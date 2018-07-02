@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>Wrangling event data</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 60px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+
+.section h2 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h3 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h4 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h5 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h6 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+#TOC {
+  display: none !important;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+  padding-left: 25px;
+  text-indent: 0;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Business Process Analysis in R</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+<li>
+  <a href="getting_started.html">Get started</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    I/O
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="creating_eventlogs.html">Creating event logs</a>
+    </li>
+    <li>
+      <a href="getting_info.html">Getting event log info</a>
+    </li>
+    <li>
+      <a href="read_xes.html">XES-files</a>
+    </li>
+    <li>
+      <a href="eventdataR.html">Event Data Repository</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Preprocessing
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="subsetting.html">Subsetting</a>
+    </li>
+    <li>
+      <a href="aggregating.html">Aggregating</a>
+    </li>
+    <li>
+      <a href="enriching.html">Enriching</a>
+    </li>
+    <li>
+      <a href="wrangling.html">Wrangling</a>
+    </li>
+    <li>
+      <a href="mapping.html">Adjusting view</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    EDA
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="exploring.html">Describing event data</a>
+    </li>
+    <li>
+      <a href="processmaps.html">Creating Process Maps</a>
+    </li>
+    <li>
+      <a href="precedence.html">Precedence Matrices</a>
+    </li>
+    <li>
+      <a href="dotted_chart.html">Dotted charts</a>
+    </li>
+    <li>
+      <a href="trace_explorer.html">Trace explorer</a>
+    </li>
+    <li>
+      <a href="social_networks.html">Social network analysis</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="processmonitR.html">Dashboards</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Reference
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="http://gertjanssenswillen.github.io/bupaR/reference/index.html">bupaR</a>
+    </li>
+    <li>
+      <a href="http://gertjanssenswillen.github.io/edeaR/reference/index.html">edeaR</a>
+    </li>
+    <li>
+      <a href="http://gertjanssenswillen.github.io/eventdataR/reference/index.html">eventdataR</a>
+    </li>
+    <li>
+      <a href="http://gertjanssenswillen.github.io/processmapR/reference/index.html">processmapR</a>
+    </li>
+    <li>
+      <a href="http://gertjanssenswillen.github.io/processmonitR/reference/index.html">processmonitR</a>
+    </li>
+    <li>
+      <a href="http://gertjanssenswillen.github.io/petrinetR/reference/index.html">petrinetR</a>
+    </li>
+    <li>
+      <a href="http://gertjanssenswillen.github.io/xesreadR/reference/index.html">xesreadR</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Wrangling event data</h1>
+
+</div>
+
+
+<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-92605173-2', 'auto');
+ga('send', 'pageview');
+
+</script>
+<p>Next to the specifically supported preprocessing steps (aggregating, subsetting and enriching), event logs can also be manipulated in a more generic way. In order to do so, well-known <a href="https://dplyr.tidyverse.org/">dplyr</a>-verbs have been adapted to event log objects and other extensions have been made.</p>
+<div id="group_by" class="section level2">
+<h2>group_by</h2>
+<p>Using the <code>group_by</code> function, event logs can be grouped according to a (set of) variables, such that all further computations happen for each of these different groups.</p>
+<p>In the next example, the number of cases are computed for each value of “vehicleclass”.</p>
+<pre class="r"><code>traffic_fines %&gt;%
+    group_by(vehicleclass) %&gt;%
+    n_cases()</code></pre>
+<pre><code>## # A tibble: 4 x 2
+##   vehicleclass n_cases
+##   &lt;chr&gt;          &lt;int&gt;
+## 1 A               8569
+## 2 C                 17
+## 3 M                  5
+## 4 &lt;NA&gt;            8591</code></pre>
+<div id="predefined-grouping-functions" class="section level3">
+<h3>Predefined grouping functions</h3>
+<p>For specific groupings, some auxiliary functions are available.</p>
+<ul>
+<li><code>group_by_case</code> - group by cases</li>
+<li><code>group_by_activity</code> - group by activity types</li>
+<li><code>group_by_resource</code> - group by resources</li>
+<li><code>group_by_activity_resource</code> - group by activity resource pair</li>
+<li><code>group_by_activity_instance</code> - group by activity instances.</li>
+</ul>
+<p>For example, the number of cases in which a specific resource occurs, can be computed as follows.</p>
+<pre class="r"><code>sepsis %&gt;%
+    group_by_resource %&gt;%
+    n_cases</code></pre>
+<pre><code>## # A tibble: 26 x 2
+##    resource n_cases
+##    &lt;fct&gt;      &lt;int&gt;
+##  1 ?            294
+##  2 A            985
+##  3 B           1013
+##  4 C           1050
+##  5 D             46
+##  6 E            782
+##  7 F            200
+##  8 G            147
+##  9 H             50
+## 10 I            118
+## # ... with 16 more rows</code></pre>
+<p>Note that each of the descriptive metrics discussed <a href="http://www.bupar.net/exploring.html">here</a> can be rewritten using these lower-level functions. The example above is equal to the <code>resource_involvement</code> metric at case level.</p>
+</div>
+<div id="remove-grouping" class="section level3">
+<h3>Remove grouping</h3>
+<p>When a grouping is no longer needed, it can be removed using the <code>ungroup_eventlog</code> function.</p>
+</div>
+</div>
+<div id="mutate" class="section level2">
+<h2>mutate</h2>
+<p>You can use <code>mutate</code> to add new variable to an event log, possibly by using existing variables. In the next example, the total amount of lacticacid is computed for each case.</p>
+<pre class="r"><code>sepsis %&gt;%
+    group_by_case() %&gt;%
+    mutate(total_lacticacid = sum(lacticacid, na.rm = T))</code></pre>
+<pre><code>## # Groups: [case_id]
+## Grouped Event log consisting of:
+## 15214 events
+## 846 traces
+## 1050 cases
+## 16 activities
+## 15214 activity instances
+## 
+## # A tibble: 15,214 x 35
+##    case_id activity     lifecycle resource timestamp             age   crp
+##    &lt;chr&gt;   &lt;fct&gt;        &lt;fct&gt;     &lt;fct&gt;    &lt;dttm&gt;              &lt;int&gt; &lt;dbl&gt;
+##  1 A       ER Registra~ complete  A        2014-10-22 11:15:41    85   NA 
+##  2 A       Leucocytes   complete  B        2014-10-22 11:27:00    NA   NA 
+##  3 A       CRP          complete  B        2014-10-22 11:27:00    NA  210.
+##  4 A       LacticAcid   complete  B        2014-10-22 11:27:00    NA   NA 
+##  5 A       ER Triage    complete  C        2014-10-22 11:33:37    NA   NA 
+##  6 A       ER Sepsis T~ complete  A        2014-10-22 11:34:00    NA   NA 
+##  7 A       IV Liquid    complete  A        2014-10-22 14:03:47    NA   NA 
+##  8 A       IV Antibiot~ complete  A        2014-10-22 14:03:47    NA   NA 
+##  9 A       Admission NC complete  D        2014-10-22 14:13:19    NA   NA 
+## 10 A       CRP          complete  B        2014-10-24 09:00:00    NA 1090.
+## # ... with 15,204 more rows, and 28 more variables: diagnose &lt;chr&gt;,
+## #   diagnosticartastrup &lt;chr&gt;, diagnosticblood &lt;chr&gt;, diagnosticecg &lt;chr&gt;,
+## #   diagnosticic &lt;chr&gt;, diagnosticlacticacid &lt;chr&gt;,
+## #   diagnosticliquor &lt;chr&gt;, diagnosticother &lt;chr&gt;, diagnosticsputum &lt;chr&gt;,
+## #   diagnosticurinaryculture &lt;chr&gt;, diagnosticurinarysediment &lt;chr&gt;,
+## #   diagnosticxthorax &lt;chr&gt;, disfuncorg &lt;chr&gt;, hypotensie &lt;chr&gt;,
+## #   hypoxie &lt;chr&gt;, infectionsuspected &lt;chr&gt;, infusion &lt;chr&gt;,
+## #   lacticacid &lt;dbl&gt;, leucocytes &lt;chr&gt;, oligurie &lt;chr&gt;,
+## #   sirscritheartrate &lt;chr&gt;, sirscritleucos &lt;chr&gt;,
+## #   sirscrittachypnea &lt;chr&gt;, sirscrittemperature &lt;chr&gt;,
+## #   sirscriteria2ormore &lt;chr&gt;, activity_instance_id &lt;chr&gt;, .order &lt;int&gt;,
+## #   total_lacticacid &lt;dbl&gt;</code></pre>
+</div>
+<div id="filter" class="section level2">
+<h2>filter</h2>
+<p>Generic filtering of events can be done using the <code>filter</code> function, which takes an event log and any number of logical conditions. The example below filters events which have vehicleclas “C” and amount greater than 300. More process-specific filtering methods can be found <a href="http://www.bupar.net/subsetting.html">here</a>.</p>
+<pre class="r"><code>traffic_fines %&gt;%
+    filter(vehicleclass == &quot;C&quot;, amount &gt; 300)</code></pre>
+<pre><code>## Event log consisting of:
+## 17 events
+## 1 traces
+## 17 cases
+## 1 activities
+## 17 activity instances
+## 
+## # A tibble: 17 x 18
+##    case_id activity  lifecycle resource timestamp           amount article
+##    &lt;chr&gt;   &lt;fct&gt;     &lt;fct&gt;     &lt;fct&gt;    &lt;dttm&gt;               &lt;dbl&gt;   &lt;int&gt;
+##  1 A10060  Create F~ complete  541      2007-03-08 00:00:00   360.     157
+##  2 A10497  Create F~ complete  558      2007-03-30 00:00:00   360.     157
+##  3 A10818  Create F~ complete  561      2007-04-08 00:00:00   360.     157
+##  4 A11707  Create F~ complete  550      2007-04-24 00:00:00   360.     157
+##  5 A1408   Create F~ complete  559      2006-08-20 00:00:00   350.     157
+##  6 A14883  Create F~ complete  561      2007-06-29 00:00:00   360.     157
+##  7 A17130  Create F~ complete  541      2007-07-15 00:00:00   360.     157
+##  8 A1815   Create F~ complete  563      2006-08-10 00:00:00   350.     157
+##  9 A19109  Create F~ complete  556      2007-07-17 00:00:00   360.     157
+## 10 A23000  Create F~ complete  550      2007-12-29 00:00:00   360.     157
+## 11 A24247  Create F~ complete  561      2007-12-03 00:00:00   360.     157
+## 12 A24366  Create F~ complete  541      2008-02-09 00:00:00   360.     157
+## 13 A24634  Create F~ complete  537      2007-11-21 00:00:00   360.     157
+## 14 A24942  Create F~ complete  561      2007-12-30 00:00:00   360.     157
+## 15 A25581  Create F~ complete  559      2007-11-23 00:00:00   360.     157
+## 16 A26099  Create F~ complete  559      2007-12-09 00:00:00   360.     157
+## 17 A26277  Create F~ complete  538      2008-01-07 00:00:00   360.     157
+## # ... with 11 more variables: dismissal &lt;chr&gt;, expense &lt;dbl&gt;,
+## #   lastsent &lt;chr&gt;, matricola &lt;chr&gt;, notificationtype &lt;chr&gt;,
+## #   paymentamount &lt;dbl&gt;, points &lt;int&gt;, totalpaymentamount &lt;chr&gt;,
+## #   vehicleclass &lt;chr&gt;, activity_instance_id &lt;chr&gt;, .order &lt;int&gt;</code></pre>
+</div>
+<div id="select" class="section level2">
+<h2>select</h2>
+<p>Variables on a event log can be <em>selected</em> using <code>select</code>. By default, <code>select</code> will always make sure that the mapping-variables are retained. Otherwise, it would no longer function as an eventlog.</p>
+<pre class="r"><code>traffic_fines %&gt;%
+    select(vehicleclass)</code></pre>
+<pre><code>## Event log consisting of:
+## 27001 events
+## 3 traces
+## 8591 cases
+## 6 activities
+## 27001 activity instances
+## 
+## # A tibble: 27,001 x 8
+##    vehicleclass case_id activity      activity_instan~ timestamp          
+##    &lt;chr&gt;        &lt;chr&gt;   &lt;fct&gt;         &lt;chr&gt;            &lt;dttm&gt;             
+##  1 A            A1      Create Fine   1                2006-07-24 00:00:00
+##  2 &lt;NA&gt;         A1      Send Fine     2                2006-12-05 00:00:00
+##  3 A            A100    Create Fine   3                2006-08-02 00:00:00
+##  4 &lt;NA&gt;         A100    Send Fine     4                2006-12-12 00:00:00
+##  5 &lt;NA&gt;         A100    Insert Fine ~ 5                2007-01-15 00:00:00
+##  6 &lt;NA&gt;         A100    Add penalty   6                2007-03-16 00:00:00
+##  7 &lt;NA&gt;         A100    Send for Cre~ 7                2009-03-30 00:00:00
+##  8 A            A10004  Create Fine   19               2007-03-20 00:00:00
+##  9 &lt;NA&gt;         A10004  Send Fine     20               2007-07-17 00:00:00
+## 10 &lt;NA&gt;         A10004  Insert Fine ~ 21               2007-07-24 00:00:00
+## # ... with 26,991 more rows, and 3 more variables: resource &lt;fct&gt;,
+## #   lifecycle &lt;fct&gt;, .order &lt;int&gt;</code></pre>
+<p>By setting the argument <code>force_df = TRUE</code>, the mapping-variables will not be retained, and the output will be a data.frame, and not an event log.</p>
+<pre class="r"><code>traffic_fines %&gt;%
+    select(case_id, vehicleclass, amount, force_df = TRUE)</code></pre>
+<pre><code>## # A tibble: 27,001 x 3
+##    case_id vehicleclass amount
+##    &lt;chr&gt;   &lt;chr&gt;         &lt;dbl&gt;
+##  1 A1      A              350.
+##  2 A1      &lt;NA&gt;           350.
+##  3 A100    A              350.
+##  4 A100    &lt;NA&gt;           350.
+##  5 A100    &lt;NA&gt;           350.
+##  6 A100    &lt;NA&gt;           715.
+##  7 A100    &lt;NA&gt;           715.
+##  8 A10004  A              360.
+##  9 A10004  &lt;NA&gt;           360.
+## 10 A10004  &lt;NA&gt;           360.
+## # ... with 26,991 more rows</code></pre>
+</div>
+<div id="arrange" class="section level2">
+<h2>arrange</h2>
+<p>Event data can be sorted using the <code>arrange</code> function. <code>desc</code> can be used to sort descendingly on an attribute.</p>
+<pre class="r"><code>#sort descending on time
+patients %&gt;%
+    arrange(desc(time))</code></pre>
+<pre><code>## Event log consisting of:
+## 5442 events
+## 7 traces
+## 500 cases
+## 7 activities
+## 2721 activity instances
+## 
+## # A tibble: 5,442 x 7
+##    handling              patient employee handling_id registration_type
+##    &lt;fct&gt;                 &lt;chr&gt;   &lt;fct&gt;    &lt;chr&gt;       &lt;fct&gt;            
+##  1 Triage and Assessment 500     r2       1000        complete         
+##  2 Discuss Results       495     r6       2229        complete         
+##  3 X-Ray                 498     r5       1734        complete         
+##  4 Triage and Assessment 500     r2       1000        start            
+##  5 Triage and Assessment 499     r2       999         complete         
+##  6 Discuss Results       495     r6       2229        start            
+##  7 Discuss Results       489     r6       2223        complete         
+##  8 X-Ray                 498     r5       1734        start            
+##  9 X-Ray                 497     r5       1733        complete         
+## 10 Discuss Results       489     r6       2223        start            
+## # ... with 5,432 more rows, and 2 more variables: time &lt;dttm&gt;,
+## #   .order &lt;int&gt;</code></pre>
+</div>
+<div id="slice" class="section level2">
+<h2>slice</h2>
+<p>An eventlog can be <em>sliced</em>, which mean returning a slice, i.e. a subset, from the eventlog, based on row number. There are three ways to slice event logs</p>
+<ul>
+<li>Using <code>slice</code>: take a slice of cases</li>
+<li>Using <code>slice_activities</code>: take a slice of activity instances</li>
+<li>Using <code>slice_events</code>: take a slice of events</li>
+</ul>
+<p>The next piece of code returns the <em>first</em> 10 cases. Note that first here is defined by the current order of the data set, not by time.</p>
+<pre class="r"><code>patients %&gt;%
+    slice(1:10)</code></pre>
+<pre><code>## Event log consisting of:
+## 110 events
+## 2 traces
+## 10 cases
+## 7 activities
+## 55 activity instances
+## 
+## # A tibble: 110 x 7
+##    handling     patient employee handling_id registration_type
+##    &lt;fct&gt;        &lt;chr&gt;   &lt;fct&gt;    &lt;chr&gt;       &lt;fct&gt;            
+##  1 Registration 1       r1       1           start            
+##  2 Registration 2       r1       2           start            
+##  3 Registration 3       r1       3           start            
+##  4 Registration 4       r1       4           start            
+##  5 Registration 5       r1       5           start            
+##  6 Registration 6       r1       6           start            
+##  7 Registration 7       r1       7           start            
+##  8 Registration 8       r1       8           start            
+##  9 Registration 9       r1       9           start            
+## 10 Registration 10      r1       10          start            
+## # ... with 100 more rows, and 2 more variables: time &lt;dttm&gt;, .order &lt;int&gt;</code></pre>
+<div id="slice_activities" class="section level3">
+<h3>slice_activities</h3>
+<p>The next piece of code returns the <em>first</em> 10 activity instances.</p>
+<pre class="r"><code>patients %&gt;%
+    slice_activities(1:10)</code></pre>
+<pre><code>## Event log consisting of:
+## 20 events
+## 1 traces
+## 10 cases
+## 1 activities
+## 10 activity instances
+## 
+## # A tibble: 20 x 7
+##    handling     patient employee handling_id registration_type
+##    &lt;fct&gt;        &lt;chr&gt;   &lt;fct&gt;    &lt;chr&gt;       &lt;fct&gt;            
+##  1 Registration 1       r1       1           start            
+##  2 Registration 2       r1       2           start            
+##  3 Registration 3       r1       3           start            
+##  4 Registration 4       r1       4           start            
+##  5 Registration 5       r1       5           start            
+##  6 Registration 6       r1       6           start            
+##  7 Registration 7       r1       7           start            
+##  8 Registration 8       r1       8           start            
+##  9 Registration 9       r1       9           start            
+## 10 Registration 10      r1       10          start            
+## 11 Registration 1       r1       1           complete         
+## 12 Registration 2       r1       2           complete         
+## 13 Registration 3       r1       3           complete         
+## 14 Registration 4       r1       4           complete         
+## 15 Registration 5       r1       5           complete         
+## 16 Registration 6       r1       6           complete         
+## 17 Registration 7       r1       7           complete         
+## 18 Registration 8       r1       8           complete         
+## 19 Registration 9       r1       9           complete         
+## 20 Registration 10      r1       10          complete         
+## # ... with 2 more variables: time &lt;dttm&gt;, .order &lt;int&gt;</code></pre>
+</div>
+<div id="slice_events" class="section level3">
+<h3>slice_events</h3>
+<p>The next piece of code returns the <em>first</em> 10 events.</p>
+<pre class="r"><code>patients %&gt;% 
+    slice_events(1:10)</code></pre>
+<pre><code>## Event log consisting of:
+## 10 events
+## 1 traces
+## 10 cases
+## 1 activities
+## 10 activity instances
+## 
+## # A tibble: 10 x 7
+##    handling     patient employee handling_id registration_type
+##    &lt;fct&gt;        &lt;chr&gt;   &lt;fct&gt;    &lt;chr&gt;       &lt;fct&gt;            
+##  1 Registration 1       r1       1           start            
+##  2 Registration 2       r1       2           start            
+##  3 Registration 3       r1       3           start            
+##  4 Registration 4       r1       4           start            
+##  5 Registration 5       r1       5           start            
+##  6 Registration 6       r1       6           start            
+##  7 Registration 7       r1       7           start            
+##  8 Registration 8       r1       8           start            
+##  9 Registration 9       r1       9           start            
+## 10 Registration 10      r1       10          start            
+## # ... with 2 more variables: time &lt;dttm&gt;, .order &lt;int&gt;</code></pre>
+</div>
+</div>
+<div id="first_n-last_n" class="section level2">
+<h2>first_n, last_n</h2>
+<p>The slice function select events, cases or activity instances based on their current position in the event data. As such, the result can be changed using the <code>arrange</code> function. More often, we want to select the first <em>n</em> activity instances, or the last ones. This is achieved with the <code>first_n</code> or <code>last_n</code> functions, which return the first, resp. last, n activity instances of a log based on time, not on position.</p>
+<pre class="r"><code>patients %&gt;% 
+    first_n(n = 5)</code></pre>
+<pre><code>## Event log consisting of:
+## 10 events
+## 2 traces
+## 3 cases
+## 2 activities
+## 5 activity instances
+## 
+## # A tibble: 10 x 7
+##    handling              patient employee handling_id registration_type
+##    &lt;fct&gt;                 &lt;chr&gt;   &lt;fct&gt;    &lt;chr&gt;       &lt;fct&gt;            
+##  1 Registration          1       r1       1           start            
+##  2 Registration          2       r1       2           start            
+##  3 Triage and Assessment 1       r2       501         start            
+##  4 Registration          1       r1       1           complete         
+##  5 Registration          2       r1       2           complete         
+##  6 Triage and Assessment 2       r2       502         start            
+##  7 Triage and Assessment 1       r2       501         complete         
+##  8 Triage and Assessment 2       r2       502         complete         
+##  9 Registration          4       r1       4           start            
+## 10 Registration          4       r1       4           complete         
+## # ... with 2 more variables: time &lt;dttm&gt;, .order &lt;int&gt;</code></pre>
+<p>This is not impacted by a different ordering of the data since it will take the time aspect into account.</p>
+<pre class="r"><code>patients %&gt;%
+    arrange(desc(time)) %&gt;%
+    first_n(n = 5)</code></pre>
+<pre><code>## Event log consisting of:
+## 10 events
+## 2 traces
+## 3 cases
+## 2 activities
+## 5 activity instances
+## 
+## # A tibble: 10 x 7
+##    handling              patient employee handling_id registration_type
+##    &lt;fct&gt;                 &lt;chr&gt;   &lt;fct&gt;    &lt;chr&gt;       &lt;fct&gt;            
+##  1 Registration          1       r1       1           start            
+##  2 Registration          2       r1       2           start            
+##  3 Triage and Assessment 1       r2       501         start            
+##  4 Registration          1       r1       1           complete         
+##  5 Registration          2       r1       2           complete         
+##  6 Triage and Assessment 2       r2       502         start            
+##  7 Triage and Assessment 1       r2       501         complete         
+##  8 Triage and Assessment 2       r2       502         complete         
+##  9 Registration          4       r1       4           start            
+## 10 Registration          4       r1       4           complete         
+## # ... with 2 more variables: time &lt;dttm&gt;, .order &lt;int&gt;</code></pre>
+<p>Incombination with <code>group_by_case</code>, it is very easy to select the heads or tails of each case. Below, we explore the 95% most common first 3 activities in the <code>sepsis</code> log.</p>
+<pre class="r"><code>sepsis %&gt;%
+    group_by_case() %&gt;%
+    first_n(3) %&gt;%
+    trace_explorer(cov = 0.95)</code></pre>
+<p><img src="wrangling_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+</div>
+<div id="sample_n" class="section level2">
+<h2>sample_n</h2>
+<p>The <code>sample_n</code> function allows to take a sample of the event log containing n cases. The code below returns a sample of 10 patients.</p>
+<pre class="r"><code>patients %&gt;%
+    sample_n(size = 10)</code></pre>
+<pre><code>## Event log consisting of:
+## 110 events
+## 2 traces
+## 10 cases
+## 7 activities
+## 55 activity instances
+## 
+## # A tibble: 110 x 7
+##    handling     patient employee handling_id registration_type
+##    &lt;fct&gt;        &lt;chr&gt;   &lt;fct&gt;    &lt;chr&gt;       &lt;fct&gt;            
+##  1 Registration 9       r1       9           start            
+##  2 Registration 130     r1       130         start            
+##  3 Registration 213     r1       213         start            
+##  4 Registration 231     r1       231         start            
+##  5 Registration 273     r1       273         start            
+##  6 Registration 312     r1       312         start            
+##  7 Registration 386     r1       386         start            
+##  8 Registration 408     r1       408         start            
+##  9 Registration 423     r1       423         start            
+## 10 Registration 463     r1       463         start            
+## # ... with 100 more rows, and 2 more variables: time &lt;dttm&gt;, .order &lt;int&gt;</code></pre>
+<p>Note that this function can also be used with a sample size bigger than the number of cases in the event log, if you allow for the replacements of drawn cases.</p>
+<p>A more extensive list of subsetting methods is provided by edeaR. Look <a href="http://www.bupar.net/subsetting.html">here</a> for more information.</p>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

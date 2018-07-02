@@ -1,0 +1,91 @@
+---
+title: edeaR
+output: 
+  html_document:
+    toc: true
+    toc_float: 
+      collapsed: false
+      print: false
+---
+
+
+```{r include = F}
+library(pander)
+```
+
+`edeaR` contains two types of functions: metric functions and filter functions. The metric functions allow to calculated a large range of log-based metrics to get insight into event logs. The filter functions allow to subset the event data in multiple flexible ways. A list of all the metrics and filters is provided below.
+	
+## Metrics
+
+```{r echo = F}
+htmltools::includeHTML("tracking_google_analytics.html")
+```
+
+```{r  results='asis', echo = F}
+table <- "
+	Function                    |  Description
+	[activity_frequency](http://www.bupar.net/exploring.html#variance)	|	Calculate frequencies of activities				
+	[activity_presence](http://www.bupar.net/exploring.html#variance)	| 	Calculate the presence of activities in cases
+	[end_activities](http://www.bupar.net/exploring.html#variance)		| 	Calculate end activities of cases 
+	[idle_time](http://www.bupar.net/exploring.html#time_perspective)			| 	Calculate the idle time of cases and resources
+	[number_of_repetitions](http://www.bupar.net/exploring.html#rework)		| 	Calculate the number of repetitions of activities
+	[number_of_selfloops](http://www.bupar.net/exploring.html#rework)		| 	Calculate the number of selfloops of activities
+	[processing_time](http://www.bupar.net/exploring.html#time_perspective)		| 	Calculate processing time
+	[redo_repetitions_referral_matrix](http://www.bupar.net/exploring.html#rework)		| 		Calculate a redo referral matrix for repetitions
+	[redo_selfloops_referral_matrix](http://www.bupar.net/exploring.html#rework)		| 	Calculate a redo referral matrix for selfloops
+	[resource_frequency](http://www.bupar.net/exploring.html#organizational_perspective)		| 	Calculate resource frequency
+	[resource_involvement](http://www.bupar.net/exploring.html#organizational_perspective)		| 	Calculate resource involvement
+	[resource_specialization](http://www.bupar.net/exploring.html#organizational_perspective)		| 	Calculate resource specialization
+	[size_of_selfloops](http://www.bupar.net/exploring.html#rework)		| 	Calculate the size of selfloops
+	[size_of_repetitions](http://www.bupar.net/exploring.html#rework)		| 	Calculate the size of repetitions
+	[start_activities](http://www.bupar.net/exploring.html#variance)		| 	Calculate start activities of cases
+	[throughput_time](http://www.bupar.net/exploring.html#time_perspective)		| 	Calculate throughput time
+	[trace_coverage](http://www.bupar.net/exploring.html#variance)		| 	Calculate trace coverage
+	[trace_length](http://www.bupar.net/exploring.html#variance)		| 	Calculate trace length of cases
+[plot](http://www.bupar.net/exploring.html) | Plot descriptive metrics
+"
+df <- read.delim(textConnection(table),header=FALSE,sep="|",strip.white=F,stringsAsFactors=FALSE)
+names(df) <- unname(as.list(df[1,])) # put headers on
+df <- df[-1,] # remove first row
+row.names(df)<-NULL
+pandoc.table(df, style = 'rmarkdown', justify = "left", split.table = Inf)
+```
+	
+## Filters
+
+	
+
+```{r  results='asis', echo = F}
+table <- "
+	Function                    |  Description
+	[filter_activity](http://www.bupar.net/subsetting.html#filter_activities)	|	Filter activities by name			
+	[filter_activity_frequency](http://www.bupar.net/subsetting.html#filter_on_activity_frequency)	| 	Filter activities based on frequency
+	[filter_activity_presence](http://www.bupar.net/subsetting.html#case_filters)		|  Filter cases based on presence (absence) of activities
+	[filter_attributes](http://www.bupar.net/subsetting.html#filter_on_attributes)		| 	Filter events by specific attributes
+	[filter_case](http://www.bupar.net/subsetting.html#case_filters)				| 	Filter cases by id
+	[filter_endpoints](http://www.bupar.net/subsetting.html#case_filters)		| 	Filter cases on endpoints (both start en end)
+	[filter_precedence](http://www.bupar.net/subsetting.html#case_filters)		| 	Filter cases on precedence rules
+	[filter_processing_time	](http://www.bupar.net/subsetting.html#case_filters)	| 	Filter on processing time
+	[filter_resource](http://www.bupar.net/subsetting.html#filter_resources)			| 	Filter resources by name
+	[filter_throughput_time](http://www.bupar.net/subsetting.html#case_filters)	| 	Filter on throughput time
+	[filter_time_period](http://www.bupar.net/subsetting.html#case_filters)		| 	Filter on time period
+	[filter_trace_frequency](http://www.bupar.net/subsetting.html#case_filters)	|  Filter of trace frequency
+	[filter_trace_length](http://www.bupar.net/subsetting.html#case_filters)		| 	Filter on trace length
+	[filter_trim](http://www.bupar.net/subsetting.html#trim_cases) 			|  Trim cases between specified activities
+
+
+
+
+"
+df <- read.delim(textConnection(table),header=FALSE,sep="|",strip.white=F,stringsAsFactors=FALSE)
+names(df) <- unname(as.list(df[1,])) # put headers on
+df <- df[-1,] # remove first row
+row.names(df)<-NULL
+pandoc.table(df, style = 'rmarkdown', justify = "left", split.table = Inf)
+```
+
+Note that each filter has an equivalent function using an interface, which can be called by adding the letter _i_ before the functionname.
+
+## Reference
+
+Check [here](http://gertjanssenswillen.github.io/edeaR/reference/index.html) for more information.

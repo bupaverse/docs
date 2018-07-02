@@ -1,0 +1,42 @@
+---
+title: "Trace explorer"
+output: 
+  html_document:
+    toc: true
+    toc_float: 
+      collapsed: false
+      print: false
+---
+	
+```{r include = F}
+library(tidyverse)
+library(bupaR)
+library(pander)
+library(lubridate)
+```
+```{r echo = F}
+knitr::opts_chunk$set(fig.width = 9)
+htmltools::includeHTML("tracking_google_analytics.html")
+```
+
+Different activity sequences in the event log can be visualized with the `trace_explorer`. It can be used to explore frequent as well as infrequent traces. The coverage argument specificies how much of the log you want to explore. By default it is set at 0.2, meaning that it will show the most (in)frequency traces covering 20% of the event log.
+
+## Frequent traces
+
+```{r}
+sepsis %>%
+	trace_explorer()
+sepsis %>%
+	trace_explorer(coverage = 0.4)
+```
+
+## Infrequent traces
+
+```{r}
+sepsis %>%
+	trace_explorer(type = "infrequent", coverage = 0.1)
+```
+
+
+
+

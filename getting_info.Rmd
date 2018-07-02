@@ -1,0 +1,63 @@
+---
+title: "Getting information from event logs"
+output: 
+  html_document:
+    toc: true
+    toc_float: 
+      collapsed: false
+      print: false
+---
+
+After preparing the data and creating an eventlog object, we can use `bupaR` functions to get basic information from the log, as well as metadata. In this example, we will use the `patients` provided by `eventdataR`.
+```{r echo = F}
+htmltools::includeHTML("tracking_google_analytics.html")
+```
+```{r message = F, warning = F}
+library(bupaR)
+eventdataR::patients
+```
+
+## Getting metadata
+
+The mapping function can be used to retrieve all the meta data from an event log object, i.e. the relation between event log identifiers and data fields.
+
+```{r}
+patients %>% mapping
+```
+
+In this case, we see that the handling field is the activity identifier in the event log, while the patient field is used as case identifier. We can also obtain each of these identifiers individually. 
+
+```{r results='hold'}
+patients %>% activity_id
+patients %>% case_id
+patients %>% resource_id
+```
+
+## Getting basic information
+
+We can look at a general summary of the event log by calling the `summary` function.
+
+```{r}
+patients %>% summary
+```
+
+The basic counts which show up in the summary can also be retrieved indivdual as a numeric vector of length one.
+
+```{r results='hold'}
+patients %>% n_activities
+patients %>% n_activity_instances
+patients %>% n_cases
+patients %>% n_events
+patients %>% n_traces
+patients %>% n_resources
+```
+
+More detailed information about `activities` , `cases`, `resources` and `traces` can be obtained using the functions named accordingly. For example, consider the overview of the cases of the patients event log below.
+
+```{r}
+patients %>% cases
+```
+
+
+
+

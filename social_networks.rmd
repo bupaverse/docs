@@ -1,0 +1,39 @@
+---
+title: "Social network analysis"
+output: 
+  html_document:
+    toc: true
+    toc_float:
+      collapsed: false
+      print: false
+---
+	
+```{r include = F}
+library(tidyverse)
+library(bupaR)
+library(pander)
+library(lubridate)
+```
+```{r echo = F}
+htmltools::includeHTML("tracking_google_analytics.html")
+```
+
+## Handover-of-work network
+
+A handover-of-work network can be created with the `resource_map` function. It has the same arguments as the `process_map` function. 
+
+```{r}
+patients %>%
+	resource_map()
+```
+
+## Resource precedence matrix
+
+A more compact representation of hand-over-of-work is given by the `resource_matrix` function, which works the same as the `precedence matrix` functions.
+
+```{r}
+patients %>%
+	resource_matrix() %>%
+	plot()
+```
+

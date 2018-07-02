@@ -1,0 +1,25 @@
+---
+title: xesreadR
+output: 
+  html_document:
+    toc: true
+    toc_float:
+      collapsed: false
+      print: false
+---
+```{r echo = F}
+htmltools::includeHTML("tracking_google_analytics.html")
+```
+## Overview
+
+Taking care of input and output of event data is done easily by way of the xesreadR package. XES refers to [eXtensibe Event Stream notation](http://www.xes-standard.org/), and is a IEEE standard for storing and sharing event data.An overview on the functions is shown below. 
+
+```{r include = F}
+library(pander)
+```
+
+
+	
+
+
+

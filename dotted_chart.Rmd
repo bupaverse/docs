@@ -1,0 +1,42 @@
+---
+title: "Dotted charts"
+output: 
+  html_document:
+    toc: true
+    toc_float: 
+      collapsed: false
+      print: false
+---
+
+```{r include = F}
+library(tidyverse)
+library(bupaR)
+library(pander)
+library(lubridate)
+```
+```{r echo = F}
+htmltools::includeHTML("tracking_google_analytics.html")
+```
+
+Dotted charts can be made with the `dotted_chart` function. A dotted chart is a graph in which each activity instance is displayed with a point. The x-axis referce to the time aspect, while the y-axis refers to cases. The dotted chart function has 3 arguments
+
+* x: Either absolute (absolute time on x-axis) or relative (time difference since start case on x-axis)
+* y: The ordering of the cases along the y-axis: by start, end, or duration.
+* color: The attribute used to color the activity instances. Default to the activity type.
+
+## Static dotted charts
+
+Below, you can see some examples for dotted charts with various configurations
+
+```{r}
+patients %>%
+	dotted_chart(x = "absolute", y = "start")
+patients %>%
+	dotted_chart(x = "absolute", y = "start", color = "employee")
+patients %>%
+	dotted_chart(x = "relative", y = "duration", color = "employee")
+```
+
+## Interactive dotted charts
+
+The function `idotted_chart` opens a shiny app which can be used to modify the arguments of the dotted chart interactively.

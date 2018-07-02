@@ -1,0 +1,189 @@
+---
+title: Wrangling event data
+output: 
+  html_document:
+    toc: true
+    toc_float: 
+      collapsed: false
+      print: false
+---
+
+```{r include = F}
+library(bupaR)
+```
+
+```{r echo = F}
+htmltools::includeHTML("tracking_google_analytics.html")
+```
+
+Next to the specifically supported preprocessing steps (aggregating, subsetting and enriching), event logs can also be manipulated in a more generic way. In order to do so, well-known [dplyr](https://dplyr.tidyverse.org/)-verbs have been adapted to event log objects and other extensions have been made. 
+
+
+## group_by
+
+Using the `group_by` function, event logs can be grouped according to a (set of) variables, such that all further computations happen for each of these different groups.
+
+In the next example, the number of cases are computed for each value of "vehicleclass".
+
+```{r}
+traffic_fines %>%
+	group_by(vehicleclass) %>%
+	n_cases()
+```
+
+### Predefined grouping functions
+
+For specific groupings, some auxiliary functions are available. 
+
+*	`group_by_case` - group by cases
+*	`group_by_activity` - group by activity types
+*	`group_by_resource` - group by resources
+*	`group_by_activity_resource` - group by activity resource pair
+*	`group_by_activity_instance` - group by activity instances.
+
+For example, the number of cases in which a specific resource occurs, can be computed as follows.
+
+```{r}
+sepsis %>%
+	group_by_resource %>%
+	n_cases
+```
+
+
+Note that each of the descriptive metrics discussed [here](http://www.bupar.net/exploring.html) can be rewritten using these lower-level functions. The example above is equal to the `resource_involvement` metric at case level. 
+
+### Remove grouping 
+
+When a grouping is no longer needed, it can be removed using the `ungroup_eventlog` function. 
+
+## mutate
+
+You can use `mutate` to add new variable to an event log, possibly by using existing variables. In the next example, the total amount of lacticacid is computed for each case. 
+
+```{r echo = F}
+sepsis %>%
+	mutate(lacticacid = as.numeric(lacticacid)) -> sepsis
+```
+
+
+```{r}
+sepsis %>%
+	group_by_case() %>%
+	mutate(total_lacticacid = sum(lacticacid, na.rm = T))
+```
+
+## filter
+
+Generic filtering of events can be done using the `filter` function, which takes an event log and any number of logical conditions. The example below filters events which have vehicleclas "C" and amount greater than 300. More process-specific filtering methods can be found [here](http://www.bupar.net/subsetting.html).
+
+```{r}
+traffic_fines %>%
+	filter(vehicleclass == "C", amount > 300)
+```
+
+## select
+
+Variables on a event log can be _selected_ using `select`. By default, `select` will always make sure that the mapping-variables are retained. Otherwise, it would no longer function as an eventlog.
+
+```{r}
+traffic_fines %>%
+	select(vehicleclass)
+```
+
+
+
+By setting the argument `force_df = TRUE`, the mapping-variables will not be retained, and the output will be a data.frame, and not an event log.
+
+```{r}
+traffic_fines %>%
+	select(case_id, vehicleclass, amount, force_df = TRUE)
+```
+
+
+## arrange
+
+Event data can be sorted using the `arrange` function. `desc` can be used to sort descendingly on an attribute.
+
+```{r}
+#sort descending on time
+patients %>%
+	arrange(desc(time))
+```
+
+
+## slice 
+
+An eventlog can be _sliced_, which mean returning a slice, i.e. a subset, from the eventlog, based on row number. There are three ways to slice event logs
+
+*	Using `slice`: take a slice of cases
+*	Using `slice_activities`: take a slice of activity instances
+*	Using `slice_events`: take a slice of events
+
+The next piece of code returns the _first_ 10 cases. Note that first here is defined by the current order of the data set, not by time.
+
+```{r}
+patients %>%
+	slice(1:10)
+```
+
+### slice_activities
+
+The next piece of code returns the _first_ 10 activity instances.
+
+```{r}
+patients %>%
+	slice_activities(1:10)
+```
+
+
+### slice_events
+
+The next piece of code returns the _first_ 10 events. 
+
+```{r}
+patients %>% 
+	slice_events(1:10)
+```
+
+
+## first_n, last_n
+
+The slice function select events, cases or activity instances based on their current position in the event data. As such, the result can be changed using the `arrange` function. More often, we want to select the first _n_ activity instances, or the last ones. This is achieved with the `first_n` or `last_n` functions, which return the first, resp. last, n activity instances of a log based on time, not on position.
+
+```{r}
+patients %>% 
+	first_n(n = 5)
+```
+
+This is not impacted by a different ordering of the data since it will take the time aspect into account. 
+
+```{r}
+patients %>%
+	arrange(desc(time)) %>%
+	first_n(n = 5)
+```
+
+Incombination with `group_by_case`, it is very easy to select the heads or tails of each case. Below, we explore the 95% most common first 3 activities in the `sepsis` log.
+
+```{r}
+sepsis %>%
+	group_by_case() %>%
+	first_n(3) %>%
+	trace_explorer(cov = 0.95)
+```
+
+
+
+## sample_n
+
+The `sample_n` function allows to take a sample of the event log containing n cases. The code below returns a sample of 10 patients.
+
+```{r}
+patients %>%
+	sample_n(size = 10)
+```
+Note that this function can also be used with a sample size bigger than the number of cases in the event log, if you allow for the replacements of drawn cases.
+
+A more extensive list of subsetting methods is provided by edeaR. Look [here](http://www.bupar.net/subsetting.html) for more information.
+
+

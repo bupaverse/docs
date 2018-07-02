@@ -1,0 +1,76 @@
+---
+title: Adjusting view
+output: 
+  html_document:
+    toc: true
+    toc_float: 
+      collapsed: false
+      print: false
+---
+
+```{r include = F}
+library(bupaR)
+```
+
+```{r echo = F}
+htmltools::includeHTML("tracking_google_analytics.html")
+```
+
+The _view_ of an event log is defined by the different variables which are mapped onto the specific characteristics:
+
+*	case identifier (`case_id`)
+*	activity information
+	*	activity type (`activity_id`)
+	*	activity instance (`activity_instance_id`)
+	*	transaction status (`lifecycle_id`) 
+* 	timestamp (`timestamp`)
+*	resource (`resource`)
+
+More information on these characteristics can be found [here](http://bupar.net/creating_eventlogs.html). Each of these can be modified to approach the event log from a different view. This can be done using the `eventlog`-function, auxiliary  `set`-functions or using an existing mapping.
+
+## Using `eventlog` function
+
+The `eventlog` function is not only used to instantiate and event log object, but can also be used to modify it, by using an event log object as input and setting just the identifiers one wants to change. 
+
+For example, consider the `traffic_fines` data. We could change to `case_id` to the "vehicleclass" column as follows. (This is a purely hypothetical example). You will see that the number of cases has changed after this modification. 
+
+```{r}
+traffic_fines %>%
+	eventlog(case_id = "vehicleclass")
+```
+
+## Using `set` functions
+
+If we only want to change one of the elements, as in the example above, the `set` function provide a very convenient way to do so. The same change as before can be done as follows.
+
+```{r}
+traffic_fines %>%
+	set_case_id("vehicleclass")
+```
+
+## Using existing mapping
+
+It is also poosible to take a snapshot of the eventlog mapping at a certain point in time, and reuse this later. A mapping can be extracted using the `mapping` function.
+
+```{r}
+mapping_fines <- mapping(traffic_fines)
+mapping_fines
+```
+
+We can than adjust the mapping incrementally by using the approaches above.
+
+```{r}
+traffic_fines %>%
+	set_case_id("vehicleclass") %>%
+	set_activity_id("notificationtype") -> traffic_fines
+```
+
+Later, we can undo these changes and "reset" the original mapping using the `re_map` function. 
+
+```{r}
+traffic_fines %>%
+	re_map(mapping_fines)
+```
+
+
+

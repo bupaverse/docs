@@ -1,0 +1,119 @@
+---
+title: bupaR
+output: 
+  html_document:
+    toc: true
+    toc_float: 
+      collapsed: false
+      print: false
+---
+```{r include = F}
+library(pander)
+```
+
+```{r echo = F}
+htmltools::includeHTML("tracking_google_analytics.html")
+```
+	
+The bupaR package itself contains the basic functionalities for handling event logs. Below you can find a list of all the relevant functions. 
+
+## Creating event log
+
+```{r  results='asis', echo = F}
+table <- "
+	Function                    |  Description
+	[eventlog](http://www.bupar.net/creating_eventlogs.html)	|	Create an event log					
+	[ieventlog](http://www.bupar.net/creating_eventlogs.html)	| 	Create an event log using a user interface 
+	[re_map](http://www.bupar.net/creating_eventlogs.html)		| 	Create an eventlog by applying an existing mapping 
+"
+df <- read.delim(textConnection(table),header=FALSE,sep="|",strip.white=F,stringsAsFactors=FALSE)
+names(df) <- unname(as.list(df[1,])) # put headers on
+df <- df[-1,] # remove first row
+row.names(df)<-NULL
+pandoc.table(df, style = 'rmarkdown', justify = "left", split.table = Inf)
+```
+
+
+
+
+
+## Getting meta information
+
+
+```{r  results='asis', echo = F}
+table <- "
+	Function                    |  Description
+ 	[activity_id](http://www.bupar.net/getting_info.html#getting_metadata)	|	Obtain activity identifier field 
+	[activity_instance_id](http://www.bupar.net/getting_info.html#getting_metadata) | Obtain activity instance field 
+	[case_id](http://www.bupar.net/getting_info.html#getting_metadata) 	|	Obtain case identifier field 
+	[mapping](http://www.bupar.net/getting_info.html#getting_metadata)		| 	Obtain the mapping of an eventlog 
+	[lifecycle_id](http://www.bupar.net/getting_info.html#getting_metadata) | Obtain lifecycle identifier field 
+ 	[timestamp](http://www.bupar.net/getting_info.html#getting_metadata)	|	Obtain timestamp field 
+	[resource_id](http://www.bupar.net/getting_info.html#getting_metadata)	| 	Obtain resource identifier field 
+"
+df <- read.delim(textConnection(table),header=FALSE,sep="|",strip.white=F,stringsAsFactors=FALSE)
+names(df) <- unname(as.list(df[1,])) # put headers on
+df <- df[-1,] # remove first row
+row.names(df)<-NULL
+pandoc.table(df, style = 'rmarkdown', justify = "left", split.table = Inf)
+```
+
+
+## Getting basic log information
+
+```{r  results='asis', echo = F}
+table <- "
+	Function     \t\t               |  Description
+  [activities](http://www.bupar.net/getting_info.html#getting_basic_information)	| Construct a list of activities with basic information 
+ [cases](http://www.bupar.net/getting_info.html#getting_basic_information) 		| Construct a list of cases with basic information 
+ [durations](http://www.bupar.net/getting_info.html#getting_basic_information)		| Compute the throughput time of cases
+ [n_activities](http://www.bupar.net/getting_info.html#getting_basic_information) 	| Count the number of distinct activities 
+ [n_activity_instance](http://www.bupar.net/getting_info.html#getting_basic_information) | Count the number activity instances 
+ [n_cases](http://www.bupar.net/getting_info.html#getting_basic_information) 		| Count the number of cases 
+ [n_events](http://www.bupar.net/getting_info.html#getting_basic_information)		| Count the number of events 
+ [n_resources](http://www.bupar.net/getting_info.html#getting_basic_information) 	| Count the number of resources 
+ [n_traces](http://www.bupar.net/getting_info.html#getting_basic_information)		| Count the number of distinct activity sequences 
+ [resources](http://www.bupar.net/getting_info.html#getting_basic_information)		| Construct a list of resources with basic information 
+[summary](http://www.bupar.net/getting_info.html#getting_basic_information) | Obtain a summary of the event log
+ [traces](http://www.bupar.net/getting_info.html#getting_basic_information)		| Construct a list of traces with basic information 
+"
+df <- read.delim(textConnection(table),header=FALSE,sep="|",strip.white=F,stringsAsFactors=FALSE)
+names(df) <- unname(as.list(df[1,])) # put headers on
+df <- df[-1,] # remove first row
+row.names(df)<-NULL
+pandoc.table(df, style = 'rmarkdown', justify = "left", split.table = Inf)
+```
+
+## Basic subsetting
+
+```{r  results='asis', echo = F}
+table <- "
+	Function                  |  Description
+ [sample_n](http://www.bupar.net/getting_info.html#sampling)	| Sample n cases from the event log
+ [slice](http://www.bupar.net/getting_info.html#slicing) 		| Slice events from the event log
+"
+df <- read.delim(textConnection(table),header=FALSE,sep="|",strip.white=F,stringsAsFactors=FALSE)
+names(df) <- unname(as.list(df[1,])) # put headers on
+df <- df[-1,] # remove first row
+row.names(df)<-NULL
+pandoc.table(df, style = 'rmarkdown', justify = "left", split.table = Inf)
+```
+
+
+## Xes interface
+
+```{r  results='asis', echo = F}
+table <- "
+	Function                                        |  Description
+	[write_xes](write_xes.html#write_xes-files)	|	Write event log object to XES File				
+[read_xes](read_xes.html#create_event_log_object) 	| 	Read event log object from XES File \n _(eventlog_from_xes)_
+[read_xes_cases](read_xes.html#create_list_of_cases) 		| 	Read case attribute data  from XES File \n _(case_attributes_from_xes)_
+"
+df <- read.delim(textConnection(table),header=FALSE,sep="|",strip.white=F,stringsAsFactors=FALSE)
+names(df) <- unname(as.list(df[1,])) # put headers on
+df <- df[-1,] # remove first row
+row.names(df)<-NULL
+pandoc.table(df, style = 'rmarkdown', justify = "left", split.table = Inf)
+```
+	
+	

@@ -1,0 +1,375 @@
+---
+title: Subsetting event data
+output: 
+  html_document:
+    toc: true
+    toc_float: 
+      collapsed: false
+      print: false
+---
+
+```{r include = F}
+library(bupaR)
+```
+```{r echo = F}
+htmltools::includeHTML("tracking_google_analytics.html")
+```
+
+Nexto more generic data filtering methods discussed [here](http://bupar.net/wrangling.html)
+
+The filters for event data subsetting can mostly be divided into two type: event filters and case filters. Event filters will subset _parts_ of cases based on criteria applied on the events (e.g. the resource which performed it), while case filters will subset complete cases, based on criteria applied on the cases (e.g. the trace length). 
+
+Each filter has a _reverse_ argument, which allows to reverse the filter very easily. Furthermore, each filter has an interface-alternative, which can be called by adding a _i_ before the function name. 
+
+## Event filters
+
+### Activities labels
+
+The filter activity function can be used to filter activities by name. It has three arguments
+
+*	the event log
+*	a vector of activities
+*	the reverse argument (FALSE or TRUE)
+
+```{r}
+patients %>%
+	filter_activity(c("X-Ray", "Blood test")) %>%
+	activities
+```
+
+As one can see, there are only 2 distinct activities left in the event log.
+
+### Activity frequency
+
+#### Relative filtering -  using percentage
+
+It is also possible to filter on activity frequency. This filter uses a percentile cut off, and will look at those activities which are most frequent until the required percentage of events has been reached. Thus, a percentile cut off of 80% will look at the activities needed to represent 80% of the events. In the example below, the __least__ frequent activities covering 50% of the event log are selected, since the reverse argument is true.
+
+```{r}
+patients %>%
+	filter_activity_frequency(percentage = 0.5, reverse = T) %>%
+	activities
+	
+```
+
+#### Absolute filtering - using interval
+
+Instead of providing a target percentage, we can provide a target frequency interval. For example, only retain the activities which occur more than 300 times.
+
+```{r}
+patients %>%
+	filter_activity_frequency(interval = c(300,500)) %>%
+	activities
+```
+
+When we don't now the maximal frequency - 500 in this case, we can use an open interval by using NA.
+
+```{r}
+patients %>%
+	filter_activity_frequency(interval = c(300, NA)) %>%
+	activities
+```
+
+
+### Resource labels
+
+Similar to the activity filter, the resource filter can be used to filter events by listing on or more resources. 
+
+```{r}
+patients %>%
+	filter_resource(c("r1","r4")) %>%
+	resource_frequency("resource")
+```
+
+### Resource frequency
+
+Instead of filtering events by the resource that performed the activity, we can also filter event by the frequency of the resource. This happens in the same way as for the activity frequency filter. The filter below gives us the 80% activity instances performed by the most common resources. 
+
+```{r}
+patients %>%
+	filter_resource_frequency(perc = 0.80) %>%
+	resources()
+```
+
+Alternatively, using the interval argument, we can select resources who perform between 200 and 300 activity instances. 
+
+```{r}
+patients %>%
+	filter_resource_frequency(interval = c(200,300)) %>%
+	resources()
+```
+
+### Trim cases
+
+The trim filter is a special event filter, as it also take into account the notion of cases. In fact, it _trim_ cases such that they start with a certain activities until they end with a certain activity. It requires two list: one for possible start activities and one for end activities. The cases will be trimmed from the first appearance of a start activity till the last appearance of an end activity. When reversed, these _slices_ of the event log will be removed instead of preserved.
+
+```{r}
+patients %>%
+	filter_trim(start_activities = "Registration", end_activities =  c("MRI SCAN","X-Ray")) %>%
+	process_map(type = performance())
+```
+
+### Trim to time window
+
+Instead of triming cases to a particular start and/or end activity, we can also trim cases to a particular time window. For this we use the function `filter_time_period` with filter_method `trim`. This filter needs a time interval, which is a vector of length 2 containing data/datetime values. These can be created easily using [lubridate](https://lubridate.tidyverse.org/) function, e.g. `ymd` for year-month-day formats. 
+
+This example takes only activity instances which happened (at least partly, i.e. some events) in December of 2017.
+
+```{r}
+library(lubridate)
+patients %>%
+	filter_time_period(interval = ymd(c(20171201, 20171231)), filter_method = "trim") %>%
+	summary()
+```
+
+Using a different filter method (start, complete, contained or intersecting), this filter can also act as a case filter (see below). 
+
+## Case filters
+
+Instead of filtering events, or parts of cases, we can also filter event data by taking (or leaving) cases as a whole. Using `edeaR`, there are the following options to filter cases:
+
+*	Based on performance
+	*	Throughput time
+	*	Processing time
+	*	Trace length
+*	Based on control-flow characteristics
+	*	Presence/absence of activities
+	*	Start/End points
+	*	Precedence constraints
+	*	Frequency of trace
+*	Time period
+
+### Throughput time
+
+Filtering on throughput time can be done in an absolute and relative way, just as for many other filters.
+
+*	Absolute: specific a throughput time interval
+*	Relative: specific a percentage target
+
+For instance, we can filter cases with a throughput time between 50 and 100 hours. Notice that setting the time unit argument appropriately is important in this case.
+
+```{r}
+patients %>%
+	filter_throughput_time(interval = c(50, 100), units = "hours") %>%
+	throughput_time(units = "hours")
+```
+
+Alternatively, we can filter the 50% cases with the lowest throughput time.
+
+```{r}
+patients %>%
+	filter_throughput_time(percentage = 0.5) %>%
+	throughput_time(units = "hours")
+```
+
+In both cases, the selection can be negated using the `reverse` argument. When using an interval, one of the limits can be set to NA to create an open interval. 
+
+### Processing time
+
+Filtering on processing time happens in exactly the same way as the filter on throughput time, as the examples below show. 
+
+```{r}
+patients %>%
+	filter_processing_time(interval = c(50, 100), units = "hours") %>%
+	processing_time(units = "hours")
+```
+
+```{r}
+patients %>%
+	filter_processing_time(percentage = 0.5) %>%
+	processing_time(units = "hours")
+```
+
+### Trace length
+
+Filtering on trace length is similar to filters on processing or throughput time. Only the units argument is not needed here. 
+
+```{r}
+patients %>%
+	filter_trace_length(interval = c(2, 5)) %>%
+	trace_length(units = "hours")
+```
+
+```{r}
+patients %>%
+	filter_trace_length(percentage = 0.5) %>%
+	trace_length()
+```
+
+### Activity presence
+
+When looking at control-flow, we can select cases that contain a specific activity, for instance a X-Ray scan.
+
+```{r}
+patients %>%
+	filter_activity_presence("X-Ray") %>%
+	traces
+```
+
+Or that don't have a specific activity.
+
+```{r}
+patients %>%
+	filter_activity_presence("X-Ray", reverse = T) %>%
+	traces
+```
+
+We can also test more than one activity. In this case, we can require "all", "one_of" or "none" of them to be present, through setting the argument `method` correctly. 
+
+
+For example, there are no case that have both X-Ray and MRI-SCAN
+```{r}
+patients %>%
+	filter_activity_presence(c("X-Ray", "MRI SCAN"), method = "all")  %>%
+	traces
+```
+
+Almost all have on of them.
+
+```{r}
+patients %>%
+	filter_activity_presence(c("X-Ray", "MRI SCAN"), method = "one_of")  %>%
+	traces
+```
+
+And 3 have none of them. 
+
+```{r}
+patients %>%
+	filter_activity_presence(c("X-Ray", "MRI SCAN"), method = "none")  %>%
+	traces
+```
+
+### End points
+
+Another way is to select cases with a specific start and or end activity. In case of the patients data set, all cases start with "Registration". Filtering cases that __don't__ start with Registration gives an empty log.
+
+```{r}
+patients %>%
+	filter_endpoints(start_activities = "Registration", reverse = T)
+```
+
+If we are interested to see the "completed" cases, those that start with Registration and end we "Check-out", we can apply the following filter.
+
+```{r fig.width = 9}
+patients %>%
+	filter_endpoints(start_activities = "Registration", end_activities = "Check-out") %>%
+	process_map()
+```
+
+### Precedence
+
+Another control-flow filtering approach is to look at precedences between activities. The `filter_precedence` function uses 5 different inputs
+
+*	A list of (one or more) possible antecedent activities ("source"-activities)
+*	A list of (one or more) possible consequent activities ("target"-activities)
+*	A precedence_type
+	*	directly_follows
+	*	eventually_follows
+*	A filter_method: all, one_of or none of the precedence rules should hold.
+*	A reverse argument
+
+If there is more than one antecedent or consequent activity, the filter will test __all__ possible pairs. The filter_method will tell the filter whether all of the rules should hold, at least one, or none are allowed.
+
+For example, take the patients data. The following filter takes only cases where "Triage and Assessment" is directly followed by "Blood test".
+
+
+
+```{r}
+patients %>%
+	filter_precedence(antecedents = "Triage and Assessment",
+					  consequents = "Blood test",
+					  precedence_type = "directly_follows") %>%
+	traces
+```
+
+The following selects cases where Triage and Assessment is eventually followed by both Blood test and X-Ray, which never happens.
+
+```{r}
+patients %>%
+	filter_precedence(antecedents = "Triage and Assessment",
+					  consequents = c("Blood test", "X-Ray"),
+					  precedence_type = "eventually_follows",
+					  filter_method = "all") %>%
+	traces
+```
+
+The next filter selects cases where Triage and Assessement is eventually followed by __at least one__ the three antecedents, by changing the filter method to _one_of_. 
+
+```{r}
+patients %>%
+	filter_precedence(antecedents = "Triage and Assessment",
+					  consequents = c("Blood test", "X-Ray", "MRI SCAN"),
+					  precedence_type = "eventually_follows",
+					  filter_method = "one_of") %>%
+	traces
+```
+
+This final example only retains cases where Triage and Assessment is _not_ followed by any of the three consequent activities. The result is 2 incomplete cases where the last activity was Triage and Assessment. 
+
+```{r}
+patients %>%
+	filter_precedence(antecedents = "Triage and Assessment",
+					  consequents = c("Blood test", "X-Ray", "MRI SCAN"),
+					  precedence_type = "eventually_follows",
+					  filter_method = "none") %>%
+	traces
+```
+
+### Trace Frequency
+
+Filtering on trace frequency is similar to the filters on activity/resource frequence and the performance filter: you can 
+choose between a percentage target or between an frequency interval.
+
+Select 80% of the cases that share the most common traces.
+
+```{r}
+sepsis %>%
+	filter_trace_frequency(percentage = 0.8) %>%
+	n_cases()
+```
+
+Or the 20% least common ones. 
+
+```{r}
+sepsis %>%
+	filter_trace_frequency(percentage = 0.2) %>%
+	n_cases()
+```
+
+Or the cases of which the trace frequency is less than 50.
+
+```{r}
+sepsis %>%
+	filter_trace_frequency(interval = c(0,50)) %>%
+	n_cases()
+```
+
+### Time period
+	
+Filtering cases by time period can be done using the `filter_time_period` introduced above. There are four different methods that result in case filters:
+
+*	start: all cases started in an interval
+*	complete: all cases completed in an interval
+*	contained: all cases contained in an interval
+*	intersecting: all cases with some activity in an interval
+	
+The following four example dotted charts show the impact of the four different methods using the same interval. 
+
+```{r}
+sepsis %>%
+	filter_time_period(interval = ymd(c(20150101, 20150131)), filter_method = "start") %>%
+	dotted_chart
+sepsis %>%
+	filter_time_period(interval = ymd(c(20150101, 20150131)), filter_method = "complete") %>%
+	dotted_chart
+sepsis %>%
+	filter_time_period(interval = ymd(c(20150101, 20150131)), filter_method = "contained") %>%
+	dotted_chart
+sepsis %>%
+	filter_time_period(interval = ymd(c(20150101, 20150131)), filter_method = "intersecting") %>%
+	dotted_chart
+```
+
+	
+	

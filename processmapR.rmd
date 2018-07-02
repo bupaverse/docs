@@ -1,0 +1,96 @@
+---
+title: processmapR
+output: 
+  html_document:
+    toc: true
+    toc_float: 
+      collapsed: false
+      print: false
+---
+	
+The processmapR package can be used to construct process maps and precedence diagrams. The functions provided by this package are listed below.
+
+```{r include = F}
+library(pander)
+```
+```{r echo = F}
+htmltools::includeHTML("tracking_google_analytics.html")
+```
+
+
+## Process Maps
+
+```{r  results='asis', echo = F}
+table <- "
+	Function                    |  Description
+	process_map	|	Create process maps					
+"
+df <- read.delim(textConnection(table),header=FALSE,sep="|",strip.white=F,stringsAsFactors=FALSE)
+names(df) <- unname(as.list(df[1,])) # put headers on
+df <- df[-1,] # remove first row
+row.names(df)<-NULL
+pandoc.table(df, style = 'rmarkdown', justify = "left", split.cells = c("40%", "60%"))
+```
+	
+## Process Map Profiles
+
+```{r  results='asis', echo = F}
+table <- "
+	Function                    |  Description
+	performance	|	Create a performance map profile
+	frequency	|	Create a frequency map profile					
+
+"
+df <- read.delim(textConnection(table),header=FALSE,sep="|",strip.white=F,stringsAsFactors=FALSE)
+names(df) <- unname(as.list(df[1,])) # put headers on
+df <- df[-1,] # remove first row
+row.names(df)<-NULL
+pandoc.table(df, style = 'rmarkdown', justify = "left", split.cells = c("40%", "60%"))
+```
+
+## Precedence diagrams
+
+```{r  results='asis', echo = F}
+table <- "
+	Function                    |  Description
+	precedence_matrix	|	Create a precedence diagram
+	plotr			| Plot precedence diagrams
+"
+df <- read.delim(textConnection(table),header=FALSE,sep="|",strip.white=F,stringsAsFactors=FALSE)
+names(df) <- unname(as.list(df[1,])) # put headers on
+df <- df[-1,] # remove first row
+row.names(df)<-NULL
+pandoc.table(df, style = 'rmarkdown', justify = "left", split.cells = c("40%", "60%"))
+```
+
+
+## Dotted charts
+
+```{r  results='asis', echo = F}
+table <- "
+	Function                    |  Description
+	dotted_chart	|	Create a dotted chart
+	idotted_chart			| Interactive dotted chart app
+"
+df <- read.delim(textConnection(table),header=FALSE,sep="|",strip.white=F,stringsAsFactors=FALSE)
+names(df) <- unname(as.list(df[1,])) # put headers on
+df <- df[-1,] # remove first row
+row.names(df)<-NULL
+pandoc.table(df, style = 'rmarkdown', justify = "left", split.cells = c("40%", "60%"))
+```
+
+
+## Social network analysis
+
+```{r  results='asis', echo = F}
+table <- "
+	Function                    |  Description
+	resource_map	|	Create a handover-of-work network
+	resource_matrix			| Create a handover-of-work matrix
+"
+df <- read.delim(textConnection(table),header=FALSE,sep="|",strip.white=F,stringsAsFactors=FALSE)
+names(df) <- unname(as.list(df[1,])) # put headers on
+df <- df[-1,] # remove first row
+row.names(df)<-NULL
+pandoc.table(df, style = 'rmarkdown', justify = "left", split.cells = c("40%", "60%"))
+```

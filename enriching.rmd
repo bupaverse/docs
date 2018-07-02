@@ -1,0 +1,91 @@
+---
+title: Enriching event data
+output: 
+  html_document:
+    toc: true
+    toc_float: 
+      collapsed: false
+      print: false
+---
+
+```{r include = F}
+library(bupaR)
+```
+
+```{r echo = F}
+htmltools::includeHTML("tracking_google_analytics.html")
+```
+
+There are several ways to enrich event data, by using predefined metrics as well as customized approaches.
+
+## Appending metrics
+
+The metrics defined [here](http://www.bupar.net/exploring.html) cannot only be computed in isolation, but also directly added as additional information to the event log. This is most useful at the level of cases, but also supported for the levels activity, resource and resource-activity (if available). 
+
+Appending metrics to the event data can be done by calling the metric with the appropriate level and setting the `append = TRUE` argument. For example, consider the throughput time.
+
+```{r}
+patients %>%
+	throughput_time(level = "case",append = TRUE)
+```
+
+A new variable, "throughput_time_case", has now been added to the event log as a case attribute. This new attribute can than be directly used in later analysis. 
+
+For some metrics, there are multiple output values that are candidate to be appended. For example, considered the output of the trace coverage metric.
+
+```{r}
+patients %>% 
+	trace_coverage(level = "case")
+```
+
+We obtain the absolute number of cases that are covered by trace, as well as the relative number. Only one of these variable gets appended, and which one is chosen automatically for each metric. The result below shows that the absolute values are appended.
+
+```{r}
+patients %>%
+	trace_coverage(level = "case",append = TRUE)
+```
+
+To change this default, the argument `append_column` can be set. For instance, we can instead append the relative coverage.
+
+```{r}
+patients %>%
+	trace_coverage(level = "case",append = TRUE, append_column = "relative") 
+```
+
+## Custom enrichment
+
+Next to the metrics, more customized enrichments can be made. Suppose we want to indicate which patients have had a MRI-SCAN. Using `mutate`, we can do this as follows.
+
+```{r}
+patients %>%
+	group_by_case %>%
+	mutate(had_MRI = any(handling == "MRI SCAN")) %>%
+	ungroup_eventlog()
+```
+
+Note that the `group_by_case` function is a helpful function to group the data by case id. As a result, the mutate will look for the MRI SCAN in each case separately. The `ungroup_eventlog` function removes the grouping, so that later analyses are not affected by this. 
+
+## Refining enriched data
+
+Using `mutate`, one can always further refine the enriched variables. For instance, after appending the relative trace coverage, we can create a variable that indicates whether a case followed a frequent or infrequent path. The following code adds a variable  `frequent` whioch is TRUE if more than 20% of the cases share the same trace. 
+
+```{r}
+patients %>%
+	trace_coverage(level = "case",append = TRUE, append_column = "relative") %>%
+	mutate(frequent = relative_case_trace_coverage > 0.2)
+```
+
+The new attribute can than be included in further analysis. For instance, does throughput time differ between frequent and infrequent traces?
+
+```{r}
+patients %>%
+	trace_coverage(level = "case",append = TRUE, append_column = "relative") %>%
+	mutate(frequent = relative_case_trace_coverage > 0.2) %>%
+	group_by(frequent) %>%
+	throughput_time()
+```
+
+We see that frequent traces have a higher throughput time on average. For this specific case, the reason for this is that the infrequent traces are actually incomplete ones. 
+
+
+

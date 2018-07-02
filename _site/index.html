@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>Business Process Analysis in R</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 60px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+
+.section h2 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h3 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h4 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h5 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h6 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Business Process Analysis in R</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+<li>
+  <a href="getting_started.html">Get started</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    I/O
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="creating_eventlogs.html">Creating event logs</a>
+    </li>
+    <li>
+      <a href="getting_info.html">Getting event log info</a>
+    </li>
+    <li>
+      <a href="read_xes.html">XES-files</a>
+    </li>
+    <li>
+      <a href="eventdataR.html">Event Data Repository</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Preprocessing
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="subsetting.html">Subsetting</a>
+    </li>
+    <li>
+      <a href="aggregating.html">Aggregating</a>
+    </li>
+    <li>
+      <a href="enriching.html">Enriching</a>
+    </li>
+    <li>
+      <a href="wrangling.html">Wrangling</a>
+    </li>
+    <li>
+      <a href="mapping.html">Adjusting view</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    EDA
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="exploring.html">Describing event data</a>
+    </li>
+    <li>
+      <a href="processmaps.html">Creating Process Maps</a>
+    </li>
+    <li>
+      <a href="precedence.html">Precedence Matrices</a>
+    </li>
+    <li>
+      <a href="dotted_chart.html">Dotted charts</a>
+    </li>
+    <li>
+      <a href="trace_explorer.html">Trace explorer</a>
+    </li>
+    <li>
+      <a href="social_networks.html">Social network analysis</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="processmonitR.html">Dashboards</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Reference
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="http://gertjanssenswillen.github.io/bupaR/reference/index.html">bupaR</a>
+    </li>
+    <li>
+      <a href="http://gertjanssenswillen.github.io/edeaR/reference/index.html">edeaR</a>
+    </li>
+    <li>
+      <a href="http://gertjanssenswillen.github.io/eventdataR/reference/index.html">eventdataR</a>
+    </li>
+    <li>
+      <a href="http://gertjanssenswillen.github.io/processmapR/reference/index.html">processmapR</a>
+    </li>
+    <li>
+      <a href="http://gertjanssenswillen.github.io/processmonitR/reference/index.html">processmonitR</a>
+    </li>
+    <li>
+      <a href="http://gertjanssenswillen.github.io/petrinetR/reference/index.html">petrinetR</a>
+    </li>
+    <li>
+      <a href="http://gertjanssenswillen.github.io/xesreadR/reference/index.html">xesreadR</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore"><strong>Business Process Analysis in R</strong></h1>
+
+</div>
+
+
+<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-92605173-2', 'auto');
+ga('send', 'pageview');
+
+</script>
+<p><img src="images/logo_breed_zonder_tekst.PNG" width="400" style="display: block; margin: auto 0 auto auto;" /></p>
+<p><strong><code>bupaR</code></strong> is an open-source, integrated suite of R-packages for the handling and analysis of business process data. It currently consists of 8 packages, including the central package, supporting different stages of a process mining workflow.</p>
+<p><br/></p>
+<p><img src="images/banner.JPG" width="900" style="display: block; margin: auto;" /></p>
+<p><strong><code>bupaR</code></strong> provides support for different stages in process analysis, such as importing event data, calculating descriptives, process monitoring and process visualization. The central package, <strong><code>bupaR</code></strong> includes basic functionality for creating event log objects in R. It contains several functions to get information about an event log and also provides specific event log versions of generic R functions.</p>
+<div id="packages" class="section level2">
+<h2>Packages</h2>
+<table style="width:100%;">
+<colgroup>
+<col width="20%" />
+<col width="80%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Package</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>bupaR</code></td>
+<td>The <code>bupaR</code>-package is the core package of the framework, implements an S3-objects class for event data. It provides functions to create these objects, as well as support for common transformations. Auxiliary functions to seamlessly change the classifiers of the event data are made available, and event log versions of common <code>dplyr</code> functions for data manipulation are implemented, such as <code>filter</code>, <code>group_by</code> and <code>mutate</code>, among others. These functions can be used to preprocess event data. Some specific preprocessing tasks are supported explicitly by specific functions, such as aggregations of activity labels.</td>
+</tr>
+<tr class="even">
+<td></td>
+<td><a href="creating_eventlogs.html"><strong>Read more</strong></a></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td><code>edeaR</code></td>
+<td><code>edeaR</code> stands for Exploratory and Descriptive Event-Data Analyses, and contains a set of process metrics to describe and explore event logs. The process metrics are based on Lean Six Sigma literature and can be analyzed and visualized at different levels of granularity. Additionally, <code>edeaR</code> contains an extensive collection of event data specific filters.</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td><a href="exploring.html"><strong>Read more</strong></a></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><code>eventdataR</code></td>
+<td><code>eventdataR</code> is a data-package which provide easy access to event logs for testing and experiments. Currently, both artificial event data, e.g. <code>patients</code>, as well as real-life event data, such as the <code>sepsis</code> dataset.</td>
+</tr>
+<tr class="even">
+<td></td>
+<td><a href="eventdataR.html"><strong>Read more</strong></a></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td><code>xesreadR</code></td>
+<td>In order to be compatible with teh eXtensible Event Stram IEEE standard, the <code>xesreadR</code> package allows to read and write .xes-files.</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td><a href="read_xes.html"><strong>Read more</strong></a></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><code>processmapR</code></td>
+<td>Process data specific visualizations, such as process maps and dotted charts, are provided by <code>processmapR</code>. The provided visualizations are highly customizable and can be used to give insights to different aspects of the process.</td>
+</tr>
+<tr class="even">
+<td></td>
+<td><a href="processmaps.html"><strong>Read more</strong></a></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td><code>processanimateR</code></td>
+<td>As an extension of <code>processmapR</code>, <code>processanimateR</code> allows to easily animate process maps using token replay.</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td><a href="https://fmannhardt.github.io/processanimateR/"><strong>Read more</strong></a></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><code>petrinetR</code></td>
+<td>While most package of <code>bupaR</code> are focused on process data, <code>petrinetR</code> is the first package to introduce a process model notation in R. Currently, it supports the creation of Petri Nets, as well as reading and writing .PMNL-files. Furthermore, Petri Nets can be visualized, adjusted and one can perform manual token replay and parse transition sequences.</td>
+</tr>
+<tr class="even">
+<td></td>
+<td><a href="https://gertjanssenswillen.github.io/petrinetR/"><strong>Read more</strong></a></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td><code>processmonitR</code></td>
+<td><code>processmonitR</code> provides a limited set of process dashboards. These can be used in a permanent, real-time fashion, as well as for interactive data analysis.</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td><a href="processmonitR.html"><strong>Read more</strong></a></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

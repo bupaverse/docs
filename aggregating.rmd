@@ -1,0 +1,62 @@
+---
+title: Aggregating event data
+output: 
+  html_document:
+    toc: true
+    toc_float: 
+      collapsed: false
+      print: false
+---
+
+```{r include = F}
+library(bupaR)
+```
+
+```{r echo = F}
+htmltools::includeHTML("tracking_google_analytics.html")
+```
+
+`bupaR` supports several strategies to zoom-out from too detailed activities. One option is to remove distinctions between similar activity types; changing them to a uniform name. A second option is to collapse activities that belong together as a sub process under a higher-level name. The first aggregation we call a "IS-A" aggregation and the second a "PART-OF" aggregation. 
+
+## Is-a aggregation
+
+As a simple example, consider the `patients` event data.
+
+```{r fig.width = 8}
+patients %>% 
+	process_map()
+```
+
+In the hypothetical situation where we want to zoom out this process, we could say that both MRI SCAN and X-Ray are _Scans_. That is, a MRI SCAN __is a__ Scan and a X-Ray __is a__ Scan. As a result, we could perform a is-a aggregation. For this, we use the `act_unite` function, since we `unite` two or more activities. We will see that the 236 MRI Scans and 261 X-Rays are replaced with 497 Scans. 
+
+```{r fig.width = 8}
+patients %>%
+	act_unite(Scan = c("MRI SCAN","X-Ray")) %>%
+	process_map()
+```
+
+## Part-of aggregation
+
+Another approach is to combine activities which are not simular, but belong together as _part of_ a sub process. Suppose we would say that X-Ray, MRI Scan, and Blood test are _part of_ the sub process "Testing". We could _collapse_ the occurence of these activities into a single activity. This can be achieved with the `act_collapse` function.
+
+```{r fig.width = 8}
+patients %>% 
+	act_collapse(Testing = c("MRI SCAN","X-Ray","Blood test")) %>%
+	process_map()
+```
+
+
+
+## Recoding individual activities
+
+Sometimes it is useful to recode individual activity levels, for instance when some typo's are present, or when you want to give different labels a more uniform format. Individual recodings can be done using `act_recode`.
+
+```{r fig.width = 8}
+patients %>%
+	act_recode("Check-in" = "Registration",
+			   "MRI Scan" = "MRI SCAN") %>%
+	process_map()
+```
+
+
+

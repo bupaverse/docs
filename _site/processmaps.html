@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>Process Maps</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<script src="site_libs/htmlwidgets-1.0/htmlwidgets.js"></script>
+<script src="site_libs/viz-0.3/viz.js"></script>
+<link href="site_libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
+<script src="site_libs/grViz-binding-1.0.0/grViz.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 60px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+
+.section h2 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h3 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h4 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h5 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h6 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+#TOC {
+  display: none !important;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+  padding-left: 25px;
+  text-indent: 0;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Business Process Analysis in R</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+<li>
+  <a href="getting_started.html">Get started</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    I/O
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="creating_eventlogs.html">Creating event logs</a>
+    </li>
+    <li>
+      <a href="getting_info.html">Getting event log info</a>
+    </li>
+    <li>
+      <a href="read_xes.html">XES-files</a>
+    </li>
+    <li>
+      <a href="eventdataR.html">Event Data Repository</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Preprocessing
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="subsetting.html">Subsetting</a>
+    </li>
+    <li>
+      <a href="aggregating.html">Aggregating</a>
+    </li>
+    <li>
+      <a href="enriching.html">Enriching</a>
+    </li>
+    <li>
+      <a href="wrangling.html">Wrangling</a>
+    </li>
+    <li>
+      <a href="mapping.html">Adjusting view</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    EDA
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="exploring.html">Describing event data</a>
+    </li>
+    <li>
+      <a href="processmaps.html">Creating Process Maps</a>
+    </li>
+    <li>
+      <a href="precedence.html">Precedence Matrices</a>
+    </li>
+    <li>
+      <a href="dotted_chart.html">Dotted charts</a>
+    </li>
+    <li>
+      <a href="trace_explorer.html">Trace explorer</a>
+    </li>
+    <li>
+      <a href="social_networks.html">Social network analysis</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="processmonitR.html">Dashboards</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Reference
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="http://gertjanssenswillen.github.io/bupaR/reference/index.html">bupaR</a>
+    </li>
+    <li>
+      <a href="http://gertjanssenswillen.github.io/edeaR/reference/index.html">edeaR</a>
+    </li>
+    <li>
+      <a href="http://gertjanssenswillen.github.io/eventdataR/reference/index.html">eventdataR</a>
+    </li>
+    <li>
+      <a href="http://gertjanssenswillen.github.io/processmapR/reference/index.html">processmapR</a>
+    </li>
+    <li>
+      <a href="http://gertjanssenswillen.github.io/processmonitR/reference/index.html">processmonitR</a>
+    </li>
+    <li>
+      <a href="http://gertjanssenswillen.github.io/petrinetR/reference/index.html">petrinetR</a>
+    </li>
+    <li>
+      <a href="http://gertjanssenswillen.github.io/xesreadR/reference/index.html">xesreadR</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Process Maps</h1>
+
+</div>
+
+
+<div id="introduction" class="section level2">
+<h2>Introduction</h2>
+<p><script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-92605173-2', 'auto');
+ga('send', 'pageview');
+
+</script> The function <code>process_map</code> can be used very easily to create a process map of an event log. Below, an example of a process map for the patients event log can be found.</p>
+<pre class="r"><code>library(bupaR)
+patients %&gt;%
+    process_map()</code></pre>
+<div id="htmlwidget-261231de5b8ad82648a4" style="width:672px;height:192px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-261231de5b8ad82648a4">{"x":{"diagram":"digraph {\n\ngraph [layout = \"dot\",\n       outputorder = \"edgesfirst\",\n       bgcolor = \"white\",\n       rankdir = \"LR\"]\n\nnode [fontname = \"Helvetica\",\n      fontsize = \"10\",\n      shape = \"circle\",\n      fixedsize = \"true\",\n      width = \"0.5\",\n      style = \"filled\",\n      fillcolor = \"aliceblue\",\n      color = \"gray70\",\n      fontcolor = \"gray50\"]\n\nedge [fontname = \"Helvetica\",\n     fontsize = \"8\",\n     len = \"1.5\",\n     color = \"gray80\",\n     arrowsize = \"0.5\"]\n\n  \"1\" [label = \"Blood test\n (237)\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"black\", color = \"grey\", tooltip = \"Blood test\n (237)\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fillcolor = \"#ECE7F2\"] \n  \"2\" [label = \"Check-out\n (492)\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"white\", color = \"grey\", tooltip = \"Check-out\n (492)\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fillcolor = \"#0570B0\"] \n  \"3\" [label = \"Discuss Results\n (495)\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"white\", color = \"grey\", tooltip = \"Discuss Results\n (495)\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fillcolor = \"#0570B0\"] \n  \"4\" [label = \"End\", shape = \"circle\", style = \"rounded,filled\", fontcolor = \"brown4\", color = \"brown4\", tooltip = \"End\n (500)\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fillcolor = \"#FFFFFF\"] \n  \"5\" [label = \"MRI SCAN\n (236)\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"black\", color = \"grey\", tooltip = \"MRI SCAN\n (236)\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fillcolor = \"#ECE7F2\"] \n  \"6\" [label = \"Registration\n (500)\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"white\", color = \"grey\", tooltip = \"Registration\n (500)\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fillcolor = \"#0570B0\"] \n  \"7\" [label = \"Start\", shape = \"circle\", style = \"rounded,filled\", fontcolor = \"chartreuse4\", color = \"chartreuse4\", tooltip = \"Start\n (500)\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fillcolor = \"#FFFFFF\"] \n  \"8\" [label = \"Triage and Assessment\n (500)\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"white\", color = \"grey\", tooltip = \"Triage and Assessment\n (500)\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fillcolor = \"#0570B0\"] \n  \"9\" [label = \"X-Ray\n (261)\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"black\", color = \"grey\", tooltip = \"X-Ray\n (261)\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fillcolor = \"#ECE7F2\"] \n\"1\"->\"4\" [label = \"1\", penwidth = \"1.008\", color = \"dodgerblue4\", fontname = \"Arial\"] \n\"1\"->\"5\" [label = \"236\", penwidth = \"2.888\", color = \"dodgerblue4\", fontname = \"Arial\"] \n\"2\"->\"4\" [label = \"492\", penwidth = \"4.936\", color = \"dodgerblue4\", fontname = \"Arial\"] \n\"3\"->\"2\" [label = \"492\", penwidth = \"4.936\", color = \"dodgerblue4\", fontname = \"Arial\"] \n\"3\"->\"4\" [label = \"3\", penwidth = \"1.024\", color = \"dodgerblue4\", fontname = \"Arial\"] \n\"5\"->\"3\" [label = \"236\", penwidth = \"2.888\", color = \"dodgerblue4\", fontname = \"Arial\"] \n\"6\"->\"8\" [label = \"500\", penwidth = \"5\", color = \"dodgerblue4\", fontname = \"Arial\"] \n\"7\"->\"6\" [label = \"500\", penwidth = \"5\", color = \"dodgerblue4\", fontname = \"Arial\"] \n\"8\"->\"1\" [label = \"237\", penwidth = \"2.896\", color = \"dodgerblue4\", fontname = \"Arial\"] \n\"8\"->\"4\" [label = \"2\", penwidth = \"1.016\", color = \"dodgerblue4\", fontname = \"Arial\"] \n\"8\"->\"9\" [label = \"261\", penwidth = \"3.088\", color = \"dodgerblue4\", fontname = \"Arial\"] \n\"9\"->\"3\" [label = \"259\", penwidth = \"3.072\", color = \"dodgerblue4\", fontname = \"Arial\"] \n\"9\"->\"4\" [label = \"2\", penwidth = \"1.016\", color = \"dodgerblue4\", fontname = \"Arial\"] \n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="map-profiles" class="section level2">
+<h2>Map profiles</h2>
+<div id="frequency-profile" class="section level3">
+<h3>Frequency profile</h3>
+<p>By default, the process map is annotated with frequencies of activities and flows. The is what is called the frequency <em>profile</em>, and can be created explicitly using the <code>frequency</code> function. This function has a <code>value</code> argument, which can be used to adjust the frequencies shown, for instance using relative frequencies instead of the default absolute ones.</p>
+<pre class="r"><code>patients %&gt;%
+    process_map(type = frequency(&quot;relative&quot;))</code></pre>
+<div id="htmlwidget-17ba6d56475595116930" style="width:672px;height:192px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-17ba6d56475595116930">{"x":{"diagram":"digraph {\n\ngraph [layout = \"dot\",\n       outputorder = \"edgesfirst\",\n       bgcolor = \"white\",\n       rankdir = \"LR\"]\n\nnode [fontname = \"Helvetica\",\n      fontsize = \"10\",\n      shape = \"circle\",\n      fixedsize = \"true\",\n      width = \"0.5\",\n      style = \"filled\",\n      fillcolor = \"aliceblue\",\n      color = \"gray70\",\n      fontcolor = \"gray50\"]\n\nedge [fontname = \"Helvetica\",\n     fontsize = \"8\",\n     len = \"1.5\",\n     color = \"gray80\",\n     arrowsize = \"0.5\"]\n\n  \"1\" [label = \"Blood test\n (8.71%)\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"black\", color = \"grey\", tooltip = \"Blood test\n (8.71%)\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fillcolor = \"#ECE7F2\"] \n  \"2\" [label = \"Check-out\n (18.08%)\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"white\", color = \"grey\", tooltip = \"Check-out\n (18.08%)\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fillcolor = \"#0570B0\"] \n  \"3\" [label = \"Discuss Results\n (18.19%)\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"white\", color = \"grey\", tooltip = \"Discuss Results\n (18.19%)\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fillcolor = \"#0570B0\"] \n  \"4\" [label = \"End\", shape = \"circle\", style = \"rounded,filled\", fontcolor = \"brown4\", color = \"brown4\", tooltip = \"End\n (18.38%)\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fillcolor = \"#FFFFFF\"] \n  \"5\" [label = \"MRI SCAN\n (8.67%)\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"black\", color = \"grey\", tooltip = \"MRI SCAN\n (8.67%)\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fillcolor = \"#ECE7F2\"] \n  \"6\" [label = \"Registration\n (18.38%)\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"white\", color = \"grey\", tooltip = \"Registration\n (18.38%)\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fillcolor = \"#0570B0\"] \n  \"7\" [label = \"Start\", shape = \"circle\", style = \"rounded,filled\", fontcolor = \"chartreuse4\", color = \"chartreuse4\", tooltip = \"Start\n (18.38%)\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fillcolor = \"#FFFFFF\"] \n  \"8\" [label = \"Triage and Assessment\n (18.38%)\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"white\", color = \"grey\", tooltip = \"Triage and Assessment\n (18.38%)\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fillcolor = \"#0570B0\"] \n  \"9\" [label = \"X-Ray\n (9.59%)\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"black\", color = \"grey\", tooltip = \"X-Ray\n (9.59%)\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fillcolor = \"#ECE7F2\"] \n\"1\"->\"4\" [label = \"0.42\", penwidth = \"1.0168\", color = \"dodgerblue4\", fontname = \"Arial\"] \n\"1\"->\"5\" [label = \"99.58\", penwidth = \"4.9832\", color = \"dodgerblue4\", fontname = \"Arial\"] \n\"2\"->\"4\" [label = \"100\", penwidth = \"5\", color = \"dodgerblue4\", fontname = \"Arial\"] \n\"3\"->\"2\" [label = \"99.39\", penwidth = \"4.9756\", color = \"dodgerblue4\", fontname = \"Arial\"] \n\"3\"->\"4\" [label = \"0.61\", penwidth = \"1.0244\", color = \"dodgerblue4\", fontname = \"Arial\"] \n\"5\"->\"3\" [label = \"100\", penwidth = \"5\", color = \"dodgerblue4\", fontname = \"Arial\"] \n\"6\"->\"8\" [label = \"100\", penwidth = \"5\", color = \"dodgerblue4\", fontname = \"Arial\"] \n\"7\"->\"6\" [label = \"100\", penwidth = \"5\", color = \"dodgerblue4\", fontname = \"Arial\"] \n\"8\"->\"1\" [label = \"47.4\", penwidth = \"2.896\", color = \"dodgerblue4\", fontname = \"Arial\"] \n\"8\"->\"4\" [label = \"0.4\", penwidth = \"1.016\", color = \"dodgerblue4\", fontname = \"Arial\"] \n\"8\"->\"9\" [label = \"52.2\", penwidth = \"3.088\", color = \"dodgerblue4\", fontname = \"Arial\"] \n\"9\"->\"3\" [label = \"99.23\", penwidth = \"4.9692\", color = \"dodgerblue4\", fontname = \"Arial\"] \n\"9\"->\"4\" [label = \"0.77\", penwidth = \"1.0308\", color = \"dodgerblue4\", fontname = \"Arial\"] \n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<p>The frequency value displayed can be one of the following</p>
+<ul>
+<li><code>absolute</code> frequency
+<ul>
+<li>The absolute number of activity instances and flows</li>
+</ul></li>
+<li><code>absolute_case</code> frequency
+<ul>
+<li>The absolute number of cases behind each activity and flow</li>
+</ul></li>
+<li><code>relative</code> frequency
+<ul>
+<li>The relative number of instances per activity</li>
+<li>The relative outgoing flows for each activity</li>
+</ul></li>
+<li><code>relative_case</code> frequency
+<ul>
+<li>The relative number of cases per activity and flow</li>
+</ul></li>
+</ul>
+<p>Examples are included below.</p>
+<pre class="r"><code>patients %&gt;%
+    process_map(type = frequency(&quot;absolute&quot;))</code></pre>
+<div id="htmlwidget-0d365a88108e1e65033e" style="width:672px;height:192px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-0d365a88108e1e65033e">{"x":{"diagram":"digraph {\n\ngraph [layout = \"dot\",\n       outputorder = \"edgesfirst\",\n       bgcolor = \"white\",\n       rankdir = \"LR\"]\n\nnode [fontname = \"Helvetica\",\n      fontsize = \"10\",\n      shape = \"circle\",\n      fixedsize = \"true\",\n      width = \"0.5\",\n      style = \"filled\",\n      fillcolor = \"aliceblue\",\n      color = \"gray70\",\n      fontcolor = \"gray50\"]\n\nedge [fontname = \"Helvetica\",\n     fontsize = \"8\",\n     len = \"1.5\",\n     color = \"gray80\",\n     arrowsize = \"0.5\"]\n\n  \"1\" [label = \"Blood test\n (237)\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"black\", color = \"grey\", tooltip = \"Blood test\n (237)\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fillcolor = \"#ECE7F2\"] \n  \"2\" [label = \"Check-out\n (492)\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"white\", color = \"grey\", tooltip = \"Check-out\n (492)\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fillcolor = \"#0570B0\"] \n  \"3\" [label = \"Discuss Results\n (495)\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"white\", color = \"grey\", tooltip = \"Discuss Results\n (495)\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fillcolor = \"#0570B0\"] \n  \"4\" [label = \"End\", shape = \"circle\", style = \"rounded,filled\", fontcolor = \"brown4\", color = \"brown4\", tooltip = \"End\n (500)\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fillcolor = \"#FFFFFF\"] \n  \"5\" [label = \"MRI SCAN\n (236)\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"black\", color = \"grey\", tooltip = \"MRI SCAN\n (236)\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fillcolor = \"#ECE7F2\"] \n  \"6\" [label = \"Registration\n (500)\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"white\", color = \"grey\", tooltip = \"Registration\n (500)\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fillcolor = \"#0570B0\"] \n  \"7\" [label = \"Start\", shape = \"circle\", style = \"rounded,filled\", fontcolor = \"chartreuse4\", color = \"chartreuse4\", tooltip = \"Start\n (500)\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fillcolor = \"#FFFFFF\"] \n  \"8\" [label = \"Triage and Assessment\n (500)\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"white\", color = \"grey\", tooltip = \"Triage and Assessment\n (500)\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fillcolor = \"#0570B0\"] \n  \"9\" [label = \"X-Ray\n (261)\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"black\", color = \"grey\", tooltip = \"X-Ray\n (261)\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fillcolor = \"#ECE7F2\"] \n\"1\"->\"4\" [label = \"1\", penwidth = \"1.008\", color = \"dodgerblue4\", fontname = \"Arial\"] \n\"1\"->\"5\" [label = \"236\", penwidth = \"2.888\", color = \"dodgerblue4\", fontname = \"Arial\"] \n\"2\"->\"4\" [label = \"492\", penwidth = \"4.936\", color = \"dodgerblue4\", fontname = \"Arial\"] \n\"3\"->\"2\" [label = \"492\", penwidth = \"4.936\", color = \"dodgerblue4\", fontname = \"Arial\"] \n\"3\"->\"4\" [label = \"3\", penwidth = \"1.024\", color = \"dodgerblue4\", fontname = \"Arial\"] \n\"5\"->\"3\" [label = \"236\", penwidth = \"2.888\", color = \"dodgerblue4\", fontname = \"Arial\"] \n\"6\"->\"8\" [label = \"500\", penwidth = \"5\", color = \"dodgerblue4\", fontname = \"Arial\"] \n\"7\"->\"6\" [label = \"500\", penwidth = \"5\", color = \"dodgerblue4\", fontname = \"Arial\"] \n\"8\"->\"1\" [label = \"237\", penwidth = \"2.896\", color = \"dodgerblue4\", fontname = \"Arial\"] \n\"8\"->\"4\" [label = \"2\", penwidth = \"1.016\", color = \"dodgerblue4\", fontname = \"Arial\"] \n\"8\"->\"9\" [label = \"261\", penwidth = \"3.088\", color = \"dodgerblue4\", fontname = \"Arial\"] \n\"9\"->\"3\" [label = \"259\", penwidth = \"3.072\", color = \"dodgerblue4\", fontname = \"Arial\"] \n\"9\"->\"4\" [label = \"2\", penwidth = \"1.016\", color = \"dodgerblue4\", fontname = \"Arial\"] \n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<pre class="r"><code>patients %&gt;%
+    process_map(type = frequency(&quot;relative_case&quot;))</code></pre>
+<div id="htmlwidget-665d385f0dffb938481a" style="width:672px;height:192px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-665d385f0dffb938481a">{"x":{"diagram":"digraph {\n\ngraph [layout = \"dot\",\n       outputorder = \"edgesfirst\",\n       bgcolor = \"white\",\n       rankdir = \"LR\"]\n\nnode [fontname = \"Helvetica\",\n      fontsize = \"10\",\n      shape = \"circle\",\n      fixedsize = \"true\",\n      width = \"0.5\",\n      style = \"filled\",\n      fillcolor = \"aliceblue\",\n      color = \"gray70\",\n      fontcolor = \"gray50\"]\n\nedge [fontname = \"Helvetica\",\n     fontsize = \"8\",\n     len = \"1.5\",\n     color = \"gray80\",\n     arrowsize = \"0.5\"]\n\n  \"1\" [label = \"Blood test\n (47.4%)\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"black\", color = \"grey\", tooltip = \"Blood test\n (47.4%)\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fillcolor = \"#ECE7F2\"] \n  \"2\" [label = \"Check-out\n (98.4%)\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"white\", color = \"grey\", tooltip = \"Check-out\n (98.4%)\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fillcolor = \"#0570B0\"] \n  \"3\" [label = \"Discuss Results\n (99%)\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"white\", color = \"grey\", tooltip = \"Discuss Results\n (99%)\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fillcolor = \"#0570B0\"] \n  \"4\" [label = \"End\", shape = \"circle\", style = \"rounded,filled\", fontcolor = \"brown4\", color = \"brown4\", tooltip = \"End\n (100%)\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fillcolor = \"#FFFFFF\"] \n  \"5\" [label = \"MRI SCAN\n (47.2%)\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"black\", color = \"grey\", tooltip = \"MRI SCAN\n (47.2%)\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fillcolor = \"#ECE7F2\"] \n  \"6\" [label = \"Registration\n (100%)\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"white\", color = \"grey\", tooltip = \"Registration\n (100%)\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fillcolor = \"#0570B0\"] \n  \"7\" [label = \"Start\", shape = \"circle\", style = \"rounded,filled\", fontcolor = \"chartreuse4\", color = \"chartreuse4\", tooltip = \"Start\n (100%)\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fillcolor = \"#FFFFFF\"] \n  \"8\" [label = \"Triage and Assessment\n (100%)\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"white\", color = \"grey\", tooltip = \"Triage and Assessment\n (100%)\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fillcolor = \"#0570B0\"] \n  \"9\" [label = \"X-Ray\n (52.2%)\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"black\", color = \"grey\", tooltip = \"X-Ray\n (52.2%)\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fillcolor = \"#ECE7F2\"] \n\"1\"->\"4\" [label = \"0.2\", penwidth = \"1.008\", color = \"dodgerblue4\", fontname = \"Arial\"] \n\"1\"->\"5\" [label = \"47.2\", penwidth = \"2.888\", color = \"dodgerblue4\", fontname = \"Arial\"] \n\"2\"->\"4\" [label = \"98.4\", penwidth = \"4.936\", color = \"dodgerblue4\", fontname = \"Arial\"] \n\"3\"->\"2\" [label = \"98.4\", penwidth = \"4.936\", color = \"dodgerblue4\", fontname = \"Arial\"] \n\"3\"->\"4\" [label = \"0.6\", penwidth = \"1.024\", color = \"dodgerblue4\", fontname = \"Arial\"] \n\"5\"->\"3\" [label = \"47.2\", penwidth = \"2.888\", color = \"dodgerblue4\", fontname = \"Arial\"] \n\"6\"->\"8\" [label = \"100\", penwidth = \"5\", color = \"dodgerblue4\", fontname = \"Arial\"] \n\"7\"->\"6\" [label = \"100\", penwidth = \"5\", color = \"dodgerblue4\", fontname = \"Arial\"] \n\"8\"->\"1\" [label = \"47.4\", penwidth = \"2.896\", color = \"dodgerblue4\", fontname = \"Arial\"] \n\"8\"->\"4\" [label = \"0.4\", penwidth = \"1.016\", color = \"dodgerblue4\", fontname = \"Arial\"] \n\"8\"->\"9\" [label = \"52.2\", penwidth = \"3.088\", color = \"dodgerblue4\", fontname = \"Arial\"] \n\"9\"->\"3\" [label = \"51.8\", penwidth = \"3.072\", color = \"dodgerblue4\", fontname = \"Arial\"] \n\"9\"->\"4\" [label = \"0.4\", penwidth = \"1.016\", color = \"dodgerblue4\", fontname = \"Arial\"] \n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<p>The colors can be modified through the <code>color_scale</code> argument. See <code>RColorBrewer::brewer.pal.info</code> for all options.</p>
+<pre class="r"><code>patients %&gt;%
+    process_map(type = frequency(&quot;relative_case&quot;, color_scale = &quot;Purples&quot;))</code></pre>
+<div id="htmlwidget-b91bb854f4828e4e0058" style="width:672px;height:192px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-b91bb854f4828e4e0058">{"x":{"diagram":"digraph {\n\ngraph [layout = \"dot\",\n       outputorder = \"edgesfirst\",\n       bgcolor = \"white\",\n       rankdir = \"LR\"]\n\nnode [fontname = \"Helvetica\",\n      fontsize = \"10\",\n      shape = \"circle\",\n      fixedsize = \"true\",\n      width = \"0.5\",\n      style = \"filled\",\n      fillcolor = \"aliceblue\",\n      color = \"gray70\",\n      fontcolor = \"gray50\"]\n\nedge [fontname = \"Helvetica\",\n     fontsize = \"8\",\n     len = \"1.5\",\n     color = \"gray80\",\n     arrowsize = \"0.5\"]\n\n  \"1\" [label = \"Blood test\n (47.4%)\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"black\", color = \"grey\", tooltip = \"Blood test\n (47.4%)\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fillcolor = \"#EFEDF5\"] \n  \"2\" [label = \"Check-out\n (98.4%)\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"white\", color = \"grey\", tooltip = \"Check-out\n (98.4%)\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fillcolor = \"#6A51A3\"] \n  \"3\" [label = \"Discuss Results\n (99%)\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"white\", color = \"grey\", tooltip = \"Discuss Results\n (99%)\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fillcolor = \"#6A51A3\"] \n  \"4\" [label = \"End\", shape = \"circle\", style = \"rounded,filled\", fontcolor = \"brown4\", color = \"brown4\", tooltip = \"End\n (100%)\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fillcolor = \"#FFFFFF\"] \n  \"5\" [label = \"MRI SCAN\n (47.2%)\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"black\", color = \"grey\", tooltip = \"MRI SCAN\n (47.2%)\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fillcolor = \"#EFEDF5\"] \n  \"6\" [label = \"Registration\n (100%)\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"white\", color = \"grey\", tooltip = \"Registration\n (100%)\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fillcolor = \"#6A51A3\"] \n  \"7\" [label = \"Start\", shape = \"circle\", style = \"rounded,filled\", fontcolor = \"chartreuse4\", color = \"chartreuse4\", tooltip = \"Start\n (100%)\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fillcolor = \"#FFFFFF\"] \n  \"8\" [label = \"Triage and Assessment\n (100%)\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"white\", color = \"grey\", tooltip = \"Triage and Assessment\n (100%)\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fillcolor = \"#6A51A3\"] \n  \"9\" [label = \"X-Ray\n (52.2%)\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"black\", color = \"grey\", tooltip = \"X-Ray\n (52.2%)\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fillcolor = \"#EFEDF5\"] \n\"1\"->\"4\" [label = \"0.2\", penwidth = \"1.008\", color = \"dodgerblue4\", fontname = \"Arial\"] \n\"1\"->\"5\" [label = \"47.2\", penwidth = \"2.888\", color = \"dodgerblue4\", fontname = \"Arial\"] \n\"2\"->\"4\" [label = \"98.4\", penwidth = \"4.936\", color = \"dodgerblue4\", fontname = \"Arial\"] \n\"3\"->\"2\" [label = \"98.4\", penwidth = \"4.936\", color = \"dodgerblue4\", fontname = \"Arial\"] \n\"3\"->\"4\" [label = \"0.6\", penwidth = \"1.024\", color = \"dodgerblue4\", fontname = \"Arial\"] \n\"5\"->\"3\" [label = \"47.2\", penwidth = \"2.888\", color = \"dodgerblue4\", fontname = \"Arial\"] \n\"6\"->\"8\" [label = \"100\", penwidth = \"5\", color = \"dodgerblue4\", fontname = \"Arial\"] \n\"7\"->\"6\" [label = \"100\", penwidth = \"5\", color = \"dodgerblue4\", fontname = \"Arial\"] \n\"8\"->\"1\" [label = \"47.4\", penwidth = \"2.896\", color = \"dodgerblue4\", fontname = \"Arial\"] \n\"8\"->\"4\" [label = \"0.4\", penwidth = \"1.016\", color = \"dodgerblue4\", fontname = \"Arial\"] \n\"8\"->\"9\" [label = \"52.2\", penwidth = \"3.088\", color = \"dodgerblue4\", fontname = \"Arial\"] \n\"9\"->\"3\" [label = \"51.8\", penwidth = \"3.072\", color = \"dodgerblue4\", fontname = \"Arial\"] \n\"9\"->\"4\" [label = \"0.4\", penwidth = \"1.016\", color = \"dodgerblue4\", fontname = \"Arial\"] \n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="performance-profile" class="section level3">
+<h3>Performance profile</h3>
+<p>Instead of a frequency profile, one can also use a performance profile, focussing on processing time of activities. The performance profile has two arguments: the FUN argument to specify the function to apply on the processing time (e.g. min, max, mean, median, etc.), and the units argument to specificy the time unit to be used.</p>
+<pre class="r"><code>patients %&gt;%
+    process_map(performance(median, &quot;days&quot;))</code></pre>
+<div id="htmlwidget-575855b7e686ab6552d6" style="width:672px;height:192px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-575855b7e686ab6552d6">{"x":{"diagram":"digraph {\n\ngraph [layout = \"dot\",\n       outputorder = \"edgesfirst\",\n       bgcolor = \"white\",\n       rankdir = \"LR\"]\n\nnode [fontname = \"Helvetica\",\n      fontsize = \"10\",\n      shape = \"circle\",\n      fixedsize = \"true\",\n      width = \"0.5\",\n      style = \"filled\",\n      fillcolor = \"aliceblue\",\n      color = \"gray70\",\n      fontcolor = \"gray50\"]\n\nedge [fontname = \"Helvetica\",\n     fontsize = \"8\",\n     len = \"1.5\",\n     color = \"gray80\",\n     arrowsize = \"0.5\"]\n\n  \"1\" [label = \"Blood test\n (0.23 days)\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"black\", color = \"grey\", tooltip = \"Blood test\n (0.23 days)\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fillcolor = \"#FCBBA1\"] \n  \"2\" [label = \"Check-out\n (0.09 days)\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"black\", color = \"grey\", tooltip = \"Check-out\n (0.09 days)\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fillcolor = \"#FFF5F0\"] \n  \"3\" [label = \"Discuss Results\n (0.12 days)\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"black\", color = \"grey\", tooltip = \"Discuss Results\n (0.12 days)\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fillcolor = \"#FEE0D2\"] \n  \"4\" [label = \"End\", shape = \"circle\", style = \"rounded,filled\", fontcolor = \"brown4\", color = \"brown4\", tooltip = \"End\n (0 days)\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fillcolor = \"#FFFFFF\"] \n  \"5\" [label = \"MRI SCAN\n (0.17 days)\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"black\", color = \"grey\", tooltip = \"MRI SCAN\n (0.17 days)\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fillcolor = \"#FEE0D2\"] \n  \"6\" [label = \"Registration\n (0.11 days)\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"black\", color = \"grey\", tooltip = \"Registration\n (0.11 days)\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fillcolor = \"#FEE0D2\"] \n  \"7\" [label = \"Start\", shape = \"circle\", style = \"rounded,filled\", fontcolor = \"chartreuse4\", color = \"chartreuse4\", tooltip = \"Start\n (0 days)\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fillcolor = \"#FFFFFF\"] \n  \"8\" [label = \"Triage and Assessment\n (0.56 days)\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"white\", color = \"grey\", tooltip = \"Triage and Assessment\n (0.56 days)\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fillcolor = \"#99000D\"] \n  \"9\" [label = \"X-Ray\n (0.2 days)\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"black\", color = \"grey\", tooltip = \"X-Ray\n (0.2 days)\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fillcolor = \"#FCBBA1\"] \n\"1\"->\"4\" [label = \" \", penwidth = \"1\", color = \"red4\", fontname = \"Arial\"] \n\"1\"->\"5\" [label = \"0.2 days\", penwidth = \"1.65732263797493\", color = \"red4\", fontname = \"Arial\"] \n\"2\"->\"4\" [label = \" \", penwidth = \"1\", color = \"red4\", fontname = \"Arial\"] \n\"3\"->\"2\" [label = \"0.28 days\", penwidth = \"1.94236995052596\", color = \"red4\", fontname = \"Arial\"] \n\"3\"->\"4\" [label = \" \", penwidth = \"1\", color = \"red4\", fontname = \"Arial\"] \n\"5\"->\"3\" [label = \"0.32 days\", penwidth = \"2.06045439262212\", color = \"red4\", fontname = \"Arial\"] \n\"6\"->\"8\" [label = \"0.47 days\", penwidth = \"2.56691483740814\", color = \"red4\", fontname = \"Arial\"] \n\"7\"->\"6\" [label = \" \", penwidth = \"1\", color = \"red4\", fontname = \"Arial\"] \n\"8\"->\"1\" [label = \"1.03 days\", penwidth = \"4.40719535040108\", color = \"red4\", fontname = \"Arial\"] \n\"8\"->\"4\" [label = \" \", penwidth = \"1\", color = \"red4\", fontname = \"Arial\"] \n\"8\"->\"9\" [label = \"1.2 days\", penwidth = \"5\", color = \"red4\", fontname = \"Arial\"] \n\"9\"->\"3\" [label = \"0.34 days\", penwidth = \"2.11936212113934\", color = \"red4\", fontname = \"Arial\"] \n\"9\"->\"4\" [label = \" \", penwidth = \"1\", color = \"red4\", fontname = \"Arial\"] \n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<pre class="r"><code>patients %&gt;%
+    process_map(performance(mean, &quot;hours&quot;))</code></pre>
+<div id="htmlwidget-1a190704632270d96605" style="width:672px;height:192px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-1a190704632270d96605">{"x":{"diagram":"digraph {\n\ngraph [layout = \"dot\",\n       outputorder = \"edgesfirst\",\n       bgcolor = \"white\",\n       rankdir = \"LR\"]\n\nnode [fontname = \"Helvetica\",\n      fontsize = \"10\",\n      shape = \"circle\",\n      fixedsize = \"true\",\n      width = \"0.5\",\n      style = \"filled\",\n      fillcolor = \"aliceblue\",\n      color = \"gray70\",\n      fontcolor = \"gray50\"]\n\nedge [fontname = \"Helvetica\",\n     fontsize = \"8\",\n     len = \"1.5\",\n     color = \"gray80\",\n     arrowsize = \"0.5\"]\n\n  \"1\" [label = \"Blood test\n (5.54 hours)\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"black\", color = \"grey\", tooltip = \"Blood test\n (5.54 hours)\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fillcolor = \"#FCBBA1\"] \n  \"2\" [label = \"Check-out\n (2.06 hours)\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"black\", color = \"grey\", tooltip = \"Check-out\n (2.06 hours)\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fillcolor = \"#FFF5F0\"] \n  \"3\" [label = \"Discuss Results\n (2.78 hours)\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"black\", color = \"grey\", tooltip = \"Discuss Results\n (2.78 hours)\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fillcolor = \"#FEE0D2\"] \n  \"4\" [label = \"End\", shape = \"circle\", style = \"rounded,filled\", fontcolor = \"brown4\", color = \"brown4\", tooltip = \"End\n (0 hours)\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fillcolor = \"#FFFFFF\"] \n  \"5\" [label = \"MRI SCAN\n (4.15 hours)\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"black\", color = \"grey\", tooltip = \"MRI SCAN\n (4.15 hours)\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fillcolor = \"#FEE0D2\"] \n  \"6\" [label = \"Registration\n (2.75 hours)\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"black\", color = \"grey\", tooltip = \"Registration\n (2.75 hours)\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fillcolor = \"#FEE0D2\"] \n  \"7\" [label = \"Start\", shape = \"circle\", style = \"rounded,filled\", fontcolor = \"chartreuse4\", color = \"chartreuse4\", tooltip = \"Start\n (0 hours)\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fillcolor = \"#FFFFFF\"] \n  \"8\" [label = \"Triage and Assessment\n (13.11 hours)\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"white\", color = \"grey\", tooltip = \"Triage and Assessment\n (13.11 hours)\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fillcolor = \"#99000D\"] \n  \"9\" [label = \"X-Ray\n (4.85 hours)\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"black\", color = \"grey\", tooltip = \"X-Ray\n (4.85 hours)\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fillcolor = \"#FCBBA1\"] \n\"1\"->\"4\" [label = \" \", penwidth = \"1\", color = \"red4\", fontname = \"Arial\"] \n\"1\"->\"5\" [label = \"25.4 hours\", penwidth = \"2.92128602061254\", color = \"red4\", fontname = \"Arial\"] \n\"2\"->\"4\" [label = \" \", penwidth = \"1\", color = \"red4\", fontname = \"Arial\"] \n\"3\"->\"2\" [label = \"31.56 hours\", penwidth = \"3.38722754249116\", color = \"red4\", fontname = \"Arial\"] \n\"3\"->\"4\" [label = \" \", penwidth = \"1\", color = \"red4\", fontname = \"Arial\"] \n\"5\"->\"3\" [label = \"21.36 hours\", penwidth = \"2.61555345954038\", color = \"red4\", fontname = \"Arial\"] \n\"6\"->\"8\" [label = \"12.92 hours\", penwidth = \"1.97714615665754\", color = \"red4\", fontname = \"Arial\"] \n\"7\"->\"6\" [label = \" \", penwidth = \"1\", color = \"red4\", fontname = \"Arial\"] \n\"8\"->\"1\" [label = \"50.51 hours\", penwidth = \"4.82005292469787\", color = \"red4\", fontname = \"Arial\"] \n\"8\"->\"4\" [label = \" \", penwidth = \"1\", color = \"red4\", fontname = \"Arial\"] \n\"8\"->\"9\" [label = \"52.89 hours\", penwidth = \"5\", color = \"red4\", fontname = \"Arial\"] \n\"9\"->\"3\" [label = \"28.73 hours\", penwidth = \"3.17286123967841\", color = \"red4\", fontname = \"Arial\"] \n\"9\"->\"4\" [label = \" \", penwidth = \"1\", color = \"red4\", fontname = \"Arial\"] \n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<p>There are two different duration types that can be displayed on the edges.</p>
+<ul>
+<li><code>idle_time</code>: the time between the end of the from-activity, and the start of the to-activity. Can be negative if the from-activity overleaps with the consecutive activity.</li>
+<li><code>inter_start_time</code>: the time between the start of the consecutive activity, including the duration of the from-activity.</li>
+</ul>
+<p>The colors can be modified through the <code>color_scale</code> argument. See <code>RColorBrewer::brewer.pal.info</code> for all options.</p>
+</div>
+<div id="custom-profile" class="section level3">
+<h3>Custom profile</h3>
+<p>Next to the specific profiles above, also custom numeric attributes can be projected. This can be achieved with the <code>custom</code> profile. It requires an aggregation function (mean, median, sum, min, etc.) and a numerical attribute. The units argument can be used to indicate how the values should be interpreted (e.g. “USD” for monetary values.) For edges, it will show the values related to the out-going activity.</p>
+<pre class="r"><code>traffic_fines %&gt;% 
+    process_map(type = custom(attribute = &quot;amount&quot;, units = &quot;EUR&quot;))</code></pre>
+<div id="htmlwidget-9c8b02ca68d7588ce05c" style="width:672px;height:192px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-9c8b02ca68d7588ce05c">{"x":{"diagram":"digraph {\n\ngraph [layout = \"dot\",\n       outputorder = \"edgesfirst\",\n       bgcolor = \"white\",\n       rankdir = \"LR\"]\n\nnode [fontname = \"Helvetica\",\n      fontsize = \"10\",\n      shape = \"circle\",\n      fixedsize = \"true\",\n      width = \"0.5\",\n      style = \"filled\",\n      fillcolor = \"aliceblue\",\n      color = \"gray70\",\n      fontcolor = \"gray50\"]\n\nedge [fontname = \"Helvetica\",\n     fontsize = \"8\",\n     len = \"1.5\",\n     color = \"gray80\",\n     arrowsize = \"0.5\"]\n\n  \"1\" [label = \"Add penalty\n (704.45 EUR)\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"white\", color = \"grey\", tooltip = \"Add penalty\n (704.45 EUR)\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fillcolor = \"#0570B0\"] \n  \"2\" [label = \"Create Fine\n (345.85 EUR)\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"black\", color = \"grey\", tooltip = \"Create Fine\n (345.85 EUR)\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fillcolor = \"#ECE7F2\"] \n  \"3\" [label = \"End\", shape = \"circle\", style = \"rounded,filled\", fontcolor = \"brown4\", color = \"brown4\", tooltip = \"End\n (483.29 EUR)\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fillcolor = \"#FFFFFF\"] \n  \"4\" [label = \"Insert Fine Notification\n (343.71 EUR)\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"black\", color = \"grey\", tooltip = \"Insert Fine Notification\n (343.71 EUR)\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fillcolor = \"#ECE7F2\"] \n  \"5\" [label = \"Payment\n (349.15 EUR)\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"black\", color = \"grey\", tooltip = \"Payment\n (349.15 EUR)\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fillcolor = \"#ECE7F2\"] \n  \"6\" [label = \"Send Fine\n (343.67 EUR)\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"black\", color = \"grey\", tooltip = \"Send Fine\n (343.67 EUR)\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fillcolor = \"#ECE7F2\"] \n  \"7\" [label = \"Send for Credit Collection\n (704.45 EUR)\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"white\", color = \"grey\", tooltip = \"Send for Credit Collection\n (704.45 EUR)\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fillcolor = \"#0570B0\"] \n  \"8\" [label = \"Start\", shape = \"circle\", style = \"rounded,filled\", fontcolor = \"chartreuse4\", color = \"chartreuse4\", tooltip = \"Start\n (345.85 EUR)\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fillcolor = \"#FFFFFF\"] \n\"1\"->\"7\" [label = \"704.45 EUR\", penwidth = \"5\", color = \"dodgerblue4\", fontname = \"Arial\"] \n\"2\"->\"5\" [label = \"349.15 EUR\", penwidth = \"1.06152445071155\", color = \"dodgerblue4\", fontname = \"Arial\"] \n\"2\"->\"6\" [label = \"343.67 EUR\", penwidth = \"1.0007603045249\", color = \"dodgerblue4\", fontname = \"Arial\"] \n\"4\"->\"1\" [label = \"343.71 EUR\", penwidth = \"1.00119934380143\", color = \"dodgerblue4\", fontname = \"Arial\"] \n\"5\"->\"3\" [label = \"349.15 EUR\", penwidth = \"1.06152445071155\", color = \"dodgerblue4\", fontname = \"Arial\"] \n\"6\"->\"3\" [label = \"343.6 EUR\", penwidth = \"1\", color = \"dodgerblue4\", fontname = \"Arial\"] \n\"6\"->\"4\" [label = \"343.71 EUR\", penwidth = \"1.00119934380143\", color = \"dodgerblue4\", fontname = \"Arial\"] \n\"7\"->\"3\" [label = \"704.45 EUR\", penwidth = \"5\", color = \"dodgerblue4\", fontname = \"Arial\"] \n\"8\"->\"2\" [label = \"345.85 EUR\", penwidth = \"1.02500654979645\", color = \"dodgerblue4\", fontname = \"Arial\"] \n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="combining-different-profiles" class="section level3">
+<h3>Combining different profiles</h3>
+<p>The profile used for edges and nodes can be differentiated using the <code>type_edges</code> and <code>type_nodes</code> attributes instead of the <code>type</code> argument. In this way, information about frequencies and performance, or any other value, can be combined in the same graph.</p>
+<pre class="r"><code>patients %&gt;%
+    process_map(type_nodes = frequency(&quot;relative_case&quot;),
+                type_edges = performance(mean))</code></pre>
+<div id="htmlwidget-766dd8ee428cc7a104d4" style="width:672px;height:192px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-766dd8ee428cc7a104d4">{"x":{"diagram":"digraph {\n\ngraph [layout = \"dot\",\n       outputorder = \"edgesfirst\",\n       bgcolor = \"white\",\n       rankdir = \"LR\"]\n\nnode [fontname = \"Helvetica\",\n      fontsize = \"10\",\n      shape = \"circle\",\n      fixedsize = \"true\",\n      width = \"0.5\",\n      style = \"filled\",\n      fillcolor = \"aliceblue\",\n      color = \"gray70\",\n      fontcolor = \"gray50\"]\n\nedge [fontname = \"Helvetica\",\n     fontsize = \"8\",\n     len = \"1.5\",\n     color = \"gray80\",\n     arrowsize = \"0.5\"]\n\n  \"1\" [label = \"Blood test\n (47.4%)\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"black\", color = \"grey\", tooltip = \"Blood test\n (47.4%)\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fillcolor = \"#ECE7F2\"] \n  \"2\" [label = \"Check-out\n (98.4%)\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"white\", color = \"grey\", tooltip = \"Check-out\n (98.4%)\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fillcolor = \"#0570B0\"] \n  \"3\" [label = \"Discuss Results\n (99%)\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"white\", color = \"grey\", tooltip = \"Discuss Results\n (99%)\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fillcolor = \"#0570B0\"] \n  \"4\" [label = \"End\", shape = \"circle\", style = \"rounded,filled\", fontcolor = \"brown4\", color = \"brown4\", tooltip = \"End\n (100%)\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fillcolor = \"#FFFFFF\"] \n  \"5\" [label = \"MRI SCAN\n (47.2%)\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"black\", color = \"grey\", tooltip = \"MRI SCAN\n (47.2%)\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fillcolor = \"#ECE7F2\"] \n  \"6\" [label = \"Registration\n (100%)\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"white\", color = \"grey\", tooltip = \"Registration\n (100%)\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fillcolor = \"#0570B0\"] \n  \"7\" [label = \"Start\", shape = \"circle\", style = \"rounded,filled\", fontcolor = \"chartreuse4\", color = \"chartreuse4\", tooltip = \"Start\n (100%)\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fillcolor = \"#FFFFFF\"] \n  \"8\" [label = \"Triage and Assessment\n (100%)\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"white\", color = \"grey\", tooltip = \"Triage and Assessment\n (100%)\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fillcolor = \"#0570B0\"] \n  \"9\" [label = \"X-Ray\n (52.2%)\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"black\", color = \"grey\", tooltip = \"X-Ray\n (52.2%)\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fillcolor = \"#ECE7F2\"] \n\"1\"->\"4\" [label = \" \", penwidth = \"1\", color = \"red4\", fontname = \"Arial\"] \n\"1\"->\"5\" [label = \"1.06 days\", penwidth = \"2.92128602061254\", color = \"red4\", fontname = \"Arial\"] \n\"2\"->\"4\" [label = \" \", penwidth = \"1\", color = \"red4\", fontname = \"Arial\"] \n\"3\"->\"2\" [label = \"1.32 days\", penwidth = \"3.38722754249116\", color = \"red4\", fontname = \"Arial\"] \n\"3\"->\"4\" [label = \" \", penwidth = \"1\", color = \"red4\", fontname = \"Arial\"] \n\"5\"->\"3\" [label = \"0.89 days\", penwidth = \"2.61555345954038\", color = \"red4\", fontname = \"Arial\"] \n\"6\"->\"8\" [label = \"0.54 days\", penwidth = \"1.97714615665754\", color = \"red4\", fontname = \"Arial\"] \n\"7\"->\"6\" [label = \" \", penwidth = \"1\", color = \"red4\", fontname = \"Arial\"] \n\"8\"->\"1\" [label = \"2.1 days\", penwidth = \"4.82005292469787\", color = \"red4\", fontname = \"Arial\"] \n\"8\"->\"4\" [label = \" \", penwidth = \"1\", color = \"red4\", fontname = \"Arial\"] \n\"8\"->\"9\" [label = \"2.2 days\", penwidth = \"5\", color = \"red4\", fontname = \"Arial\"] \n\"9\"->\"3\" [label = \"1.2 days\", penwidth = \"3.17286123967841\", color = \"red4\", fontname = \"Arial\"] \n\"9\"->\"4\" [label = \" \", penwidth = \"1\", color = \"red4\", fontname = \"Arial\"] \n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="customizing-the-layout" class="section level3">
+<h3>Customizing the layout</h3>
+<p>The layout of the process map can be further customized.</p>
+<ul>
+<li>Instead of a left-right (LR) layout, the <code>rankdir</code> can be set to TB (top-bottom), BT (bottom-top) or RL (right-left).</li>
+<li>The varying edge width can be disabled.</li>
+<li>If <code>render</code> is set to <code>FALSE</code>, the function will return a unrendered graph, which can be further modified. See <a href="http://rich-iannone.github.io/DiagrammeR/">here</a> for more information.</li>
+</ul>
+</div>
+</div>
+<div id="simplifying-process-maps" class="section level2">
+<h2>Simplifying process maps</h2>
+<p>When event logs get larger, they will also become more unstructured, making the process maps illegible and expensive to computate. In such cases, it is useful to apply them on a simplified version of the event log, using one or more of the <a href="http://www.bupar.net/subsetting.html">subsetting methods</a> provided by edeaR.</p>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

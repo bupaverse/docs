@@ -1,0 +1,74 @@
+name: "bupar"
+output:
+  html_document:
+    theme: flatly
+    highlight: textmate
+navbar:
+  title: "Business Process Analysis in R"
+  right:
+    - text: "Home"
+      href: index.html
+    - text: "About"
+      href: about.html
+    - text: "Get started"
+      href: getting_started.html
+    - text: "I/O"
+      menu:
+      - text: "Creating event logs"
+        href: creating_eventlogs.html
+      - text: "Getting event log info"
+        href: getting_info.html
+      - text: "XES-files"
+        href: read_xes.html
+      - text: "Event Data Repository"
+        href: eventdataR.html
+    - text: "Preprocessing"
+      menu:
+      - text: "Subsetting"
+        href: subsetting.html
+      - text: "Aggregating"
+        href: aggregating.html
+      - text: "Enriching"
+        href: enriching.html
+      - text: "Wrangling"
+        href: wrangling.html
+      - text: "Adjusting view"
+        href: mapping.html
+    - text: "EDA"
+      menu:
+      - text: "Describing event data"
+        href: exploring.html
+      - text: "Creating Process Maps"
+        href: processmaps.html
+      - text: "Precedence Matrices"
+        href: precedence.html
+      - text: "Dotted charts"
+        href: dotted_chart.html
+      - text: "Trace explorer"
+        href: trace_explorer.html
+      - text: "Social network analysis"
+        href: social_networks.html
+    - text: "Dashboards"
+      href: processmonitR.html
+    - text: "Reference"
+      menu: 
+      - text: bupaR
+        href: http://gertjanssenswillen.github.io/bupaR/reference/index.html
+      - text: edeaR
+        href: http://gertjanssenswillen.github.io/edeaR/reference/index.html
+      - text: eventdataR
+        href: http://gertjanssenswillen.github.io/eventdataR/reference/index.html      
+      - text: processmapR
+        href: http://gertjanssenswillen.github.io/processmapR/reference/index.html
+      - text: processmonitR
+        href: http://gertjanssenswillen.github.io/processmonitR/reference/index.html        
+      - text: petrinetR
+        href: http://gertjanssenswillen.github.io/petrinetR/reference/index.html        
+      - text: xesreadR
+        href: http://gertjanssenswillen.github.io/xesreadR/reference/index.html        
+        
+        
+        
+        
+        
+        

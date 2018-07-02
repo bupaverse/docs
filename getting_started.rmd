@@ -1,0 +1,42 @@
+---
+title: "Getting started"
+output: 
+  html_document:
+    toc: true
+    toc_float: 
+      collapsed: false
+      print: false
+---
+	
+```{r echo = F}
+htmltools::includeHTML("tracking_google_analytics.html")
+```
+
+## Installing
+	
+Each of the packages is shared on [CRAN](https://cran.rstudio.com/) and can be installed using the `install.packages` function, and subsequently loaded with `library`.
+
+```{r eval = F}
+install.packages("bupaR")
+install.packages("edeaR")
+install.packages("eventdataR")
+install.packages("processmapR")
+install.packages("processmonitR")
+install.packages("xesreadR")
+install.packages("petrinetR")
+```
+
+## Loading
+
+```{r}
+library(bupaR)
+```
+
+Loading `bupar` will load all the related packages
+
+## Cheat Sheet
+
+A comprehensive overview of the packages and their functionalities can be found [here](materials/20170904 poster bupaR.pdf).
+
+
+[![](images/poster.PNG)](materials/20170904 poster bupaR.pdf).

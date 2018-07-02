@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>About</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 60px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+
+.section h2 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h3 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h4 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h5 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h6 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+#TOC {
+  display: none !important;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+  padding-left: 25px;
+  text-indent: 0;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Business Process Analysis in R</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+<li>
+  <a href="getting_started.html">Get started</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    I/O
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="creating_eventlogs.html">Creating event logs</a>
+    </li>
+    <li>
+      <a href="getting_info.html">Getting event log info</a>
+    </li>
+    <li>
+      <a href="read_xes.html">XES-files</a>
+    </li>
+    <li>
+      <a href="eventdataR.html">Event Data Repository</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Preprocessing
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="subsetting.html">Subsetting</a>
+    </li>
+    <li>
+      <a href="aggregating.html">Aggregating</a>
+    </li>
+    <li>
+      <a href="enriching.html">Enriching</a>
+    </li>
+    <li>
+      <a href="wrangling.html">Wrangling</a>
+    </li>
+    <li>
+      <a href="mapping.html">Adjusting view</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    EDA
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="exploring.html">Describing event data</a>
+    </li>
+    <li>
+      <a href="processmaps.html">Creating Process Maps</a>
+    </li>
+    <li>
+      <a href="precedence.html">Precedence Matrices</a>
+    </li>
+    <li>
+      <a href="dotted_chart.html">Dotted charts</a>
+    </li>
+    <li>
+      <a href="trace_explorer.html">Trace explorer</a>
+    </li>
+    <li>
+      <a href="social_networks.html">Social network analysis</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="processmonitR.html">Dashboards</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Reference
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="http://gertjanssenswillen.github.io/bupaR/reference/index.html">bupaR</a>
+    </li>
+    <li>
+      <a href="http://gertjanssenswillen.github.io/edeaR/reference/index.html">edeaR</a>
+    </li>
+    <li>
+      <a href="http://gertjanssenswillen.github.io/eventdataR/reference/index.html">eventdataR</a>
+    </li>
+    <li>
+      <a href="http://gertjanssenswillen.github.io/processmapR/reference/index.html">processmapR</a>
+    </li>
+    <li>
+      <a href="http://gertjanssenswillen.github.io/processmonitR/reference/index.html">processmonitR</a>
+    </li>
+    <li>
+      <a href="http://gertjanssenswillen.github.io/petrinetR/reference/index.html">petrinetR</a>
+    </li>
+    <li>
+      <a href="http://gertjanssenswillen.github.io/xesreadR/reference/index.html">xesreadR</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">About</h1>
+
+</div>
+
+
+<table>
+<colgroup>
+<col width="22%" />
+<col width="77%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td><img src="images/Uhasselt-standaard.jpg" width = "100px"/></td>
+<td>The main bupaR packages have been developed by the Business Informatics research group of Hasselt University, and are maintained by Gert Janssenswillen. The packages are available under <a href="about.html#license">MIT license</a>. Contributions can be made through our <a href="about.hmtl#contribute">github repositories</a>. Subscribe to our <a href="about.html#newsletter">newsletter</a> in order to get informed on new releases.</td>
+</tr>
+</tbody>
+</table>
+<p><br/> <br/></p>
+<div id="contact" class="section level2">
+<h2>Contact</h2>
+<p>Gert Janssenswillen<br/> Hasselt University<br/> Campus Diepenbeek<br/> Agoralaan Building D<br/> <a href="mailto:gert.janssenswillen@uhasselt.be">gert.janssenswillen@uhasselt.be</a> <br/> <a href="http://www.janssenswillen.com">www.janssenswillen.com</a></p>
+<p>Research Group Business Informatics<br/> <a href="http://www.businessinformatics.be">www.businessinformatics.be</a></p>
+<p><br/> <br/></p>
+</div>
+<div id="cran-releases" class="section level2">
+<h2>CRAN Releases</h2>
+<p>Below you find a list of the current releases of the packages:</p>
+<ul>
+<li>0.4.0 <a href="https://cran.r-project.org/package=bupaR">bupaR</a></li>
+<li>0.8.0 <a href="https://cran.r-project.org/package=edeaR">edeaR</a></li>
+<li>0.2.0 <a href="https://cran.r-project.org/package=eventdataR">eventdataR</a></li>
+<li>0.1.0 <a href="https:/cran.r-project.org/package=petrinetR">petrinetR</a></li>
+<li>0.3.1 <a href="https://cran.r-project.org/package=processmapR">processmapR</a></li>
+<li>0.1.0 <a href="https://cran.r-project.org/package=processmonitR">processmonitR</a></li>
+<li>0.2.2 <a href="https://cran.r-project.org/package=xesreadR">xesreadR</a></li>
+</ul>
+<div id="by-other-maintainers" class="section level3">
+<h3>By other maintainers</h3>
+<ul>
+<li>0.1.1 <a href="https://cran.r-project.org/package=processanimateR">processanimateR</a>, maintained by <a href="https://fmannhardt.github.io/processanimateR/">Felix Mannhardt</a></li>
+</ul>
+<p><br/> <br/></p>
+</div>
+</div>
+<div id="contribute" class="section level2">
+<h2>Contribute</h2>
+<p>The source code of all the packages is available on <strong>github</strong>, so that you can directly contribute to the packages. If you want to contribute by creating new compatible packages, feel free to contact us.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Package</th>
+<th align="left">Link</th>
+<th align="left"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">bupaR</td>
+<td align="left"><a href="https://github.com/gertjanssenswillen/bupaR">github.com/gertjanssenswillen/bupaR</a></td>
+<td align="left"><a href="https://github.com/gertjanssenswillen/bupaR/issues">Submit issue</a></td>
+</tr>
+<tr class="even">
+<td align="left">edeaR</td>
+<td align="left"><a href="https://github.com/gertjanssenswillen/edeaR">github.com/gertjanssenswillen/edeaR</a></td>
+<td align="left"><a href="https://github.com/gertjanssenswillen/edear/issues">Submit issue</a></td>
+</tr>
+<tr class="odd">
+<td align="left">eventdataR</td>
+<td align="left"><a href="https://github.com/gertjanssenswillen/eventdataR">github.com/gertjanssenswillen/eventdataR</a></td>
+<td align="left"><a href="https://github.com/gertjanssenswillen/eventdatar/issues">Submit issue</a></td>
+</tr>
+<tr class="even">
+<td align="left">processmapR</td>
+<td align="left"><a href="https://github.com/gertjanssenswillen/processmapR">github.com/gertjanssenswillen/processmapR</a></td>
+<td align="left"><a href="https://github.com/gertjanssenswillen/processmapR/issues">Submit issue</a></td>
+</tr>
+<tr class="odd">
+<td align="left">processmonitR</td>
+<td align="left"><a href="https://github.com/gertjanssenswillen/processmonitR">github.com/gertjanssenswillen/processmonitR</a></td>
+<td align="left"><a href="https://github.com/gertjanssenswillen/processmonitr/issues">Submit issue</a></td>
+</tr>
+<tr class="even">
+<td align="left">petrinetR</td>
+<td align="left"><a href="https://github.com/gertjanssenswillen/petrinetR">github.com/gertjanssenswillen/petrinetR</a></td>
+<td align="left"><a href="https://github.com/gertjanssenswillen/petrinetr/issues">Submit issue</a></td>
+</tr>
+<tr class="odd">
+<td align="left">xesreadR</td>
+<td align="left"><a href="https://github.com/gertjanssenswillen/xesreadR">github.com/gertjanssenswillen/xesreadR</a></td>
+<td align="left"><a href="https://github.com/gertjanssenswillen/xesreadr/issues">Submit issue</a></td>
+</tr>
+</tbody>
+</table>
+<p><br/> <br/></p>
+</div>
+<div id="license" class="section level2">
+<h2>License</h2>
+<p>The following license is applicable to all packages maintained by Hasselt University.</p>
+<p>Permission is hereby granted, free of charge, to any person obtaining A copy of this software and associated documentation files (the “software”), to deal in the software without restriction, including Without limitation the rights to use, copy, modify, merge, publish, Distribute, sublicense, and/or sell copies of the software, and to Permit persons to whom the software is furnished to do so, subject to The following conditions:</p>
+<p>The above copyright notice and this permission notice shall be Included in all copies or substantial portions of the software.</p>
+<p>The software is provided “as is”, without warranty of any kind, Express or implied, including but not limited to the warranties of Merchantability, fitness for a particular purpose and Noninfringement. In no event shall the authors or copyright holders be Liable for any claim, damages or other liability, whether in an action Of contract, tort or otherwise, arising from, out of or in connection With the software or the use or other dealings in the software.</p>
+<p>Year: 2016-2018 <br/> Copyright holder: Hasselt University</p>
+</div>
+<div id="newsletter" class="section level2">
+<h2>Newsletter</h2>
+<!-- Begin MailChimp Signup Form -->
+	<link href="//cdn-images.mailchimp.com/embedcode/classic-10_7.css" rel="stylesheet" type="text/css">
+		<style type="text/css">
+			#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; }
+			/* Add your own MailChimp form style overrides in your site stylesheet or in this style block.
+		We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+			</style>
+			<div id="mc_embed_signup">
+			<form action="//bupar.us16.list-manage.com/subscribe/post?u=9d576bd96e19cc1bc20d9a940&amp;id=5b57f67977" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+			<div id="mc_embed_signup_scroll">
+			<h3>Subscribe to our mailing list</h3>
+			<div class="indicates-required"><span class="asterisk">*</span> indicates required</div>
+			<div class="mc-field-group">
+			<label for="mce-EMAIL">Email Address  <span class="asterisk">*</span>
+			</label>
+			<input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL">
+			</div>
+			<div class="mc-field-group">
+			<label for="mce-FNAME">First Name </label>
+			<input type="text" value="" name="FNAME" class="" id="mce-FNAME">
+			</div>
+			<div class="mc-field-group">
+			<label for="mce-LNAME">Last Name </label>
+			<input type="text" value="" name="LNAME" class="" id="mce-LNAME">
+			</div>
+			<div class="mc-field-group">
+	<label for="mce-COMPANY">Company </label>
+	<input type="text" value="" name="COMPANY" class="" id="mce-COMPANY">
+</div>
+			<div class="response" id="mce-error-response" style="display:none"></div>
+			<div class="response" id="mce-success-response" style="display:none"></div>
+			</div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+			<div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_9d576bd96e19cc1bc20d9a940_5b57f67977" tabindex="-1" value=""></div>
+			<div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+			</div>
+			</form>
+			</div>
+			<script type='text/javascript' src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script><script type='text/javascript'>(function($) {window.fnames = new Array(); window.ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';fnames[1]='FNAME';ftypes[1]='text';fnames[2]='LNAME';ftypes[2]='text';fnames[3]='BIRTHDAY';ftypes[3]='birthday';}(jQuery));var $mcj = jQuery.noConflict(true);</script>
+			<!--End mc_embed_signup-->
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

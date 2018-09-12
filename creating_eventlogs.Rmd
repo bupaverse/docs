@@ -38,7 +38,7 @@ tribble(~patient, ~activity,
 		"John Doe","check-in",
 		"John Doe","surgery",
 		"John Doe","treatment",
-		"John DOe","surgery",
+		"John Doe","surgery",
 		"John Doe","check-out") %>% pander
 ```
 

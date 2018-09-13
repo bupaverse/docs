@@ -62,8 +62,8 @@ tribble(~patient, ~activity, ~timestamp, ~status,
 		"John Doe","surgery", "20170510 092519", "complete",
 		"John Doe","treatment","20170510 100125", "start",
 		"John Doe","treatment","20170510 103518", "complete",
-		"John DOe","surgery", "20170510 104135", "start",
-		"John DOe","surgery", "20170510 110556", "complete",
+		"John Doe","surgery", "20170510 104135", "start",
+		"John Doe","surgery", "20170510 110556", "complete",
 		"John Doe","check-out", "20170511 145236", "complete") %>% 
 	mutate(timestamp = ymd_hms(timestamp)) %>% pander()
 ```

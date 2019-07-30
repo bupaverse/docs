@@ -38,7 +38,12 @@ knitr::include_graphics("images/banner.JPG")
 ```
 
 
+
+
 **`bupaR`** provides support for different stages in process analysis, such as importing event data, calculating descriptives, process monitoring and process visualization. The central package, **`bupaR`** includes basic functionality for creating event log objects in R. It contains several functions to get information about an event log and also provides specific event log versions of generic R functions.
+
+
+
 
 ## Packages
 
@@ -69,7 +74,17 @@ knitr::include_graphics("images/banner.JPG")
 | | [**Read more**](processmonitR.html) |
 | | |
 
+## Pay tribute
 
+bupaR is developed by volunteering academic researchers and provided for free. If you use it for your research, please be so kind to cite us. 
+
+> Janssenswillen, G., Depaire, B., Swennen, M., Jans, M., & Vanhoof, K. (2019). bupaR: Enabling reproducible business process analysis. Knowledge-Based Systems, 163, 927-930.
+
+To cite invidual packages, use the `citation` function in R. 
+
+```{r}
+citation("processmapR")
+```
 
 
 

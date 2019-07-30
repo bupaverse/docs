@@ -436,27 +436,35 @@ ga('send', 'pageview');
 ## activity instance identifier specified in xes-file. By default considered
 ## each event as a different activity instance. Please check!</code></pre>
 <pre class="r"><code>data</code></pre>
-<pre><code>## Event log consisting of:
-## 11 events
-## 3 traces
-## 3 cases
-## 5 activities
-## 11 activity instances
+<pre><code>## Log of 11 events consisting of:
+## 3 traces 
+## 3 cases 
+## 11 instances of 5 activities 
+## 1 resource 
+## Events occurred from 2008-12-09 07:20:01 until 2008-12-09 07:23:01 
+##  
+## Variables were mapped as follows:
+## Case identifier:     CASE_concept_name 
+## Activity identifier:     activity_id 
+## Resource identifier:     resource_id 
+## Activity instance identifier:    activity_instance_id 
+## Timestamp:           timestamp 
+## Lifecycle transition:        lifecycle_id 
 ## 
 ## # A tibble: 11 x 7
-##    CASE_concept_name activity_id lifecycle_id resource_id
-##    &lt;chr&gt;             &lt;fct&gt;       &lt;fct&gt;        &lt;fct&gt;      
-##  1 Case3.0           A           complete     UNDEFINED  
-##  2 Case3.0           E           complete     UNDEFINED  
-##  3 Case3.0           D           complete     UNDEFINED  
-##  4 Case2.0           A           complete     UNDEFINED  
-##  5 Case2.0           C           complete     UNDEFINED  
-##  6 Case2.0           B           complete     UNDEFINED  
-##  7 Case2.0           D           complete     UNDEFINED  
-##  8 Case1.0           A           complete     UNDEFINED  
-##  9 Case1.0           B           complete     UNDEFINED  
-## 10 Case1.0           C           complete     UNDEFINED  
-## 11 Case1.0           D           complete     UNDEFINED  
+##    CASE_concept_na~ activity_id lifecycle_id resource_id
+##    &lt;chr&gt;            &lt;fct&gt;       &lt;fct&gt;        &lt;fct&gt;      
+##  1 Case3.0          A           complete     UNDEFINED  
+##  2 Case3.0          E           complete     UNDEFINED  
+##  3 Case3.0          D           complete     UNDEFINED  
+##  4 Case2.0          A           complete     UNDEFINED  
+##  5 Case2.0          C           complete     UNDEFINED  
+##  6 Case2.0          B           complete     UNDEFINED  
+##  7 Case2.0          D           complete     UNDEFINED  
+##  8 Case1.0          A           complete     UNDEFINED  
+##  9 Case1.0          B           complete     UNDEFINED  
+## 10 Case1.0          C           complete     UNDEFINED  
+## 11 Case1.0          D           complete     UNDEFINED  
 ## # ... with 3 more variables: timestamp &lt;dttm&gt;, activity_instance_id &lt;chr&gt;,
 ## #   .order &lt;int&gt;</code></pre>
 <p>Note that in the example above, the <code>read_xes</code> functions emits a warnings that no activity instance identifier was found. Recall that an event log objects in R needs certain <a href="creating_eventlogs.html#the_event_log_object">data fields</a> to be present. However, it might be so that not all of these field are available, in which case <code>read_xes</code> will throw a warning or an error. Ideally, the XES-file should contain at least the following elements:</p>
@@ -552,26 +560,34 @@ ga('send', 'pageview');
 <pre><code>## Warning in read_xes(&quot;https://bupar.net/eventdata/repairExample.xes&quot;): No
 ## activity instance identifier specified in xes-file. By default considered
 ## each event as a different activity instance. Please check!</code></pre>
-<pre><code>## Event log consisting of:
-## 11855 events
-## 77 traces
-## 1104 cases
-## 8 activities
-## 11855 activity instances
+<pre><code>## Log of 11855 events consisting of:
+## 77 traces 
+## 1104 cases 
+## 11855 instances of 8 activities 
+## 13 resources 
+## Events occurred from 1970-01-01 05:36:00 until 1970-01-24 08:16:00 
+##  
+## Variables were mapped as follows:
+## Case identifier:     CASE_concept_name 
+## Activity identifier:     activity_id 
+## Resource identifier:     resource_id 
+## Activity instance identifier:    activity_instance_id 
+## Timestamp:           timestamp 
+## Lifecycle transition:        lifecycle_id 
 ## 
 ## # A tibble: 11,855 x 12
-##    CASE_concept_name CASE_description   activity_id defectFixed defectType
-##    &lt;chr&gt;             &lt;chr&gt;              &lt;fct&gt;       &lt;chr&gt;       &lt;chr&gt;     
-##  1 1                 Simulated process~ Register    &lt;NA&gt;        &lt;NA&gt;      
-##  2 1                 Simulated process~ Analyze De~ &lt;NA&gt;        &lt;NA&gt;      
-##  3 1                 Simulated process~ Analyze De~ &lt;NA&gt;        6         
-##  4 1                 Simulated process~ Repair (Co~ &lt;NA&gt;        &lt;NA&gt;      
-##  5 1                 Simulated process~ Repair (Co~ &lt;NA&gt;        &lt;NA&gt;      
-##  6 1                 Simulated process~ Test Repair &lt;NA&gt;        &lt;NA&gt;      
-##  7 1                 Simulated process~ Test Repair true        &lt;NA&gt;      
-##  8 1                 Simulated process~ Inform User &lt;NA&gt;        &lt;NA&gt;      
-##  9 1                 Simulated process~ Archive Re~ true        &lt;NA&gt;      
-## 10 10                Simulated process~ Register    &lt;NA&gt;        &lt;NA&gt;      
+##    CASE_concept_na~ CASE_description activity_id defectFixed defectType
+##    &lt;chr&gt;            &lt;chr&gt;            &lt;fct&gt;       &lt;chr&gt;       &lt;chr&gt;     
+##  1 1                Simulated proce~ Register    &lt;NA&gt;        &lt;NA&gt;      
+##  2 1                Simulated proce~ Analyze De~ &lt;NA&gt;        &lt;NA&gt;      
+##  3 1                Simulated proce~ Analyze De~ &lt;NA&gt;        6         
+##  4 1                Simulated proce~ Repair (Co~ &lt;NA&gt;        &lt;NA&gt;      
+##  5 1                Simulated proce~ Repair (Co~ &lt;NA&gt;        &lt;NA&gt;      
+##  6 1                Simulated proce~ Test Repair &lt;NA&gt;        &lt;NA&gt;      
+##  7 1                Simulated proce~ Test Repair true        &lt;NA&gt;      
+##  8 1                Simulated proce~ Inform User &lt;NA&gt;        &lt;NA&gt;      
+##  9 1                Simulated proce~ Archive Re~ true        &lt;NA&gt;      
+## 10 10               Simulated proce~ Register    &lt;NA&gt;        &lt;NA&gt;      
 ## # ... with 11,845 more rows, and 7 more variables: lifecycle_id &lt;fct&gt;,
 ## #   numberRepairs &lt;chr&gt;, resource_id &lt;fct&gt;, phoneType &lt;chr&gt;,
 ## #   timestamp &lt;dttm&gt;, activity_instance_id &lt;chr&gt;, .order &lt;int&gt;</code></pre>

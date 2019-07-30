@@ -25,10 +25,10 @@
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
-<script src="site_libs/htmlwidgets-1.0/htmlwidgets.js"></script>
+<script src="site_libs/htmlwidgets-1.2/htmlwidgets.js"></script>
 <script src="site_libs/viz-0.3/viz.js"></script>
 <link href="site_libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
-<script src="site_libs/grViz-binding-1.0.0/grViz.js"></script>
+<script src="site_libs/grViz-binding-1.0.1/grViz.js"></script>
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -539,8 +539,8 @@ ga('send', 'pageview');
 <pre class="r"><code>patients %&gt;%
     filter_trim(start_activities = &quot;Registration&quot;, end_activities =  c(&quot;MRI SCAN&quot;,&quot;X-Ray&quot;)) %&gt;%
     process_map(type = performance())</code></pre>
-<div id="htmlwidget-0453fb936105eec8f688" style="width:672px;height:480px;" class="grViz html-widget"></div>
-<script type="application/json" data-for="htmlwidget-0453fb936105eec8f688">{"x":{"diagram":"digraph {\n\ngraph [layout = \"dot\",\n       outputorder = \"edgesfirst\",\n       bgcolor = \"white\",\n       rankdir = \"LR\"]\n\nnode [fontname = \"Helvetica\",\n      fontsize = \"10\",\n      shape = \"circle\",\n      fixedsize = \"true\",\n      width = \"0.5\",\n      style = \"filled\",\n      fillcolor = \"aliceblue\",\n      color = \"gray70\",\n      fontcolor = \"gray50\"]\n\nedge [fontname = \"Helvetica\",\n     fontsize = \"8\",\n     len = \"1.5\",\n     color = \"gray80\",\n     arrowsize = \"0.5\"]\n\n  \"1\" [label = \"Blood test\n (0.23 days)\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"black\", color = \"grey\", tooltip = \"Blood test\n (0.23 days)\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fillcolor = \"#FCBBA1\"] \n  \"2\" [label = \"End\", shape = \"circle\", style = \"rounded,filled\", fontcolor = \"brown4\", color = \"brown4\", tooltip = \"End\n (0 days)\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fillcolor = \"#FFFFFF\"] \n  \"3\" [label = \"MRI SCAN\n (0.17 days)\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"black\", color = \"grey\", tooltip = \"MRI SCAN\n (0.17 days)\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fillcolor = \"#FEE0D2\"] \n  \"4\" [label = \"Registration\n (0.11 days)\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"black\", color = \"grey\", tooltip = \"Registration\n (0.11 days)\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fillcolor = \"#FFF5F0\"] \n  \"5\" [label = \"Start\", shape = \"circle\", style = \"rounded,filled\", fontcolor = \"chartreuse4\", color = \"chartreuse4\", tooltip = \"Start\n (0 days)\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fillcolor = \"#FFFFFF\"] \n  \"6\" [label = \"Triage and Assessment\n (0.55 days)\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"white\", color = \"grey\", tooltip = \"Triage and Assessment\n (0.55 days)\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fillcolor = \"#99000D\"] \n  \"7\" [label = \"X-Ray\n (0.2 days)\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"black\", color = \"grey\", tooltip = \"X-Ray\n (0.2 days)\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fillcolor = \"#FCBBA1\"] \n\"1\"->\"3\" [label = \"1.06 days\", penwidth = \"2.92128602061254\", color = \"red4\", fontname = \"Arial\"] \n\"3\"->\"2\" [label = \" \", penwidth = \"1\", color = \"red4\", fontname = \"Arial\"] \n\"4\"->\"6\" [label = \"0.53 days\", penwidth = \"1.95322283903858\", color = \"red4\", fontname = \"Arial\"] \n\"5\"->\"4\" [label = \" \", penwidth = \"1\", color = \"red4\", fontname = \"Arial\"] \n\"6\"->\"1\" [label = \"2.11 days\", penwidth = \"4.8327727871476\", color = \"red4\", fontname = \"Arial\"] \n\"6\"->\"7\" [label = \"2.2 days\", penwidth = \"5\", color = \"red4\", fontname = \"Arial\"] \n\"7\"->\"2\" [label = \" \", penwidth = \"1\", color = \"red4\", fontname = \"Arial\"] \n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-d007f9631dad1cef7e43" style="width:672px;height:480px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-d007f9631dad1cef7e43">{"x":{"diagram":"digraph {\n\ngraph [layout = \"dot\",\n       outputorder = \"edgesfirst\",\n       bgcolor = \"white\",\n       rankdir = \"LR\"]\n\nnode [fontname = \"Helvetica\",\n      fontsize = \"10\",\n      shape = \"circle\",\n      fixedsize = \"true\",\n      width = \"0.5\",\n      style = \"filled\",\n      fillcolor = \"aliceblue\",\n      color = \"gray70\",\n      fontcolor = \"gray50\"]\n\nedge [fontname = \"Helvetica\",\n     fontsize = \"8\",\n     len = \"1.5\",\n     color = \"gray80\",\n     arrowsize = \"0.5\"]\n\n  \"1\" [label = \"Blood test\n332.06 mins\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"black\", color = \"grey\", tooltip = \"Blood test\n332.06 mins\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#FCBBA1\"] \n  \"2\" [label = \"End\", shape = \"circle\", style = \"rounded,filled\", fontcolor = \"brown4\", color = \"brown4\", tooltip = \"End\n0 mins\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#FFFFFF\"] \n  \"3\" [label = \"MRI SCAN\n248.99 mins\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"black\", color = \"grey\", tooltip = \"MRI SCAN\n248.99 mins\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#FEE0D2\"] \n  \"4\" [label = \"Registration\n165.55 mins\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"black\", color = \"grey\", tooltip = \"Registration\n165.55 mins\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#FFF5F0\"] \n  \"5\" [label = \"Start\", shape = \"circle\", style = \"rounded,filled\", fontcolor = \"chartreuse4\", color = \"chartreuse4\", tooltip = \"Start\n0 mins\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#FFFFFF\"] \n  \"6\" [label = \"Triage and Assessment\n786.79 mins\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"white\", color = \"grey\", tooltip = \"Triage and Assessment\n786.79 mins\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#99000D\"] \n  \"7\" [label = \"X-Ray\n290.76 mins\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"black\", color = \"grey\", tooltip = \"X-Ray\n290.76 mins\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#FCBBA1\"] \n\"1\"->\"3\" [label = \"1524.19 mins\", penwidth = \"2.92128602061254\", color = \"red4\", fontname = \"Arial\", fontsize = \"10\"] \n\"3\"->\"2\" [label = \" \", penwidth = \"1\", color = \"red4\", fontname = \"Arial\", fontsize = \"10\"] \n\"4\"->\"6\" [label = \"756.21 mins\", penwidth = \"1.95322283903858\", color = \"red4\", fontname = \"Arial\", fontsize = \"10\"] \n\"5\"->\"4\" [label = \" \", penwidth = \"1\", color = \"red4\", fontname = \"Arial\", fontsize = \"10\"] \n\"6\"->\"1\" [label = \"3040.61 mins\", penwidth = \"4.8327727871476\", color = \"red4\", fontname = \"Arial\", fontsize = \"10\"] \n\"6\"->\"7\" [label = \"3173.28 mins\", penwidth = \"5\", color = \"red4\", fontname = \"Arial\", fontsize = \"10\"] \n\"7\"->\"2\" [label = \" \", penwidth = \"1\", color = \"red4\", fontname = \"Arial\", fontsize = \"10\"] \n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div id="trim-to-time-window" class="section level3">
 <h3>Trim to time window</h3>
@@ -629,15 +629,33 @@ patients %&gt;%
 <pre class="r"><code>patients %&gt;%
     filter_processing_time(interval = c(50, 100), units = &quot;hours&quot;) %&gt;%
     processing_time(units = &quot;hours&quot;)</code></pre>
+<pre><code>## Warning: Factor `handling` contains implicit NA, consider using
+## `forcats::fct_explicit_na`</code></pre>
+<pre><code>## Warning: Factor `employee` contains implicit NA, consider using
+## `forcats::fct_explicit_na`</code></pre>
+<pre><code>## Warning: Factor `handling` contains implicit NA, consider using
+## `forcats::fct_explicit_na`</code></pre>
+<pre><code>## Warning: Factor `employee` contains implicit NA, consider using
+## `forcats::fct_explicit_na`</code></pre>
+<pre><code>## Warning in min.default(structure(numeric(0), class = c(&quot;POSIXct&quot;, &quot;POSIXt&quot;:
+## no non-missing arguments to min; returning Inf</code></pre>
+<pre><code>## Warning in max.default(structure(numeric(0), class = c(&quot;POSIXct&quot;, &quot;POSIXt&quot;:
+## no non-missing arguments to max; returning -Inf</code></pre>
+<pre><code>## Warning: Factor `handling` contains implicit NA, consider using
+## `forcats::fct_explicit_na`</code></pre>
 <pre><code>##    min     q1 median   mean     q3    max st_dev    iqr 
-##     NA     NA     NA    NaN     NA     NA     NA     NA</code></pre>
+##   -Inf   -Inf   -Inf   -Inf   -Inf   -Inf     NA    NaN 
+## attr(,&quot;units&quot;)
+## [1] &quot;hours&quot;</code></pre>
 <pre class="r"><code>patients %&gt;%
     filter_processing_time(percentage = 0.5) %&gt;%
     processing_time(units = &quot;hours&quot;)</code></pre>
 <pre><code>##       min        q1    median      mean        q3       max    st_dev 
 ## 10.717778 23.043750 24.945000 24.387612 26.423264 27.726944  2.657736 
 ##       iqr 
-##  3.379514</code></pre>
+##  3.379514 
+## attr(,&quot;units&quot;)
+## [1] &quot;hours&quot;</code></pre>
 </div>
 <div id="trace-length" class="section level3">
 <h3>Trace length</h3>
@@ -651,9 +669,9 @@ patients %&gt;%
     filter_trace_length(percentage = 0.5) %&gt;%
     trace_length()</code></pre>
 <pre><code>##       min        q1    median      mean        q3       max    st_dev 
-## 5.0000000 5.0000000 5.0000000 5.4600000 6.0000000 6.0000000 0.4993972 
+## 5.0000000 6.0000000 6.0000000 5.9360000 6.0000000 6.0000000 0.2452439 
 ##       iqr 
-## 1.0000000</code></pre>
+## 0.0000000</code></pre>
 </div>
 <div id="activity-presence" class="section level3">
 <h3>Activity presence</h3>
@@ -662,22 +680,22 @@ patients %&gt;%
     filter_activity_presence(&quot;X-Ray&quot;) %&gt;%
     traces</code></pre>
 <pre><code>## # A tibble: 3 x 3
-##   trace                                absolute_frequen~ relative_frequen~
-##   &lt;chr&gt;                                            &lt;int&gt;             &lt;dbl&gt;
-## 1 Registration,Triage and Assessment,~               258           0.989  
-## 2 Registration,Triage and Assessment,~                 1           0.00383
-## 3 Registration,Triage and Assessment,~                 2           0.00766</code></pre>
+##   trace                                 absolute_frequen~ relative_frequen~
+##   &lt;chr&gt;                                             &lt;int&gt;             &lt;dbl&gt;
+## 1 Registration,Triage and Assessment,X~               258           0.989  
+## 2 Registration,Triage and Assessment,X~                 1           0.00383
+## 3 Registration,Triage and Assessment,X~                 2           0.00766</code></pre>
 <p>Or that don’t have a specific activity.</p>
 <pre class="r"><code>patients %&gt;%
     filter_activity_presence(&quot;X-Ray&quot;, reverse = T) %&gt;%
     traces</code></pre>
 <pre><code>## # A tibble: 4 x 3
-##   trace                                 absolute_frequen~ relative_freque~
-##   &lt;chr&gt;                                             &lt;int&gt;            &lt;dbl&gt;
-## 1 Registration,Triage and Assessment,B~               234          0.979  
-## 2 Registration,Triage and Assessment,B~                 2          0.00837
-## 3 Registration,Triage and Assessment,B~                 1          0.00418
-## 4 Registration,Triage and Assessment                    2          0.00837</code></pre>
+##   trace                                  absolute_frequen~ relative_freque~
+##   &lt;chr&gt;                                              &lt;int&gt;            &lt;dbl&gt;
+## 1 Registration,Triage and Assessment,Bl~               234          0.979  
+## 2 Registration,Triage and Assessment,Bl~                 2          0.00837
+## 3 Registration,Triage and Assessment,Bl~                 1          0.00418
+## 4 Registration,Triage and Assessment                     2          0.00837</code></pre>
 <p>We can also test more than one activity. In this case, we can require “all”, “one_of” or “none” of them to be present, through setting the argument <code>method</code> correctly.</p>
 <p>For example, there are no case that have both X-Ray and MRI-SCAN</p>
 <pre class="r"><code>patients %&gt;%
@@ -690,34 +708,46 @@ patients %&gt;%
     filter_activity_presence(c(&quot;X-Ray&quot;, &quot;MRI SCAN&quot;), method = &quot;one_of&quot;)  %&gt;%
     traces</code></pre>
 <pre><code>## # A tibble: 5 x 3
-##   trace                                 absolute_frequen~ relative_freque~
-##   &lt;chr&gt;                                             &lt;int&gt;            &lt;dbl&gt;
-## 1 Registration,Triage and Assessment,B~               234          0.471  
-## 2 Registration,Triage and Assessment,X~               258          0.519  
-## 3 Registration,Triage and Assessment,B~                 2          0.00402
-## 4 Registration,Triage and Assessment,X~                 1          0.00201
-## 5 Registration,Triage and Assessment,X~                 2          0.00402</code></pre>
+##   trace                                  absolute_frequen~ relative_freque~
+##   &lt;chr&gt;                                              &lt;int&gt;            &lt;dbl&gt;
+## 1 Registration,Triage and Assessment,Bl~               234          0.471  
+## 2 Registration,Triage and Assessment,X-~               258          0.519  
+## 3 Registration,Triage and Assessment,Bl~                 2          0.00402
+## 4 Registration,Triage and Assessment,X-~                 1          0.00201
+## 5 Registration,Triage and Assessment,X-~                 2          0.00402</code></pre>
 <p>And 3 have none of them.</p>
 <pre class="r"><code>patients %&gt;%
     filter_activity_presence(c(&quot;X-Ray&quot;, &quot;MRI SCAN&quot;), method = &quot;none&quot;)  %&gt;%
     traces</code></pre>
 <pre><code>## # A tibble: 2 x 3
-##   trace                               absolute_frequency relative_frequen~
-##   &lt;chr&gt;                                            &lt;int&gt;             &lt;dbl&gt;
-## 1 Registration,Triage and Assessment~                  1             0.333
-## 2 Registration,Triage and Assessment                   2             0.667</code></pre>
+##   trace                                absolute_frequency relative_frequen~
+##   &lt;chr&gt;                                             &lt;int&gt;             &lt;dbl&gt;
+## 1 Registration,Triage and Assessment,~                  1             0.333
+## 2 Registration,Triage and Assessment                    2             0.667</code></pre>
 </div>
 <div id="end-points" class="section level3">
 <h3>End points</h3>
 <p>Another way is to select cases with a specific start and or end activity. In case of the patients data set, all cases start with “Registration”. Filtering cases that <strong>don’t</strong> start with Registration gives an empty log.</p>
 <pre class="r"><code>patients %&gt;%
     filter_endpoints(start_activities = &quot;Registration&quot;, reverse = T)</code></pre>
-<pre><code>## Event log consisting of:
-## 0 events
-## 0 traces
-## 0 cases
-## 0 activities
-## 0 activity instances
+<pre><code>## Log of 0 events consisting of:
+## 0 traces 
+## 0 cases 
+## 0 instances of 0 activities 
+## 0 resources</code></pre>
+<pre><code>## Warning in min.default(structure(numeric(0), class = c(&quot;POSIXct&quot;, &quot;POSIXt&quot;:
+## no non-missing arguments to min; returning Inf</code></pre>
+<pre><code>## Warning in max.default(structure(numeric(0), class = c(&quot;POSIXct&quot;, &quot;POSIXt&quot;:
+## no non-missing arguments to max; returning -Inf</code></pre>
+<pre><code>## Events occurred from NA until NA 
+##  
+## Variables were mapped as follows:
+## Case identifier:     patient 
+## Activity identifier:     handling 
+## Resource identifier:     employee 
+## Activity instance identifier:    handling_id 
+## Timestamp:           time 
+## Lifecycle transition:        registration_type 
 ## 
 ## # A tibble: 0 x 7
 ## # ... with 7 variables: handling &lt;fct&gt;, patient &lt;chr&gt;, employee &lt;fct&gt;,
@@ -726,8 +756,8 @@ patients %&gt;%
 <pre class="r"><code>patients %&gt;%
     filter_endpoints(start_activities = &quot;Registration&quot;, end_activities = &quot;Check-out&quot;) %&gt;%
     process_map()</code></pre>
-<div id="htmlwidget-0168ab514c62d007f963" style="width:864px;height:480px;" class="grViz html-widget"></div>
-<script type="application/json" data-for="htmlwidget-0168ab514c62d007f963">{"x":{"diagram":"digraph {\n\ngraph [layout = \"dot\",\n       outputorder = \"edgesfirst\",\n       bgcolor = \"white\",\n       rankdir = \"LR\"]\n\nnode [fontname = \"Helvetica\",\n      fontsize = \"10\",\n      shape = \"circle\",\n      fixedsize = \"true\",\n      width = \"0.5\",\n      style = \"filled\",\n      fillcolor = \"aliceblue\",\n      color = \"gray70\",\n      fontcolor = \"gray50\"]\n\nedge [fontname = \"Helvetica\",\n     fontsize = \"8\",\n     len = \"1.5\",\n     color = \"gray80\",\n     arrowsize = \"0.5\"]\n\n  \"1\" [label = \"Blood test\n (234)\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"black\", color = \"grey\", tooltip = \"Blood test\n (234)\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fillcolor = \"#ECE7F2\"] \n  \"2\" [label = \"Check-out\n (492)\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"white\", color = \"grey\", tooltip = \"Check-out\n (492)\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fillcolor = \"#0570B0\"] \n  \"3\" [label = \"Discuss Results\n (492)\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"white\", color = \"grey\", tooltip = \"Discuss Results\n (492)\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fillcolor = \"#0570B0\"] \n  \"4\" [label = \"End\", shape = \"circle\", style = \"rounded,filled\", fontcolor = \"brown4\", color = \"brown4\", tooltip = \"End\n (492)\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fillcolor = \"#FFFFFF\"] \n  \"5\" [label = \"MRI SCAN\n (234)\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"black\", color = \"grey\", tooltip = \"MRI SCAN\n (234)\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fillcolor = \"#ECE7F2\"] \n  \"6\" [label = \"Registration\n (492)\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"white\", color = \"grey\", tooltip = \"Registration\n (492)\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fillcolor = \"#0570B0\"] \n  \"7\" [label = \"Start\", shape = \"circle\", style = \"rounded,filled\", fontcolor = \"chartreuse4\", color = \"chartreuse4\", tooltip = \"Start\n (492)\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fillcolor = \"#FFFFFF\"] \n  \"8\" [label = \"Triage and Assessment\n (492)\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"white\", color = \"grey\", tooltip = \"Triage and Assessment\n (492)\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fillcolor = \"#0570B0\"] \n  \"9\" [label = \"X-Ray\n (258)\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"black\", color = \"grey\", tooltip = \"X-Ray\n (258)\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fillcolor = \"#ECE7F2\"] \n\"1\"->\"5\" [label = \"234\", penwidth = \"2.90243902439024\", color = \"dodgerblue4\", fontname = \"Arial\"] \n\"2\"->\"4\" [label = \"492\", penwidth = \"5\", color = \"dodgerblue4\", fontname = \"Arial\"] \n\"3\"->\"2\" [label = \"492\", penwidth = \"5\", color = \"dodgerblue4\", fontname = \"Arial\"] \n\"5\"->\"3\" [label = \"234\", penwidth = \"2.90243902439024\", color = \"dodgerblue4\", fontname = \"Arial\"] \n\"6\"->\"8\" [label = \"492\", penwidth = \"5\", color = \"dodgerblue4\", fontname = \"Arial\"] \n\"7\"->\"6\" [label = \"492\", penwidth = \"5\", color = \"dodgerblue4\", fontname = \"Arial\"] \n\"8\"->\"1\" [label = \"234\", penwidth = \"2.90243902439024\", color = \"dodgerblue4\", fontname = \"Arial\"] \n\"8\"->\"9\" [label = \"258\", penwidth = \"3.09756097560976\", color = \"dodgerblue4\", fontname = \"Arial\"] \n\"9\"->\"3\" [label = \"258\", penwidth = \"3.09756097560976\", color = \"dodgerblue4\", fontname = \"Arial\"] \n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-5fe150dc7db504854f18" style="width:864px;height:480px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-5fe150dc7db504854f18">{"x":{"diagram":"digraph {\n\ngraph [layout = \"dot\",\n       outputorder = \"edgesfirst\",\n       bgcolor = \"white\",\n       rankdir = \"LR\"]\n\nnode [fontname = \"Helvetica\",\n      fontsize = \"10\",\n      shape = \"circle\",\n      fixedsize = \"true\",\n      width = \"0.5\",\n      style = \"filled\",\n      fillcolor = \"aliceblue\",\n      color = \"gray70\",\n      fontcolor = \"gray50\"]\n\nedge [fontname = \"Helvetica\",\n     fontsize = \"8\",\n     len = \"1.5\",\n     color = \"gray80\",\n     arrowsize = \"0.5\"]\n\n  \"1\" [label = \"Blood test\n234\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"black\", color = \"grey\", tooltip = \"Blood test\n234\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#ECE7F2\"] \n  \"2\" [label = \"Check-out\n492\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"white\", color = \"grey\", tooltip = \"Check-out\n492\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#0570B0\"] \n  \"3\" [label = \"Discuss Results\n492\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"white\", color = \"grey\", tooltip = \"Discuss Results\n492\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#0570B0\"] \n  \"4\" [label = \"End\", shape = \"circle\", style = \"rounded,filled\", fontcolor = \"brown4\", color = \"brown4\", tooltip = \"End\n492\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#FFFFFF\"] \n  \"5\" [label = \"MRI SCAN\n234\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"black\", color = \"grey\", tooltip = \"MRI SCAN\n234\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#ECE7F2\"] \n  \"6\" [label = \"Registration\n492\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"white\", color = \"grey\", tooltip = \"Registration\n492\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#0570B0\"] \n  \"7\" [label = \"Start\", shape = \"circle\", style = \"rounded,filled\", fontcolor = \"chartreuse4\", color = \"chartreuse4\", tooltip = \"Start\n492\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#FFFFFF\"] \n  \"8\" [label = \"Triage and Assessment\n492\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"white\", color = \"grey\", tooltip = \"Triage and Assessment\n492\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#0570B0\"] \n  \"9\" [label = \"X-Ray\n258\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"black\", color = \"grey\", tooltip = \"X-Ray\n258\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#ECE7F2\"] \n\"1\"->\"5\" [label = \"234\", penwidth = \"2.90243902439024\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\"] \n\"2\"->\"4\" [label = \"492\", penwidth = \"5\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\"] \n\"3\"->\"2\" [label = \"492\", penwidth = \"5\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\"] \n\"5\"->\"3\" [label = \"234\", penwidth = \"2.90243902439024\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\"] \n\"6\"->\"8\" [label = \"492\", penwidth = \"5\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\"] \n\"7\"->\"6\" [label = \"492\", penwidth = \"5\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\"] \n\"8\"->\"1\" [label = \"234\", penwidth = \"2.90243902439024\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\"] \n\"8\"->\"9\" [label = \"258\", penwidth = \"3.09756097560976\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\"] \n\"9\"->\"3\" [label = \"258\", penwidth = \"3.09756097560976\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\"] \n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div id="precedence" class="section level3">
 <h3>Precedence</h3>
@@ -751,11 +781,11 @@ patients %&gt;%
                       precedence_type = &quot;directly_follows&quot;) %&gt;%
     traces</code></pre>
 <pre><code>## # A tibble: 3 x 3
-##   trace                                 absolute_frequen~ relative_freque~
-##   &lt;chr&gt;                                             &lt;int&gt;            &lt;dbl&gt;
-## 1 Registration,Triage and Assessment,B~               234          0.987  
-## 2 Registration,Triage and Assessment,B~                 2          0.00844
-## 3 Registration,Triage and Assessment,B~                 1          0.00422</code></pre>
+##   trace                                  absolute_frequen~ relative_freque~
+##   &lt;chr&gt;                                              &lt;int&gt;            &lt;dbl&gt;
+## 1 Registration,Triage and Assessment,Bl~               234          0.987  
+## 2 Registration,Triage and Assessment,Bl~                 2          0.00844
+## 3 Registration,Triage and Assessment,Bl~                 1          0.00422</code></pre>
 <p>The following selects cases where Triage and Assessment is eventually followed by both Blood test and X-Ray, which never happens.</p>
 <pre class="r"><code>patients %&gt;%
     filter_precedence(antecedents = &quot;Triage and Assessment&quot;,
@@ -773,14 +803,14 @@ patients %&gt;%
                       filter_method = &quot;one_of&quot;) %&gt;%
     traces</code></pre>
 <pre><code>## # A tibble: 6 x 3
-##   trace                                 absolute_frequen~ relative_freque~
-##   &lt;chr&gt;                                             &lt;int&gt;            &lt;dbl&gt;
-## 1 Registration,Triage and Assessment,B~               234          0.470  
-## 2 Registration,Triage and Assessment,X~               258          0.518  
-## 3 Registration,Triage and Assessment,B~                 2          0.00402
-## 4 Registration,Triage and Assessment,X~                 1          0.00201
-## 5 Registration,Triage and Assessment,B~                 1          0.00201
-## 6 Registration,Triage and Assessment,X~                 2          0.00402</code></pre>
+##   trace                                  absolute_frequen~ relative_freque~
+##   &lt;chr&gt;                                              &lt;int&gt;            &lt;dbl&gt;
+## 1 Registration,Triage and Assessment,Bl~               234          0.470  
+## 2 Registration,Triage and Assessment,X-~               258          0.518  
+## 3 Registration,Triage and Assessment,Bl~                 2          0.00402
+## 4 Registration,Triage and Assessment,X-~                 1          0.00201
+## 5 Registration,Triage and Assessment,Bl~                 1          0.00201
+## 6 Registration,Triage and Assessment,X-~                 2          0.00402</code></pre>
 <p>This final example only retains cases where Triage and Assessment is <em>not</em> followed by any of the three consequent activities. The result is 2 incomplete cases where the last activity was Triage and Assessment.</p>
 <pre class="r"><code>patients %&gt;%
     filter_precedence(antecedents = &quot;Triage and Assessment&quot;,
@@ -791,7 +821,7 @@ patients %&gt;%
 <pre><code>## # A tibble: 1 x 3
 ##   trace                              absolute_frequency relative_frequency
 ##   &lt;chr&gt;                                           &lt;int&gt;              &lt;dbl&gt;
-## 1 Registration,Triage and Assessment                  2                 1.</code></pre>
+## 1 Registration,Triage and Assessment                  2                  1</code></pre>
 </div>
 <div id="trace-frequency" class="section level3">
 <h3>Trace Frequency</h3>
@@ -825,18 +855,22 @@ patients %&gt;%
 <pre class="r"><code>sepsis %&gt;%
     filter_time_period(interval = ymd(c(20150101, 20150131)), filter_method = &quot;start&quot;) %&gt;%
     dotted_chart</code></pre>
+<pre><code>## Joining, by = &quot;case_id&quot;</code></pre>
 <p><img src="subsetting_files/figure-html/unnamed-chunk-32-1.png" width="672" /></p>
 <pre class="r"><code>sepsis %&gt;%
     filter_time_period(interval = ymd(c(20150101, 20150131)), filter_method = &quot;complete&quot;) %&gt;%
     dotted_chart</code></pre>
+<pre><code>## Joining, by = &quot;case_id&quot;</code></pre>
 <p><img src="subsetting_files/figure-html/unnamed-chunk-32-2.png" width="672" /></p>
 <pre class="r"><code>sepsis %&gt;%
     filter_time_period(interval = ymd(c(20150101, 20150131)), filter_method = &quot;contained&quot;) %&gt;%
     dotted_chart</code></pre>
+<pre><code>## Joining, by = &quot;case_id&quot;</code></pre>
 <p><img src="subsetting_files/figure-html/unnamed-chunk-32-3.png" width="672" /></p>
 <pre class="r"><code>sepsis %&gt;%
     filter_time_period(interval = ymd(c(20150101, 20150131)), filter_method = &quot;intersecting&quot;) %&gt;%
     dotted_chart</code></pre>
+<pre><code>## Joining, by = &quot;case_id&quot;</code></pre>
 <p><img src="subsetting_files/figure-html/unnamed-chunk-32-4.png" width="672" /></p>
 </div>
 </div>

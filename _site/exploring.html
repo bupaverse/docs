@@ -439,6 +439,14 @@ ga('send', 'pageview');
 </ul>
 <div id="time-perspective" class="section level2">
 <h2>Time perspective</h2>
+<p>Three different time metrics can be computed:</p>
+<ul>
+<li>throughput time: the time between the very first event of the case and the very last</li>
+<li>processing time: the sum of the duration of all activity instances</li>
+<li>idle time: the time when no activity instance is active</li>
+</ul>
+<p>The duration of an activity instance is the time between the first and the last event related to that activity instance. In case several activity instances within a case overlap, processing time for that overlap will be counted twice. The figure below shows a schematic overview of different time metrics.</p>
+<p><img src="images/processingtime.PNG" width="732" /></p>
 <div id="idle-time" class="section level4">
 <h4>Idle Time</h4>
 <p>The idle time is the time that there is no activity in a case or for a resource. It can only be calculated when there are both start and end timestamps available for activity instances. It can be computed at the levels trace, resource, case and log, and using different time units.</p>
@@ -447,18 +455,18 @@ ga('send', 'pageview');
 <pre><code>## # A tibble: 7 x 2
 ##   employee idle_time
 ##   &lt;fct&gt;        &lt;dbl&gt;
-## 1 r1            450.
-## 2 r2            215.
-## 3 r3            429.
-## 4 r4            443.
-## 5 r5            430.
+## 1 r7            464.
+## 2 r1            450.
+## 3 r4            443.
+## 4 r5            430.
+## 5 r3            429.
 ## 6 r6            426.
-## 7 r7            464.</code></pre>
+## 7 r2            215.</code></pre>
 <p>The output of <strong>all</strong> metrics in edeaR can be visualized by supplying it to the plot function.</p>
 <pre class="r"><code>patients %&gt;%
     idle_time(&quot;resource&quot;, units = &quot;days&quot;) %&gt;%
     plot()</code></pre>
-<p><img src="exploring_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p><img src="exploring_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 </div>
 <div id="processing-time" class="section level4">
 <h4>Processing Time</h4>
@@ -466,7 +474,7 @@ ga('send', 'pageview');
 <pre class="r"><code>patients %&gt;% 
     processing_time(&quot;activity&quot;) %&gt;%
     plot</code></pre>
-<p><img src="exploring_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p><img src="exploring_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 </div>
 <div id="throughput-time" class="section level4">
 <h4>Throughput Time</h4>
@@ -474,7 +482,7 @@ ga('send', 'pageview');
 <pre class="r"><code>patients %&gt;%
     throughput_time(&quot;log&quot;) %&gt;%
     plot()</code></pre>
-<p><img src="exploring_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p><img src="exploring_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 </div>
 </div>
 <div id="organizational-perspective" class="section level2">
@@ -500,7 +508,7 @@ ga('send', 'pageview');
 <p>Resource involvement refers to the notion of the number of cases in which a resource is involved. It can be computed at levels case, resource, and resource-activity.</p>
 <pre class="r"><code>patients %&gt;%
     resource_involvement(&quot;resource&quot;) %&gt;% plot</code></pre>
-<p><img src="exploring_files/figure-html/unnamed-chunk-8-1.png" width="672" /> It this example it shows that only r1 and r2 are involved in all cases, r6 and r7 are involved in most of the cases, while the others are only involved in half of the cases, more or less.</p>
+<p><img src="exploring_files/figure-html/unnamed-chunk-9-1.png" width="672" /> It this example it shows that only r1 and r2 are involved in all cases, r6 and r7 are involved in most of the cases, while the others are only involved in half of the cases, more or less.</p>
 </div>
 <div id="resource-specialization" class="section level4">
 <h4>Resource Specialization</h4>
@@ -529,7 +537,7 @@ ga('send', 'pageview');
 <p>Activity presence shows in what percentage of cases an activity is present. It has no level-argument.</p>
 <pre class="r"><code>patients %&gt;% activity_presence() %&gt;%
     plot</code></pre>
-<p><img src="exploring_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p><img src="exploring_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
 </div>
 <div id="activity-frequency" class="section level4">
 <h4>Activity Frequency</h4>
@@ -539,13 +547,13 @@ ga('send', 'pageview');
 <pre><code>## # A tibble: 7 x 3
 ##   handling              absolute relative
 ##   &lt;fct&gt;                    &lt;int&gt;    &lt;dbl&gt;
-## 1 Blood test                 237   0.0871
-## 2 Check-out                  492   0.181 
+## 1 Registration               500   0.184 
+## 2 Triage and Assessment      500   0.184 
 ## 3 Discuss Results            495   0.182 
-## 4 MRI SCAN                   236   0.0867
-## 5 Registration               500   0.184 
-## 6 Triage and Assessment      500   0.184 
-## 7 X-Ray                      261   0.0959</code></pre>
+## 4 Check-out                  492   0.181 
+## 5 X-Ray                      261   0.0959
+## 6 Blood test                 237   0.0871
+## 7 MRI SCAN                   236   0.0867</code></pre>
 </div>
 <div id="start-activities" class="section level4">
 <h4>Start Activities</h4>
@@ -555,7 +563,7 @@ ga('send', 'pageview');
 <pre><code>## # A tibble: 1 x 5
 ##   employee handling     absolute relative cum_sum
 ##   &lt;fct&gt;    &lt;fct&gt;           &lt;int&gt;    &lt;dbl&gt;   &lt;dbl&gt;
-## 1 r1       Registration      500       1.      1.</code></pre>
+## 1 r1       Registration      500        1       1</code></pre>
 <p>This shows that in this event log, all cases are started with the Registration by resource r1.</p>
 </div>
 <div id="end-activities" class="section level4">
@@ -566,11 +574,11 @@ ga('send', 'pageview');
 <pre><code>## # A tibble: 5 x 5
 ##   employee handling              absolute relative cum_sum
 ##   &lt;fct&gt;    &lt;fct&gt;                    &lt;int&gt;    &lt;dbl&gt;   &lt;dbl&gt;
-## 1 r7       Check-out                  492  0.984     0.984
-## 2 r6       Discuss Results              3  0.00600   0.990
-## 3 r2       Triage and Assessment        2  0.00400   0.994
-## 4 r5       X-Ray                        2  0.00400   0.998
-## 5 r3       Blood test                   1  0.00200   1.00</code></pre>
+## 1 r7       Check-out                  492    0.984   0.984
+## 2 r6       Discuss Results              3    0.006   0.99 
+## 3 r2       Triage and Assessment        2    0.004   0.994
+## 4 r5       X-Ray                        2    0.004   0.998
+## 5 r3       Blood test                   1    0.002   1</code></pre>
 <p>In contract to the start of cases, the end of cases seems to differ more frequently, although it is mostly the Check-Out activity.</p>
 </div>
 <div id="trace-coverage" class="section level4">
@@ -579,7 +587,7 @@ ga('send', 'pageview');
 <pre class="r"><code>patients %&gt;%
     trace_coverage(&quot;trace&quot;) %&gt;%
     plot()</code></pre>
-<p><img src="exploring_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<p><img src="exploring_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
 <p>In the patients log, there are only 7 different traces, and 2 of them cover nearly 100% of the event log.</p>
 </div>
 <div id="trace-length" class="section level4">
@@ -588,7 +596,7 @@ ga('send', 'pageview');
 <pre class="r"><code>patients %&gt;%
     trace_length(&quot;log&quot;) %&gt;%
     plot</code></pre>
-<p><img src="exploring_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<p><img src="exploring_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
 <p>It can be seen that in this simple event log, most cases have a trace length of 5 or 6, while a minority has a trace length lower than 5.</p>
 </div>
 </div>

@@ -434,26 +434,34 @@ ga('send', 'pageview');
 <p>Appending metrics to the event data can be done by calling the metric with the appropriate level and setting the <code>append = TRUE</code> argument. For example, consider the throughput time.</p>
 <pre class="r"><code>patients %&gt;%
     throughput_time(level = &quot;case&quot;,append = TRUE)</code></pre>
-<pre><code>## Event log consisting of:
-## 5442 events
-## 7 traces
-## 500 cases
-## 7 activities
-## 2721 activity instances
+<pre><code>## Log of 5442 events consisting of:
+## 7 traces 
+## 500 cases 
+## 2721 instances of 7 activities 
+## 7 resources 
+## Events occurred from 2017-01-02 11:41:53 until 2018-05-05 07:16:02 
+##  
+## Variables were mapped as follows:
+## Case identifier:     patient 
+## Activity identifier:     handling 
+## Resource identifier:     employee 
+## Activity instance identifier:    handling_id 
+## Timestamp:           time 
+## Lifecycle transition:        registration_type 
 ## 
 ## # A tibble: 5,442 x 8
-##    handling     patient employee handling_id registration_type
-##    &lt;fct&gt;        &lt;chr&gt;   &lt;fct&gt;    &lt;chr&gt;       &lt;fct&gt;            
-##  1 Registration 1       r1       1           start            
-##  2 Registration 2       r1       2           start            
-##  3 Registration 3       r1       3           start            
-##  4 Registration 4       r1       4           start            
-##  5 Registration 5       r1       5           start            
-##  6 Registration 6       r1       6           start            
-##  7 Registration 7       r1       7           start            
-##  8 Registration 8       r1       8           start            
-##  9 Registration 9       r1       9           start            
-## 10 Registration 10      r1       10          start            
+##    handling patient employee handling_id registration_ty~
+##    &lt;fct&gt;    &lt;chr&gt;   &lt;fct&gt;    &lt;chr&gt;       &lt;fct&gt;           
+##  1 Registr~ 1       r1       1           start           
+##  2 Registr~ 2       r1       2           start           
+##  3 Registr~ 3       r1       3           start           
+##  4 Registr~ 4       r1       4           start           
+##  5 Registr~ 5       r1       5           start           
+##  6 Registr~ 6       r1       6           start           
+##  7 Registr~ 7       r1       7           start           
+##  8 Registr~ 8       r1       8           start           
+##  9 Registr~ 9       r1       9           start           
+## 10 Registr~ 10      r1       10          start           
 ## # ... with 5,432 more rows, and 3 more variables: time &lt;dttm&gt;,
 ## #   .order &lt;int&gt;, throughput_time_case &lt;dbl&gt;</code></pre>
 <p>A new variable, “throughput_time_case”, has now been added to the event log as a case attribute. This new attribute can than be directly used in later analysis.</p>
@@ -461,67 +469,83 @@ ga('send', 'pageview');
 <pre class="r"><code>patients %&gt;% 
     trace_coverage(level = &quot;case&quot;)</code></pre>
 <pre><code>## # A tibble: 500 x 4
-##    patient trace                                         absolute relative
-##    &lt;chr&gt;   &lt;chr&gt;                                            &lt;int&gt;    &lt;dbl&gt;
-##  1 2       Registration,Triage and Assessment,X-Ray,Dis~      258    0.516
-##  2 5       Registration,Triage and Assessment,X-Ray,Dis~      258    0.516
-##  3 8       Registration,Triage and Assessment,X-Ray,Dis~      258    0.516
-##  4 9       Registration,Triage and Assessment,X-Ray,Dis~      258    0.516
-##  5 10      Registration,Triage and Assessment,X-Ray,Dis~      258    0.516
-##  6 11      Registration,Triage and Assessment,X-Ray,Dis~      258    0.516
-##  7 14      Registration,Triage and Assessment,X-Ray,Dis~      258    0.516
-##  8 17      Registration,Triage and Assessment,X-Ray,Dis~      258    0.516
-##  9 18      Registration,Triage and Assessment,X-Ray,Dis~      258    0.516
-## 10 19      Registration,Triage and Assessment,X-Ray,Dis~      258    0.516
+##    patient trace                                          absolute relative
+##    &lt;chr&gt;   &lt;chr&gt;                                             &lt;int&gt;    &lt;dbl&gt;
+##  1 2       Registration,Triage and Assessment,X-Ray,Disc~      258    0.516
+##  2 5       Registration,Triage and Assessment,X-Ray,Disc~      258    0.516
+##  3 8       Registration,Triage and Assessment,X-Ray,Disc~      258    0.516
+##  4 9       Registration,Triage and Assessment,X-Ray,Disc~      258    0.516
+##  5 10      Registration,Triage and Assessment,X-Ray,Disc~      258    0.516
+##  6 11      Registration,Triage and Assessment,X-Ray,Disc~      258    0.516
+##  7 14      Registration,Triage and Assessment,X-Ray,Disc~      258    0.516
+##  8 17      Registration,Triage and Assessment,X-Ray,Disc~      258    0.516
+##  9 18      Registration,Triage and Assessment,X-Ray,Disc~      258    0.516
+## 10 19      Registration,Triage and Assessment,X-Ray,Disc~      258    0.516
 ## # ... with 490 more rows</code></pre>
 <p>We obtain the absolute number of cases that are covered by trace, as well as the relative number. Only one of these variable gets appended, and which one is chosen automatically for each metric. The result below shows that the absolute values are appended.</p>
 <pre class="r"><code>patients %&gt;%
     trace_coverage(level = &quot;case&quot;,append = TRUE)</code></pre>
-<pre><code>## Event log consisting of:
-## 5442 events
-## 7 traces
-## 500 cases
-## 7 activities
-## 2721 activity instances
+<pre><code>## Log of 5442 events consisting of:
+## 7 traces 
+## 500 cases 
+## 2721 instances of 7 activities 
+## 7 resources 
+## Events occurred from 2017-01-02 11:41:53 until 2018-05-05 07:16:02 
+##  
+## Variables were mapped as follows:
+## Case identifier:     patient 
+## Activity identifier:     handling 
+## Resource identifier:     employee 
+## Activity instance identifier:    handling_id 
+## Timestamp:           time 
+## Lifecycle transition:        registration_type 
 ## 
 ## # A tibble: 5,442 x 9
-##    handling     patient employee handling_id registration_type
-##    &lt;fct&gt;        &lt;chr&gt;   &lt;fct&gt;    &lt;chr&gt;       &lt;fct&gt;            
-##  1 Registration 1       r1       1           start            
-##  2 Registration 2       r1       2           start            
-##  3 Registration 3       r1       3           start            
-##  4 Registration 4       r1       4           start            
-##  5 Registration 5       r1       5           start            
-##  6 Registration 6       r1       6           start            
-##  7 Registration 7       r1       7           start            
-##  8 Registration 8       r1       8           start            
-##  9 Registration 9       r1       9           start            
-## 10 Registration 10      r1       10          start            
+##    handling patient employee handling_id registration_ty~
+##    &lt;fct&gt;    &lt;chr&gt;   &lt;fct&gt;    &lt;chr&gt;       &lt;fct&gt;           
+##  1 Registr~ 1       r1       1           start           
+##  2 Registr~ 2       r1       2           start           
+##  3 Registr~ 3       r1       3           start           
+##  4 Registr~ 4       r1       4           start           
+##  5 Registr~ 5       r1       5           start           
+##  6 Registr~ 6       r1       6           start           
+##  7 Registr~ 7       r1       7           start           
+##  8 Registr~ 8       r1       8           start           
+##  9 Registr~ 9       r1       9           start           
+## 10 Registr~ 10      r1       10          start           
 ## # ... with 5,432 more rows, and 4 more variables: time &lt;dttm&gt;,
 ## #   .order &lt;int&gt;, trace &lt;chr&gt;, absolute_case_trace_coverage &lt;int&gt;</code></pre>
 <p>To change this default, the argument <code>append_column</code> can be set. For instance, we can instead append the relative coverage.</p>
 <pre class="r"><code>patients %&gt;%
     trace_coverage(level = &quot;case&quot;,append = TRUE, append_column = &quot;relative&quot;) </code></pre>
-<pre><code>## Event log consisting of:
-## 5442 events
-## 7 traces
-## 500 cases
-## 7 activities
-## 2721 activity instances
+<pre><code>## Log of 5442 events consisting of:
+## 7 traces 
+## 500 cases 
+## 2721 instances of 7 activities 
+## 7 resources 
+## Events occurred from 2017-01-02 11:41:53 until 2018-05-05 07:16:02 
+##  
+## Variables were mapped as follows:
+## Case identifier:     patient 
+## Activity identifier:     handling 
+## Resource identifier:     employee 
+## Activity instance identifier:    handling_id 
+## Timestamp:           time 
+## Lifecycle transition:        registration_type 
 ## 
 ## # A tibble: 5,442 x 9
-##    handling     patient employee handling_id registration_type
-##    &lt;fct&gt;        &lt;chr&gt;   &lt;fct&gt;    &lt;chr&gt;       &lt;fct&gt;            
-##  1 Registration 1       r1       1           start            
-##  2 Registration 2       r1       2           start            
-##  3 Registration 3       r1       3           start            
-##  4 Registration 4       r1       4           start            
-##  5 Registration 5       r1       5           start            
-##  6 Registration 6       r1       6           start            
-##  7 Registration 7       r1       7           start            
-##  8 Registration 8       r1       8           start            
-##  9 Registration 9       r1       9           start            
-## 10 Registration 10      r1       10          start            
+##    handling patient employee handling_id registration_ty~
+##    &lt;fct&gt;    &lt;chr&gt;   &lt;fct&gt;    &lt;chr&gt;       &lt;fct&gt;           
+##  1 Registr~ 1       r1       1           start           
+##  2 Registr~ 2       r1       2           start           
+##  3 Registr~ 3       r1       3           start           
+##  4 Registr~ 4       r1       4           start           
+##  5 Registr~ 5       r1       5           start           
+##  6 Registr~ 6       r1       6           start           
+##  7 Registr~ 7       r1       7           start           
+##  8 Registr~ 8       r1       8           start           
+##  9 Registr~ 9       r1       9           start           
+## 10 Registr~ 10      r1       10          start           
 ## # ... with 5,432 more rows, and 4 more variables: time &lt;dttm&gt;,
 ## #   .order &lt;int&gt;, trace &lt;chr&gt;, relative_case_trace_coverage &lt;dbl&gt;</code></pre>
 </div>
@@ -532,26 +556,34 @@ ga('send', 'pageview');
     group_by_case %&gt;%
     mutate(had_MRI = any(handling == &quot;MRI SCAN&quot;)) %&gt;%
     ungroup_eventlog()</code></pre>
-<pre><code>## Event log consisting of:
-## 5442 events
-## 7 traces
-## 500 cases
-## 7 activities
-## 2721 activity instances
+<pre><code>## Log of 5442 events consisting of:
+## 7 traces 
+## 500 cases 
+## 2721 instances of 7 activities 
+## 7 resources 
+## Events occurred from 2017-01-02 11:41:53 until 2018-05-05 07:16:02 
+##  
+## Variables were mapped as follows:
+## Case identifier:     patient 
+## Activity identifier:     handling 
+## Resource identifier:     employee 
+## Activity instance identifier:    handling_id 
+## Timestamp:           time 
+## Lifecycle transition:        registration_type 
 ## 
 ## # A tibble: 5,442 x 8
-##    handling     patient employee handling_id registration_type
-##    &lt;fct&gt;        &lt;chr&gt;   &lt;fct&gt;    &lt;chr&gt;       &lt;fct&gt;            
-##  1 Registration 1       r1       1           start            
-##  2 Registration 2       r1       2           start            
-##  3 Registration 3       r1       3           start            
-##  4 Registration 4       r1       4           start            
-##  5 Registration 5       r1       5           start            
-##  6 Registration 6       r1       6           start            
-##  7 Registration 7       r1       7           start            
-##  8 Registration 8       r1       8           start            
-##  9 Registration 9       r1       9           start            
-## 10 Registration 10      r1       10          start            
+##    handling patient employee handling_id registration_ty~
+##    &lt;fct&gt;    &lt;chr&gt;   &lt;fct&gt;    &lt;chr&gt;       &lt;fct&gt;           
+##  1 Registr~ 1       r1       1           start           
+##  2 Registr~ 2       r1       2           start           
+##  3 Registr~ 3       r1       3           start           
+##  4 Registr~ 4       r1       4           start           
+##  5 Registr~ 5       r1       5           start           
+##  6 Registr~ 6       r1       6           start           
+##  7 Registr~ 7       r1       7           start           
+##  8 Registr~ 8       r1       8           start           
+##  9 Registr~ 9       r1       9           start           
+## 10 Registr~ 10      r1       10          start           
 ## # ... with 5,432 more rows, and 3 more variables: time &lt;dttm&gt;,
 ## #   .order &lt;int&gt;, had_MRI &lt;lgl&gt;</code></pre>
 <p>Note that the <code>group_by_case</code> function is a helpful function to group the data by case id. As a result, the mutate will look for the MRI SCAN in each case separately. The <code>ungroup_eventlog</code> function removes the grouping, so that later analyses are not affected by this.</p>
@@ -562,26 +594,34 @@ ga('send', 'pageview');
 <pre class="r"><code>patients %&gt;%
     trace_coverage(level = &quot;case&quot;,append = TRUE, append_column = &quot;relative&quot;) %&gt;%
     mutate(frequent = relative_case_trace_coverage &gt; 0.2)</code></pre>
-<pre><code>## Event log consisting of:
-## 5442 events
-## 7 traces
-## 500 cases
-## 7 activities
-## 2721 activity instances
+<pre><code>## Log of 5442 events consisting of:
+## 7 traces 
+## 500 cases 
+## 2721 instances of 7 activities 
+## 7 resources 
+## Events occurred from 2017-01-02 11:41:53 until 2018-05-05 07:16:02 
+##  
+## Variables were mapped as follows:
+## Case identifier:     patient 
+## Activity identifier:     handling 
+## Resource identifier:     employee 
+## Activity instance identifier:    handling_id 
+## Timestamp:           time 
+## Lifecycle transition:        registration_type 
 ## 
 ## # A tibble: 5,442 x 10
-##    handling     patient employee handling_id registration_type
-##    &lt;fct&gt;        &lt;chr&gt;   &lt;fct&gt;    &lt;chr&gt;       &lt;fct&gt;            
-##  1 Registration 1       r1       1           start            
-##  2 Registration 2       r1       2           start            
-##  3 Registration 3       r1       3           start            
-##  4 Registration 4       r1       4           start            
-##  5 Registration 5       r1       5           start            
-##  6 Registration 6       r1       6           start            
-##  7 Registration 7       r1       7           start            
-##  8 Registration 8       r1       8           start            
-##  9 Registration 9       r1       9           start            
-## 10 Registration 10      r1       10          start            
+##    handling patient employee handling_id registration_ty~
+##    &lt;fct&gt;    &lt;chr&gt;   &lt;fct&gt;    &lt;chr&gt;       &lt;fct&gt;           
+##  1 Registr~ 1       r1       1           start           
+##  2 Registr~ 2       r1       2           start           
+##  3 Registr~ 3       r1       3           start           
+##  4 Registr~ 4       r1       4           start           
+##  5 Registr~ 5       r1       5           start           
+##  6 Registr~ 6       r1       6           start           
+##  7 Registr~ 7       r1       7           start           
+##  8 Registr~ 8       r1       8           start           
+##  9 Registr~ 9       r1       9           start           
+## 10 Registr~ 10      r1       10          start           
 ## # ... with 5,432 more rows, and 5 more variables: time &lt;dttm&gt;,
 ## #   .order &lt;int&gt;, trace &lt;chr&gt;, relative_case_trace_coverage &lt;dbl&gt;,
 ## #   frequent &lt;lgl&gt;</code></pre>

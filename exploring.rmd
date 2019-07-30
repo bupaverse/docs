@@ -27,6 +27,22 @@ The metrics for exploring and describing event data which are available are base
 	
 ## Time perspective
 
+Three different time metrics can be computed:
+
+*	throughput time: the time between the very first event of the case and the very last
+*	processing time: the sum of the duration of all activity instances
+*	idle time: the time when no activity instance is active
+
+The duration of an activity instance is the time between the first and the last event related to that activity instance. In case several activity instances within a case overlap, processing time for that overlap will be counted twice. The figure below shows a schematic overview of different time metrics. 
+
+```{r echo = F}
+knitr::include_graphics("images/processingtime.PNG")
+```
+
+
+
+
+
 #### Idle Time
 
 The idle time is the time that there is no activity in a case or for a resource. It can only be calculated when there are both start and end timestamps available for activity instances. It can be computed at the levels trace, resource, case and log, and using different time units.

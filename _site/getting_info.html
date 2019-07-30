@@ -429,26 +429,34 @@ ga('send', 'pageview');
 </script></p>
 <pre class="r"><code>library(bupaR)
 eventdataR::patients</code></pre>
-<pre><code>## Event log consisting of:
-## 5442 events
-## 7 traces
-## 500 cases
-## 7 activities
-## 2721 activity instances
+<pre><code>## Log of 5442 events consisting of:
+## 7 traces 
+## 500 cases 
+## 2721 instances of 7 activities 
+## 7 resources 
+## Events occurred from 2017-01-02 11:41:53 until 2018-05-05 07:16:02 
+##  
+## Variables were mapped as follows:
+## Case identifier:     patient 
+## Activity identifier:     handling 
+## Resource identifier:     employee 
+## Activity instance identifier:    handling_id 
+## Timestamp:           time 
+## Lifecycle transition:        registration_type 
 ## 
 ## # A tibble: 5,442 x 7
-##    handling     patient employee handling_id registration_type
-##    &lt;fct&gt;        &lt;chr&gt;   &lt;fct&gt;    &lt;chr&gt;       &lt;fct&gt;            
-##  1 Registration 1       r1       1           start            
-##  2 Registration 2       r1       2           start            
-##  3 Registration 3       r1       3           start            
-##  4 Registration 4       r1       4           start            
-##  5 Registration 5       r1       5           start            
-##  6 Registration 6       r1       6           start            
-##  7 Registration 7       r1       7           start            
-##  8 Registration 8       r1       8           start            
-##  9 Registration 9       r1       9           start            
-## 10 Registration 10      r1       10          start            
+##    handling patient employee handling_id registration_ty~
+##    &lt;fct&gt;    &lt;chr&gt;   &lt;fct&gt;    &lt;chr&gt;       &lt;fct&gt;           
+##  1 Registr~ 1       r1       1           start           
+##  2 Registr~ 2       r1       2           start           
+##  3 Registr~ 3       r1       3           start           
+##  4 Registr~ 4       r1       4           start           
+##  5 Registr~ 5       r1       5           start           
+##  6 Registr~ 6       r1       6           start           
+##  7 Registr~ 7       r1       7           start           
+##  8 Registr~ 8       r1       8           start           
+##  9 Registr~ 9       r1       9           start           
+## 10 Registr~ 10      r1       10          start           
 ## # ... with 5,432 more rows, and 2 more variables: time &lt;dttm&gt;,
 ## #   .order &lt;int&gt;</code></pre>
 <div id="getting-metadata" class="section level2">
@@ -521,18 +529,18 @@ patients %&gt;% n_resources</code></pre>
 <p>More detailed information about <code>activities</code> , <code>cases</code>, <code>resources</code> and <code>traces</code> can be obtained using the functions named accordingly. For example, consider the overview of the cases of the patients event log below.</p>
 <pre class="r"><code>patients %&gt;% cases</code></pre>
 <pre><code>## # A tibble: 500 x 10
-##    patient trace_length number_of_activities start_timestamp    
-##    &lt;chr&gt;          &lt;int&gt;                &lt;int&gt; &lt;dttm&gt;             
-##  1 1                  6                    6 2017-01-02 11:41:53
-##  2 10                 5                    5 2017-01-06 05:58:54
-##  3 100                5                    5 2017-04-11 16:34:31
-##  4 101                5                    5 2017-04-16 06:38:58
-##  5 102                5                    5 2017-04-16 06:38:58
-##  6 103                6                    6 2017-04-19 20:22:01
-##  7 104                6                    6 2017-04-19 20:22:01
-##  8 105                6                    6 2017-04-21 02:19:09
-##  9 106                6                    6 2017-04-21 02:19:09
-## 10 107                5                    5 2017-04-22 18:32:16
+##    patient trace_length number_of_activ~ start_timestamp    
+##    &lt;chr&gt;          &lt;int&gt;            &lt;int&gt; &lt;dttm&gt;             
+##  1 1                  6                6 2017-01-02 11:41:53
+##  2 10                 5                5 2017-01-06 05:58:54
+##  3 100                5                5 2017-04-11 16:34:31
+##  4 101                5                5 2017-04-16 06:38:58
+##  5 102                5                5 2017-04-16 06:38:58
+##  6 103                6                6 2017-04-19 20:22:01
+##  7 104                6                6 2017-04-19 20:22:01
+##  8 105                6                6 2017-04-21 02:19:09
+##  9 106                6                6 2017-04-21 02:19:09
+## 10 107                5                5 2017-04-22 18:32:16
 ## # ... with 490 more rows, and 6 more variables: complete_timestamp &lt;dttm&gt;,
 ## #   trace &lt;chr&gt;, trace_id &lt;dbl&gt;, duration_in_days &lt;dbl&gt;,
 ## #   first_activity &lt;fct&gt;, last_activity &lt;fct&gt;</code></pre>

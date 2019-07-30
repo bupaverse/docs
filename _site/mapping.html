@@ -446,26 +446,34 @@ ga('send', 'pageview');
 <p>For example, consider the <code>traffic_fines</code> data. We could change to <code>case_id</code> to the “vehicleclass” column as follows. (This is a purely hypothetical example). You will see that the number of cases has changed after this modification.</p>
 <pre class="r"><code>traffic_fines %&gt;%
     eventlog(case_id = &quot;vehicleclass&quot;)</code></pre>
-<pre><code>## Event log consisting of:
-## 34724 events
-## 4 traces
-## 4 cases
-## 11 activities
-## 34724 activity instances
+<pre><code>## Log of 34724 events consisting of:
+## 4 traces 
+## 4 cases 
+## 34724 instances of 11 activities 
+## 16 resources 
+## Events occurred from 2006-06-17 until 2012-03-26 
+##  
+## Variables were mapped as follows:
+## Case identifier:     vehicleclass 
+## Activity identifier:     activity 
+## Resource identifier:     resource 
+## Activity instance identifier:    activity_instance_id 
+## Timestamp:           timestamp 
+## Lifecycle transition:        lifecycle 
 ## 
 ## # A tibble: 34,724 x 18
-##    case_id activity  lifecycle resource timestamp           amount article
-##    &lt;chr&gt;   &lt;fct&gt;     &lt;fct&gt;     &lt;fct&gt;    &lt;dttm&gt;               &lt;dbl&gt;   &lt;int&gt;
-##  1 A1      Create F~ complete  561      2006-07-24 00:00:00   350.     157
-##  2 A1      Send Fine complete  &lt;NA&gt;     2006-12-05 00:00:00    NA       NA
-##  3 A100    Create F~ complete  561      2006-08-02 00:00:00   350.     157
-##  4 A100    Send Fine complete  &lt;NA&gt;     2006-12-12 00:00:00    NA       NA
-##  5 A100    Insert F~ complete  &lt;NA&gt;     2007-01-15 00:00:00    NA       NA
-##  6 A100    Add pena~ complete  &lt;NA&gt;     2007-03-16 00:00:00   715.      NA
-##  7 A100    Send for~ complete  &lt;NA&gt;     2009-03-30 00:00:00    NA       NA
-##  8 A10000  Create F~ complete  561      2007-03-09 00:00:00   360.     157
-##  9 A10000  Send Fine complete  &lt;NA&gt;     2007-07-17 00:00:00    NA       NA
-## 10 A10000  Insert F~ complete  &lt;NA&gt;     2007-08-02 00:00:00    NA       NA
+##    case_id activity lifecycle resource timestamp           amount article
+##    &lt;chr&gt;   &lt;fct&gt;    &lt;fct&gt;     &lt;fct&gt;    &lt;dttm&gt;               &lt;dbl&gt;   &lt;int&gt;
+##  1 A1      Create ~ complete  561      2006-07-24 00:00:00    350     157
+##  2 A1      Send Fi~ complete  &lt;NA&gt;     2006-12-05 00:00:00     NA      NA
+##  3 A100    Create ~ complete  561      2006-08-02 00:00:00    350     157
+##  4 A100    Send Fi~ complete  &lt;NA&gt;     2006-12-12 00:00:00     NA      NA
+##  5 A100    Insert ~ complete  &lt;NA&gt;     2007-01-15 00:00:00     NA      NA
+##  6 A100    Add pen~ complete  &lt;NA&gt;     2007-03-16 00:00:00    715      NA
+##  7 A100    Send fo~ complete  &lt;NA&gt;     2009-03-30 00:00:00     NA      NA
+##  8 A10000  Create ~ complete  561      2007-03-09 00:00:00    360     157
+##  9 A10000  Send Fi~ complete  &lt;NA&gt;     2007-07-17 00:00:00     NA      NA
+## 10 A10000  Insert ~ complete  &lt;NA&gt;     2007-08-02 00:00:00     NA      NA
 ## # ... with 34,714 more rows, and 11 more variables: dismissal &lt;chr&gt;,
 ## #   expense &lt;dbl&gt;, lastsent &lt;chr&gt;, matricola &lt;chr&gt;,
 ## #   notificationtype &lt;chr&gt;, paymentamount &lt;dbl&gt;, points &lt;int&gt;,
@@ -477,26 +485,34 @@ ga('send', 'pageview');
 <p>If we only want to change one of the elements, as in the example above, the <code>set</code> function provide a very convenient way to do so. The same change as before can be done as follows.</p>
 <pre class="r"><code>traffic_fines %&gt;%
     set_case_id(&quot;vehicleclass&quot;)</code></pre>
-<pre><code>## Event log consisting of:
-## 34724 events
-## 4 traces
-## 4 cases
-## 11 activities
-## 34724 activity instances
+<pre><code>## Log of 34724 events consisting of:
+## 4 traces 
+## 4 cases 
+## 34724 instances of 11 activities 
+## 16 resources 
+## Events occurred from 2006-06-17 until 2012-03-26 
+##  
+## Variables were mapped as follows:
+## Case identifier:     vehicleclass 
+## Activity identifier:     activity 
+## Resource identifier:     resource 
+## Activity instance identifier:    activity_instance_id 
+## Timestamp:           timestamp 
+## Lifecycle transition:        lifecycle 
 ## 
 ## # A tibble: 34,724 x 18
-##    case_id activity  lifecycle resource timestamp           amount article
-##    &lt;chr&gt;   &lt;fct&gt;     &lt;fct&gt;     &lt;fct&gt;    &lt;dttm&gt;               &lt;dbl&gt;   &lt;int&gt;
-##  1 A1      Create F~ complete  561      2006-07-24 00:00:00   350.     157
-##  2 A1      Send Fine complete  &lt;NA&gt;     2006-12-05 00:00:00    NA       NA
-##  3 A100    Create F~ complete  561      2006-08-02 00:00:00   350.     157
-##  4 A100    Send Fine complete  &lt;NA&gt;     2006-12-12 00:00:00    NA       NA
-##  5 A100    Insert F~ complete  &lt;NA&gt;     2007-01-15 00:00:00    NA       NA
-##  6 A100    Add pena~ complete  &lt;NA&gt;     2007-03-16 00:00:00   715.      NA
-##  7 A100    Send for~ complete  &lt;NA&gt;     2009-03-30 00:00:00    NA       NA
-##  8 A10000  Create F~ complete  561      2007-03-09 00:00:00   360.     157
-##  9 A10000  Send Fine complete  &lt;NA&gt;     2007-07-17 00:00:00    NA       NA
-## 10 A10000  Insert F~ complete  &lt;NA&gt;     2007-08-02 00:00:00    NA       NA
+##    case_id activity lifecycle resource timestamp           amount article
+##    &lt;chr&gt;   &lt;fct&gt;    &lt;fct&gt;     &lt;fct&gt;    &lt;dttm&gt;               &lt;dbl&gt;   &lt;int&gt;
+##  1 A1      Create ~ complete  561      2006-07-24 00:00:00    350     157
+##  2 A1      Send Fi~ complete  &lt;NA&gt;     2006-12-05 00:00:00     NA      NA
+##  3 A100    Create ~ complete  561      2006-08-02 00:00:00    350     157
+##  4 A100    Send Fi~ complete  &lt;NA&gt;     2006-12-12 00:00:00     NA      NA
+##  5 A100    Insert ~ complete  &lt;NA&gt;     2007-01-15 00:00:00     NA      NA
+##  6 A100    Add pen~ complete  &lt;NA&gt;     2007-03-16 00:00:00    715      NA
+##  7 A100    Send fo~ complete  &lt;NA&gt;     2009-03-30 00:00:00     NA      NA
+##  8 A10000  Create ~ complete  561      2007-03-09 00:00:00    360     157
+##  9 A10000  Send Fi~ complete  &lt;NA&gt;     2007-07-17 00:00:00     NA      NA
+## 10 A10000  Insert ~ complete  &lt;NA&gt;     2007-08-02 00:00:00     NA      NA
 ## # ... with 34,714 more rows, and 11 more variables: dismissal &lt;chr&gt;,
 ## #   expense &lt;dbl&gt;, lastsent &lt;chr&gt;, matricola &lt;chr&gt;,
 ## #   notificationtype &lt;chr&gt;, paymentamount &lt;dbl&gt;, points &lt;int&gt;,
@@ -521,26 +537,34 @@ mapping_fines</code></pre>
 <p>Later, we can undo these changes and “reset” the original mapping using the <code>re_map</code> function.</p>
 <pre class="r"><code>traffic_fines %&gt;%
     re_map(mapping_fines)</code></pre>
-<pre><code>## Event log consisting of:
-## 34724 events
-## 44 traces
-## 10000 cases
-## 11 activities
-## 34724 activity instances
+<pre><code>## Log of 34724 events consisting of:
+## 44 traces 
+## 10000 cases 
+## 34724 instances of 11 activities 
+## 16 resources 
+## Events occurred from 2006-06-17 until 2012-03-26 
+##  
+## Variables were mapped as follows:
+## Case identifier:     case_id 
+## Activity identifier:     activity 
+## Resource identifier:     resource 
+## Activity instance identifier:    activity_instance_id 
+## Timestamp:           timestamp 
+## Lifecycle transition:        lifecycle 
 ## 
 ## # A tibble: 34,724 x 18
-##    case_id activity  lifecycle resource timestamp           amount article
-##    &lt;chr&gt;   &lt;fct&gt;     &lt;fct&gt;     &lt;fct&gt;    &lt;dttm&gt;               &lt;dbl&gt;   &lt;int&gt;
-##  1 A1      Create F~ complete  561      2006-07-24 00:00:00   350.     157
-##  2 A1      Send Fine complete  &lt;NA&gt;     2006-12-05 00:00:00    NA       NA
-##  3 A100    Create F~ complete  561      2006-08-02 00:00:00   350.     157
-##  4 A100    Send Fine complete  &lt;NA&gt;     2006-12-12 00:00:00    NA       NA
-##  5 A100    Insert F~ complete  &lt;NA&gt;     2007-01-15 00:00:00    NA       NA
-##  6 A100    Add pena~ complete  &lt;NA&gt;     2007-03-16 00:00:00   715.      NA
-##  7 A100    Send for~ complete  &lt;NA&gt;     2009-03-30 00:00:00    NA       NA
-##  8 A10000  Create F~ complete  561      2007-03-09 00:00:00   360.     157
-##  9 A10000  Send Fine complete  &lt;NA&gt;     2007-07-17 00:00:00    NA       NA
-## 10 A10000  Insert F~ complete  &lt;NA&gt;     2007-08-02 00:00:00    NA       NA
+##    case_id activity lifecycle resource timestamp           amount article
+##    &lt;chr&gt;   &lt;fct&gt;    &lt;fct&gt;     &lt;fct&gt;    &lt;dttm&gt;               &lt;dbl&gt;   &lt;int&gt;
+##  1 A1      Create ~ complete  561      2006-07-24 00:00:00    350     157
+##  2 A1      Send Fi~ complete  &lt;NA&gt;     2006-12-05 00:00:00     NA      NA
+##  3 A100    Create ~ complete  561      2006-08-02 00:00:00    350     157
+##  4 A100    Send Fi~ complete  &lt;NA&gt;     2006-12-12 00:00:00     NA      NA
+##  5 A100    Insert ~ complete  &lt;NA&gt;     2007-01-15 00:00:00     NA      NA
+##  6 A100    Add pen~ complete  &lt;NA&gt;     2007-03-16 00:00:00    715      NA
+##  7 A100    Send fo~ complete  &lt;NA&gt;     2009-03-30 00:00:00     NA      NA
+##  8 A10000  Create ~ complete  561      2007-03-09 00:00:00    360     157
+##  9 A10000  Send Fi~ complete  &lt;NA&gt;     2007-07-17 00:00:00     NA      NA
+## 10 A10000  Insert ~ complete  &lt;NA&gt;     2007-08-02 00:00:00     NA      NA
 ## # ... with 34,714 more rows, and 11 more variables: dismissal &lt;chr&gt;,
 ## #   expense &lt;dbl&gt;, lastsent &lt;chr&gt;, matricola &lt;chr&gt;,
 ## #   notificationtype &lt;fct&gt;, paymentamount &lt;dbl&gt;, points &lt;int&gt;,

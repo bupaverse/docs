@@ -745,25 +745,33 @@ example_log_1 %&gt;% #a data.frame with the information in the table above
         timestamp = &quot;timestamp&quot;,
         resource_id = &quot;resource&quot;
     )</code></pre>
-<pre><code>## Event log consisting of:
-## 9 events
-## 1 traces
-## 1 cases
-## 4 activities
-## 5 activity instances
+<pre><code>## Log of 9 events consisting of:
+## 1 trace 
+## 1 case 
+## 5 instances of 4 activities 
+## 4 resources 
+## Events occurred from 2017-05-10 08:33:26 until 2017-05-11 14:52:36 
+##  
+## Variables were mapped as follows:
+## Case identifier:     patient 
+## Activity identifier:     activity 
+## Resource identifier:     resource 
+## Activity instance identifier:    activity_instance 
+## Timestamp:           timestamp 
+## Lifecycle transition:        status 
 ## 
 ## # A tibble: 9 x 7
-##   patient  activity  timestamp           status  activity_instan~ resource
-##   &lt;chr&gt;    &lt;fct&gt;     &lt;dttm&gt;              &lt;fct&gt;   &lt;chr&gt;            &lt;fct&gt;   
-## 1 John Doe check-in  2017-05-10 08:33:26 comple~ 1                Samantha
-## 2 John Doe surgery   2017-05-10 08:38:21 schedu~ 2                Danny   
-## 3 John Doe surgery   2017-05-10 08:53:16 start   2                Richard 
-## 4 John Doe surgery   2017-05-10 09:25:19 comple~ 2                Richard 
-## 5 John Doe treatment 2017-05-10 10:01:25 start   3                Danny   
-## 6 John Doe treatment 2017-05-10 10:35:18 comple~ 3                Danny   
-## 7 John Doe surgery   2017-05-10 10:41:35 start   4                William 
-## 8 John Doe surgery   2017-05-10 11:05:56 comple~ 4                William 
-## 9 John Doe check-out 2017-05-11 14:52:36 comple~ 5                Samantha
+##   patient activity timestamp           status activity_instan~ resource
+##   &lt;chr&gt;   &lt;fct&gt;    &lt;dttm&gt;              &lt;fct&gt;  &lt;chr&gt;            &lt;fct&gt;   
+## 1 John D~ check-in 2017-05-10 08:33:26 compl~ 1                Samantha
+## 2 John D~ surgery  2017-05-10 08:38:21 sched~ 2                Danny   
+## 3 John D~ surgery  2017-05-10 08:53:16 start  2                Richard 
+## 4 John D~ surgery  2017-05-10 09:25:19 compl~ 2                Richard 
+## 5 John D~ treatme~ 2017-05-10 10:01:25 start  3                Danny   
+## 6 John D~ treatme~ 2017-05-10 10:35:18 compl~ 3                Danny   
+## 7 John D~ surgery  2017-05-10 10:41:35 start  4                William 
+## 8 John D~ surgery  2017-05-10 11:05:56 compl~ 4                William 
+## 9 John D~ check-o~ 2017-05-11 14:52:36 compl~ 5                Samantha
 ## # ... with 1 more variable: .order &lt;int&gt;</code></pre>
 </div>
 <div id="common-transformations" class="section level2">
@@ -793,21 +801,29 @@ example_log_1 %&gt;% #a data.frame with the information in the table above
         timestamp = &quot;timestamp&quot;,
         resource_id = &quot;resource&quot;
     )</code></pre>
-<pre><code>## Event log consisting of:
-## 5 events
-## 1 traces
-## 1 cases
-## 4 activities
-## 5 activity instances
+<pre><code>## Log of 5 events consisting of:
+## 1 trace 
+## 1 case 
+## 5 instances of 4 activities 
+## 4 resources 
+## Events occurred from 2017-05-10 08:33:26 until 2017-05-11 14:52:36 
+##  
+## Variables were mapped as follows:
+## Case identifier:     patient 
+## Activity identifier:     activity 
+## Resource identifier:     resource 
+## Activity instance identifier:    activity_instance 
+## Timestamp:           timestamp 
+## Lifecycle transition:        status 
 ## 
 ## # A tibble: 5 x 7
-##   patient  activity  timestamp           resource status  activity_instan~
-##   &lt;chr&gt;    &lt;fct&gt;     &lt;dttm&gt;              &lt;fct&gt;    &lt;fct&gt;   &lt;chr&gt;           
-## 1 John Doe check-in  2017-05-10 08:33:26 Samantha comple~ 1               
-## 2 John Doe surgery   2017-05-10 09:25:19 Richard  comple~ 2               
-## 3 John Doe treatment 2017-05-10 10:35:18 Danny    comple~ 3               
-## 4 John Doe surgery   2017-05-10 11:05:56 William  comple~ 4               
-## 5 John Doe check-out 2017-05-11 14:52:36 Samantha comple~ 5               
+##   patient activity timestamp           resource status activity_instan~
+##   &lt;chr&gt;   &lt;fct&gt;    &lt;dttm&gt;              &lt;fct&gt;    &lt;fct&gt;  &lt;chr&gt;           
+## 1 John D~ check-in 2017-05-10 08:33:26 Samantha compl~ 1               
+## 2 John D~ surgery  2017-05-10 09:25:19 Richard  compl~ 2               
+## 3 John D~ treatme~ 2017-05-10 10:35:18 Danny    compl~ 3               
+## 4 John D~ surgery  2017-05-10 11:05:56 William  compl~ 4               
+## 5 John D~ check-o~ 2017-05-11 14:52:36 Samantha compl~ 5               
 ## # ... with 1 more variable: .order &lt;int&gt;</code></pre>
 </div>
 <div id="lack-of-resources" class="section level3">
@@ -817,15 +833,15 @@ example_log_1 %&gt;% #a data.frame with the information in the table above
 <pre><code>## # A tibble: 9 x 5
 ##   patient  activity  timestamp           status   activity_instance
 ##   &lt;chr&gt;    &lt;chr&gt;     &lt;dttm&gt;              &lt;chr&gt;                &lt;dbl&gt;
-## 1 John Doe check-in  2017-05-10 08:33:26 complete                1.
-## 2 John Doe surgery   2017-05-10 08:38:21 schedule                2.
-## 3 John Doe surgery   2017-05-10 08:53:16 start                   2.
-## 4 John Doe surgery   2017-05-10 09:25:19 complete                2.
-## 5 John Doe treatment 2017-05-10 10:01:25 start                   3.
-## 6 John Doe treatment 2017-05-10 10:35:18 complete                3.
-## 7 John Doe surgery   2017-05-10 10:41:35 start                   4.
-## 8 John Doe surgery   2017-05-10 11:05:56 complete                4.
-## 9 John Doe check-out 2017-05-11 14:52:36 complete                5.</code></pre>
+## 1 John Doe check-in  2017-05-10 08:33:26 complete                 1
+## 2 John Doe surgery   2017-05-10 08:38:21 schedule                 2
+## 3 John Doe surgery   2017-05-10 08:53:16 start                    2
+## 4 John Doe surgery   2017-05-10 09:25:19 complete                 2
+## 5 John Doe treatment 2017-05-10 10:01:25 start                    3
+## 6 John Doe treatment 2017-05-10 10:35:18 complete                 3
+## 7 John Doe surgery   2017-05-10 10:41:35 start                    4
+## 8 John Doe surgery   2017-05-10 11:05:56 complete                 4
+## 9 John Doe check-out 2017-05-11 14:52:36 complete                 5</code></pre>
 <p>In order to work around this problem, the easiest solution is to include an empty resource variable.</p>
 <pre class="r"><code>example_log_3 %&gt;%
     mutate(resource = NA) %&gt;%
@@ -837,25 +853,33 @@ example_log_1 %&gt;% #a data.frame with the information in the table above
         timestamp = &quot;timestamp&quot;,
         resource_id = &quot;resource&quot;
     )</code></pre>
-<pre><code>## Event log consisting of:
-## 9 events
-## 1 traces
-## 1 cases
-## 4 activities
-## 5 activity instances
+<pre><code>## Log of 9 events consisting of:
+## 1 trace 
+## 1 case 
+## 5 instances of 4 activities 
+## 1 resource 
+## Events occurred from 2017-05-10 08:33:26 until 2017-05-11 14:52:36 
+##  
+## Variables were mapped as follows:
+## Case identifier:     patient 
+## Activity identifier:     activity 
+## Resource identifier:     resource 
+## Activity instance identifier:    activity_instance 
+## Timestamp:           timestamp 
+## Lifecycle transition:        status 
 ## 
 ## # A tibble: 9 x 7
-##   patient  activity  timestamp           status  activity_instan~ resource
-##   &lt;chr&gt;    &lt;fct&gt;     &lt;dttm&gt;              &lt;fct&gt;   &lt;chr&gt;            &lt;fct&gt;   
-## 1 John Doe check-in  2017-05-10 08:33:26 comple~ 1                &lt;NA&gt;    
-## 2 John Doe surgery   2017-05-10 08:38:21 schedu~ 2                &lt;NA&gt;    
-## 3 John Doe surgery   2017-05-10 08:53:16 start   2                &lt;NA&gt;    
-## 4 John Doe surgery   2017-05-10 09:25:19 comple~ 2                &lt;NA&gt;    
-## 5 John Doe treatment 2017-05-10 10:01:25 start   3                &lt;NA&gt;    
-## 6 John Doe treatment 2017-05-10 10:35:18 comple~ 3                &lt;NA&gt;    
-## 7 John Doe surgery   2017-05-10 10:41:35 start   4                &lt;NA&gt;    
-## 8 John Doe surgery   2017-05-10 11:05:56 comple~ 4                &lt;NA&gt;    
-## 9 John Doe check-out 2017-05-11 14:52:36 comple~ 5                &lt;NA&gt;    
+##   patient activity timestamp           status activity_instan~ resource
+##   &lt;chr&gt;   &lt;fct&gt;    &lt;dttm&gt;              &lt;fct&gt;  &lt;chr&gt;            &lt;fct&gt;   
+## 1 John D~ check-in 2017-05-10 08:33:26 compl~ 1                &lt;NA&gt;    
+## 2 John D~ surgery  2017-05-10 08:38:21 sched~ 2                &lt;NA&gt;    
+## 3 John D~ surgery  2017-05-10 08:53:16 start  2                &lt;NA&gt;    
+## 4 John D~ surgery  2017-05-10 09:25:19 compl~ 2                &lt;NA&gt;    
+## 5 John D~ treatme~ 2017-05-10 10:01:25 start  3                &lt;NA&gt;    
+## 6 John D~ treatme~ 2017-05-10 10:35:18 compl~ 3                &lt;NA&gt;    
+## 7 John D~ surgery  2017-05-10 10:41:35 start  4                &lt;NA&gt;    
+## 8 John D~ surgery  2017-05-10 11:05:56 compl~ 4                &lt;NA&gt;    
+## 9 John D~ check-o~ 2017-05-11 14:52:36 compl~ 5                &lt;NA&gt;    
 ## # ... with 1 more variable: .order &lt;int&gt;</code></pre>
 </div>
 <div id="activity-log" class="section level3">
@@ -863,13 +887,13 @@ example_log_1 %&gt;% #a data.frame with the information in the table above
 <p>Another possibity is that instead of a list of events, there is a list of activity instances available. This is the case in <code>example_log_4</code>.</p>
 <pre class="r"><code>example_log_4</code></pre>
 <pre><code>## # A tibble: 5 x 5
-##   patient  activity  schedule            start              
-##   &lt;chr&gt;    &lt;chr&gt;     &lt;dttm&gt;              &lt;dttm&gt;             
-## 1 John Doe check-in  NA                  NA                 
-## 2 John Doe check-out NA                  NA                 
-## 3 John Doe surgery   2017-05-10 08:38:21 2017-05-10 08:53:16
-## 4 John Doe surgery   NA                  2017-05-10 10:41:35
-## 5 John Doe treatment NA                  2017-05-10 10:01:25
+##   patient activity schedule            start              
+##   &lt;chr&gt;   &lt;chr&gt;    &lt;dttm&gt;              &lt;dttm&gt;             
+## 1 John D~ check-in NA                  NA                 
+## 2 John D~ check-o~ NA                  NA                 
+## 3 John D~ surgery  2017-05-10 08:38:21 2017-05-10 08:53:16
+## 4 John D~ surgery  NA                  2017-05-10 10:41:35
+## 5 John D~ treatme~ NA                  2017-05-10 10:01:25
 ## # ... with 1 more variable: complete &lt;dttm&gt;</code></pre>
 <p>When this is the case, we proceed by first adding an unique id to define the activity instances, and subsequently by gathering the different timestamp columns using <code>tidyr::gather</code>.</p>
 <pre class="r"><code>example_log_4 %&gt;%
@@ -885,25 +909,33 @@ example_log_1 %&gt;% #a data.frame with the information in the table above
         timestamp = &quot;timestamp&quot;,
         resource_id = &quot;resource&quot;
     )</code></pre>
-<pre><code>## Event log consisting of:
-## 9 events
-## 1 traces
-## 1 cases
-## 4 activities
-## 5 activity instances
+<pre><code>## Log of 9 events consisting of:
+## 1 trace 
+## 1 case 
+## 5 instances of 4 activities 
+## 1 resource 
+## Events occurred from 2017-05-10 08:33:26 until 2017-05-11 14:52:36 
+##  
+## Variables were mapped as follows:
+## Case identifier:     patient 
+## Activity identifier:     activity 
+## Resource identifier:     resource 
+## Activity instance identifier:    activity_instance 
+## Timestamp:           timestamp 
+## Lifecycle transition:        status 
 ## 
 ## # A tibble: 9 x 7
-##   patient  activity  activity_instan~ status  timestamp           resource
-##   &lt;chr&gt;    &lt;fct&gt;     &lt;chr&gt;            &lt;fct&gt;   &lt;dttm&gt;              &lt;fct&gt;   
-## 1 John Doe surgery   3                schedu~ 2017-05-10 08:38:21 &lt;NA&gt;    
-## 2 John Doe surgery   3                start   2017-05-10 08:53:16 &lt;NA&gt;    
-## 3 John Doe surgery   4                start   2017-05-10 10:41:35 &lt;NA&gt;    
-## 4 John Doe treatment 5                start   2017-05-10 10:01:25 &lt;NA&gt;    
-## 5 John Doe check-in  1                comple~ 2017-05-10 08:33:26 &lt;NA&gt;    
-## 6 John Doe check-out 2                comple~ 2017-05-11 14:52:36 &lt;NA&gt;    
-## 7 John Doe surgery   3                comple~ 2017-05-10 09:25:19 &lt;NA&gt;    
-## 8 John Doe surgery   4                comple~ 2017-05-10 11:05:56 &lt;NA&gt;    
-## 9 John Doe treatment 5                comple~ 2017-05-10 10:35:18 &lt;NA&gt;    
+##   patient activity activity_instan~ status timestamp           resource
+##   &lt;chr&gt;   &lt;fct&gt;    &lt;chr&gt;            &lt;fct&gt;  &lt;dttm&gt;              &lt;fct&gt;   
+## 1 John D~ surgery  3                sched~ 2017-05-10 08:38:21 &lt;NA&gt;    
+## 2 John D~ surgery  3                start  2017-05-10 08:53:16 &lt;NA&gt;    
+## 3 John D~ surgery  4                start  2017-05-10 10:41:35 &lt;NA&gt;    
+## 4 John D~ treatme~ 5                start  2017-05-10 10:01:25 &lt;NA&gt;    
+## 5 John D~ check-in 1                compl~ 2017-05-10 08:33:26 &lt;NA&gt;    
+## 6 John D~ check-o~ 2                compl~ 2017-05-11 14:52:36 &lt;NA&gt;    
+## 7 John D~ surgery  3                compl~ 2017-05-10 09:25:19 &lt;NA&gt;    
+## 8 John D~ surgery  4                compl~ 2017-05-10 11:05:56 &lt;NA&gt;    
+## 9 John D~ treatme~ 5                compl~ 2017-05-10 10:35:18 &lt;NA&gt;    
 ## # ... with 1 more variable: .order &lt;int&gt;</code></pre>
 </div>
 </div>

@@ -438,10 +438,10 @@ ga('send', 'pageview');
 <pre><code>## # A tibble: 4 x 2
 ##   vehicleclass n_cases
 ##   &lt;chr&gt;          &lt;int&gt;
-## 1 A               8569
-## 2 C                 17
-## 3 M                  5
-## 4 &lt;NA&gt;            8591</code></pre>
+## 1 &lt;NA&gt;            8591
+## 2 A               8569
+## 3 C                 17
+## 4 M                  5</code></pre>
 <div id="predefined-grouping-functions" class="section level3">
 <h3>Predefined grouping functions</h3>
 <p>For specific groupings, some auxiliary functions are available.</p>
@@ -484,26 +484,34 @@ ga('send', 'pageview');
     group_by_case() %&gt;%
     mutate(total_lacticacid = sum(lacticacid, na.rm = T))</code></pre>
 <pre><code>## # Groups: [case_id]
-## Grouped Event log consisting of:
-## 15214 events
-## 846 traces
-## 1050 cases
-## 16 activities
-## 15214 activity instances
+## Grouped Log of 15214 events consisting of:
+## 846 traces 
+## 1050 cases 
+## 15214 instances of 16 activities 
+## 26 resources 
+## Events occurred from 2013-11-07 08:18:29 until 2015-06-05 12:25:11 
+##  
+## Variables were mapped as follows:
+## Case identifier:     case_id 
+## Activity identifier:     activity 
+## Resource identifier:     resource 
+## Activity instance identifier:    activity_instance_id 
+## Timestamp:           timestamp 
+## Lifecycle transition:        lifecycle 
 ## 
 ## # A tibble: 15,214 x 35
-##    case_id activity     lifecycle resource timestamp             age   crp
-##    &lt;chr&gt;   &lt;fct&gt;        &lt;fct&gt;     &lt;fct&gt;    &lt;dttm&gt;              &lt;int&gt; &lt;dbl&gt;
-##  1 A       ER Registra~ complete  A        2014-10-22 11:15:41    85   NA 
-##  2 A       Leucocytes   complete  B        2014-10-22 11:27:00    NA   NA 
-##  3 A       CRP          complete  B        2014-10-22 11:27:00    NA  210.
-##  4 A       LacticAcid   complete  B        2014-10-22 11:27:00    NA   NA 
-##  5 A       ER Triage    complete  C        2014-10-22 11:33:37    NA   NA 
-##  6 A       ER Sepsis T~ complete  A        2014-10-22 11:34:00    NA   NA 
-##  7 A       IV Liquid    complete  A        2014-10-22 14:03:47    NA   NA 
-##  8 A       IV Antibiot~ complete  A        2014-10-22 14:03:47    NA   NA 
-##  9 A       Admission NC complete  D        2014-10-22 14:13:19    NA   NA 
-## 10 A       CRP          complete  B        2014-10-24 09:00:00    NA 1090.
+##    case_id activity lifecycle resource timestamp             age   crp
+##    &lt;chr&gt;   &lt;fct&gt;    &lt;fct&gt;     &lt;fct&gt;    &lt;dttm&gt;              &lt;int&gt; &lt;dbl&gt;
+##  1 A       ER Regi~ complete  A        2014-10-22 11:15:41    85    NA
+##  2 A       Leucocy~ complete  B        2014-10-22 11:27:00    NA    NA
+##  3 A       CRP      complete  B        2014-10-22 11:27:00    NA   210
+##  4 A       LacticA~ complete  B        2014-10-22 11:27:00    NA    NA
+##  5 A       ER Tria~ complete  C        2014-10-22 11:33:37    NA    NA
+##  6 A       ER Seps~ complete  A        2014-10-22 11:34:00    NA    NA
+##  7 A       IV Liqu~ complete  A        2014-10-22 14:03:47    NA    NA
+##  8 A       IV Anti~ complete  A        2014-10-22 14:03:47    NA    NA
+##  9 A       Admissi~ complete  D        2014-10-22 14:13:19    NA    NA
+## 10 A       CRP      complete  B        2014-10-24 09:00:00    NA  1090
 ## # ... with 15,204 more rows, and 28 more variables: diagnose &lt;chr&gt;,
 ## #   diagnosticartastrup &lt;chr&gt;, diagnosticblood &lt;chr&gt;, diagnosticecg &lt;chr&gt;,
 ## #   diagnosticic &lt;chr&gt;, diagnosticlacticacid &lt;chr&gt;,
@@ -522,33 +530,41 @@ ga('send', 'pageview');
 <p>Generic filtering of events can be done using the <code>filter</code> function, which takes an event log and any number of logical conditions. The example below filters events which have vehicleclas “C” and amount greater than 300. More process-specific filtering methods can be found <a href="http://www.bupar.net/subsetting.html">here</a>.</p>
 <pre class="r"><code>traffic_fines %&gt;%
     filter(vehicleclass == &quot;C&quot;, amount &gt; 300)</code></pre>
-<pre><code>## Event log consisting of:
-## 17 events
-## 1 traces
-## 17 cases
-## 1 activities
-## 17 activity instances
+<pre><code>## Log of 17 events consisting of:
+## 1 trace 
+## 17 cases 
+## 17 instances of 1 activity 
+## 9 resources 
+## Events occurred from 2006-08-10 until 2008-02-09 
+##  
+## Variables were mapped as follows:
+## Case identifier:     case_id 
+## Activity identifier:     activity 
+## Resource identifier:     resource 
+## Activity instance identifier:    activity_instance_id 
+## Timestamp:           timestamp 
+## Lifecycle transition:        lifecycle 
 ## 
 ## # A tibble: 17 x 18
-##    case_id activity  lifecycle resource timestamp           amount article
-##    &lt;chr&gt;   &lt;fct&gt;     &lt;fct&gt;     &lt;fct&gt;    &lt;dttm&gt;               &lt;dbl&gt;   &lt;int&gt;
-##  1 A10060  Create F~ complete  541      2007-03-08 00:00:00   360.     157
-##  2 A10497  Create F~ complete  558      2007-03-30 00:00:00   360.     157
-##  3 A10818  Create F~ complete  561      2007-04-08 00:00:00   360.     157
-##  4 A11707  Create F~ complete  550      2007-04-24 00:00:00   360.     157
-##  5 A1408   Create F~ complete  559      2006-08-20 00:00:00   350.     157
-##  6 A14883  Create F~ complete  561      2007-06-29 00:00:00   360.     157
-##  7 A17130  Create F~ complete  541      2007-07-15 00:00:00   360.     157
-##  8 A1815   Create F~ complete  563      2006-08-10 00:00:00   350.     157
-##  9 A19109  Create F~ complete  556      2007-07-17 00:00:00   360.     157
-## 10 A23000  Create F~ complete  550      2007-12-29 00:00:00   360.     157
-## 11 A24247  Create F~ complete  561      2007-12-03 00:00:00   360.     157
-## 12 A24366  Create F~ complete  541      2008-02-09 00:00:00   360.     157
-## 13 A24634  Create F~ complete  537      2007-11-21 00:00:00   360.     157
-## 14 A24942  Create F~ complete  561      2007-12-30 00:00:00   360.     157
-## 15 A25581  Create F~ complete  559      2007-11-23 00:00:00   360.     157
-## 16 A26099  Create F~ complete  559      2007-12-09 00:00:00   360.     157
-## 17 A26277  Create F~ complete  538      2008-01-07 00:00:00   360.     157
+##    case_id activity lifecycle resource timestamp           amount article
+##    &lt;chr&gt;   &lt;fct&gt;    &lt;fct&gt;     &lt;fct&gt;    &lt;dttm&gt;               &lt;dbl&gt;   &lt;int&gt;
+##  1 A10060  Create ~ complete  541      2007-03-08 00:00:00    360     157
+##  2 A10497  Create ~ complete  558      2007-03-30 00:00:00    360     157
+##  3 A10818  Create ~ complete  561      2007-04-08 00:00:00    360     157
+##  4 A11707  Create ~ complete  550      2007-04-24 00:00:00    360     157
+##  5 A1408   Create ~ complete  559      2006-08-20 00:00:00    350     157
+##  6 A14883  Create ~ complete  561      2007-06-29 00:00:00    360     157
+##  7 A17130  Create ~ complete  541      2007-07-15 00:00:00    360     157
+##  8 A1815   Create ~ complete  563      2006-08-10 00:00:00    350     157
+##  9 A19109  Create ~ complete  556      2007-07-17 00:00:00    360     157
+## 10 A23000  Create ~ complete  550      2007-12-29 00:00:00    360     157
+## 11 A24247  Create ~ complete  561      2007-12-03 00:00:00    360     157
+## 12 A24366  Create ~ complete  541      2008-02-09 00:00:00    360     157
+## 13 A24634  Create ~ complete  537      2007-11-21 00:00:00    360     157
+## 14 A24942  Create ~ complete  561      2007-12-30 00:00:00    360     157
+## 15 A25581  Create ~ complete  559      2007-11-23 00:00:00    360     157
+## 16 A26099  Create ~ complete  559      2007-12-09 00:00:00    360     157
+## 17 A26277  Create ~ complete  538      2008-01-07 00:00:00    360     157
 ## # ... with 11 more variables: dismissal &lt;chr&gt;, expense &lt;dbl&gt;,
 ## #   lastsent &lt;chr&gt;, matricola &lt;chr&gt;, notificationtype &lt;chr&gt;,
 ## #   paymentamount &lt;dbl&gt;, points &lt;int&gt;, totalpaymentamount &lt;chr&gt;,
@@ -559,26 +575,34 @@ ga('send', 'pageview');
 <p>Variables on a event log can be <em>selected</em> using <code>select</code>. By default, <code>select</code> will always make sure that the mapping-variables are retained. Otherwise, it would no longer function as an eventlog.</p>
 <pre class="r"><code>traffic_fines %&gt;%
     select(vehicleclass)</code></pre>
-<pre><code>## Event log consisting of:
-## 27001 events
-## 3 traces
-## 8591 cases
-## 6 activities
-## 27001 activity instances
+<pre><code>## Log of 27001 events consisting of:
+## 3 traces 
+## 8591 cases 
+## 27001 instances of 6 activities 
+## 15 resources 
+## Events occurred from 2006-06-17 until 2012-03-26 
+##  
+## Variables were mapped as follows:
+## Case identifier:     case_id 
+## Activity identifier:     activity 
+## Resource identifier:     resource 
+## Activity instance identifier:    activity_instance_id 
+## Timestamp:           timestamp 
+## Lifecycle transition:        lifecycle 
 ## 
 ## # A tibble: 27,001 x 8
-##    vehicleclass case_id activity      activity_instan~ timestamp          
-##    &lt;chr&gt;        &lt;chr&gt;   &lt;fct&gt;         &lt;chr&gt;            &lt;dttm&gt;             
-##  1 A            A1      Create Fine   1                2006-07-24 00:00:00
-##  2 &lt;NA&gt;         A1      Send Fine     2                2006-12-05 00:00:00
-##  3 A            A100    Create Fine   3                2006-08-02 00:00:00
-##  4 &lt;NA&gt;         A100    Send Fine     4                2006-12-12 00:00:00
-##  5 &lt;NA&gt;         A100    Insert Fine ~ 5                2007-01-15 00:00:00
-##  6 &lt;NA&gt;         A100    Add penalty   6                2007-03-16 00:00:00
-##  7 &lt;NA&gt;         A100    Send for Cre~ 7                2009-03-30 00:00:00
-##  8 A            A10004  Create Fine   19               2007-03-20 00:00:00
-##  9 &lt;NA&gt;         A10004  Send Fine     20               2007-07-17 00:00:00
-## 10 &lt;NA&gt;         A10004  Insert Fine ~ 21               2007-07-24 00:00:00
+##    vehicleclass case_id activity activity_instan~ timestamp          
+##    &lt;chr&gt;        &lt;chr&gt;   &lt;fct&gt;    &lt;chr&gt;            &lt;dttm&gt;             
+##  1 A            A1      Create ~ 1                2006-07-24 00:00:00
+##  2 &lt;NA&gt;         A1      Send Fi~ 2                2006-12-05 00:00:00
+##  3 A            A100    Create ~ 3                2006-08-02 00:00:00
+##  4 &lt;NA&gt;         A100    Send Fi~ 4                2006-12-12 00:00:00
+##  5 &lt;NA&gt;         A100    Insert ~ 5                2007-01-15 00:00:00
+##  6 &lt;NA&gt;         A100    Add pen~ 6                2007-03-16 00:00:00
+##  7 &lt;NA&gt;         A100    Send fo~ 7                2009-03-30 00:00:00
+##  8 A            A10004  Create ~ 19               2007-03-20 00:00:00
+##  9 &lt;NA&gt;         A10004  Send Fi~ 20               2007-07-17 00:00:00
+## 10 &lt;NA&gt;         A10004  Insert ~ 21               2007-07-24 00:00:00
 ## # ... with 26,991 more rows, and 3 more variables: resource &lt;fct&gt;,
 ## #   lifecycle &lt;fct&gt;, .order &lt;int&gt;</code></pre>
 <p>By setting the argument <code>force_df = TRUE</code>, the mapping-variables will not be retained, and the output will be a data.frame, and not an event log.</p>
@@ -587,16 +611,16 @@ ga('send', 'pageview');
 <pre><code>## # A tibble: 27,001 x 3
 ##    case_id vehicleclass amount
 ##    &lt;chr&gt;   &lt;chr&gt;         &lt;dbl&gt;
-##  1 A1      A              350.
-##  2 A1      &lt;NA&gt;           350.
-##  3 A100    A              350.
-##  4 A100    &lt;NA&gt;           350.
-##  5 A100    &lt;NA&gt;           350.
-##  6 A100    &lt;NA&gt;           715.
-##  7 A100    &lt;NA&gt;           715.
-##  8 A10004  A              360.
-##  9 A10004  &lt;NA&gt;           360.
-## 10 A10004  &lt;NA&gt;           360.
+##  1 A1      A               350
+##  2 A1      &lt;NA&gt;            350
+##  3 A100    A               350
+##  4 A100    &lt;NA&gt;            350
+##  5 A100    &lt;NA&gt;            350
+##  6 A100    &lt;NA&gt;            715
+##  7 A100    &lt;NA&gt;            715
+##  8 A10004  A               360
+##  9 A10004  &lt;NA&gt;            360
+## 10 A10004  &lt;NA&gt;            360
 ## # ... with 26,991 more rows</code></pre>
 </div>
 <div id="arrange" class="section level2">
@@ -605,26 +629,34 @@ ga('send', 'pageview');
 <pre class="r"><code>#sort descending on time
 patients %&gt;%
     arrange(desc(time))</code></pre>
-<pre><code>## Event log consisting of:
-## 5442 events
-## 7 traces
-## 500 cases
-## 7 activities
-## 2721 activity instances
+<pre><code>## Log of 5442 events consisting of:
+## 7 traces 
+## 500 cases 
+## 2721 instances of 7 activities 
+## 7 resources 
+## Events occurred from 2017-01-02 11:41:53 until 2018-05-05 07:16:02 
+##  
+## Variables were mapped as follows:
+## Case identifier:     patient 
+## Activity identifier:     handling 
+## Resource identifier:     employee 
+## Activity instance identifier:    handling_id 
+## Timestamp:           time 
+## Lifecycle transition:        registration_type 
 ## 
 ## # A tibble: 5,442 x 7
-##    handling              patient employee handling_id registration_type
-##    &lt;fct&gt;                 &lt;chr&gt;   &lt;fct&gt;    &lt;chr&gt;       &lt;fct&gt;            
-##  1 Triage and Assessment 500     r2       1000        complete         
-##  2 Discuss Results       495     r6       2229        complete         
-##  3 X-Ray                 498     r5       1734        complete         
-##  4 Triage and Assessment 500     r2       1000        start            
-##  5 Triage and Assessment 499     r2       999         complete         
-##  6 Discuss Results       495     r6       2229        start            
-##  7 Discuss Results       489     r6       2223        complete         
-##  8 X-Ray                 498     r5       1734        start            
-##  9 X-Ray                 497     r5       1733        complete         
-## 10 Discuss Results       489     r6       2223        start            
+##    handling patient employee handling_id registration_ty~
+##    &lt;fct&gt;    &lt;chr&gt;   &lt;fct&gt;    &lt;chr&gt;       &lt;fct&gt;           
+##  1 Triage ~ 500     r2       1000        complete        
+##  2 Discuss~ 495     r6       2229        complete        
+##  3 X-Ray    498     r5       1734        complete        
+##  4 Triage ~ 500     r2       1000        start           
+##  5 Triage ~ 499     r2       999         complete        
+##  6 Discuss~ 495     r6       2229        start           
+##  7 Discuss~ 489     r6       2223        complete        
+##  8 X-Ray    498     r5       1734        start           
+##  9 X-Ray    497     r5       1733        complete        
+## 10 Discuss~ 489     r6       2223        start           
 ## # ... with 5,432 more rows, and 2 more variables: time &lt;dttm&gt;,
 ## #   .order &lt;int&gt;</code></pre>
 </div>
@@ -639,62 +671,78 @@ patients %&gt;%
 <p>The next piece of code returns the <em>first</em> 10 cases. Note that first here is defined by the current order of the data set, not by time.</p>
 <pre class="r"><code>patients %&gt;%
     slice(1:10)</code></pre>
-<pre><code>## Event log consisting of:
-## 110 events
-## 2 traces
-## 10 cases
-## 7 activities
-## 55 activity instances
+<pre><code>## Log of 110 events consisting of:
+## 2 traces 
+## 10 cases 
+## 55 instances of 7 activities 
+## 7 resources 
+## Events occurred from 2017-01-02 11:41:53 until 2017-01-11 11:39:30 
+##  
+## Variables were mapped as follows:
+## Case identifier:     patient 
+## Activity identifier:     handling 
+## Resource identifier:     employee 
+## Activity instance identifier:    handling_id 
+## Timestamp:           time 
+## Lifecycle transition:        registration_type 
 ## 
 ## # A tibble: 110 x 7
-##    handling     patient employee handling_id registration_type
-##    &lt;fct&gt;        &lt;chr&gt;   &lt;fct&gt;    &lt;chr&gt;       &lt;fct&gt;            
-##  1 Registration 1       r1       1           start            
-##  2 Registration 2       r1       2           start            
-##  3 Registration 3       r1       3           start            
-##  4 Registration 4       r1       4           start            
-##  5 Registration 5       r1       5           start            
-##  6 Registration 6       r1       6           start            
-##  7 Registration 7       r1       7           start            
-##  8 Registration 8       r1       8           start            
-##  9 Registration 9       r1       9           start            
-## 10 Registration 10      r1       10          start            
+##    handling patient employee handling_id registration_ty~
+##    &lt;fct&gt;    &lt;chr&gt;   &lt;fct&gt;    &lt;chr&gt;       &lt;fct&gt;           
+##  1 Registr~ 1       r1       1           start           
+##  2 Registr~ 2       r1       2           start           
+##  3 Registr~ 3       r1       3           start           
+##  4 Registr~ 4       r1       4           start           
+##  5 Registr~ 5       r1       5           start           
+##  6 Registr~ 6       r1       6           start           
+##  7 Registr~ 7       r1       7           start           
+##  8 Registr~ 8       r1       8           start           
+##  9 Registr~ 9       r1       9           start           
+## 10 Registr~ 10      r1       10          start           
 ## # ... with 100 more rows, and 2 more variables: time &lt;dttm&gt;, .order &lt;int&gt;</code></pre>
 <div id="slice_activities" class="section level3">
 <h3>slice_activities</h3>
 <p>The next piece of code returns the <em>first</em> 10 activity instances.</p>
 <pre class="r"><code>patients %&gt;%
     slice_activities(1:10)</code></pre>
-<pre><code>## Event log consisting of:
-## 20 events
-## 1 traces
-## 10 cases
-## 1 activities
-## 10 activity instances
+<pre><code>## Log of 20 events consisting of:
+## 1 trace 
+## 10 cases 
+## 10 instances of 1 activity 
+## 1 resource 
+## Events occurred from 2017-01-02 11:41:53 until 2017-01-06 09:13:28 
+##  
+## Variables were mapped as follows:
+## Case identifier:     patient 
+## Activity identifier:     handling 
+## Resource identifier:     employee 
+## Activity instance identifier:    handling_id 
+## Timestamp:           time 
+## Lifecycle transition:        registration_type 
 ## 
 ## # A tibble: 20 x 7
-##    handling     patient employee handling_id registration_type
-##    &lt;fct&gt;        &lt;chr&gt;   &lt;fct&gt;    &lt;chr&gt;       &lt;fct&gt;            
-##  1 Registration 1       r1       1           start            
-##  2 Registration 2       r1       2           start            
-##  3 Registration 3       r1       3           start            
-##  4 Registration 4       r1       4           start            
-##  5 Registration 5       r1       5           start            
-##  6 Registration 6       r1       6           start            
-##  7 Registration 7       r1       7           start            
-##  8 Registration 8       r1       8           start            
-##  9 Registration 9       r1       9           start            
-## 10 Registration 10      r1       10          start            
-## 11 Registration 1       r1       1           complete         
-## 12 Registration 2       r1       2           complete         
-## 13 Registration 3       r1       3           complete         
-## 14 Registration 4       r1       4           complete         
-## 15 Registration 5       r1       5           complete         
-## 16 Registration 6       r1       6           complete         
-## 17 Registration 7       r1       7           complete         
-## 18 Registration 8       r1       8           complete         
-## 19 Registration 9       r1       9           complete         
-## 20 Registration 10      r1       10          complete         
+##    handling patient employee handling_id registration_ty~
+##    &lt;fct&gt;    &lt;chr&gt;   &lt;fct&gt;    &lt;chr&gt;       &lt;fct&gt;           
+##  1 Registr~ 1       r1       1           start           
+##  2 Registr~ 2       r1       2           start           
+##  3 Registr~ 3       r1       3           start           
+##  4 Registr~ 4       r1       4           start           
+##  5 Registr~ 5       r1       5           start           
+##  6 Registr~ 6       r1       6           start           
+##  7 Registr~ 7       r1       7           start           
+##  8 Registr~ 8       r1       8           start           
+##  9 Registr~ 9       r1       9           start           
+## 10 Registr~ 10      r1       10          start           
+## 11 Registr~ 1       r1       1           complete        
+## 12 Registr~ 2       r1       2           complete        
+## 13 Registr~ 3       r1       3           complete        
+## 14 Registr~ 4       r1       4           complete        
+## 15 Registr~ 5       r1       5           complete        
+## 16 Registr~ 6       r1       6           complete        
+## 17 Registr~ 7       r1       7           complete        
+## 18 Registr~ 8       r1       8           complete        
+## 19 Registr~ 9       r1       9           complete        
+## 20 Registr~ 10      r1       10          complete        
 ## # ... with 2 more variables: time &lt;dttm&gt;, .order &lt;int&gt;</code></pre>
 </div>
 <div id="slice_events" class="section level3">
@@ -702,26 +750,34 @@ patients %&gt;%
 <p>The next piece of code returns the <em>first</em> 10 events.</p>
 <pre class="r"><code>patients %&gt;% 
     slice_events(1:10)</code></pre>
-<pre><code>## Event log consisting of:
-## 10 events
-## 1 traces
-## 10 cases
-## 1 activities
-## 10 activity instances
+<pre><code>## Log of 10 events consisting of:
+## 1 trace 
+## 10 cases 
+## 10 instances of 1 activity 
+## 1 resource 
+## Events occurred from 2017-01-02 11:41:53 until 2017-01-06 05:58:54 
+##  
+## Variables were mapped as follows:
+## Case identifier:     patient 
+## Activity identifier:     handling 
+## Resource identifier:     employee 
+## Activity instance identifier:    handling_id 
+## Timestamp:           time 
+## Lifecycle transition:        registration_type 
 ## 
 ## # A tibble: 10 x 7
-##    handling     patient employee handling_id registration_type
-##    &lt;fct&gt;        &lt;chr&gt;   &lt;fct&gt;    &lt;chr&gt;       &lt;fct&gt;            
-##  1 Registration 1       r1       1           start            
-##  2 Registration 2       r1       2           start            
-##  3 Registration 3       r1       3           start            
-##  4 Registration 4       r1       4           start            
-##  5 Registration 5       r1       5           start            
-##  6 Registration 6       r1       6           start            
-##  7 Registration 7       r1       7           start            
-##  8 Registration 8       r1       8           start            
-##  9 Registration 9       r1       9           start            
-## 10 Registration 10      r1       10          start            
+##    handling patient employee handling_id registration_ty~
+##    &lt;fct&gt;    &lt;chr&gt;   &lt;fct&gt;    &lt;chr&gt;       &lt;fct&gt;           
+##  1 Registr~ 1       r1       1           start           
+##  2 Registr~ 2       r1       2           start           
+##  3 Registr~ 3       r1       3           start           
+##  4 Registr~ 4       r1       4           start           
+##  5 Registr~ 5       r1       5           start           
+##  6 Registr~ 6       r1       6           start           
+##  7 Registr~ 7       r1       7           start           
+##  8 Registr~ 8       r1       8           start           
+##  9 Registr~ 9       r1       9           start           
+## 10 Registr~ 10      r1       10          start           
 ## # ... with 2 more variables: time &lt;dttm&gt;, .order &lt;int&gt;</code></pre>
 </div>
 </div>
@@ -730,51 +786,67 @@ patients %&gt;%
 <p>The slice function select events, cases or activity instances based on their current position in the event data. As such, the result can be changed using the <code>arrange</code> function. More often, we want to select the first <em>n</em> activity instances, or the last ones. This is achieved with the <code>first_n</code> or <code>last_n</code> functions, which return the first, resp. last, n activity instances of a log based on time, not on position.</p>
 <pre class="r"><code>patients %&gt;% 
     first_n(n = 5)</code></pre>
-<pre><code>## Event log consisting of:
-## 10 events
-## 2 traces
-## 3 cases
-## 2 activities
-## 5 activity instances
+<pre><code>## Log of 10 events consisting of:
+## 2 traces 
+## 3 cases 
+## 5 instances of 2 activities 
+## 2 resources 
+## Events occurred from 2017-01-02 11:41:53 until 2017-01-04 04:25:06 
+##  
+## Variables were mapped as follows:
+## Case identifier:     patient 
+## Activity identifier:     handling 
+## Resource identifier:     employee 
+## Activity instance identifier:    handling_id 
+## Timestamp:           time 
+## Lifecycle transition:        registration_type 
 ## 
 ## # A tibble: 10 x 7
-##    handling              patient employee handling_id registration_type
-##    &lt;fct&gt;                 &lt;chr&gt;   &lt;fct&gt;    &lt;chr&gt;       &lt;fct&gt;            
-##  1 Registration          1       r1       1           start            
-##  2 Registration          2       r1       2           start            
-##  3 Triage and Assessment 1       r2       501         start            
-##  4 Registration          1       r1       1           complete         
-##  5 Registration          2       r1       2           complete         
-##  6 Triage and Assessment 2       r2       502         start            
-##  7 Triage and Assessment 1       r2       501         complete         
-##  8 Triage and Assessment 2       r2       502         complete         
-##  9 Registration          4       r1       4           start            
-## 10 Registration          4       r1       4           complete         
+##    handling patient employee handling_id registration_ty~
+##    &lt;fct&gt;    &lt;chr&gt;   &lt;fct&gt;    &lt;chr&gt;       &lt;fct&gt;           
+##  1 Registr~ 1       r1       1           start           
+##  2 Registr~ 2       r1       2           start           
+##  3 Triage ~ 1       r2       501         start           
+##  4 Registr~ 1       r1       1           complete        
+##  5 Registr~ 2       r1       2           complete        
+##  6 Triage ~ 2       r2       502         start           
+##  7 Triage ~ 1       r2       501         complete        
+##  8 Triage ~ 2       r2       502         complete        
+##  9 Registr~ 4       r1       4           start           
+## 10 Registr~ 4       r1       4           complete        
 ## # ... with 2 more variables: time &lt;dttm&gt;, .order &lt;int&gt;</code></pre>
 <p>This is not impacted by a different ordering of the data since it will take the time aspect into account.</p>
 <pre class="r"><code>patients %&gt;%
     arrange(desc(time)) %&gt;%
     first_n(n = 5)</code></pre>
-<pre><code>## Event log consisting of:
-## 10 events
-## 2 traces
-## 3 cases
-## 2 activities
-## 5 activity instances
+<pre><code>## Log of 10 events consisting of:
+## 2 traces 
+## 3 cases 
+## 5 instances of 2 activities 
+## 2 resources 
+## Events occurred from 2017-01-02 11:41:53 until 2017-01-04 04:25:06 
+##  
+## Variables were mapped as follows:
+## Case identifier:     patient 
+## Activity identifier:     handling 
+## Resource identifier:     employee 
+## Activity instance identifier:    handling_id 
+## Timestamp:           time 
+## Lifecycle transition:        registration_type 
 ## 
 ## # A tibble: 10 x 7
-##    handling              patient employee handling_id registration_type
-##    &lt;fct&gt;                 &lt;chr&gt;   &lt;fct&gt;    &lt;chr&gt;       &lt;fct&gt;            
-##  1 Registration          1       r1       1           start            
-##  2 Registration          2       r1       2           start            
-##  3 Triage and Assessment 1       r2       501         start            
-##  4 Registration          1       r1       1           complete         
-##  5 Registration          2       r1       2           complete         
-##  6 Triage and Assessment 2       r2       502         start            
-##  7 Triage and Assessment 1       r2       501         complete         
-##  8 Triage and Assessment 2       r2       502         complete         
-##  9 Registration          4       r1       4           start            
-## 10 Registration          4       r1       4           complete         
+##    handling patient employee handling_id registration_ty~
+##    &lt;fct&gt;    &lt;chr&gt;   &lt;fct&gt;    &lt;chr&gt;       &lt;fct&gt;           
+##  1 Registr~ 1       r1       1           start           
+##  2 Registr~ 2       r1       2           start           
+##  3 Triage ~ 1       r2       501         start           
+##  4 Registr~ 1       r1       1           complete        
+##  5 Registr~ 2       r1       2           complete        
+##  6 Triage ~ 2       r2       502         start           
+##  7 Triage ~ 1       r2       501         complete        
+##  8 Triage ~ 2       r2       502         complete        
+##  9 Registr~ 4       r1       4           start           
+## 10 Registr~ 4       r1       4           complete        
 ## # ... with 2 more variables: time &lt;dttm&gt;, .order &lt;int&gt;</code></pre>
 <p>Incombination with <code>group_by_case</code>, it is very easy to select the heads or tails of each case. Below, we explore the 95% most common first 3 activities in the <code>sepsis</code> log.</p>
 <pre class="r"><code>sepsis %&gt;%
@@ -788,27 +860,35 @@ patients %&gt;%
 <p>The <code>sample_n</code> function allows to take a sample of the event log containing n cases. The code below returns a sample of 10 patients.</p>
 <pre class="r"><code>patients %&gt;%
     sample_n(size = 10)</code></pre>
-<pre><code>## Event log consisting of:
-## 110 events
-## 2 traces
-## 10 cases
-## 7 activities
-## 55 activity instances
+<pre><code>## Log of 108 events consisting of:
+## 2 traces 
+## 10 cases 
+## 54 instances of 7 activities 
+## 7 resources 
+## Events occurred from 2017-01-06 05:58:54 until 2018-04-30 21:52:25 
+##  
+## Variables were mapped as follows:
+## Case identifier:     patient 
+## Activity identifier:     handling 
+## Resource identifier:     employee 
+## Activity instance identifier:    handling_id 
+## Timestamp:           time 
+## Lifecycle transition:        registration_type 
 ## 
-## # A tibble: 110 x 7
-##    handling     patient employee handling_id registration_type
-##    &lt;fct&gt;        &lt;chr&gt;   &lt;fct&gt;    &lt;chr&gt;       &lt;fct&gt;            
-##  1 Registration 9       r1       9           start            
-##  2 Registration 130     r1       130         start            
-##  3 Registration 213     r1       213         start            
-##  4 Registration 231     r1       231         start            
-##  5 Registration 273     r1       273         start            
-##  6 Registration 312     r1       312         start            
-##  7 Registration 386     r1       386         start            
-##  8 Registration 408     r1       408         start            
-##  9 Registration 423     r1       423         start            
-## 10 Registration 463     r1       463         start            
-## # ... with 100 more rows, and 2 more variables: time &lt;dttm&gt;, .order &lt;int&gt;</code></pre>
+## # A tibble: 108 x 7
+##    handling patient employee handling_id registration_ty~
+##    &lt;fct&gt;    &lt;chr&gt;   &lt;fct&gt;    &lt;chr&gt;       &lt;fct&gt;           
+##  1 Registr~ 9       r1       9           start           
+##  2 Registr~ 10      r1       10          start           
+##  3 Registr~ 17      r1       17          start           
+##  4 Registr~ 158     r1       158         start           
+##  5 Registr~ 162     r1       162         start           
+##  6 Registr~ 187     r1       187         start           
+##  7 Registr~ 284     r1       284         start           
+##  8 Registr~ 299     r1       299         start           
+##  9 Registr~ 323     r1       323         start           
+## 10 Registr~ 486     r1       486         start           
+## # ... with 98 more rows, and 2 more variables: time &lt;dttm&gt;, .order &lt;int&gt;</code></pre>
 <p>Note that this function can also be used with a sample size bigger than the number of cases in the event log, if you allow for the replacements of drawn cases.</p>
 <p>A more extensive list of subsetting methods is provided by edeaR. Look <a href="http://www.bupar.net/subsetting.html">here</a> for more information.</p>
 </div>

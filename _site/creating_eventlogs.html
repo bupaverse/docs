@@ -7,6 +7,7 @@
 <meta charset="utf-8" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
 
@@ -72,9 +73,7 @@ h6 {
 </style>
 
 
-</head>
 
-<body>
 
 <style type = "text/css">
 .main-container {
@@ -93,8 +92,14 @@ img {
 .tabbed-pane {
   padding-top: 12px;
 }
+.html-widget {
+  margin-bottom: 20px;
+}
 button.code-folding-btn:focus {
   outline: none;
+}
+summary {
+  display: list-item;
 }
 </style>
 
@@ -110,7 +115,6 @@ body {
   padding-top: 65px;
   margin-top: -65px;
 }
-
 .section h2 {
   padding-top: 65px;
   margin-top: -65px;
@@ -130,6 +134,43 @@ body {
 .section h6 {
   padding-top: 65px;
   margin-top: -65px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
 }
 </style>
 
@@ -151,47 +192,65 @@ $(document).ready(function () {
 });
 </script>
 
-
-<div class="container-fluid main-container">
-
 <!-- tabsets -->
-<script>
-$(document).ready(function () {
-  window.buildTabsets("TOC");
-});
-</script>
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
 
 <!-- code folding -->
 
 
-
-
-<script>
-$(document).ready(function ()  {
-
-    // move toc-ignore selectors from section div to header
-    $('div.section.toc-ignore')
-        .removeClass('toc-ignore')
-        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
-
-    // establish options
-    var options = {
-      selectors: "h1,h2,h3",
-      theme: "bootstrap3",
-      context: '.toc-content',
-      hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
-      },
-      ignoreSelector: ".toc-ignore",
-      scrollTo: 0
-    };
-    options.showAndHide = false;
-    options.smoothScroll = true;
-
-    // tocify
-    var toc = $("#TOC").tocify(options).data("toc-tocify");
-});
-</script>
 
 <style type="text/css">
 
@@ -245,8 +304,6 @@ div.tocify {
 
 .tocify-subheader .tocify-item {
   font-size: 0.90em;
-  padding-left: 25px;
-  text-indent: 0;
 }
 
 .tocify .list-group-item {
@@ -261,6 +318,16 @@ div.tocify {
 }
 
 </style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
 
 <!-- setup 3col/9col grid for toc_float and main content  -->
 <div class="row-fluid">
@@ -434,10 +501,10 @@ ga('send', 'pageview');
 <div id="activities-and-activity-instances" class="section level3">
 <h3>Activities and activity instances</h3>
 <p>Each event relates to the coarser concept of an activity. For instance, activities in our example might be: <em>check-in</em>, <em>surgery</em>, <em>treatment</em>, etc. When an activity is performed, this means that an <em>activity instance</em> is created. While the label <em>surgery</em> refers to an activity, one specific surgery for a specific patient at a specific point in time is an activity instance.</p>
-<table style="width:31%;">
+<table style="width:32%;">
 <colgroup>
 <col width="15%" />
-<col width="15%" />
+<col width="16%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -459,7 +526,7 @@ ga('send', 'pageview');
 <td align="center">treatment</td>
 </tr>
 <tr class="even">
-<td align="center">John DOe</td>
+<td align="center">John Doe</td>
 <td align="center">surgery</td>
 </tr>
 <tr class="odd">
@@ -480,12 +547,12 @@ Standard transactional life cycle.
 </p>
 </div>
 <p>In the table below, the earlier example is extended: for each activity instance, different statusses of the transactional life cycle can be seen, each of them with there own timestamp. At this point, each row refers to a single specific event. Note that not all activity instances have the same life cycle transations, and even different instances of the same activity might have different recorded transitions. E.g. in contrast with the first surgery, the second started without being scheduled, probably due to reasons of urgency.</p>
-<table style="width:76%;">
+<table style="width:78%;">
 <colgroup>
 <col width="15%" />
 <col width="16%" />
 <col width="30%" />
-<col width="13%" />
+<col width="15%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -533,13 +600,13 @@ Standard transactional life cycle.
 <td align="center">complete</td>
 </tr>
 <tr class="odd">
-<td align="center">John DOe</td>
+<td align="center">John Doe</td>
 <td align="center">surgery</td>
 <td align="center">2017-05-10 10:41:35</td>
 <td align="center">start</td>
 </tr>
 <tr class="even">
-<td align="center">John DOe</td>
+<td align="center">John Doe</td>
 <td align="center">surgery</td>
 <td align="center">2017-05-10 11:05:56</td>
 <td align="center">complete</td>
@@ -734,45 +801,8 @@ Standard transactional life cycle.
 </div>
 <div id="the-event-log-object" class="section level2">
 <h2>The event log object</h2>
-<p>Given that the data is in the format discussed above and stored as a data.frame, an event log object can be created with the <code>eventlog</code> function from <code>bupaR</code> as shown below.</p>
-<pre class="r"><code>library(bupaR)
-example_log_1 %&gt;% #a data.frame with the information in the table above
-    eventlog(
-        case_id = &quot;patient&quot;,
-        activity_id = &quot;activity&quot;,
-        activity_instance_id = &quot;activity_instance&quot;,
-        lifecycle_id = &quot;status&quot;,
-        timestamp = &quot;timestamp&quot;,
-        resource_id = &quot;resource&quot;
-    )</code></pre>
-<pre><code>## Log of 9 events consisting of:
-## 1 trace 
-## 1 case 
-## 5 instances of 4 activities 
-## 4 resources 
-## Events occurred from 2017-05-10 08:33:26 until 2017-05-11 14:52:36 
-##  
-## Variables were mapped as follows:
-## Case identifier:     patient 
-## Activity identifier:     activity 
-## Resource identifier:     resource 
-## Activity instance identifier:    activity_instance 
-## Timestamp:           timestamp 
-## Lifecycle transition:        status 
-## 
-## # A tibble: 9 x 7
-##   patient activity timestamp           status activity_instan~ resource
-##   &lt;chr&gt;   &lt;fct&gt;    &lt;dttm&gt;              &lt;fct&gt;  &lt;chr&gt;            &lt;fct&gt;   
-## 1 John D~ check-in 2017-05-10 08:33:26 compl~ 1                Samantha
-## 2 John D~ surgery  2017-05-10 08:38:21 sched~ 2                Danny   
-## 3 John D~ surgery  2017-05-10 08:53:16 start  2                Richard 
-## 4 John D~ surgery  2017-05-10 09:25:19 compl~ 2                Richard 
-## 5 John D~ treatme~ 2017-05-10 10:01:25 start  3                Danny   
-## 6 John D~ treatme~ 2017-05-10 10:35:18 compl~ 3                Danny   
-## 7 John D~ surgery  2017-05-10 10:41:35 start  4                William 
-## 8 John D~ surgery  2017-05-10 11:05:56 compl~ 4                William 
-## 9 John D~ check-o~ 2017-05-11 14:52:36 compl~ 5                Samantha
-## # ... with 1 more variable: .order &lt;int&gt;</code></pre>
+<p>Given that the data is in the format discussed above and stored as a data.frame <code>example_log_1</code>, an event log object can be created with the <code>eventlog</code> function from <code>bupaR</code> as shown below.</p>
+<p>The example datasets used can be found <a href="https://github.com/bupaverse/website/tree/master/data">here</a></p>
 </div>
 <div id="common-transformations" class="section level2">
 <h2>Common transformations</h2>
@@ -958,6 +988,49 @@ $(document).ready(function () {
 });
 
 
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
 </script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->

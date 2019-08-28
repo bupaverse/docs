@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<log xmlns="http://www.xes-standard.org/" xes.version="2.0">
+<extension name="Concept" prefix="concept" uri="http://www.xes-standard.org/concept.xesext" />
+<extension name="Time" prefix="concept" uri="http://www.xes-standard.org/time.xesext" />
+<global scope="trace">
+</global>
+<global scope="event">
+<string key="concept:name" value="default"/>
+<date key="time:timestamp" value="1970-01-01T00:00:00.000+00:00"/>
+<string key="org:resource" value="default"/>
+<string key="lifecycle:transition" value="default"/>
+<string key="concept:instance" value="default"/>
+<string key=".order" value="default"/>
+</global>
+<trace>
+<string key="concept:name" value="1"/>
+<event>
+<string key="concept:name" value="check-in"/>
+<date key="time:timestamp" value="2017-05-10T08:33:26.000+00:00"/>
+<string key="org:resource" value="Samantha"/>
+<string key="lifecycle:transition" value="complete"/>
+<string key="concept:instance" value="1"/>
+<string key=".order" value="1"/>
+</event>
+<event>
+<string key="concept:name" value="surgery"/>
+<date key="time:timestamp" value="2017-05-10T09:25:19.000+00:00"/>
+<string key="org:resource" value="Richard"/>
+<string key="lifecycle:transition" value="complete"/>
+<string key="concept:instance" value="2"/>
+<string key=".order" value="2"/>
+</event>
+<event>
+<string key="concept:name" value="treatment"/>
+<date key="time:timestamp" value="2017-05-10T10:35:18.000+00:00"/>
+<string key="org:resource" value="Danny"/>
+<string key="lifecycle:transition" value="complete"/>
+<string key="concept:instance" value="3"/>
+<string key=".order" value="3"/>
+</event>
+<event>
+<string key="concept:name" value="surgery"/>
+<date key="time:timestamp" value="2017-05-10T11:05:56.000+00:00"/>
+<string key="org:resource" value="William"/>
+<string key="lifecycle:transition" value="complete"/>
+<string key="concept:instance" value="4"/>
+<string key=".order" value="4"/>
+</event>
+<event>
+<string key="concept:name" value="check-out"/>
+<date key="time:timestamp" value="2017-05-11T14:52:36.000+00:00"/>
+<string key="org:resource" value="Samantha"/>
+<string key="lifecycle:transition" value="complete"/>
+<string key="concept:instance" value="5"/>
+<string key=".order" value="5"/>
+</event>
+</trace>
+</log>

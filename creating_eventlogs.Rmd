@@ -101,6 +101,9 @@ tribble(~patient, ~activity, ~timestamp, ~status, ~activity_instance, ~resource,
 		"John Doe","check-out", "20170511 145236", "complete", 0005, "Samantha") %>% 
 	mutate(timestamp = ymd_hms(timestamp)) -> example_log_1
 
+#xesreadR::write_xes(example_log_1, "data/example_log_1.xes")
+write_csv(example_log_1, "data/example_log_1.csv")
+
 example_log_1 %>% knitr::kable()
 ```
 
@@ -119,9 +122,9 @@ Additionally, any number of custom event attributes can be addedn e.g. cost.
 
 ## The event log object
 
-Given that the data is in the format discussed above and stored as a data.frame, an event log object can be created with the `eventlog` function from `bupaR` as shown below.
+Given that the data is in the format discussed above and stored as a data.frame `example_log_1`, an event log object can be created with the `eventlog` function from `bupaR` as shown below.
 
-```{r message=F, warning = F}
+```{r, include = F}
 library(bupaR)
 example_log_1 %>% #a data.frame with the information in the table above
 	eventlog(
@@ -132,8 +135,24 @@ example_log_1 %>% #a data.frame with the information in the table above
 		timestamp = "timestamp",
 		resource_id = "resource"
 	)
+
 ```
 
+```{r, include = F}
+example_log_1 %>% #a data.frame with the information in the table above
+	eventlog(
+		case_id = "patient",
+		activity_id = "activity",
+		activity_instance_id = "activity_instance",
+		lifecycle_id = "status",
+		timestamp = "timestamp",
+		resource_id = "resource"
+	) -> log
+write_xes(log, "data/example_log_1.xes")
+
+```
+
+The example datasets used can be found [here](https://github.com/bupaverse/website/tree/master/data)
 
 ## Common transformations
 
@@ -143,7 +162,7 @@ Often, data will not come in the format defined above, or will not include all t
 
 It happens a lot that data is not recorded at the low level of transactions, but that only a single timestamp is recorded for each activity instance. In that case, an event is _equivalent_ to a activity instance. For instance, consider the example above, but now we only have the following information.
 
-```{r echo = F}
+```{r, include = F}
 tribble(~patient, ~activity, ~timestamp, ~resource,
 		"John Doe","check-in", "20170510 083326", "Samantha",
 		"John Doe","surgery", "20170510 092519", "Richard",
@@ -151,6 +170,8 @@ tribble(~patient, ~activity, ~timestamp, ~resource,
 		"John Doe","surgery", "20170510 110556",  "William",
 		"John Doe","check-out", "20170511 145236", "Samantha") %>% 
 	mutate(timestamp = ymd_hms(timestamp)) -> example_log_2
+
+write_csv(example_log_2, "data/example_log_2.csv")
 ```
 ```{r}
 example_log_2
@@ -172,11 +193,28 @@ example_log_2 %>%
 	)
 ```
 
+```{r, include = F}
+example_log_2 %>%
+	mutate(status = "complete",
+		   activity_instance = 1:nrow(.)) %>%
+	eventlog(
+		case_id = "patient",
+		activity_id = "activity",
+		activity_instance_id = "activity_instance",
+		lifecycle_id = "status",
+		timestamp = "timestamp",
+		resource_id = "resource"
+	) -> log
+write_xes(log, "data/example_log_2.xes")
+
+```
+
+
 ### Lack of resources
 
 Since many of the functions in bupaR are targetted towards organizational and performance issues, they expect the presence of the resource attribute. However, in certain cases, this information will no be available, such as for the data in `example_log_3`.
 
-```{r echo = F}
+```{r, include = F}
 tribble(~patient, ~activity, ~timestamp, ~status, ~activity_instance,
 		"John Doe","check-in", "20170510 083326", "complete", 0001, 
 		"John Doe","surgery", "20170510 083821", "schedule", 0002, 
@@ -188,6 +226,8 @@ tribble(~patient, ~activity, ~timestamp, ~status, ~activity_instance,
 		"John Doe","surgery", "20170510 110556", "complete", 0004, 
 		"John Doe","check-out", "20170511 145236", "complete", 0005) %>% 
 	mutate(timestamp = ymd_hms(timestamp)) -> example_log_3
+write_csv(example_log_3, "data/example_log_3.csv")
+
 ```
 ```{r}
 example_log_3
@@ -208,16 +248,33 @@ example_log_3 %>%
 	)
 ```
 
+```{r, include = F}
+example_log_3 %>%
+	mutate(resource = NA) %>%
+		eventlog(
+		case_id = "patient",
+		activity_id = "activity",
+		activity_instance_id = "activity_instance",
+		lifecycle_id = "status",
+		timestamp = "timestamp",
+		resource_id = "resource"
+	) -> log
+write_xes(log, "data/example_log_3.xes")
+```
+
+
 ### Activity log
 
 Another possibity is that instead of a list of events, there is a list of activity instances available. This is the case in `example_log_4`.
 
-```{r echo = F}
+```{r, include = F}
 example_log_1 %>%
 	select(-resource) %>%
 	tidyr::spread(status, timestamp) %>%
 	select(-activity_instance) %>%
 	select(patient, activity, schedule, start, complete) -> example_log_4
+write_csv(example_log_4, "data/example_log_4.csv")
+
 ```
 
 ```{r}
@@ -241,5 +298,24 @@ example_log_4 %>%
 		resource_id = "resource"
 	)
 ```
+
+```{r, include = F}
+example_log_4 %>%
+	mutate(activity_instance = 1:nrow(.)) %>%
+	gather(status, timestamp, schedule, start, complete)  %>%
+	mutate(resource = NA) %>%
+	filter(!is.na(timestamp)) %>%
+	eventlog(
+		case_id = "patient",
+		activity_id = "activity",
+		activity_instance_id = "activity_instance",
+		lifecycle_id = "status",
+		timestamp = "timestamp",
+		resource_id = "resource"
+	) -> log
+
+write_xes(log, "data/example_log_4.xes")
+```
+
 
 

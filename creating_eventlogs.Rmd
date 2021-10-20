@@ -154,6 +154,30 @@ write_xes(log, "data/example_log_1.xes")
 
 The example datasets used can be found [here](https://github.com/bupaverse/website/tree/master/data)
 
+### Large Datasets and Validation
+
+By default bupaR validates certain properties of the data frame that is supplied when creating an event log:
+
+* a single activity instance identifier must not be connected to multiple cases,
+* a single activity instance identifier must not be connected to multiple activity labels,
+* a single activity instance identifier must not be connected to multiple resources.
+
+However, these checks are not efficient and may lead to considerable performance issues for large data frames. It is possible to deactivate the validation in case you already know that your data fulfills all the requirements:
+
+```{r, include = F}
+example_log_1 %>% #a data.frame with the information in the table above
+	eventlog(
+		case_id = "patient",
+		activity_id = "activity",
+		activity_instance_id = "activity_instance",
+		lifecycle_id = "status",
+		timestamp = "timestamp",
+		resource_id = "resource",
+		validate = FALSE
+	) -> log
+```
+
+
 ## Common transformations
 
 Often, data will not come in the format defined above, or will not include all the required values. Below are given a few examples and how to handle them.

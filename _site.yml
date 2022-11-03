@@ -1,0 +1,22 @@
+name: "bupaR"
+output:
+  html_document:
+    theme:
+      bootswatch: superhero
+    include:
+      after_body: footer.html
+output_dir: "docs"
+navbar:
+  title: "<a href = 'https://bupar.net'><img id = \"logo\" style = \"width: 200px;\" src = \"images/bupar_trans2.png\" /></a>"
+  left:
+  - text: "Home"
+    href: index.html
+  - text: "Install"
+    href: about.html
+  - text: "Construct"
+  - text: "Manipulate"
+  - text: "Preprocess"
+  - text: "Analyse"
+  - text: "Visualize"
+  - text: "Developer guide"
+  - text: "Package guide"

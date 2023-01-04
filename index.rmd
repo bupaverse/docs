@@ -1,89 +1,46 @@
 ---
-title: __Business Process Analysis in R__
+title: "bupaR Docs"
 ---
 
 ```{r include = F}
+library(bslib)
 library(htmltools)
-thumbnail <- function(title, img, href, caption = F) {
-  div(class = "col-sm-3",
-      a(class = "thumbnail", title = title, href = href,
-        img(src = img),
-        div(class = ifelse(caption, "caption", ""),
-          ifelse(caption, title, "")
-        )
-      )
-  )
-}
+library(shiny)
+library(bupaverse)
+library(tidyverse)
 ```
 
-```{r echo = F}
-htmltools::includeHTML("tracking_google_analytics.html")
+```{r xaringanExtra-clipboard, echo=FALSE}
+xaringanExtra::use_clipboard()
 ```
 
-```{r echo = F, fig.align = "right", out.width=400}
-knitr::include_graphics("images/logo_breed_zonder_tekst.PNG")
-```
-
-
-**`bupaR`** is an open-source, integrated suite of R-packages for the handling and analysis of business process data. It currently consists of 8 packages, including the central package, supporting different stages of a process mining workflow. 
+<style>
+  .title{
+    display: none;
+  }
+</style>
 
 <br/>
+<br/>
 
-```{r echo = F, eval = F, fig.align = "center", out.width=700}
-knitr::include_graphics("images/workflow.PNG")
-```	
 
-```{r echo = F, fig.align="center", out.width = 900}
-knitr::include_graphics("images/banner.JPG")
+```{r echo = F, out.width = "50%", fig.align = "right"}
+knitr::include_graphics("images/logo/docs.jpg")
 ```
 
 
 
 
-**`bupaR`** provides support for different stages in process analysis, such as importing event data, calculating descriptives, process monitoring and process visualization. The central package, **`bupaR`** includes basic functionality for creating event log objects in R. It contains several functions to get information about an event log and also provides specific event log versions of generic R functions.
+```{r echo = F, message = F, warning = F}
+library(readr)
+library(purrr)
 
+read_csv("cards.csv") %>%
+    mutate(card = pmap(list(class, head, body, icon), ~card(card_header(class = ..1, ..2), 
+                                                       card_image(..4)))) -> cards
 
-
-
-## Packages
-
-| Package | Description
-|---------------|---------------------------------------------------------------|
-| `bupaR` | The `bupaR`-package is the core package of the framework, implements an S3-objects class for event data. It provides functions to create these objects, as well as support for common transformations. Auxiliary functions to seamlessly change  the classifiers of the event data are made available, and event log versions of common `dplyr` functions for data manipulation are implemented, such as `filter`, `group_by` and `mutate`, among others. These functions can be used to preprocess event data. Some specific preprocessing tasks are supported explicitly by specific functions, such as aggregations of activity labels. |
-| | [**Read more**](creating_eventlogs.html) |
-| | |
-| `edeaR` | `edeaR`  stands for Exploratory and Descriptive Event-Data Analyses, and contains a set of process metrics to describe and explore event logs. The process metrics are based on Lean Six Sigma literature  and can be analyzed and visualized at different levels of granularity. Additionally, `edeaR` contains an extensive collection of event data specific filters.|<!--| | ![](images/resource_activity_matrix_hospital.PNG) |-->
-| | [**Read more**](exploring.html) |
-| | |
-| `eventdataR` | `eventdataR` is a data-package which provide easy access to event logs for testing and experiments. Currently, both artificial event data, e.g. `patients`, as well as real-life event data, such as the `sepsis` dataset.
-| | [**Read more**](eventdataR.html) |
-| | |
-| `xesreadR` | In order to be compatible with teh eXtensible Event Stram IEEE standard, the `xesreadR` package allows to read and write .xes-files.|<!--| | <img src = "images/xes.png", width = "200"> |-->
-| | [**Read more**](read_xes.html) |
-| | |
-| `processmapR` | Process data specific visualizations, such as process maps and dotted charts, are provided by `processmapR`. The provided visualizations are highly customizable and can be used to give insights to different aspects of the process. |<!--| | ![](images/dotted_chart2.PNG) | -->
-| | [**Read more**](processmaps.html) |
-| | |
-| `processanimateR` | As an extension of `processmapR`, `processanimateR` allows to easily animate process maps using token replay. |<!--| | ![](images/processanimateR.jpg) |-->
-| | [**Read more**](https://fmannhardt.github.io/processanimateR/) |
-| | |
-| `petrinetR` | While most package of `bupaR` are focused on process data, `petrinetR` is the first package to introduce a process model notation in R. Currently, it supports the creation of Petri Nets, as well as reading and writing .PMNL-files. Furthermore, Petri Nets can be visualized, adjusted and one can perform manual token replay and parse transition sequences. |
-| | [**Read more**](https://gertjanssenswillen.github.io/petrinetR/) |
-| | |
-| `processmonitR` |  `processmonitR` provides a limited set of process dashboards. These can be used in a permanent, real-time fashion, as well as for interactive data analysis. |
-| | [**Read more**](processmonitR.html) |
-| | |
-
-## Pay tribute
-
-bupaR is developed by volunteering academic researchers and provided for free. If you use it for your research, please be so kind to cite us. 
-
-> Janssenswillen, G., Depaire, B., Swennen, M., Jans, M., & Vanhoof, K. (2019). bupaR: Enabling reproducible business process analysis. Knowledge-Based Systems, 163, 927-930.
-
-To cite invidual packages, use the `citation` function in R. 
-
-```{r}
-citation("processmapR")
+layout_column_wrap(cards$card[1], cards$card[2], cards$card[3],
+                   cards$card[4], cards$card[5], width = "150px")
 ```
 
 

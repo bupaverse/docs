@@ -1,22 +1,112 @@
 name: "bupaR"
 output:
   html_document:
+    css: "my_css.css"
     theme:
-      bootswatch: superhero
-    include:
+      bootswatch: sandstone
+      primary: "#339999"
+      secondary: "#FF8749"
+      success: "#8ADA8A"
+      info: "#008FAD"
+      danger: "#A93800"
+      warning: "#956F5D"
+    highlight: tango
+    includes:
+      in_header: header.html
       after_body: footer.html
 output_dir: "docs"
 navbar:
-  title: "<a href = 'https://bupar.net'><img id = \"logo\" style = \"width: 200px;\" src = \"images/bupar_trans2.png\" /></a>"
+  title: "<a href = 'https://bupar.net'><img id = \"logo\" style = \"width: 200px; padding: 0px 20px 0px 0px\" src = \"images/bupar_trans2.png\" /></a>"
   left:
   - text: "Home"
     href: index.html
   - text: "Install"
-    href: about.html
-  - text: "Construct"
+    href: install.html
+  - text: "Create"
+    menu:
+      - text: "Create Logs"
+        href: create_logs.html
+      - text: "Adjust Logs"
+        href: adjust_logs.html
+      - text: "Public Logs"
+        href: public_logs.html
+      - text: "XES-files"
+        href: xes_files.html
   - text: "Manipulate"
-  - text: "Preprocess"
+    menu:
+      - text: "Filter"
+      - text: "by case"
+        href: case_filters.html
+      - text: "by event"
+        href: event_filters.html
+      - text: "generic"
+        href: generic_filtering.html
+      - text: "----------"
+      - text: "Enrich"
+      - text: "augment"
+        href: augment.html
+      - text: "mutate"
+        href: mutate.html
+      - text: "----------"
+      - text: "Aggregate"
+      - text: "collapse"
+        href: collapse.html
+      - text: "unite"
+        href: unite.html
   - text: "Analyse"
+    menu:
+      - text: "Control-flow"
+        href: control_flow_analysis.html
+      - text: "Performance"
+        href: performance_analysis.html
+      - text: "Organisational"
+        href: organisational_analysis.html
+      - text: "Multi-dimensional"
+        href: multi_dimensional_analysis.html
   - text: "Visualize"
+    menu:
+     - text: "Process maps"
+     - text: "Frequency"
+       href: frequency_maps.html
+     - text: "Performance"
+       href: performance_maps.html
+     - text: "Advanced"
+       href: advanced_maps.html
+     - text: "Animate"
+       href: animate_maps.html
+     - text: "------------"
+     - text: "Process Matrix"
+       href: process_matrix.html
+     - text: "Dotted chart"
+       href: dotted_chart.html
+     - text: "Trace explorer"
+       href: trace_exporer.html
+     - text: "Performance spectrum"
+       href: performance_spectrum.html
+  right:
   - text: "Developer guide"
+    href: developer_guide.html
   - text: "Package guide"
+    menu:
+      - text: bupaR
+        href: https://bupaverse.github.io/bupaR/
+      - text: bupaverse
+        href: https://bupaverse.github.io/bupaverse/
+      - text: daqapo
+        href: https://bupaverse.github.io/daqapo
+      - text: edeaR
+        href: https://bupaverse.github.io/edeaR/
+      - text: eventdataR
+        href: https://bupaverse.github.io/eventdataR/
+      - text: heuristicsmineR
+        href: https://bupaverse.github.io/heuristicsmineR/
+      - text: pm4py
+        href: https://bupaverse.github.io/pm4py/
+      - text: processanimateR
+        href: https://bupaverse.github.io/processanimateR/
+      - text: processcheckR
+        href: https://bupaverse.github.io/processcheckR/
+      - text: processmapR
+        href: https://bupaverse.github.io/processmapR/
+      - text: xesreadR
+        href: https://bupaverse.github.io/xesreadR

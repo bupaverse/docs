@@ -1,0 +1,6 @@
+name,class,head,body,icon
+"Install", "card text-white bg-primary mb-3", "Install", "Install","images/icons/install.PNG"
+"Create", "card text-white bg-secondary mb-3", "Create", "Create","images/icons/create.PNG"
+"Manipulate", "card text-white bg-info mb-3", "Manipulate", "Manipulate","images/icons/manipulate.PNG"
+"Analyse", "card text-white bg-danger mb-3", "Analyse", "Analyse","images/icons/analyze.PNG"
+"Visualize", "card text-white bg-warning mb-3", "Visualize", "Visualize","images/icons/visualize.PNG"

@@ -18,6 +18,9 @@
 .Rproj
 .Rproj.user/
 
+# IntelliJ files
+.idea/
+
 # produced vignettes
 vignettes/*.html
 vignettes/*.pdf

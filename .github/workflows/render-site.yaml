@@ -37,6 +37,7 @@ jobs:
           install.packages("readr")
           install.packages("purrr")
           install.packages("xaringanExtra")
+          install.packages("pander")
           install.packages("remotes")
           remotes::install_github("bupaverse/processpredictR")
         shell: Rscript {0}

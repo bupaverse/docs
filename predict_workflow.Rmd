@@ -1,5 +1,5 @@
 ---
-title: Introduction to processpredictR: a basic workflow
+title: "Introduction to processpredictR: a basic workflow"
 ---
 
 ```{r, include = FALSE}

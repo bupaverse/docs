@@ -15,8 +15,8 @@
 /*.Rcheck/
 
 # RStudio files
-.Rproj
-.Rproj.user/
+*.Rproj
+*.Rproj.user/
 
 # IntelliJ files
 .idea/
@@ -37,3 +37,9 @@ vignettes/*.pdf
 *.knit.md
 
 /docs
+/site_libs
+
+*.html
+!footer.html
+!header.html
+

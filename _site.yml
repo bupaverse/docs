@@ -1,7 +1,6 @@
 name: "bupaR"
 output:
   html_document:
-    css: "my_css.css"
     theme:
       bootswatch: sandstone
       primary: "#339999"

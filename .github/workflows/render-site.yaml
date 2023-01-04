@@ -25,12 +25,20 @@ jobs:
 
       - uses: r-lib/actions/setup-renv@v2
 
-      - name: Install rmarkdown
-        run: install.packages("rmarkdown")
+      - name: Install packages
+        run: |
+          install.packages("rmarkdown")
+          install.packages("bslib")
+          install.packages("htmltools")
+          install.packages("shiny")
+          install.packages("bupaverse")
+          install.packages("tidyverse")
+          install.packages("readr")
+          install.packages("purrr")
         shell: Rscript {0}
 
       - name: Build site
-        run: rmarkdown::render_site(encoding = 'UTF-8')
+        run: Rscript -e 'rmarkdown::render_site(encoding = "UTF-8")'
         shell: Rscript {0}
 
       - name: Deploy to GitHub pages 🚀

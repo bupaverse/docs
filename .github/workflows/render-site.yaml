@@ -30,11 +30,13 @@ jobs:
           install.packages("rmarkdown")
           install.packages("bslib")
           install.packages("htmltools")
+          install.packages("knitr")
           install.packages("shiny")
           install.packages("bupaverse")
           install.packages("tidyverse")
           install.packages("readr")
           install.packages("purrr")
+          install.packages("xaringanExtra")
         shell: Rscript {0}
 
       - name: Build site

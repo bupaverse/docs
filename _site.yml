@@ -92,7 +92,7 @@ navbar:
      - text: "Customization with keras"
        href: predict_keras.html
   right:
-  - text: "FAQ",
+  - text: "FAQ"
     href: faq.html
   - text: "Developer guide"
     href: developer_guide.html

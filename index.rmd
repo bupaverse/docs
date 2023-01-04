@@ -1,5 +1,5 @@
 ---
-title: "bupaR Docs"
+title: "bupaR Documentation"
 ---
 
 ```{r include = F}

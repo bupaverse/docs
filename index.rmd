@@ -14,11 +14,7 @@ library(tidyverse)
 xaringanExtra::use_clipboard()
 ```
 
-<style>
-  .title{
-    display: none;
-  }
-</style>
+
 
 <br/>
 <br/>
@@ -36,8 +32,8 @@ library(readr)
 library(purrr)
 
 read_csv("cards.csv") %>%
-    mutate(card = pmap(list(class, head, body, icon), ~card(card_header(class = ..1, ..2), 
-                                                       card_image(..4)))) -> cards
+    mutate(card = pmap(list(class, head, body, icon, href), ~card(card_header(class = ..1, ..2), 
+                                                       card_image(..4, href = ..5)))) -> cards
 
 layout_column_wrap(cards$card[1], cards$card[2], cards$card[3],
                    cards$card[4], cards$card[5], cards$card[6], width = "125px")

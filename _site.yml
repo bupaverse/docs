@@ -83,6 +83,14 @@ navbar:
        href: trace_exporer.html
      - text: "Performance spectrum"
        href: performance_spectrum.html
+  - text: "Predict"
+    menu:
+     - text: "Workflow"
+       href: predict_workflow.html
+     - text: "Adapting your model"
+       href: predict_adapt.html
+     - text: "Customization with keras"
+       href: predict_keras.html
   right:
   - text: "Developer guide"
     href: developer_guide.html

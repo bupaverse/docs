@@ -24,7 +24,7 @@ xaringanExtra::use_clipboard()
 knitr::include_graphics("images/logo/docs.jpg")
 ```
 
-Welcome to **bupaR docs** once more. 
+Welcome to **bupaR docs** once more and again.
 
 
 ```{r echo = F, message = F, warning = F}

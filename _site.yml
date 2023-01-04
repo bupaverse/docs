@@ -6,7 +6,7 @@ output:
       bootswatch: sandstone
       primary: "#339999"
       secondary: "#FF8749"
-      success: "#8ADA8A"
+      success: "#3681B7"
       info: "#008FAD"
       danger: "#A93800"
       warning: "#956F5D"

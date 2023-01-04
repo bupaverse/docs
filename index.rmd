@@ -41,7 +41,7 @@ layout_column_wrap(cards$card[1], cards$card[2], cards$card[3],
 
 <br/>
 
-Alternatively, you can directly consult the documentation of individual packages using the Package Guid on the top right, or have a look at the [FAQ](faq.html). 
+Alternatively, you can directly consult the documentation of individual packages using the Package Guide on the top right, or have a look at the [FAQ](faq.html). 
 
-
+Didn't found what you where looking for? Post your question on [Stackoverflow](https://stackoverflow.com/questions/tagged/bupar) under the `bupar` tag, or contact us directly at [support@bupar.net](mailto:support@bupar.net). 
 

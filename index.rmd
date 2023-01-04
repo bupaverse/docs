@@ -24,7 +24,7 @@ xaringanExtra::use_clipboard()
 knitr::include_graphics("images/logo/docs.jpg")
 ```
 
-Welcome to **bupaR docs** once more and again.
+Welcome to **bupaR docs**. All information you need to use the **bupaverse** packages you can find here, organized along 6 different topics: Install, Create, Manipulate, Analyse, Visualize and Predict. 
 
 
 ```{r echo = F, message = F, warning = F}
@@ -38,6 +38,10 @@ read_csv("cards.csv") %>%
 layout_column_wrap(cards$card[1], cards$card[2], cards$card[3],
                    cards$card[4], cards$card[5], cards$card[6], width = "125px")
 ```
+
+<br/>
+
+Alternatively, you can directly consult the documentation of individual packages using the Package Guid on the top right, or have a look at the [FAQ](faq.html). 
 
 
 

@@ -43,3 +43,4 @@ vignettes/*.pdf
 !footer.html
 !header.html
 
+.Rproj.user

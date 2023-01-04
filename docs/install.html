@@ -50,6 +50,107 @@ ga('send', 'pageview');
 
 
 
+<style type="text/css">
+  code {
+    white-space: pre;
+  }
+  .sourceCode {
+    overflow: visible;
+  }
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  background-color: #f8f8f8; }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #c4a000; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #000000; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #000000; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #000000; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
 
 
 
@@ -438,7 +539,54 @@ $(document).ready(function () {
 </div>
 
 
-
+<p><img src="images/icons/install.PNG" width="25%" /></p>
+<div id="installing-bupar" class="section level2">
+<h2>Installing bupaR</h2>
+<p>The easiest way to install the core <strong>bupaR</strong> packages
+is by installing the <code>bupaverse</code>-package.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;bupaverse&quot;</span>)</span></code></pre></div>
+<p>You can then load the packages using <code>library</code>.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(bupaverse)</span></code></pre></div>
+<p>This allows you to use <code>bupaR</code>, <code>eventdataR</code>,
+<code>edeaR</code>, <code>processcheckR</code>, and
+<code>processmapR</code>.</p>
+<p>The following packages can be installed from <a
+href="https://cran.r-project.org/">CRAN</a> individually using
+<code>install.packages</code>.</p>
+<ul>
+<li><code>daqapo</code></li>
+<li><code>heuristicsmineR</code></li>
+<li><code>petrinetR</code></li>
+<li><code>pm4py</code></li>
+<li><code>processanimateR</code></li>
+<li><code>processpredictR</code></li>
+<li><code>psmineR</code></li>
+<li><code>understandBPMN</code></li>
+<li><code>xesreadR</code></li>
+</ul>
+<p>Dev-versions of these packages can be installed from <a
+href="https://github.com/bupaverse">GitHub</a> using
+<code>remotes::install_github</code>.</p>
+<p>In the same way, the following experiment packages can be
+installed.</p>
+<ul>
+<li><code>collaborateR</code></li>
+<li><code>bpmnR</code></li>
+<li><code>propro</code></li>
+</ul>
+<div id="additional-requirements" class="section level3">
+<h3>Additional requirements</h3>
+<div id="processpredictr" class="section level4">
+<h4><code>processpredictR</code></h4>
+<p>Using the <code>processpredictR</code> package requires a Python
+installation on your machine. Check the <a
+href="https://tensorflow.rstudio.com/install/">Tensorflow
+documentation</a> to get started. Once <code>tensorflow</code> and
+<code>keras</code> are installed, <code>processpredictR</code> will be
+ready to be used.</p>
+</div>
+</div>
+</div>
 
 <p>Copyright &copy; 2023 bupaR - Hasselt University</p>
 

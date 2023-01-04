@@ -15,8 +15,8 @@
 /*.Rcheck/
 
 # RStudio files
-.Rproj
-.Rproj.user/
+*.Rproj
+*.Rproj.user/
 
 # IntelliJ files
 .idea/

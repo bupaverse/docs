@@ -23,10 +23,11 @@ jobs:
         with:
           use-public-rspm: true
 
-      - uses: r-lib/actions/setup-r-dependencies@v2
-        with:
-          extra-packages: any::rmarkdown
-          needs: website
+      - uses: r-lib/actions/setup-renv@v2
+
+      - name: Install rmarkdown
+        run: install.packages("rmarkdown")
+        shell: Rscript {0}
 
       - name: Build site
         run: rmarkdown::render_site(encoding = 'UTF-8')

@@ -7,4 +7,53 @@ title: "Public Logs"
 knitr::include_graphics("images/icons/create.PNG")
 ```
 
-## Public logs
+# Public logs
+
+The `eventdataR` package contains several real-life and artificial event logs. Each can be loaded using the `data` function. The currently available event logs are listed below. More event logs will be added in the future.
+
+## Real-life data
+
+### Sepsis
+
+```{r}
+sepsis
+```
+
+### Hospital Log
+
+```{r}
+hospital
+```
+
+### Hospital Billing
+
+```{r}
+hospital_billing
+```
+
+### Road Traffic Fine Management
+
+```{r}
+traffic_fines
+```
+
+## Artifical data
+
+### Patients
+
+Artificial eventlog about patients arriving in an emergency department of a hospital. This event log was used as the running example in the journal paper entitled [Retrieving batch organisation of work insights from event logs](http://www.sciencedirect.com/science/article/pii/S0167923617300374).
+
+
+```{r message = F, warning = F}
+library(eventdataR)
+patients %>% summary
+```
+
+### Patients activitylog
+
+Equivalent process log of patient but stored as an activity log. 
+
+```{r}
+patients_act
+```
+

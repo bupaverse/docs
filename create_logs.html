@@ -633,7 +633,7 @@ div.tocify {
 <p>Transforming your raw data into an event log object is one of the
 most challenging tasks in process analysis. On this page, we cover all
 the possible situations and challenges that you can encounter.</p>
-<p>We start with some important terminology.</p>
+<p>We start with some important terminology:</p>
 <ul>
 <li><strong>Case</strong>: The <em>subject</em> of your process, e.g. a
 customer, an order, a patient.</li>
@@ -653,19 +653,19 @@ activity instance connect to an event. Typical values are
 <em>schedule</em>, <em>suspend</em>, <em>resume</em>, etc.</li>
 <li><strong>Trace</strong>: A sequence of activities. The activity
 instances that belong to a case will result to a specific trace when
-ordered by the time each instance occured.</li>
+ordered by the time each instance occurred.</li>
 </ul>
 <div id="logs-eventlog-vs-activitylog" class="section level2">
 <h2>Logs: <code>eventlog</code> vs <code>activitylog</code></h2>
 <p><code>bupaR</code> supports two different kinds of log formats, both
-of which are an extension on R data.frames:</p>
+of which are an extension on R <code>data.frame</code>:</p>
 <ul>
 <li><strong><code>eventlog</code></strong>: Event logs are created from
-data.frames in which each row represents a single event. This means that
-it has a single timestamp.</li>
+<code>data.frame</code> in which each row represents a single event.
+This means that it has a single timestamp.</li>
 <li><strong><code>activitylog</code></strong>: Activity logs are created
-from data.frames in which each row represents a single activity
-instances. This means it can has multiple timestamps, stored in
+from <code>data.frame</code> in which each row represents a single
+activity instances. This means it can has multiple timestamps, stored in
 different columns.</li>
 </ul>
 <p>The data model below shows the difference between these two levels of
@@ -700,61 +700,61 @@ activity instances.</p>
 <tbody>
 <tr class="odd">
 <td align="left">Registration</td>
-<td align="left">289</td>
+<td align="left">30</td>
 <td align="left">r1</td>
-<td align="left">289</td>
+<td align="left">30</td>
 <td align="left">start</td>
-<td align="left">2017-10-09 02:05:53</td>
+<td align="left">2017-02-01 06:16:20</td>
 </tr>
 <tr class="even">
+<td align="left">Triage and Assessment</td>
+<td align="left">30</td>
+<td align="left">r2</td>
+<td align="left">530</td>
+<td align="left">start</td>
+<td align="left">2017-02-01 08:41:41</td>
+</tr>
+<tr class="odd">
 <td align="left">Registration</td>
-<td align="left">289</td>
+<td align="left">30</td>
 <td align="left">r1</td>
-<td align="left">289</td>
+<td align="left">30</td>
 <td align="left">complete</td>
-<td align="left">2017-10-09 05:29:41</td>
-</tr>
-<tr class="odd">
-<td align="left">Triage and Assessment</td>
-<td align="left">289</td>
-<td align="left">r2</td>
-<td align="left">789</td>
-<td align="left">start</td>
-<td align="left">2017-10-09 22:05:13</td>
+<td align="left">2017-02-01 08:41:41</td>
 </tr>
 <tr class="even">
 <td align="left">Triage and Assessment</td>
-<td align="left">289</td>
+<td align="left">30</td>
 <td align="left">r2</td>
-<td align="left">789</td>
+<td align="left">530</td>
 <td align="left">complete</td>
-<td align="left">2017-10-10 10:15:59</td>
+<td align="left">2017-02-02 01:15:22</td>
 </tr>
 <tr class="odd">
-<td align="left">X-Ray</td>
-<td align="left">289</td>
-<td align="left">r5</td>
-<td align="left">1630</td>
+<td align="left">Blood test</td>
+<td align="left">30</td>
+<td align="left">r3</td>
+<td align="left">1015</td>
 <td align="left">start</td>
-<td align="left">2017-10-11 15:10:54</td>
+<td align="left">2017-02-02 12:19:53</td>
 </tr>
 <tr class="even">
-<td align="left">X-Ray</td>
-<td align="left">289</td>
-<td align="left">r5</td>
-<td align="left">1630</td>
+<td align="left">Blood test</td>
+<td align="left">30</td>
+<td align="left">r3</td>
+<td align="left">1015</td>
 <td align="left">complete</td>
-<td align="left">2017-10-11 21:54:39</td>
+<td align="left">2017-02-02 17:40:36</td>
 </tr>
 </tbody>
 </table>
 <div class="card bslib-card html-fill-item html-fill-container" data-require-bs-caller="card()" data-require-bs-version="5" data-toggle="collapse">
 <div class="card-header card text-white bg-secondary mb-3">Transactional lifecycle?</div>
-<div class="card-body" style="flex:0 0 auto;">An event is an atomic registration related to an activity instance. It thus contains one (and only one) timestamp. Additionally, the event should include a reference to a life cycle transition. More specifically, multiple events can describe different life cycle transitions of a single activity instance. For example, one event might record when a surgery is scheduled, another when it is started, yet another when it is completed, etc.</div>
+<div class="card-body" style="flex:0 0 auto;">An event is an atomic registration related to an activity instance. It thus contains one (and only one) timestamp. Additionally, the event should include a reference to a lifecycle transition. More specifically, multiple events can describe different lifecycle transitions of a single activity instance. For example, one event might record when a surgery is scheduled, another when it is started, yet another when it is completed, etc.</div>
 <div class="bslib-column-wrap html-fill-item" data-require-bs-caller="layout_column_wrap()" data-require-bs-version="5" style="grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));grid-auto-rows:1fr;--bslib-column-wrap-height:auto;--bslib-column-wrap-height-mobile:auto;">
 <div class="html-fill-container">
 <div class="html-fill-item html-fill-container">
-<div class="card-body" style="flex:0 0 auto;">The standard transactional life cycle.</div>
+<div class="card-body" style="flex:0 0 auto;">The standard transactional lifecycle.</div>
 </div>
 </div>
 <div class="html-fill-container">
@@ -809,10 +809,10 @@ activity instances.</p>
 </span>
 </div>
 <p>The table below show the same data as above, but now using the
-activitylog format. It can be seen that there are now just 3 rows
-instead of 6, but each row as 2 timestamps, representing 2 events. The
-lifecycle status that those timestamps represent is now the column names
-of those variables.</p>
+<code>activitylog</code> format. It can be seen that there are now just
+3 rows instead of 6, but each row as 2 timestamps, representing 2
+events. The lifecycle status represented by those timestamps is now the
+column names of those variables.</p>
 <table>
 <colgroup>
 <col width="24%" />
@@ -835,43 +835,44 @@ of those variables.</p>
 <tbody>
 <tr class="odd">
 <td align="left">Registration</td>
-<td align="left">289</td>
+<td align="left">30</td>
 <td align="left">r1</td>
-<td align="left">289</td>
-<td align="left">2017-10-09 05:29:41</td>
-<td align="left">2017-10-09 02:05:53</td>
+<td align="left">30</td>
+<td align="left">2017-02-01 08:41:41</td>
+<td align="left">2017-02-01 06:16:20</td>
 </tr>
 <tr class="even">
 <td align="left">Triage and Assessment</td>
-<td align="left">289</td>
+<td align="left">30</td>
 <td align="left">r2</td>
-<td align="left">789</td>
-<td align="left">2017-10-10 10:15:59</td>
-<td align="left">2017-10-09 22:05:13</td>
+<td align="left">530</td>
+<td align="left">2017-02-02 01:15:22</td>
+<td align="left">2017-02-01 08:41:41</td>
 </tr>
 <tr class="odd">
-<td align="left">X-Ray</td>
-<td align="left">289</td>
-<td align="left">r5</td>
-<td align="left">1630</td>
-<td align="left">2017-10-11 21:54:39</td>
-<td align="left">2017-10-11 15:10:54</td>
+<td align="left">Blood test</td>
+<td align="left">30</td>
+<td align="left">r3</td>
+<td align="left">1015</td>
+<td align="left">2017-02-02 17:40:36</td>
+<td align="left">2017-02-02 12:19:53</td>
 </tr>
 </tbody>
 </table>
 <p>As these examples show, both formats can often be used for
-representing the same process data. However, some important differences
-between them:</p>
+representing the same process data. However, there are some important
+differences between them:</p>
 <ul>
 <li>the <code>eventlog</code> format has much more
 <strong>flexibility</strong> in terms of lifecycle. There is no limit to
 the number of events that can occur in a single activity instance. If
 your data contains lifecycle statuses such as <em>suspend</em>,
 <em>resume</em> or <em>reassign</em>, they can be recorded multiple
-times within a single activity instance. In the activitylog format, as
-each lifecycle gets is own column, it isn’t possible to have two events
-of the same lifecycle status in a single activity instance.</li>
-<li>in an <code>eventlog</code>, the level of observation is a event. As
+times within a single activity instance. In the <code>activitylog</code>
+format, as each lifecycle gets is own column, it isn’t possible to have
+two events of the same lifecycle status in a single activity
+instance.</li>
+<li>the level of observation in an <code>eventlog</code> is an event. As
 a result, attribute values can be stored at the <strong>event
 level</strong>. In an <code>activitylog</code>, the level of observation
 is an activity instance. This means that all additional attributes that
@@ -882,11 +883,11 @@ different events within the same activity instance can have different
 resources, of different values for any other attribute.</li>
 <li>because of the limited flexibility, an <code>activitylog</code> is
 <strong>easier</strong> to make, and typically closer to the format that
-your data is already in (see further below on how to construct log
-objects). As a result of this, there are many situations in which the
-analysis of an <code>activitylog</code> will be much faster compared to
-<code>eventlogs</code>, where a lot of additional complexity needs to be
-taken into account.</li>
+your data is already in (see further below on how to construct
+<code>log</code> objects). As a result of this, there are many
+situations in which the analysis of an <code>activitylog</code> will be
+much faster compared to <code>eventlog</code>, where a lot of additional
+complexity needs to be taken into account.</li>
 </ul>
 </div>
 <div id="the-right-log-for-the-job" class="section level2">
@@ -906,9 +907,9 @@ executed by the same resource). When these two criteria do not hold, you
 can create an <code>eventlog</code> object.</p>
 <div id="scenario-1" class="section level3">
 <h3>Scenario 1</h3>
-<p>If each row in your data.frame is already an activity instance, the
-<code>activitylog</code> format is the best way to go. Consider the data
-sample below.</p>
+<p>If each row in your <code>data.frame</code> is already an activity
+instance, the <code>activitylog</code> format is the best way to go.
+Consider the data sample below.</p>
 <table style="width:100%;">
 <colgroup>
 <col width="11%" />
@@ -926,45 +927,52 @@ sample below.</p>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">442</td>
+<td align="left">212</td>
+<td align="left">Blood test</td>
+<td align="left">2017-07-27 23:22:02</td>
+<td align="left">2017-07-28 02:48:02</td>
+</tr>
+<tr class="even">
+<td align="left">212</td>
 <td align="left">Check-out</td>
-<td align="left">2018-03-05 05:13:32</td>
-<td align="left">2018-03-05 07:59:10</td>
+<td align="left">2017-07-29 18:58:43</td>
+<td align="left">2017-07-29 20:35:50</td>
 </tr>
-<tr class="even">
-<td align="left">442</td>
+<tr class="odd">
+<td align="left">212</td>
 <td align="left">Discuss Results</td>
-<td align="left">2018-03-01 00:52:42</td>
-<td align="left">2018-03-01 04:25:46</td>
-</tr>
-<tr class="odd">
-<td align="left">442</td>
-<td align="left">Registration</td>
-<td align="left">2018-02-27 16:18:24</td>
-<td align="left">2018-02-27 18:38:59</td>
+<td align="left">2017-07-29 16:51:16</td>
+<td align="left">2017-07-29 18:58:43</td>
 </tr>
 <tr class="even">
-<td align="left">442</td>
-<td align="left">Triage and Assessment</td>
-<td align="left">2018-02-27 18:38:59</td>
-<td align="left">2018-02-28 06:36:34</td>
+<td align="left">212</td>
+<td align="left">MRI SCAN</td>
+<td align="left">2017-07-28 07:14:18</td>
+<td align="left">2017-07-28 11:28:54</td>
 </tr>
 <tr class="odd">
-<td align="left">442</td>
-<td align="left">X-Ray</td>
-<td align="left">2018-02-28 14:36:19</td>
-<td align="left">2018-02-28 19:38:03</td>
+<td align="left">212</td>
+<td align="left">Registration</td>
+<td align="left">2017-07-26 04:56:00</td>
+<td align="left">2017-07-26 07:46:43</td>
+</tr>
+<tr class="even">
+<td align="left">212</td>
+<td align="left">Triage and Assessment</td>
+<td align="left">2017-07-26 07:46:43</td>
+<td align="left">2017-07-26 22:24:01</td>
 </tr>
 </tbody>
 </table>
 <p>As each row contains multiple timestamps, i.e. activity_started and
 activity_ended, it is clear that each row represents an activity
 instance. Turning this dataset in an <code>activitylog</code> requires
-the following steps.</p>
+the following steps:</p>
 <ol style="list-style-type: decimal">
 <li>Timestamp variables should be named in correspondence with the
-standard Transactional life cycle.</li>
-<li>Timestamp variables should be of type Date or POSIXct</li>
+standard Transactional lifecycle.</li>
+<li>Timestamp variables should be of type <code>Date</code> or
+<code>POSIXct</code>.</li>
 <li>Use the <code>activitylog</code> constructor function.</li>
 </ol>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span></span>
@@ -976,12 +984,12 @@ standard Transactional life cycle.</li>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">activitylog</span>(<span class="at">case_id =</span> <span class="st">&quot;patient&quot;</span>,</span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>                <span class="at">activity_id =</span> <span class="st">&quot;handling&quot;</span>,</span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>                <span class="at">timestamps =</span> <span class="fu">c</span>(<span class="st">&quot;start&quot;</span>, <span class="st">&quot;complete&quot;</span>))</span></code></pre></div>
-<pre><code>## # Log of 10 events consisting of:
+<pre><code>## # Log of 12 events consisting of:
 ## 1 trace 
 ## 1 case 
-## 5 instances of 5 activities 
+## 6 instances of 6 activities 
 ## 0 resources 
-## Events occurred from 2018-02-27 16:18:24 until 2018-03-05 07:59:10 
+## Events occurred from 2017-07-26 04:56:00 until 2017-07-29 20:35:50 
 ##  
 ## # Variables were mapped as follows:
 ## Case identifier:     patient 
@@ -989,23 +997,24 @@ standard Transactional life cycle.</li>
 ## Resource identifier:     employee 
 ## Timestamps:      start, complete 
 ## 
-## # A tibble: 5 × 5
+## # A tibble: 6 × 5
 ##   patient handling              start               complete            .order
 ##   &lt;chr&gt;   &lt;fct&gt;                 &lt;dttm&gt;              &lt;dttm&gt;               &lt;int&gt;
-## 1 442     Check-out             2018-03-05 05:13:32 2018-03-05 07:59:10      1
-## 2 442     Discuss Results       2018-03-01 00:52:42 2018-03-01 04:25:46      2
-## 3 442     Registration          2018-02-27 16:18:24 2018-02-27 18:38:59      3
-## 4 442     Triage and Assessment 2018-02-27 18:38:59 2018-02-28 06:36:34      4
-## 5 442     X-Ray                 2018-02-28 14:36:19 2018-02-28 19:38:03      5</code></pre>
+## 1 212     Blood test            2017-07-27 23:22:02 2017-07-28 02:48:02      1
+## 2 212     Check-out             2017-07-29 18:58:43 2017-07-29 20:35:50      2
+## 3 212     Discuss Results       2017-07-29 16:51:16 2017-07-29 18:58:43      3
+## 4 212     MRI SCAN              2017-07-28 07:14:18 2017-07-28 11:28:54      4
+## 5 212     Registration          2017-07-26 04:56:00 2017-07-26 07:46:43      5
+## 6 212     Triage and Assessment 2017-07-26 07:46:43 2017-07-26 22:24:01      6</code></pre>
 <p>Note that in case a resource identifier is available, this
 information can be added in the <code>activitylog</code> call.</p>
 </div>
 <div id="scenario-2" class="section level3">
 <h3>Scenario 2</h3>
-<p>If each row in your data.frame is an event, but all events that
-belong to the same activity instance share the same attribute values,
-the <code>activitylog</code> format is again the best way to go.
-Consider the data sample below.</p>
+<p>If each row in your <code>data.frame</code> is an event, but all
+events that belong to the same activity instance share the same
+attribute values, the <code>activitylog</code> format is again the best
+way to go. Consider the data sample below.</p>
 <table style="width:100%;">
 <colgroup>
 <col width="8%" />
@@ -1027,100 +1036,84 @@ Consider the data sample below.</p>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">67</td>
+<td align="left">457</td>
 <td align="left">Registration</td>
 <td align="left">r1</td>
-<td align="left">67</td>
+<td align="left">457</td>
 <td align="left">started</td>
-<td align="left">2017-03-11 01:10:09</td>
+<td align="left">2018-03-16 04:58:52</td>
 </tr>
 <tr class="even">
-<td align="left">67</td>
+<td align="left">457</td>
 <td align="left">Registration</td>
 <td align="left">r1</td>
-<td align="left">67</td>
+<td align="left">457</td>
 <td align="left">completed</td>
-<td align="left">2017-03-11 03:07:58</td>
+<td align="left">2018-03-16 08:14:47</td>
 </tr>
 <tr class="odd">
-<td align="left">67</td>
+<td align="left">457</td>
 <td align="left">Triage and Assessment</td>
 <td align="left">r2</td>
-<td align="left">567</td>
+<td align="left">957</td>
 <td align="left">started</td>
-<td align="left">2017-03-12 19:16:47</td>
+<td align="left">2018-03-16 22:41:06</td>
 </tr>
 <tr class="even">
-<td align="left">67</td>
+<td align="left">457</td>
 <td align="left">Triage and Assessment</td>
 <td align="left">r2</td>
-<td align="left">567</td>
+<td align="left">957</td>
 <td align="left">completed</td>
-<td align="left">2017-03-13 09:52:04</td>
+<td align="left">2018-03-17 10:30:24</td>
 </tr>
 <tr class="odd">
-<td align="left">67</td>
-<td align="left">Blood test</td>
-<td align="left">r3</td>
-<td align="left">1032</td>
+<td align="left">457</td>
+<td align="left">X-Ray</td>
+<td align="left">r5</td>
+<td align="left">1712</td>
 <td align="left">started</td>
-<td align="left">2017-03-17 20:36:35</td>
+<td align="left">2018-03-17 19:06:45</td>
 </tr>
 <tr class="even">
-<td align="left">67</td>
-<td align="left">Blood test</td>
-<td align="left">r3</td>
-<td align="left">1032</td>
+<td align="left">457</td>
+<td align="left">X-Ray</td>
+<td align="left">r5</td>
+<td align="left">1712</td>
 <td align="left">completed</td>
-<td align="left">2017-03-18 03:10:54</td>
+<td align="left">2018-03-18 00:20:51</td>
 </tr>
 <tr class="odd">
-<td align="left">67</td>
-<td align="left">MRI SCAN</td>
-<td align="left">r4</td>
-<td align="left">1269</td>
-<td align="left">started</td>
-<td align="left">2017-03-18 07:29:31</td>
-</tr>
-<tr class="even">
-<td align="left">67</td>
-<td align="left">MRI SCAN</td>
-<td align="left">r4</td>
-<td align="left">1269</td>
-<td align="left">completed</td>
-<td align="left">2017-03-18 10:13:37</td>
-</tr>
-<tr class="odd">
-<td align="left">67</td>
+<td align="left">457</td>
 <td align="left">Discuss Results</td>
 <td align="left">r6</td>
-<td align="left">1801</td>
+<td align="left">2191</td>
 <td align="left">started</td>
-<td align="left">2017-03-20 10:19:31</td>
+<td align="left">2018-03-18 05:25:30</td>
 </tr>
 <tr class="even">
-<td align="left">67</td>
+<td align="left">457</td>
 <td align="left">Check-out</td>
 <td align="left">r7</td>
-<td align="left">2296</td>
+<td align="left">2686</td>
 <td align="left">started</td>
-<td align="left">2017-03-20 12:11:39</td>
+<td align="left">2018-03-18 08:12:07</td>
 </tr>
 <tr class="odd">
-<td align="left">67</td>
+<td align="left">457</td>
 <td align="left">Discuss Results</td>
 <td align="left">r6</td>
-<td align="left">1801</td>
+<td align="left">2191</td>
 <td align="left">completed</td>
-<td align="left">2017-03-20 12:11:39</td>
+<td align="left">2018-03-18 08:12:07</td>
 </tr>
 <tr class="even">
-<td align="left">67</td>
+<td align="left">457</td>
 <td align="left">Check-out</td>
 <td align="left">r7</td>
-<td align="left">2296</td>
+<td align="left">2686</td>
 <td align="left">completed</td>
-<td align="left">2017-03-20 14:16:12</td>
+<td align="left">2018-03-18 11:01:35</td>
 </tr>
 </tbody>
 </table>
@@ -1133,8 +1126,9 @@ create an <code>activitylog</code>. The steps to do so are the
 following.</p>
 <ol style="list-style-type: decimal">
 <li>Lifecycle variable should be named in correspondence with the
-standard Transactional life cycle.</li>
-<li>Timestamp variable should be of type Date or POSIXct</li>
+standard Transactional lifecycle.</li>
+<li>Timestamp variable should be of type <code>Date</code> or
+<code>POSIXct</code>.</li>
 <li>Use the <code>eventlog</code> constructor function.</li>
 <li>Convert to <code>activitylog</code> using
 <code>to_activitylog</code> for reduced memory usage and improved
@@ -1186,95 +1180,112 @@ below.</p>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">399</td>
+<td align="left">105</td>
 <td align="left">Registration</td>
-<td align="left">r5</td>
-<td align="left">399</td>
+<td align="left">r2</td>
+<td align="left">105</td>
 <td align="left">started</td>
-<td align="left">2018-01-24 06:05:03</td>
+<td align="left">2017-04-21 02:19:09</td>
 </tr>
 <tr class="even">
-<td align="left">399</td>
+<td align="left">105</td>
+<td align="left">Triage and Assessment</td>
+<td align="left">r3</td>
+<td align="left">605</td>
+<td align="left">started</td>
+<td align="left">2017-04-21 05:11:33</td>
+</tr>
+<tr class="odd">
+<td align="left">105</td>
 <td align="left">Registration</td>
+<td align="left">r4</td>
+<td align="left">105</td>
+<td align="left">completed</td>
+<td align="left">2017-04-21 05:11:33</td>
+</tr>
+<tr class="even">
+<td align="left">105</td>
+<td align="left">Triage and Assessment</td>
 <td align="left">r1</td>
-<td align="left">399</td>
+<td align="left">605</td>
 <td align="left">completed</td>
-<td align="left">2018-01-24 10:17:10</td>
+<td align="left">2017-04-21 19:50:49</td>
 </tr>
 <tr class="odd">
-<td align="left">399</td>
-<td align="left">Triage and Assessment</td>
+<td align="left">105</td>
+<td align="left">Blood test</td>
 <td align="left">r7</td>
-<td align="left">899</td>
+<td align="left">1048</td>
 <td align="left">started</td>
-<td align="left">2018-01-24 20:29:46</td>
+<td align="left">2017-04-22 06:02:04</td>
 </tr>
 <tr class="even">
-<td align="left">399</td>
-<td align="left">Triage and Assessment</td>
+<td align="left">105</td>
+<td align="left">Blood test</td>
 <td align="left">r6</td>
-<td align="left">899</td>
+<td align="left">1048</td>
 <td align="left">completed</td>
-<td align="left">2018-01-25 04:32:05</td>
+<td align="left">2017-04-22 11:22:30</td>
 </tr>
 <tr class="odd">
-<td align="left">399</td>
-<td align="left">X-Ray</td>
-<td align="left">r7</td>
-<td align="left">1683</td>
+<td align="left">105</td>
+<td align="left">MRI SCAN</td>
+<td align="left">r6</td>
+<td align="left">1285</td>
 <td align="left">started</td>
-<td align="left">2018-01-27 09:21:35</td>
+<td align="left">2017-04-22 15:48:55</td>
 </tr>
 <tr class="even">
-<td align="left">399</td>
-<td align="left">X-Ray</td>
-<td align="left">r6</td>
-<td align="left">1683</td>
+<td align="left">105</td>
+<td align="left">MRI SCAN</td>
+<td align="left">r7</td>
+<td align="left">1285</td>
 <td align="left">completed</td>
-<td align="left">2018-01-27 14:03:44</td>
+<td align="left">2017-04-22 19:21:43</td>
 </tr>
 <tr class="odd">
-<td align="left">399</td>
+<td align="left">105</td>
 <td align="left">Discuss Results</td>
 <td align="left">r1</td>
-<td align="left">2133</td>
+<td align="left">1839</td>
 <td align="left">started</td>
-<td align="left">2018-01-27 19:55:31</td>
+<td align="left">2017-04-23 00:16:15</td>
 </tr>
 <tr class="even">
-<td align="left">399</td>
+<td align="left">105</td>
 <td align="left">Discuss Results</td>
-<td align="left">r2</td>
-<td align="left">2133</td>
+<td align="left">r4</td>
+<td align="left">1839</td>
 <td align="left">completed</td>
-<td align="left">2018-01-27 21:48:03</td>
+<td align="left">2017-04-23 02:39:08</td>
 </tr>
 <tr class="odd">
-<td align="left">399</td>
+<td align="left">105</td>
 <td align="left">Check-out</td>
 <td align="left">r2</td>
-<td align="left">2628</td>
+<td align="left">2334</td>
 <td align="left">started</td>
-<td align="left">2018-01-29 12:05:20</td>
+<td align="left">2017-04-27 00:12:17</td>
 </tr>
 <tr class="even">
-<td align="left">399</td>
+<td align="left">105</td>
 <td align="left">Check-out</td>
-<td align="left">r5</td>
-<td align="left">2628</td>
+<td align="left">r3</td>
+<td align="left">2334</td>
 <td align="left">completed</td>
-<td align="left">2018-01-29 14:04:18</td>
+<td align="left">2017-04-27 01:09:05</td>
 </tr>
 </tbody>
 </table>
 <p>In this example, different resources (employees) sometimes perform
 the start and complete event of the same activity instance. Therefore,
 we resort to the <code>eventlog</code> format which has no problems
-storing this. The steps to take are the following.</p>
+storing this. The steps to take are the following:</p>
 <ol style="list-style-type: decimal">
 <li>Lifecycle variable should be named in correspondence with the
-standard Transactional life cycle.</li>
-<li>Timestamp variable should be of type Date or POSIXct</li>
+standard Transactional lifecycle.</li>
+<li>Timestamp variable should be of type <code>Date</code> or
+<code>POSIXct</code>.</li>
 <li>Use the <code>eventlog</code> constructor function.</li>
 </ol>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span></span>
@@ -1290,13 +1301,13 @@ standard Transactional life cycle.</li>
 <span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>                <span class="at">timestamp =</span> <span class="st">&quot;time&quot;</span>,</span>
 <span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>                <span class="at">resource_id =</span> <span class="st">&quot;employee&quot;</span>) </span></code></pre></div>
 <pre><code>## Warning in validate_eventlog(eventlog): The following activity instances are
-## connected to more than one resource: 1683,2133,2628,399,899</code></pre>
-<pre><code>## # Log of 10 events consisting of:
+## connected to more than one resource: 1048,105,1285,1839,2334,605</code></pre>
+<pre><code>## # Log of 12 events consisting of:
 ## 1 trace 
 ## 1 case 
-## 5 instances of 5 activities 
-## 5 resources 
-## Events occurred from 2018-01-24 06:05:03 until 2018-01-29 14:04:18 
+## 6 instances of 6 activities 
+## 6 resources 
+## Events occurred from 2017-04-21 02:19:09 until 2017-04-27 01:09:05 
 ##  
 ## # Variables were mapped as follows:
 ## Case identifier:     patient 
@@ -1306,26 +1317,28 @@ standard Transactional life cycle.</li>
 ## Timestamp:           time 
 ## Lifecycle transition:        registration_type 
 ## 
-## # A tibble: 10 × 7
+## # A tibble: 12 × 7
 ##    patient handling           emplo…¹ handl…² regis…³ time                .order
 ##    &lt;chr&gt;   &lt;fct&gt;              &lt;fct&gt;   &lt;chr&gt;   &lt;fct&gt;   &lt;dttm&gt;               &lt;int&gt;
-##  1 399     Registration       r5      399     start   2018-01-24 06:05:03      1
-##  2 399     Registration       r1      399     comple… 2018-01-24 10:17:10      2
-##  3 399     Triage and Assess… r7      899     start   2018-01-24 20:29:46      3
-##  4 399     Triage and Assess… r6      899     comple… 2018-01-25 04:32:05      4
-##  5 399     X-Ray              r7      1683    start   2018-01-27 09:21:35      5
-##  6 399     X-Ray              r6      1683    comple… 2018-01-27 14:03:44      6
-##  7 399     Discuss Results    r1      2133    start   2018-01-27 19:55:31      7
-##  8 399     Discuss Results    r2      2133    comple… 2018-01-27 21:48:03      8
-##  9 399     Check-out          r2      2628    start   2018-01-29 12:05:20      9
-## 10 399     Check-out          r5      2628    comple… 2018-01-29 14:04:18     10
+##  1 105     Registration       r2      105     start   2017-04-21 02:19:09      1
+##  2 105     Triage and Assess… r3      605     start   2017-04-21 05:11:33      2
+##  3 105     Registration       r4      105     comple… 2017-04-21 05:11:33      3
+##  4 105     Triage and Assess… r1      605     comple… 2017-04-21 19:50:49      4
+##  5 105     Blood test         r7      1048    start   2017-04-22 06:02:04      5
+##  6 105     Blood test         r6      1048    comple… 2017-04-22 11:22:30      6
+##  7 105     MRI SCAN           r6      1285    start   2017-04-22 15:48:55      7
+##  8 105     MRI SCAN           r7      1285    comple… 2017-04-22 19:21:43      8
+##  9 105     Discuss Results    r1      1839    start   2017-04-23 00:16:15      9
+## 10 105     Discuss Results    r4      1839    comple… 2017-04-23 02:39:08     10
+## 11 105     Check-out          r2      2334    start   2017-04-27 00:12:17     11
+## 12 105     Check-out          r3      2334    comple… 2017-04-27 01:09:05     12
 ## # … with abbreviated variable names ¹​employee, ²​handling_id, ³​registration_type</code></pre>
-<p>Note that we need an eventlog irrespective of which attribute values
-are differing. I.e. it can be resources, but also any additional
-variables you have in your data set. For the special case of resource
-values, it might be that a different resource executing events in the
-same activity instance is a data quality issues. If so, some functions
-can help you to identify this issue: <a
+<p>Note that we need an <code>eventlog</code> irrespective of which
+attribute values are differing, i.e. it can be resources, but also any
+additional variables you have in your data set. For the special case of
+resource values, it might be that a different resource executing events
+in the same activity instance is a data quality issue. If so, some
+functions can help you to identify this issue: <a
 href="#inconsistent-resources">Inconsistent Resources</a>.</p>
 <p>Again, if the activity instance id does not exist, some heuristics
 are available to generate it: [Missing activity instance
@@ -1339,7 +1352,7 @@ identifier].</p>
 <p>In order to be able to correlate events which belong to the same
 activity instance, an activity instance identifier is required. For
 example, in the data shown below, it is possible that a patient has gone
-through different surgeries, each with their own started and complete
+through different surgeries, each with their own start- and complete
 event. The activity instance identifier will then allow to distinguish
 which events belong together and which do not. It is important to note
 that this instance identifier should be unique, also among different
@@ -1414,15 +1427,15 @@ cases and activities.</p>
 </tbody>
 </table>
 <p>If the activity instance identifier is not available you can use the
-<code>assign_instance_id</code> function, which uses an heuristic to
+<code>assign_instance_id()</code> function, which uses an heuristic to
 create the missing identifier. Alternatively, you can try to create the
-identifier on your own using <code>dplyr::mutate</code> and other
+identifier on your own using <code>dplyr::mutate()</code> and other
 manipulation functions.</p>
 </div>
 <div id="large-datasets-and-validation" class="section level3">
 <h3>Large Datasets and Validation</h3>
-<p>By default, bupaR validates certain properties of the activity
-instances that is supplied when creating an event log:</p>
+<p>By default, <code>bupaR</code> validates certain properties of the
+activity instances that is supplied when creating an event log:</p>
 <ul>
 <li>a single activity instance identifier must not be connected to
 multiple cases,</li>
@@ -1434,13 +1447,13 @@ performance issues for large data frames. It is possible to deactivate
 the validation in case you already know that your data fulfills all the
 requirements, using the argument <code>validate = FALSE</code> when
 creating the <code>eventlog</code>. Note that when the activity instance
-id was created with the <code>assign_instance_id</code> function, you
+id was created with the <code>assign_instance_id()</code> function, you
 can assume the above properties hold.</p>
 </div>
 <div id="inconsistent-resources" class="section level3">
 <h3>Inconsistent Resources</h3>
 <p>Each event can contain the notion of a resource. It can be so that
-different events beloging to the same activity instance are executed by
+different events belonging to the same activity instance are executed by
 different resources, as in the <code>eventlog</code> below.</p>
 <table>
 <colgroup>
@@ -1465,155 +1478,160 @@ different resources, as in the <code>eventlog</code> below.</p>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">113</td>
+<td align="left">417</td>
 <td align="left">Registration</td>
 <td align="left">r7</td>
-<td align="left">113</td>
+<td align="left">417</td>
 <td align="left">start</td>
-<td align="left">2017-04-27 05:07:31</td>
+<td align="left">2018-02-06 10:47:31</td>
 <td align="right">1</td>
 </tr>
 <tr class="even">
-<td align="left">113</td>
+<td align="left">417</td>
 <td align="left">Registration</td>
-<td align="left">r3</td>
-<td align="left">113</td>
+<td align="left">r6</td>
+<td align="left">417</td>
 <td align="left">complete</td>
-<td align="left">2017-04-27 09:09:00</td>
+<td align="left">2018-02-06 14:24:58</td>
 <td align="right">2</td>
 </tr>
 <tr class="odd">
-<td align="left">113</td>
+<td align="left">417</td>
 <td align="left">Triage and Assessment</td>
 <td align="left">r4</td>
-<td align="left">613</td>
+<td align="left">917</td>
 <td align="left">start</td>
-<td align="left">2017-04-28 06:44:12</td>
+<td align="left">2018-02-06 21:58:04</td>
 <td align="right">3</td>
 </tr>
 <tr class="even">
-<td align="left">113</td>
+<td align="left">417</td>
 <td align="left">Triage and Assessment</td>
-<td align="left">r4</td>
-<td align="left">613</td>
+<td align="left">r1</td>
+<td align="left">917</td>
 <td align="left">complete</td>
-<td align="left">2017-04-28 20:47:34</td>
+<td align="left">2018-02-07 13:33:50</td>
 <td align="right">4</td>
 </tr>
 <tr class="odd">
-<td align="left">113</td>
+<td align="left">417</td>
 <td align="left">Blood test</td>
-<td align="left">r1</td>
-<td align="left">1052</td>
+<td align="left">r6</td>
+<td align="left">1197</td>
 <td align="left">start</td>
-<td align="left">2017-04-30 09:43:59</td>
+<td align="left">2018-02-08 02:03:02</td>
 <td align="right">5</td>
 </tr>
 <tr class="even">
-<td align="left">113</td>
+<td align="left">417</td>
 <td align="left">Blood test</td>
-<td align="left">r1</td>
-<td align="left">1052</td>
+<td align="left">r4</td>
+<td align="left">1197</td>
 <td align="left">complete</td>
-<td align="left">2017-04-30 15:13:28</td>
+<td align="left">2018-02-08 07:02:54</td>
 <td align="right">6</td>
 </tr>
 <tr class="odd">
-<td align="left">113</td>
+<td align="left">417</td>
 <td align="left">MRI SCAN</td>
 <td align="left">r2</td>
-<td align="left">1289</td>
+<td align="left">1434</td>
 <td align="left">start</td>
-<td align="left">2017-04-30 21:24:18</td>
+<td align="left">2018-02-08 09:53:43</td>
 <td align="right">7</td>
 </tr>
 <tr class="even">
-<td align="left">113</td>
+<td align="left">417</td>
 <td align="left">MRI SCAN</td>
 <td align="left">r3</td>
-<td align="left">1289</td>
+<td align="left">1434</td>
 <td align="left">complete</td>
-<td align="left">2017-05-01 01:12:51</td>
+<td align="left">2018-02-08 14:29:35</td>
 <td align="right">8</td>
 </tr>
 <tr class="odd">
-<td align="left">113</td>
+<td align="left">417</td>
 <td align="left">Discuss Results</td>
-<td align="left">r6</td>
-<td align="left">1847</td>
+<td align="left">r3</td>
+<td align="left">2151</td>
 <td align="left">start</td>
-<td align="left">2017-05-01 07:20:45</td>
+<td align="left">2018-02-08 19:17:04</td>
 <td align="right">9</td>
 </tr>
 <tr class="even">
-<td align="left">113</td>
+<td align="left">417</td>
 <td align="left">Discuss Results</td>
-<td align="left">r2</td>
-<td align="left">1847</td>
+<td align="left">r1</td>
+<td align="left">2151</td>
 <td align="left">complete</td>
-<td align="left">2017-05-01 09:44:20</td>
+<td align="left">2018-02-08 22:16:48</td>
 <td align="right">10</td>
 </tr>
 <tr class="odd">
-<td align="left">113</td>
+<td align="left">417</td>
 <td align="left">Check-out</td>
 <td align="left">r7</td>
-<td align="left">2342</td>
+<td align="left">2646</td>
 <td align="left">start</td>
-<td align="left">2017-05-03 04:02:35</td>
+<td align="left">2018-02-10 18:31:42</td>
 <td align="right">11</td>
 </tr>
 <tr class="even">
-<td align="left">113</td>
+<td align="left">417</td>
 <td align="left">Check-out</td>
-<td align="left">r6</td>
-<td align="left">2342</td>
+<td align="left">r2</td>
+<td align="left">2646</td>
 <td align="left">complete</td>
-<td align="left">2017-05-03 06:59:33</td>
+<td align="left">2018-02-10 21:21:04</td>
 <td align="right">12</td>
 </tr>
 </tbody>
 </table>
 <p>If you have a large dataset, and want to have an overview of the
 activity instances that have more than one resource connected to them,
-you can use the <code>detect_resource_inconsistences</code>
+you can use the <code>detect_resource_inconsistences()</code>
 function.</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>log <span class="sc">%&gt;%</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">detect_resource_inconsistencies</span>()</span></code></pre></div>
-<pre><code>## # A tibble: 4 × 5
-##   patient handling        handling_id complete start
-##   &lt;chr&gt;   &lt;fct&gt;           &lt;chr&gt;       &lt;chr&gt;    &lt;chr&gt;
-## 1 113     Check-out       2342        r6       r7   
-## 2 113     Discuss Results 1847        r2       r6   
-## 3 113     MRI SCAN        1289        r3       r2   
-## 4 113     Registration    113         r3       r7</code></pre>
+<pre><code>## # A tibble: 6 × 5
+##   patient handling              handling_id complete start
+##   &lt;chr&gt;   &lt;fct&gt;                 &lt;chr&gt;       &lt;chr&gt;    &lt;chr&gt;
+## 1 417     Blood test            1197        r4       r6   
+## 2 417     Check-out             2646        r2       r7   
+## 3 417     Discuss Results       2151        r1       r3   
+## 4 417     MRI SCAN              1434        r3       r2   
+## 5 417     Registration          417         r6       r7   
+## 6 417     Triage and Assessment 917         r1       r4</code></pre>
 <p>If you want to remove these inconsistencies, a quick fix is to merge
 the resource labels together with
-<code>fix_resource_inconsistencies</code>. Note that this is not needed
-for eventlogs, but it is for activity logs. While the creation of the
-event log will emit a warning when resource inconsistencies exist, this
-should mostly be seen as a data quality warning. That said, there might
-be analysis related to the counting of resources where such
+<code>fix_resource_inconsistencies()</code>. Note that this is not
+needed for <code>eventlog</code>, but it is for
+<code>activitylog</code>. While the creation of the
+<code>eventlog</code> will emit a warning when resource inconsistencies
+exist, this should mostly be seen as a data quality warning. That said,
+there might be analysis related to the counting of resources where such
 inconsistencies might lead to odd results.</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>log <span class="sc">%&gt;%</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">fix_resource_inconsistencies</span>()</span></code></pre></div>
 <pre><code>## *** OUTPUT ***</code></pre>
-<pre><code>## A total of 4 activity executions in the event log are classified as inconsistencies.</code></pre>
+<pre><code>## A total of 6 activity executions in the event log are classified as inconsistencies.</code></pre>
 <pre><code>## They are spread over the following cases and activities:</code></pre>
-<pre><code>## # A tibble: 4 × 5
-##   patient handling        handling_id complete start
-##   &lt;chr&gt;   &lt;fct&gt;           &lt;chr&gt;       &lt;chr&gt;    &lt;chr&gt;
-## 1 113     Check-out       2342        r6       r7   
-## 2 113     Discuss Results 1847        r2       r6   
-## 3 113     MRI SCAN        1289        r3       r2   
-## 4 113     Registration    113         r3       r7</code></pre>
+<pre><code>## # A tibble: 6 × 5
+##   patient handling              handling_id complete start
+##   &lt;chr&gt;   &lt;fct&gt;                 &lt;chr&gt;       &lt;chr&gt;    &lt;chr&gt;
+## 1 417     Blood test            1197        r4       r6   
+## 2 417     Check-out             2646        r2       r7   
+## 3 417     Discuss Results       2151        r1       r3   
+## 4 417     MRI SCAN              1434        r3       r2   
+## 5 417     Registration          417         r6       r7   
+## 6 417     Triage and Assessment 917         r1       r4</code></pre>
 <pre><code>## Inconsistencies solved succesfully.</code></pre>
 <pre><code>## # Log of 12 events consisting of:
 ## 1 trace 
 ## 1 case 
 ## 6 instances of 6 activities 
 ## 6 resources 
-## Events occurred from 2017-04-27 05:07:31 until 2017-05-03 06:59:33 
+## Events occurred from 2018-02-06 10:47:31 until 2018-02-10 21:21:04 
 ##  
 ## # Variables were mapped as follows:
 ## Case identifier:     patient 
@@ -1626,19 +1644,20 @@ inconsistencies might lead to odd results.</p>
 ## # A tibble: 12 × 7
 ##    patient handling           emplo…¹ handl…² regis…³ time                .order
 ##    &lt;chr&gt;   &lt;fct&gt;              &lt;chr&gt;   &lt;chr&gt;   &lt;fct&gt;   &lt;dttm&gt;               &lt;int&gt;
-##  1 113     Registration       r3 - r7 113     start   2017-04-27 05:07:31      1
-##  2 113     Registration       r3 - r7 113     comple… 2017-04-27 09:09:00      2
-##  3 113     Triage and Assess… r4      613     start   2017-04-28 06:44:12      3
-##  4 113     Triage and Assess… r4      613     comple… 2017-04-28 20:47:34      4
-##  5 113     Blood test         r1      1052    start   2017-04-30 09:43:59      5
-##  6 113     Blood test         r1      1052    comple… 2017-04-30 15:13:28      6
-##  7 113     MRI SCAN           r3 - r2 1289    start   2017-04-30 21:24:18      7
-##  8 113     MRI SCAN           r3 - r2 1289    comple… 2017-05-01 01:12:51      8
-##  9 113     Discuss Results    r2 - r6 1847    start   2017-05-01 07:20:45      9
-## 10 113     Discuss Results    r2 - r6 1847    comple… 2017-05-01 09:44:20     10
-## 11 113     Check-out          r6 - r7 2342    start   2017-05-03 04:02:35     11
-## 12 113     Check-out          r6 - r7 2342    comple… 2017-05-03 06:59:33     12
+##  1 417     Registration       r6 - r7 417     start   2018-02-06 10:47:31      1
+##  2 417     Registration       r6 - r7 417     comple… 2018-02-06 14:24:58      2
+##  3 417     Triage and Assess… r1 - r4 917     start   2018-02-06 21:58:04      3
+##  4 417     Triage and Assess… r1 - r4 917     comple… 2018-02-07 13:33:50      4
+##  5 417     Blood test         r4 - r6 1197    start   2018-02-08 02:03:02      5
+##  6 417     Blood test         r4 - r6 1197    comple… 2018-02-08 07:02:54      6
+##  7 417     MRI SCAN           r3 - r2 1434    start   2018-02-08 09:53:43      7
+##  8 417     MRI SCAN           r3 - r2 1434    comple… 2018-02-08 14:29:35      8
+##  9 417     Discuss Results    r1 - r3 2151    start   2018-02-08 19:17:04      9
+## 10 417     Discuss Results    r1 - r3 2151    comple… 2018-02-08 22:16:48     10
+## 11 417     Check-out          r2 - r7 2646    start   2018-02-10 18:31:42     11
+## 12 417     Check-out          r2 - r7 2646    comple… 2018-02-10 21:21:04     12
 ## # … with abbreviated variable names ¹​employee, ²​handling_id, ³​registration_type</code></pre>
+<p>See next: <a href="adjust_logs.html">Adjusting logs</a></p>
 </div>
 </div>
 </div>

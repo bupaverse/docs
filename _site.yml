@@ -37,6 +37,7 @@ navbar:
       - text: "XES-files"
         href: xes_files.html
   - text: "Manipulate"
+    href: manipulate.html
     menu:
       - text: "Filter"
       - text: "by case"

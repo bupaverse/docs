@@ -11,7 +11,7 @@
 
 
 
-<title>adjust_logs.knit</title>
+<title>Adjust Logs</title>
 
 <script src="site_libs/header-attrs-2.19/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -53,6 +53,107 @@ ga('send', 'pageview');
 
 
 
+<style type="text/css">
+  code {
+    white-space: pre;
+  }
+  .sourceCode {
+    overflow: visible;
+  }
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  background-color: #f8f8f8; }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #c4a000; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #000000; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #000000; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #000000; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
 
 
 
@@ -512,11 +613,191 @@ div.tocify {
 
 
 
+<h1 class="title toc-ignore">Adjust Logs</h1>
 
 </div>
 
 
-
+<p><img src="images/icons/create.PNG" width="25%" style="display: block; margin: auto 0 auto auto;" /></p>
+<div id="adjusting-logs" class="section level2">
+<h2>Adjusting logs</h2>
+<p>The <em>mapping</em> of a log is defined by the different variables
+which are mapped onto the specific characteristics.</p>
+<p>For an <code>eventlog</code>:</p>
+<ul>
+<li>case identifier (<code>case_id</code>)</li>
+<li>activity type (<code>activity_id</code>)</li>
+<li>activity instance (<code>activity_instance_id</code>)</li>
+<li>transaction status (<code>lifecycle_id</code>)</li>
+<li>timestamp (<code>timestamp</code>)</li>
+<li>resource (<code>resource</code>)</li>
+</ul>
+<p>For an <code>activitylog</code></p>
+<ul>
+<li>case identifier (<code>case_id</code>)</li>
+<li>activity type (<code>activity_id</code>)</li>
+<li>timestamps (<code>timestamps</code>)</li>
+<li>resource (<code>resource</code>)</li>
+</ul>
+<p>More information on these characteristics can be found <a
+href="http://bupar.net/creating_eventlogs.html">here</a>. Each of these
+can be modified to approach the event log from a different angle. This
+can be done using the <code>eventlog</code> or
+<code>activitylog</code>-function, auxiliary <code>set</code>-functions,
+or by using an existing mapping.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(bupaR)</span></code></pre></div>
+<pre><code>## 
+## Attaching package: &#39;bupaR&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:stats&#39;:
+## 
+##     filter</code></pre>
+<pre><code>## The following object is masked from &#39;package:utils&#39;:
+## 
+##     timestamp</code></pre>
+</div>
+<div id="using-eventlog-function" class="section level2">
+<h2>Using <code>eventlog</code> function</h2>
+<p>The <code>eventlog</code> function is not only used to instantiate
+and event log object, but can also be used to modify it, by using an
+event log object as input and setting just the identifiers one wants to
+change.</p>
+<p>For example, consider the <code>traffic_fines</code> data. We could
+change to <code>case_id</code> to the “vehicleclass” column as follows.
+(This is a purely hypothetical example). You will see that the number of
+cases has changed after this modification.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>traffic_fines <span class="sc">%&gt;%</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">eventlog</span>(<span class="at">case_id =</span> <span class="st">&quot;vehicleclass&quot;</span>)</span></code></pre></div>
+<pre><code>## # Log of 34724 events consisting of:
+## 4 traces 
+## 4 cases 
+## 34724 instances of 11 activities 
+## 16 resources 
+## Events occurred from 2006-06-17 until 2012-03-26 
+##  
+## # Variables were mapped as follows:
+## Case identifier:     vehicleclass 
+## Activity identifier:     activity 
+## Resource identifier:     resource 
+## Activity instance identifier:    activity_instance_id 
+## Timestamp:           timestamp 
+## Lifecycle transition:        lifecycle 
+## 
+## # A tibble: 34,724 × 18
+##    case_id activity   lifec…¹ resou…² timestamp           amount article dismi…³
+##    &lt;chr&gt;   &lt;fct&gt;      &lt;fct&gt;   &lt;fct&gt;   &lt;dttm&gt;              &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;  
+##  1 A1      Create Fi… comple… 561     2006-07-24 00:00:00 35.0       157 NIL    
+##  2 A1      Send Fine  comple… &lt;NA&gt;    2006-12-05 00:00:00 &lt;NA&gt;        NA &lt;NA&gt;   
+##  3 A100    Create Fi… comple… 561     2006-08-02 00:00:00 35.0       157 NIL    
+##  4 A100    Send Fine  comple… &lt;NA&gt;    2006-12-12 00:00:00 &lt;NA&gt;        NA &lt;NA&gt;   
+##  5 A100    Insert Fi… comple… &lt;NA&gt;    2007-01-15 00:00:00 &lt;NA&gt;        NA &lt;NA&gt;   
+##  6 A100    Add penal… comple… &lt;NA&gt;    2007-03-16 00:00:00 71.5        NA &lt;NA&gt;   
+##  7 A100    Send for … comple… &lt;NA&gt;    2009-03-30 00:00:00 &lt;NA&gt;        NA &lt;NA&gt;   
+##  8 A10000  Create Fi… comple… 561     2007-03-09 00:00:00 36.0       157 NIL    
+##  9 A10000  Send Fine  comple… &lt;NA&gt;    2007-07-17 00:00:00 &lt;NA&gt;        NA &lt;NA&gt;   
+## 10 A10000  Insert Fi… comple… &lt;NA&gt;    2007-08-02 00:00:00 &lt;NA&gt;        NA &lt;NA&gt;   
+## # … with 34,714 more rows, 10 more variables: expense &lt;chr&gt;, lastsent &lt;chr&gt;,
+## #   matricola &lt;dbl&gt;, notificationtype &lt;chr&gt;, paymentamount &lt;dbl&gt;, points &lt;dbl&gt;,
+## #   totalpaymentamount &lt;chr&gt;, vehicleclass &lt;chr&gt;, activity_instance_id &lt;chr&gt;,
+## #   .order &lt;int&gt;, and abbreviated variable names ¹​lifecycle, ²​resource,
+## #   ³​dismissal</code></pre>
+</div>
+<div id="using-set-functions" class="section level2">
+<h2>Using <code>set</code> functions</h2>
+<p>If we only want to change one of the elements, as in the example
+above, the <code>set</code> function provide a very convenient way to do
+so. The same change as before can be done as follows.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>traffic_fines <span class="sc">%&gt;%</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">set_case_id</span>(<span class="st">&quot;vehicleclass&quot;</span>)</span></code></pre></div>
+<pre><code>## # Log of 34724 events consisting of:
+## 4 traces 
+## 4 cases 
+## 34724 instances of 11 activities 
+## 16 resources 
+## Events occurred from 2006-06-17 until 2012-03-26 
+##  
+## # Variables were mapped as follows:
+## Case identifier:     vehicleclass 
+## Activity identifier:     activity 
+## Resource identifier:     resource 
+## Activity instance identifier:    activity_instance_id 
+## Timestamp:           timestamp 
+## Lifecycle transition:        lifecycle 
+## 
+## # A tibble: 34,724 × 18
+##    case_id activity   lifec…¹ resou…² timestamp           amount article dismi…³
+##    &lt;chr&gt;   &lt;fct&gt;      &lt;fct&gt;   &lt;fct&gt;   &lt;dttm&gt;              &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;  
+##  1 A1      Create Fi… comple… 561     2006-07-24 00:00:00 35.0       157 NIL    
+##  2 A1      Send Fine  comple… &lt;NA&gt;    2006-12-05 00:00:00 &lt;NA&gt;        NA &lt;NA&gt;   
+##  3 A100    Create Fi… comple… 561     2006-08-02 00:00:00 35.0       157 NIL    
+##  4 A100    Send Fine  comple… &lt;NA&gt;    2006-12-12 00:00:00 &lt;NA&gt;        NA &lt;NA&gt;   
+##  5 A100    Insert Fi… comple… &lt;NA&gt;    2007-01-15 00:00:00 &lt;NA&gt;        NA &lt;NA&gt;   
+##  6 A100    Add penal… comple… &lt;NA&gt;    2007-03-16 00:00:00 71.5        NA &lt;NA&gt;   
+##  7 A100    Send for … comple… &lt;NA&gt;    2009-03-30 00:00:00 &lt;NA&gt;        NA &lt;NA&gt;   
+##  8 A10000  Create Fi… comple… 561     2007-03-09 00:00:00 36.0       157 NIL    
+##  9 A10000  Send Fine  comple… &lt;NA&gt;    2007-07-17 00:00:00 &lt;NA&gt;        NA &lt;NA&gt;   
+## 10 A10000  Insert Fi… comple… &lt;NA&gt;    2007-08-02 00:00:00 &lt;NA&gt;        NA &lt;NA&gt;   
+## # … with 34,714 more rows, 10 more variables: expense &lt;chr&gt;, lastsent &lt;chr&gt;,
+## #   matricola &lt;dbl&gt;, notificationtype &lt;chr&gt;, paymentamount &lt;dbl&gt;, points &lt;dbl&gt;,
+## #   totalpaymentamount &lt;chr&gt;, vehicleclass &lt;chr&gt;, activity_instance_id &lt;chr&gt;,
+## #   .order &lt;int&gt;, and abbreviated variable names ¹​lifecycle, ²​resource,
+## #   ³​dismissal</code></pre>
+</div>
+<div id="using-existing-mapping" class="section level2">
+<h2>Using existing mapping</h2>
+<p>It is also poosible to take a snapshot of the eventlog mapping at a
+certain point in time, and reuse this later. A mapping can be extracted
+using the <code>mapping</code> function.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>mapping_fines <span class="ot">&lt;-</span> <span class="fu">mapping</span>(traffic_fines)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>mapping_fines</span></code></pre></div>
+<pre><code>## Case identifier:     case_id 
+## Activity identifier:     activity 
+## Resource identifier:     resource 
+## Activity instance identifier:    activity_instance_id 
+## Timestamp:           timestamp 
+## Lifecycle transition:        lifecycle</code></pre>
+<p>We can than adjust the mapping incrementally by using the approaches
+above.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>traffic_fines <span class="sc">%&gt;%</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">set_case_id</span>(<span class="st">&quot;vehicleclass&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">set_activity_id</span>(<span class="st">&quot;notificationtype&quot;</span>) <span class="ot">-&gt;</span> traffic_fines</span></code></pre></div>
+<p>Later, we can undo these changes and “reset” the original mapping
+using the <code>re_map</code> function.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>traffic_fines <span class="sc">%&gt;%</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">re_map</span>(mapping_fines)</span></code></pre></div>
+<pre><code>## # Log of 34724 events consisting of:
+## 44 traces 
+## 10000 cases 
+## 34724 instances of 11 activities 
+## 16 resources 
+## Events occurred from 2006-06-17 until 2012-03-26 
+##  
+## # Variables were mapped as follows:
+## Case identifier:     case_id 
+## Activity identifier:     activity 
+## Resource identifier:     resource 
+## Activity instance identifier:    activity_instance_id 
+## Timestamp:           timestamp 
+## Lifecycle transition:        lifecycle 
+## 
+## # A tibble: 34,724 × 18
+##    case_id activity   lifec…¹ resou…² timestamp           amount article dismi…³
+##    &lt;chr&gt;   &lt;fct&gt;      &lt;fct&gt;   &lt;fct&gt;   &lt;dttm&gt;              &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;  
+##  1 A1      Create Fi… comple… 561     2006-07-24 00:00:00 35.0       157 NIL    
+##  2 A1      Send Fine  comple… &lt;NA&gt;    2006-12-05 00:00:00 &lt;NA&gt;        NA &lt;NA&gt;   
+##  3 A100    Create Fi… comple… 561     2006-08-02 00:00:00 35.0       157 NIL    
+##  4 A100    Send Fine  comple… &lt;NA&gt;    2006-12-12 00:00:00 &lt;NA&gt;        NA &lt;NA&gt;   
+##  5 A100    Insert Fi… comple… &lt;NA&gt;    2007-01-15 00:00:00 &lt;NA&gt;        NA &lt;NA&gt;   
+##  6 A100    Add penal… comple… &lt;NA&gt;    2007-03-16 00:00:00 71.5        NA &lt;NA&gt;   
+##  7 A100    Send for … comple… &lt;NA&gt;    2009-03-30 00:00:00 &lt;NA&gt;        NA &lt;NA&gt;   
+##  8 A10000  Create Fi… comple… 561     2007-03-09 00:00:00 36.0       157 NIL    
+##  9 A10000  Send Fine  comple… &lt;NA&gt;    2007-07-17 00:00:00 &lt;NA&gt;        NA &lt;NA&gt;   
+## 10 A10000  Insert Fi… comple… &lt;NA&gt;    2007-08-02 00:00:00 &lt;NA&gt;        NA &lt;NA&gt;   
+## # … with 34,714 more rows, 10 more variables: expense &lt;chr&gt;, lastsent &lt;chr&gt;,
+## #   matricola &lt;dbl&gt;, notificationtype &lt;chr&gt;, paymentamount &lt;dbl&gt;, points &lt;dbl&gt;,
+## #   totalpaymentamount &lt;chr&gt;, vehicleclass &lt;chr&gt;, activity_instance_id &lt;chr&gt;,
+## #   .order &lt;int&gt;, and abbreviated variable names ¹​lifecycle, ²​resource,
+## #   ³​dismissal</code></pre>
+</div>
 
 <p>Copyright &copy; 2023 bupaR - Hasselt University</p>
 

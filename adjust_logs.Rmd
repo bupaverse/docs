@@ -19,16 +19,16 @@ For an `eventlog`:
 * 	timestamp (`timestamp`)
 *	resource (`resource`)
 
-For an `activitylog`
+For an `activitylog`:
 
 *	case identifier (`case_id`)
 *	activity type (`activity_id`)
 * 	timestamps (`timestamps`)
 *	resource (`resource`)
 
-More information on these characteristics can be found [here](http://bupar.net/creating_eventlogs.html). Each of these can be modified to approach the event log from a different angle. This can be done using the `eventlog` or `activitylog`-function, auxiliary  `set`-functions, or by using an existing mapping.
+More information on these characteristics can be found [here](http://bupar.net/creating_eventlogs.html). Each of these can be modified to approach the event log from a different angle. This can be done using the `eventlog()` or `activitylog()`-function, auxiliary  `set_`-functions, or by using an existing mapping.
 
-```{r}
+```{r message = F, warning = F}
 library(bupaR)
 ```
 

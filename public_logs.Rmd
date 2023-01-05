@@ -3,17 +3,26 @@ title: "Public Logs"
 ---
 
 
+```{r echo = F, include = F}
+library(eventdataR)
+library(bupaR)
+```
+
 ```{r echo = F, out.width="25%", fig.align = "right"}
 knitr::include_graphics("images/icons/create.PNG")
 ```
 
 # Public logs
 
-The `eventdataR` package contains several real-life and artificial event logs. Each can be loaded using the `data` function. The currently available event logs are listed below. More event logs will be added in the future.
+The `eventdataR` package contains several real-life and artificial logs. Each can be loaded using the `data` function. The currently available logs are listed below. 
 
 ## Real-life data
 
 ### Sepsis
+
+This real-life event log contains events of sepsis cases from a hospital. Sepsis is a life threatening condition typically caused by an infection. One case represents the pathway through the hospital. The events were recorded by the ERP (Enterprise Resource Planning) system of the hospital. There are about 1000 cases with in total 15,000 events that were recorded for 16 different activities. Moreover, 39 data attributes are recorded, e.g., the group responsible for the activity, the results of tests and information from checklists. Events and attribute values have been anonymized. The time stamps of events have been randomized, but the time between events within a trace has not been altered.
+
+Source: <https://doi.org/10.4121/uuid:915d2bfb-7e84-49ad-a286-dc35f063a460>
 
 ```{r}
 sepsis
@@ -21,17 +30,32 @@ sepsis
 
 ### Hospital Log
 
+Real life log of a Dutch academic hospital, originally intended for use in the first Business Process Intelligence Contest (BPIC 2011).
+
+
+Source: <https://doi.org/10.4121/uuid:d9769f3d-0ab0-4fb8-803b-0d1120ffcf54>
+
 ```{r}
 hospital
 ```
 
 ### Hospital Billing
 
+The 'Hospital Billing' event log was obtained from the financial modules of the ERP system of a regional hospital. The event log contains events that are related to the billing of medical services that have been provided by the hospital. Each trace of the event log records the activities executed to bill a package of medical services that were bundled together. The event log does not contain information about the actual medical services provided by the hospital. The 100,000 traces in the event log are a random sample of process instances that were recorded over three years. Several attributes such as the 'state' of the process, the 'caseType', the underlying 'diagnosis' etc. are included in the event log. Events and attribute values have been anonymized. The time stamps of events have been randomized for this purpose, but the time between events within a trace has not been altered.
+
+Source: <https://doi.org/10.4121/uuid:76c46b83-c930-4798-a1c9-4be94dfeb741>
+
 ```{r}
 hospital_billing
 ```
 
+
+
 ### Road Traffic Fine Management
+
+Real-life event log of an information system managing road traffic fines.
+
+Source: https://doi.org/10.4121/uuid:270fd440-1057-4fb9-89a9-b699b47990f5
 
 ```{r}
 traffic_fines
@@ -45,7 +69,6 @@ Artificial eventlog about patients arriving in an emergency department of a hosp
 
 
 ```{r message = F, warning = F}
-library(eventdataR)
 patients %>% summary
 ```
 

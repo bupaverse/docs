@@ -34,7 +34,7 @@ The 5 process monitoring tasks are defined as follows:
 The overall approach using `processpredictR` is shown in the Figure below. `prepare_examples()` transforms logs into a dataset that can be used for training and prediction, which is thereafter split into train and test set. Subsequently a model is made, compiled and fit. Finally, the model can be used to predict and can be evaluated
 
 ```{r echo = F, eval = T, out.width = "60%", fig.align = "center"}
-knitr::include_graphics("docs/images/framework.PNG")
+knitr::include_graphics("images/framework.PNG")
 ```
 
 Different levels of customization are offered. Using `create_model()`, a standard off-the-shelf model can be created for each of the supported tasks, including standard features. 
@@ -305,7 +305,7 @@ plot(predictions) +
 ```
 
 ```{r, out.width="100%", fig.width = 7} 
-knitr::include_graphics("docs/images/confusion_matrix.PNG")
+knitr::include_graphics("images/confusion_matrix.PNG")
 ```
 
 ## Evaluate model

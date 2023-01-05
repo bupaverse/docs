@@ -552,15 +552,16 @@ workflow</h1>
 tasks on processes using event logs and Transformer models. The 5
 process monitoring tasks are defined as follows:</p>
 <ul>
-<li><em>outcome</em>: predict the case outcome, which can be the last
-activity, or a manually defined variable</li>
-<li><em>next activity</em>: predict the next activity instance</li>
-<li><em>remaining trace</em>: predict the sequence of all next activity
-instances</li>
-<li><em>next time</em>: predict the start time of the next activity
+<li><strong>outcome</strong>: predict the case outcome, which can be the
+last activity, or a manually defined variable</li>
+<li><strong>next activity</strong>: predict the next activity
 instance</li>
-<li><em>remaining time</em>: predict the remaining time till the end of
-the case</li>
+<li><strong>remaining trace</strong>: predict the sequence of all next
+activity instances</li>
+<li><strong>next time</strong>: predict the start time of the next
+activity instance</li>
+<li><strong>remaining time</strong>: predict the remaining time till the
+end of the case</li>
 </ul>
 <p>The overall approach using <code>processpredictR</code> is shown in
 the Figure below. <code>prepare_examples()</code> transforms logs into a

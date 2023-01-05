@@ -25,11 +25,11 @@ library(purrr)
 The goal of `processpredictR` is to perform prediction tasks on processes using event logs and Transformer models.
 The 5 process monitoring tasks are defined as follows:
 
-* _outcome_: predict the case outcome, which can be the last activity, or a manually defined variable
-* _next activity_: predict the next activity instance 
-* _remaining trace_: predict the sequence of all next activity instances
-* _next time_: predict the start time of the next activity instance
-* _remaining time_: predict the remaining time till the end of the case
+* __outcome__: predict the case outcome, which can be the last activity, or a manually defined variable
+* __next activity__: predict the next activity instance 
+* __remaining trace__: predict the sequence of all next activity instances
+* __next time__: predict the start time of the next activity instance
+* __remaining time__: predict the remaining time till the end of the case
 
 The overall approach using `processpredictR` is shown in the Figure below. `prepare_examples()` transforms logs into a dataset that can be used for training and prediction, which is thereafter split into train and test set. Subsequently a model is made, compiled and fit. Finally, the model can be used to predict and can be evaluated
 

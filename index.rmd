@@ -1,5 +1,8 @@
 ---
 title: "bupaR Documentation"
+output: 
+  html_document: 
+    css: "my_css.css"
 ---
 
 ```{r include = F}

@@ -65,7 +65,6 @@ Additional features can be either numerical variables, or factors. Numerical var
 
 
 # Customize your transformer model
-
 Instead of using the standard `off the shelf` transformer model that comes with `processpredictR`, you can customize the model. One way to do this, is by using the `custom` argument of the `create_model()` function. The resulting model will then only contain the input layers of the model, as shown below. 
 
 ```{r}
@@ -95,6 +94,7 @@ custom_model
 ```
 
 You can than stack layers on top of your custom model as you prefer, using the `stack_layers()` function. This function provides an abstraction from a little bit more code work if `keras` is used (see [customization with keras](https://bupaverse.github.io/docs/predict_keras.html)).
+
 ```{r}
 custom_model <- custom_model %>%
   stack_layers(layer_dropout(rate = 0.1)) %>% 

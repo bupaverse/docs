@@ -631,6 +631,9 @@ instead of using the provided <code>processpredictR</code> methods. Note
 that after defining a model with <code>keras::keras_model()</code> the
 model no longer is of class <code>ppred_model</code> (as opposed to
 <code>processpredictR::create_model()</code>).</p>
+<div id="adding-layers-and-defining-a-new-custom-model"
+class="section level2">
+<h2>Adding layers and defining a new custom model</h2>
 <p>The layers on top of a custom model (previously defined in <a
 href="https://bupaverse.github.io/docs/predict_adapt.html">adapting your
 model</a>) can be added as follows:</p>
@@ -671,22 +674,19 @@ model</a>) can be added as follows:</p>
 #&gt; [7] &quot;keras.utils.version_utils.LayerVersionSelector&quot;         
 #&gt; [8] &quot;keras.utils.version_utils.ModelVersionSelector&quot;         
 #&gt; [9] &quot;python.builtin.object&quot;</code></pre>
-<blockquote>
-<p>Note also that <code>keras::keras_model()</code> no longer returns a
-list, so we simply refer to the model as to an object.</p>
-</blockquote>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># compile</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">compile</span>(<span class="at">object=</span>custom_model, <span class="at">optimizer =</span> <span class="st">&quot;adam&quot;</span>, </span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">loss =</span> <span class="fu">loss_sparse_categorical_crossentropy</span>(), </span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">metrics =</span> <span class="fu">metric_sparse_categorical_crossentropy</span>())</span></code></pre></div>
+</div>
+<div id="preprocessing" class="section level2">
+<h2>Preprocessing</h2>
+<div id="processpredictrtokenize" class="section level3">
+<h3><code>processpredictR::tokenize()</code></h3>
 <p>Before training the model we first must prepare the data.
 <code>processpredictR</code> provides the <code>tokenize()</code>
 function, but other alternatives (see <a
 href="https://tensorflow.rstudio.com/guides/keras/preprocessing_layers">working
 with preprocessing layers</a>) can also be used.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># the trace of activities must be tokenized</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>tokens_train <span class="ot">&lt;-</span> df<span class="sc">$</span>train_df <span class="sc">%&gt;%</span> <span class="fu">tokenize</span>()</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">map</span>(tokens_train, head) <span class="co"># the output of tokens is a list</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># the trace of activities must be tokenized</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>tokens_train <span class="ot">&lt;-</span> df<span class="sc">$</span>train_df <span class="sc">%&gt;%</span> <span class="fu">tokenize</span>()</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">map</span>(tokens_train, head) <span class="co"># the output of tokens is a list</span></span></code></pre></div>
 <pre><code>#&gt; $token_x
 #&gt; $token_x[[1]]
 #&gt; [1] 2
@@ -715,11 +715,27 @@ with preprocessing layers</a>) can also be used.</p>
 #&gt; 
 #&gt; $token_y
 #&gt; [1] 0 1 2 3 4 5</code></pre>
+</div>
+<div id="pad-sequences" class="section level3">
+<h3>Pad sequences</h3>
 <p>Padding of sequences is required to make every input sequence of an
 equal length.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># make sequences of equal length</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> tokens_train<span class="sc">$</span>token_x <span class="sc">%&gt;%</span> <span class="fu">pad_sequences</span>(<span class="at">maxlen =</span> <span class="fu">max_case_length</span>(df<span class="sc">$</span>train_df), <span class="at">value =</span> <span class="dv">0</span>)</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> tokens_train<span class="sc">$</span>token_y</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># make sequences of equal length</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> tokens_train<span class="sc">$</span>token_x <span class="sc">%&gt;%</span> <span class="fu">pad_sequences</span>(<span class="at">maxlen =</span> <span class="fu">max_case_length</span>(df<span class="sc">$</span>train_df), <span class="at">value =</span> <span class="dv">0</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> tokens_train<span class="sc">$</span>token_y</span></code></pre></div>
+</div>
+</div>
+<div id="compile-fit-predict-evaluate" class="section level2">
+<h2>compile, fit, predict &amp; evaluate</h2>
+<blockquote>
+<p>Note that <code>keras::keras_model()</code> no longer returns a list,
+so we simply refer to the model as to an object.</p>
+</blockquote>
+<p>Do not forget to compile the model</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># compile</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">compile</span>(<span class="at">object=</span>custom_model, <span class="at">optimizer =</span> <span class="st">&quot;adam&quot;</span>, </span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">loss =</span> <span class="fu">loss_sparse_categorical_crossentropy</span>(), </span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">metrics =</span> <span class="fu">metric_sparse_categorical_crossentropy</span>())</span></code></pre></div>
 <p>We are now ready to train our custom model (the code below is not
 being evaluated).</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># train</span></span>
@@ -736,6 +752,7 @@ being evaluated).</p>
 <span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="co"># normalize by dividing y_test over the standard deviation of y_train</span></span>
 <span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> tokens_test<span class="sc">$</span>token_y <span class="sc">/</span> <span class="fu">sd</span>(tokens_train<span class="sc">$</span>token_y)</span>
 <span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a><span class="fu">evaluate</span>(custom_model, x, y)</span></code></pre></div>
+</div>
 </div>
 
 <p>Copyright &copy; 2023 bupaR - Hasselt University</p>

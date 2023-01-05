@@ -2,9 +2,11 @@
 title: Developer Guide
 ---
 
+<br/>
+
 ## Developer guide
 
-### Object classes and characteristics
+### Object classes
 
 bupaR knows 2 main object classes: `eventlog` and `activitylog.` Both are special types of `data.frames`. Furthermore there is the overarching object class `log`. The object class log is used by functions were a distinction between the two classes is not relevant. It is only used as a higher-level classification of the `eventlog` and `activitylog` objects - it cannot stand on its own. That is, objects which have just the class "log" cannot exist, they must have one of the subclasses as well. 
 

@@ -203,9 +203,10 @@ hist$metrics
 
 The method  _predict()_ can return 3 types of output, by setting the argument `output` to "append", "y_pred" or "raw". 
 
-Test dataset with appended predicted values (output = "append")
+Test dataset with appended predicted values (output = "append"):
 
 ```{r}
+# make predictions on the test set
 predictions <- model %>% predict(test_data = split$test_df, 
                                  output = "append") # default
 predictions %>% head(5)
@@ -273,6 +274,7 @@ predictions %>% class
 #> [7] "data.frame"
 ```
 ```{r}
+# print confusion matrix
 confusion_matrix(predictions)
 ```
 ```
@@ -297,12 +299,13 @@ confusion_matrix(predictions)
 Plot method for the confusion matrix (classification) or a scatter plot (regression).
 
 ```{r, out.width="100%", fig.width = 7}
+# plot confusion matrix in a bupaR style
 plot(predictions) +
   theme(axis.text.x = element_text(angle = 90))
 ```
 
 ```{r, out.width="100%", fig.width = 7} 
-knitr::include_graphics("confusion_matrix.PNG")
+knitr::include_graphics("images/confusion_matrix.PNG")
 ```
 
 ## Evaluate model

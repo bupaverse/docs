@@ -1,6 +1,11 @@
 name: "bupaR"
 output:
   html_document:
+    toc: true
+    toc_depth: 4
+    toc_float: 
+      collapsed: true
+      print: false
     theme:
       bootswatch: sandstone
       primary: "#339999"
@@ -15,7 +20,7 @@ output:
       after_body: footer.html
 output_dir: "docs"
 navbar:
-  title: "<a href = 'https://bupar.net'><img id = \"logo\" style = \"width: 200px; padding: 0px 20px 0px 0px\" src = \"images/bupar_trans2.png\" /></a>"
+  title: "<a href = 'https://bupar.net'><img id = \"logo\" style = \"width: 200px; padding: 0px 20px 0px 0px\" src = \"images/logo/bupar_trans_witteR2.png\" /></a>"
   left:
   - text: "Home"
     href: index.html

@@ -1,3 +1,151 @@
 ---
-title: Customization with Keras
+title: "Customization with Keras"
 ---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  eval = FALSE,
+  cache = FALSE
+)
+```
+
+```{r setup, message = F, eval = T}
+library(processpredictR)
+library(bupaR)
+library(ggplot2)
+library(dplyr)
+library(keras)
+library(purrr)
+```
+
+# Custom training and prediction
+
+We can also opt for setting up and training our model manually, instead of using the provided `processpredictR` methods. Note that after defining a model with `keras::keras_model()` the model no longer is of class `ppred_model` (as opposed to `processpredictR::create_model()`).
+
+The layers on top of a custom model (previously defined in [adapting your model](https://bupaverse.github.io/docs/predict_adapt.html)) can be added as follows:
+```{r}
+new_outputs <- custom_model$model$output %>% # custom_model$model to access a model and $output to access the outputs of that model
+  keras::layer_dropout(rate = 0.1) %>%
+  keras::layer_dense(units = custom_model$num_outputs, activation = 'softmax')
+
+custom_model <- keras::keras_model(inputs = custom_model$model$input, outputs = new_outputs, name = "new_custom_model")
+custom_model
+
+```
+
+```
+#> Model: "new_custom_model"
+#> ________________________________________________________________________________
+#>  Layer (type)                       Output Shape                    Param #     
+#> ================================================================================
+#>  input_2 (InputLayer)               [(None, 9)]                     0           
+#>  token_and_position_embedding_1 (To  (None, 9, 36)                  828         
+#>  kenAndPositionEmbedding)                                                       
+#>  transformer_block_1 (TransformerBl  (None, 9, 36)                  26056       
+#>  ock)                                                                           
+#>  global_average_pooling1d_1 (Global  (None, 36)                     0           
+#>  AveragePooling1D)                                                              
+#>  dropout_6 (Dropout)                (None, 36)                      0           
+#>  dense_6 (Dense)                    (None, 64)                      2368        
+#>  dropout_8 (Dropout)                (None, 64)                      0           
+#>  dense_8 (Dense)                    (None, 11)                      715         
+#> ================================================================================
+#> Total params: 29,967
+#> Trainable params: 29,967
+#> Non-trainable params: 0
+#> ________________________________________________________________________________
+```
+
+```{r}
+# class of the model
+custom_model %>% class
+```
+```
+#> [1] "keras.engine.functional.Functional"                     
+#> [2] "keras.engine.training.Model"                            
+#> [3] "keras.engine.base_layer.Layer"                          
+#> [4] "tensorflow.python.module.module.Module"                 
+#> [5] "tensorflow.python.trackable.autotrackable.AutoTrackable"
+#> [6] "tensorflow.python.trackable.base.Trackable"             
+#> [7] "keras.utils.version_utils.LayerVersionSelector"         
+#> [8] "keras.utils.version_utils.ModelVersionSelector"         
+#> [9] "python.builtin.object"
+```
+
+> Note also that `keras::keras_model()` no longer returns a list, so we simply refer to the model as to an object.
+
+```{r}
+# compile
+compile(object=custom_model, optimizer = "adam", 
+        loss = loss_sparse_categorical_crossentropy(), 
+        metrics = metric_sparse_categorical_crossentropy())
+```
+
+
+Before training the model we first must prepare the data. `processpredictR` provides the `tokenize()` function, but other alternatives (see [working with preprocessing layers](https://tensorflow.rstudio.com/guides/keras/preprocessing_layers)) can also be used. 
+
+```{r}
+# the trace of activities must be tokenized
+tokens_train <- df$train_df %>% tokenize()
+map(tokens_train, head) # the output of tokens is a list
+
+
+```
+
+```
+#> $token_x
+#> $token_x[[1]]
+#> [1] 2
+#> 
+#> $token_x[[2]]
+#> [1] 2 3
+#> 
+#> $token_x[[3]]
+#> [1] 2
+#> 
+#> $token_x[[4]]
+#> [1] 2 4
+#> 
+#> $token_x[[5]]
+#> [1] 2 4 5
+#> 
+#> $token_x[[6]]
+#> [1] 2 4 5 6
+#> 
+#> 
+#> $numeric_features
+#> NULL
+#> 
+#> $categorical_features
+#> NULL
+#> 
+#> $token_y
+#> [1] 0 1 2 3 4 5
+```
+
+Padding of sequences is required to make every input sequence of an equal length. 
+```{r}
+# make sequences of equal length
+x <- tokens_train$token_x %>% pad_sequences(maxlen = max_case_length(df$train_df), value = 0)
+y <- tokens_train$token_y
+```
+
+We are now ready to train our custom model (the code below is not being evaluated).
+```{r, eval=F}
+# train
+fit(object = custom_model, x, y, epochs = 10, batch_size = 10) # see also ?keras::fit.keras.engine.training.Model
+
+# predict
+tokens_test <- df$test_df %>% tokenize()
+x <- tokens_test$token_x %>% pad_sequences(maxlen = max_case_length(df$train_df), value = 0)
+predict(custom_model, x)
+
+# evaluate
+tokens_test <- df$test_df %>% tokenize()
+x <- tokens_test$token_x
+# normalize by dividing y_test over the standard deviation of y_train
+y <- tokens_test$token_y / sd(tokens_train$token_y)
+evaluate(custom_model, x, y)
+```

@@ -1,3 +1,134 @@
 ---
-title: Adapting your model
+title: "Adapting your model"
 ---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  eval = FALSE,
+  cache = FALSE
+)
+```
+
+```{r setup, message = F, eval = T}
+library(processpredictR)
+library(bupaR)
+library(ggplot2)
+library(dplyr)
+library(keras)
+library(purrr)
+```
+
+# Additional features
+Next to the activity prefixes in the data, and standard features defined for each task, additional features can be defined when using `prepare_examples()`. The example below shows how the month in which a case is started can be added as a feature. 
+
+```{r}
+# preprocessed dataset with categorical hot encoded features
+df_next_time <- traffic_fines %>% 
+  group_by_case() %>%
+  mutate(month = lubridate::month(min(timestamp), label = TRUE)) %>%
+  ungroup_eventlog() %>%
+  prepare_examples(task = "next_time", features = "month") %>% split_train_test()
+```
+
+```{r}
+# the attributes of df are added or changed accordingly
+
+df_next_time$train_df %>% attr("features")
+```
+
+```
+#>  [1] "latest_duration"      "throughput_time"      "processing_time"     
+#>  [4] "time_before_activity" "month_jan"            "month_feb"           
+#>  [7] "month_mrt"            "month_apr"            "month_mei"           
+#> [10] "month_jun"            "month_jul"            "month_aug"           
+#> [13] "month_sep"            "month_okt"            "month_nov"           
+#> [16] "month_dec"
+```
+
+```{r}
+# the month feature is hot-encoded
+df_next_time$train_df %>% attr("hot_encoded_categorical_features")
+```
+
+```
+#>  [1] "month_jan" "month_feb" "month_mrt" "month_apr" "month_mei" "month_jun"
+#>  [7] "month_jul" "month_aug" "month_sep" "month_okt" "month_nov" "month_dec"
+```
+
+Additional features can be either numerical variables, or factors. Numerical variables will be automatically normalized. Factors will automatically be converted to hot-encoded variables. A few important notes: 
+
+* Character values are not accepted, and should be transformed to factors. 
+* We assume that no features have missing values. If there are any, these should be imputed or removed before using `prepare_examples()`. 
+* Finally, in case the data is an event log, features should have single values for each activity instance. Start and complete event should thus have a single unique value of a variable for it to be used as feature. 
+
+
+# Customize your transformer model
+
+Instead of using the standard `off the shelf` transformer model that comes with `processpredictR`, you can customize the model. One way to do this, is by using the `custom` argument of the `create_model()` function. The resulting model will then only contain the input layers of the model, as shown below. 
+
+```{r}
+df <- prepare_examples(traffic_fines, task = "next_activity") %>% split_train_test()
+custom_model <- df$train_df %>% create_model(custom = TRUE, name = "my_custom_model")
+custom_model
+```
+
+
+```
+#> Model: "my_custom_model"
+#> ________________________________________________________________________________
+#>  Layer (type)                       Output Shape                    Param #     
+#> ================================================================================
+#>  input_2 (InputLayer)               [(None, 9)]                     0           
+#>  token_and_position_embedding_1 (To  (None, 9, 36)                  828         
+#>  kenAndPositionEmbedding)                                                       
+#>  transformer_block_1 (TransformerBl  (None, 9, 36)                  26056       
+#>  ock)                                                                           
+#>  global_average_pooling1d_1 (Global  (None, 36)                     0           
+#>  AveragePooling1D)                                                              
+#> ================================================================================
+#> Total params: 26,884
+#> Trainable params: 26,884
+#> Non-trainable params: 0
+#> ________________________________________________________________________________
+```
+
+You can than stack layers on top of your custom model as you prefer, using the `stack_layers()` function. This function provides an abstraction from a little bit more code work if `keras` is used (see [customization with keras](https://bupaverse.github.io/docs/predict_keras.html)).
+```{r}
+custom_model <- custom_model %>%
+  stack_layers(layer_dropout(rate = 0.1)) %>% 
+  stack_layers(layer_dense(units = 64, activation = 'relu'))
+custom_model
+```
+
+```
+#> Model: "my_custom_model"
+#> ________________________________________________________________________________
+#>  Layer (type)                       Output Shape                    Param #     
+#> ================================================================================
+#>  input_2 (InputLayer)               [(None, 9)]                     0           
+#>  token_and_position_embedding_1 (To  (None, 9, 36)                  828         
+#>  kenAndPositionEmbedding)                                                       
+#>  transformer_block_1 (TransformerBl  (None, 9, 36)                  26056       
+#>  ock)                                                                           
+#>  global_average_pooling1d_1 (Global  (None, 36)                     0           
+#>  AveragePooling1D)                                                              
+#>  dropout_6 (Dropout)                (None, 36)                      0           
+#>  dense_6 (Dense)                    (None, 64)                      2368        
+#> ================================================================================
+#> Total params: 29,252
+#> Trainable params: 29,252
+#> Non-trainable params: 0
+#> ________________________________________________________________________________
+
+```
+
+```{r}
+# this works too
+# we pass multiple keras-package layers separated by comma
+custom_model %>%
+  stack_layers(layer_dropout(rate = 0.1), layer_dense(units = 64, activation = 'relu'))
+```
+
+Once you have finalized your model, with an appropriate output-layer (which should have the correct amount of outputs, as recorded in `customer_model$num_outputs` and an appropriate activation function), you can use the `compile()`, `fit()`, `predict()` and `evaluate()` functions as seen before in the previous introductory [example](https://bupaverse.github.io/docs/predict_workflow.html). 

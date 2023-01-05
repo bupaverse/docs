@@ -21,10 +21,11 @@ library(purrr)
 ```
 
 # Custom training and prediction
-
 We can also opt for setting up and training our model manually, instead of using the provided `processpredictR` methods. Note that after defining a model with `keras::keras_model()` the model no longer is of class `ppred_model` (as opposed to `processpredictR::create_model()`).
 
+## Adding layers and defining a new custom model
 The layers on top of a custom model (previously defined in [adapting your model](https://bupaverse.github.io/docs/predict_adapt.html)) can be added as follows:
+
 ```{r}
 new_outputs <- custom_model$model$output %>% # custom_model$model to access a model and $output to access the outputs of that model
   keras::layer_dropout(rate = 0.1) %>%
@@ -74,16 +75,8 @@ custom_model %>% class
 #> [9] "python.builtin.object"
 ```
 
-> Note also that `keras::keras_model()` no longer returns a list, so we simply refer to the model as to an object.
-
-```{r}
-# compile
-compile(object=custom_model, optimizer = "adam", 
-        loss = loss_sparse_categorical_crossentropy(), 
-        metrics = metric_sparse_categorical_crossentropy())
-```
-
-
+## Preprocessing
+### `processpredictR::tokenize()`
 Before training the model we first must prepare the data. `processpredictR` provides the `tokenize()` function, but other alternatives (see [working with preprocessing layers](https://tensorflow.rstudio.com/guides/keras/preprocessing_layers)) can also be used. 
 
 ```{r}
@@ -125,11 +118,23 @@ map(tokens_train, head) # the output of tokens is a list
 #> [1] 0 1 2 3 4 5
 ```
 
+### Pad sequences
 Padding of sequences is required to make every input sequence of an equal length. 
 ```{r}
 # make sequences of equal length
 x <- tokens_train$token_x %>% pad_sequences(maxlen = max_case_length(df$train_df), value = 0)
 y <- tokens_train$token_y
+```
+
+## compile, fit, predict & evaluate
+> Note that `keras::keras_model()` no longer returns a list, so we simply refer to the model as to an object.
+
+Do not forget to compile the model
+```{r}
+# compile
+compile(object=custom_model, optimizer = "adam", 
+        loss = loss_sparse_categorical_crossentropy(), 
+        metrics = metric_sparse_categorical_crossentropy())
 ```
 
 We are now ready to train our custom model (the code below is not being evaluated).

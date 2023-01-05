@@ -19,7 +19,7 @@ knitr::include_graphics("images/icons/create.PNG")
 
 Transforming your raw data into an event log object is one of the most challenging tasks in process analysis. On this page, we cover all the possible situations and challenges that you can encounter. 
 
-We start with some important terminology. 
+We start with some important terminology:
 
 -   **Case**: The _subject_ of your process, e.g. a customer, an order, a patient. 
 -   **Activity**: A step in your process, e.g. receive order, sent payment, perform MRI SCAN, etc.
@@ -27,15 +27,15 @@ We start with some important terminology.
 -   **Event**: A registration connected to an activity instance, characterized by a single timestamp. E.g. the _start_ of _Perform MRI SCAN_ for _Patient X_. 
 -   **Resource**: A person or machine that is related to the execution of (part of) an activity instance. E.g. the radiologist in charge of our MRI SCAN. 
 -   **Lifecycle status**: An indication of the status of an activity instance connect to an event. Typical values are _start_, _complete_. Other possible values are _schedule_, _suspend_, _resume_, etc. 
--   **Trace**: A sequence of activities. The activity instances that belong to a case will result to a specific trace when ordered by the time each instance occured. 
+-   **Trace**: A sequence of activities. The activity instances that belong to a case will result to a specific trace when ordered by the time each instance occurred. 
 
 
 ## Logs: `eventlog` vs `activitylog`
 
-`bupaR` supports two different kinds of log formats, both of which are an extension on R data.frames:
+`bupaR` supports two different kinds of log formats, both of which are an extension on R `data.frame`:
 
--   **`eventlog`**: Event logs are created from data.frames in which each row represents a single event. This means that it has a single timestamp.
--   **`activitylog`**: Activity logs are created from data.frames in which each row represents a single activity instances. This means it can has multiple timestamps, stored in different columns.
+-   **`eventlog`**: Event logs are created from `data.frame` in which each row represents a single event. This means that it has a single timestamp.
+-   **`activitylog`**: Activity logs are created from `data.frame` in which each row represents a single activity instances. This means it can has multiple timestamps, stored in different columns.
 
 The data model below shows the difference between these two levels of observations, i.e. activity instances vs events.
 
@@ -59,15 +59,15 @@ tmp %>%
 
 ```{r echo = F, message = F, warning = F}
 card("data-toggle" = "collapse", card_header(class = "card text-white bg-secondary mb-3", "Transactional lifecycle?"),
-	 card_body("An event is an atomic registration related to an activity instance. It thus contains one (and only one) timestamp. Additionally, the event should include a reference to a life cycle transition. More specifically, multiple events can describe different life cycle transitions of a single activity instance. For example, one event might record when a surgery is scheduled, another when it is started, yet another when it is completed, etc."),
+	 card_body("An event is an atomic registration related to an activity instance. It thus contains one (and only one) timestamp. Additionally, the event should include a reference to a lifecycle transition. More specifically, multiple events can describe different lifecycle transitions of a single activity instance. For example, one event might record when a surgery is scheduled, another when it is started, yet another when it is completed, etc."),
 	 layout_column_wrap(width = "200px", 
-			card_body("The standard transactional life cycle."),card_image("images/transactional-lifecycle.PNG", container = card_body, width = "800px")), full_screen = TRUE)
+			card_body("The standard transactional lifecycle."),card_image("images/transactional-lifecycle.PNG", container = card_body, width = "800px")), full_screen = TRUE)
 
 ```
 
 
 
-The table below show the same data as above, but now using the activitylog format. It can be seen that there are now just 3 rows instead of 6, but each row as 2 timestamps, representing 2 events. The lifecycle status that those timestamps represent is now the column names of those variables.
+The table below show the same data as above, but now using the `activitylog` format. It can be seen that there are now just 3 rows instead of 6, but each row as 2 timestamps, representing 2 events. The lifecycle status represented by those timestamps is now the column names of those variables. 
 
 ```{r echo = F}
 tmp %>%
@@ -79,11 +79,11 @@ tmp %>%
 	knitr::kable()
 ```
 
-As these examples show, both formats can often be used for representing the same process data. However, some important differences between them:
+As these examples show, both formats can often be used for representing the same process data. However, there are some important differences between them:
 
--   the `eventlog` format has much more **flexibility** in terms of lifecycle. There is no limit to the number of events that can occur in a single activity instance. If your data contains lifecycle statuses such as *suspend*, *resume* or *reassign*, they can be recorded multiple times within a single activity instance. In the activitylog format, as each lifecycle gets is own column, it isn't possible to have two events of the same lifecycle status in a single activity instance.
--   in an `eventlog`, the level of observation is a event. As a result, attribute values can be stored at the **event level**. In an `activitylog`, the level of observation is an activity instance. This means that all additional attributes that you have about your process should be at this higher level. For example, an activity instance can only be connected to a single resource in the `activitylog` format, whereas in an `eventlog` different events within the same activity instance can have different resources, of different values for any other attribute.
--   because of the limited flexibility, an `activitylog` is **easier** to make, and typically closer to the format that your data is already in (see further below on how to construct log objects). As a result of this, there are many situations in which the analysis of an `activitylog` will be much faster compared to `eventlogs`, where a lot of additional complexity needs to be taken into account.
+-   the `eventlog` format has much more **flexibility** in terms of lifecycle. There is no limit to the number of events that can occur in a single activity instance. If your data contains lifecycle statuses such as *suspend*, *resume* or *reassign*, they can be recorded multiple times within a single activity instance. In the `activitylog` format, as each lifecycle gets is own column, it isn't possible to have two events of the same lifecycle status in a single activity instance.
+-   the level of observation in an `eventlog` is an event. As a result, attribute values can be stored at the **event level**. In an `activitylog`, the level of observation is an activity instance. This means that all additional attributes that you have about your process should be at this higher level. For example, an activity instance can only be connected to a single resource in the `activitylog` format, whereas in an `eventlog` different events within the same activity instance can have different resources, of different values for any other attribute.
+-   because of the limited flexibility, an `activitylog` is **easier** to make, and typically closer to the format that your data is already in (see further below on how to construct `log` objects). As a result of this, there are many situations in which the analysis of an `activitylog` will be much faster compared to `eventlog`, where a lot of additional complexity needs to be taken into account.
 
 ## The right log for the job
 
@@ -99,7 +99,7 @@ An `activitylog` is the best option when each row in your data is an activity in
 
 ### Scenario 1
 
-If each row in your data.frame is already an activity instance, the `activitylog` format is the best way to go. Consider the data sample below.
+If each row in your `data.frame` is already an activity instance, the `activitylog` format is the best way to go. Consider the data sample below.
 
 ```{r echo = F}
 patients %>%
@@ -114,10 +114,10 @@ data %>%
 	knitr::kable()
 ```
 
-As each row contains multiple timestamps, i.e. activity_started and activity_ended, it is clear that each row represents an activity instance. Turning this dataset in an `activitylog` requires the following steps.
+As each row contains multiple timestamps, i.e. activity_started and activity_ended, it is clear that each row represents an activity instance. Turning this dataset in an `activitylog` requires the following steps:
 
-1.  Timestamp variables should be named in correspondence with the standard Transactional life cycle.
-2.  Timestamp variables should be of type Date or POSIXct
+1.  Timestamp variables should be named in correspondence with the standard Transactional lifecycle.
+2.  Timestamp variables should be of type `Date` or `POSIXct`.
 3.  Use the `activitylog` constructor function.
 
 ```{r}
@@ -137,7 +137,7 @@ Note that in case a resource identifier is available, this information can be ad
 
 ### Scenario 2
 
-If each row in your data.frame is an event, but all events that belong to the same activity instance share the same attribute values, the `activitylog` format is again the best way to go. Consider the data sample below.
+If each row in your `data.frame` is an event, but all events that belong to the same activity instance share the same attribute values, the `activitylog` format is again the best way to go. Consider the data sample below.
 
 ```{r echo = F}
 patients %>%
@@ -154,8 +154,8 @@ data %>%
 
 The resource identifier (employee) has been added as an additional attribute. Note that though each row is an event, they can be grouped into activity instances using the handling_id column, which we will call the activity instance id. Using the latter, we can see that the resource attribute is the same within each activity instance, which allows us to create an `activitylog`. The steps to do so are the following.
 
-1.  Lifecycle variable should be named in correspondence with the standard Transactional life cycle.
-2.  Timestamp variable should be of type Date or POSIXct
+1.  Lifecycle variable should be named in correspondence with the standard Transactional lifecycle.
+2.  Timestamp variable should be of type `Date` or `POSIXct`.
 3.  Use the `eventlog` constructor function.
 4.  Convert to `activitylog` using `to_activitylog` for reduced memory usage and improved performance.
 
@@ -195,10 +195,10 @@ data %>%
 	knitr::kable()
 ```
 
-In this example, different resources (employees) sometimes perform the start and complete event of the same activity instance. Therefore, we resort to the `eventlog` format which has no problems storing this. The steps to take are the following.
+In this example, different resources (employees) sometimes perform the start and complete event of the same activity instance. Therefore, we resort to the `eventlog` format which has no problems storing this. The steps to take are the following:
 
-1.  Lifecycle variable should be named in correspondence with the standard Transactional life cycle.
-2.  Timestamp variable should be of type Date or POSIXct
+1.  Lifecycle variable should be named in correspondence with the standard Transactional lifecycle.
+2.  Timestamp variable should be of type `Date` or `POSIXct`.
 3.  Use the `eventlog` constructor function.
 
 ```{r}
@@ -216,7 +216,7 @@ data %>%
 				resource_id = "employee") 
 ```
 
-Note that we need an eventlog irrespective of which attribute values are differing. I.e. it can be resources, but also any additional variables you have in your data set. For the special case of resource values, it might be that a different resource executing events in the same activity instance is a data quality issues. If so, some functions can help you to identify this issue: [Inconsistent Resources].
+Note that we need an `eventlog` irrespective of which attribute values are differing, i.e. it can be resources, but also any additional variables you have in your data set. For the special case of resource values, it might be that a different resource executing events in the same activity instance is a data quality issue. If so, some functions can help you to identify this issue: [Inconsistent Resources].
 
 Again, if the activity instance id does not exist, some heuristics are available to generate it: [Missing activity instance identifier].
 
@@ -224,7 +224,7 @@ Again, if the activity instance id does not exist, some heuristics are available
 
 ### Missing activity instance id
 
-In order to be able to correlate events which belong to the same activity instance, an activity instance identifier is required. For example, in the data shown below, it is possible that a patient has gone through different surgeries, each with their own started and complete event. The activity instance identifier will then allow to distinguish which events belong together and which do not. It is important to note that this instance identifier should be unique, also among different cases and activities.
+In order to be able to correlate events which belong to the same activity instance, an activity instance identifier is required. For example, in the data shown below, it is possible that a patient has gone through different surgeries, each with their own start- and complete event. The activity instance identifier will then allow to distinguish which events belong together and which do not. It is important to note that this instance identifier should be unique, also among different cases and activities.
 
 ```{r echo = F}
 tribble(~patient, ~activity, ~timestamp, ~status, ~activity_instance,
@@ -241,20 +241,20 @@ tribble(~patient, ~activity, ~timestamp, ~status, ~activity_instance,
 data %>% knitr::kable()
 ```
 
-If the activity instance identifier is not available you can use the `assign_instance_id` function, which uses an heuristic to create the missing identifier. Alternatively, you can try to create the identifier on your own using `dplyr::mutate` and other manipulation functions.
+If the activity instance identifier is not available you can use the `assign_instance_id()` function, which uses an heuristic to create the missing identifier. Alternatively, you can try to create the identifier on your own using `dplyr::mutate()` and other manipulation functions.
 
 ### Large Datasets and Validation
 
-By default, bupaR validates certain properties of the activity instances that is supplied when creating an event log:
+By default, `bupaR` validates certain properties of the activity instances that is supplied when creating an event log:
 
 -   a single activity instance identifier must not be connected to multiple cases,
 -   a single activity instance identifier must not be connected to multiple activity labels,
 
-However, these checks are not efficient and may lead to considerable performance issues for large data frames. It is possible to deactivate the validation in case you already know that your data fulfills all the requirements, using the argument `validate = FALSE` when creating the `eventlog`. Note that when the activity instance id was created with the `assign_instance_id` function, you can assume the above properties hold.
+However, these checks are not efficient and may lead to considerable performance issues for large data frames. It is possible to deactivate the validation in case you already know that your data fulfills all the requirements, using the argument `validate = FALSE` when creating the `eventlog`. Note that when the activity instance id was created with the `assign_instance_id()` function, you can assume the above properties hold.
 
 ### Inconsistent Resources
 
-Each event can contain the notion of a resource. It can be so that different events beloging to the same activity instance are executed by different resources, as in the `eventlog` below.
+Each event can contain the notion of a resource. It can be so that different events belonging to the same activity instance are executed by different resources, as in the `eventlog` below.
 
 ```{r echo = F, warning = F}
 patients %>%
@@ -283,16 +283,18 @@ log %>%
 	knitr::kable()
 ```
 
-If you have a large dataset, and want to have an overview of the activity instances that have more than one resource connected to them, you can use the `detect_resource_inconsistences` function.
+If you have a large dataset, and want to have an overview of the activity instances that have more than one resource connected to them, you can use the `detect_resource_inconsistences()` function.
 
 ```{r}
 log %>%
 	detect_resource_inconsistencies()
 ```
 
-If you want to remove these inconsistencies, a quick fix is to merge the resource labels together with `fix_resource_inconsistencies`. Note that this is not needed for eventlogs, but it is for activity logs. While the creation of the event log will emit a warning when resource inconsistencies exist, this should mostly be seen as a data quality warning. That said, there might be analysis related to the counting of resources where such inconsistencies might lead to odd results.
+If you want to remove these inconsistencies, a quick fix is to merge the resource labels together with `fix_resource_inconsistencies()`. Note that this is not needed for `eventlog`, but it is for `activitylog`. While the creation of the `eventlog` will emit a warning when resource inconsistencies exist, this should mostly be seen as a data quality warning. That said, there might be analysis related to the counting of resources where such inconsistencies might lead to odd results.
 
 ```{r}
 log %>%
 	fix_resource_inconsistencies()
 ```
+
+See next: [Adjusting logs](adjust_logs.html)

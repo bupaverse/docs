@@ -38,7 +38,7 @@ The following packages can be installed from [CRAN](https://cran.r-project.org/)
 
 Dev-versions of these packages can be installed from [GitHub](https://github.com/bupaverse) using `remotes::install_github()`.
 
-In the same way, the following experiment packages can be installed.  
+In the same way, the following experimental packages can be installed.  
 
 * `collaborateR`
 * `bpmnR`

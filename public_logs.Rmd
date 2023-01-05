@@ -14,7 +14,7 @@ knitr::include_graphics("images/icons/create.PNG")
 
 # Public logs
 
-The `eventdataR` package contains several real-life and artificial logs. Each can be loaded using the `data` function. The currently available logs are listed below. 
+The `eventdataR` package contains several real-life and artificial logs. Each can be loaded using the `data()` function. The currently available logs are listed below. 
 
 ## Real-life data
 
@@ -74,7 +74,7 @@ patients %>% summary
 
 ### Patients activitylog
 
-Equivalent process log of patient but stored as an activity log. 
+Equivalent process log of patient, but stored as an activity log. 
 
 ```{r}
 patients_act

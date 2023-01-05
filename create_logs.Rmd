@@ -296,5 +296,3 @@ If you want to remove these inconsistencies, a quick fix is to merge the resourc
 log %>%
 	fix_resource_inconsistencies()
 ```
-
-See next: [Adjusting logs](adjust_logs.html)

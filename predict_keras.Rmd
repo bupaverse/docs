@@ -2,6 +2,24 @@
 title: "Customization with Keras"
 ---
 
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  eval = FALSE,
+  cache = FALSE
+)
+```
+
+```{r setup, message = F, eval = T}
+library(processpredictR)
+library(bupaR)
+library(ggplot2)
+library(dplyr)
+library(keras)
+library(purrr)
+```
+
 # Custom training and prediction
 
 We can also opt for setting up and training our model manually, instead of using the provided `processpredictR` methods. Note that after defining a model with `keras::keras_model()` the model no longer is of class `ppred_model` (as opposed to `processpredictR::create_model()`).
@@ -66,7 +84,7 @@ compile(object=custom_model, optimizer = "adam",
 ```
 
 
-Before training the model we first must prepare the data, using the `tokenize()` function. 
+Before training the model we first must prepare the data. `processpredictR` provides the `tokenize()` function, but other alternatives (see [working with preprocessing layers](https://tensorflow.rstudio.com/guides/keras/preprocessing_layers)) can also be used. 
 
 ```{r}
 # the trace of activities must be tokenized
@@ -107,6 +125,7 @@ map(tokens_train, head) # the output of tokens is a list
 #> [1] 0 1 2 3 4 5
 ```
 
+Padding of sequences is required to make every input sequence of an equal length. 
 ```{r}
 # make sequences of equal length
 x <- tokens_train$token_x %>% pad_sequences(maxlen = max_case_length(df$train_df), value = 0)

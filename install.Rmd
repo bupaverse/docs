@@ -16,7 +16,7 @@ The easiest way to install the core **bupaR** packages is by installing the `bup
 install.packages("bupaverse")
 ```
 
-You can then load the packages using `library`. 
+You can then load the packages using `library()`. 
 
 ```{r eval = F}
 library(bupaverse)
@@ -24,7 +24,7 @@ library(bupaverse)
 
 This allows you to use `bupaR`, `eventdataR`, `edeaR`, `processcheckR`, and `processmapR`. 
 
-The following packages can be installed from [CRAN](https://cran.r-project.org/) individually using `install.packages`.
+The following packages can be installed from [CRAN](https://cran.r-project.org/) individually using `install.packages()`.
 
 * `daqapo`
 * `heuristicsmineR`
@@ -36,7 +36,7 @@ The following packages can be installed from [CRAN](https://cran.r-project.org/)
 * `understandBPMN`
 * `xesreadR`
 
-Dev-versions of these packages can be installed from [GitHub](https://github.com/bupaverse) using `remotes::install_github`.
+Dev-versions of these packages can be installed from [GitHub](https://github.com/bupaverse) using `remotes::install_github()`.
 
 In the same way, the following experiment packages can be installed.  
 

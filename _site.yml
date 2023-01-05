@@ -64,7 +64,7 @@ navbar:
     menu:
       - text: "Overview"
         href: analyze.html
-      - text: "----------""
+      - text: "----------"
       - text: "Control-flow"
         href: control_flow_analysis.html
       - text: "Performance"
@@ -77,7 +77,7 @@ navbar:
     menu:
      - text: "Overview"
        href: visualize.html
-     - text: "----------""
+     - text: "----------"
      - text: "Process maps"
      - text: "Frequency"
        href: frequency_maps.html

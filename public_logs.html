@@ -628,13 +628,26 @@ div.tocify {
 <div id="public-logs" class="section level1">
 <h1>Public logs</h1>
 <p>The <code>eventdataR</code> package contains several real-life and
-artificial event logs. Each can be loaded using the <code>data</code>
-function. The currently available event logs are listed below. More
-event logs will be added in the future.</p>
+artificial logs. Each can be loaded using the <code>data</code>
+function. The currently available logs are listed below.</p>
 <div id="real-life-data" class="section level2">
 <h2>Real-life data</h2>
 <div id="sepsis" class="section level3">
 <h3>Sepsis</h3>
+<p>This real-life event log contains events of sepsis cases from a
+hospital. Sepsis is a life threatening condition typically caused by an
+infection. One case represents the pathway through the hospital. The
+events were recorded by the ERP (Enterprise Resource Planning) system of
+the hospital. There are about 1000 cases with in total 15,000 events
+that were recorded for 16 different activities. Moreover, 39 data
+attributes are recorded, e.g., the group responsible for the activity,
+the results of tests and information from checklists. Events and
+attribute values have been anonymized. The time stamps of events have
+been randomized, but the time between events within a trace has not been
+altered.</p>
+<p>Source: <a
+href="https://doi.org/10.4121/uuid:915d2bfb-7e84-49ad-a286-dc35f063a460"
+class="uri">https://doi.org/10.4121/uuid:915d2bfb-7e84-49ad-a286-dc35f063a460</a></p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>sepsis</span></code></pre></div>
 <pre><code>## # Log of 15214 events consisting of:
 ## 846 traces 
@@ -674,6 +687,11 @@ event logs will be added in the future.</p>
 </div>
 <div id="hospital-log" class="section level3">
 <h3>Hospital Log</h3>
+<p>Real life log of a Dutch academic hospital, originally intended for
+use in the first Business Process Intelligence Contest (BPIC 2011).</p>
+<p>Source: <a
+href="https://doi.org/10.4121/uuid:d9769f3d-0ab0-4fb8-803b-0d1120ffcf54"
+class="uri">https://doi.org/10.4121/uuid:d9769f3d-0ab0-4fb8-803b-0d1120ffcf54</a></p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>hospital</span></code></pre></div>
 <pre><code>## # Log of 150291 events consisting of:
 ## 981 traces 
@@ -713,6 +731,22 @@ event logs will be added in the future.</p>
 </div>
 <div id="hospital-billing" class="section level3">
 <h3>Hospital Billing</h3>
+<p>The ‘Hospital Billing’ event log was obtained from the financial
+modules of the ERP system of a regional hospital. The event log contains
+events that are related to the billing of medical services that have
+been provided by the hospital. Each trace of the event log records the
+activities executed to bill a package of medical services that were
+bundled together. The event log does not contain information about the
+actual medical services provided by the hospital. The 100,000 traces in
+the event log are a random sample of process instances that were
+recorded over three years. Several attributes such as the ‘state’ of the
+process, the ‘caseType’, the underlying ‘diagnosis’ etc. are included in
+the event log. Events and attribute values have been anonymized. The
+time stamps of events have been randomized for this purpose, but the
+time between events within a trace has not been altered.</p>
+<p>Source: <a
+href="https://doi.org/10.4121/uuid:76c46b83-c930-4798-a1c9-4be94dfeb741"
+class="uri">https://doi.org/10.4121/uuid:76c46b83-c930-4798-a1c9-4be94dfeb741</a></p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>hospital_billing</span></code></pre></div>
 <pre><code>## # Log of 49951 events consisting of:
 ## 288 traces 
@@ -751,6 +785,11 @@ event logs will be added in the future.</p>
 </div>
 <div id="road-traffic-fine-management" class="section level3">
 <h3>Road Traffic Fine Management</h3>
+<p>Real-life event log of an information system managing road traffic
+fines.</p>
+<p>Source: <a
+href="https://doi.org/10.4121/uuid:270fd440-1057-4fb9-89a9-b699b47990f5"
+class="uri">https://doi.org/10.4121/uuid:270fd440-1057-4fb9-89a9-b699b47990f5</a></p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>traffic_fines</span></code></pre></div>
 <pre><code>## # Log of 34724 events consisting of:
 ## 4 traces 
@@ -796,8 +835,7 @@ department of a hospital. This event log was used as the running example
 in the journal paper entitled <a
 href="http://www.sciencedirect.com/science/article/pii/S0167923617300374">Retrieving
 batch organisation of work insights from event logs</a>.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(eventdataR)</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span> summary</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span> summary</span></code></pre></div>
 <pre><code>## Number of events:  5442
 ## Number of cases:  500
 ## Number of traces:  7

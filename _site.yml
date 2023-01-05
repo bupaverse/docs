@@ -38,6 +38,9 @@ navbar:
         href: xes_files.html
   - text: "Manipulate"
     menu:
+      - text: "Overview"
+        href: manipulate.html
+      - text: "----------""
       - text: "Filter"
       - text: "by case"
         href: case_filters.html
@@ -57,8 +60,11 @@ navbar:
         href: collapse.html
       - text: "unite"
         href: unite.html
-  - text: "Analyse"
+  - text: "Analyze"
     menu:
+      - text: "Overview"
+        href: analyze.html
+      - text: "----------""
       - text: "Control-flow"
         href: control_flow_analysis.html
       - text: "Performance"
@@ -69,6 +75,9 @@ navbar:
         href: multi_dimensional_analysis.html
   - text: "Visualize"
     menu:
+     - text: "Overview"
+       href: visualize.html
+     - text: "----------""
      - text: "Process maps"
      - text: "Frequency"
        href: frequency_maps.html

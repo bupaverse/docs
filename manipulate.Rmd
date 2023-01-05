@@ -27,9 +27,18 @@ layout_column_wrap(card(
 						),
 				   card(
 				   	 card_header("Enrich", class = "card text-white bg-info mb-3"),
-						card_image("images/icons/enrich.png", container = card_body)),
+						card_image("images/icons/enrich.png", container = card_body),
+						shiny::HTML('<div class="d-grid gap-2">
+  <a href = "augment.html" class="btn btn-lg btn-info" type="button">Augment</a>
+  <a href = "mutate.html"class="btn btn-lg btn-info" type="button">Mutate</a>
+</div>')),
 				   card( 
 				   	 card_header("Aggregate", class = "card text-white bg-info mb-3"),
-						card_image("images/icons/aggregate.png", container = card_body)),width = "250px")
+						card_image("images/icons/aggregate.png", container = card_body),
+						shiny::HTML('<div class="d-grid gap-2">
+  <a href = "collapse.html" class="btn btn-lg btn-info" type="button">Collapse</a>
+  <a href = "unite.html" class="btn btn-lg btn-info" type="button">Unite</a>
+</div>')),width = "250px")
 ```
 
+<br/>

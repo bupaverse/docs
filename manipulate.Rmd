@@ -1,7 +1,8 @@
 ---
 title: Manipulate process data
-html_document: 
-  toc: false
+output: 
+  html_document: 
+    toc: false
 ---
 
 
@@ -15,8 +16,20 @@ library(bslib)
 
 
 ```{r echo = F}
-layout_column_wrap(card(card_header("Filter")),
-				   card(card_header("Enrich")),
-				   card(card_header("Augment")),width = "250px")
+layout_column_wrap(card( 
+						card_header("Filter",class = "card text-white bg-info mb-3"),
+						card_image("images/icons/filter.png", container = card_body),
+						shiny::HTML('<div class="d-grid gap-2">
+  <a href = "case_filters.html" class="btn btn-lg btn-info" type="button">Case filters</a>
+  <a href = "event_filters.html"class="btn btn-lg btn-info" type="button">Event filters</a>
+   <a href = "generic_filtering.html"class="btn btn-lg btn-info" type="button">Generic filters</a>
+</div>')
+						),
+				   card(
+				   	 card_header("Enrich", class = "card text-white bg-info mb-3"),
+						card_image("images/icons/enrich.png", container = card_body)),
+				   card( 
+				   	 card_header("Aggregate", class = "card text-white bg-info mb-3"),
+						card_image("images/icons/aggregate.png", container = card_body)),width = "250px")
 ```
 

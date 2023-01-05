@@ -8,7 +8,7 @@ title: "Install bupaR"
 knitr::include_graphics("images/icons/install.PNG")
 ```
 
-## Installing bupaR
+# Installing bupaR
 
 The easiest way to install the core **bupaR** packages is by installing the `bupaverse`-package. 
 
@@ -44,9 +44,9 @@ In the same way, the following experiment packages can be installed.
 * `bpmnR`
 * `propro`
 
-### Additional requirements
+## Additional requirements
 
-#### `processpredictR`
+### `processpredictR`
 
 Using the `processpredictR` package requires a Python installation on your machine. Check the [Tensorflow documentation](https://tensorflow.rstudio.com/install/) to get started. Once `tensorflow` and `keras` are installed, `processpredictR` will be ready to be used. 
 

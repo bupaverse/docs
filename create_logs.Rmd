@@ -15,7 +15,7 @@ library(bslib)
 knitr::include_graphics("images/icons/create.PNG")
 ```
 
-## Creating logs
+# Creating logs
 
 Transforming your raw data into an event log object is one of the most challenging tasks in process analysis. On this page, we cover all the possible situations and challenges that you can encounter. 
 
@@ -30,7 +30,7 @@ We start with some important terminology.
 -   **Trace**: A sequence of activities. The activity instances that belong to a case will result to a specific trace when ordered by the time each instance occured. 
 
 
-### Logs: `eventlog` vs `activitylog`
+## Logs: `eventlog` vs `activitylog`
 
 `bupaR` supports two different kinds of log formats, both of which are an extension on R data.frames:
 
@@ -85,7 +85,7 @@ As these examples show, both formats can often be used for representing the same
 -   in an `eventlog`, the level of observation is a event. As a result, attribute values can be stored at the **event level**. In an `activitylog`, the level of observation is an activity instance. This means that all additional attributes that you have about your process should be at this higher level. For example, an activity instance can only be connected to a single resource in the `activitylog` format, whereas in an `eventlog` different events within the same activity instance can have different resources, of different values for any other attribute.
 -   because of the limited flexibility, an `activitylog` is **easier** to make, and typically closer to the format that your data is already in (see further below on how to construct log objects). As a result of this, there are many situations in which the analysis of an `activitylog` will be much faster compared to `eventlogs`, where a lot of additional complexity needs to be taken into account.
 
-### The right log for the job
+## The right log for the job
 
 Functionalities in bupaR core packages support both formats. [^1] As such, the goal of your analysis does not impact the decision. Only the complexity of your data is important to make this decision. The precise format your raw data is in will further define the preparatory steps that are needed. We can distinguish between 3 typical scenarios. The flowchart below helps you on your way.
 
@@ -97,7 +97,7 @@ knitr::include_graphics("images/scenario.JPG")
 
 An `activitylog` is the best option when each row in your data is an activity instance, or when events belonging to the same activity instance have equal attribute values (e.g. all events are executed by the same resource). When these two criteria do not hold, you can create an `eventlog` object.
 
-#### Scenario 1
+### Scenario 1
 
 If each row in your data.frame is already an activity instance, the `activitylog` format is the best way to go. Consider the data sample below.
 
@@ -135,7 +135,7 @@ data %>%
 
 Note that in case a resource identifier is available, this information can be added in the `activitylog` call.
 
-#### Scenario 2
+### Scenario 2
 
 If each row in your data.frame is an event, but all events that belong to the same activity instance share the same attribute values, the `activitylog` format is again the best way to go. Consider the data sample below.
 
@@ -177,7 +177,7 @@ data %>%
 
 Note that the resource identifier is optional, and can be left out of the `eventlog` call if such an attribute does not exist in your data. If the activity instance id does not exist, some heuristics are available to generate it: [Missing activity instance identifier].
 
-#### Scenario 3
+### Scenario 3
 
 If each row is an event, and events of the same activity instance have differing attribute values, the flexibility of `eventlog` objects is required. Consider the data sample below.
 
@@ -220,9 +220,9 @@ Note that we need an eventlog irrespective of which attribute values are differi
 
 Again, if the activity instance id does not exist, some heuristics are available to generate it: [Missing activity instance identifier].
 
-### Typical problems
+## Typical problems
 
-#### Missing activity instance identifier
+### Missing activity instance id
 
 In order to be able to correlate events which belong to the same activity instance, an activity instance identifier is required. For example, in the data shown below, it is possible that a patient has gone through different surgeries, each with their own started and complete event. The activity instance identifier will then allow to distinguish which events belong together and which do not. It is important to note that this instance identifier should be unique, also among different cases and activities.
 
@@ -243,7 +243,7 @@ data %>% knitr::kable()
 
 If the activity instance identifier is not available you can use the `assign_instance_id` function, which uses an heuristic to create the missing identifier. Alternatively, you can try to create the identifier on your own using `dplyr::mutate` and other manipulation functions.
 
-#### Large Datasets and Validation
+### Large Datasets and Validation
 
 By default, bupaR validates certain properties of the activity instances that is supplied when creating an event log:
 
@@ -252,7 +252,7 @@ By default, bupaR validates certain properties of the activity instances that is
 
 However, these checks are not efficient and may lead to considerable performance issues for large data frames. It is possible to deactivate the validation in case you already know that your data fulfills all the requirements, using the argument `validate = FALSE` when creating the `eventlog`. Note that when the activity instance id was created with the `assign_instance_id` function, you can assume the above properties hold.
 
-#### Inconsistent Resources
+### Inconsistent Resources
 
 Each event can contain the notion of a resource. It can be so that different events beloging to the same activity instance are executed by different resources, as in the `eventlog` below.
 

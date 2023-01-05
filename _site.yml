@@ -6,6 +6,7 @@ output:
     toc_float: 
       collapsed: false
       print: false
+    css: "my_css.css"
     theme:
       bootswatch: sandstone
       primary: "#339999"

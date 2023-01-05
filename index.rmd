@@ -2,7 +2,6 @@
 title: "bupaR docs"
 output: 
   html_document: 
-    css: "my_css.css"
     toc: false 
 ---
 

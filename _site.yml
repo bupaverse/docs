@@ -40,7 +40,7 @@ navbar:
     menu:
       - text: "Overview"
         href: manipulate.html
-      - text: "----------""
+      - text: "----------"
       - text: "Filter"
       - text: "by case"
         href: case_filters.html

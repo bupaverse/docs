@@ -8,8 +8,22 @@ library(bslib)
 ```
 
 
+# Frequently Asked Questions
+
+## Install
+
 ```{r echo = F, message = F, warning = F}
-card(card_header("question"),
-	 card_body("answer"))
+card(card_header("Question"),
+	 card_body("Answer"))
 ```
+
+## Create
+
+## Manipulate
+
+## Analyse
+
+## Visualize
+
+## Predict
 

@@ -6,7 +6,7 @@ title: "Adjust Logs"
 knitr::include_graphics("images/icons/create.PNG")
 ```
 
-## Adjusting logs
+# Adjusting logs
 
 The _mapping_ of a log is defined by the different variables which are mapped onto the specific characteristics.
 
@@ -33,9 +33,9 @@ library(bupaR)
 ```
 
 
-## Using `eventlog` function
+## Using `eventlog()`/`activitylog()` 
 
-The `eventlog` function is not only used to instantiate and event log object, but can also be used to modify it, by using an event log object as input and setting just the identifiers one wants to change. 
+The `eventlog` and `activitylog` functions are not only used to instantiate and event log object, but can also be used to modify it, by using a log object as input and setting only the identifiers one wants to change. 
 
 For example, consider the `traffic_fines` data. We could change to `case_id` to the "vehicleclass" column as follows. (This is a purely hypothetical example). You will see that the number of cases has changed after this modification. 
 
@@ -55,14 +55,14 @@ traffic_fines %>%
 
 ## Using existing mapping
 
-It is also poosible to take a snapshot of the eventlog mapping at a certain point in time, and reuse this later. A mapping can be extracted using the `mapping` function.
+It is also possible to extract the log mapping at a certain point in time using the `mapping` function.
 
 ```{r}
 mapping_fines <- mapping(traffic_fines)
 mapping_fines
 ```
 
-We can than adjust the mapping incrementally by using the approaches above.
+We can adjust the mapping incrementally by using the approaches above.
 
 ```{r}
 traffic_fines %>%

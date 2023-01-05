@@ -1,5 +1,5 @@
 ---
-title: "bupaR Documentation"
+title: "bupaR docs"
 output: 
   html_document: 
     css: "my_css.css"

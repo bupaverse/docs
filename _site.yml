@@ -4,7 +4,6 @@ output:
     toc: true
     toc_depth: 4
     toc_float: 
-      collapsed: true
       print: false
     theme:
       bootswatch: sandstone

@@ -3,4 +3,13 @@ title: "Frequently Asked Questions"
 ---
 
 
+```{r include = F}
+library(bslib)
+```
+
+
+```{r echo = F, message = F, warning = F}
+card(card_header("question"),
+	 card_body("answer"))
+```
 

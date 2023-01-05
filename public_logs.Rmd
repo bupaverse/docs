@@ -1,0 +1,10 @@
+---
+title: "Public Logs"
+---
+
+
+```{r echo = F, out.width="25%", fig.align = "right"}
+knitr::include_graphics("images/icons/create.PNG")
+```
+
+## Public logs

@@ -625,8 +625,8 @@ div.tocify {
 
 
 <p><img src="images/icons/create.PNG" width="25%" style="display: block; margin: auto 0 auto auto;" /></p>
-<div id="adjusting-logs" class="section level2">
-<h2>Adjusting logs</h2>
+<div id="adjusting-logs" class="section level1">
+<h1>Adjusting logs</h1>
 <p>The <em>mapping</em> of a log is defined by the different variables
 which are mapped onto the specific characteristics.</p>
 <p>For an <code>eventlog</code>:</p>
@@ -660,13 +660,12 @@ or by using an existing mapping.</p>
 <pre><code>## The following object is masked from &#39;package:utils&#39;:
 ## 
 ##     timestamp</code></pre>
-</div>
-<div id="using-eventlog-function" class="section level2">
-<h2>Using <code>eventlog</code> function</h2>
-<p>The <code>eventlog</code> function is not only used to instantiate
-and event log object, but can also be used to modify it, by using an
-event log object as input and setting just the identifiers one wants to
-change.</p>
+<div id="using-eventlogactivitylog" class="section level2">
+<h2>Using <code>eventlog()</code>/<code>activitylog()</code></h2>
+<p>The <code>eventlog</code> and <code>activitylog</code> functions are
+not only used to instantiate and event log object, but can also be used
+to modify it, by using a log object as input and setting only the
+identifiers one wants to change.</p>
 <p>For example, consider the <code>traffic_fines</code> data. We could
 change to <code>case_id</code> to the “vehicleclass” column as follows.
 (This is a purely hypothetical example). You will see that the number of
@@ -750,9 +749,8 @@ so. The same change as before can be done as follows.</p>
 </div>
 <div id="using-existing-mapping" class="section level2">
 <h2>Using existing mapping</h2>
-<p>It is also poosible to take a snapshot of the eventlog mapping at a
-certain point in time, and reuse this later. A mapping can be extracted
-using the <code>mapping</code> function.</p>
+<p>It is also possible to extract the log mapping at a certain point in
+time using the <code>mapping</code> function.</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>mapping_fines <span class="ot">&lt;-</span> <span class="fu">mapping</span>(traffic_fines)</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>mapping_fines</span></code></pre></div>
 <pre><code>## Case identifier:     case_id 
@@ -761,7 +759,7 @@ using the <code>mapping</code> function.</p>
 ## Activity instance identifier:    activity_instance_id 
 ## Timestamp:           timestamp 
 ## Lifecycle transition:        lifecycle</code></pre>
-<p>We can than adjust the mapping incrementally by using the approaches
+<p>We can adjust the mapping incrementally by using the approaches
 above.</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>traffic_fines <span class="sc">%&gt;%</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">set_case_id</span>(<span class="st">&quot;vehicleclass&quot;</span>) <span class="sc">%&gt;%</span></span>
@@ -803,6 +801,7 @@ using the <code>re_map</code> function.</p>
 ## #   totalpaymentamount &lt;chr&gt;, vehicleclass &lt;chr&gt;, activity_instance_id &lt;chr&gt;,
 ## #   .order &lt;int&gt;, and abbreviated variable names ¹​lifecycle, ²​resource,
 ## #   ³​dismissal</code></pre>
+</div>
 </div>
 
 <p>Copyright &copy; 2023 bupaR - Hasselt University</p>

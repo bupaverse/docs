@@ -1,0 +1,1158 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Developer Guide</title>
+
+<script src="site_libs/header-attrs-2.19/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<link href="site_libs/bootstrap-5.2.2/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-5.2.2/bootstrap.bundle.min.js"></script>
+<script src="site_libs/bs3compat-0.4.2/transition.js"></script>
+<script src="site_libs/bs3compat-0.4.2/tabs.js"></script>
+<script src="site_libs/bs3compat-0.4.2/bs3compat.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-92605173-2', 'auto');
+ga('send', 'pageview');
+
+</script>
+<link rel="shortcut icon" href="images/logo/favicon.PNG" />
+<style>
+  .title{
+    display: none;
+  }
+</style>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+
+<style type="text/css">
+  code {
+    white-space: pre;
+  }
+  .sourceCode {
+    overflow: visible;
+  }
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  background-color: #f8f8f8; }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #c4a000; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #000000; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #000000; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #000000; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+#TOC {
+  display: none !important;
+}
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"><a href = 'https://bupar.net'><img id = "logo" style = "width: 200px; padding: 0px 20px 0px 0px" src = "images/logo/bupar_trans_witteR2.png" /></a></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="install.html">Install</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Create
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="create_logs.html">Create Logs</a>
+    </li>
+    <li>
+      <a href="adjust_logs.html">Adjust Logs</a>
+    </li>
+    <li>
+      <a href="public_logs.html">Public Logs</a>
+    </li>
+    <li>
+      <a href="xes_files.html">XES-files</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Manipulate
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Filter</li>
+    <li>
+      <a href="case_filters.html">by case</a>
+    </li>
+    <li>
+      <a href="event_filters.html">by event</a>
+    </li>
+    <li>
+      <a href="generic_filtering.html">generic</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Enrich</li>
+    <li>
+      <a href="augment.html">augment</a>
+    </li>
+    <li>
+      <a href="mutate.html">mutate</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Aggregate</li>
+    <li>
+      <a href="collapse.html">collapse</a>
+    </li>
+    <li>
+      <a href="unite.html">unite</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Analyse
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="control_flow_analysis.html">Control-flow</a>
+    </li>
+    <li>
+      <a href="performance_analysis.html">Performance</a>
+    </li>
+    <li>
+      <a href="organisational_analysis.html">Organisational</a>
+    </li>
+    <li>
+      <a href="multi_dimensional_analysis.html">Multi-dimensional</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Visualize
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Process maps</li>
+    <li>
+      <a href="frequency_maps.html">Frequency</a>
+    </li>
+    <li>
+      <a href="performance_maps.html">Performance</a>
+    </li>
+    <li>
+      <a href="advanced_maps.html">Advanced</a>
+    </li>
+    <li>
+      <a href="animate_maps.html">Animate</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="process_matrix.html">Process Matrix</a>
+    </li>
+    <li>
+      <a href="dotted_chart.html">Dotted chart</a>
+    </li>
+    <li>
+      <a href="trace_exporer.html">Trace explorer</a>
+    </li>
+    <li>
+      <a href="performance_spectrum.html">Performance spectrum</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Predict
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="predict_workflow.html">Workflow</a>
+    </li>
+    <li>
+      <a href="predict_adapt.html">Adapting your model</a>
+    </li>
+    <li>
+      <a href="predict_keras.html">Customization with keras</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="faq.html">FAQ</a>
+</li>
+<li>
+  <a href="developer_guide.html">Developer guide</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Package guide
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="https://bupaverse.github.io/bupaR/">bupaR</a>
+    </li>
+    <li>
+      <a href="https://bupaverse.github.io/bupaverse/">bupaverse</a>
+    </li>
+    <li>
+      <a href="https://bupaverse.github.io/daqapo">daqapo</a>
+    </li>
+    <li>
+      <a href="https://bupaverse.github.io/edeaR/">edeaR</a>
+    </li>
+    <li>
+      <a href="https://bupaverse.github.io/eventdataR/">eventdataR</a>
+    </li>
+    <li>
+      <a href="https://bupaverse.github.io/heuristicsmineR/">heuristicsmineR</a>
+    </li>
+    <li>
+      <a href="https://bupaverse.github.io/pm4py/">pm4py</a>
+    </li>
+    <li>
+      <a href="https://bupaverse.github.io/processanimateR/">processanimateR</a>
+    </li>
+    <li>
+      <a href="https://bupaverse.github.io/processcheckR/">processcheckR</a>
+    </li>
+    <li>
+      <a href="https://bupaverse.github.io/processmapR/">processmapR</a>
+    </li>
+    <li>
+      <a href="https://bupaverse.github.io/xesreadR">xesreadR</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Developer Guide</h1>
+
+</div>
+
+
+<div id="developer-guide" class="section level2">
+<h2>Developer guide</h2>
+<div id="object-classes-and-characteristics" class="section level3">
+<h3>Object classes and characteristics</h3>
+<p>bupaR knows 2 main object classes: <code>eventlog</code> and
+<code>activitylog.</code> Both are special types of
+<code>data.frames</code>. Furthermore there is the overarching object
+class <code>log</code>. The object class log is used by functions were a
+distinction between the two classes is not relevant. It is only used as
+a higher-level classification of the <code>eventlog</code> and
+<code>activitylog</code> objects - it cannot stand on its own. That is,
+objects which have just the class “log” cannot exist, they must have one
+of the subclasses as well.</p>
+<p>The defining characteristics of a <code>log</code> are stored in
+regular variables, of which the names can be obtained with the
+<code>mapping()</code> function.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mapping</span>(patients)</span></code></pre></div>
+<pre><code>## Case identifier:     patient 
+## Activity identifier:     handling 
+## Resource identifier:     employee 
+## Activity instance identifier:    handling_id 
+## Timestamp:           time 
+## Lifecycle transition:        registration_type</code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mapping</span>(patients_act)</span></code></pre></div>
+<pre><code>## Case identifier:     patient 
+## Activity identifier:     handling 
+## Resource identifier:     employee 
+## Timestamps:      start, complete</code></pre>
+<p>Note that <code>eventlog</code>s and <code>activitylog</code>s have
+some mapping-elements in common:</p>
+<ul>
+<li>case identifier</li>
+<li>activity identifier</li>
+<li>resource identifier</li>
+</ul>
+<p>While others are slightly difference</p>
+<ul>
+<li>the activity instance identifier only exist for
+<code>eventlog</code>s. For <code>activitylog</code>, each row is an
+activity instance by definition</li>
+<li>the lifecycle identifier for <code>eventlog</code>s consist of a
+single column. For activity log, it consist of multiple columns. (At
+least start and complete are required, although they can contain NAs).
+These are stored under the <code>timestamps</code> mapping elemnt</li>
+</ul>
+<p>Note that there are 2 classes for the mapping, one for
+<code>eventlog</code> and one for <code>activitylog.</code> (Note also
+that the <code>eventlog_mapping</code> has a dedicated print function,
+while the activitylog has not (yet), and prints just a regular
+list.)</p>
+<p>Individual mapping-variables can be obtained with the dedicated id
+functions. They work on both the logs itself, and on the mappings.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">activity_id</span>(patients)</span></code></pre></div>
+<pre><code>## [1] &quot;handling&quot;</code></pre>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">activity_id</span>(patients_act)</span></code></pre></div>
+<pre><code>## [1] &quot;handling&quot;</code></pre>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>mapping_event <span class="ot">&lt;-</span> <span class="fu">mapping</span>(patients)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>mapping_act <span class="ot">&lt;-</span> <span class="fu">mapping</span>(patients_act)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">activity_id</span>(mapping_event)</span></code></pre></div>
+<pre><code>## [1] &quot;handling&quot;</code></pre>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">activity_id</span>(mapping_act)</span></code></pre></div>
+<pre><code>## [1] &quot;handling&quot;</code></pre>
+<p>During data manipulation, it can sometimes happen (or sometimes is
+necessary) that the log is at somepoint transferred to a regular
+<code>data.frame</code> for some operations. If the ultimate output of
+the function should be once again a log object (and not a visual or
+summary table), the mapping can be used to recuperate the original
+mapping. This happens with the <code>re_map()</code> function.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>patients_df <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(patients)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(patients_df)</span></code></pre></div>
+<pre><code>## [1] &quot;data.frame&quot;</code></pre>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>patients_log <span class="ot">&lt;-</span> <span class="fu">re_map</span>(patients_df, mapping_event)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(patients_log)</span></code></pre></div>
+<pre><code>## [1] &quot;eventlog&quot;   &quot;log&quot;        &quot;tbl_df&quot;     &quot;tbl&quot;        &quot;data.frame&quot;</code></pre>
+<p>The <code>re_map()</code> function, recognizes the class of the
+mapping, and thus works for both <code>activitylog</code> and
+<code>eventlog</code> mappings. It will always return to the original
+type. (I.e. if the mapping originates from an <code>activitylog</code>
+object, it will result once again in an <code>activitylog</code>
+object.) It can never be used to convert <code>activitylog</code> to
+<code>eventlog</code>, or vice versa.</p>
+<p>While the <code>re_map()</code> function is exported by bupaR, it is
+primarly for internal use. Only for more advanced use of bupaR, it can
+be useful for the end-user.</p>
+<p>Note that functions that are not exported can always be used using
+the ::: instead of the :: operator. For instance, we can use the
+not-exported <code>activity_id_()</code> function outside of bupaR as
+follows.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>bupaR<span class="sc">:::</span><span class="fu">activity_id_</span>(patients)</span></code></pre></div>
+<pre><code>## handling</code></pre>
+<p>While you should typically not need these function outside of
+<code>bupaR</code>, except for perhaps developing or testing some code
+interactively, we will use the ::: notation in this manual whenever we
+refer to internal functions.</p>
+<p>The <code>activity_id_()</code> function is a variant on the
+<code>activity_id()</code> function. Only instead of returning a
+character object, it returns a symbol. This symbol is useful when you
+want to use the mapping variable while programming.</p>
+<p>For example, suppose you want to filter the patients log, only for
+patient == 1. But you don’t know that the <code>case_id</code> is
+patient, so you use the function to get the case_id.</p>
+<p>The following will not work.</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="fu">case_id</span>(patients) <span class="sc">==</span> <span class="dv">1</span>)</span></code></pre></div>
+<pre><code>## EMPTY EVENT LOG
+## # A tibble: 0 × 7
+## # … with 7 variables: handling &lt;fct&gt;, patient &lt;chr&gt;, employee &lt;fct&gt;,
+## #   handling_id &lt;chr&gt;, registration_type &lt;fct&gt;, time &lt;dttm&gt;, .order &lt;int&gt;</code></pre>
+<p>just as the following will not work.</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="st">&quot;patient&quot;</span> <span class="sc">==</span> <span class="dv">1</span>)</span></code></pre></div>
+<pre><code>## EMPTY EVENT LOG
+## # A tibble: 0 × 7
+## # … with 7 variables: handling &lt;fct&gt;, patient &lt;chr&gt;, employee &lt;fct&gt;,
+## #   handling_id &lt;chr&gt;, registration_type &lt;fct&gt;, time &lt;dttm&gt;, .order &lt;int&gt;</code></pre>
+<p>In order to successfully do this, we could use the symbol:</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="sc">!!</span>bupaR<span class="sc">:::</span><span class="fu">case_id_</span>(patients) <span class="sc">==</span> <span class="dv">1</span>)</span></code></pre></div>
+<pre><code>## # Log of 12 events consisting of:
+## 1 trace 
+## 1 case 
+## 6 instances of 6 activities 
+## 6 resources 
+## Events occurred from 2017-01-02 11:41:53 until 2017-01-09 19:45:45 
+##  
+## # Variables were mapped as follows:
+## Case identifier:     patient 
+## Activity identifier:     handling 
+## Resource identifier:     employee 
+## Activity instance identifier:    handling_id 
+## Timestamp:           time 
+## Lifecycle transition:        registration_type 
+## 
+## # A tibble: 12 × 7
+##    handling           patient emplo…¹ handl…² regis…³ time                .order
+##    &lt;fct&gt;              &lt;chr&gt;   &lt;fct&gt;   &lt;chr&gt;   &lt;fct&gt;   &lt;dttm&gt;               &lt;int&gt;
+##  1 Registration       1       r1      1       start   2017-01-02 11:41:53      1
+##  2 Triage and Assess… 1       r2      501     start   2017-01-02 12:40:20      2
+##  3 Blood test         1       r3      1001    start   2017-01-05 08:59:04      3
+##  4 MRI SCAN           1       r4      1238    start   2017-01-05 21:37:12      4
+##  5 Discuss Results    1       r6      1735    start   2017-01-07 07:57:49      5
+##  6 Check-out          1       r7      2230    start   2017-01-09 17:09:43      6
+##  7 Registration       1       r1      1       comple… 2017-01-02 12:40:20      7
+##  8 Triage and Assess… 1       r2      501     comple… 2017-01-02 22:32:25      8
+##  9 Blood test         1       r3      1001    comple… 2017-01-05 14:34:27      9
+## 10 MRI SCAN           1       r4      1238    comple… 2017-01-06 01:54:23     10
+## 11 Discuss Results    1       r6      1735    comple… 2017-01-07 10:18:08     11
+## 12 Check-out          1       r7      2230    comple… 2017-01-09 19:45:45     12
+## # … with abbreviated variable names ¹​employee, ²​handling_id, ³​registration_type</code></pre>
+<p>More on symbols and !!: <a
+href="https://adv-r.hadley.nz/quasiquotation.html"
+class="uri">https://adv-r.hadley.nz/quasiquotation.html</a></p>
+<p>Alternatively, the following notation works as well.</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(.data[[<span class="fu">case_id</span>(patients)]] <span class="sc">==</span> <span class="dv">1</span>)</span></code></pre></div>
+<pre><code>## # Log of 12 events consisting of:
+## 1 trace 
+## 1 case 
+## 6 instances of 6 activities 
+## 6 resources 
+## Events occurred from 2017-01-02 11:41:53 until 2017-01-09 19:45:45 
+##  
+## # Variables were mapped as follows:
+## Case identifier:     patient 
+## Activity identifier:     handling 
+## Resource identifier:     employee 
+## Activity instance identifier:    handling_id 
+## Timestamp:           time 
+## Lifecycle transition:        registration_type 
+## 
+## # A tibble: 12 × 7
+##    handling           patient emplo…¹ handl…² regis…³ time                .order
+##    &lt;fct&gt;              &lt;chr&gt;   &lt;fct&gt;   &lt;chr&gt;   &lt;fct&gt;   &lt;dttm&gt;               &lt;int&gt;
+##  1 Registration       1       r1      1       start   2017-01-02 11:41:53      1
+##  2 Triage and Assess… 1       r2      501     start   2017-01-02 12:40:20      2
+##  3 Blood test         1       r3      1001    start   2017-01-05 08:59:04      3
+##  4 MRI SCAN           1       r4      1238    start   2017-01-05 21:37:12      4
+##  5 Discuss Results    1       r6      1735    start   2017-01-07 07:57:49      5
+##  6 Check-out          1       r7      2230    start   2017-01-09 17:09:43      6
+##  7 Registration       1       r1      1       comple… 2017-01-02 12:40:20      7
+##  8 Triage and Assess… 1       r2      501     comple… 2017-01-02 22:32:25      8
+##  9 Blood test         1       r3      1001    comple… 2017-01-05 14:34:27      9
+## 10 MRI SCAN           1       r4      1238    comple… 2017-01-06 01:54:23     10
+## 11 Discuss Results    1       r6      1735    comple… 2017-01-07 10:18:08     11
+## 12 Check-out          1       r7      2230    comple… 2017-01-09 19:45:45     12
+## # … with abbreviated variable names ¹​employee, ²​handling_id, ³​registration_type</code></pre>
+<p>The .data here is a special command, <em>a pronoun</em>, that can be
+used in <code>dplyr</code> functions. More information here: <a
+href="https://adv-r.hadley.nz/quasiquotation.html"
+class="uri">https://adv-r.hadley.nz/quasiquotation.html</a></p>
+<p>In <code>bupaR</code>, the preference goes to the latter notation. It
+has the advantage to be used in scripts both inside bupaR as well as
+outside (whereas the !! notation only works with the bupaR::: prefix).
+It is also slightly easier to understand than the workings of !!.</p>
+<p>That said, the use of <code>case_id_()</code> and
+<code>symbol(case_id())</code> is still widespread in bupaR, but the
+goal is to phase out this usage.</p>
+</div>
+<div id="dplyr-verbs" class="section level3">
+<h3>dplyr verbs</h3>
+<p>The following dplyr verbs have received methods for activity logs and
+event logs.</p>
+<ul>
+<li><code>filter()</code></li>
+<li><code>group_by()</code></li>
+<li><code>arrange()</code></li>
+<li><code>mutate()</code></li>
+<li><code>select()</code></li>
+</ul>
+<p>They will all return a proper log - i.e. there is no risk the mapping
+is lost.</p>
+<p>Special attention has to be given to the following:</p>
+<div id="select" class="section level4">
+<h4>Select</h4>
+<p>Conventionally, <code>select()</code> will not ensure that the log
+maintains the variables it needs to be considered a log. The select
+methods for logs therefore will keep the listed variables
+<strong>and</strong> the variables that define the eventlog.</p>
+<p>The following code returns an <code>eventlog</code> with the
+attribute <em>oligurie</em>, as well as the 6 variables needed to define
+the <code>eventlog</code> (plus the .order variable, see further).</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>sepsis <span class="sc">%&gt;%</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(oligurie)</span></code></pre></div>
+<pre><code>## # Log of 15214 events consisting of:
+## 846 traces 
+## 1050 cases 
+## 15214 instances of 16 activities 
+## 26 resources 
+## Events occurred from 2013-11-07 08:18:29 until 2015-06-05 12:25:11 
+##  
+## # Variables were mapped as follows:
+## Case identifier:     case_id 
+## Activity identifier:     activity 
+## Resource identifier:     resource 
+## Activity instance identifier:    activity_instance_id 
+## Timestamp:           timestamp 
+## Lifecycle transition:        lifecycle 
+## 
+## # A tibble: 15,214 × 8
+##    oligurie case_id activity  activ…¹ timestamp           resou…² lifec…³ .order
+##    &lt;lgl&gt;    &lt;chr&gt;   &lt;fct&gt;     &lt;chr&gt;   &lt;dttm&gt;              &lt;fct&gt;   &lt;fct&gt;    &lt;int&gt;
+##  1 FALSE    A       ER Regis… 1       2014-10-22 11:15:41 A       comple…      1
+##  2 NA       A       Leucocyt… 2       2014-10-22 11:27:00 B       comple…      2
+##  3 NA       A       CRP       3       2014-10-22 11:27:00 B       comple…      3
+##  4 NA       A       LacticAc… 4       2014-10-22 11:27:00 B       comple…      4
+##  5 NA       A       ER Triage 5       2014-10-22 11:33:37 C       comple…      5
+##  6 NA       A       ER Sepsi… 6       2014-10-22 11:34:00 A       comple…      6
+##  7 NA       A       IV Liquid 7       2014-10-22 14:03:47 A       comple…      7
+##  8 NA       A       IV Antib… 8       2014-10-22 14:03:47 A       comple…      8
+##  9 NA       A       Admissio… 9       2014-10-22 14:13:19 D       comple…      9
+## 10 NA       A       CRP       10      2014-10-24 09:00:00 B       comple…     10
+## # … with 15,204 more rows, and abbreviated variable names
+## #   ¹​activity_instance_id, ²​resource, ³​lifecycle</code></pre>
+<p>This behavior can be turned of using the <code>force_df = TRUE</code>
+argument. In that case, the select will work just like a traditional
+<code>select</code>, and the result will be a normal
+<code>data.frame</code>, no longer an <code>eventlog</code>.</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>sepsis <span class="sc">%&gt;%</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(oligurie, <span class="at">force_df =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 15,214 × 1
+##    oligurie
+##    &lt;lgl&gt;   
+##  1 FALSE   
+##  2 NA      
+##  3 NA      
+##  4 NA      
+##  5 NA      
+##  6 NA      
+##  7 NA      
+##  8 NA      
+##  9 NA      
+## 10 NA      
+## # … with 15,204 more rows</code></pre>
+<p>Because of this, you can select just the <em>event log mapping</em>
+using <code>select()</code>.</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>sepsis <span class="sc">%&gt;%</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>()</span></code></pre></div>
+<pre><code>## # Log of 15214 events consisting of:
+## 846 traces 
+## 1050 cases 
+## 15214 instances of 16 activities 
+## 26 resources 
+## Events occurred from 2013-11-07 08:18:29 until 2015-06-05 12:25:11 
+##  
+## # Variables were mapped as follows:
+## Case identifier:     case_id 
+## Activity identifier:     activity 
+## Resource identifier:     resource 
+## Activity instance identifier:    activity_instance_id 
+## Timestamp:           timestamp 
+## Lifecycle transition:        lifecycle 
+## 
+## # A tibble: 15,214 × 7
+##    case_id activity         activit…¹ timestamp           resou…² lifec…³ .order
+##    &lt;chr&gt;   &lt;fct&gt;            &lt;chr&gt;     &lt;dttm&gt;              &lt;fct&gt;   &lt;fct&gt;    &lt;int&gt;
+##  1 A       ER Registration  1         2014-10-22 11:15:41 A       comple…      1
+##  2 A       Leucocytes       2         2014-10-22 11:27:00 B       comple…      2
+##  3 A       CRP              3         2014-10-22 11:27:00 B       comple…      3
+##  4 A       LacticAcid       4         2014-10-22 11:27:00 B       comple…      4
+##  5 A       ER Triage        5         2014-10-22 11:33:37 C       comple…      5
+##  6 A       ER Sepsis Triage 6         2014-10-22 11:34:00 A       comple…      6
+##  7 A       IV Liquid        7         2014-10-22 14:03:47 A       comple…      7
+##  8 A       IV Antibiotics   8         2014-10-22 14:03:47 A       comple…      8
+##  9 A       Admission NC     9         2014-10-22 14:13:19 D       comple…      9
+## 10 A       CRP              10        2014-10-24 09:00:00 B       comple…     10
+## # … with 15,204 more rows, and abbreviated variable names
+## #   ¹​activity_instance_id, ²​resource, ³​lifecycle</code></pre>
+<p>If you want to select only specific eventlog-classifiers, you can use
+the function <code>selects_ids()</code>. Because you will typically not
+select all ids (otherwise you can use select()), this will by default
+turn your object to a data.frame.</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>sepsis <span class="sc">%&gt;%</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>    bupaR<span class="sc">::</span><span class="fu">select_ids</span>(activity_id, case_id)</span></code></pre></div>
+<pre><code>## # A tibble: 15,214 × 2
+##    activity         case_id
+##    &lt;fct&gt;            &lt;chr&gt;  
+##  1 ER Registration  A      
+##  2 Leucocytes       A      
+##  3 CRP              A      
+##  4 LacticAcid       A      
+##  5 ER Triage        A      
+##  6 ER Sepsis Triage A      
+##  7 IV Liquid        A      
+##  8 IV Antibiotics   A      
+##  9 Admission NC     A      
+## 10 CRP              A      
+## # … with 15,204 more rows</code></pre>
+<p>Note how the different classifiers are defined: using the
+<code>id()</code> functions, but without the brackets. And not using
+characters.</p>
+</div>
+<div id="group-by" class="section level4">
+<h4>Group by</h4>
+<p>While the <code>group_by()</code> function is defined for logs, it
+should be noted that it requires special methods for each function
+before that function is “compatible” with grouped logs. Some utility
+functions for this do however exist (see further).</p>
+<p>There are some short cuts for typical groupings when programming in
+bupaR.</p>
+<ul>
+<li><code>group_by_case()</code></li>
+<li><code>group_by_activity()</code></li>
+<li><code>group_by_activity_instance()</code></li>
+<li><code>group_by_resource()</code></li>
+<li><code>group_by_resource_activity()</code></li>
+</ul>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by_case</span>()</span></code></pre></div>
+<pre><code>## # Groups: [patient]
+## Grouped # Log of 5442 events consisting of:
+## 7 traces 
+## 500 cases 
+## 2721 instances of 7 activities 
+## 7 resources 
+## Events occurred from 2017-01-02 11:41:53 until 2018-05-05 07:16:02 
+##  
+## # Variables were mapped as follows:
+## Case identifier:     patient 
+## Activity identifier:     handling 
+## Resource identifier:     employee 
+## Activity instance identifier:    handling_id 
+## Timestamp:           time 
+## Lifecycle transition:        registration_type 
+## 
+## # A tibble: 5,442 × 7
+##    handling     patient employee handling_id regist…¹ time                .order
+##    &lt;fct&gt;        &lt;chr&gt;   &lt;fct&gt;    &lt;chr&gt;       &lt;fct&gt;    &lt;dttm&gt;               &lt;int&gt;
+##  1 Registration 1       r1       1           start    2017-01-02 11:41:53      1
+##  2 Registration 2       r1       2           start    2017-01-02 11:41:53      2
+##  3 Registration 3       r1       3           start    2017-01-04 01:34:05      3
+##  4 Registration 4       r1       4           start    2017-01-04 01:34:04      4
+##  5 Registration 5       r1       5           start    2017-01-04 16:07:47      5
+##  6 Registration 6       r1       6           start    2017-01-04 16:07:47      6
+##  7 Registration 7       r1       7           start    2017-01-05 04:56:11      7
+##  8 Registration 8       r1       8           start    2017-01-05 04:56:11      8
+##  9 Registration 9       r1       9           start    2017-01-06 05:58:54      9
+## 10 Registration 10      r1       10          start    2017-01-06 05:58:54     10
+## # … with 5,432 more rows, and abbreviated variable name ¹​registration_type</code></pre>
+<p>is equivalent to</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(.data[[<span class="fu">case_id</span>(patients)]])</span></code></pre></div>
+<pre><code>## # Groups: [patient]
+## Grouped # Log of 5442 events consisting of:
+## 7 traces 
+## 500 cases 
+## 2721 instances of 7 activities 
+## 7 resources 
+## Events occurred from 2017-01-02 11:41:53 until 2018-05-05 07:16:02 
+##  
+## # Variables were mapped as follows:
+## Case identifier:     patient 
+## Activity identifier:     handling 
+## Resource identifier:     employee 
+## Activity instance identifier:    handling_id 
+## Timestamp:           time 
+## Lifecycle transition:        registration_type 
+## 
+## # A tibble: 5,442 × 7
+##    handling     patient employee handling_id regist…¹ time                .order
+##    &lt;fct&gt;        &lt;chr&gt;   &lt;fct&gt;    &lt;chr&gt;       &lt;fct&gt;    &lt;dttm&gt;               &lt;int&gt;
+##  1 Registration 1       r1       1           start    2017-01-02 11:41:53      1
+##  2 Registration 2       r1       2           start    2017-01-02 11:41:53      2
+##  3 Registration 3       r1       3           start    2017-01-04 01:34:05      3
+##  4 Registration 4       r1       4           start    2017-01-04 01:34:04      4
+##  5 Registration 5       r1       5           start    2017-01-04 16:07:47      5
+##  6 Registration 6       r1       6           start    2017-01-04 16:07:47      6
+##  7 Registration 7       r1       7           start    2017-01-05 04:56:11      7
+##  8 Registration 8       r1       8           start    2017-01-05 04:56:11      8
+##  9 Registration 9       r1       9           start    2017-01-06 05:58:54      9
+## 10 Registration 10      r1       10          start    2017-01-06 05:58:54     10
+## # … with 5,432 more rows, and abbreviated variable name ¹​registration_type</code></pre>
+<p>While, except for the more common resource-activity, not all relevant
+combinations of groupings are provided as a shortcut, the internal
+group_by_ids function allows the use of any combination of _id
+functions. For example:</p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>    bupaR<span class="sc">:::</span><span class="fu">group_by_ids</span>(activity_id, case_id)</span></code></pre></div>
+<pre><code>## # Groups: [handling, patient]
+## Grouped # Log of 5442 events consisting of:
+## 7 traces 
+## 500 cases 
+## 2721 instances of 7 activities 
+## 7 resources 
+## Events occurred from 2017-01-02 11:41:53 until 2018-05-05 07:16:02 
+##  
+## # Variables were mapped as follows:
+## Case identifier:     patient 
+## Activity identifier:     handling 
+## Resource identifier:     employee 
+## Activity instance identifier:    handling_id 
+## Timestamp:           time 
+## Lifecycle transition:        registration_type 
+## 
+## # A tibble: 5,442 × 7
+##    handling     patient employee handling_id regist…¹ time                .order
+##    &lt;fct&gt;        &lt;chr&gt;   &lt;fct&gt;    &lt;chr&gt;       &lt;fct&gt;    &lt;dttm&gt;               &lt;int&gt;
+##  1 Registration 1       r1       1           start    2017-01-02 11:41:53      1
+##  2 Registration 2       r1       2           start    2017-01-02 11:41:53      2
+##  3 Registration 3       r1       3           start    2017-01-04 01:34:05      3
+##  4 Registration 4       r1       4           start    2017-01-04 01:34:04      4
+##  5 Registration 5       r1       5           start    2017-01-04 16:07:47      5
+##  6 Registration 6       r1       6           start    2017-01-04 16:07:47      6
+##  7 Registration 7       r1       7           start    2017-01-05 04:56:11      7
+##  8 Registration 8       r1       8           start    2017-01-05 04:56:11      8
+##  9 Registration 9       r1       9           start    2017-01-06 05:58:54      9
+## 10 Registration 10      r1       10          start    2017-01-06 05:58:54     10
+## # … with 5,432 more rows, and abbreviated variable name ¹​registration_type</code></pre>
+<p>Note that the notation is analogous to <code>select_ids()</code>:
+specify the id functions, without quotation marks or brackets.</p>
+</div>
+</div>
+</div>
+
+<p>Copyright &copy; 2023 bupaR - Hasselt University</p>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3,h4",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

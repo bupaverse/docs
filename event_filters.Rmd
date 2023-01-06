@@ -12,9 +12,9 @@ knitr::include_graphics("images/icons/manipulate.PNG")
 library(bupaR)
 ```
 
-## Event filters
+# Event filters
 
-### Activities labels
+## Activity
 
 The filter activity function can be used to filter activities by name. It has three arguments
 
@@ -30,7 +30,7 @@ patients %>%
 
 As one can see, there are only 2 distinct activities left in the event log.
 
-### Activity frequency
+## Activity Frequency
 
 #### Relative filtering -  using percentage
 
@@ -62,7 +62,10 @@ patients %>%
 ```
 
 
-### Resource labels
+## Activity Instance
+## Lifecycle
+## Lifecycle Presence
+## Resource Labels
 
 Similar to the activity filter, the resource filter can be used to filter events by listing on or more resources. 
 
@@ -72,7 +75,7 @@ patients %>%
 	resource_frequency("resource")
 ```
 
-### Resource frequency
+## Resource Frequency
 
 Instead of filtering events by the resource that performed the activity, we can also filter event by the frequency of the resource. This happens in the same way as for the activity frequency filter. The filter below gives us the 80% activity instances performed by the most common resources. 
 
@@ -90,7 +93,7 @@ patients %>%
 	resources()
 ```
 
-### Trim cases
+## Trim to Endpoints
 
 The trim filter is a special event filter, as it also take into account the notion of cases. In fact, it _trim_ cases such that they start with a certain activities until they end with a certain activity. It requires two list: one for possible start activities and one for end activities. The cases will be trimmed from the first appearance of a start activity till the last appearance of an end activity. When reversed, these _slices_ of the event log will be removed instead of preserved.
 
@@ -100,7 +103,7 @@ patients %>%
 	process_map(type = performance())
 ```
 
-### Trim to time window
+## Trim to Time Window
 
 Instead of triming cases to a particular start and/or end activity, we can also trim cases to a particular time window. For this we use the function `filter_time_period` with filter_method `trim`. This filter needs a time interval, which is a vector of length 2 containing data/datetime values. These can be created easily using [lubridate](https://lubridate.tidyverse.org/) function, e.g. `ymd` for year-month-day formats. 
 

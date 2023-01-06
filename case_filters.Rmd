@@ -12,79 +12,9 @@ library(bupaR)
 ```
 
 
-## Case filters
+# Case filters
 
-Instead of filtering events, or parts of cases, we can also filter event data by taking (or leaving) cases as a whole. Using `edeaR`, there are the following options to filter cases:
-
-*	Based on performance
-	*	Throughput time
-	*	Processing time
-	*	Trace length
-*	Based on control-flow characteristics
-	*	Presence/absence of activities
-	*	Start/End points
-	*	Precedence constraints
-	*	Frequency of trace
-*	Time period
-
-### Throughput time
-
-Filtering on throughput time can be done in an absolute and relative way, just as for many other filters.
-
-*	Absolute: specific a throughput time interval
-*	Relative: specific a percentage target
-
-For instance, we can filter cases with a throughput time between 50 and 100 hours. Notice that setting the time unit argument appropriately is important in this case.
-
-```{r}
-patients %>%
-	filter_throughput_time(interval = c(50, 100), units = "hours") %>%
-	throughput_time(units = "hours")
-```
-
-Alternatively, we can filter the 50% cases with the lowest throughput time.
-
-```{r}
-patients %>%
-	filter_throughput_time(percentage = 0.5) %>%
-	throughput_time(units = "hours")
-```
-
-In both cases, the selection can be negated using the `reverse` argument. When using an interval, one of the limits can be set to NA to create an open interval. 
-
-### Processing time
-
-Filtering on processing time happens in exactly the same way as the filter on throughput time, as the examples below show. 
-
-```{r}
-patients %>%
-	filter_processing_time(interval = c(5, 100), units = "hours") %>%
-	processing_time(units = "hours")
-```
-
-```{r}
-patients %>%
-	filter_processing_time(percentage = 0.5) %>%
-	processing_time(units = "hours")
-```
-
-### Trace length
-
-Filtering on trace length is similar to filters on processing or throughput time. Only the units argument is not needed here. 
-
-```{r}
-patients %>%
-	filter_trace_length(interval = c(2, 5)) %>%
-	trace_length()
-```
-
-```{r}
-patients %>%
-	filter_trace_length(percentage = 0.5) %>%
-	trace_length()
-```
-
-### Activity presence
+## Activity presence
 
 When looking at control-flow, we can select cases that contain a specific activity, for instance a X-Ray scan.
 
@@ -128,7 +58,10 @@ patients %>%
 	traces
 ```
 
-### End points
+
+## Case
+## Case Condition
+## Endpoints
 
 Another way is to select cases with a specific start and or end activity. In case of the patients data set, all cases start with "Registration". Filtering cases that __don't__ start with Registration gives an empty log.
 
@@ -145,7 +78,11 @@ patients %>%
 	process_map()
 ```
 
-### Precedence
+## Endpoints Condition
+## Flow Time
+## Idle Time
+## Infrequent Flows
+## Precedence
 
 Another control-flow filtering approach is to look at precedences between activities. The `filter_precedence` function uses 5 different inputs
 
@@ -204,7 +141,77 @@ patients %>%
 	traces
 ```
 
-### Trace Frequency
+## Precedence Condition
+## Precedence Resource
+## Processing time
+
+Filtering on processing time happens in exactly the same way as the filter on throughput time, as the examples below show. 
+
+```{r}
+patients %>%
+	filter_processing_time(interval = c(5, 100), units = "hours") %>%
+	processing_time(units = "hours")
+```
+
+```{r}
+patients %>%
+	filter_processing_time(percentage = 0.5) %>%
+	processing_time(units = "hours")
+```
+
+## Throughput time
+
+Filtering on throughput time can be done in an absolute and relative way, just as for many other filters.
+
+*	Absolute: specific a throughput time interval
+*	Relative: specific a percentage target
+
+For instance, we can filter cases with a throughput time between 50 and 100 hours. Notice that setting the time unit argument appropriately is important in this case.
+
+```{r}
+patients %>%
+	filter_throughput_time(interval = c(50, 100), units = "hours") %>%
+	throughput_time(units = "hours")
+```
+
+Alternatively, we can filter the 50% cases with the lowest throughput time.
+
+```{r}
+patients %>%
+	filter_throughput_time(percentage = 0.5) %>%
+	throughput_time(units = "hours")
+```
+
+In both cases, the selection can be negated using the `reverse` argument. When using an interval, one of the limits can be set to NA to create an open interval. 
+
+## Time period
+	
+Filtering cases by time period can be done using the `filter_time_period` introduced above. There are four different methods that result in case filters:
+
+*	start: all cases started in an interval
+*	complete: all cases completed in an interval
+*	contained: all cases contained in an interval
+*	intersecting: all cases with some activity in an interval
+	
+The following four example dotted charts show the impact of the four different methods using the same interval. 
+
+```{r}
+sepsis %>%
+	filter_time_period(interval = ymd(c(20150101, 20150131)), filter_method = "start") %>%
+	dotted_chart
+sepsis %>%
+	filter_time_period(interval = ymd(c(20150101, 20150131)), filter_method = "complete") %>%
+	dotted_chart
+sepsis %>%
+	filter_time_period(interval = ymd(c(20150101, 20150131)), filter_method = "contained") %>%
+	dotted_chart
+sepsis %>%
+	filter_time_period(interval = ymd(c(20150101, 20150131)), filter_method = "intersecting") %>%
+	dotted_chart
+```
+
+	
+## Trace Frequency
 
 Filtering on trace frequency is similar to the filters on activity/resource frequence and the performance filter: you can 
 choose between a percentage target or between an frequency interval.
@@ -233,30 +240,25 @@ sepsis %>%
 	n_cases()
 ```
 
-### Time period
-	
-Filtering cases by time period can be done using the `filter_time_period` introduced above. There are four different methods that result in case filters:
+## Trace Length
 
-*	start: all cases started in an interval
-*	complete: all cases completed in an interval
-*	contained: all cases contained in an interval
-*	intersecting: all cases with some activity in an interval
-	
-The following four example dotted charts show the impact of the four different methods using the same interval. 
+Filtering on trace length is similar to filters on processing or throughput time. Only the units argument is not needed here. 
 
 ```{r}
-sepsis %>%
-	filter_time_period(interval = ymd(c(20150101, 20150131)), filter_method = "start") %>%
-	dotted_chart
-sepsis %>%
-	filter_time_period(interval = ymd(c(20150101, 20150131)), filter_method = "complete") %>%
-	dotted_chart
-sepsis %>%
-	filter_time_period(interval = ymd(c(20150101, 20150131)), filter_method = "contained") %>%
-	dotted_chart
-sepsis %>%
-	filter_time_period(interval = ymd(c(20150101, 20150131)), filter_method = "intersecting") %>%
-	dotted_chart
+patients %>%
+	filter_trace_length(interval = c(2, 5)) %>%
+	trace_length()
 ```
 
+```{r}
+patients %>%
+	filter_trace_length(percentage = 0.5) %>%
+	trace_length()
+```
+
+
+	
+	
+	
+	
 	

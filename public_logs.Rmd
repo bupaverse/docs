@@ -6,6 +6,7 @@ title: "Public Logs"
 ```{r echo = F, include = F}
 library(eventdataR)
 library(bupaR)
+knitr::opts_chunk$set(eval = F)
 ```
 
 ```{r echo = F, out.width="25%", fig.align = "right"}

@@ -1,0 +1,98 @@
+---
+title: Generic filtering
+---
+
+
+```{r echo = F, out.width="25%", fig.align = "right"}
+knitr::include_graphics("images/icons/manipulate.PNG")
+
+```
+
+```{r}
+library(bupaR)
+```
+
+## filter
+
+Generic filtering of events can be done using the `filter` function, which takes an event log and any number of logical conditions. The example below filters events which have vehicleclas "C" and amount greater than 300. More process-specific filtering methods can be found [here](http://www.bupar.net/subsetting.html).
+
+```{r}
+traffic_fines %>%
+	filter(vehicleclass == "C", amount > 300)
+```
+
+
+## slice 
+
+An eventlog can be _sliced_, which mean returning a slice, i.e. a subset, from the eventlog, based on row number. There are three ways to slice event logs
+
+*	Using `slice`: take a slice of cases
+*	Using `slice_activities`: take a slice of activity instances
+*	Using `slice_events`: take a slice of events
+
+The next piece of code returns the _first_ 10 cases. Note that first here is defined by the current order of the data set, not by time.
+
+```{r}
+patients %>%
+	slice(1:10)
+```
+
+### slice_activities
+
+The next piece of code returns the _first_ 10 activity instances.
+
+```{r}
+patients %>%
+	slice_activities(1:10)
+```
+
+
+### slice_events
+
+The next piece of code returns the _first_ 10 events. 
+
+```{r}
+patients %>% 
+	slice_events(1:10)
+```
+
+
+## first_n, last_n
+
+The slice function select events, cases or activity instances based on their current position in the event data. As such, the result can be changed using the `arrange` function. More often, we want to select the first _n_ activity instances, or the last ones. This is achieved with the `first_n` or `last_n` functions, which return the first, resp. last, n activity instances of a log based on time, not on position.
+
+```{r}
+patients %>% 
+	first_n(n = 5)
+```
+
+This is not impacted by a different ordering of the data since it will take the time aspect into account. 
+
+```{r}
+patients %>%
+	arrange(desc(time)) %>%
+	first_n(n = 5)
+```
+
+Incombination with `group_by_case`, it is very easy to select the heads or tails of each case. Below, we explore the 95% most common first 3 activities in the `sepsis` log.
+
+```{r}
+sepsis %>%
+	group_by_case() %>%
+	first_n(3) %>%
+	trace_explorer(coverage = 0.95)
+```
+
+
+
+## sample_n
+
+The `sample_n` function allows to take a sample of the event log containing n cases. The code below returns a sample of 10 patients.
+
+```{r}
+patients %>%
+	sample_n(size = 10)
+```
+Note that this function can also be used with a sample size bigger than the number of cases in the event log, if you allow for the replacements of drawn cases.
+
+A more extensive list of subsetting methods is provided by edeaR. Look [here](http://www.bupar.net/subsetting.html) for more information.

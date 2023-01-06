@@ -1,0 +1,116 @@
+---
+title: Filter events
+---
+
+
+```{r echo = F, out.width="25%", fig.align = "right"}
+knitr::include_graphics("images/icons/manipulate.PNG")
+
+```
+
+```{r}
+library(bupaR)
+```
+
+## Event filters
+
+### Activities labels
+
+The filter activity function can be used to filter activities by name. It has three arguments
+
+*	the event log
+*	a vector of activities
+*	the reverse argument (FALSE or TRUE)
+
+```{r}
+patients %>%
+	filter_activity(c("X-Ray", "Blood test")) %>%
+	activities
+```
+
+As one can see, there are only 2 distinct activities left in the event log.
+
+### Activity frequency
+
+#### Relative filtering -  using percentage
+
+It is also possible to filter on activity frequency. This filter uses a percentile cut off, and will look at those activities which are most frequent until the required percentage of events has been reached. Thus, a percentile cut off of 80% will look at the activities needed to represent 80% of the events. In the example below, the __least__ frequent activities covering 50% of the event log are selected, since the reverse argument is true.
+
+```{r}
+patients %>%
+	filter_activity_frequency(percentage = 0.5, reverse = T) %>%
+	activities
+	
+```
+
+#### Absolute filtering - using interval
+
+Instead of providing a target percentage, we can provide a target frequency interval. For example, only retain the activities which occur more than 300 times.
+
+```{r}
+patients %>%
+	filter_activity_frequency(interval = c(300,500)) %>%
+	activities
+```
+
+When we don't now the maximal frequency - 500 in this case, we can use an open interval by using NA.
+
+```{r}
+patients %>%
+	filter_activity_frequency(interval = c(300, NA)) %>%
+	activities
+```
+
+
+### Resource labels
+
+Similar to the activity filter, the resource filter can be used to filter events by listing on or more resources. 
+
+```{r}
+patients %>%
+	filter_resource(c("r1","r4")) %>%
+	resource_frequency("resource")
+```
+
+### Resource frequency
+
+Instead of filtering events by the resource that performed the activity, we can also filter event by the frequency of the resource. This happens in the same way as for the activity frequency filter. The filter below gives us the 80% activity instances performed by the most common resources. 
+
+```{r}
+patients %>%
+	filter_resource_frequency(perc = 0.80) %>%
+	resources()
+```
+
+Alternatively, using the interval argument, we can select resources who perform between 200 and 300 activity instances. 
+
+```{r}
+patients %>%
+	filter_resource_frequency(interval = c(200,300)) %>%
+	resources()
+```
+
+### Trim cases
+
+The trim filter is a special event filter, as it also take into account the notion of cases. In fact, it _trim_ cases such that they start with a certain activities until they end with a certain activity. It requires two list: one for possible start activities and one for end activities. The cases will be trimmed from the first appearance of a start activity till the last appearance of an end activity. When reversed, these _slices_ of the event log will be removed instead of preserved.
+
+```{r}
+patients %>%
+	filter_trim(start_activities = "Registration", end_activities =  c("MRI SCAN","X-Ray")) %>%
+	process_map(type = performance())
+```
+
+### Trim to time window
+
+Instead of triming cases to a particular start and/or end activity, we can also trim cases to a particular time window. For this we use the function `filter_time_period` with filter_method `trim`. This filter needs a time interval, which is a vector of length 2 containing data/datetime values. These can be created easily using [lubridate](https://lubridate.tidyverse.org/) function, e.g. `ymd` for year-month-day formats. 
+
+This example takes only activity instances which happened (at least partly, i.e. some events) in December of 2017.
+
+```{r}
+library(lubridate)
+patients %>%
+	filter_time_period(interval = ymd(c(20171201, 20171231)), filter_method = "trim") %>%
+	summary()
+```
+
+Using a different filter method (start, complete, contained or intersecting), this filter can also act as a case filter (see below). 

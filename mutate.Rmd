@@ -1,0 +1,29 @@
+---
+title: Mutate logs
+---
+
+
+```{r echo = F, out.width="25%", fig.align = "right"}
+knitr::include_graphics("images/icons/manipulate.PNG")
+
+```
+
+```{r}
+library(bupaR)
+```
+
+## mutate
+
+You can use `mutate` to add new variable to an event log, possibly by using existing variables. In the next example, the total amount of lacticacid is computed for each case. 
+
+```{r echo = F}
+sepsis %>%
+	mutate(lacticacid = as.numeric(lacticacid)) -> sepsis
+```
+
+
+```{r}
+sepsis %>%
+	group_by_case() %>%
+	mutate(total_lacticacid = sum(lacticacid, na.rm = T))
+```

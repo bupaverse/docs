@@ -1,3 +1,58 @@
 ---
 title: Visualize process data
+output:
+  html_document:
+    toc: false
 ---
+
+```{r echo = F, out.width="25%", fig.align = "right"}
+knitr::include_graphics("images/icons/visualize.PNG")
+
+```
+
+```{r include = F}
+library(bslib)
+library(htmltools)
+```
+
+
+```{r echo = F}
+
+layout_column_wrap(heights_equal = "row",
+				   width = NULL,
+				   layout_column_wrap(
+				   	width = NULL,
+				   	style = css(grid_template_columns = "2fr 1fr"),
+				   	card( 
+				   		card_header("Process map",class = "card text-white bg-success mb-3"),
+				   		layout_column_wrap(width = 0.5,
+				   						   card_image("images/icons/visualize.PNG", href = "control_flow_analysis.html", container = card_body),
+				   						   shiny::HTML('<div class="d-grid gap-2">
+					<a href = "frequency_maps.html" class="btn btn-lg btn-success" type="button">Frequency Maps</a>
+					<a href = "performance_maps.html"class="btn btn-lg btn-success" type="button">Performance Maps</a>
+					<a href = "advanced_maps.html"class="btn btn-lg btn-success" type="button">Advanced Maps</a>
+					<a href = "animate_maps.html"class="btn btn-lg btn-success" type="button">Animate Maps</a>
+					</div>'))
+				   	),
+					card(
+						card_header("Process Matrix", class = "card text-white bg-success mb-3"),
+						card_image("images/icons/visualize.PNG", href = "process_matrix.html", container = card_body)
+					)), 
+					layout_column_wrap(
+						width = "250px",
+						card( 
+							
+							card_header("Dotted Chart", class = "card text-white bg-success mb-3"),
+							card_image("images/icons/visualize.PNG", href = "dotted_chart.html", container = card_body)
+						),
+						card( 
+							card_header("Trace explorer", class = "card text-white bg-success mb-3"),
+							card_image("images/icons/visualize.PNG", href = "trace_exporer.html", container = card_body)
+						),
+						card( 
+							card_header("Performance spectrum", class = "card text-white bg-success mb-3"),
+							card_image("images/icons/visualize.PNG", href = "performance_spectrum.html", container = card_body))))
+
+```
+
+<br/>

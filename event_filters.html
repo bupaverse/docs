@@ -642,10 +642,10 @@ div.tocify {
 
 <p><img src="images/icons/manipulate.PNG" width="25%" style="display: block; margin: auto 0 auto auto;" /></p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(bupaR)</span></code></pre></div>
-<div id="event-filters" class="section level2">
-<h2>Event filters</h2>
-<div id="activities-labels" class="section level3">
-<h3>Activities labels</h3>
+<div id="event-filters" class="section level1">
+<h1>Event filters</h1>
+<div id="activity" class="section level2">
+<h2>Activity</h2>
 <p>The filter activity function can be used to filter activities by
 name. It has three arguments</p>
 <ul>
@@ -664,8 +664,8 @@ name. It has three arguments</p>
 <p>As one can see, there are only 2 distinct activities left in the
 event log.</p>
 </div>
-<div id="activity-frequency" class="section level3">
-<h3>Activity frequency</h3>
+<div id="activity-frequency" class="section level2">
+<h2>Activity Frequency</h2>
 <div id="relative-filtering---using-percentage" class="section level4">
 <h4>Relative filtering - using percentage</h4>
 <p>It is also possible to filter on activity frequency. This filter uses
@@ -715,8 +715,17 @@ use an open interval by using NA.</p>
 ## 4 Check-out                            492              0.248</code></pre>
 </div>
 </div>
-<div id="resource-labels" class="section level3">
-<h3>Resource labels</h3>
+<div id="activity-instance" class="section level2">
+<h2>Activity Instance</h2>
+</div>
+<div id="lifecycle" class="section level2">
+<h2>Lifecycle</h2>
+</div>
+<div id="lifecycle-presence" class="section level2">
+<h2>Lifecycle Presence</h2>
+</div>
+<div id="resource-labels" class="section level2">
+<h2>Resource Labels</h2>
 <p>Similar to the activity filter, the resource filter can be used to
 filter events by listing on or more resources.</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span></span>
@@ -728,8 +737,8 @@ filter events by listing on or more resources.</p>
 ## 1 r1            500    0.679
 ## 2 r4            236    0.321</code></pre>
 </div>
-<div id="resource-frequency" class="section level3">
-<h3>Resource frequency</h3>
+<div id="resource-frequency" class="section level2">
+<h2>Resource Frequency</h2>
 <p>Instead of filtering events by the resource that performed the
 activity, we can also filter event by the frequency of the resource.
 This happens in the same way as for the activity frequency filter. The
@@ -758,8 +767,8 @@ who perform between 200 and 300 activity instances.</p>
 ## 2 r3                      237              0.323
 ## 3 r4                      236              0.322</code></pre>
 </div>
-<div id="trim-cases" class="section level3">
-<h3>Trim cases</h3>
+<div id="trim-to-endpoints" class="section level2">
+<h2>Trim to Endpoints</h2>
 <p>The trim filter is a special event filter, as it also take into
 account the notion of cases. In fact, it <em>trim</em> cases such that
 they start with a certain activities until they end with a certain
@@ -771,11 +780,11 @@ removed instead of preserved.</p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter_trim</span>(<span class="at">start_activities =</span> <span class="st">&quot;Registration&quot;</span>, <span class="at">end_activities =</span>  <span class="fu">c</span>(<span class="st">&quot;MRI SCAN&quot;</span>,<span class="st">&quot;X-Ray&quot;</span>)) <span class="sc">%&gt;%</span></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">process_map</span>(<span class="at">type =</span> <span class="fu">performance</span>())</span></code></pre></div>
-<div class="grViz html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-7ea4aacc75cbc61d25a3" style="width:672px;height:480px;"></div>
-<script type="application/json" data-for="htmlwidget-7ea4aacc75cbc61d25a3">{"x":{"diagram":"digraph {\n\ngraph [layout = \"dot\",\n       outputorder = \"edgesfirst\",\n       bgcolor = \"white\",\n       rankdir = \"LR\"]\n\nnode [fontname = \"Helvetica\",\n      fontsize = \"10\",\n      shape = \"circle\",\n      fixedsize = \"true\",\n      width = \"0.5\",\n      style = \"filled\",\n      fillcolor = \"aliceblue\",\n      color = \"gray70\",\n      fontcolor = \"gray50\"]\n\nedge [fontname = \"Helvetica\",\n     fontsize = \"8\",\n     weight = \"1.5\",\n     color = \"gray80\",\n     arrowsize = \"0.5\"]\n\n  \"1\" [label = \"End\", shape = \"circle\", style = \"rounded,filled\", fontcolor = \"brown4\", color = \"brown4\", tooltip = \"ARTIFICIAL_END\n0 mins\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#FFFFFF\"] \n  \"2\" [label = \"Start\", shape = \"circle\", style = \"rounded,filled\", fontcolor = \"chartreuse4\", color = \"chartreuse4\", tooltip = \"ARTIFICIAL_START\n0 mins\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#FFFFFF\"] \n  \"3\" [label = \"Blood test\n332.06 mins\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"black\", color = \"grey\", tooltip = \"Blood test\n332.06 mins\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#FCBBA1\"] \n  \"4\" [label = \"MRI SCAN\n248.99 mins\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"black\", color = \"grey\", tooltip = \"MRI SCAN\n248.99 mins\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#FEE0D2\"] \n  \"5\" [label = \"Registration\n165.55 mins\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"black\", color = \"grey\", tooltip = \"Registration\n165.55 mins\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#FFF5F0\"] \n  \"6\" [label = \"Triage and Assessment\n786.79 mins\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"white\", color = \"grey\", tooltip = \"Triage and Assessment\n786.79 mins\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#99000D\"] \n  \"7\" [label = \"X-Ray\n290.76 mins\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"black\", color = \"grey\", tooltip = \"X-Ray\n290.76 mins\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#FCBBA1\"] \n\"2\"->\"5\" [label = \" \", penwidth = \"1\", color = \"red4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"3\"->\"4\" [label = \"1524.19 mins\", penwidth = \"2.92128602061254\", color = \"red4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"4\"->\"1\" [label = \" \", penwidth = \"1\", color = \"red4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"5\"->\"6\" [label = \"756.21 mins\", penwidth = \"1.95322283903858\", color = \"red4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"6\"->\"3\" [label = \"3040.61 mins\", penwidth = \"4.8327727871476\", color = \"red4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"6\"->\"7\" [label = \"3173.28 mins\", penwidth = \"5\", color = \"red4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"7\"->\"1\" [label = \" \", penwidth = \"1\", color = \"red4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div class="grViz html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-86bee0484ddae1ffed53" style="width:672px;height:480px;"></div>
+<script type="application/json" data-for="htmlwidget-86bee0484ddae1ffed53">{"x":{"diagram":"digraph {\n\ngraph [layout = \"dot\",\n       outputorder = \"edgesfirst\",\n       bgcolor = \"white\",\n       rankdir = \"LR\"]\n\nnode [fontname = \"Helvetica\",\n      fontsize = \"10\",\n      shape = \"circle\",\n      fixedsize = \"true\",\n      width = \"0.5\",\n      style = \"filled\",\n      fillcolor = \"aliceblue\",\n      color = \"gray70\",\n      fontcolor = \"gray50\"]\n\nedge [fontname = \"Helvetica\",\n     fontsize = \"8\",\n     weight = \"1.5\",\n     color = \"gray80\",\n     arrowsize = \"0.5\"]\n\n  \"1\" [label = \"End\", shape = \"circle\", style = \"rounded,filled\", fontcolor = \"brown4\", color = \"brown4\", tooltip = \"ARTIFICIAL_END\n0 mins\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#FFFFFF\"] \n  \"2\" [label = \"Start\", shape = \"circle\", style = \"rounded,filled\", fontcolor = \"chartreuse4\", color = \"chartreuse4\", tooltip = \"ARTIFICIAL_START\n0 mins\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#FFFFFF\"] \n  \"3\" [label = \"Blood test\n332.06 mins\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"black\", color = \"grey\", tooltip = \"Blood test\n332.06 mins\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#FCBBA1\"] \n  \"4\" [label = \"MRI SCAN\n248.99 mins\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"black\", color = \"grey\", tooltip = \"MRI SCAN\n248.99 mins\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#FEE0D2\"] \n  \"5\" [label = \"Registration\n165.55 mins\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"black\", color = \"grey\", tooltip = \"Registration\n165.55 mins\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#FFF5F0\"] \n  \"6\" [label = \"Triage and Assessment\n786.79 mins\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"white\", color = \"grey\", tooltip = \"Triage and Assessment\n786.79 mins\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#99000D\"] \n  \"7\" [label = \"X-Ray\n290.76 mins\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"black\", color = \"grey\", tooltip = \"X-Ray\n290.76 mins\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#FCBBA1\"] \n\"2\"->\"5\" [label = \" \", penwidth = \"1\", color = \"red4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"3\"->\"4\" [label = \"1524.19 mins\", penwidth = \"2.92128602061254\", color = \"red4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"4\"->\"1\" [label = \" \", penwidth = \"1\", color = \"red4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"5\"->\"6\" [label = \"756.21 mins\", penwidth = \"1.95322283903858\", color = \"red4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"6\"->\"3\" [label = \"3040.61 mins\", penwidth = \"4.8327727871476\", color = \"red4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"6\"->\"7\" [label = \"3173.28 mins\", penwidth = \"5\", color = \"red4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"7\"->\"1\" [label = \" \", penwidth = \"1\", color = \"red4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 </div>
-<div id="trim-to-time-window" class="section level3">
-<h3>Trim to time window</h3>
+<div id="trim-to-time-window" class="section level2">
+<h2>Trim to Time Window</h2>
 <p>Instead of triming cases to a particular start and/or end activity,
 we can also trim cases to a particular time window. For this we use the
 function <code>filter_time_period</code> with filter_method

@@ -636,7 +636,6 @@ div.tocify {
 </div>
 
 
-<p><img src="images/icons/create.PNG" width="25%" style="display: block; margin: auto 0 auto auto;" /></p>
 <div id="public-logs" class="section level1">
 <h1>Public logs</h1>
 <p>The <code>eventdataR</code> package contains several real-life and
@@ -661,41 +660,6 @@ altered.</p>
 href="https://doi.org/10.4121/uuid:915d2bfb-7e84-49ad-a286-dc35f063a460"
 class="uri">https://doi.org/10.4121/uuid:915d2bfb-7e84-49ad-a286-dc35f063a460</a></p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>sepsis</span></code></pre></div>
-<pre><code>## # Log of 15214 events consisting of:
-## 846 traces 
-## 1050 cases 
-## 15214 instances of 16 activities 
-## 26 resources 
-## Events occurred from 2013-11-07 08:18:29 until 2015-06-05 12:25:11 
-##  
-## # Variables were mapped as follows:
-## Case identifier:     case_id 
-## Activity identifier:     activity 
-## Resource identifier:     resource 
-## Activity instance identifier:    activity_instance_id 
-## Timestamp:           timestamp 
-## Lifecycle transition:        lifecycle 
-## 
-## # A tibble: 15,214 × 34
-##    case_id activity      lifec…¹ resou…² timestamp             age   crp diagn…³
-##    &lt;chr&gt;   &lt;fct&gt;         &lt;fct&gt;   &lt;fct&gt;   &lt;dttm&gt;              &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;  
-##  1 A       ER Registrat… comple… A       2014-10-22 11:15:41    85    NA A      
-##  2 A       Leucocytes    comple… B       2014-10-22 11:27:00    NA    NA &lt;NA&gt;   
-##  3 A       CRP           comple… B       2014-10-22 11:27:00    NA   210 &lt;NA&gt;   
-##  4 A       LacticAcid    comple… B       2014-10-22 11:27:00    NA    NA &lt;NA&gt;   
-##  5 A       ER Triage     comple… C       2014-10-22 11:33:37    NA    NA &lt;NA&gt;   
-##  6 A       ER Sepsis Tr… comple… A       2014-10-22 11:34:00    NA    NA &lt;NA&gt;   
-##  7 A       IV Liquid     comple… A       2014-10-22 14:03:47    NA    NA &lt;NA&gt;   
-##  8 A       IV Antibioti… comple… A       2014-10-22 14:03:47    NA    NA &lt;NA&gt;   
-##  9 A       Admission NC  comple… D       2014-10-22 14:13:19    NA    NA &lt;NA&gt;   
-## 10 A       CRP           comple… B       2014-10-24 09:00:00    NA  1090 &lt;NA&gt;   
-## # … with 15,204 more rows, 26 more variables: diagnosticartastrup &lt;lgl&gt;,
-## #   diagnosticblood &lt;lgl&gt;, diagnosticecg &lt;lgl&gt;, diagnosticic &lt;lgl&gt;,
-## #   diagnosticlacticacid &lt;lgl&gt;, diagnosticliquor &lt;lgl&gt;, diagnosticother &lt;lgl&gt;,
-## #   diagnosticsputum &lt;lgl&gt;, diagnosticurinaryculture &lt;lgl&gt;,
-## #   diagnosticurinarysediment &lt;lgl&gt;, diagnosticxthorax &lt;lgl&gt;, disfuncorg &lt;lgl&gt;,
-## #   hypotensie &lt;lgl&gt;, hypoxie &lt;lgl&gt;, infectionsuspected &lt;lgl&gt;, infusion &lt;lgl&gt;,
-## #   lacticacid &lt;dbl&gt;, leucocytes &lt;chr&gt;, oligurie &lt;lgl&gt;, …</code></pre>
 </div>
 <div id="hospital-log" class="section level3">
 <h3>Hospital Log</h3>
@@ -704,42 +668,8 @@ use in the first Business Process Intelligence Contest (BPIC 2011).</p>
 <p>Source: <a
 href="https://doi.org/10.4121/uuid:d9769f3d-0ab0-4fb8-803b-0d1120ffcf54"
 class="uri">https://doi.org/10.4121/uuid:d9769f3d-0ab0-4fb8-803b-0d1120ffcf54</a></p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>hospital</span></code></pre></div>
-<pre><code>## # Log of 150291 events consisting of:
-## 981 traces 
-## 1143 cases 
-## 150291 instances of 624 activities 
-## 43 resources 
-## Events occurred from 2005-01-03 until 2008-03-20 
-##  
-## # Variables were mapped as follows:
-## Case identifier:     case_id 
-## Activity identifier:     activity 
-## Resource identifier:     group 
-## Activity instance identifier:    activity_instance_id 
-## Timestamp:           timestamp 
-## Lifecycle transition:        lifecycle 
-## 
-## # A tibble: 150,291 × 98
-##    case_id  activity   lifec…¹ group timestamp           CASE_…² CASE_…³ CASE_…⁴
-##    &lt;chr&gt;    &lt;fct&gt;      &lt;fct&gt;   &lt;fct&gt; &lt;dttm&gt;                &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
-##  1 00000000 1e consul… comple… Radi… 2005-01-03 00:00:00      33      NA      NA
-##  2 00000000 administr… comple… Radi… 2005-01-03 00:00:00      33      NA      NA
-##  3 00000000 verlosk.-… comple… Nurs… 2005-01-05 00:00:00      33      NA      NA
-##  4 00000000 echografi… comple… Obst… 2005-01-05 00:00:00      33      NA      NA
-##  5 00000000 1e consul… comple… Nurs… 2005-01-05 00:00:00      33      NA      NA
-##  6 00000000 administr… comple… Nurs… 2005-01-05 00:00:00      33      NA      NA
-##  7 00000000 simulator… comple… Radi… 2005-01-24 00:00:00      33      NA      NA
-##  8 00000000 behandelt… comple… Radi… 2005-01-31 00:00:00      33      NA      NA
-##  9 00000000 telethera… comple… Radi… 2005-01-31 00:00:00      33      NA      NA
-## 10 00000000 aanname l… comple… Gene… 2005-02-15 00:00:00      33      NA      NA
-## # … with 150,281 more rows, 90 more variables: `CASE_age:3` &lt;dbl&gt;,
-## #   `CASE_age:4` &lt;dbl&gt;, `CASE_age:5` &lt;dbl&gt;, CASE_diagnosis &lt;chr&gt;,
-## #   CASE_diagnosis_treatment_combination_id &lt;dbl&gt;,
-## #   `CASE_diagnosis_treatment_combination_id:1` &lt;dbl&gt;,
-## #   `CASE_diagnosis_treatment_combination_id:10` &lt;dbl&gt;,
-## #   `CASE_diagnosis_treatment_combination_id:11` &lt;dbl&gt;,
-## #   `CASE_diagnosis_treatment_combination_id:12` &lt;dbl&gt;, …</code></pre>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>hospital <span class="sc">%&gt;%</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">str</span>()</span></code></pre></div>
 </div>
 <div id="hospital-billing" class="section level3">
 <h3>Hospital Billing</h3>
@@ -759,41 +689,7 @@ time between events within a trace has not been altered.</p>
 <p>Source: <a
 href="https://doi.org/10.4121/uuid:76c46b83-c930-4798-a1c9-4be94dfeb741"
 class="uri">https://doi.org/10.4121/uuid:76c46b83-c930-4798-a1c9-4be94dfeb741</a></p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>hospital_billing</span></code></pre></div>
-<pre><code>## # Log of 49951 events consisting of:
-## 288 traces 
-## 10000 cases 
-## 49951 instances of 16 activities 
-## 566 resources 
-## Events occurred from 2012-12-13 10:13:18 until 2015-12-13 13:55:15 
-##  
-## # Variables were mapped as follows:
-## Case identifier:     case_id 
-## Activity identifier:     activity 
-## Resource identifier:     resource 
-## Activity instance identifier:    activity_instance_id 
-## Timestamp:           timestamp 
-## Lifecycle transition:        lifecycle 
-## 
-## # A tibble: 49,951 × 25
-##    case_id activity lifecycle resou…¹ timestamp           actor…² actred blocked
-##    &lt;chr&gt;   &lt;fct&gt;    &lt;fct&gt;     &lt;fct&gt;   &lt;dttm&gt;              &lt;lgl&gt;   &lt;lgl&gt;  &lt;lgl&gt;  
-##  1 A       NEW      complete  ResA    2012-12-16 19:33:10 NA      NA     FALSE  
-##  2 A       FIN      complete  &lt;NA&gt;    2013-12-15 19:00:37 NA      NA     NA     
-##  3 A       RELEASE  complete  &lt;NA&gt;    2013-12-16 03:53:38 NA      NA     NA     
-##  4 A       CODE OK  complete  &lt;NA&gt;    2013-12-17 12:56:29 FALSE   FALSE  NA     
-##  5 A       BILLED   complete  ResB    2013-12-19 03:44:31 NA      NA     NA     
-##  6 B       NEW      complete  ResA    2012-12-16 19:33:50 NA      NA     FALSE  
-##  7 B       DELETE   complete  ResC    2013-10-19 12:37:05 NA      NA     NA     
-##  8 C       NEW      complete  ResA    2013-01-13 21:04:24 NA      NA     FALSE  
-##  9 C       FIN      complete  &lt;NA&gt;    2013-04-17 19:59:43 NA      NA     NA     
-## 10 C       RELEASE  complete  &lt;NA&gt;    2013-04-18 02:30:35 NA      NA     NA     
-## # … with 49,941 more rows, 17 more variables: casetype &lt;chr&gt;, closecode &lt;chr&gt;,
-## #   diagnosis &lt;chr&gt;, flaga &lt;lgl&gt;, flagb &lt;lgl&gt;, flagc &lt;lgl&gt;, flagd &lt;lgl&gt;,
-## #   iscancelled &lt;lgl&gt;, isclosed &lt;lgl&gt;, msgcode &lt;chr&gt;, msgcount &lt;dbl&gt;,
-## #   msgtype &lt;chr&gt;, speciality &lt;chr&gt;, state &lt;chr&gt;, version &lt;chr&gt;,
-## #   activity_instance_id &lt;chr&gt;, .order &lt;int&gt;, and abbreviated variable names
-## #   ¹​resource, ²​actorange</code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>hospital_billing</span></code></pre></div>
 </div>
 <div id="road-traffic-fine-management" class="section level3">
 <h3>Road Traffic Fine Management</h3>
@@ -802,40 +698,7 @@ fines.</p>
 <p>Source: <a
 href="https://doi.org/10.4121/uuid:270fd440-1057-4fb9-89a9-b699b47990f5"
 class="uri">https://doi.org/10.4121/uuid:270fd440-1057-4fb9-89a9-b699b47990f5</a></p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>traffic_fines</span></code></pre></div>
-<pre><code>## # Log of 34724 events consisting of:
-## 4 traces 
-## 4 cases 
-## 34724 instances of 2 activities 
-## 16 resources 
-## Events occurred from 2006-06-17 until 2012-03-26 
-##  
-## # Variables were mapped as follows:
-## Case identifier:     vehicleclass 
-## Activity identifier:     notificationtype 
-## Resource identifier:     resource 
-## Activity instance identifier:    activity_instance_id 
-## Timestamp:           timestamp 
-## Lifecycle transition:        lifecycle 
-## 
-## # A tibble: 34,724 × 18
-##    case_id activity   lifec…¹ resou…² timestamp           amount article dismi…³
-##    &lt;chr&gt;   &lt;fct&gt;      &lt;fct&gt;   &lt;fct&gt;   &lt;dttm&gt;              &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;  
-##  1 A1      Create Fi… comple… 561     2006-07-24 00:00:00 35.0       157 NIL    
-##  2 A1      Send Fine  comple… &lt;NA&gt;    2006-12-05 00:00:00 &lt;NA&gt;        NA &lt;NA&gt;   
-##  3 A100    Create Fi… comple… 561     2006-08-02 00:00:00 35.0       157 NIL    
-##  4 A100    Send Fine  comple… &lt;NA&gt;    2006-12-12 00:00:00 &lt;NA&gt;        NA &lt;NA&gt;   
-##  5 A100    Insert Fi… comple… &lt;NA&gt;    2007-01-15 00:00:00 &lt;NA&gt;        NA &lt;NA&gt;   
-##  6 A100    Add penal… comple… &lt;NA&gt;    2007-03-16 00:00:00 71.5        NA &lt;NA&gt;   
-##  7 A100    Send for … comple… &lt;NA&gt;    2009-03-30 00:00:00 &lt;NA&gt;        NA &lt;NA&gt;   
-##  8 A10000  Create Fi… comple… 561     2007-03-09 00:00:00 36.0       157 NIL    
-##  9 A10000  Send Fine  comple… &lt;NA&gt;    2007-07-17 00:00:00 &lt;NA&gt;        NA &lt;NA&gt;   
-## 10 A10000  Insert Fi… comple… &lt;NA&gt;    2007-08-02 00:00:00 &lt;NA&gt;        NA &lt;NA&gt;   
-## # … with 34,714 more rows, 10 more variables: expense &lt;chr&gt;, lastsent &lt;chr&gt;,
-## #   matricola &lt;dbl&gt;, notificationtype &lt;chr&gt;, paymentamount &lt;dbl&gt;, points &lt;dbl&gt;,
-## #   totalpaymentamount &lt;chr&gt;, vehicleclass &lt;chr&gt;, activity_instance_id &lt;chr&gt;,
-## #   .order &lt;int&gt;, and abbreviated variable names ¹​lifecycle, ²​resource,
-## #   ³​dismissal</code></pre>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>traffic_fines</span></code></pre></div>
 </div>
 </div>
 <div id="artifical-data" class="section level2">
@@ -847,63 +710,12 @@ department of a hospital. This event log was used as the running example
 in the journal paper entitled <a
 href="http://www.sciencedirect.com/science/article/pii/S0167923617300374">Retrieving
 batch organisation of work insights from event logs</a>.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span> summary</span></code></pre></div>
-<pre><code>## Number of events:  5442
-## Number of cases:  500
-## Number of traces:  7
-## Number of distinct activities:  7
-## Average trace length:  10.884
-## 
-## Start eventlog:  2017-01-02 11:41:53
-## End eventlog:  2018-05-05 07:16:02</code></pre>
-<pre><code>##                   handling      patient          employee  handling_id       
-##  Blood test           : 474   Length:5442        r1:1000   Length:5442       
-##  Check-out            : 984   Class :character   r2:1000   Class :character  
-##  Discuss Results      : 990   Mode  :character   r3: 474   Mode  :character  
-##  MRI SCAN             : 472                      r4: 472                     
-##  Registration         :1000                      r5: 522                     
-##  Triage and Assessment:1000                      r6: 990                     
-##  X-Ray                : 522                      r7: 984                     
-##  registration_type      time                            .order    
-##  complete:2721     Min.   :2017-01-02 11:41:53.00   Min.   :   1  
-##  start   :2721     1st Qu.:2017-05-06 17:15:18.00   1st Qu.:1361  
-##                    Median :2017-09-08 04:16:50.00   Median :2722  
-##                    Mean   :2017-09-02 20:52:34.40   Mean   :2722  
-##                    3rd Qu.:2017-12-22 15:44:11.25   3rd Qu.:4082  
-##                    Max.   :2018-05-05 07:16:02.00   Max.   :5442  
-## </code></pre>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span> summary</span></code></pre></div>
 </div>
 <div id="patients-activitylog" class="section level3">
 <h3>Patients activitylog</h3>
 <p>Equivalent process log of patient, but stored as an activity log.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>patients_act</span></code></pre></div>
-<pre><code>## # Log of 5442 events consisting of:
-## 7 traces 
-## 500 cases 
-## 2721 instances of 7 activities 
-## 7 resources 
-## Events occurred from 2017-01-02 11:41:53 until 2018-05-05 07:16:02 
-##  
-## # Variables were mapped as follows:
-## Case identifier:     patient 
-## Activity identifier:     handling 
-## Resource identifier:     employee 
-## Timestamps:      start, complete 
-## 
-## # A tibble: 2,721 × 7
-##    handling     patient employee handling_id .order complete           
-##    &lt;fct&gt;        &lt;chr&gt;   &lt;fct&gt;    &lt;chr&gt;        &lt;int&gt; &lt;dttm&gt;             
-##  1 Registration 1       r1       1                1 2017-01-02 12:40:20
-##  2 Registration 2       r1       2                2 2017-01-02 15:16:38
-##  3 Registration 3       r1       3                3 2017-01-04 06:36:54
-##  4 Registration 4       r1       4                4 2017-01-04 04:25:06
-##  5 Registration 5       r1       5                5 2017-01-04 20:07:50
-##  6 Registration 6       r1       6                6 2017-01-04 18:12:46
-##  7 Registration 7       r1       7                7 2017-01-05 06:27:49
-##  8 Registration 8       r1       8                8 2017-01-05 07:58:17
-##  9 Registration 9       r1       9                9 2017-01-06 07:18:32
-## 10 Registration 10      r1       10              10 2017-01-06 09:13:28
-## # … with 2,711 more rows, and 1 more variable: start &lt;dttm&gt;</code></pre>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>patients_act</span></code></pre></div>
 </div>
 </div>
 </div>

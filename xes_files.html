@@ -641,16 +641,16 @@ div.tocify {
 <h1>Xes Files</h1>
 <div id="read-xes" class="section level2">
 <h2>Read XES</h2>
-<p>The function <code>read_xes</code> can be used to read XES-files and
-turn the data into an event log object in R. The function needs only one
-argument, called <em>xesfile</em>. This can be a local path to a file
-with a .xes extension or an URL. An example XES-file can be found at the
-following link: <a
+<p>The function <code>read_xes()</code> can be used to read XES files
+and turn the data into an <code>eventlog</code> object in R. The
+function needs only one <code>xesfile</code> argument. This can be a
+local path to a file with a .xes extension or an URL. An example XES
+file can be found at the following link: <a
 href="https://bupar.net/eventdata/exercise1.xes">https://bupar.net/eventdata/exercise1.xes</a>.
-When opening this file in a browser, you will see that it is an
-XML-file. More information on the notation can be found <a
+When opening this file in a browser, you will see that it is an XML
+file. More information on the notation can be found <a
 href="http://www.xes-standard.org/">here</a>.</p>
-<p>Importing a XES-file is easily done as follows:</p>
+<p>Importing a XES file is easily done as follows:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(xesreadR)</span></code></pre></div>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read_xes</span>(<span class="st">&quot;https://bupar.net/eventdata/exercise1.xes&quot;</span>)</span></code></pre></div>
 <pre><code>## Warning: `data_frame()` was deprecated in tibble 1.1.0.
@@ -697,14 +697,13 @@ href="http://www.xes-standard.org/">here</a>.</p>
 ## 11 Case1.0           D        comple… UNDEFI… 2008-12-09 07:23:01      11     11
 ## # … with abbreviated variable names ¹​activity_id, ²​lifecycle_id, ³​resource_id,
 ## #   ⁴​activity_instance_id</code></pre>
-<p>Note that in the example above, the <code>read_xes</code> functions
+<p>Note that in the example above, the <code>read_xes()</code> function
 emits a warnings that no activity instance identifier was found. Recall
-that an event log objects in R needs certain <a
-href="creating_eventlogs.html#the_event_log_object">data fields</a> to
-be present. However, it might be so that not all of these field are
-available, in which case <code>read_xes</code> will throw a warning or
-an error. Ideally, the XES-file should contain at least the following
-elements:</p>
+that an <code>eventlog</code> object in R needs certain <a
+href="create_logs.html">data fields</a> to be present. However, it might
+be so that not all of these field are available, in which case
+<code>read_xes()</code> will throw a warning or an error. Ideally, the
+XES file should contain at least the following elements:</p>
 <div class="sourceCode" id="cb8"><pre
 class="sourceCode xml"><code class="sourceCode xml"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>&lt;<span class="kw">trace</span>&gt;</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">string</span><span class="ot"> key=</span><span class="st">&quot;concept:name&quot;</span><span class="ot"> value=</span><span class="st">&quot;Case3.0&quot;</span>/&gt;</span>
@@ -718,8 +717,8 @@ class="sourceCode xml"><code class="sourceCode xml"><span id="cb8-1"><a href="#c
 <span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    &lt;/<span class="kw">event</span>&gt;</span>
 <span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    ...</span>
 <span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>&lt;/<span class="kw">trace</span>&gt;</span></code></pre></div>
-<p>These elements are translated as follows to the terminolgy used by
-bupaR.</p>
+<p>These elements are translated according to the terminology used in
+<code>bupaR</code> as follows:</p>
 <table>
 <thead>
 <tr class="header">
@@ -761,16 +760,16 @@ bupaR.</p>
 </tr>
 </tbody>
 </table>
-<p>When there is no case identifier, an artificial case identifier with
-the name <em>CASE_ID</em> will be created based on the hierarchy of the
-XES-file. In case of other missing elements, either an error will be
-thrown, or a warning.</p>
+<p>When there is no case identifier, an artificial case identifier
+<strong>CASE_ID</strong> will be created based on the hierarchy of the
+XES file. In case of other missing elements, either an error or a
+warning will be thrown.</p>
 <div id="errors" class="section level3">
 <h3>Errors</h3>
-<p>An error will be thrown if the XES-files does not contains an
+<p>An error will be thrown if a XES file does not contain an
 <strong>activity identifier</strong> or a <strong>timestamp</strong>. As
-such these are the minimum requirements to create an event log object
-from a XES-file.</p>
+such these are the minimum requirements to create an
+<code>eventlog</code> object from a XES file.</p>
 </div>
 <div id="warnings" class="section level3">
 <h3>Warnings</h3>
@@ -785,14 +784,14 @@ This column will regard every event in the log as a distinct activity
 instance. A warning will be emitted noting that you should check whether
 this is a justified assumption.</p></li>
 <li><p>If available, missing information can be added manually to the
-event log object in R by overwriting the variables, e.g. with
-<code>mutate</code>.</p></li>
+<code>eventlog</code> object by overwriting the variables, e.g. with
+<code>mutate()</code>.</p></li>
 </ul>
 </div>
 <div id="additional-elements" class="section level3">
 <h3>Additional elements</h3>
 <p>Note that both traces and events can have additional elements in the
-XES-files. These will be added as extra variables in the resulting log.
+XES files. These will be added as extra variables in the resulting log.
 Attributes at a the level of traces will get the prefix <em>CASE_</em>
 in their name. <a href="#fn1" class="footnote-ref"
 id="fnref1"><sup>1</sup></a></p>
@@ -802,13 +801,13 @@ id="fnref1"><sup>1</sup></a></p>
 <h2>Create list of cases</h2>
 <p>In certain circumstances, it might be useful to have a separate list
 of cases with case attributes. This can be obtained using function
-<code>read_xes_cases</code>. The argument for this function is the same,
-i.e. a xesfile. The result is a data.frame with one row for each case
-and one column for each attribute. Non-existing attributes for a
-specific case are filled in with NA. Below, this function is illustrated
-using the <em>repairExample</em> event log, which has one case attribute
-called <em>description</em>. For the sake of illustration, the entire
-event log is also imported.</p>
+<code>read_xes_cases()</code>. The argument for this function remains
+the same <code>xesfile.</code> The result is a <code>data.frame</code>
+with one row for each case and one column for each attribute.
+Non-existing attributes for a specific case are filled in with NA`s.
+Below, this function is illustrated using the <em>repairExample</em>
+event log, which has one case attribute called <em>description</em>. For
+the sake of illustration the entire event log is also imported.</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read_xes_cases</span>(<span class="st">&quot;https://bupar.net/eventdata/repairExample.xes&quot;</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 1,104 × 2
 ##    CASE_concept_name CASE_description          
@@ -863,22 +862,22 @@ event log is also imported.</p>
 </div>
 <div id="write-xes" class="section level2">
 <h2>Write XES</h2>
-<p>Writing of XES-files can be done using the function
-<code>write_xes</code>.</p>
+<p>Writing a XES file can be done using the function
+<code>write_xes()</code>.</p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">args</span>(write_xes)</span></code></pre></div>
 <pre><code>## function (eventlog, xesfile = file.choose(), case_attributes = NULL) 
 ## NULL</code></pre>
 <p>It minimally requires 2 arguments:</p>
 <ul>
-<li>an event log object</li>
+<li>an <code>eventlog</code> object</li>
 <li>a file name/path where to store the file (if not specified, as file
 system window will open to save the file)</li>
 </ul>
 <p>Additionally, one can specify which of the variables in the event log
 should be regarded as case attributes by supplying a character vector of
-variable names to the case_attributes argument. If this argument is not
-specified, all the variables start with prefix <strong>CASE_</strong>
-will be considered as case attributes.</p>
+variable names to the <code>case_attributes</code> argument. If this
+argument is not specified, all the variables starting with the prefix
+<strong>CASE_</strong> will be considered as case attributes.</p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>eventdataR<span class="sc">::</span>patients</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="fu">write_xes</span>(patients, <span class="st">&quot;patients.xes&quot;</span>)</span></code></pre></div>
@@ -889,13 +888,13 @@ will be considered as case attributes.</p>
 <ol>
 <li id="fn1"><p>On terminology: what in XES is called a <em>trace</em>
 (i.e. between <trace> tags) is called a case or process instance in
-bupaR. In the context of <em>bupaR</em> the concept <em>trace</em> is
-reserved for an activity sequence, and is not related to a specific
-process instance. Many process instances can share the same
-<em>trace</em> of activities. The terminology used by <em>bupaR</em> is
-in correspondence with current literature. For more information about
-the data model used, look <a href="creating_eventlogs.html">here</a>.<a
-href="#fnref1" class="footnote-back">↩︎</a></p></li>
+bupaR. In <code>bupaR</code> the concept <em>trace</em> is reserved for
+an activity sequence, and is not related to a specific process instance.
+Many process instances can share the same <em>trace</em> of activities.
+The terminology used in <code>bupaR</code> is in correspondence with
+current literature. See <a href="create_logs.html">creating logs</a> for
+more information about the data model used.<a href="#fnref1"
+class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
 

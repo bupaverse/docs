@@ -36,7 +36,8 @@ Real life log of a Dutch academic hospital, originally intended for use in the f
 Source: <https://doi.org/10.4121/uuid:d9769f3d-0ab0-4fb8-803b-0d1120ffcf54>
 
 ```{r}
-hospital
+hospital %>%
+	str()
 ```
 
 ### Hospital Billing

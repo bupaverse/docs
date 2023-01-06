@@ -11,9 +11,9 @@ knitr::include_graphics("images/icons/create.PNG")
 
 ## Read XES
 
-The function  `read_xes` can be used to read XES-files and turn the data into an event log object in R. The function needs only one argument, called _xesfile_. This can be a local path to a file with a .xes extension or an URL. An example XES-file can be found at the following link: [https://bupar.net/eventdata/exercise1.xes](https://bupar.net/eventdata/exercise1.xes). When opening this file in a browser, you will see that it is an XML-file. More information on the notation can be found [here](http://www.xes-standard.org/).
+The function  `read_xes()` can be used to read XES files and turn the data into an `eventlog` object in R. The function needs only one `xesfile` argument. This can be a local path to a file with a .xes extension or an URL. An example XES file can be found at the following link: [https://bupar.net/eventdata/exercise1.xes](https://bupar.net/eventdata/exercise1.xes). When opening this file in a browser, you will see that it is an XML file. More information on the notation can be found [here](http://www.xes-standard.org/).
 
-Importing a XES-file is easily done as follows:
+Importing a XES file is easily done as follows:
 
 ```{r include = F}
 library(bupaR)
@@ -30,7 +30,7 @@ data <- read_xes("https://bupar.net/eventdata/exercise1.xes")
 data
 ```
 
-Note that in the example above, the `read_xes` functions emits a warnings that no activity instance identifier was found. Recall that an event log objects in R needs certain [data fields](creating_eventlogs.html#the_event_log_object) to be present. However, it might be so that not all of these field are available, in which case `read_xes` will throw a warning or an error. Ideally, the XES-file should contain at least the following elements:
+Note that in the example above, the `read_xes()` function emits a warnings that no activity instance identifier was found. Recall that an `eventlog` object in R needs certain [data fields](create_logs.html) to be present. However, it might be so that not all of these field are available, in which case `read_xes()` will throw a warning or an error. Ideally, the XES file should contain at least the following elements:
 
 
 ```xml
@@ -48,7 +48,7 @@ Note that in the example above, the `read_xes` functions emits a warnings that n
 </trace>
 ```
 
-These elements are translated as follows to the terminolgy used by bupaR.
+These elements are translated according to the terminology used in `bupaR` as follows:
 
 ```{r  results='asis', echo = F}
 table <- "
@@ -67,11 +67,11 @@ row.names(df)<-NULL
 pandoc.table(df, style = 'rmarkdown', justify = "left", split.table = Inf)
 ```
 
-When there is no case identifier, an artificial case identifier with the name _CASE_ID_ will be created based on the hierarchy of the XES-file. In case of other missing elements, either an error will be thrown, or a warning.
+When there is no case identifier, an artificial case identifier __CASE_ID__ will be created based on the hierarchy of the XES file. In case of other missing elements, either an error or a warning will be thrown.
 
 ### Errors
 
-An error will be thrown if the XES-files does not contains an __activity identifier__ or a __timestamp__. As such these are the minimum requirements to create an event log object from a XES-file. 
+An error will be thrown if a XES file does not contain an __activity identifier__ or a __timestamp__. As such these are the minimum requirements to create an `eventlog` object from a XES file. 
 
 ### Warnings
 
@@ -79,17 +79,17 @@ An error will be thrown if the XES-files does not contains an __activity identif
 
 * In case the __activity instance identifier__ is missing, a default activity instance identifier column will be added. This column will regard every event in the log as a distinct activity instance. A warning will be emitted noting that you should check whether this is a justified assumption. 
 
-* If available, missing information can be added manually to the event log object in R by overwriting the variables, e.g. with `mutate`.
+* If available, missing information can be added manually to the `eventlog` object by overwriting the variables, e.g. with `mutate()`.
 
 ### Additional elements
 
-Note that both traces and events can have additional elements in the XES-files. These will be added as extra variables in the resulting log. Attributes at a the level of traces will get the prefix *CASE_* in their name. [^1]
+Note that both traces and events can have additional elements in the XES files. These will be added as extra variables in the resulting log. Attributes at a the level of traces will get the prefix *CASE_* in their name. [^1]
 
-[^1]: On terminology: what in XES is called a _trace_ (i.e. between <trace> tags) is called a case or process instance in bupaR. In the context of _bupaR_ the concept _trace_ is reserved for an activity sequence, and is not related to a specific process instance. Many process instances can share the same _trace_ of activities. The terminology used by _bupaR_ is in correspondence with current literature. For more information about the data model used, look [here](creating_eventlogs.html).
+[^1]: On terminology: what in XES is called a _trace_ (i.e. between <trace> tags) is called a case or process instance in bupaR. In `bupaR` the concept _trace_ is reserved for an activity sequence, and is not related to a specific process instance. Many process instances can share the same _trace_ of activities. The terminology used in `bupaR` is in correspondence with current literature. See [creating logs](create_logs.html) for more information about the data model used.
 
 ## Create list of cases
 
-In certain circumstances, it might be useful to have a separate list of cases with case attributes. This can be obtained using function `read_xes_cases`. The argument for this function is the same, i.e. a xesfile. The result is a data.frame with one row for each case and one column for each attribute. Non-existing attributes for a specific case are filled in with NA. Below, this function is illustrated using the _repairExample_ event log, which has one case attribute called _description_. For the sake of illustration, the entire event log is also imported.
+In certain circumstances, it might be useful to have a separate list of cases with case attributes. This can be obtained using function `read_xes_cases()`. The argument for this function remains the same `xesfile.` The result is a `data.frame` with one row for each case and one column for each attribute. Non-existing attributes for a specific case are filled in with NA`s. Below, this function is illustrated using the _repairExample_ event log, which has one case attribute called _description_. For the sake of illustration the entire event log is also imported.
 
 ```{r}
 read_xes_cases("https://bupar.net/eventdata/repairExample.xes")
@@ -101,7 +101,7 @@ read_xes("https://bupar.net/eventdata/repairExample.xes")
 
 ## Write XES
 
-Writing of XES-files can be done using the function  `write_xes`. 
+Writing a XES file can be done using the function `write_xes()`. 
 
 ```{r}
 args(write_xes)
@@ -110,10 +110,10 @@ args(write_xes)
 
 It minimally requires 2 arguments: 
 
-* an event log object 
+* an `eventlog` object 
 * a file name/path where to store the file (if not specified, as file system window will open to save the file)
 
-Additionally, one can specify which of the variables in the event log should be regarded as case attributes by supplying a character vector of variable names to the case_attributes argument. If this argument is not specified, all the variables start with prefix **CASE_** will be considered as case attributes. 
+Additionally, one can specify which of the variables in the event log should be regarded as case attributes by supplying a character vector of variable names to the `case_attributes` argument. If this argument is not specified, all the variables starting with the prefix **CASE_** will be considered as case attributes. 
 
 ```{r eval = F}
 eventdataR::patients

@@ -11,7 +11,7 @@
 
 
 
-<title>case_filters.knit</title>
+<title>Filter case</title>
 
 <script src="site_libs/header-attrs-2.19/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -25,6 +25,10 @@
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/htmlwidgets-1.6.0/htmlwidgets.js"></script>
+<script src="site_libs/viz-1.8.2/viz.js"></script>
+<link href="site_libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
+<script src="site_libs/grViz-binding-1.0.9/grViz.js"></script>
 <script>
 	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -53,6 +57,107 @@ ga('send', 'pageview');
 
 
 
+<style type="text/css">
+  code {
+    white-space: pre;
+  }
+  .sourceCode {
+    overflow: visible;
+  }
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  background-color: #f8f8f8; }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #c4a000; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #000000; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #000000; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #000000; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
 
 
 
@@ -530,11 +635,318 @@ div.tocify {
 
 
 
+<h1 class="title toc-ignore">Filter case</h1>
 
 </div>
 
 
-
+<p><img src="images/icons/manipulate.PNG" width="25%" style="display: block; margin: auto 0 auto auto;" /></p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(bupaR)</span></code></pre></div>
+<div id="case-filters" class="section level2">
+<h2>Case filters</h2>
+<p>Instead of filtering events, or parts of cases, we can also filter
+event data by taking (or leaving) cases as a whole. Using
+<code>edeaR</code>, there are the following options to filter cases:</p>
+<ul>
+<li>Based on performance
+<ul>
+<li>Throughput time</li>
+<li>Processing time</li>
+<li>Trace length</li>
+</ul></li>
+<li>Based on control-flow characteristics
+<ul>
+<li>Presence/absence of activities</li>
+<li>Start/End points</li>
+<li>Precedence constraints</li>
+<li>Frequency of trace</li>
+</ul></li>
+<li>Time period</li>
+</ul>
+<div id="throughput-time" class="section level3">
+<h3>Throughput time</h3>
+<p>Filtering on throughput time can be done in an absolute and relative
+way, just as for many other filters.</p>
+<ul>
+<li>Absolute: specific a throughput time interval</li>
+<li>Relative: specific a percentage target</li>
+</ul>
+<p>For instance, we can filter cases with a throughput time between 50
+and 100 hours. Notice that setting the time unit argument appropriately
+is important in this case.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter_throughput_time</span>(<span class="at">interval =</span> <span class="fu">c</span>(<span class="dv">50</span>, <span class="dv">100</span>), <span class="at">units =</span> <span class="st">&quot;hours&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">throughput_time</span>(<span class="at">units =</span> <span class="st">&quot;hours&quot;</span>)</span></code></pre></div>
+<pre><code>## Warning: between() called on numeric vector with S3 class</code></pre>
+<pre><code>## # A tibble: 1 × 8
+##   min            q1             median         mean     q3    max   st_dev iqr  
+##   &lt;drtn&gt;         &lt;drtn&gt;         &lt;drtn&gt;         &lt;drtn&gt;   &lt;drt&gt; &lt;drt&gt;  &lt;dbl&gt; &lt;drt&gt;
+## 1 50.08389 hours 63.55361 hours 78.62292 hours 76.8482… 87.4… 99.9…   13.8 23.8…</code></pre>
+<p>Alternatively, we can filter the 50% cases with the lowest throughput
+time.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter_throughput_time</span>(<span class="at">percentage =</span> <span class="fl">0.5</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">throughput_time</span>(<span class="at">units =</span> <span class="st">&quot;hours&quot;</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 1 × 8
+##   min            q1            median         mean      q3    max   st_dev iqr  
+##   &lt;drtn&gt;         &lt;drtn&gt;        &lt;drtn&gt;         &lt;drtn&gt;    &lt;drt&gt; &lt;drt&gt;  &lt;dbl&gt; &lt;drt&gt;
+## 1 35.90611 hours 81.1666 hours 103.5106 hours 99.84844… 120.… 145.…   26.6 39.5…</code></pre>
+<p>In both cases, the selection can be negated using the
+<code>reverse</code> argument. When using an interval, one of the limits
+can be set to NA to create an open interval.</p>
+</div>
+<div id="processing-time" class="section level3">
+<h3>Processing time</h3>
+<p>Filtering on processing time happens in exactly the same way as the
+filter on throughput time, as the examples below show.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter_processing_time</span>(<span class="at">interval =</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">100</span>), <span class="at">units =</span> <span class="st">&quot;hours&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">processing_time</span>(<span class="at">units =</span> <span class="st">&quot;hours&quot;</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 1 × 8
+##   min            q1          median         mean        q3    max   st_dev iqr  
+##   &lt;drtn&gt;         &lt;drtn&gt;      &lt;drtn&gt;         &lt;drtn&gt;      &lt;drt&gt; &lt;drt&gt;  &lt;dbl&gt; &lt;drt&gt;
+## 1 10.71778 hours 24.95 hours 27.72708 hours 27.74947 h… 30.7… 38.2…   4.17 5.78…</code></pre>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter_processing_time</span>(<span class="at">percentage =</span> <span class="fl">0.5</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">processing_time</span>(<span class="at">units =</span> <span class="st">&quot;hours&quot;</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 1 × 8
+##   min            q1             median       mean       q3    max   st_dev iqr  
+##   &lt;drtn&gt;         &lt;drtn&gt;         &lt;drtn&gt;       &lt;drtn&gt;     &lt;drt&gt; &lt;drt&gt;  &lt;dbl&gt; &lt;drt&gt;
+## 1 10.71778 hours 23.04375 hours 24.945 hours 24.38761 … 26.4… 27.7…   2.66 3.37…</code></pre>
+</div>
+<div id="trace-length" class="section level3">
+<h3>Trace length</h3>
+<p>Filtering on trace length is similar to filters on processing or
+throughput time. Only the units argument is not needed here.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter_trace_length</span>(<span class="at">interval =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">5</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">trace_length</span>()</span></code></pre></div>
+<pre><code>## # A tibble: 1 × 8
+##     min    q1 median  mean    q3   max st_dev   iqr
+##   &lt;int&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt;
+## 1     2     5      5  4.95     5     5  0.339     0</code></pre>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter_trace_length</span>(<span class="at">percentage =</span> <span class="fl">0.5</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">trace_length</span>()</span></code></pre></div>
+<pre><code>## # A tibble: 1 × 8
+##     min    q1 median  mean    q3   max st_dev   iqr
+##   &lt;int&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt;
+## 1     5     6      6  5.94     6     6  0.245     0</code></pre>
+</div>
+<div id="activity-presence" class="section level3">
+<h3>Activity presence</h3>
+<p>When looking at control-flow, we can select cases that contain a
+specific activity, for instance a X-Ray scan.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter_activity_presence</span>(<span class="st">&quot;X-Ray&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    traces</span></code></pre></div>
+<pre><code>## # A tibble: 3 × 3
+##   trace                                                          absol…¹ relat…²
+##   &lt;chr&gt;                                                            &lt;int&gt;   &lt;dbl&gt;
+## 1 Registration,Triage and Assessment,X-Ray,Discuss Results,Chec…     258 0.989  
+## 2 Registration,Triage and Assessment,X-Ray                             2 0.00766
+## 3 Registration,Triage and Assessment,X-Ray,Discuss Results             1 0.00383
+## # … with abbreviated variable names ¹​absolute_frequency, ²​relative_frequency</code></pre>
+<p>Or that don’t have a specific activity.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter_activity_presence</span>(<span class="st">&quot;X-Ray&quot;</span>, <span class="at">reverse =</span> T) <span class="sc">%&gt;%</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    traces</span></code></pre></div>
+<pre><code>## # A tibble: 4 × 3
+##   trace                                                          absol…¹ relat…²
+##   &lt;chr&gt;                                                            &lt;int&gt;   &lt;dbl&gt;
+## 1 Registration,Triage and Assessment,Blood test,MRI SCAN,Discus…     234 0.979  
+## 2 Registration,Triage and Assessment,Blood test,MRI SCAN,Discus…       2 0.00837
+## 3 Registration,Triage and Assessment                                   2 0.00837
+## 4 Registration,Triage and Assessment,Blood test                        1 0.00418
+## # … with abbreviated variable names ¹​absolute_frequency, ²​relative_frequency</code></pre>
+<p>We can also test more than one activity. In this case, we can require
+“all”, “one_of” or “none” of them to be present, through setting the
+argument <code>method</code> correctly.</p>
+<p>For example, there are no cases that have both X-Ray and MRI-SCAN</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter_activity_presence</span>(<span class="fu">c</span>(<span class="st">&quot;X-Ray&quot;</span>, <span class="st">&quot;MRI SCAN&quot;</span>), <span class="at">method =</span> <span class="st">&quot;all&quot;</span>)  <span class="sc">%&gt;%</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    traces</span></code></pre></div>
+<pre><code>## [1] trace              absolute_frequency relative_frequency
+## &lt;0 rows&gt; (or 0-length row.names)</code></pre>
+<p>Almost all have on of them.</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter_activity_presence</span>(<span class="fu">c</span>(<span class="st">&quot;X-Ray&quot;</span>, <span class="st">&quot;MRI SCAN&quot;</span>), <span class="at">method =</span> <span class="st">&quot;one_of&quot;</span>)  <span class="sc">%&gt;%</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    traces</span></code></pre></div>
+<pre><code>## # A tibble: 5 × 3
+##   trace                                                          absol…¹ relat…²
+##   &lt;chr&gt;                                                            &lt;int&gt;   &lt;dbl&gt;
+## 1 Registration,Triage and Assessment,X-Ray,Discuss Results,Chec…     258 0.519  
+## 2 Registration,Triage and Assessment,Blood test,MRI SCAN,Discus…     234 0.471  
+## 3 Registration,Triage and Assessment,Blood test,MRI SCAN,Discus…       2 0.00402
+## 4 Registration,Triage and Assessment,X-Ray                             2 0.00402
+## 5 Registration,Triage and Assessment,X-Ray,Discuss Results             1 0.00201
+## # … with abbreviated variable names ¹​absolute_frequency, ²​relative_frequency</code></pre>
+<p>And 3 have none of them.</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter_activity_presence</span>(<span class="fu">c</span>(<span class="st">&quot;X-Ray&quot;</span>, <span class="st">&quot;MRI SCAN&quot;</span>), <span class="at">method =</span> <span class="st">&quot;none&quot;</span>)  <span class="sc">%&gt;%</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>    traces</span></code></pre></div>
+<pre><code>## # A tibble: 2 × 3
+##   trace                                         absolute_frequency relative_fr…¹
+##   &lt;chr&gt;                                                      &lt;int&gt;         &lt;dbl&gt;
+## 1 Registration,Triage and Assessment                             2         0.667
+## 2 Registration,Triage and Assessment,Blood test                  1         0.333
+## # … with abbreviated variable name ¹​relative_frequency</code></pre>
+</div>
+<div id="end-points" class="section level3">
+<h3>End points</h3>
+<p>Another way is to select cases with a specific start and or end
+activity. In case of the patients data set, all cases start with
+“Registration”. Filtering cases that <strong>don’t</strong> start with
+Registration gives an empty log.</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter_endpoints</span>(<span class="at">start_activities =</span> <span class="st">&quot;Registration&quot;</span>, <span class="at">reverse =</span> T)</span></code></pre></div>
+<pre><code>## EMPTY EVENT LOG
+## # A tibble: 0 × 7
+## # … with 7 variables: handling &lt;fct&gt;, patient &lt;chr&gt;, employee &lt;fct&gt;,
+## #   handling_id &lt;chr&gt;, registration_type &lt;fct&gt;, time &lt;dttm&gt;, .order &lt;int&gt;</code></pre>
+<p>If we are interested to see the “completed” cases, those that start
+with Registration and end we “Check-out”, we can apply the following
+filter.</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter_endpoints</span>(<span class="at">start_activities =</span> <span class="st">&quot;Registration&quot;</span>, <span class="at">end_activities =</span> <span class="st">&quot;Check-out&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">process_map</span>()</span></code></pre></div>
+<div class="grViz html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-03ee4c1203352a5f0d31" style="width:864px;height:480px;"></div>
+<script type="application/json" data-for="htmlwidget-03ee4c1203352a5f0d31">{"x":{"diagram":"digraph {\n\ngraph [layout = \"dot\",\n       outputorder = \"edgesfirst\",\n       bgcolor = \"white\",\n       rankdir = \"LR\"]\n\nnode [fontname = \"Helvetica\",\n      fontsize = \"10\",\n      shape = \"circle\",\n      fixedsize = \"true\",\n      width = \"0.5\",\n      style = \"filled\",\n      fillcolor = \"aliceblue\",\n      color = \"gray70\",\n      fontcolor = \"gray50\"]\n\nedge [fontname = \"Helvetica\",\n     fontsize = \"8\",\n     weight = \"1.5\",\n     color = \"gray80\",\n     arrowsize = \"0.5\"]\n\n  \"1\" [label = \"End\", shape = \"circle\", style = \"rounded,filled\", fontcolor = \"brown4\", color = \"brown4\", tooltip = \"ARTIFICIAL_END\n492\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#FFFFFF\"] \n  \"2\" [label = \"Start\", shape = \"circle\", style = \"rounded,filled\", fontcolor = \"chartreuse4\", color = \"chartreuse4\", tooltip = \"ARTIFICIAL_START\n492\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#FFFFFF\"] \n  \"3\" [label = \"Blood test\n234\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"black\", color = \"grey\", tooltip = \"Blood test\n234\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#ECE7F2\"] \n  \"4\" [label = \"Check-out\n492\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"white\", color = \"grey\", tooltip = \"Check-out\n492\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#0570B0\"] \n  \"5\" [label = \"Discuss Results\n492\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"white\", color = \"grey\", tooltip = \"Discuss Results\n492\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#0570B0\"] \n  \"6\" [label = \"MRI SCAN\n234\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"black\", color = \"grey\", tooltip = \"MRI SCAN\n234\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#ECE7F2\"] \n  \"7\" [label = \"Registration\n492\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"white\", color = \"grey\", tooltip = \"Registration\n492\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#0570B0\"] \n  \"8\" [label = \"Triage and Assessment\n492\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"white\", color = \"grey\", tooltip = \"Triage and Assessment\n492\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#0570B0\"] \n  \"9\" [label = \"X-Ray\n258\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"black\", color = \"grey\", tooltip = \"X-Ray\n258\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#ECE7F2\"] \n\"2\"->\"7\" [label = \"492\", penwidth = \"5\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"3\"->\"6\" [label = \"234\", penwidth = \"2.90243902439024\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"4\"->\"1\" [label = \"492\", penwidth = \"5\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"5\"->\"4\" [label = \"492\", penwidth = \"5\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"6\"->\"5\" [label = \"234\", penwidth = \"2.90243902439024\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"7\"->\"8\" [label = \"492\", penwidth = \"5\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"8\"->\"3\" [label = \"234\", penwidth = \"2.90243902439024\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"8\"->\"9\" [label = \"258\", penwidth = \"3.09756097560976\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"9\"->\"5\" [label = \"258\", penwidth = \"3.09756097560976\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="precedence" class="section level3">
+<h3>Precedence</h3>
+<p>Another control-flow filtering approach is to look at precedences
+between activities. The <code>filter_precedence</code> function uses 5
+different inputs</p>
+<ul>
+<li>A list of (one or more) possible antecedent activities
+(“source”-activities)</li>
+<li>A list of (one or more) possible consequent activities
+(“target”-activities)</li>
+<li>A precedence_type
+<ul>
+<li>directly_follows</li>
+<li>eventually_follows</li>
+</ul></li>
+<li>A filter_method: all, one_of or none of the precedence rules should
+hold.</li>
+<li>A reverse argument</li>
+</ul>
+<p>If there is more than one antecedent or consequent activity, the
+filter will test <strong>all</strong> possible pairs. The filter_method
+will tell the filter whether all of the rules should hold, at least one,
+or none are allowed.</p>
+<p>For example, take the patients data. The following filter takes only
+cases where “Triage and Assessment” is directly followed by “Blood
+test”.</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter_precedence</span>(<span class="at">antecedents =</span> <span class="st">&quot;Triage and Assessment&quot;</span>,</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">consequents =</span> <span class="st">&quot;Blood test&quot;</span>,</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>                      <span class="at">precedence_type =</span> <span class="st">&quot;directly_follows&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>    traces</span></code></pre></div>
+<pre><code>## # A tibble: 3 × 3
+##   trace                                                          absol…¹ relat…²
+##   &lt;chr&gt;                                                            &lt;int&gt;   &lt;dbl&gt;
+## 1 Registration,Triage and Assessment,Blood test,MRI SCAN,Discus…     234 0.987  
+## 2 Registration,Triage and Assessment,Blood test,MRI SCAN,Discus…       2 0.00844
+## 3 Registration,Triage and Assessment,Blood test                        1 0.00422
+## # … with abbreviated variable names ¹​absolute_frequency, ²​relative_frequency</code></pre>
+<p>The following selects cases where Triage and Assessment is eventually
+followed by both Blood test and X-Ray, which never happens.</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter_precedence</span>(<span class="at">antecedents =</span> <span class="st">&quot;Triage and Assessment&quot;</span>,</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">consequents =</span> <span class="fu">c</span>(<span class="st">&quot;Blood test&quot;</span>, <span class="st">&quot;X-Ray&quot;</span>),</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>                      <span class="at">precedence_type =</span> <span class="st">&quot;eventually_follows&quot;</span>,</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>                      <span class="at">filter_method =</span> <span class="st">&quot;all&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>    traces</span></code></pre></div>
+<pre><code>## [1] trace              absolute_frequency relative_frequency
+## &lt;0 rows&gt; (or 0-length row.names)</code></pre>
+<p>The next filter selects cases where Triage and Assessement is
+eventually followed by <strong>at least one</strong> the three
+antecedents, by changing the filter method to <em>one_of</em>.</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter_precedence</span>(<span class="at">antecedents =</span> <span class="st">&quot;Triage and Assessment&quot;</span>,</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">consequents =</span> <span class="fu">c</span>(<span class="st">&quot;Blood test&quot;</span>, <span class="st">&quot;X-Ray&quot;</span>, <span class="st">&quot;MRI SCAN&quot;</span>),</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>                      <span class="at">precedence_type =</span> <span class="st">&quot;eventually_follows&quot;</span>,</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>                      <span class="at">filter_method =</span> <span class="st">&quot;one_of&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>    traces</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 3
+##   trace                                                          absol…¹ relat…²
+##   &lt;chr&gt;                                                            &lt;int&gt;   &lt;dbl&gt;
+## 1 Registration,Triage and Assessment,X-Ray,Discuss Results,Chec…     258 0.518  
+## 2 Registration,Triage and Assessment,Blood test,MRI SCAN,Discus…     234 0.470  
+## 3 Registration,Triage and Assessment,Blood test,MRI SCAN,Discus…       2 0.00402
+## 4 Registration,Triage and Assessment,X-Ray                             2 0.00402
+## 5 Registration,Triage and Assessment,X-Ray,Discuss Results             1 0.00201
+## 6 Registration,Triage and Assessment,Blood test                        1 0.00201
+## # … with abbreviated variable names ¹​absolute_frequency, ²​relative_frequency</code></pre>
+<p>This final example only retains cases where Triage and Assessment is
+<em>not</em> followed by any of the three consequent activities. The
+result is 2 incomplete cases where the last activity was Triage and
+Assessment.</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter_precedence</span>(<span class="at">antecedents =</span> <span class="st">&quot;Triage and Assessment&quot;</span>,</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">consequents =</span> <span class="fu">c</span>(<span class="st">&quot;Blood test&quot;</span>, <span class="st">&quot;X-Ray&quot;</span>, <span class="st">&quot;MRI SCAN&quot;</span>),</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>                      <span class="at">precedence_type =</span> <span class="st">&quot;eventually_follows&quot;</span>,</span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>                      <span class="at">filter_method =</span> <span class="st">&quot;none&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>    traces</span></code></pre></div>
+<pre><code>## # A tibble: 1 × 3
+##   trace                              absolute_frequency relative_frequency
+##   &lt;chr&gt;                                           &lt;int&gt;              &lt;dbl&gt;
+## 1 Registration,Triage and Assessment                  2                  1</code></pre>
+</div>
+<div id="trace-frequency" class="section level3">
+<h3>Trace Frequency</h3>
+<p>Filtering on trace frequency is similar to the filters on
+activity/resource frequence and the performance filter: you can choose
+between a percentage target or between an frequency interval.</p>
+<p>Select 80% of the cases that share the most common traces.</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>sepsis <span class="sc">%&gt;%</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter_trace_frequency</span>(<span class="at">percentage =</span> <span class="fl">0.8</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">n_cases</span>()</span></code></pre></div>
+<pre><code>## [1] 1050</code></pre>
+<p>Or the 20% least common ones.</p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>sepsis <span class="sc">%&gt;%</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter_trace_frequency</span>(<span class="at">percentage =</span> <span class="fl">0.2</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">n_cases</span>()</span></code></pre></div>
+<pre><code>## [1] 266</code></pre>
+<p>Or the cases of which the trace frequency is less than 50.</p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>sepsis <span class="sc">%&gt;%</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter_trace_frequency</span>(<span class="at">interval =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">50</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">n_cases</span>()</span></code></pre></div>
+<pre><code>## [1] 1050</code></pre>
+</div>
+<div id="time-period" class="section level3">
+<h3>Time period</h3>
+<p>Filtering cases by time period can be done using the
+<code>filter_time_period</code> introduced above. There are four
+different methods that result in case filters:</p>
+<ul>
+<li>start: all cases started in an interval</li>
+<li>complete: all cases completed in an interval</li>
+<li>contained: all cases contained in an interval</li>
+<li>intersecting: all cases with some activity in an interval</li>
+</ul>
+<p>The following four example dotted charts show the impact of the four
+different methods using the same interval.</p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>sepsis <span class="sc">%&gt;%</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter_time_period</span>(<span class="at">interval =</span> <span class="fu">ymd</span>(<span class="fu">c</span>(<span class="dv">20150101</span>, <span class="dv">20150131</span>)), <span class="at">filter_method =</span> <span class="st">&quot;start&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>    dotted_chart</span></code></pre></div>
+<p><img src="case_filters_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>sepsis <span class="sc">%&gt;%</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter_time_period</span>(<span class="at">interval =</span> <span class="fu">ymd</span>(<span class="fu">c</span>(<span class="dv">20150101</span>, <span class="dv">20150131</span>)), <span class="at">filter_method =</span> <span class="st">&quot;complete&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>    dotted_chart</span></code></pre></div>
+<p><img src="case_filters_files/figure-html/unnamed-chunk-23-2.png" width="672" /></p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>sepsis <span class="sc">%&gt;%</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter_time_period</span>(<span class="at">interval =</span> <span class="fu">ymd</span>(<span class="fu">c</span>(<span class="dv">20150101</span>, <span class="dv">20150131</span>)), <span class="at">filter_method =</span> <span class="st">&quot;contained&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>    dotted_chart</span></code></pre></div>
+<p><img src="case_filters_files/figure-html/unnamed-chunk-23-3.png" width="672" /></p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>sepsis <span class="sc">%&gt;%</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter_time_period</span>(<span class="at">interval =</span> <span class="fu">ymd</span>(<span class="fu">c</span>(<span class="dv">20150101</span>, <span class="dv">20150131</span>)), <span class="at">filter_method =</span> <span class="st">&quot;intersecting&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>    dotted_chart</span></code></pre></div>
+<p><img src="case_filters_files/figure-html/unnamed-chunk-23-4.png" width="672" /></p>
+</div>
+</div>
 
 <center><p style = "font-size: 12px">Copyright &copy; 2023 <a href = "https://bupar.net/about/" >bupaR - Hasselt University</a></p></center>
 

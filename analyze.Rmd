@@ -1,0 +1,37 @@
+---
+title: Analyze process data
+output:
+  html_document:
+    toc: false
+---
+
+
+```{r echo = F, out.width="25%", fig.align = "right"}
+knitr::include_graphics("images/icons/analyze.PNG")
+
+```
+
+```{r include = F}
+library(bslib)
+```
+
+
+```{r echo = F}
+layout_column_wrap(card( 
+						card_header("Control-Flow",class = "card text-white bg-danger mb-3"),
+						card_image("images/icons/analyze.PNG", href = "control_flow_analysis.html", container = card_body)
+						),
+				   card(
+				   	 card_header("Performance", class = "card text-white bg-danger mb-3"),
+						card_image("images/icons/analyze.PNG", href = "performance_analysis.html", container = card_body)
+						),
+				   card( 
+				   	 card_header("Organisational", class = "card text-white bg-danger mb-3"),
+						card_image("images/icons/analyze.PNG", href = "organisational_analysis.html", container = card_body)
+						),
+				   card( 
+				   	 card_header("Multi-dimensional", class = "card text-white bg-danger mb-3"),
+						card_image("images/icons/analyze.PNG", href = "multi_dimensional_analysis.html", container = card_body)),width = "187.5px")
+```
+
+<br/>

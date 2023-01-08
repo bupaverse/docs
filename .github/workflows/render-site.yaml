@@ -41,6 +41,9 @@ jobs:
           install.packages("remotes")
           install.packages("xesreadR")
           install.packages("processanimateR")
+          install.packages("daqapo")
+          install.packages("psmineR")
+          install.packages("processcheckR")
           remotes::install_github("bupaverse/processpredictR")
         shell: Rscript {0}
 

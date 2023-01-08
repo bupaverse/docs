@@ -1,0 +1,179 @@
+---
+title: "Data Quality Assessment"
+---
+
+
+```{r include = F}
+library(bslib)
+```
+
+
+# Data Quality Assessment
+
+```{r setup, include=FALSE}
+library(daqapo)
+library(dplyr)
+data("hospital_actlog")
+hospital_actlog <- activitylog(hospital_actlog)
+data("hospital_events")
+```
+
+
+Despite the extensive opportunities that process mining techniques provide, the garbage in - garbage out principle still applies. Data quality issues are widespread in real-life data and can generate misleading results when used for analysis purposes. `daqapo` - Data Quality Assessment for Process-Oriented data - provides a set of assessment functions to identify a wide array of quality issues.
+
+
+In the examples below, we use the dataset `hospital_actlog_actlog`, which is an artificial event log with data quality issues provided by `daqapo`.
+
+
+```{r eval = F, echo = F}
+
+
+## Activity Frequency Violations
+
+# ```{r}
+# hospital_actlog %>%
+  # detect_activity_frequency_violations("Registration" = 1,
+                                       "Clinical exam" = 1)
+<!-- ``` -->
+
+
+<!-- ## Activity Order Violations -->
+
+# ```{r}
+# hospital_actlog %>%
+  # detect_activity_order_violations(activity_order = c("Registration", "Triage", "Clinical exam",
+                                                      # "Treatment", "Treatment evaluation"))
+<!-- ``` -->
+```
+
+
+## Attribute Dependencies
+
+```{r}
+hospital_actlog %>% 
+  detect_attribute_dependencies(antecedent = activity == "Registration",
+                                consequent = startsWith(originator,"Clerk"))
+```
+
+## Case ID Sequence Gaps
+
+```{r}
+hospital_actlog %>%
+  detect_case_id_sequence_gaps()
+```
+
+## Conditional Activity Presence
+
+```{r}
+hospital_actlog %>%
+  detect_conditional_activity_presence(condition = specialization == "TRAU",
+                                       activities = "Clinical exam")
+```
+
+
+## Duration Outliers
+
+```{r}
+hospital_actlog %>%
+  detect_duration_outliers(Treatment = duration_within(bound_sd = 1))
+```
+
+
+```{r}
+hospital_actlog %>%
+  detect_duration_outliers(Treatment = duration_within(lower_bound = 0, upper_bound = 15))
+```
+
+## Inactive Periods
+
+```{r}
+hospital_actlog %>%
+  detect_inactive_periods(threshold = 30)
+```
+
+## Incomplete Cases
+
+```{r}
+hospital_actlog %>%
+  detect_incomplete_cases(activities = c("Registration","Triage","Clinical exam","Treatment","Treatment evaluation"))
+```
+
+## Incorrect Activity Names
+
+```{r}
+hospital_actlog %>%
+  detect_incorrect_activity_names(allowed_activities = c("Registration","Triage","Clinical exam","Treatment","Treatment evaluation"))
+```
+
+## Missing Values 
+
+```{r}
+hospital_actlog %>%
+  detect_missing_values()
+```
+
+```{r}
+hospital_actlog %>% 
+  detect_missing_values(level_of_aggregation = "activity")
+```
+
+```{r}
+hospital_actlog %>% 
+  detect_missing_values(
+  level_of_aggregation = "column",
+  column = "triagecode")
+```
+
+## Multiregistration
+
+```{r}
+hospital_actlog %>%
+  detect_multiregistration(threshold_in_seconds = 10)
+```
+
+## Overlaps
+
+```{r}
+hospital_actlog %>%
+  detect_overlaps()
+```
+
+## Related Activities
+
+```{r}
+hospital_actlog %>%
+  detect_related_activities(antecedent = "Treatment evaluation", 
+                            consequent = "Treatment")
+```
+
+## Similar Labels
+
+```{r}
+hospital_actlog %>%
+  detect_similar_labels(column_labels = "activity", max_edit_distance = 3)
+```
+
+## Time Anomalies
+
+```{r}
+hospital_actlog %>%
+  detect_time_anomalies()
+```
+
+## Unique Values
+
+```{r}
+hospital_actlog %>%
+  detect_unique_values(column_labels = "activity")
+```
+```{r}
+hospital_actlog %>%
+  detect_unique_values(column_labels = c("activity", "originator"))
+```
+
+## Value Range Violations
+
+```{r}
+hospital_actlog %>%
+  detect_value_range_violations(triagecode = domain_numeric(from = 0, to = 5))
+```

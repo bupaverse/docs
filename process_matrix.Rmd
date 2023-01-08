@@ -1,0 +1,64 @@
+---
+title: Process Matrix
+---
+
+
+```{r}
+library(bupaR)
+```
+
+
+## Introduction
+A precendence diagrams is a two-dimensional matrix showing the flows between activities. It can be contain different type values, by adjusting the type argument.
+
+*	Absolute frequency of flows
+*	Relative frequency of flows
+*	Relative frequency of flows, for each antecendent
+	*	I.e. given antecendent A, it is followed x% of the time by Consequent B
+*	Relative frequency of flows, for each consequent
+	*	I.e. given consequent B, it is preceded x% of the time by Antecedent A
+	
+The precedence diagrams can be visualized using the generic plot function. Below, an example of each of the different types is shown.
+
+##Examples
+
+### Absolute Frequencies
+
+```{r}
+
+patients %>%
+	precedence_matrix(type = "absolute") 
+patients %>%
+	precedence_matrix(type = "absolute") %>%
+	plot
+```
+
+
+### Relative Frequencies
+```{r}
+patients %>%
+	precedence_matrix(type = "relative") %>%
+	plot
+```
+
+
+### Antecedent-wise Frequencies
+```{r}
+patients %>%
+	precedence_matrix(type = "relative-antecedent") %>%
+	plot
+```
+
+
+### Consequent-wise Frequencies
+```{r}
+patients %>%
+	precedence_matrix(type = "relative-consequent") %>%
+	plot
+```	
+
+
+	
+	
+	
+	

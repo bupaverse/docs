@@ -2,6 +2,6 @@ name,class,head,body,icon,href
 "Install", "card text-white bg-primary mb-3", "Install", "Install","images/icons/install.PNG","install.html"
 "Create", "card text-white bg-secondary mb-3", "Create", "Create","images/icons/create.PNG","create_logs.html"
 "Manipulate", "card text-white bg-info mb-3", "Manipulate", "Manipulate","images/icons/manipulate.PNG","manipulate.html"
-"Analyse", "card text-white bg-danger mb-3", "Analyze", "Analyse","images/icons/analyze.PNG","analyse.html"
+"Analyse", "card text-white bg-danger mb-3", "Analyze", "Analyse","images/icons/analyze.PNG","analyze.html"
 "Visualize", "card text-white bg-success mb-3", "Visualize", "Visualize","images/icons/visualize.PNG","visualize.html"
 "Predict", "card text-white bg-warning mb-3", "Predict", "Predict","images/icons/predict.PNG","predict_workflow.html"

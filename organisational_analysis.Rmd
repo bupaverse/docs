@@ -1,0 +1,39 @@
+---
+title: "Organisational Analysis"
+---
+
+```{r}
+library(bupaR)
+```
+
+
+
+#### Resource Frequency
+
+The resource frequency metric allows the computation of the number/frequency of resources at the levels of log, case, activity, resource, and resource-activity.
+
+```{r}
+patients %>%
+	resource_frequency("resource")
+```
+
+#### Resource Involvement
+
+Resource involvement refers to the notion of the number of cases in which a resource is involved. It can be computed at levels case, resource, and resource-activity. 
+
+```{r eval = F}
+patients %>%
+	resource_involvement(level = "resource") %>% plot
+```
+It this example it shows that only r1 and r2 are involved in all cases, r6 and r7 are involved in most of the cases, while the others are only involved in half of the cases, more or less.
+
+
+#### Resource Specialization
+
+The resource specalization metric shows whether resources are specialized in certain activities or not. It can be calculated at the levels log, case, resource and activity.
+
+```{r}
+patients %>%
+	resource_specialisation("resource")
+```
+In the simple patients event log, each resource is performing exactly one activity, and is therefore 100% specialized.

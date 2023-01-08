@@ -37,6 +37,10 @@ navbar:
         href: public_logs.html
       - text: "XES-files"
         href: xes_files.html
+      - text: "Inspect logs"
+        href: metadata.html
+      - text: "Data Quality"
+        href: data_quality.html
   - text: "Manipulate"
     menu:
       - text: "Overview"

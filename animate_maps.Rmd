@@ -1,0 +1,420 @@
+---
+title: Animate Process Maps
+---
+
+
+
+
+```{r}
+knitr::opts_chunk$set(eval = T)
+```
+
+
+## Introduction
+```{r echo = F}
+htmltools::includeHTML("tracking_google_analytics.html")
+```
+We use the patients event log provided by the eventdataR package.
+
+
+```{r warning = F}
+library(processanimateR)
+library(eventdataR)
+```
+
+
+A basic animation with static color and token size:
+```{r warning = F}
+animate_process(patients)
+```
+
+Default token color, size, or image can be changed as follows:
+
+```{r}
+animate_process(patients, mapping = token_aes(size = token_scale(12), shape = "rect"))
+animate_process(patients, mapping = token_aes(color = token_scale("red")))
+```
+
+The example animation on the top of this site:
+
+```{r}
+animate_process(patients, mode = "relative", jitter = 10, legend = "color",
+  mapping = token_aes(color = token_scale("employee", 
+    scale = "ordinal", 
+    range = RColorBrewer::brewer.pal(7, "Paired"))))
+```
+
+
+Tokens can also be assigned images, for example:
+
+```{r}
+animate_process(patients,
+   mapping = token_aes(shape = "image",
+    size = token_scale(10),
+    image = token_scale("https://upload.wikimedia.org/wikipedia/en/5/5f/Pacman.gif")))
+```
+
+
+## Use external data
+
+It is possible to use a secondary data frame to determine the aesthetics of tokens irregardless of the times at which activities occurred. This can be useful if measurement are taken throughout a process, but the measurement event itself should not be included in the process map.
+
+For example, the lactic acid measurements of the sepsis data could be used in that way:
+
+```{r, message = F}
+library(processanimateR)
+library(dplyr)
+library(bupaR)
+# Extract only the lacticacid measurements
+lactic <- sepsis %>%
+    mutate(lacticacid = as.numeric(lacticacid)) %>%
+    filter_activity(c("LacticAcid")) %>%
+    as.data.frame() %>%
+    select("case" = case_id, 
+            "time" =  timestamp, 
+            value = lacticacid) # format needs to be 'case,time,value'
+
+# Remove the measurement events from the sepsis log
+sepsisBase <- sepsis %>%
+    filter_activity(c("LacticAcid", "CRP", "Leucocytes", "Return ER",
+                      "IV Liquid", "IV Antibiotics"), reverse = T) %>%
+    filter_trace_frequency(percentage = 0.95)
+
+# Animate with the secondary data frame `lactic`
+animate_process(sepsisBase, 
+                mode = "relative", 
+                duration = 300,
+                legend = "color", 
+                mapping = token_aes(color = token_scale(lactic, 
+                                                        scale = "linear", 
+                                                        range = c("#fff5eb","#7f2704")))) 
+```
+
+ProcessanimateR animation can be also used interactively as part of a (Shiny) web-application. Here, an example application that expects attributes are of an appropriate data type and automatically chooses appropriate color scales is given. We first define a function `ianimate_process` that defines our Shiny application as follows:
+
+
+## Shiny
+
+```{r eval = F}
+library(processanimateR)
+library(shiny)
+library(shinycssloaders)
+ianimate_process <- function(eventlog, min.time = 30, max.time = 600, default.time = 60) {
+
+  ui <- function(request) {
+    fluidPage(
+      tags$head(tags$style("#process{height:90vh !important;}")),
+      titlePanel("Hello processanimateR!"),
+
+      sidebarLayout(
+
+        sidebarPanel(
+          width = 2,
+          sliderInput("duration", "Animation duration", min.time, max.time, default.time),
+          selectInput("type", "Animation type", c("relative", "absolute"), "relative"),
+          selectInput("sizeAttribute", "Size attribute", c("none", colnames(eventlog)), "none"),
+          selectInput("colorAttribute", "Color attribute", c("none", colnames(eventlog)), "none"),
+          selectInput("orientation", "Orientation", c("horizontal"="LR", "vertical"="TB"), "horizontal"),
+          h4("Selected cases"),
+          textOutput("token_selection"),
+          h4("Selected activities"),
+          textOutput("activity_selection")
+        ),
+
+        mainPanel(
+          width = 10,
+          shinycssloaders::withSpinner(processanimaterOutput("process"))
+        )
+      )
+    )
+  }
+
+  server <- function(session, input, output) {
+
+    data <- reactive({
+
+      if (input$colorAttribute != "none") {
+        attr <- rlang::sym(input$colorAttribute)
+        val <- eventlog %>% pull(!!attr)
+        if (!(is.character(val) || is.factor(val))) {
+          warning("Trying to use a numeric attribute for the token color!")
+        }
+      }
+
+      if (input$sizeAttribute != "none") {
+        # This only works for numeric attributes
+        attr <- rlang::sym(input$sizeAttribute)
+        val <- eventlog %>% pull(!!attr)
+        if (!is.numeric(val)) {
+          warning("Trying to use a non-numeric attribute for the token size!")
+        }
+      }
+
+      eventlog
+
+    })
+
+    output$token_selection <- renderText({
+
+      paste0(input$process_tokens, ",")
+
+    })
+
+    output$activity_selection <- renderText({
+
+      paste0(input$process_activities, ",")
+
+    })
+
+    output$process <- renderProcessanimater(expr = {
+      graph <- processmapR::process_map(data(), render = F)
+      model <- DiagrammeR::add_global_graph_attrs(graph, attr = "rankdir", value = input$orientation, attr_type = "graph")
+      if (input$sizeAttribute != "none" && input$colorAttribute != "none") {
+        animate_process(data(), model,
+                        mode = input$type,
+                        legend = "color",
+                        mapping = token_aes(color = token_scale(input$colorAttribute, scale = "ordinal", 
+                                                                range = RColorBrewer::brewer.pal(5, "YlOrBr")),
+                                            size = token_scale(input$sizeAttribute, scale = "linear", range = c(6,10))),
+                        duration = input$duration)
+      } else if (input$sizeAttribute != "none") {
+        animate_process(data(), model,
+                        mode = input$type,
+                        legend = "size",
+                        mapping = token_aes(size = token_scale(input$sizeAttribute, scale = "linear", range = c(6,10))),
+                        duration = input$duration)
+
+      } else if (input$colorAttribute != "none") {
+        animate_process(data(), model,
+                        mode = input$type,
+                        legend = "color",
+                        mapping = token_aes(color = token_scale(input$colorAttribute, scale = "ordinal", range = RColorBrewer::brewer.pal(5, "YlOrBr"))),
+                        duration = input$duration)
+      } else {
+        animate_process(data(), model,
+                        mode = input$type,
+                        duration = input$duration)
+      }
+
+    })
+
+  }
+
+  shinyApp(ui, server, options = list(height = 500))
+
+}
+```
+
+Then, the application can be, for example, launched by calling:
+
+
+
+```{r eval = F}
+library(eventdataR)
+library(edeaR)
+library(dplyr)
+ianimate_process(sepsis %>%
+  filter_trace_frequency(percentage = 0.2) %>%
+  filter_activity(c("Return ER"), reverse = T) %>%
+  # we fix the datatype of some of the attributes to allow proper rendering of the token color
+  # the token size option currently only support numeric attributes
+  mutate_at(c("lacticacid", "leucocytes", "crp", "age"), as.numeric) %>%
+  mutate_at(c("disfuncorg", "sirscriteria2ormore", "infectionsuspected"), as.logical))
+```
+
+
+
+### Introduction
+
+ProcessanimateR animation can be also used interactively as part of a (Shiny) web-application. Here, an example application that expects attributes are of an appropriate data type and automatically chooses appropriate color scales is given. We first define a function ianimate_process that defines our Shiny application as follows:
+
+### Selections
+
+Selections made in the processanimateR animation be used as input by Shiny applications. Here a simple example in which a Shiny module is created that renders the case identifiers of selected tokens and the identifiers and names of selected activities:
+
+```{r eval = F}
+library(shiny)
+library(processanimateR)
+library(eventdataR)
+library(jsonlite)
+
+shinyAnimation <- function(eventlog, min.time = 30, max.time = 600, default.time = 60) {
+
+  # Define Shiny Module
+  animationUI <- function(id, title) {
+    ns <- NS(id)
+    tagList(
+      h2(title),
+      processanimaterOutput(ns("process")),
+      h4("Selected cases"),
+      textOutput(ns("token_selection")),
+      h4("Selected activities"),
+      textOutput(ns("activity_selection")),
+      h4("Current time"),
+      textOutput(ns("activity_time"))
+    )
+  }
+
+  animation <- function(input, output, session, ...) {
+
+    output$token_selection <- renderText({
+      if (is.null(input$process_tokens)) {
+        "None"
+      } else {
+        paste0(input$process_tokens, collapse = ",")
+      }
+    })
+
+    output$activity_selection <- renderText({
+      if (is.null(input$process_activities)) {
+        "None"
+      } else {
+        activities <- jsonlite::fromJSON(input$process_activities)
+        paste0("(", activities$id, ",", activities$activity, ")", collapse = ",")
+      }
+    })
+    
+    output$activity_time <- renderText({
+      if (is.null(input$process_time)) {
+        "0"
+      } else {
+        input$process_time
+      }
+    })    
+
+    output$process <- renderProcessanimater(expr = {
+      animate_process(eventlog, ...)
+    })
+
+  }
+
+  ui <- fluidPage(
+    animationUI("module1", "Relative"),
+    animationUI("module2", "Absolute")
+  )
+
+  # Two animations
+  server <- function(input, output, session) {
+    callModule(animation, "module1", mode = "relative")
+    callModule(animation, "module2")
+  }
+
+  shinyApp(ui, server, options = list(height = 500))
+
+}
+
+shinyAnimation(patients)
+```
+
+## User defined bins 
+
+_Contributed by [Dominic Rowney](https://github.com/DomRowney/). _
+
+It is possible to change the aesthetics of tokens based on the timestamp of the animation
+
+For example, the number of days a ‘patient’ has been in the system
+
+```{r}
+
+# Libraries ---------------------------------------------------------------
+library(dplyr)            ##pipes
+library(tidyr)            ##tidy data, partcularly the crossing() function
+library(lubridate)        ##date time manipulation
+library(bupaR)            ##buisness process analytics
+library(processanimateR)  ##animates process
+
+
+# Create performance time flags ------------------------------------------------
+my_flags <- data.frame(value = c(0,2,4,8,16)) %>% 
+            mutate(day = days(value)) #convert numeric value into days
+```
+
+This will change the colour of the token at 0, 2, 4, 8, and 16 days.
+
+The crossing() function joins the cases of ‘patients’ to ‘my_flags’ and creates all possible combinations.
+
+```{r}
+# Create timestamps of flags ----------------------------------------------
+
+my_timeflags <- patients %>% 
+                cases %>%
+                crossing(my_flags) %>% ##similar to a SQL outer join
+                mutate(time = start_timestamp + day) %>% 
+                filter(time <= complete_timestamp) %>% 
+                select("case" = patient,time,value) ##must be case, time, value
+```
+
+
+The data for the token_scale() function must have the column headings ‘case, time, value’.
+
+Without the domain = my_flags$value argument the flags follow alphabetic order (e.g.  0, 16, 2, 4, 8) rather than the numeric order we wants. See d3-legend for further information.
+```{r}
+# Animate process ---------------------------------------------------------
+
+patients %>%
+  animate_process(mode ="absolute",
+                  jitter=10,
+                  legend = "color", 
+                  mapping = token_aes(
+                    color = token_scale(my_timeflags
+                                        , scale = "ordinal"
+                                        , domain = my_flags$value
+                                        , range = rev(RColorBrewer::brewer.pal(5,"Spectral"))
+                    )))
+```
+
+
+
+The colors can be modified through the range argument. In this case the scale is reversed with rev() to go from blue to red. See [RColorBrewer::brewer.pal.info](https://www.rdocumentation.org/packages/RColorBrewer/topics/ColorBrewer) for all options:
+
+_**Acknowledgement**_
+
+Thanks to [Dominic Rowney](https://github.com/DomRowney/) for this nice example of advanced processanimateR usage. The original example code can be found [here](https://github.com/DomRowney/ProcessAnimateR_vignette).
+
+
+## Token scales
+
+
+Several aesthetics of tokens (`color`, `size`, `opacity`, `image`) can be dynamically determined based on event log attributes using D3 scales.
+
+### Ordinal scales
+
+```{r}
+animate_process(patients, 
+                legend = "color", 
+                mapping = token_aes(color = token_scale("employee", 
+                                                        scale = "ordinal", 
+                                                        range = RColorBrewer::brewer.pal(8, "Paired"))))
+```
+
+### Linear scales
+
+```{r eval = F}
+animate_process(sample_n(traffic_fines, 1000) %>% filter_trace_frequency(percentage = 0.95),
+                mode = "relative",
+                legend = "color", 
+                mapping = token_aes(color = token_scale("amount", 
+                                                        scale = "linear", 
+                                                        range = c("yellow","red"))))
+```
+
+### Time scales
+
+```{r}
+animate_process(patients, 
+                mapping = token_aes(color = token_scale("time", 
+                                                        scale = "time", 
+                                                        range = c("blue","red"))))
+```
+
+
+Source: [https://bupaverse.github.io/processanimateR/](https://bupaverse.github.io/processanimateR/)
+
+
+
+
+
+
+
+
+

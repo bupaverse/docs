@@ -19,19 +19,19 @@ library(bslib)
 ```{r echo = F}
 layout_column_wrap(card( 
 						card_header("Control-Flow",class = "card text-white bg-danger mb-3"),
-						card_image("images/icons/analyze.PNG", href = "control_flow_analysis.html", container = card_body)
+						card_image("images/icons/cf.PNG", href = "control_flow_analysis.html", container = card_body)
 						),
 				   card(
 				   	 card_header("Performance", class = "card text-white bg-danger mb-3"),
-						card_image("images/icons/analyze.PNG", href = "performance_analysis.html", container = card_body)
+						card_image("images/icons/perf.PNG", href = "performance_analysis.html", container = card_body)
 						),
 				   card( 
 				   	 card_header("Organisational", class = "card text-white bg-danger mb-3"),
-						card_image("images/icons/analyze.PNG", href = "organisational_analysis.html", container = card_body)
+						card_image("images/icons/org.PNG", href = "organisational_analysis.html", container = card_body)
 						),
 				   card( 
 				   	 card_header("Multi-dimensional", class = "card text-white bg-danger mb-3"),
-						card_image("images/icons/analyze.PNG", href = "multi_dimensional_analysis.html", container = card_body)),width = "187.5px")
+						card_image("images/icons/multi.PNG", href = "multi_dimensional_analysis.html", container = card_body)),width = "187.5px")
 ```
 
 <br/>

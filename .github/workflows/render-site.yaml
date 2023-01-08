@@ -40,6 +40,7 @@ jobs:
           install.packages("pander")
           install.packages("remotes")
           install.packages("xesreadR")
+          install.packages("processanimateR")
           remotes::install_github("bupaverse/processpredictR")
         shell: Rscript {0}
 

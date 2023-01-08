@@ -11,9 +11,7 @@ library(bupaR)
 library(psmineR)
 ```
 
-```{r echo = F}
-htmltools::includeHTML("tracking_google_analytics.html")
-```
+
 
 The `psmineR` packages supports both detailed and aggregated performance spectra, as described in Denisov, V., Fahland, D., & van der Aalst, W. M. P. (2018) doi:10.1007/978-3-319-98648-7_9. The can be created using `ps_detailed` and `ps_aggregated`, respectively.
 

@@ -2,9 +2,8 @@
 title: Frequency Maps
 ---
 ## Introduction
-```{r processmaps,  echo = F}
-htmltools::includeHTML("tracking_google_analytics.html")
-```
+
+
 The function `process_map` can be used very easily to create a process map of an event log. Below, an example of a process map for the patients event log can be found.
 
 

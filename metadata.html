@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Inspect log</title>
+
+<script src="site_libs/header-attrs-2.19/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<link href="site_libs/bootstrap-5.2.2/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-5.2.2/bootstrap.bundle.min.js"></script>
+<script src="site_libs/bs3compat-0.4.2/transition.js"></script>
+<script src="site_libs/bs3compat-0.4.2/tabs.js"></script>
+<script src="site_libs/bs3compat-0.4.2/bs3compat.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-92605173-2', 'auto');
+ga('send', 'pageview');
+
+</script>
+<link rel="shortcut icon" href="images/logo/favicon.PNG" />
+<style>
+  .title{
+    display: none;
+  }
+</style>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+
+<style type="text/css">
+  code {
+    white-space: pre;
+  }
+  .sourceCode {
+    overflow: visible;
+  }
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  background-color: #f8f8f8; }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #c4a000; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #000000; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #000000; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #000000; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+#TOC {
+  display: none !important;
+}
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"><a href = 'https://bupar.net'><img id = "logo" style = "width: 200px; padding: 0px 20px 0px 0px" src = "images/logo/bupar_trans_witteR2.png" /></a></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="install.html">Install</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Create
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="create_logs.html">Create Logs</a>
+    </li>
+    <li>
+      <a href="adjust_logs.html">Adjust Logs</a>
+    </li>
+    <li>
+      <a href="public_logs.html">Public Logs</a>
+    </li>
+    <li>
+      <a href="xes_files.html">XES-files</a>
+    </li>
+    <li>
+      <a href="metadata.html">Inspect logs</a>
+    </li>
+    <li>
+      <a href="data_quality.html">Data Quality</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Manipulate
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="manipulate.html">Overview</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Filter</li>
+    <li>
+      <a href="case_filters.html">by case</a>
+    </li>
+    <li>
+      <a href="event_filters.html">by event</a>
+    </li>
+    <li>
+      <a href="generic_filtering.html">generic</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Enrich</li>
+    <li>
+      <a href="augment.html">augment</a>
+    </li>
+    <li>
+      <a href="mutate.html">mutate</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Aggregate</li>
+    <li>
+      <a href="collapse.html">collapse</a>
+    </li>
+    <li>
+      <a href="unite.html">unite</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Analyze
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="analyze.html">Overview</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="control_flow_analysis.html">Control-flow</a>
+    </li>
+    <li>
+      <a href="performance_analysis.html">Performance</a>
+    </li>
+    <li>
+      <a href="organisational_analysis.html">Organisational</a>
+    </li>
+    <li>
+      <a href="multi_dimensional_analysis.html">Multi-dimensional</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Visualize
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="visualize.html">Overview</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Process maps</li>
+    <li>
+      <a href="frequency_maps.html">Frequency</a>
+    </li>
+    <li>
+      <a href="performance_maps.html">Performance</a>
+    </li>
+    <li>
+      <a href="advanced_maps.html">Advanced</a>
+    </li>
+    <li>
+      <a href="animate_maps.html">Animate</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="process_matrix.html">Process Matrix</a>
+    </li>
+    <li>
+      <a href="dotted_chart.html">Dotted chart</a>
+    </li>
+    <li>
+      <a href="trace_exporer.html">Trace explorer</a>
+    </li>
+    <li>
+      <a href="performance_spectrum.html">Performance spectrum</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Predict
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="predict_workflow.html">Workflow</a>
+    </li>
+    <li>
+      <a href="predict_adapt.html">Adapting your model</a>
+    </li>
+    <li>
+      <a href="predict_keras.html">Customization with keras</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="faq.html">FAQ</a>
+</li>
+<li>
+  <a href="developer_guide.html">Developer guide</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Package guide
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="https://bupaverse.github.io/bupaR/">bupaR</a>
+    </li>
+    <li>
+      <a href="https://bupaverse.github.io/bupaverse/">bupaverse</a>
+    </li>
+    <li>
+      <a href="https://bupaverse.github.io/daqapo">daqapo</a>
+    </li>
+    <li>
+      <a href="https://bupaverse.github.io/edeaR/">edeaR</a>
+    </li>
+    <li>
+      <a href="https://bupaverse.github.io/eventdataR/">eventdataR</a>
+    </li>
+    <li>
+      <a href="https://bupaverse.github.io/heuristicsmineR/">heuristicsmineR</a>
+    </li>
+    <li>
+      <a href="https://bupaverse.github.io/pm4py/">pm4py</a>
+    </li>
+    <li>
+      <a href="https://bupaverse.github.io/processanimateR/">processanimateR</a>
+    </li>
+    <li>
+      <a href="https://bupaverse.github.io/processcheckR/">processcheckR</a>
+    </li>
+    <li>
+      <a href="https://bupaverse.github.io/processmapR/">processmapR</a>
+    </li>
+    <li>
+      <a href="https://bupaverse.github.io/xesreadR">xesreadR</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Inspect log</h1>
+
+</div>
+
+
+<div id="inspect-log" class="section level1">
+<h1>Inspect log</h1>
+<div id="getting-metadata" class="section level2">
+<h2>Getting metadata</h2>
+<p>The mapping function can be used to retrieve all the meta data from
+an event log object, i.e. the relation between event log identifiers and
+data fields.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span> mapping</span></code></pre></div>
+<pre><code>## Case identifier:     patient 
+## Activity identifier:     handling 
+## Resource identifier:     employee 
+## Activity instance identifier:    handling_id 
+## Timestamp:           time 
+## Lifecycle transition:        registration_type</code></pre>
+<p>In this case, we see that the handling field is the activity
+identifier in the event log, while the patient field is used as case
+identifier. We can also obtain each of these identifiers
+individually.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span> activity_id</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span> case_id</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span> resource_id</span></code></pre></div>
+<pre><code>## [1] &quot;handling&quot;
+## [1] &quot;patient&quot;
+## [1] &quot;employee&quot;</code></pre>
+</div>
+<div id="getting-basic-information" class="section level2">
+<h2>Getting basic information</h2>
+<p>We can look at a general summary of the event log by calling the
+<code>summary</code> function.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span> summary</span></code></pre></div>
+<pre><code>## Number of events:  5442
+## Number of cases:  500
+## Number of traces:  7
+## Number of distinct activities:  7
+## Average trace length:  10.884
+## 
+## Start eventlog:  2017-01-02 11:41:53
+## End eventlog:  2018-05-05 07:16:02</code></pre>
+<pre><code>##                   handling      patient          employee  handling_id       
+##  Blood test           : 474   Length:5442        r1:1000   Length:5442       
+##  Check-out            : 984   Class :character   r2:1000   Class :character  
+##  Discuss Results      : 990   Mode  :character   r3: 474   Mode  :character  
+##  MRI SCAN             : 472                      r4: 472                     
+##  Registration         :1000                      r5: 522                     
+##  Triage and Assessment:1000                      r6: 990                     
+##  X-Ray                : 522                      r7: 984                     
+##  registration_type      time                            .order    
+##  complete:2721     Min.   :2017-01-02 11:41:53.00   Min.   :   1  
+##  start   :2721     1st Qu.:2017-05-06 17:15:18.00   1st Qu.:1361  
+##                    Median :2017-09-08 04:16:50.00   Median :2722  
+##                    Mean   :2017-09-02 20:52:34.40   Mean   :2722  
+##                    3rd Qu.:2017-12-22 15:44:11.25   3rd Qu.:4082  
+##                    Max.   :2018-05-05 07:16:02.00   Max.   :5442  
+## </code></pre>
+<p>The basic counts which show up in the summary can also be retrieved
+indivdual as a numeric vector of length one.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span> n_activities</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span> n_activity_instances</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span> n_cases</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span> n_events</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span> n_traces</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span> n_resources</span></code></pre></div>
+<pre><code>## [1] 7
+## [1] 2721
+## [1] 500
+## [1] 5442
+## [1] 7
+## [1] 7</code></pre>
+<p>More detailed information about <code>activities</code> ,
+<code>cases</code>, <code>resources</code> and <code>traces</code> can
+be obtained using the functions named accordingly. For example, consider
+the overview of the cases of the patients event log below.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span> cases</span></code></pre></div>
+<pre><code>## # A tibble: 500 × 10
+##    patient trace…¹ numbe…² start_timestamp     complete_timestamp  trace trace…³
+##    &lt;chr&gt;     &lt;int&gt;   &lt;int&gt; &lt;dttm&gt;              &lt;dttm&gt;              &lt;chr&gt;   &lt;dbl&gt;
+##  1 1             6       6 2017-01-02 11:41:53 2017-01-09 19:45:45 Regi…       4
+##  2 10            5       5 2017-01-06 05:58:54 2017-01-10 15:41:59 Regi…       7
+##  3 100           5       5 2017-04-11 16:34:31 2017-04-22 09:58:07 Regi…       7
+##  4 101           5       5 2017-04-16 06:38:58 2017-04-23 02:55:23 Regi…       7
+##  5 102           5       5 2017-04-16 06:38:58 2017-04-22 10:50:04 Regi…       7
+##  6 103           6       6 2017-04-19 20:22:01 2017-04-23 02:36:55 Regi…       4
+##  7 104           6       6 2017-04-19 20:22:01 2017-04-23 02:07:20 Regi…       4
+##  8 105           6       6 2017-04-21 02:19:09 2017-04-27 01:09:05 Regi…       4
+##  9 106           6       6 2017-04-21 02:19:09 2017-05-01 09:54:39 Regi…       4
+## 10 107           5       5 2017-04-22 18:32:16 2017-04-27 02:45:57 Regi…       7
+## # … with 490 more rows, 3 more variables: duration &lt;drtn&gt;,
+## #   first_activity &lt;fct&gt;, last_activity &lt;fct&gt;, and abbreviated variable names
+## #   ¹​trace_length, ²​number_of_activities, ³​trace_id</code></pre>
+</div>
+</div>
+
+<center><p style = "font-size: 12px">Copyright &copy; 2023 <a href = "https://bupar.net/about/" >bupaR - Hasselt University</a></p></center>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3,h4",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

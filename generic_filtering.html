@@ -449,6 +449,12 @@ div.tocify {
     <li>
       <a href="xes_files.html">XES-files</a>
     </li>
+    <li>
+      <a href="metadata.html">Inspect logs</a>
+    </li>
+    <li>
+      <a href="data_quality.html">Data Quality</a>
+    </li>
   </ul>
 </li>
 <li class="dropdown">
@@ -647,44 +653,41 @@ greater than 300. More process-specific filtering methods can be found
 <a href="http://www.bupar.net/subsetting.html">here</a>.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>traffic_fines <span class="sc">%&gt;%</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(vehicleclass <span class="sc">==</span> <span class="st">&quot;C&quot;</span>, amount <span class="sc">&gt;</span> <span class="dv">300</span>)</span></code></pre></div>
-<pre><code>## # Log of 20 events consisting of:
+<pre><code>## # Log of 17 events consisting of:
 ## 1 trace 
-## 1 case 
-## 20 instances of 1 activity 
-## 10 resources 
+## 17 cases 
+## 17 instances of 1 activity 
+## 9 resources 
 ## Events occurred from 2006-08-10 until 2008-02-09 
 ##  
 ## # Variables were mapped as follows:
-## Case identifier:     vehicleclass 
-## Activity identifier:     notificationtype 
+## Case identifier:     case_id 
+## Activity identifier:     activity 
 ## Resource identifier:     resource 
 ## Activity instance identifier:    activity_instance_id 
 ## Timestamp:           timestamp 
 ## Lifecycle transition:        lifecycle 
 ## 
-## # A tibble: 20 × 18
+## # A tibble: 17 × 18
 ##    case_id activity   lifec…¹ resou…² timestamp           amount article dismi…³
 ##    &lt;chr&gt;   &lt;fct&gt;      &lt;fct&gt;   &lt;fct&gt;   &lt;dttm&gt;              &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;  
 ##  1 A10060  Create Fi… comple… 541     2007-03-08 00:00:00 36.0       157 NIL    
 ##  2 A10497  Create Fi… comple… 558     2007-03-30 00:00:00 36.0       157 NIL    
 ##  3 A10818  Create Fi… comple… 561     2007-04-08 00:00:00 36.0       157 NIL    
 ##  4 A11707  Create Fi… comple… 550     2007-04-24 00:00:00 36.0       157 NIL    
-##  5 A11936  Create Fi… comple… 557     2007-04-29 00:00:00 36.0       157 NIL    
-##  6 A12073  Create Fi… comple… 557     2007-05-03 00:00:00 36.0       157 NIL    
-##  7 A1408   Create Fi… comple… 559     2006-08-20 00:00:00 35.0       157 NIL    
-##  8 A14883  Create Fi… comple… 561     2007-06-29 00:00:00 36.0       157 NIL    
-##  9 A17130  Create Fi… comple… 541     2007-07-15 00:00:00 36.0       157 NIL    
-## 10 A1815   Create Fi… comple… 563     2006-08-10 00:00:00 35.0       157 NIL    
-## 11 A19109  Create Fi… comple… 556     2007-07-17 00:00:00 36.0       157 NIL    
-## 12 A23000  Create Fi… comple… 550     2007-12-29 00:00:00 36.0       157 NIL    
-## 13 A24247  Create Fi… comple… 561     2007-12-03 00:00:00 36.0       157 NIL    
-## 14 A24366  Create Fi… comple… 541     2008-02-09 00:00:00 36.0       157 NIL    
-## 15 A24634  Create Fi… comple… 537     2007-11-21 00:00:00 36.0       157 NIL    
-## 16 A24942  Create Fi… comple… 561     2007-12-30 00:00:00 36.0       157 NIL    
-## 17 A25581  Create Fi… comple… 559     2007-11-23 00:00:00 36.0       157 NIL    
-## 18 A25599  Create Fi… comple… 559     2007-11-24 00:00:00 36.0       157 NIL    
-## 19 A26099  Create Fi… comple… 559     2007-12-09 00:00:00 36.0       157 NIL    
-## 20 A26277  Create Fi… comple… 538     2008-01-07 00:00:00 36.0       157 NIL    
+##  5 A1408   Create Fi… comple… 559     2006-08-20 00:00:00 35.0       157 NIL    
+##  6 A14883  Create Fi… comple… 561     2007-06-29 00:00:00 36.0       157 NIL    
+##  7 A17130  Create Fi… comple… 541     2007-07-15 00:00:00 36.0       157 NIL    
+##  8 A1815   Create Fi… comple… 563     2006-08-10 00:00:00 35.0       157 NIL    
+##  9 A19109  Create Fi… comple… 556     2007-07-17 00:00:00 36.0       157 NIL    
+## 10 A23000  Create Fi… comple… 550     2007-12-29 00:00:00 36.0       157 NIL    
+## 11 A24247  Create Fi… comple… 561     2007-12-03 00:00:00 36.0       157 NIL    
+## 12 A24366  Create Fi… comple… 541     2008-02-09 00:00:00 36.0       157 NIL    
+## 13 A24634  Create Fi… comple… 537     2007-11-21 00:00:00 36.0       157 NIL    
+## 14 A24942  Create Fi… comple… 561     2007-12-30 00:00:00 36.0       157 NIL    
+## 15 A25581  Create Fi… comple… 559     2007-11-23 00:00:00 36.0       157 NIL    
+## 16 A26099  Create Fi… comple… 559     2007-12-09 00:00:00 36.0       157 NIL    
+## 17 A26277  Create Fi… comple… 538     2008-01-07 00:00:00 36.0       157 NIL    
 ## # … with 10 more variables: expense &lt;chr&gt;, lastsent &lt;chr&gt;, matricola &lt;dbl&gt;,
 ## #   notificationtype &lt;chr&gt;, paymentamount &lt;dbl&gt;, points &lt;dbl&gt;,
 ## #   totalpaymentamount &lt;chr&gt;, vehicleclass &lt;chr&gt;, activity_instance_id &lt;chr&gt;,
@@ -908,12 +911,12 @@ event log containing n cases. The code below returns a sample of 10
 patients.</p>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sample_n</span>(<span class="at">size =</span> <span class="dv">10</span>)</span></code></pre></div>
-<pre><code>## # Log of 110 events consisting of:
+<pre><code>## # Log of 112 events consisting of:
 ## 2 traces 
 ## 10 cases 
-## 55 instances of 7 activities 
+## 56 instances of 7 activities 
 ## 7 resources 
-## Events occurred from 2017-02-05 02:12:22 until 2018-02-22 07:16:29 
+## Events occurred from 2017-01-04 01:34:05 until 2018-04-12 20:20:46 
 ##  
 ## # Variables were mapped as follows:
 ## Case identifier:     patient 
@@ -923,20 +926,20 @@ patients.</p>
 ## Timestamp:           time 
 ## Lifecycle transition:        registration_type 
 ## 
-## # A tibble: 110 × 7
+## # A tibble: 112 × 7
 ##    handling     patient employee handling_id regist…¹ time                .order
 ##    &lt;fct&gt;        &lt;chr&gt;   &lt;fct&gt;    &lt;chr&gt;       &lt;fct&gt;    &lt;dttm&gt;               &lt;int&gt;
-##  1 Registration 31      r1       31          start    2017-02-05 02:12:22      1
-##  2 Registration 79      r1       79          start    2017-03-29 22:12:55      2
-##  3 Registration 91      r1       91          start    2017-04-04 17:42:26      3
-##  4 Registration 169     r1       169         start    2017-06-17 15:10:30      4
-##  5 Registration 197     r1       197         start    2017-07-12 06:43:07      5
-##  6 Registration 226     r1       226         start    2017-08-07 09:06:07      6
-##  7 Registration 357     r1       357         start    2017-11-30 15:50:38      7
+##  1 Registration 3       r1       3           start    2017-01-04 01:34:05      1
+##  2 Registration 106     r1       106         start    2017-04-21 02:19:09      2
+##  3 Registration 127     r1       127         start    2017-05-05 23:40:40      3
+##  4 Registration 152     r1       152         start    2017-05-31 09:16:08      4
+##  5 Registration 207     r1       207         start    2017-07-20 22:31:31      5
+##  6 Registration 252     r1       252         start    2017-09-06 10:04:48      6
+##  7 Registration 332     r1       332         start    2017-11-15 12:22:08      7
 ##  8 Registration 378     r1       378         start    2017-12-26 19:09:57      8
-##  9 Registration 408     r1       408         start    2018-01-27 09:21:23      9
-## 10 Registration 430     r1       430         start    2018-02-17 15:44:17     10
-## # … with 100 more rows, and abbreviated variable name ¹​registration_type</code></pre>
+##  9 Registration 428     r1       428         start    2018-02-17 00:45:15      9
+## 10 Registration 469     r1       469         start    2018-04-06 01:29:41     10
+## # … with 102 more rows, and abbreviated variable name ¹​registration_type</code></pre>
 <p>Note that this function can also be used with a sample size bigger
 than the number of cases in the event log, if you allow for the
 replacements of drawn cases.</p>

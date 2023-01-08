@@ -11,7 +11,7 @@
 
 
 
-<title>control_flow_analysis.knit</title>
+<title>Control-Flow Analysis</title>
 
 <script src="site_libs/header-attrs-2.19/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -53,6 +53,107 @@ ga('send', 'pageview');
 
 
 
+<style type="text/css">
+  code {
+    white-space: pre;
+  }
+  .sourceCode {
+    overflow: visible;
+  }
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  background-color: #f8f8f8; }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #c4a000; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #000000; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #000000; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #000000; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
 
 
 
@@ -348,6 +449,12 @@ div.tocify {
     <li>
       <a href="xes_files.html">XES-files</a>
     </li>
+    <li>
+      <a href="metadata.html">Inspect logs</a>
+    </li>
+    <li>
+      <a href="data_quality.html">Data Quality</a>
+    </li>
   </ul>
 </li>
 <li class="dropdown">
@@ -530,11 +637,455 @@ div.tocify {
 
 
 
+<h1 class="title toc-ignore">Control-Flow Analysis</h1>
 
 </div>
 
 
-
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(bupaR)</span></code></pre></div>
+<div id="variance" class="section level3">
+<h3>Variance</h3>
+<div id="activity-presence" class="section level4">
+<h4>Activity Presence</h4>
+<p>Activity presence shows in what percentage of cases an activity is
+present. It has no level-argument.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span> <span class="fu">activity_presence</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    plot</span></code></pre></div>
+<p><img src="control_flow_analysis_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+</div>
+<div id="activity-frequency" class="section level4">
+<h4>Activity Frequency</h4>
+<p>The frequency of activities can be calculated using the
+activity_frequency function, at the levels log, trace and activity.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">activity_frequency</span>(<span class="st">&quot;activity&quot;</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 7 × 3
+##   handling              absolute relative
+##   &lt;fct&gt;                    &lt;int&gt;    &lt;dbl&gt;
+## 1 Registration               500   0.184 
+## 2 Triage and Assessment      500   0.184 
+## 3 Discuss Results            495   0.182 
+## 4 Check-out                  492   0.181 
+## 5 X-Ray                      261   0.0959
+## 6 Blood test                 237   0.0871
+## 7 MRI SCAN                   236   0.0867</code></pre>
+</div>
+<div id="start-activities" class="section level4">
+<h4>Start Activities</h4>
+<p>The start of cases can be described using the start_activities
+function. Available levels are activity, case, log, resource and
+resource activity.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">start_activities</span>(<span class="st">&quot;resource-activity&quot;</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 1 × 5
+##   employee handling     absolute relative cum_sum
+##   &lt;fct&gt;    &lt;fct&gt;           &lt;int&gt;    &lt;dbl&gt;   &lt;dbl&gt;
+## 1 r1       Registration      500        1       1</code></pre>
+<p>This shows that in this event log, all cases are started with the
+Registration by resource r1.</p>
+</div>
+<div id="end-activities" class="section level4">
+<h4>End Activities</h4>
+<p>Conversely, the end_activities functions describes the end of cases,
+using the same levels: log, case, activity, resource and
+resource-activity.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">end_activities</span>(<span class="st">&quot;resource-activity&quot;</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 5 × 5
+##   employee handling              absolute relative cum_sum
+##   &lt;fct&gt;    &lt;fct&gt;                    &lt;int&gt;    &lt;dbl&gt;   &lt;dbl&gt;
+## 1 r7       Check-out                  492    0.984   0.984
+## 2 r6       Discuss Results              3    0.006   0.99 
+## 3 r2       Triage and Assessment        2    0.004   0.994
+## 4 r5       X-Ray                        2    0.004   0.998
+## 5 r3       Blood test                   1    0.002   1</code></pre>
+<p>In contract to the start of cases, the end of cases seems to differ
+more frequently, although it is mostly the Check-Out activity.</p>
+</div>
+<div id="trace-coverage" class="section level4">
+<h4>Trace Coverage</h4>
+<p>The trace coverage metric shows the relationship between the number
+of different activity sequences (i.e. traces) and the number of cases
+they cover.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">trace_coverage</span>(<span class="st">&quot;trace&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">plot</span>()</span></code></pre></div>
+<p><img src="control_flow_analysis_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p>In the patients log, there are only 7 different traces, and 2 of them
+cover nearly 100% of the event log.</p>
+</div>
+<div id="trace-length" class="section level4">
+<h4>Trace Length</h4>
+<p>The trace length metric describes the length of traces, i.e. the
+number of activity instances for each case. It can be computed at the
+levels case, trace and log.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">trace_length</span>(<span class="st">&quot;log&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    plot</span></code></pre></div>
+<p><img src="control_flow_analysis_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p>It can be seen that in this simple event log, most cases have a trace
+length of 5 or 6, while a minority has a trace length lower than 5.</p>
+</div>
+</div>
+<div id="rework" class="section level3">
+<h3>Rework</h3>
+<p>Documentation coming soon</p>
+</div>
+<div id="introduction" class="section level2">
+<h2>Introduction</h2>
+<p>Using the packages <code>processcheckr</code> prodecural rules can be
+checked in an event log. Checking rules will add a boolean case
+attribute, which can be used for filtering or in analysis.</p>
+<p>Rules can be checked using the <code>check_rule</code> function (see
+example below). It will create a new logical variable to indicate for
+which cases the rule holds. The name of the variable can be configured
+using the <code>label</code> argument in <code>check_rule</code>.</p>
+<p>In the following example, the first rule checks the starting
+activity, while the second rule checks whether CRP and LacticAcid occur
+together.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(bupaR)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(processcheckR)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>sepsis <span class="sc">%&gt;%</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># check if cases starts with &quot;ER Registration&quot;</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">check_rule</span>(<span class="fu">starts</span>(<span class="st">&quot;ER Registration&quot;</span>), <span class="at">label =</span> <span class="st">&quot;r1&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># check if activities &quot;CRP&quot; and &quot;LacticAcid&quot; occur together</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">check_rule</span>(<span class="fu">and</span>(<span class="st">&quot;CRP&quot;</span>,<span class="st">&quot;LacticAcid&quot;</span>), <span class="at">label =</span> <span class="st">&quot;r2&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(r1, r2) <span class="sc">%&gt;%</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">n_cases</span>() </span></code></pre></div>
+<pre><code>## # A tibble: 4 × 3
+##   r1    r2    n_cases
+##   &lt;lgl&gt; &lt;lgl&gt;   &lt;int&gt;
+## 1 FALSE FALSE      10
+## 2 FALSE TRUE       45
+## 3 TRUE  FALSE     137
+## 4 TRUE  TRUE      858</code></pre>
+<div id="checking-multiple-rules" class="section level3">
+<h3>Checking multiple rules</h3>
+<p>Using the function <code>check_rules</code>, multiple rules can be
+checked with one function call, by providing them as named arguments.
+The following code is equivalent to that above.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>sepsis <span class="sc">%&gt;%</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">check_rules</span>(</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">r1 =</span> <span class="fu">starts</span>(<span class="st">&quot;ER Registration&quot;</span>),</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">r2 =</span> <span class="fu">and</span>(<span class="st">&quot;CRP&quot;</span>,<span class="st">&quot;LacticAcid&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(r1, r2) <span class="sc">%&gt;%</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">n_cases</span>() </span></code></pre></div>
+<pre><code>## # A tibble: 4 × 3
+##   r1    r2    n_cases
+##   &lt;lgl&gt; &lt;lgl&gt;   &lt;int&gt;
+## 1 FALSE FALSE      10
+## 2 FALSE TRUE       45
+## 3 TRUE  FALSE     137
+## 4 TRUE  TRUE      858</code></pre>
+</div>
+<div id="rule-based-filtering" class="section level3">
+<h3>Rule-based filtering</h3>
+<p>Instead of adding logical values for each rule, you can also
+immediately filter the cases which adhere to one or more rules, using
+the <code>filter_rules</code></p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>sepsis <span class="sc">%&gt;%</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter_rules</span>(</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">r1 =</span> <span class="fu">starts</span>(<span class="st">&quot;ER Registration&quot;</span>),</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">r2 =</span> <span class="fu">and</span>(<span class="st">&quot;CRP&quot;</span>,<span class="st">&quot;LacticAcid&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">n_cases</span>() </span></code></pre></div>
+<pre><code>## [1] 858</code></pre>
+</div>
+</div>
+<div id="rules" class="section level2">
+<h2>Rules</h2>
+<p>Currently the following declarative rules can be checked:</p>
+<p>Cardinality rules:</p>
+<ul>
+<li><code>contains</code>: activity occurs n times or more</li>
+<li><code>contains_exactly</code>: activity occurs exactly n times</li>
+<li><code>contains_between</code>: activity occures between min and max
+number of times</li>
+<li><code>absent</code>: activity does not occur more than n - 1
+times</li>
+</ul>
+<p>Ordering rules:</p>
+<ul>
+<li><code>starts</code>: case starts with activity</li>
+<li><code>ends</code>: case ends with activity</li>
+<li><code>succession</code>: if activity A happens, B should happen
+after. If B happens, A should have happened before.</li>
+<li><code>response</code>: if activity A happens, B should happen
+after</li>
+<li><code>precedence</code>: if activity B happens, A should have
+happend before</li>
+<li><code>responded_existence</code>: if activity A happens, B should
+also (have) happen(ed) (i.e. before or after A)</li>
+</ul>
+<p>Exclusiveness:</p>
+<ul>
+<li><code>and</code>: two activities always exist together</li>
+<li><code>xor</code>: two activities are not allowed to exist
+together</li>
+</ul>
+<p>The available rules are explained in more detail below.</p>
+<div id="cardinality-rules" class="section level3">
+<h3>Cardinality rules</h3>
+<div id="contains" class="section level4">
+<h4>contains</h4>
+<p>Arguments:</p>
+<ul>
+<li><code>activity</code>: a single activity name.</li>
+<li><code>n</code> (default = 1): the minimum number of the times the
+activity should be present</li>
+</ul>
+<p>Returns: cases where <code>activity</code> occurs <code>n</code>
+times or more.</p>
+<p><strong>[Example]</strong> How many cases have three or more
+occurences of Leucocytes?</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>sepsis <span class="sc">%&gt;%</span> </span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">check_rule</span>(<span class="fu">contains</span>(<span class="st">&quot;Leucocytes&quot;</span>, <span class="at">n =</span> <span class="dv">3</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(contains_Leucocytes_3) <span class="sc">%&gt;%</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">n_cases</span>()</span></code></pre></div>
+<pre><code>## # A tibble: 2 × 2
+##   contains_Leucocytes_3 n_cases
+##   &lt;lgl&gt;                   &lt;int&gt;
+## 1 FALSE                     590
+## 2 TRUE                      460</code></pre>
+</div>
+<div id="contains_exactly" class="section level4">
+<h4>contains_exactly</h4>
+<p>Arguments:</p>
+<ul>
+<li><code>activity</code>: a single activity name.</li>
+<li><code>n</code> (default = 1): the exact number of the times the
+activity should be present</li>
+</ul>
+<p>[Example] How many cases have exactly four more occurences of
+Leucocytes?</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>sepsis <span class="sc">%&gt;%</span> </span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">check_rule</span>(<span class="fu">contains_exactly</span>(<span class="st">&quot;Leucocytes&quot;</span>, <span class="at">n =</span> <span class="dv">4</span>), <span class="at">label =</span> <span class="st">&quot;r1&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(r1) <span class="sc">%&gt;%</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">n_cases</span>()</span></code></pre></div>
+<pre><code>## # A tibble: 2 × 2
+##   r1    n_cases
+##   &lt;lgl&gt;   &lt;int&gt;
+## 1 FALSE     960
+## 2 TRUE       90</code></pre>
+<p>Returns: cases where <code>activity</code> occurs <code>n</code>.</p>
+</div>
+<div id="contains_between" class="section level4">
+<h4>contains_between</h4>
+<p>Arguments:</p>
+<ul>
+<li><code>activity</code>: a single activity name.</li>
+<li><code>min</code> (default = 1): the minimum number of the times the
+activity should be present</li>
+<li><code>max</code> (default = 1): the minimum number of the times the
+activity should be present</li>
+</ul>
+<p>Returns: cases where <code>activity</code> occurs between
+<code>min</code> and <code>max</code> times.</p>
+<p>[Example] How many cases have between 0 and 10 occurences of
+Leucocytes?</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>sepsis <span class="sc">%&gt;%</span> </span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">check_rule</span>(<span class="fu">contains_between</span>(<span class="st">&quot;Leucocytes&quot;</span>, <span class="at">min =</span> <span class="dv">0</span>, <span class="at">max =</span> <span class="dv">10</span>), <span class="at">label =</span> <span class="st">&quot;r1&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(r1) <span class="sc">%&gt;%</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">n_cases</span>()</span></code></pre></div>
+<pre><code>## # A tibble: 2 × 2
+##   r1    n_cases
+##   &lt;lgl&gt;   &lt;int&gt;
+## 1 FALSE      38
+## 2 TRUE     1012</code></pre>
+</div>
+<div id="absent" class="section level4">
+<h4>absent</h4>
+<p>Arguments:</p>
+<ul>
+<li><code>activity</code>: a single activity name.</li>
+<li><code>n</code> (default = 0): the maximum number of times the
+activity is allowed to happen</li>
+</ul>
+<p>Returns: cases where <code>activity</code> occurs maximum
+<code>n</code> times.</p>
+<p>Note that <code>absent(n = x)</code> is equivalent to
+<code>contains_between(min = 0, max = x)</code></p>
+<p>[Example] How many cases have between 0 and 10 occurences of
+Leucocytes?</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>sepsis <span class="sc">%&gt;%</span> </span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">check_rule</span>(<span class="fu">absent</span>(<span class="st">&quot;Leucocytes&quot;</span>, <span class="at">n =</span> <span class="dv">10</span>), <span class="at">label =</span> <span class="st">&quot;r1&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(r1) <span class="sc">%&gt;%</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">n_cases</span>()</span></code></pre></div>
+<pre><code>## # A tibble: 2 × 2
+##   r1    n_cases
+##   &lt;lgl&gt;   &lt;int&gt;
+## 1 FALSE    1012
+## 2 TRUE       38</code></pre>
+</div>
+</div>
+<div id="ordering-rules" class="section level3">
+<h3>Ordering rules</h3>
+<div id="starts" class="section level4">
+<h4>starts</h4>
+<p>Arguments:</p>
+<ul>
+<li><code>activity</code>: a single activity name</li>
+</ul>
+<p>Returns: cases that start with <code>activity</code>.</p>
+<p>[Example] How many cases start with “ER Registration”</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>sepsis <span class="sc">%&gt;%</span> </span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">check_rule</span>(<span class="fu">starts</span>(<span class="st">&quot;ER Registration&quot;</span>), <span class="at">label =</span> <span class="st">&quot;r1&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(r1) <span class="sc">%&gt;%</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">n_cases</span>()</span></code></pre></div>
+<pre><code>## # A tibble: 2 × 2
+##   r1    n_cases
+##   &lt;lgl&gt;   &lt;int&gt;
+## 1 FALSE      55
+## 2 TRUE      995</code></pre>
+</div>
+<div id="ends" class="section level4">
+<h4>ends</h4>
+<p>Arguments:</p>
+<ul>
+<li><code>activity</code>: a single activity name</li>
+</ul>
+<p>Returns: cases that end with <code>activity</code>.</p>
+<p>[Example] How many cases end with “Release A”</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>sepsis <span class="sc">%&gt;%</span> </span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">check_rule</span>(<span class="fu">ends</span>(<span class="st">&quot;Release A&quot;</span>), <span class="at">label =</span> <span class="st">&quot;r1&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(r1) <span class="sc">%&gt;%</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">n_cases</span>()</span></code></pre></div>
+<pre><code>## # A tibble: 2 × 2
+##   r1    n_cases
+##   &lt;lgl&gt;   &lt;int&gt;
+## 1 FALSE     657
+## 2 TRUE      393</code></pre>
+</div>
+<div id="succession" class="section level4">
+<h4>succession</h4>
+<p>Arguments:</p>
+<ul>
+<li><code>activity_a</code>: a single activity name</li>
+<li><code>activity_b</code>: a single activity name</li>
+</ul>
+<p>Returns: cases where (an instance of) <code>activity_a</code> is
+eventually followed by (an instance of) <code>activity_b</code>, if
+either <code>activity_a</code> or <code>activity_b</code> occurs.</p>
+<p>[Example] How many cases is “ER Sepsis Triage” succeeded by “CRP”</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>sepsis <span class="sc">%&gt;%</span> </span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">check_rule</span>(<span class="fu">succession</span>(<span class="st">&quot;ER Sepsis Triage&quot;</span>,<span class="st">&quot;CRP&quot;</span>), <span class="at">label =</span> <span class="st">&quot;r1&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(r1) <span class="sc">%&gt;%</span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">n_cases</span>()</span></code></pre></div>
+<pre><code>## # A tibble: 2 × 2
+##   r1    n_cases
+##   &lt;lgl&gt;   &lt;int&gt;
+## 1 FALSE     229
+## 2 TRUE      821</code></pre>
+</div>
+<div id="response" class="section level4">
+<h4>response</h4>
+<p>Arguments:</p>
+<ul>
+<li><code>activity_a</code>: a single activity name</li>
+<li><code>activity_b</code>: a single activity name</li>
+</ul>
+<p>Returns: cases where (an instance of) <code>activity_a</code> is
+eventually followed by (an instance of) <code>activity_b</code>, if
+<code>activity_a</code> occurs. [Example] How many cases is “ER Sepsis
+Triage” followed by “CRP”, if “ER Sespis Triage” occurs.</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>sepsis <span class="sc">%&gt;%</span> </span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">check_rule</span>(<span class="fu">response</span>(<span class="st">&quot;ER Sepsis Triage&quot;</span>,<span class="st">&quot;CRP&quot;</span>), <span class="at">label =</span> <span class="st">&quot;r1&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(r1) <span class="sc">%&gt;%</span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">n_cases</span>()</span></code></pre></div>
+<pre><code>## # A tibble: 2 × 2
+##   r1    n_cases
+##   &lt;lgl&gt;   &lt;int&gt;
+## 1 FALSE     106
+## 2 TRUE      944</code></pre>
+</div>
+<div id="precedence" class="section level4">
+<h4>precedence</h4>
+<p>Arguments:</p>
+<ul>
+<li><code>activity_a</code>: a single activity name</li>
+<li><code>activity_b</code>: a single activity name</li>
+</ul>
+<p>Returns: cases where (an instance of) <code>activity_b</code> is
+preceded by (an instance of) <code>activity_a</code>, if
+<code>activity_b</code> occurs.</p>
+<p>[Example] How many cases is “CRP” preceded “ER Sepsis Triage”, if
+“CPR” occurs.</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>sepsis <span class="sc">%&gt;%</span> </span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">check_rule</span>(<span class="fu">precedence</span>(<span class="st">&quot;ER Sepsis Triage&quot;</span>,<span class="st">&quot;CRP&quot;</span>), <span class="at">label =</span> <span class="st">&quot;r1&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(r1) <span class="sc">%&gt;%</span></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">n_cases</span>()</span></code></pre></div>
+<pre><code>## # A tibble: 2 × 2
+##   r1    n_cases
+##   &lt;lgl&gt;   &lt;int&gt;
+## 1 FALSE     186
+## 2 TRUE      864</code></pre>
+</div>
+<div id="responded_existence" class="section level4">
+<h4>responded_existence</h4>
+<p>Arguments:</p>
+<ul>
+<li><code>activity_a</code>: a single activity name</li>
+<li><code>activity_b</code>: a single activity name</li>
+</ul>
+<p>Returns: cases where if <code>activity_a</code> occurs, also
+<code>activity_b</code> occurs (but not vice versa)</p>
+<p>[Example] How many cases contain both “CRP” and “ER Sepsis Triage”,
+if “CPR” occurs.</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>sepsis <span class="sc">%&gt;%</span> </span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">check_rule</span>(<span class="fu">responded_existence</span>(<span class="st">&quot;CRP&quot;</span>, <span class="st">&quot;ER Sepsis Triage&quot;</span>), <span class="at">label =</span> <span class="st">&quot;r1&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(r1) <span class="sc">%&gt;%</span></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">n_cases</span>()</span></code></pre></div>
+<pre><code>## # A tibble: 2 × 2
+##   r1    n_cases
+##   &lt;lgl&gt;   &lt;int&gt;
+## 1 FALSE       1
+## 2 TRUE     1049</code></pre>
+</div>
+</div>
+<div id="exclusiveness-rules" class="section level3">
+<h3>Exclusiveness rules</h3>
+<div id="and" class="section level4">
+<h4>and</h4>
+<p>Arguments:</p>
+<ul>
+<li><code>activity_a</code>: a single activity name</li>
+<li><code>activity_b</code>: a single activity name</li>
+</ul>
+<p>Returns: cases where both <code>activity_a</code> and
+<code>activity_b</code> occur or both are absent</p>
+<p>[Example] How many cases contain both “CRP” and “ER Sepsis
+Triage”.</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>sepsis <span class="sc">%&gt;%</span> </span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">check_rule</span>(<span class="fu">and</span>(<span class="st">&quot;CRP&quot;</span>, <span class="st">&quot;ER Sepsis Triage&quot;</span>), <span class="at">label =</span> <span class="st">&quot;r1&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(r1) <span class="sc">%&gt;%</span></span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">n_cases</span>()</span></code></pre></div>
+<pre><code>## # A tibble: 2 × 2
+##   r1    n_cases
+##   &lt;lgl&gt;   &lt;int&gt;
+## 1 FALSE      44
+## 2 TRUE     1006</code></pre>
+</div>
+<div id="xor" class="section level4">
+<h4>xor</h4>
+<p>Arguments:</p>
+<ul>
+<li><code>activity_a</code>: a single activity name</li>
+<li><code>activity_b</code>: a single activity name</li>
+</ul>
+<p>Returns: cases where either <code>activity_a</code> or
+<code>activity_b</code> occur, but not both.</p>
+<p>[Example] How many cases contain “CRP” OR “ER Sepsis Triage”.</p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>sepsis <span class="sc">%&gt;%</span> </span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">check_rule</span>(<span class="fu">xor</span>(<span class="st">&quot;CRP&quot;</span>, <span class="st">&quot;ER Sepsis Triage&quot;</span>), <span class="at">label =</span> <span class="st">&quot;r1&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(r1) <span class="sc">%&gt;%</span></span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">n_cases</span>()</span></code></pre></div>
+<pre><code>## # A tibble: 2 × 2
+##   r1    n_cases
+##   &lt;lgl&gt;   &lt;int&gt;
+## 1 FALSE    1006
+## 2 TRUE       44</code></pre>
+</div>
+</div>
+</div>
 
 <center><p style = "font-size: 12px">Copyright &copy; 2023 <a href = "https://bupar.net/about/" >bupaR - Hasselt University</a></p></center>
 

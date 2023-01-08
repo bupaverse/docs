@@ -98,9 +98,6 @@ A selfloop occurs when an activity is immediatey
 
 ## Introduction
 
-```{r echo = F}
-htmltools::includeHTML("tracking_google_analytics.html")
-```
 
 Using the packages `processcheckr` prodecural rules can be checked in an event log. Checking rules will add a boolean case attribute, which can be used for filtering or in analysis. 
 

@@ -11,9 +11,7 @@ knitr::opts_chunk$set(eval = T)
 
 
 ## Introduction
-```{r echo = F}
-htmltools::includeHTML("tracking_google_analytics.html")
-```
+
 We use the patients event log provided by the eventdataR package.
 
 

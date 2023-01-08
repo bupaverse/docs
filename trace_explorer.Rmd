@@ -1,0 +1,28 @@
+---
+title: Trace Explorer
+---
+
+
+
+```{r include = F}
+library(tidyverse)
+library(bupaR)
+library(pander)
+library(lubridate)
+```
+```{r echo = F}
+knitr::opts_chunk$set(fig.width = 9)
+```
+
+Different activity sequences in the event log can be visualized with the `trace_explorer`. It can be used to explore frequent as well as infrequent traces. The coverage argument specificies how much of the log you want to explore. By default it is set at 0.2, meaning that it will show the most (in)frequency traces covering 20% of the event log.
+
+## Frequent traces
+
+```{r fig.heigth = 6}
+sepsis %>%
+	trace_explorer()
+sepsis %>%
+	trace_explorer(coverage = 0.15)
+```
+
+

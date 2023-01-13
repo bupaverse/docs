@@ -16,9 +16,10 @@ output:
       danger: "#A93800"
       warning: "#956F5D"
     highlight: tango
-    includes:
+    includes: 
       in_header: header.html
-      after_body: footer.html
+      after_body: 
+        - footer.html
 output_dir: "docs"
 navbar:
   title: "<a href = 'https://bupar.net'><img id = \"logo\" style = \"width: 200px; padding: 0px 20px 0px 0px\" src = \"images/logo/bupar_trans_witteR2.png\" /></a>"

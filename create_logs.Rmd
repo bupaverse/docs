@@ -298,10 +298,17 @@ log %>%
 ```
 
 
-Read more: 
 
-<div class="btn-toolbar" role="group">
-  <a href = "create_logs.html" class="btn btn-secondary disabled" type="button">Create logs</a>
-  <a href = "adjust_logs.html" class="btn btn-secondary" type="button">Adjust logs</a>
-  <a href = "public_logs.html" class="btn btn-secondary" type="button">Public logs</a>
-</div>
+```{r footer, results = "asis", echo = F}
+CURRENT_PAGE <-  str_replace(knitr::current_input(), ".Rmd",".html")
+res <- knitr::knit_expand("button_footer.Rmd", quiet = TRUE)
+res <- knitr::knit_child(text = unlist(res), quiet = TRUE)
+cat(res, sep = '\n')
+```
+
+
+
+
+
+
+

@@ -6,7 +6,11 @@ title: "Inspect log"
 library(bupaR)
 ```
 
-# Inspect log
+```{r echo = F, out.width="25%", fig.align = "right"}
+knitr::include_graphics("images/icons/create.PNG")
+```
+
+# Inspect logs
 
 ## Getting metadata
 

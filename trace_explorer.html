@@ -11,7 +11,7 @@
 
 
 
-<title>Trace Explorer</title>
+<title>bupaR Docs | Trace Explorer</title>
 
 <script src="site_libs/header-attrs-2.19/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -637,11 +637,13 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Trace Explorer</h1>
+<h1 class="title toc-ignore">bupaR Docs | Trace Explorer</h1>
 
 </div>
 
 
+<p><img src="images/icons/traces.PNG" width="25%" style="display: block; margin: auto 0 auto auto;" /></p>
+<hr />
 <p>Different activity sequences in the event log can be visualized with
 the <code>trace_explorer</code>. It can be used to explore frequent as
 well as infrequent traces. The coverage argument specificies how much of
@@ -654,10 +656,30 @@ log.</p>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">trace_explorer</span>()</span></code></pre></div>
 <pre><code>## Warning: No `coverage` or `n_traces` set.
 ## ! Defaulting to `coverage` = 0.2 for `type` = &quot;frequent&quot; traces.</code></pre>
-<p><img src="trace_explorer_files/figure-html/unnamed-chunk-3-1.png" width="864" /></p>
+<p><img src="trace_explorer_files/figure-html/unnamed-chunk-4-1.png" width="864" /></p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>sepsis <span class="sc">%&gt;%</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">trace_explorer</span>(<span class="at">coverage =</span> <span class="fl">0.15</span>)</span></code></pre></div>
-<p><img src="trace_explorer_files/figure-html/unnamed-chunk-3-2.png" width="864" /></p>
+<p><img src="trace_explorer_files/figure-html/unnamed-chunk-4-2.png" width="864" /></p>
+<hr />
+<p>Read more:</p>
+<div class="btn-toolbar" role="group">
+<p><a href = "frequency_maps.html" class="btn btn-success" type="button">Frequency
+Maps</a>
+<a href = "performance_maps.html" class="btn btn-success" type="button">Performance
+Maps</a>
+<a href = "advanced_maps.html" class="btn btn-success" type="button">Advanced
+Maps</a>
+<a href = "animate_maps.html" class="btn btn-success" type="button">Animate
+Maps</a>
+<a href = "process_matrix.html" class="btn btn-success" type="button">Process
+Matrix</a>
+<a href = "dotted_chart.html" class="btn btn-success" type="button">Dotted
+Chart</a>
+<a href = "trace_explorer.html" class="btn btn-success disabled" type="button">Trace
+Explorer</a>
+<a href = "performance_spectrum.html" class="btn btn-success" type="button">Performance
+Spectrum</a></p>
+</div>
 </div>
 
 <hr>

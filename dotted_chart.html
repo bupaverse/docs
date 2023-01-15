@@ -11,7 +11,7 @@
 
 
 
-<title>Dotted Charts</title>
+<title>bupaR Docs | Dotted Charts</title>
 
 <script src="site_libs/header-attrs-2.19/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -637,11 +637,13 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Dotted Charts</h1>
+<h1 class="title toc-ignore">bupaR Docs | Dotted Charts</h1>
 
 </div>
 
 
+<p><img src="images/icons/dotted.PNG" width="25%" style="display: block; margin: auto 0 auto auto;" /></p>
+<hr />
 <p>Dotted charts can be made with the <code>dotted_chart</code>
 function. A dotted chart is a graph in which each activity instance is
 displayed with a point. The x-axis referce to the time aspect, while the
@@ -658,13 +660,33 @@ to the activity type.</li>
 configurations</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">dotted_chart</span>(<span class="at">x =</span> <span class="st">&quot;absolute&quot;</span>, <span class="at">sort =</span> <span class="st">&quot;start&quot;</span>)</span></code></pre></div>
-<p><img src="dotted_chart_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p><img src="dotted_chart_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">dotted_chart</span>(<span class="at">x =</span> <span class="st">&quot;absolute&quot;</span>, <span class="at">sort =</span> <span class="st">&quot;start&quot;</span>, <span class="at">color =</span> <span class="st">&quot;employee&quot;</span>)</span></code></pre></div>
-<p><img src="dotted_chart_files/figure-html/unnamed-chunk-2-2.png" width="672" /></p>
+<p><img src="dotted_chart_files/figure-html/unnamed-chunk-3-2.png" width="672" /></p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">dotted_chart</span>(<span class="at">x =</span> <span class="st">&quot;relative&quot;</span>, <span class="at">sort =</span> <span class="st">&quot;duration&quot;</span>, <span class="at">color =</span> <span class="st">&quot;employee&quot;</span>)</span></code></pre></div>
-<p><img src="dotted_chart_files/figure-html/unnamed-chunk-2-3.png" width="672" /></p>
+<p><img src="dotted_chart_files/figure-html/unnamed-chunk-3-3.png" width="672" /></p>
+<hr />
+<p>Read more:</p>
+<div class="btn-toolbar" role="group">
+<p><a href = "frequency_maps.html" class="btn btn-success" type="button">Frequency
+Maps</a>
+<a href = "performance_maps.html" class="btn btn-success" type="button">Performance
+Maps</a>
+<a href = "advanced_maps.html" class="btn btn-success" type="button">Advanced
+Maps</a>
+<a href = "animate_maps.html" class="btn btn-success" type="button">Animate
+Maps</a>
+<a href = "process_matrix.html" class="btn btn-success" type="button">Process
+Matrix</a>
+<a href = "dotted_chart.html" class="btn btn-success disabled" type="button">Dotted
+Chart</a>
+<a href = "trace_explorer.html" class="btn btn-success" type="button">Trace
+Explorer</a>
+<a href = "performance_spectrum.html" class="btn btn-success" type="button">Performance
+Spectrum</a></p>
+</div>
 
 <hr>
 <center><p style = "font-size: 12px">Copyright &copy; 2023 <a href = "https://bupar.net/about/" >bupaR - Hasselt University</a></p></center>

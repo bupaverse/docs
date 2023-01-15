@@ -11,7 +11,7 @@
 
 
 
-<title>Performance Spectrum</title>
+<title>bupaR Docs | Performance Spectrum</title>
 
 <script src="site_libs/header-attrs-2.19/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -637,11 +637,13 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Performance Spectrum</h1>
+<h1 class="title toc-ignore">bupaR Docs | Performance Spectrum</h1>
 
 </div>
 
 
+<p><img src="images/icons/psminer.PNG" width="25%" style="display: block; margin: auto 0 auto auto;" /></p>
+<hr />
 <p>The <code>psmineR</code> packages supports both detailed and
 aggregated performance spectra, as described in Denisov, V., Fahland,
 D., &amp; van der Aalst, W. M. P. (2018) <a
@@ -653,13 +655,13 @@ respectively.</p>
 <h2>Detailed performance spectrum</h2>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>traffic_fines <span class="sc">%&gt;%</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ps_detailed</span>()</span></code></pre></div>
-<p><img src="performance_spectrum_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+<p><img src="performance_spectrum_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
 <p>The number of segments shown in the performance spectrum can be
 configured in two ways. The first is to explicitly state the number of
 segments to show.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>traffic_fines <span class="sc">%&gt;%</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ps_detailed</span>(<span class="at">n_segments =</span> <span class="dv">10</span>)</span></code></pre></div>
-<p><img src="performance_spectrum_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p><img src="performance_spectrum_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 <p>Alternatively, one can state a <code>segment_coverage</code>. This is
 a value between 0 and 1 that indicates the percentage of cases in which
 each segment must be present in order to be visualized. A value of 0.2
@@ -672,7 +674,7 @@ argument, any available attribute can be used for coloring. For example,
 the resource, as shown below.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>traffic_fines <span class="sc">%&gt;%</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ps_detailed</span>(<span class="at">classification =</span> <span class="st">&quot;resource&quot;</span>)</span></code></pre></div>
-<p><img src="performance_spectrum_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p><img src="performance_spectrum_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 <p>Note that when another color classification is used, the built-in
 bupaR color scale will be used. As the resource in the case of
 traffic_fines is not very insightful, below we show a slightly more
@@ -682,7 +684,7 @@ activity of the case.</p>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">end_activities</span>(<span class="st">&quot;case&quot;</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">augment</span>(traffic_fines, <span class="at">prefix =</span> <span class="st">&quot;end&quot;</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ps_detailed</span>(<span class="at">classification =</span> <span class="st">&quot;end_activity&quot;</span>)</span></code></pre></div>
-<p><img src="performance_spectrum_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p><img src="performance_spectrum_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <p>Changing the color classification can also be done implicitly, by
 grouping the log on the classification variable.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>traffic_fines <span class="sc">%&gt;%</span></span>
@@ -690,7 +692,7 @@ grouping the log on the classification variable.</p>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">augment</span>(traffic_fines, <span class="at">prefix =</span> <span class="st">&quot;end&quot;</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(end_activity) <span class="sc">%&gt;%</span></span>
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ps_detailed</span>()</span></code></pre></div>
-<p><img src="performance_spectrum_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p><img src="performance_spectrum_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 </div>
 <div id="aggregated-performance-spectrum" class="section level2">
 <h2>Aggregated performance spectrum</h2>
@@ -701,11 +703,31 @@ way.</p>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">augment</span>(traffic_fines, <span class="at">prefix =</span> <span class="st">&quot;end&quot;</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(end_activity) <span class="sc">%&gt;%</span></span>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ps_aggregated</span>()</span></code></pre></div>
-<p><img src="performance_spectrum_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p><img src="performance_spectrum_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 <p>It does have 2 more configuration options: the number of bins to be
 used (default 30), and the grouping to be used (which can be based on
 “start” or “complete”). Details on the latter can be found in the
 original paper describing the performance spectrum.</p>
+<hr />
+<p>Read more:</p>
+<div class="btn-toolbar" role="group">
+<p><a href = "frequency_maps.html" class="btn btn-success" type="button">Frequency
+Maps</a>
+<a href = "performance_maps.html" class="btn btn-success" type="button">Performance
+Maps</a>
+<a href = "advanced_maps.html" class="btn btn-success" type="button">Advanced
+Maps</a>
+<a href = "animate_maps.html" class="btn btn-success" type="button">Animate
+Maps</a>
+<a href = "process_matrix.html" class="btn btn-success" type="button">Process
+Matrix</a>
+<a href = "dotted_chart.html" class="btn btn-success" type="button">Dotted
+Chart</a>
+<a href = "trace_explorer.html" class="btn btn-success" type="button">Trace
+Explorer</a>
+<a href = "performance_spectrum.html" class="btn btn-success disabled" type="button">Performance
+Spectrum</a></p>
+</div>
 </div>
 
 <hr>

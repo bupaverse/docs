@@ -11,7 +11,7 @@
 
 
 
-<title>Introduction to processpredictR: a basic workflow</title>
+<title>bupaR Docs | processpredictR workflow</title>
 
 <script src="site_libs/header-attrs-2.19/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -637,12 +637,12 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Introduction to processpredictR: a basic
-workflow</h1>
+<h1 class="title toc-ignore">bupaR Docs | processpredictR workflow</h1>
 
 </div>
 
 
+<hr />
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(processpredictR)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(bupaR)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
@@ -712,22 +712,22 @@ from <code>eventdataR</code>. Note that both <code>eventlog</code> and
 supported.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">prepare_examples</span>(traffic_fines, <span class="at">task =</span> <span class="st">&quot;outcome&quot;</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>df</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 27,001 × 11</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    ith_case case_id prefix                 prefi…¹ outcome     k activ…² resou…³</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;       &lt;int&gt; &lt;chr&gt;   &lt;chr&gt;                  &lt;list&gt;  &lt;fct&gt;   &lt;dbl&gt; &lt;chr&gt;   &lt;fct&gt;  </span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  1        1 A2127   Create Fine            &lt;chr&gt;   Payment     0 Create… 537    </span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  2        1 A2127   Create Fine - Payment  &lt;chr&gt;   Payment     1 Payment &lt;NA&gt;   </span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  3        2 A15     Create Fine            &lt;chr&gt;   Send f…     0 Create… 561    </span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  4        2 A15     Create Fine - Send Fi… &lt;chr&gt;   Send f…     1 Send F… &lt;NA&gt;   </span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  5        2 A15     Create Fine - Send Fi… &lt;chr&gt;   Send f…     2 Insert… &lt;NA&gt;   </span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  6        2 A15     Create Fine - Send Fi… &lt;chr&gt;   Send f…     3 Add pe… &lt;NA&gt;   </span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  7        2 A15     Create Fine - Send Fi… &lt;chr&gt;   Send f…     4 Send f… &lt;NA&gt;   </span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  8        3 A1820   Create Fine            &lt;chr&gt;   Payment     0 Create… 563    </span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  9        3 A1820   Create Fine - Payment  &lt;chr&gt;   Payment     1 Payment &lt;NA&gt;   </span></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10        4 A1451   Create Fine            &lt;chr&gt;   Send f…     0 Create… 560    </span></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # … with 26,991 more rows, 3 more variables: start_time &lt;dttm&gt;,</span></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   end_time &lt;dttm&gt;, remaining_trace_list &lt;list&gt;, and abbreviated variable</span></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   names ¹​prefix_list, ²​activity, ³​resource</span></span></code></pre></div>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="do">## # A tibble: 27,001 × 11</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="do">##    ith_case case_id prefix                 prefi…¹ outcome     k activ…² resou…³</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="do">##       &lt;int&gt; &lt;chr&gt;   &lt;chr&gt;                  &lt;list&gt;  &lt;fct&gt;   &lt;dbl&gt; &lt;chr&gt;   &lt;fct&gt;  </span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="do">##  1        1 A2127   Create Fine            &lt;chr&gt;   Payment     0 Create… 537    </span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="do">##  2        1 A2127   Create Fine - Payment  &lt;chr&gt;   Payment     1 Payment &lt;NA&gt;   </span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="do">##  3        2 A15     Create Fine            &lt;chr&gt;   Send f…     0 Create… 561    </span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="do">##  4        2 A15     Create Fine - Send Fi… &lt;chr&gt;   Send f…     1 Send F… &lt;NA&gt;   </span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="do">##  5        2 A15     Create Fine - Send Fi… &lt;chr&gt;   Send f…     2 Insert… &lt;NA&gt;   </span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="do">##  6        2 A15     Create Fine - Send Fi… &lt;chr&gt;   Send f…     3 Add pe… &lt;NA&gt;   </span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="do">##  7        2 A15     Create Fine - Send Fi… &lt;chr&gt;   Send f…     4 Send f… &lt;NA&gt;   </span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="do">##  8        3 A1820   Create Fine            &lt;chr&gt;   Payment     0 Create… 563    </span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="do">##  9        3 A1820   Create Fine - Payment  &lt;chr&gt;   Payment     1 Payment &lt;NA&gt;   </span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="do">## 10        4 A1451   Create Fine            &lt;chr&gt;   Send f…     0 Create… 560    </span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="do">## # … with 26,991 more rows, 3 more variables: start_time &lt;dttm&gt;,</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="do">## #   end_time &lt;dttm&gt;, remaining_trace_list &lt;list&gt;, and abbreviated variable</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="do">## #   names ¹​prefix_list, ²​activity, ³​resource</span></span></code></pre></div>
 <p>We split the transformed dataset <code>df</code> into train- and test
 sets for later use in <code>fit()</code> and <code>predict()</code>,
 respectively. The proportion of the train set is configured with the
@@ -735,29 +735,29 @@ respectively. The proportion of the train set is configured with the
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>split <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> <span class="fu">split_train_test</span>(<span class="at">split =</span> <span class="fl">0.8</span>)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>split<span class="sc">$</span>train_df <span class="sc">%&gt;%</span> <span class="fu">head</span>(<span class="dv">5</span>)</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 5 × 11</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   ith_case case_id prefix                  prefi…¹ outcome     k activ…² resou…³</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;      &lt;int&gt; &lt;chr&gt;   &lt;chr&gt;                   &lt;list&gt;  &lt;fct&gt;   &lt;dbl&gt; &lt;chr&gt;   &lt;fct&gt;  </span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1        1 A2127   Create Fine             &lt;chr&gt;   Payment     0 Create… 537    </span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2        1 A2127   Create Fine - Payment   &lt;chr&gt;   Payment     1 Payment &lt;NA&gt;   </span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3        2 A15     Create Fine             &lt;chr&gt;   Send f…     0 Create… 561    </span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4        2 A15     Create Fine - Send Fine &lt;chr&gt;   Send f…     1 Send F… &lt;NA&gt;   </span></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5        2 A15     Create Fine - Send Fin… &lt;chr&gt;   Send f…     2 Insert… &lt;NA&gt;   </span></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # … with 3 more variables: start_time &lt;dttm&gt;, end_time &lt;dttm&gt;,</span></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   remaining_trace_list &lt;list&gt;, and abbreviated variable names ¹​prefix_list,</span></span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   ²​activity, ³​resource</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="do">## # A tibble: 5 × 11</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="do">##   ith_case case_id prefix                  prefi…¹ outcome     k activ…² resou…³</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="do">##      &lt;int&gt; &lt;chr&gt;   &lt;chr&gt;                   &lt;list&gt;  &lt;fct&gt;   &lt;dbl&gt; &lt;chr&gt;   &lt;fct&gt;  </span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="do">## 1        1 A2127   Create Fine             &lt;chr&gt;   Payment     0 Create… 537    </span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="do">## 2        1 A2127   Create Fine - Payment   &lt;chr&gt;   Payment     1 Payment &lt;NA&gt;   </span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="do">## 3        2 A15     Create Fine             &lt;chr&gt;   Send f…     0 Create… 561    </span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="do">## 4        2 A15     Create Fine - Send Fine &lt;chr&gt;   Send f…     1 Send F… &lt;NA&gt;   </span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="do">## 5        2 A15     Create Fine - Send Fin… &lt;chr&gt;   Send f…     2 Insert… &lt;NA&gt;   </span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="do">## # … with 3 more variables: start_time &lt;dttm&gt;, end_time &lt;dttm&gt;,</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="do">## #   remaining_trace_list &lt;list&gt;, and abbreviated variable names ¹​prefix_list,</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="do">## #   ²​activity, ³​resource</span></span>
 <span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>split<span class="sc">$</span>test_df <span class="sc">%&gt;%</span> <span class="fu">head</span>(<span class="dv">5</span>)</span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 5 × 11</span></span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   ith_case case_id prefix                  prefi…¹ outcome     k activ…² resou…³</span></span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;      &lt;int&gt; &lt;chr&gt;   &lt;chr&gt;                   &lt;list&gt;  &lt;fct&gt;   &lt;dbl&gt; &lt;chr&gt;   &lt;fct&gt;  </span></span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1     6873 A23409  Create Fine             &lt;chr&gt;   Payment     0 Create… 557    </span></span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2     6873 A23409  Create Fine - Payment   &lt;chr&gt;   Payment     1 Payment &lt;NA&gt;   </span></span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3     6874 A23410  Create Fine             &lt;chr&gt;   Send f…     0 Create… 557    </span></span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4     6874 A23410  Create Fine - Send Fine &lt;chr&gt;   Send f…     1 Send F… &lt;NA&gt;   </span></span>
-<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5     6874 A23410  Create Fine - Send Fin… &lt;chr&gt;   Send f…     2 Insert… &lt;NA&gt;   </span></span>
-<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # … with 3 more variables: start_time &lt;dttm&gt;, end_time &lt;dttm&gt;,</span></span>
-<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   remaining_trace_list &lt;list&gt;, and abbreviated variable names ¹​prefix_list,</span></span>
-<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   ²​activity, ³​resource</span></span></code></pre></div>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="do">## # A tibble: 5 × 11</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="do">##   ith_case case_id prefix                  prefi…¹ outcome     k activ…² resou…³</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="do">##      &lt;int&gt; &lt;chr&gt;   &lt;chr&gt;                   &lt;list&gt;  &lt;fct&gt;   &lt;dbl&gt; &lt;chr&gt;   &lt;fct&gt;  </span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="do">## 1     6873 A23409  Create Fine             &lt;chr&gt;   Payment     0 Create… 557    </span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="do">## 2     6873 A23409  Create Fine - Payment   &lt;chr&gt;   Payment     1 Payment &lt;NA&gt;   </span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="do">## 3     6874 A23410  Create Fine             &lt;chr&gt;   Send f…     0 Create… 557    </span></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="do">## 4     6874 A23410  Create Fine - Send Fine &lt;chr&gt;   Send f…     1 Send F… &lt;NA&gt;   </span></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="do">## 5     6874 A23410  Create Fine - Send Fin… &lt;chr&gt;   Send f…     2 Insert… &lt;NA&gt;   </span></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="do">## # … with 3 more variables: start_time &lt;dttm&gt;, end_time &lt;dttm&gt;,</span></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="do">## #   remaining_trace_list &lt;list&gt;, and abbreviated variable names ¹​prefix_list,</span></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a><span class="do">## #   ²​activity, ³​resource</span></span></code></pre></div>
 <p>It’s important to note that the split is done at case level (a case
 is fully part of either the train data or either the test data).
 Furthermore, the split is done chronologically, meaning that the train
@@ -767,9 +767,9 @@ set contains the split% first cases, and the test set contains the
 all examples in the train set can be slightly different, as cases differ
 with respect their length.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(split<span class="sc">$</span>train_df) <span class="sc">/</span> <span class="fu">nrow</span>(df)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 0.8032295</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 0.8032295</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">n_distinct</span>(split<span class="sc">$</span>train_df<span class="sc">$</span>case_id) <span class="sc">/</span> <span class="fu">n_distinct</span>(df<span class="sc">$</span>case_id)</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 0.7999069</span></span></code></pre></div>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 0.7999069</span></span></code></pre></div>
 </div>
 <div id="transformer-model" class="section level1">
 <h1>Transformer model</h1>

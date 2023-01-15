@@ -7,12 +7,16 @@ knitr::include_graphics("images/icons/manipulate.PNG")
 
 ```
 
+
+```{r echo = F, out.width="25%", fig.align = "right"}
+knitr::include_graphics("images/icons/filter.png")
+```
+
+# Case filters
+
 ```{r}
 library(bupaR)
 ```
-
-
-# Case filters
 
 ## Activity presence
 

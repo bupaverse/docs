@@ -1,5 +1,5 @@
 name: "bupaR"
-exclude: ["button_footer.Rmd"]
+exclude: ["_button_footer.Rmd"]
 output:
   html_document:
     toc: true

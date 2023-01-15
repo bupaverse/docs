@@ -1,5 +1,5 @@
 ---
-title: "Data Quality Assessment"
+title: "Data Quality"
 ---
 
 
@@ -11,7 +11,7 @@ library(bslib)
 knitr::include_graphics("images/icons/create.PNG")
 ```
 
-# Data Quality Assessment
+# Data Quality 
 
 ```{r setup, include=FALSE}
 library(daqapo)

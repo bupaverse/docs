@@ -1,15 +1,20 @@
 ---
-title: "Introduction to processpredictR: a basic workflow"
+title: "bupaR Docs | processpredictR workflow"
 ---
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>",
   eval = FALSE,
   cache = FALSE
 )
 ```
+
+```{r echo = F, out.width="25%", fig.align = "right"}
+knitr::include_graphics("images/icons/predict.PNG")
+```
+
+***
 
 ```{r setup, message = F, eval = T}
 library(processpredictR)
@@ -321,4 +326,9 @@ model %>% evaluate(split$test_df)
 #>                   0.7779053                   0.6716526
 ```
 
-
+```{r footer, results = "asis", echo = F}
+CURRENT_PAGE <-  stringr::str_replace(knitr::current_input(), ".Rmd",".html")
+res <- knitr::knit_expand("_button_footer.Rmd", quiet = TRUE)
+res <- knitr::knit_child(text = unlist(res), quiet = TRUE)
+cat(res, sep = '\n')
+```

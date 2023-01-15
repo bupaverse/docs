@@ -1,15 +1,20 @@
 ---
-title: "Adapting your model"
+title: "bupaR Docs | Adapting your model"
 ---
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>",
   eval = FALSE,
   cache = FALSE
 )
 ```
+
+```{r echo = F, out.width="25%", fig.align = "right"}
+knitr::include_graphics("images/icons/predict.PNG")
+```
+
+***
 
 ```{r setup, message = F, eval = T}
 library(processpredictR)
@@ -132,3 +137,12 @@ custom_model %>%
 ```
 
 Once you have finalized your model, with an appropriate output-layer (which should have the correct amount of outputs, as recorded in `customer_model$num_outputs` and an appropriate activation function), you can use the `compile()`, `fit()`, `predict()` and `evaluate()` functions as seen before in the previous introductory [example](https://bupaverse.github.io/docs/predict_workflow.html). 
+
+
+```{r footer, results = "asis", echo = F}
+CURRENT_PAGE <-  stringr::str_replace(knitr::current_input(), ".Rmd",".html")
+res <- knitr::knit_expand("_button_footer.Rmd", quiet = TRUE)
+res <- knitr::knit_child(text = unlist(res), quiet = TRUE)
+cat(res, sep = '\n')
+```
+

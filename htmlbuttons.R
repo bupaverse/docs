@@ -45,7 +45,7 @@ colors <- data.frame(group = c("install", "create", "manipulate", "analyse", "vi
 					 class = c("primary", "secondary", "info", "danger", "success", "warning"))
 
 # data
-df <- dplyr::left_join(group_page, colors)
+df <- dplyr::left_join(group_page, colors, by = "group")
 
 
 # functies

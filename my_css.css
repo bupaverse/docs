@@ -3,3 +3,15 @@
 div.card-header {
     text-align: center
 }
+
+h1, .h1, h2, .h2, h3, .h3 {
+    margin-top: 25px;
+}
+
+
+div.install { background-color:#339999; border-radius: 5px; padding: 20px;}
+div.create { background-color:#FF8749; border-radius: 5px; padding: 20px;}
+div.manipulate { background-color:#008FAD; border-radius: 5px; padding: 20px;}
+div.analyze { background-color:#A93800; border-radius: 5px; padding: 20px;}
+div.visualize { background-color:#3681B7; border-radius: 5px; padding: 20px;}
+div.predict { background-color:#956F5D; border-radius: 5px; padding: 20px;}

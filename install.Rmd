@@ -8,6 +8,8 @@ title: "Install bupaR"
 knitr::include_graphics("images/icons/install.PNG")
 ```
 
+***
+
 # Installing bupaR
 
 The easiest way to install the core **bupaR** packages is by installing the `bupaverse`-package. 

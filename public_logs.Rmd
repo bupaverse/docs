@@ -13,6 +13,8 @@ knitr::opts_chunk$set(eval = F)
 knitr::include_graphics("images/icons/create.PNG")
 ```
 
+***
+
 # Public logs
 
 The `eventdataR` package contains several real-life and artificial logs. Each can be loaded using the `data()` function. The currently available logs are listed below. 

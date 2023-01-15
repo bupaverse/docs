@@ -15,6 +15,8 @@ library(bslib)
 knitr::include_graphics("images/icons/create.PNG")
 ```
 
+***
+
 # Creating logs
 
 Transforming your raw data into an event log object is one of the most challenging tasks in process analysis. On this page, we cover all the possible situations and challenges that you can encounter. 

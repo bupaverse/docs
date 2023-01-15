@@ -11,6 +11,8 @@ library(bslib)
 knitr::include_graphics("images/icons/create.PNG")
 ```
 
+***
+
 # Data Quality 
 
 ```{r setup, include=FALSE}
@@ -21,10 +23,6 @@ hospital_actlog <- activitylog(hospital_actlog)
 data("hospital_events")
 ```
 
-
-```{r echo = F, out.width="25%", fig.align = "right"}
-knitr::include_graphics("images/icons/create.PNG")
-```
 
 Despite the extensive opportunities that process mining techniques provide, the garbage in - garbage out principle still applies. Data quality issues are widespread in real-life data and can generate misleading results when used for analysis purposes. `daqapo` - Data Quality Assessment for Process-Oriented data - provides a set of assessment functions to identify a wide array of quality issues.
 

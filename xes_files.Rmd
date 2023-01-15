@@ -9,7 +9,7 @@ knitr::include_graphics("images/icons/create.PNG")
 
 ***
 
-# Xes Files
+# XES Files
 
 ## Read XES
 

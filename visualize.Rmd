@@ -27,7 +27,7 @@ layout_column_wrap(heights_equal = "row",
 				   		card_header("Process map",class = "card text-white bg-success mb-3"),
 				   		layout_column_wrap(width = 0.5,
 				   						   card_image("images/icons/pm.PNG", href = "control_flow_analysis.html", container = card_body),
-				   						   shiny::HTML('<div class="d-grid gap-2">
+				   						   shiny::HTML('<div class="d-grid gap-2" style = "padding: 20px 20px 20px 20px;">
 					<a href = "frequency_maps.html" class="btn btn-lg btn-success" type="button">Frequency Maps</a>
 					<a href = "performance_maps.html"class="btn btn-lg btn-success" type="button">Performance Maps</a>
 					<a href = "advanced_maps.html"class="btn btn-lg btn-success" type="button">Advanced Maps</a>

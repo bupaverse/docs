@@ -1,6 +1,16 @@
 ---
-title: Frequency Maps
+title: bupaR Docs | Frequency Maps
 ---
+
+
+```{r echo = F, out.width="25%", fig.align = "right"}
+knitr::include_graphics("images/icons/pm.png")
+```
+
+***
+
+
+
 ## Introduction
 
 
@@ -122,3 +132,10 @@ The layout of the process map can be further customized.
 
 When event logs get larger, they will also become more unstructured, making the process maps illegible and expensive to computate. In such cases, it is useful to apply them on a simplified version of the event log, using one or more of the [subsetting methods](http://www.bupar.net/subsetting.html) provided by edeaR. 
 
+
+```{r footer, results = "asis", echo = F}
+CURRENT_PAGE <-  stringr::str_replace(knitr::current_input(), ".Rmd",".html")
+res <- knitr::knit_expand("_button_footer.Rmd", quiet = TRUE)
+res <- knitr::knit_child(text = unlist(res), quiet = TRUE)
+cat(res, sep = '\n')
+```

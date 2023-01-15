@@ -4,7 +4,7 @@ title: bupaR Docs | Frequency Maps
 
 
 ```{r echo = F, out.width="25%", fig.align = "right"}
-knitr::include_graphics("images/icons/pm.png")
+knitr::include_graphics("images/icons/pm.PNG)
 ```
 
 ***

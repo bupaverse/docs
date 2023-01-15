@@ -1,5 +1,5 @@
 ---
-title: "Create Logs"
+title: "bupaR Docs | Create Logs"
 ---
 
 

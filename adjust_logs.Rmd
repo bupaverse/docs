@@ -1,10 +1,12 @@
 ---
-title: "Adjust Logs"
+title: "bupaR Docs | Adjust Logs"
 ---
 
 ```{r echo = F, out.width="25%", fig.align = "right"}
 knitr::include_graphics("images/icons/create.PNG")
 ```
+
+***
 
 # Adjusting logs
 

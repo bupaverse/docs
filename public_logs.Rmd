@@ -1,5 +1,5 @@
 ---
-title: "Public Logs"
+title: "bupaR Docs | Public Logs"
 ---
 
 

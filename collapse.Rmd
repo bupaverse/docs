@@ -1,14 +1,23 @@
 ---
-title: Collapse activities
+title: bupaR Docs | Collapse activities
 ---
 
 
 ```{r echo = F, out.width="25%", fig.align = "right"}
-knitr::include_graphics("images/icons/manipulate.PNG")
-
+knitr::include_graphics("images/icons/aggregate.png")
 ```
 
+***
 
 ```{r include = F}
 library(bupaR)
+```
+
+
+
+```{r footer, results = "asis", echo = F}
+CURRENT_PAGE <-  stringr::str_replace(knitr::current_input(), ".Rmd",".html")
+res <- knitr::knit_expand("_button_footer.Rmd", quiet = TRUE)
+res <- knitr::knit_child(text = unlist(res), quiet = TRUE)
+cat(res, sep = '\n')
 ```

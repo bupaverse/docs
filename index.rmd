@@ -1,5 +1,5 @@
 ---
-title: "bupaR docs"
+title: "bupaR Docs"
 output: 
   html_document: 
     toc: false 

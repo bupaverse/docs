@@ -16,48 +16,46 @@ knitr::include_graphics("images/icons/predict.PNG")
 
 ***
 
-```{r setup, message = F, eval = T}
+# Prediction Workflow
+
+```{r setup, message = F, eval = T, collapse = TRUE, warning = F}
 library(processpredictR)
-library(bupaR)
-library(ggplot2)
-library(dplyr)
-library(keras)
-library(purrr)
+library(bupaverse)
 ```
 
 
-# Introduction
 The goal of `processpredictR` is to perform prediction tasks on processes using event logs and Transformer models.
-The 5 process monitoring tasks are defined as follows:
+The 6 process monitoring tasks available are defined as follows:
 
 * __outcome__: predict the case outcome, which can be the last activity, or a manually defined variable
 * __next activity__: predict the next activity instance 
-* __remaining trace__: predict the sequence of all next activity instances
+* __remaining trace__: predict the sequence of all next activity instances, where each entire sequence is regarded as a separate output class
 * __remaining trace s2s__: predict the sequence of all next activity instances using __encoder-decoder__ architecture
 * __next time__: predict the start time of the next activity instance
 * __remaining time__: predict the remaining time till the end of the case
 
-The overall approach using `processpredictR` is shown in the Figure below. `prepare_examples()` transforms logs into a dataset that can be used for training and prediction, which is thereafter split into train and test set. Subsequently a model is made, compiled and fit. Finally, the model can be used to predict and can be evaluated
+The overall approach using `processpredictR` is shown in the Figure below. `prepare_examples()` transforms logs into a dataset that can be used for training and prediction, which is thereafter split into train and test set. Subsequently a model is made, compiled and fitted. Finally, the model can be used to predict and can be evaluated.
 
-```{r echo = F, eval = T, out.width = "60%", fig.align = "center"}
-knitr::include_graphics("images/framework.PNG")
+```{r echo = F, eval = T, out.width = "100%", fig.align = "center", fig.cap="processpredictR workflow"}
+knitr::include_graphics("images/processpredictR.jpg")
 ```
 
 Different levels of customization are offered. Using `create_model()`, a standard off-the-shelf model can be created for each of the supported tasks, including standard features. 
 
-A first customization is to include additional features, such as case or event attributes. These can be configured in the `prepare_examples()` step, and they will be processed automatically (normalized for numerical features, or hot-encoded for categorical features). 
+A first customization is to include additional features, such as case or event attributes. These can be configured in the `prepare_examples()` step, and they will be processed automatically (normalized for numerical features, or hot-encoded for categorical features). Furthermore, the dimensions of the model can be modified.
 
-A further way to customize your model, is to only generate the input layer of the model with `create_model()`, and define the remainder of the model yourself by adding `keras` layers using the provided `stack_layers()` function. 
+A further way to customize your model, is to only generate the input layer of the model with `create_model()`, and define the remainder of the model yourself by adding `keras` layers using the provided `stack_layers()` function.  More information about customization can be found [here](predict_adapt.html).
 
-Going beyond that, you can also create the model entirely yourself using `keras`, including the preprocessing of the data. Auxiliary functions are provided to help you with, e.g., tokenizing activity sequences. 
+Going beyond that, you can also create the model entirely yourself using `keras`, including the preprocessing of the data. Auxiliary functions are provided to help you with, e.g., tokenizing activity sequences. More information on this approach can be found [here](predict_keras.html).
 
-In the remainder of this tutorial, each of the steps and possible avenues for customization will be described in more detail. 
+In the remainder of this tutorial, the general workflow will be described in more detail.  
 
-# Preprocessing
+## Preprocessing
+
 As a first step in the process prediction workflow we use `prepare_examples()` to obtain a dataset, where: 
 
-* each row/observation is a unique activity instance id
-* the prefix(_list) column stores the sequence of activities already executed in the case
+* each row/observation is a unique activity instance id,
+* the prefix(_list) column stores the sequence of activities already executed in the case,
 * necessary features and target variables are calculated and/or added
 
 The returned object is of class `ppred_examples_df`, which inherits from `tbl_df`. 
@@ -72,7 +70,6 @@ df
 We split the transformed dataset `df` into train- and test sets for later use in `fit()` and `predict()`, respectively. The proportion of the train set is configured with the `split` argument. 
 
 ```{r, eval = T}
-set.seed(123)
 split <- df %>% split_train_test(split = 0.8)
 split$train_df %>% head(5)
 split$test_df %>% head(5)
@@ -87,11 +84,9 @@ nrow(split$train_df) / nrow(df)
 n_distinct(split$train_df$case_id) / n_distinct(df$case_id)
 ```
 
-# Transformer model
+## Define model
 
 The next step in the workflow is to build a model. `processpredictR` provides a default set of functions that are wrappers of generics provided by `keras`. For ease of use, the preprocessing steps, such as tokenizing of sequences, normalizing numerical features, etc. happen within the `create_model()` function and are abstracted from the user. 
-
-## Define model
 
 Based on the train set we define the default transformer model, using `create_model()`.
 
@@ -125,7 +120,8 @@ model # is a list
 #> ________________________________________________________________________________
 ```
 
-Some useful information and metrics are stored for a tracebility and an easy extraction if needed.
+Some useful information and metrics are stored for tracebility and an easy extraction if needed.
+
 ```{r}
 model %>% names() # objects from a returned list
 ```
@@ -135,7 +131,6 @@ model %>% names() # objects from a returned list
 #> [5] "num_outputs"     "vocabulary"     
 
 ```
-
 Note that `create_model()` returns a list, in which the actual keras model is stored under the element name `model`. Thus, we can use functions from the keras-package as follows:
 
 ```{r}
@@ -145,6 +140,7 @@ model$model$name # get the name of a model
 #> [1] "my_model"
 
 ```
+
 ```{r}
 model$model$non_trainable_variables # list of non-trainable parameters of a model
 ```
@@ -156,19 +152,19 @@ The result of `create_model()` is assigned it's own class (`ppred_model`) for wh
 
 ## Compilation
 
-The following step is to compile the model. By default, the loss function is the log-cosh or the categorical cross entropy, for regression tasks (next time and remaining time) and classification tasks, respectively. It is of course possible to override the defaults.
+The next step is to compile the model. By default, the loss function is the log-cosh or the categorical cross entropy, for regression tasks (next time and remaining time) and classification tasks, respectively. Naturally, it is possible to override these defaults.
 
 ```{r}
 model %>% compile() # model compilation
 ```
 
 ```
-#> Compilation complete!
+#> ✔ Compilation complete!
 ```
 
 ## Training
 
-Training of the model is done with the `fit()` function. During training, a visualization window will open in the Viewer-pane to show the progress in terms of loss. Optionally, the result of `fit()` can be assigned to an object to access the training metrics specified in _compile()_. 
+Training of the model is done with the `fit()` function. During training, a visualization window will open in the Viewer-pane to show the progress in terms of loss. Optionally, the result of `fit()` can be assigned to an object to access the training metrics specified in _compile()_. The number of epochs to train for can be configured using the `epochs` argument. 
 
 ```{r}
 hist <- fit(object = model, train_data = split$train_df, epochs = 5)
@@ -205,11 +201,11 @@ hist$metrics
 #> [1] 0.6725934 0.6727730 0.6725934 0.6725934 0.6722342
 ``` 
 
-## Make predictions
+### Make predictions
 
-The method  _predict()_ can return 3 types of output, by setting the argument `output` to "append", "y_pred" or "raw". 
+The method  `predict()` can return 3 types of output, by setting the argument `output` to "append", "y_pred" or "raw". 
 
-Test dataset with appended predicted values (output = "append"):
+Test dataset with appended predicted values (`output = "append"`):
 
 ```{r}
 # make predictions on the test set
@@ -233,7 +229,7 @@ predictions %>% head(5)
 ``` 
 
 <details>
-<summary>raw predicted values (output = "raw")</summary>
+<summary>raw predicted values (`output = "raw"`)</summary>
 <p>
 ```
 #>              Payment Send for Credit Collection    Send Fine
@@ -252,7 +248,7 @@ predictions %>% head(5)
 </p>
 
 <details>
-<summary>predicted values with postprocessing (output = "y_pred")</summary>
+<summary>predicted values with postprocessing (`output = "y_pred"`)</summary>
 ```
 #>    [1] "Payment"                    "Payment"                   
 #>    [3] "Payment"                    "Payment"                   
@@ -269,7 +265,8 @@ predictions %>% head(5)
 </p>
 
 ### Visualize predictions
-For the classification tasks outcome and next activity a `confusion_matrix()` function is provided. 
+
+For the classification tasks outcome and next activity a `confusion_matrix()` function is provided to visualize the results. 
 
 ```{r}
 predictions %>% class
@@ -327,7 +324,7 @@ model %>% evaluate(split$test_df)
 #>                   0.7779053                   0.6716526
 ```
 
-```{r footer, results = "asis", echo = F}
+```{r footer, results = "asis", echo = F, eval = T}
 CURRENT_PAGE <-  stringr::str_replace(knitr::current_input(), ".Rmd",".html")
 res <- knitr::knit_expand("_button_footer.Rmd", quiet = TRUE)
 res <- knitr::knit_child(text = unlist(res), quiet = TRUE)

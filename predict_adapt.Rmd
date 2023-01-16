@@ -68,8 +68,13 @@ Additional features can be either numerical variables, or factors. Numerical var
 * We assume that no features have missing values. If there are any, these should be imputed or removed before using `prepare_examples()`. 
 * Finally, in case the data is an event log, features should have single values for each activity instance. Start and complete event should thus have a single unique value of a variable for it to be used as feature. 
 
+# Model
+When it comes to the model itself some parameters are set by default, but can of course be adjusted. Below, a quick overview of each one of these parameters:
+* `num_heads`: A number of attention heads of the [keras::layer_multi_head_attention()]. The more attention heads, the more representational power a multi-head attention layer has to encode (relationships between) each activity instance.
+* `output_dim`: A dimension of the dense embedding of the [keras::layer_embedding()], a `key_dim` parameter of the [keras::layer_multi_head_attention()] and a `units` (_dimensionality of the output space_) parameter of the 2nd [keras::layer_dense()] in the feed-forward (sequential) network of the transformer architecture.
+* `dim_ff`: `units` parameter of the 1st [keras::layer_dense()] in the feed-forward (sequential) network of the transformer architecture, i.e. the _width_ (number of nodes) of the neural network layer. 
 
-# Customize your transformer model
+## Customize your transformer model
 Instead of using the standard `off the shelf` transformer model that comes with `processpredictR`, you can customize the model. One way to do this, is by using the `custom` argument of the `create_model()` function. The resulting model will then only contain the input layers of the model, as shown below. 
 
 ```{r}

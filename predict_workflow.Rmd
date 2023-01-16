@@ -33,6 +33,7 @@ The 5 process monitoring tasks are defined as follows:
 * __outcome__: predict the case outcome, which can be the last activity, or a manually defined variable
 * __next activity__: predict the next activity instance 
 * __remaining trace__: predict the sequence of all next activity instances
+* __remaining trace s2s__: predict the sequence of all next activity instances using __encoder-decoder__ architecture
 * __next time__: predict the start time of the next activity instance
 * __remaining time__: predict the remaining time till the end of the case
 

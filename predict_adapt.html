@@ -691,8 +691,25 @@ should thus have a single unique value of a variable for it to be used
 as feature.</li>
 </ul>
 </div>
-<div id="customize-your-transformer-model" class="section level1">
-<h1>Customize your transformer model</h1>
+<div id="model" class="section level1">
+<h1>Model</h1>
+<p>When it comes to the model itself some parameters are set by default,
+but can of course be adjusted. Below, a quick overview of each one of
+these parameters: * <code>num_heads</code>: A number of attention heads
+of the [keras::layer_multi_head_attention()]. The more attention heads,
+the more representational power a multi-head attention layer has to
+encode (relationships between) each activity instance. *
+<code>output_dim</code>: A dimension of the dense embedding of the
+[keras::layer_embedding()], a <code>key_dim</code> parameter of the
+[keras::layer_multi_head_attention()] and a <code>units</code>
+(<em>dimensionality of the output space</em>) parameter of the 2nd
+[keras::layer_dense()] in the feed-forward (sequential) network of the
+transformer architecture. * <code>dim_ff</code>: <code>units</code>
+parameter of the 1st [keras::layer_dense()] in the feed-forward
+(sequential) network of the transformer architecture, i.e. the
+<em>width</em> (number of nodes) of the neural network layer.</p>
+<div id="customize-your-transformer-model" class="section level2">
+<h2>Customize your transformer model</h2>
 <p>Instead of using the standard <code>off the shelf</code> transformer
 model that comes with <code>processpredictR</code>, you can customize
 the model. One way to do this, is by using the <code>custom</code>
@@ -758,6 +775,7 @@ function), you can use the <code>compile()</code>, <code>fit()</code>,
 <code>predict()</code> and <code>evaluate()</code> functions as seen
 before in the previous introductory <a
 href="https://bupaverse.github.io/docs/predict_workflow.html">example</a>.</p>
+</div>
 </div>
 
 <hr>

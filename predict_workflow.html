@@ -963,17 +963,25 @@ plot (regression).</p>
 <div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot confusion matrix in a bupaR style</span></span>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(predictions) <span class="sc">+</span></span>
 <span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>))</span></code></pre></div>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">&quot;images/confusion_matrix.PNG&quot;</span>)</span></code></pre></div>
+<p><img src="images/confusion_matrix.PNG" width="80%" /></p>
 </div>
 </div>
 <div id="evaluate-model" class="section level2">
 <h2>Evaluate model</h2>
 <p>Returns loss and metrics specified in <em>compile()</em>.</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>model <span class="sc">%&gt;%</span> <span class="fu">evaluate</span>(split<span class="sc">$</span>test_df)</span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>model <span class="sc">%&gt;%</span> <span class="fu">evaluate</span>(split<span class="sc">$</span>test_df)</span></code></pre></div>
 <pre><code>#&gt;                        loss sparse_categorical_accuracy 
 #&gt;                   0.7779053                   0.6716526</code></pre>
 <hr />
 <p>Read more:</p>
+<div class="btn-toolbar" role="group">
+<p><a href = "predict_workflow.html" class="btn btn-warning disabled" type="button">Predict
+Workflow</a>
+<a href = "predict_adapt.html" class="btn btn-warning" type="button">Predict
+Adapt</a>
+<a href = "predict_keras.html" class="btn btn-warning" type="button">Predict
+Keras</a></p>
+</div>
 </div>
 </div>
 

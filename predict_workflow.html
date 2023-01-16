@@ -644,24 +644,21 @@ div.tocify {
 
 <p><img src="images/icons/predict.PNG" width="25%" style="display: block; margin: auto 0 auto auto;" /></p>
 <hr />
+<div id="prediction-workflow" class="section level1">
+<h1>Prediction Workflow</h1>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(processpredictR)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(bupaR)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(keras)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(purrr)</span></code></pre></div>
-<div id="introduction" class="section level1">
-<h1>Introduction</h1>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(bupaverse)</span></code></pre></div>
 <p>The goal of <code>processpredictR</code> is to perform prediction
-tasks on processes using event logs and Transformer models. The 5
-process monitoring tasks are defined as follows:</p>
+tasks on processes using event logs and Transformer models. The 6
+process monitoring tasks available are defined as follows:</p>
 <ul>
 <li><strong>outcome</strong>: predict the case outcome, which can be the
 last activity, or a manually defined variable</li>
 <li><strong>next activity</strong>: predict the next activity
 instance</li>
 <li><strong>remaining trace</strong>: predict the sequence of all next
-activity instances</li>
+activity instances, where each entire sequence is regarded as a separate
+output class</li>
 <li><strong>remaining trace s2s</strong>: predict the sequence of all
 next activity instances using <strong>encoder-decoder</strong>
 architecture</li>
@@ -674,9 +671,14 @@ end of the case</li>
 the Figure below. <code>prepare_examples()</code> transforms logs into a
 dataset that can be used for training and prediction, which is
 thereafter split into train and test set. Subsequently a model is made,
-compiled and fit. Finally, the model can be used to predict and can be
-evaluated</p>
-<p><img src="images/framework.PNG" width="60%" style="display: block; margin: auto;" /></p>
+compiled and fitted. Finally, the model can be used to predict and can
+be evaluated.</p>
+<div class="figure" style="text-align: center">
+<img src="images/processpredictR.jpg" alt="processpredictR workflow" width="100%" />
+<p class="caption">
+processpredictR workflow
+</p>
+</div>
 <p>Different levels of customization are offered. Using
 <code>create_model()</code>, a standard off-the-shelf model can be
 created for each of the supported tasks, including standard
@@ -685,26 +687,29 @@ features.</p>
 or event attributes. These can be configured in the
 <code>prepare_examples()</code> step, and they will be processed
 automatically (normalized for numerical features, or hot-encoded for
-categorical features).</p>
+categorical features). Furthermore, the dimensions of the model can be
+modified.</p>
 <p>A further way to customize your model, is to only generate the input
 layer of the model with <code>create_model()</code>, and define the
 remainder of the model yourself by adding <code>keras</code> layers
-using the provided <code>stack_layers()</code> function.</p>
+using the provided <code>stack_layers()</code> function. More
+information about customization can be found <a
+href="predict_adapt.html">here</a>.</p>
 <p>Going beyond that, you can also create the model entirely yourself
 using <code>keras</code>, including the preprocessing of the data.
 Auxiliary functions are provided to help you with, e.g., tokenizing
-activity sequences.</p>
-<p>In the remainder of this tutorial, each of the steps and possible
-avenues for customization will be described in more detail.</p>
-</div>
-<div id="preprocessing" class="section level1">
-<h1>Preprocessing</h1>
+activity sequences. More information on this approach can be found <a
+href="predict_keras.html">here</a>.</p>
+<p>In the remainder of this tutorial, the general workflow will be
+described in more detail.</p>
+<div id="preprocessing" class="section level2">
+<h2>Preprocessing</h2>
 <p>As a first step in the process prediction workflow we use
 <code>prepare_examples()</code> to obtain a dataset, where:</p>
 <ul>
-<li>each row/observation is a unique activity instance id</li>
+<li>each row/observation is a unique activity instance id,</li>
 <li>the prefix(_list) column stores the sequence of activities already
-executed in the case</li>
+executed in the case,</li>
 <li>necessary features and target variables are calculated and/or
 added</li>
 </ul>
@@ -736,32 +741,31 @@ supported.</p>
 sets for later use in <code>fit()</code> and <code>predict()</code>,
 respectively. The proportion of the train set is configured with the
 <code>split</code> argument.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>split <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> <span class="fu">split_train_test</span>(<span class="at">split =</span> <span class="fl">0.8</span>)</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>split<span class="sc">$</span>train_df <span class="sc">%&gt;%</span> <span class="fu">head</span>(<span class="dv">5</span>)</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="do">## # A tibble: 5 × 11</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="do">##   ith_case case_id prefix                  prefi…¹ outcome     k activ…² resou…³</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="do">##      &lt;int&gt; &lt;chr&gt;   &lt;chr&gt;                   &lt;list&gt;  &lt;fct&gt;   &lt;dbl&gt; &lt;chr&gt;   &lt;fct&gt;  </span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="do">## 1        1 A2127   Create Fine             &lt;chr&gt;   Payment     0 Create… 537    </span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="do">## 2        1 A2127   Create Fine - Payment   &lt;chr&gt;   Payment     1 Payment &lt;NA&gt;   </span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="do">## 3        2 A15     Create Fine             &lt;chr&gt;   Send f…     0 Create… 561    </span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="do">## 4        2 A15     Create Fine - Send Fine &lt;chr&gt;   Send f…     1 Send F… &lt;NA&gt;   </span></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="do">## 5        2 A15     Create Fine - Send Fin… &lt;chr&gt;   Send f…     2 Insert… &lt;NA&gt;   </span></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="do">## # … with 3 more variables: start_time &lt;dttm&gt;, end_time &lt;dttm&gt;,</span></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="do">## #   remaining_trace_list &lt;list&gt;, and abbreviated variable names ¹​prefix_list,</span></span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="do">## #   ²​activity, ³​resource</span></span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>split<span class="sc">$</span>test_df <span class="sc">%&gt;%</span> <span class="fu">head</span>(<span class="dv">5</span>)</span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="do">## # A tibble: 5 × 11</span></span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="do">##   ith_case case_id prefix                  prefi…¹ outcome     k activ…² resou…³</span></span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="do">##      &lt;int&gt; &lt;chr&gt;   &lt;chr&gt;                   &lt;list&gt;  &lt;fct&gt;   &lt;dbl&gt; &lt;chr&gt;   &lt;fct&gt;  </span></span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="do">## 1     6873 A23409  Create Fine             &lt;chr&gt;   Payment     0 Create… 557    </span></span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="do">## 2     6873 A23409  Create Fine - Payment   &lt;chr&gt;   Payment     1 Payment &lt;NA&gt;   </span></span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="do">## 3     6874 A23410  Create Fine             &lt;chr&gt;   Send f…     0 Create… 557    </span></span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="do">## 4     6874 A23410  Create Fine - Send Fine &lt;chr&gt;   Send f…     1 Send F… &lt;NA&gt;   </span></span>
-<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="do">## 5     6874 A23410  Create Fine - Send Fin… &lt;chr&gt;   Send f…     2 Insert… &lt;NA&gt;   </span></span>
-<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="do">## # … with 3 more variables: start_time &lt;dttm&gt;, end_time &lt;dttm&gt;,</span></span>
-<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="do">## #   remaining_trace_list &lt;list&gt;, and abbreviated variable names ¹​prefix_list,</span></span>
-<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a><span class="do">## #   ²​activity, ³​resource</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>split <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> <span class="fu">split_train_test</span>(<span class="at">split =</span> <span class="fl">0.8</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>split<span class="sc">$</span>train_df <span class="sc">%&gt;%</span> <span class="fu">head</span>(<span class="dv">5</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="do">## # A tibble: 5 × 11</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="do">##   ith_case case_id prefix                  prefi…¹ outcome     k activ…² resou…³</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="do">##      &lt;int&gt; &lt;chr&gt;   &lt;chr&gt;                   &lt;list&gt;  &lt;fct&gt;   &lt;dbl&gt; &lt;chr&gt;   &lt;fct&gt;  </span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="do">## 1        1 A2127   Create Fine             &lt;chr&gt;   Payment     0 Create… 537    </span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="do">## 2        1 A2127   Create Fine - Payment   &lt;chr&gt;   Payment     1 Payment &lt;NA&gt;   </span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="do">## 3        2 A15     Create Fine             &lt;chr&gt;   Send f…     0 Create… 561    </span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="do">## 4        2 A15     Create Fine - Send Fine &lt;chr&gt;   Send f…     1 Send F… &lt;NA&gt;   </span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="do">## 5        2 A15     Create Fine - Send Fin… &lt;chr&gt;   Send f…     2 Insert… &lt;NA&gt;   </span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="do">## # … with 3 more variables: start_time &lt;dttm&gt;, end_time &lt;dttm&gt;,</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="do">## #   remaining_trace_list &lt;list&gt;, and abbreviated variable names ¹​prefix_list,</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="do">## #   ²​activity, ³​resource</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>split<span class="sc">$</span>test_df <span class="sc">%&gt;%</span> <span class="fu">head</span>(<span class="dv">5</span>)</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="do">## # A tibble: 5 × 11</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="do">##   ith_case case_id prefix                  prefi…¹ outcome     k activ…² resou…³</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="do">##      &lt;int&gt; &lt;chr&gt;   &lt;chr&gt;                   &lt;list&gt;  &lt;fct&gt;   &lt;dbl&gt; &lt;chr&gt;   &lt;fct&gt;  </span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="do">## 1     6873 A23409  Create Fine             &lt;chr&gt;   Payment     0 Create… 557    </span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="do">## 2     6873 A23409  Create Fine - Payment   &lt;chr&gt;   Payment     1 Payment &lt;NA&gt;   </span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="do">## 3     6874 A23410  Create Fine             &lt;chr&gt;   Send f…     0 Create… 557    </span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="do">## 4     6874 A23410  Create Fine - Send Fine &lt;chr&gt;   Send f…     1 Send F… &lt;NA&gt;   </span></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="do">## 5     6874 A23410  Create Fine - Send Fin… &lt;chr&gt;   Send f…     2 Insert… &lt;NA&gt;   </span></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="do">## # … with 3 more variables: start_time &lt;dttm&gt;, end_time &lt;dttm&gt;,</span></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="do">## #   remaining_trace_list &lt;list&gt;, and abbreviated variable names ¹​prefix_list,</span></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="do">## #   ²​activity, ³​resource</span></span></code></pre></div>
 <p>It’s important to note that the split is done at case level (a case
 is fully part of either the train data or either the test data).
 Furthermore, the split is done chronologically, meaning that the train
@@ -775,8 +779,8 @@ with respect their length.</p>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">n_distinct</span>(split<span class="sc">$</span>train_df<span class="sc">$</span>case_id) <span class="sc">/</span> <span class="fu">n_distinct</span>(df<span class="sc">$</span>case_id)</span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 0.7999069</span></span></code></pre></div>
 </div>
-<div id="transformer-model" class="section level1">
-<h1>Transformer model</h1>
+<div id="define-model" class="section level2">
+<h2>Define model</h2>
 <p>The next step in the workflow is to build a model.
 <code>processpredictR</code> provides a default set of functions that
 are wrappers of generics provided by <code>keras</code>. For ease of
@@ -784,8 +788,6 @@ use, the preprocessing steps, such as tokenizing of sequences,
 normalizing numerical features, etc. happen within the
 <code>create_model()</code> function and are abstracted from the
 user.</p>
-<div id="define-model" class="section level2">
-<h2>Define model</h2>
 <p>Based on the train set we define the default transformer model, using
 <code>create_model()</code>.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> split<span class="sc">$</span>train_df <span class="sc">%&gt;%</span> <span class="fu">create_model</span>(<span class="at">name =</span> <span class="st">&quot;my_model&quot;</span>) </span>
@@ -812,8 +814,8 @@ user.</p>
 #&gt; Trainable params: 29,606
 #&gt; Non-trainable params: 0
 #&gt; ________________________________________________________________________________</code></pre>
-<p>Some useful information and metrics are stored for a tracebility and
-an easy extraction if needed.</p>
+<p>Some useful information and metrics are stored for tracebility and an
+easy extraction if needed.</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>model <span class="sc">%&gt;%</span> <span class="fu">names</span>() <span class="co"># objects from a returned list</span></span></code></pre></div>
 <pre><code>#&gt; $names
 #&gt; [1] &quot;model&quot;           &quot;max_case_length&quot; &quot;number_features&quot; &quot;task&quot;           
@@ -834,13 +836,12 @@ provides the methods <em>compile()</em>, <em>fit()</em>,
 </div>
 <div id="compilation" class="section level2">
 <h2>Compilation</h2>
-<p>The following step is to compile the model. By default, the loss
-function is the log-cosh or the categorical cross entropy, for
-regression tasks (next time and remaining time) and classification
-tasks, respectively. It is of course possible to override the
-defaults.</p>
+<p>The next step is to compile the model. By default, the loss function
+is the log-cosh or the categorical cross entropy, for regression tasks
+(next time and remaining time) and classification tasks, respectively.
+Naturally, it is possible to override these defaults.</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>model <span class="sc">%&gt;%</span> <span class="fu">compile</span>() <span class="co"># model compilation</span></span></code></pre></div>
-<pre><code>#&gt; Compilation complete!</code></pre>
+<pre><code>#&gt; ✔ Compilation complete!</code></pre>
 </div>
 <div id="training" class="section level2">
 <h2>Training</h2>
@@ -848,7 +849,8 @@ defaults.</p>
 During training, a visualization window will open in the Viewer-pane to
 show the progress in terms of loss. Optionally, the result of
 <code>fit()</code> can be assigned to an object to access the training
-metrics specified in <em>compile()</em>.</p>
+metrics specified in <em>compile()</em>. The number of epochs to train
+for can be configured using the <code>epochs</code> argument.</p>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>hist <span class="ot">&lt;-</span> <span class="fu">fit</span>(<span class="at">object =</span> model, <span class="at">train_data =</span> split<span class="sc">$</span>train_df, <span class="at">epochs =</span> <span class="dv">5</span>)</span></code></pre></div>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>hist<span class="sc">$</span>params</span></code></pre></div>
 <pre><code>#&gt; $verbose
@@ -871,13 +873,13 @@ metrics specified in <em>compile()</em>.</p>
 #&gt; 
 #&gt; $val_sparse_categorical_accuracy
 #&gt; [1] 0.6725934 0.6727730 0.6725934 0.6725934 0.6722342</code></pre>
-</div>
-<div id="make-predictions" class="section level2">
-<h2>Make predictions</h2>
-<p>The method <em>predict()</em> can return 3 types of output, by
+<div id="make-predictions" class="section level3">
+<h3>Make predictions</h3>
+<p>The method <code>predict()</code> can return 3 types of output, by
 setting the argument <code>output</code> to “append”, “y_pred” or
 “raw”.</p>
-<p>Test dataset with appended predicted values (output = “append”):</p>
+<p>Test dataset with appended predicted values
+(<code>output = "append"</code>):</p>
 <div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># make predictions on the test set</span></span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>predictions <span class="ot">&lt;-</span> model <span class="sc">%&gt;%</span> <span class="fu">predict</span>(<span class="at">test_data =</span> split<span class="sc">$</span>test_df, </span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">output =</span> <span class="st">&quot;append&quot;</span>) <span class="co"># default</span></span>
@@ -895,7 +897,7 @@ setting the argument <code>output</code> to “append”, “y_pred” or
 #&gt; #   abbreviated variable names ¹​prefix_list, ²​activity, ³​resource</code></pre>
 <details>
 <summary>
-raw predicted values (output = “raw”)
+raw predicted values (<code>output = "raw"</code>)
 </summary>
 <p>
 <pre><code>#&gt;              Payment Send for Credit Collection    Send Fine
@@ -913,7 +915,7 @@ raw predicted values (output = “raw”)
 </p>
 <details>
 <summary>
-predicted values with postprocessing (output = “y_pred”)
+predicted values with postprocessing (<code>output = "y_pred"</code>)
 </summary>
 <pre><code>#&gt;    [1] &quot;Payment&quot;                    &quot;Payment&quot;                   
 #&gt;    [3] &quot;Payment&quot;                    &quot;Payment&quot;                   
@@ -927,10 +929,12 @@ predicted values with postprocessing (output = “y_pred”)
 #&gt;   [19] &quot;Payment&quot;                    &quot;Send for Credit Collection&quot;</code></pre>
 </details>
 </p>
+</div>
 <div id="visualize-predictions" class="section level3">
 <h3>Visualize predictions</h3>
 <p>For the classification tasks outcome and next activity a
-<code>confusion_matrix()</code> function is provided.</p>
+<code>confusion_matrix()</code> function is provided to visualize the
+results.</p>
 <div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>predictions <span class="sc">%&gt;%</span> class</span></code></pre></div>
 <pre><code>#&gt; [1] &quot;ppred_predictions&quot; &quot;ppred_examples_df&quot; &quot;ppred_examples_df&quot;
 #&gt; [4] &quot;ppred_examples_df&quot; &quot;tbl_df&quot;            &quot;tbl&quot;              
@@ -967,6 +971,8 @@ plot (regression).</p>
 <div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>model <span class="sc">%&gt;%</span> <span class="fu">evaluate</span>(split<span class="sc">$</span>test_df)</span></code></pre></div>
 <pre><code>#&gt;                        loss sparse_categorical_accuracy 
 #&gt;                   0.7779053                   0.6716526</code></pre>
+<hr />
+<p>Read more:</p>
 </div>
 </div>
 

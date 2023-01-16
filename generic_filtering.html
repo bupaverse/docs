@@ -912,12 +912,12 @@ event log containing n cases. The code below returns a sample of 10
 patients.</p>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sample_n</span>(<span class="at">size =</span> <span class="dv">10</span>)</span></code></pre></div>
-<pre><code>## # Log of 112 events consisting of:
+<pre><code>## # Log of 110 events consisting of:
 ## 2 traces 
 ## 10 cases 
-## 56 instances of 7 activities 
+## 55 instances of 7 activities 
 ## 7 resources 
-## Events occurred from 2017-01-04 01:34:04 until 2017-10-21 05:01:21 
+## Events occurred from 2017-01-25 02:03:36 until 2017-09-26 16:40:56 
 ##  
 ## # Variables were mapped as follows:
 ## Case identifier:     patient 
@@ -927,20 +927,20 @@ patients.</p>
 ## Timestamp:           time 
 ## Lifecycle transition:        registration_type 
 ## 
-## # A tibble: 112 × 7
+## # A tibble: 110 × 7
 ##    handling     patient employee handling_id regist…¹ time                .order
 ##    &lt;fct&gt;        &lt;chr&gt;   &lt;fct&gt;    &lt;chr&gt;       &lt;fct&gt;    &lt;dttm&gt;               &lt;int&gt;
-##  1 Registration 4       r1       4           start    2017-01-04 01:34:04      1
-##  2 Registration 65      r1       65          start    2017-03-10 00:48:16      2
-##  3 Registration 192     r1       192         start    2017-07-08 02:53:42      3
-##  4 Registration 196     r1       196         start    2017-07-11 03:39:26      4
-##  5 Registration 204     r1       204         start    2017-07-18 11:22:29      5
-##  6 Registration 213     r1       213         start    2017-07-26 20:08:32      6
-##  7 Registration 222     r1       222         start    2017-08-03 17:05:27      7
-##  8 Registration 230     r1       230         start    2017-08-13 13:11:31      8
-##  9 Registration 279     r1       279         start    2017-09-27 16:22:38      9
-## 10 Registration 302     r1       302         start    2017-10-18 02:38:51     10
-## # … with 102 more rows, and abbreviated variable name ¹​registration_type</code></pre>
+##  1 Registration 26      r1       26          start    2017-01-25 02:03:36      1
+##  2 Registration 56      r1       56          start    2017-03-01 15:13:30      2
+##  3 Registration 68      r1       68          start    2017-03-11 01:10:09      3
+##  4 Registration 86      r1       86          start    2017-04-02 13:26:42      4
+##  5 Registration 191     r1       191         start    2017-07-08 02:53:42      5
+##  6 Registration 197     r1       197         start    2017-07-12 06:43:07      6
+##  7 Registration 203     r1       203         start    2017-07-18 11:22:29      7
+##  8 Registration 226     r1       226         start    2017-08-07 09:06:07      8
+##  9 Registration 227     r1       227         start    2017-08-09 19:55:30      9
+## 10 Registration 260     r1       260         start    2017-09-14 09:03:35     10
+## # … with 100 more rows, and abbreviated variable name ¹​registration_type</code></pre>
 <p>Note that this function can also be used with a sample size bigger
 than the number of cases in the event log, if you allow for the
 replacements of drawn cases.</p>

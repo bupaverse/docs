@@ -70,9 +70,9 @@ Additional features can be either numerical variables, or factors. Numerical var
 
 When it comes to the model itself some parameters are set by default, but can of course be adjusted. Below, a quick overview of each one of these parameters:
 
-* `num_heads`: A number of attention heads of the [keras::layer_multi_head_attention()]. The more attention heads, the more representational power a multi-head attention layer has to encode (relationships between) each activity instance. Default: 4.
-* `output_dim`: A dimension of the dense embedding of the [keras::layer_embedding()], a `key_dim` parameter of the [keras::layer_multi_head_attention()] and a `units` (_dimensionality of the output space_) parameter of the 2nd [keras::layer_dense()] in the feed-forward (sequential) network of the transformer architecture. Default: 36.
-* `dim_ff`: `units` parameter of the 1st [keras::layer_dense()] in the feed-forward (sequential) network of the transformer architecture, i.e. the _width_ (number of nodes) of the neural network layer. Default 64.
+* `num_heads`: A number of attention heads of the `keras::layer_multi_head_attention()`. The more attention heads, the more representational power a multi-head attention layer has to encode (relationships between) each activity instance. Default: 4.
+* `output_dim`: A dimension of the dense embedding of the `keras::layer_embedding()`, a `key_dim` parameter of the `keras::layer_multi_head_attention()` and a `units` (_dimensionality of the output space_) parameter of the 2nd `keras::layer_dense()` in the feed-forward (sequential) network of the transformer architecture. Default: 36.
+* `dim_ff`: `units` parameter of the 1st `keras::layer_dense()` in the feed-forward (sequential) network of the transformer architecture, i.e. the _width_ (number of nodes) of the neural network layer. Default 64.
 
 ## Customize model architecture
 

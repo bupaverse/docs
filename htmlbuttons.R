@@ -42,7 +42,7 @@ group_page <- data.frame(group, page_html, page) %>%
 
 
 colors <- data.frame(group = c("install", "create", "manipulate", "analyse", "visualize", "predict"),
-					 class = c("primary", "secondary", "info", "danger", "success", "warning"))
+					 class = c("primary", "secondary", "info", "danger", "success", "success"))
 
 # data
 df <- dplyr::left_join(group_page, colors, by = "group")

@@ -144,11 +144,11 @@ custom_model %>%
 
 Once you have finalized your model, with an appropriate output-layer (which should have the correct amount of outputs, as recorded in `customer_model$num_outputs` and an appropriate activation function), you can use the `compile()`, `fit()`, `predict()` and `evaluate()` functions as seen before in the previous introductory [example](https://bupaverse.github.io/docs/predict_workflow.html). 
 
+***
 
-```{r footer, results = "asis", echo = F, eval = T}
-CURRENT_PAGE <-  stringr::str_replace(knitr::current_input(), ".Rmd",".html")
-res <- knitr::knit_expand("_button_footer.Rmd", quiet = TRUE)
-res <- knitr::knit_child(text = unlist(res), quiet = TRUE)
-cat(res, sep = '\n')
+Read more: 
+
+```{r footer, results = "asis", echo = F, eval = T, collapse = F}
+source("htmlbuttons.R")
+create_buttons(df, "predict_adapt.html")
 ```
-

@@ -306,7 +306,7 @@ plot(predictions) +
   theme(axis.text.x = element_text(angle = 90))
 ```
 
-```{r, out.width="100%", fig.width = 7} 
+```{r, out.width="80%", fig.width = 7, eval = T, echo = F} 
 knitr::include_graphics("images/confusion_matrix.PNG")
 ```
 
@@ -323,9 +323,14 @@ model %>% evaluate(split$test_df)
 #>                   0.7779053                   0.6716526
 ```
 
+***
+
+Read more: 
+
 ```{r footer, results = "asis", echo = F, eval = T, collapse = F}
-CURRENT_PAGE <-  stringr::str_replace(knitr::current_input(), ".Rmd",".html")
-res <- knitr::knit_expand("_button_footer.Rmd", quiet = TRUE)
-res <- knitr::knit_child(text = unlist(res), quiet = TRUE)
-cat(res, sep = '\n')
+source("htmlbuttons.R")
+create_buttons(df, "predict_workflow.html")
 ```
+
+
+

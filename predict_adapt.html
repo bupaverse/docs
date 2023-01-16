@@ -695,19 +695,21 @@ but can of course be adjusted. Below, a quick overview of each one of
 these parameters:</p>
 <ul>
 <li><code>num_heads</code>: A number of attention heads of the
-[keras::layer_multi_head_attention()]. The more attention heads, the
-more representational power a multi-head attention layer has to encode
-(relationships between) each activity instance. Default: 4.</li>
+<code>keras::layer_multi_head_attention()</code>. The more attention
+heads, the more representational power a multi-head attention layer has
+to encode (relationships between) each activity instance. Default:
+4.</li>
 <li><code>output_dim</code>: A dimension of the dense embedding of the
-[keras::layer_embedding()], a <code>key_dim</code> parameter of the
-[keras::layer_multi_head_attention()] and a <code>units</code>
-(<em>dimensionality of the output space</em>) parameter of the 2nd
-[keras::layer_dense()] in the feed-forward (sequential) network of the
-transformer architecture. Default: 36.</li>
+<code>keras::layer_embedding()</code>, a <code>key_dim</code> parameter
+of the <code>keras::layer_multi_head_attention()</code> and a
+<code>units</code> (<em>dimensionality of the output space</em>)
+parameter of the 2nd <code>keras::layer_dense()</code> in the
+feed-forward (sequential) network of the transformer architecture.
+Default: 36.</li>
 <li><code>dim_ff</code>: <code>units</code> parameter of the 1st
-[keras::layer_dense()] in the feed-forward (sequential) network of the
-transformer architecture, i.e. the <em>width</em> (number of nodes) of
-the neural network layer. Default 64.</li>
+<code>keras::layer_dense()</code> in the feed-forward (sequential)
+network of the transformer architecture, i.e. the <em>width</em> (number
+of nodes) of the neural network layer. Default 64.</li>
 </ul>
 </div>
 <div id="customize-model-architecture" class="section level2">

@@ -75,7 +75,7 @@ patients %>% resources()
 patients %>% traces()
 ```
 
-
+## {-}
 
 ```{r footer, results = "asis", echo = F}
 CURRENT_PAGE <-  stringr::str_replace(knitr::current_input(), ".Rmd",".html")

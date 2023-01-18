@@ -287,7 +287,7 @@ traffic_fines %>% process_map()
 
 In this map, we can observe several unique directly follows relations, as well as flows occuring only 2 or 3 times. Using the filter, we can remove the cases that lead to these flows as follows. 
 
-```{r}
+```{r eval = F}
 traffic_fines %>%
 	filter_infrequent_flows(min_n = 5) %>%
 	process_map()

@@ -40,7 +40,7 @@ navbar:
       - text: "XES-files"
         href: xes_files.html
       - text: "Inspect logs"
-        href: metadata.html
+        href: inspect_logs.html
       - text: "Data Quality"
         href: data_quality.html
   - text: "Manipulate"
@@ -100,7 +100,7 @@ navbar:
      - text: "Dotted chart"
        href: dotted_chart.html
      - text: "Trace explorer"
-       href: trace_exporer.html
+       href: trace_explorer.html
      - text: "Performance spectrum"
        href: performance_spectrum.html
   - text: "Predict"

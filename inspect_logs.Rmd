@@ -30,7 +30,7 @@ patients %>% case_id
 patients %>% resource_id
 ```
 
-## Getting basic information
+## Getting basic information {.tabset .tabset-fade .tabset-pills}
 
 We can look at a general summary of the event log by calling the `summary` function.
 
@@ -49,11 +49,33 @@ patients %>% n_traces
 patients %>% n_resources
 ```
 
-More detailed information about `activities` , `cases`, `resources` and `traces` can be obtained using the functions named accordingly. For example, consider the overview of the cases of the patients event log below.
+More detailed information about `activities` , `cases`, `resources` and `traces` can be obtained using the functions named accordingly, as in the examples below for the patients event log.
+
+### Activities 
 
 ```{r}
-patients %>% cases
+patients %>% activities()
 ```
+
+### Cases 
+
+```{r}
+patients %>% cases()
+```
+
+### Resources 
+
+```{r}
+patients %>% resources()
+```
+
+### Traces 
+
+```{r message = F, warning = F}
+patients %>% traces()
+```
+
+
 
 ```{r footer, results = "asis", echo = F}
 CURRENT_PAGE <-  stringr::str_replace(knitr::current_input(), ".Rmd",".html")

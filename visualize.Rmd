@@ -47,7 +47,7 @@ layout_column_wrap(heights_equal = "row",
 						),
 						card( 
 							card_header("Trace explorer", class = "card text-white bg-success mb-3"),
-							card_image("images/icons/traces.PNG", href = "trace_exporer.html", container = card_body)
+							card_image("images/icons/traces.PNG", href = "trace_explorer.html", container = card_body)
 						),
 						card( 
 							card_header("Performance spectrum", class = "card text-white bg-success mb-3"),

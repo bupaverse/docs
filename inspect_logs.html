@@ -450,7 +450,7 @@ div.tocify {
       <a href="xes_files.html">XES-files</a>
     </li>
     <li>
-      <a href="metadata.html">Inspect logs</a>
+      <a href="inspect_logs.html">Inspect logs</a>
     </li>
     <li>
       <a href="data_quality.html">Data Quality</a>
@@ -553,7 +553,7 @@ div.tocify {
       <a href="dotted_chart.html">Dotted chart</a>
     </li>
     <li>
-      <a href="trace_exporer.html">Trace explorer</a>
+      <a href="trace_explorer.html">Trace explorer</a>
     </li>
     <li>
       <a href="performance_spectrum.html">Performance spectrum</a>
@@ -669,8 +669,10 @@ individually.</p>
 ## [1] &quot;patient&quot;
 ## [1] &quot;employee&quot;</code></pre>
 </div>
-<div id="getting-basic-information" class="section level2">
-<h2>Getting basic information</h2>
+<div id="getting-basic-information"
+class="section level2 tabset tabset-fade tabset-pills">
+<h2 class="tabset tabset-fade tabset-pills">Getting basic
+information</h2>
 <p>We can look at a general summary of the event log by calling the
 <code>summary</code> function.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span> summary</span></code></pre></div>
@@ -714,9 +716,25 @@ indivdual as a numeric vector of length one.</p>
 ## [1] 7</code></pre>
 <p>More detailed information about <code>activities</code> ,
 <code>cases</code>, <code>resources</code> and <code>traces</code> can
-be obtained using the functions named accordingly. For example, consider
-the overview of the cases of the patients event log below.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span> cases</span></code></pre></div>
+be obtained using the functions named accordingly, as in the examples
+below for the patients event log.</p>
+<div id="activities" class="section level3">
+<h3>Activities</h3>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span> <span class="fu">activities</span>()</span></code></pre></div>
+<pre><code>## # A tibble: 7 × 3
+##   handling              absolute_frequency relative_frequency
+##   &lt;fct&gt;                              &lt;int&gt;              &lt;dbl&gt;
+## 1 Registration                         500             0.184 
+## 2 Triage and Assessment                500             0.184 
+## 3 Discuss Results                      495             0.182 
+## 4 Check-out                            492             0.181 
+## 5 X-Ray                                261             0.0959
+## 6 Blood test                           237             0.0871
+## 7 MRI SCAN                             236             0.0867</code></pre>
+</div>
+<div id="cases" class="section level3">
+<h3>Cases</h3>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span> <span class="fu">cases</span>()</span></code></pre></div>
 <pre><code>## # A tibble: 500 × 10
 ##    patient trace…¹ numbe…² start_timestamp     complete_timestamp  trace trace…³
 ##    &lt;chr&gt;     &lt;int&gt;   &lt;int&gt; &lt;dttm&gt;              &lt;dttm&gt;              &lt;chr&gt;   &lt;dbl&gt;
@@ -733,6 +751,35 @@ the overview of the cases of the patients event log below.</p>
 ## # … with 490 more rows, 3 more variables: duration &lt;drtn&gt;,
 ## #   first_activity &lt;fct&gt;, last_activity &lt;fct&gt;, and abbreviated variable names
 ## #   ¹​trace_length, ²​number_of_activities, ³​trace_id</code></pre>
+</div>
+<div id="resources" class="section level3">
+<h3>Resources</h3>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span> <span class="fu">resources</span>()</span></code></pre></div>
+<pre><code>## # A tibble: 7 × 3
+##   employee absolute_frequency relative_frequency
+##   &lt;fct&gt;                 &lt;int&gt;              &lt;dbl&gt;
+## 1 r1                      500             0.184 
+## 2 r2                      500             0.184 
+## 3 r6                      495             0.182 
+## 4 r7                      492             0.181 
+## 5 r5                      261             0.0959
+## 6 r3                      237             0.0871
+## 7 r4                      236             0.0867</code></pre>
+</div>
+<div id="traces" class="section level3">
+<h3>Traces</h3>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span> <span class="fu">traces</span>()</span></code></pre></div>
+<pre><code>## # A tibble: 7 × 3
+##   trace                                                          absol…¹ relat…²
+##   &lt;chr&gt;                                                            &lt;int&gt;   &lt;dbl&gt;
+## 1 Registration,Triage and Assessment,X-Ray,Discuss Results,Chec…     258   0.516
+## 2 Registration,Triage and Assessment,Blood test,MRI SCAN,Discus…     234   0.468
+## 3 Registration,Triage and Assessment,Blood test,MRI SCAN,Discus…       2   0.004
+## 4 Registration,Triage and Assessment,X-Ray                             2   0.004
+## 5 Registration,Triage and Assessment                                   2   0.004
+## 6 Registration,Triage and Assessment,X-Ray,Discuss Results             1   0.002
+## 7 Registration,Triage and Assessment,Blood test                        1   0.002
+## # … with abbreviated variable names ¹​absolute_frequency, ²​relative_frequency</code></pre>
 <hr />
 <p>Read more:</p>
 <div class="btn-toolbar" role="group">
@@ -744,9 +791,11 @@ Logs</a>
 Logs</a>
 <a href = "xes_files.html" class="btn btn-secondary" type="button">Xes
 Files</a>
-<a href = "metadata.html" class="btn btn-secondary disabled" type="button">Metadata</a>
+<a href = "inspect_logs.html" class="btn btn-secondary disabled" type="button">Inspect
+Logs</a>
 <a href = "data_quality.html" class="btn btn-secondary" type="button">Data
 Quality</a></p>
+</div>
 </div>
 </div>
 </div>

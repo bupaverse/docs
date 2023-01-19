@@ -7,8 +7,8 @@ title: bupaR Docs | Mutate logs
 knitr::include_graphics("images/icons/enrich.png")
 ```
 
-***
 
+***
 
 
 # Mutate logs

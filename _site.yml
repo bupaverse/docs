@@ -1,11 +1,21 @@
 name: "bupaR"
 exclude: ["_button_footer.Rmd"]
-output: 
-  distill::distill_article:
+output:
+  html_document:
     toc: true
     toc_depth: 4
-    toc_float: TRUE
+    toc_float: 
+      collapsed: false
+      print: false
     css: "my_css.css"
+    theme:
+      bootswatch: sandstone
+      primary: "#339999"
+      secondary: "#FF8749"
+      success: "#3681B7"
+      info: "#008FAD"
+      danger: "#A93800"
+      warning: "#956F5D"
     highlight: tango
     includes: 
       in_header: header.html
@@ -13,8 +23,8 @@ output:
         - footer.html
 output_dir: "docs"
 navbar:
-  title: "test"
   search: true
+  title: "<a href = 'https://bupar.net'><img id = \"logo\" style = \"width: 200px; padding: 0px 20px 0px 0px\" src = \"images/logo/bupar_trans_witteR2.png\" /></a>"
   left:
   - text: "Home"
     href: index.html

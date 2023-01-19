@@ -5,13 +5,14 @@ library(dplyr)
 })
 
 # html buttons ------------------------------------------------------------
-group <- c(rep("create", 6), rep("manipulate", 7), rep("analyse", 4), rep("visualize", 8), rep("predict", 3))
+group <- c(rep("create", 6), rep("manipulate", 8), rep("analyse", 4), rep("visualize", 8), rep("predict", 3))
 page <- c("create_logs",
 		  "adjust_logs",
 		  "public_logs",
 		  "xes_files",
 		  "inspect_logs",
 		  "data_quality",
+		  "wrangling",
 		  "case_filters",
 		  "event_filters",
 		  "generic_filtering",

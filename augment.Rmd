@@ -92,14 +92,17 @@ As you can see only the [`trace_coverage()`](control_flow_analysis.html) values 
 ```{r}
 patients %>%
 	trace_length(level = "case") %>%
-	augment(patients, prefix = "trace_length") -> patient
+	augment(patients, prefix = "trace_length") -> patients
 
-patient %>%
+patients %>%
 	trace_coverage(level = "case") %>%
 	augment(patients, prefix = "trace_frequency") %>%
 	glimpse()
 ```
 
+```{r include = F}
+patients <- eventdataR::patients
+```
 
 
 ```{r footer, results = "asis", echo = F}

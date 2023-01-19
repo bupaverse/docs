@@ -1,0 +1,143 @@
+---
+title: bupaR Docs | Mutate logs
+---
+
+
+```{r echo = F, out.width="25%", fig.align = "right"}
+knitr::include_graphics("images/icons/manipulate.png")
+```
+
+
+***
+
+# Wrangling
+
+```{r eval = F}
+library(bupaverse)
+library(dplyr)
+```
+
+```{r include = F}
+library(bupaverse)
+library(dplyr)
+```
+
+---
+title: Wrangling event data
+output: 
+  html_document:
+    includes: 
+      in_header: "favicon.html"
+    toc: true
+    toc_float: 
+      collapsed: false
+      print: false
+---
+
+```{r include = F}
+library(bupaR)
+```
+
+
+In order to easily manipulate logs, well-known [dplyr](https://dplyr.tidyverse.org/)-verbs have been adapted. This page serves as a general introduction of the wrangling verbs. Their usages is illustrated through the documentation for _Manipulation_, _Analysis_ and _Visualization_. 
+
+## group_by
+
+Using the `group_by` function, event logs can be grouped according to a (set of) variables, such that all further computations happen for each of these different groups.
+
+In the next example, the number of cases are computed for each value of "vehicleclass".
+
+```{r}
+traffic_fines %>%
+	group_by(vehicleclass) %>%
+	n_cases()
+```
+
+### Predefined grouping functions
+
+For specific groupings, some auxiliary functions are available. 
+
+*	`group_by_case` - group by cases
+*	`group_by_activity` - group by activity types
+*	`group_by_resource` - group by resources
+*	`group_by_activity_resource` - group by activity resource pair
+*	`group_by_activity_instance` - group by activity instances.
+
+For example, the number of cases in which a specific resource occurs, can be computed as follows.
+
+```{r}
+sepsis %>%
+	group_by_resource %>%
+	n_cases
+```
+
+
+Note that each of the descriptive metrics discussed [here](http://www.bupar.net/exploring.html) can be rewritten using these lower-level functions. The example above is equal to the `resource_involvement` metric at case level. 
+
+### Remove grouping 
+
+When a grouping is no longer needed, it can be removed using the `ungroup_eventlog` function. 
+
+## mutate
+
+You can use `mutate` to add new variable to an event log, possibly by using existing variables. In the next example, the total amount of lacticacid is computed for each case. 
+
+```{r echo = F}
+sepsis %>%
+	mutate(lacticacid = as.numeric(lacticacid)) -> sepsis
+```
+
+
+```{r}
+sepsis %>%
+	group_by_case() %>%
+	mutate(total_lacticacid = sum(lacticacid, na.rm = T))
+```
+
+## filter
+
+Generic filtering of events can be done using the `filter` function, which takes an event log and any number of logical conditions. The example below filters events which have vehicleclas "C" and amount greater than 300. More process-specific filtering methods can be found [here](http://www.bupar.net/subsetting.html).
+
+```{r}
+traffic_fines %>%
+	filter(vehicleclass == "C", amount > 300)
+```
+
+## select
+
+Variables on a event log can be _selected_ using `select`. By default, `select` will always make sure that the mapping-variables are retained. Otherwise, it would no longer function as an eventlog.
+
+```{r}
+traffic_fines %>%
+	select(vehicleclass)
+```
+
+By setting the argument `force_df = TRUE`, the mapping-variables will not be retained, and the output will be a data.frame, and not an event log.
+
+```{r}
+traffic_fines %>%
+	select(case_id, vehicleclass, amount, force_df = TRUE)
+```
+
+
+## arrange
+
+Event data can be sorted using the `arrange` function. `desc` can be used to sort descendingly on an attribute.
+
+```{r}
+#sort descending on time
+patients %>%
+	arrange(desc(time))
+```
+
+
+
+
+
+
+```{r footer, results = "asis", echo = F}
+CURRENT_PAGE <-  stringr::str_replace(knitr::current_input(), ".Rmd",".html")
+res <- knitr::knit_expand("_button_footer.Rmd", quiet = TRUE)
+res <- knitr::knit_child(text = unlist(res), quiet = TRUE)
+cat(res, sep = '\n')
+```

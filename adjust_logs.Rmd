@@ -79,6 +79,11 @@ traffic_fines %>%
 	re_map(mapping_fines)
 ```
 
+```{r include = F}
+traffic_fines <- eventdataR::traffic_fines
+```
+
+
 ```{r footer, results = "asis", echo = F}
 CURRENT_PAGE <-  stringr::str_replace(knitr::current_input(), ".Rmd",".html")
 res <- knitr::knit_expand("_button_footer.Rmd", quiet = TRUE)

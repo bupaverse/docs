@@ -49,6 +49,9 @@ navbar:
       - text: "Overview"
         href: manipulate.html
       - text: "----------"
+      - text: "Wrangling"
+        href: wrangling.html
+      - text: "----------"
       - text: "Filter"
       - text: "by case"
         href: case_filters.html

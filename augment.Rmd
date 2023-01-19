@@ -9,9 +9,97 @@ knitr::include_graphics("images/icons/enrich.png")
 
 ***
 
-```{r}
-library(bupaR)
+# Augment logs
+
+```{r eval = F}
+library(bupaverse)
+library(dplyr)
 ```
+
+```{r include = F}
+library(bupaverse)
+library(dplyr)
+```
+
+
+Enriching your `log` with calculated metrics can be done using `augment()`. For example, consider [`trace_length()`](control_flow_analysis.html).
+
+```{r}
+traffic_fines %>%
+	trace_length(level = "case") 
+```
+Feeding the resulting table back to `traffic_fines` with `augment()` makes the trace length metric available as a case attribute for further analysis. 
+
+```{r}
+traffic_fines %>%
+	trace_length(level = "case") %>%
+	augment(traffic_fines) %>%
+	glimpse()
+```
+
+## Adjust names
+
+Using the `prefix` argument, you can add a descriptive prefix to the name of the new variable. In the current example, where the variable is called _absolute_, it might be useful to add the prefix _trace_length_. 
+
+```{r}
+traffic_fines %>%
+	trace_length(level = "case") %>%
+	augment(traffic_fines, prefix = "trace_length") %>%
+	glimpse()
+```
+
+## Select variables
+
+Some metrics return several variables with information. Say you want to add information on the _processing time_ of each _activity_ to the data. 
+
+```{r}
+patients %>% 
+	processing_time(level = "activity", units = "hours")
+```
+
+Calling augment without any further arguments will add all columns, from _min_ until _relative_frequency_ to the data. 
+
+```{r}
+patients %>% 
+	processing_time(level = "activity", units = "hours") %>%
+	augment(patients) %>%
+	glimpse()
+```
+
+Using the `columns` argument we can specify a selection of columns that we want to use for augmenting the log. For example, say we are only interested in the _mean_ and _median_ processing time. Let's also add a descriptive prefix to these columns.
+
+```{r}
+patients %>% 
+	processing_time(level = "activity", units = "hours") %>%
+	augment(patients, columns = c("mean","median"), prefix = "processing_time") %>%
+	glimpse()
+```
+## Adding multiple metrics
+
+When you want to add multiple metrics, it is imperative to save intermediate updates of the data. Consider the example below. 
+
+```{r}
+patients %>%
+	trace_length(level = "case") %>%
+	augment(patients, prefix = "trace_length") %>%
+	trace_coverage(level = "case") %>%
+	augment(patients, prefix = "trace_frequency") %>%
+	glimpse()
+```
+
+As you can see only the [`trace_coverage()`](control_flow_analysis.html) values of the second augment are added, while the first augment is lost. This is because the patients dataset did not get updated after the first `augment()` call. The proper way would be as follows. 
+
+```{r}
+patients %>%
+	trace_length(level = "case") %>%
+	augment(patients, prefix = "trace_length") -> patient
+
+patient %>%
+	trace_coverage(level = "case") %>%
+	augment(patients, prefix = "trace_frequency") %>%
+	glimpse()
+```
+
 
 
 ```{r footer, results = "asis", echo = F}

@@ -1,6 +1,8 @@
 
+suppressPackageStartupMessages({
 library(stringr)
 library(dplyr)
+})
 
 # html buttons ------------------------------------------------------------
 group <- c(rep("create", 6), rep("manipulate", 7), rep("analyse", 4), rep("visualize", 8), rep("predict", 3))

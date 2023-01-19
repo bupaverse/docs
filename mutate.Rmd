@@ -9,27 +9,50 @@ knitr::include_graphics("images/icons/enrich.png")
 
 ***
 
-```{r}
-library(bupaR)
+<form class="form-inline my-2 my-lg-0" role="search">
+        <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="search.json" id="search-input" placeholder="Search for" autocomplete="off">
+</form>
+
+# Mutate logs
+
+```{r eval = F}
+library(bupaverse)
+library(dplyr)
 ```
 
-## mutate
+```{r include = F}
+library(bupaverse)
+library(dplyr)
+```
 
-You can use `mutate` to add new variable to an event log, possibly by using existing variables. In the next example, the total amount of lacticacid is computed for each case. 
 
-```{r echo = F}
+
+Next to [`augment()`](augment.html) for enriching log with calculated merics, you can use `mutate()` to add more custom new variables to a log, or change existing ones. The use of `mutate()` is especially conventient in combination with `group_by()`.
+
+
+## Transforming variables
+
+The code below transforms the _lacticacid_ variable, stored as a `character`, to a `numeric` variable. 
+
+```{r}
 sepsis %>%
 	mutate(lacticacid = as.numeric(lacticacid)) -> sepsis
 ```
 
+## Calculating variables
+
+Below, we group the data by case using `group_by_case()`, and subsequently calculate the total lacticacid value. Note that `na.rm = TRUE` is required as there are missing values for this variable. 
 
 ```{r}
 sepsis %>%
 	group_by_case() %>%
-	mutate(total_lacticacid = sum(lacticacid, na.rm = T))
+	mutate(total_lacticacid = sum(lacticacid, na.rm = TRUE)) %>%
+	ungroup_eventlog()
 ```
 
+Before continuing to further analyses, not that you might want to ungroup the log using `ungroup_eventlog()`. More on [grouping](wrangling.html).
 
+```
 
 ```{r footer, results = "asis", echo = F}
 CURRENT_PAGE <-  stringr::str_replace(knitr::current_input(), ".Rmd",".html")

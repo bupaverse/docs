@@ -140,3 +140,4 @@ navbar:
         href: https://bupaverse.github.io/processmapR/
       - text: xesreadR
         href: https://bupaverse.github.io/xesreadR
+  - search: true

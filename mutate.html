@@ -628,6 +628,9 @@ div.tocify {
     </li>
   </ul>
 </li>
+<li>
+  <a></a>
+</li>
       </ul>
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
@@ -644,17 +647,36 @@ div.tocify {
 
 <p><img src="images/icons/enrich.png" width="25%" style="display: block; margin: auto 0 auto auto;" /></p>
 <hr />
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(bupaR)</span></code></pre></div>
-<div id="mutate" class="section level2">
-<h2>mutate</h2>
-<p>You can use <code>mutate</code> to add new variable to an event log,
-possibly by using existing variables. In the next example, the total
-amount of lacticacid is computed for each case.</p>
+<form class="form-inline my-2 my-lg-0" role="search">
+<input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="search.json" id="search-input" placeholder="Search for" autocomplete="off">
+</form>
+<div id="mutate-logs" class="section level1">
+<h1>Mutate logs</h1>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(bupaverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code></pre></div>
+<p>Next to <a href="augment.html"><code>augment()</code></a> for
+enriching log with calculated merics, you can use <code>mutate()</code>
+to add more custom new variables to a log, or change existing ones. The
+use of <code>mutate()</code> is especially conventient in combination
+with <code>group_by()</code>.</p>
+<div id="transforming-variables" class="section level2">
+<h2>Transforming variables</h2>
+<p>The code below transforms the <em>lacticacid</em> variable, stored as
+a <code>character</code>, to a <code>numeric</code> variable.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>sepsis <span class="sc">%&gt;%</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by_case</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">total_lacticacid =</span> <span class="fu">sum</span>(lacticacid, <span class="at">na.rm =</span> T))</span></code></pre></div>
-<pre><code>## # Groups: [case_id]
-## Grouped # Log of 15214 events consisting of:
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">lacticacid =</span> <span class="fu">as.numeric</span>(lacticacid)) <span class="ot">-&gt;</span> sepsis</span></code></pre></div>
+</div>
+<div id="calculating-variables" class="section level2">
+<h2>Calculating variables</h2>
+<p>Below, we group the data by case using <code>group_by_case()</code>,
+and subsequently calculate the total lacticacid value. Note that
+<code>na.rm = TRUE</code> is required as there are missing values for
+this variable.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>sepsis <span class="sc">%&gt;%</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by_case</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">total_lacticacid =</span> <span class="fu">sum</span>(lacticacid, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ungroup_eventlog</span>()</span></code></pre></div>
+<pre><code>## # Log of 15214 events consisting of:
 ## 846 traces 
 ## 1050 cases 
 ## 15214 instances of 16 activities 
@@ -689,6 +711,10 @@ amount of lacticacid is computed for each case.</p>
 ## #   diagnosticurinarysediment &lt;lgl&gt;, diagnosticxthorax &lt;lgl&gt;, disfuncorg &lt;lgl&gt;,
 ## #   hypotensie &lt;lgl&gt;, hypoxie &lt;lgl&gt;, infectionsuspected &lt;lgl&gt;, infusion &lt;lgl&gt;,
 ## #   lacticacid &lt;dbl&gt;, leucocytes &lt;chr&gt;, oligurie &lt;lgl&gt;, …</code></pre>
+<p>Before continuing to further analyses, not that you might want to
+ungroup the log using <code>ungroup_eventlog()</code>. More on <a
+href="wrangling.html">grouping</a>.</p>
+<p>```</p>
 <hr />
 <p>Read more:</p>
 <div class="btn-toolbar" role="group">
@@ -702,6 +728,7 @@ Filtering</a>
 <a href = "mutate.html" class="btn btn-info disabled" type="button">Mutate</a>
 <a href = "collapse.html" class="btn btn-info" type="button">Collapse</a>
 <a href = "unite.html" class="btn btn-info" type="button">Unite</a></p>
+</div>
 </div>
 </div>
 

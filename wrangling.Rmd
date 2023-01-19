@@ -22,24 +22,8 @@ library(bupaverse)
 library(dplyr)
 ```
 
----
-title: Wrangling event data
-output: 
-  html_document:
-    includes: 
-      in_header: "favicon.html"
-    toc: true
-    toc_float: 
-      collapsed: false
-      print: false
----
 
-```{r include = F}
-library(bupaR)
-```
-
-
-In order to easily manipulate logs, well-known [dplyr](https://dplyr.tidyverse.org/)-verbs have been adapted. This page serves as a general introduction of the wrangling verbs. Their usages is illustrated through the documentation for _Manipulation_, _Analysis_ and _Visualization_. 
+In order to easily manipulate logs, well-known [dplyr](https://dplyr.tidyverse.org/)-verbs have been adapted. This page serves as a general introduction of the wrangling verbs. Their usage is illustrated through the documentation for _Manipulation_, _Analysis_ and _Visualization_. 
 
 ## group_by
 
@@ -53,7 +37,7 @@ traffic_fines %>%
 	n_cases()
 ```
 
-### Predefined grouping functions
+### Predefined groupings
 
 For specific groupings, some auxiliary functions are available. 
 
@@ -68,11 +52,23 @@ For example, the number of cases in which a specific resource occurs, can be com
 ```{r}
 sepsis %>%
 	group_by_resource %>%
-	n_cases
+	n_cases()
 ```
 
 
 Note that each of the descriptive metrics discussed [here](http://www.bupar.net/exploring.html) can be rewritten using these lower-level functions. The example above is equal to the `resource_involvement` metric at case level. 
+
+
+### Grouping on (a set of) ids
+
+When you want to group on a combination of mapping variables, for example, for each combination of _case_ and _activity_, you can use `group_by_ids()`. The following examples counts the number of events per case and per activity. 
+
+```{r}
+patients %>%
+	group_by_ids(case_id, activity_id) %>%
+	n_events()	
+```
+Note that the arguments of `group_by_ids()` are not the variable names of case (_patient_) and activity (_handling_) columns, but unqouted mapping id-functions. You can thus use this function while being agnostic of the precise variable names. 
 
 ### Remove grouping 
 
@@ -80,7 +76,7 @@ When a grouping is no longer needed, it can be removed using the `ungroup_eventl
 
 ## mutate
 
-You can use `mutate` to add new variable to an event log, possibly by using existing variables. In the next example, the total amount of lacticacid is computed for each case. 
+You can use `mutate` to add new variables to an event log, possibly by using existing variables. In the next example, the total amount of lacticacid is computed for each case. [Read more.](mutate.html)
 
 ```{r echo = F}
 sepsis %>%
@@ -96,7 +92,7 @@ sepsis %>%
 
 ## filter
 
-Generic filtering of events can be done using the `filter` function, which takes an event log and any number of logical conditions. The example below filters events which have vehicleclas "C" and amount greater than 300. More process-specific filtering methods can be found [here](http://www.bupar.net/subsetting.html).
+Generic filtering of events can be done using `filter()`, which takes an event log and any number of logical conditions. The example below filters events which have vehicleclas "C" and amount greater than 300. [Read more. ](generic_filtering.html).
 
 ```{r}
 traffic_fines %>%
@@ -105,24 +101,34 @@ traffic_fines %>%
 
 ## select
 
-Variables on a event log can be _selected_ using `select`. By default, `select` will always make sure that the mapping-variables are retained. Otherwise, it would no longer function as an eventlog.
+Variables on a event log can be _selected_ using `select()`. By default, `select()` will always make sure that the mapping-variables are retained. Otherwise, it would no longer function as an eventlog.
 
 ```{r}
 traffic_fines %>%
 	select(vehicleclass)
 ```
 
-By setting the argument `force_df = TRUE`, the mapping-variables will not be retained, and the output will be a data.frame, and not an event log.
+By setting the argument `force_df = TRUE`, the mapping-variables will not be retained, and the output will be a data.frame, and not an event log. Not that this is true even in the case that all mapping variables are selected. 
 
 ```{r}
 traffic_fines %>%
 	select(case_id, vehicleclass, amount, force_df = TRUE)
 ```
 
+### Selecting (a set of) ids
+
+Similar to `group_by_ids()`, `select_ids()` can be used to select a (set of) mapping variables. 
+
+```{r}
+patients %>%
+	select_ids(case_id, activity_id)
+```
+Note again how the arguments are unquoted id-functions instead of raw variable names. The result of `select_ids()` will __always__ be `data.frame`, as typically not all ids in the mapping will be selected. 
+
 
 ## arrange
 
-Event data can be sorted using the `arrange` function. `desc` can be used to sort descendingly on an attribute.
+Event data can be sorted using the `arrange` function. `desc` can be used to sort descending on an attribute.
 
 ```{r}
 #sort descending on time

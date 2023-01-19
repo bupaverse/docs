@@ -15,6 +15,8 @@ library(bslib)
 ```
 
 
+In its most general sense, manipulation of logs can be done using the [wrangling-verbs](wrangling.html): `mutate`, `filter` `group_by`, `arrange`, `select`, and their variants. More process-specific use cases of process data manipulations are categorized as _filtering_, _enriching_ and _aggregating_, and can be found below. 
+
 ```{r echo = F}
 layout_column_wrap(card( 
 						card_header("Filter",class = "card text-white bg-info mb-3"),

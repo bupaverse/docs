@@ -674,7 +674,7 @@ Note that the obtained percentage of cases will not always be exactly the specif
 
 </div>
 
-
+## {.unlisted .unnumbered}
 
 ```{r footer, results = "asis", echo = F}
 CURRENT_PAGE <-  stringr::str_replace(knitr::current_input(), ".Rmd",".html")

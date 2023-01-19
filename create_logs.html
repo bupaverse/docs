@@ -38,6 +38,7 @@ ga('create', 'UA-92605173-2', 'auto');
 ga('send', 'pageview');
 
 </script>
+<!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="pkgdown.js"></script>
 <link rel="shortcut icon" href="images/logo/favicon.PNG" />
 <style>
   .title{
@@ -471,6 +472,10 @@ div.tocify {
       <a href="manipulate.html">Overview</a>
     </li>
     <li class="divider"></li>
+    <li>
+      <a href="wrangling.html">Wrangling</a>
+    </li>
+    <li class="divider"></li>
     <li class="dropdown-header">Filter</li>
     <li>
       <a href="case_filters.html">by case</a>
@@ -719,51 +724,51 @@ activity instances.</p>
 <tbody>
 <tr class="odd">
 <td align="left">Registration</td>
-<td align="left">25</td>
+<td align="left">435</td>
 <td align="left">r1</td>
-<td align="left">25</td>
+<td align="left">435</td>
 <td align="left">start</td>
-<td align="left">2017-01-25 02:03:36</td>
+<td align="left">2018-02-19 23:17:19</td>
 </tr>
 <tr class="even">
 <td align="left">Registration</td>
-<td align="left">25</td>
+<td align="left">435</td>
 <td align="left">r1</td>
-<td align="left">25</td>
+<td align="left">435</td>
 <td align="left">complete</td>
-<td align="left">2017-01-25 04:16:31</td>
+<td align="left">2018-02-20 01:39:27</td>
 </tr>
 <tr class="odd">
 <td align="left">Triage and Assessment</td>
-<td align="left">25</td>
+<td align="left">435</td>
 <td align="left">r2</td>
-<td align="left">525</td>
+<td align="left">935</td>
 <td align="left">start</td>
-<td align="left">2017-01-26 04:00:19</td>
+<td align="left">2018-02-21 09:47:40</td>
 </tr>
 <tr class="even">
 <td align="left">Triage and Assessment</td>
-<td align="left">25</td>
+<td align="left">435</td>
 <td align="left">r2</td>
-<td align="left">525</td>
+<td align="left">935</td>
 <td align="left">complete</td>
-<td align="left">2017-01-26 15:08:41</td>
+<td align="left">2018-02-22 01:28:01</td>
 </tr>
 <tr class="odd">
-<td align="left">X-Ray</td>
-<td align="left">25</td>
-<td align="left">r5</td>
-<td align="left">1485</td>
+<td align="left">Blood test</td>
+<td align="left">435</td>
+<td align="left">r3</td>
+<td align="left">1206</td>
 <td align="left">start</td>
-<td align="left">2017-01-27 01:17:35</td>
+<td align="left">2018-02-22 20:28:15</td>
 </tr>
 <tr class="even">
-<td align="left">X-Ray</td>
-<td align="left">25</td>
-<td align="left">r5</td>
-<td align="left">1485</td>
+<td align="left">Blood test</td>
+<td align="left">435</td>
+<td align="left">r3</td>
+<td align="left">1206</td>
 <td align="left">complete</td>
-<td align="left">2017-01-27 07:14:01</td>
+<td align="left">2018-02-23 02:57:15</td>
 </tr>
 </tbody>
 </table>
@@ -854,27 +859,27 @@ column names of those variables.</p>
 <tbody>
 <tr class="odd">
 <td align="left">Registration</td>
-<td align="left">25</td>
+<td align="left">435</td>
 <td align="left">r1</td>
-<td align="left">25</td>
-<td align="left">2017-01-25 04:16:31</td>
-<td align="left">2017-01-25 02:03:36</td>
+<td align="left">435</td>
+<td align="left">2018-02-20 01:39:27</td>
+<td align="left">2018-02-19 23:17:19</td>
 </tr>
 <tr class="even">
 <td align="left">Triage and Assessment</td>
-<td align="left">25</td>
+<td align="left">435</td>
 <td align="left">r2</td>
-<td align="left">525</td>
-<td align="left">2017-01-26 15:08:41</td>
-<td align="left">2017-01-26 04:00:19</td>
+<td align="left">935</td>
+<td align="left">2018-02-22 01:28:01</td>
+<td align="left">2018-02-21 09:47:40</td>
 </tr>
 <tr class="odd">
-<td align="left">X-Ray</td>
-<td align="left">25</td>
-<td align="left">r5</td>
-<td align="left">1485</td>
-<td align="left">2017-01-27 07:14:01</td>
-<td align="left">2017-01-27 01:17:35</td>
+<td align="left">Blood test</td>
+<td align="left">435</td>
+<td align="left">r3</td>
+<td align="left">1206</td>
+<td align="left">2018-02-23 02:57:15</td>
+<td align="left">2018-02-22 20:28:15</td>
 </tr>
 </tbody>
 </table>
@@ -946,34 +951,34 @@ Consider the data sample below.</p>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">292</td>
+<td align="left">316</td>
 <td align="left">Check-out</td>
-<td align="left">2017-10-15 07:36:24</td>
-<td align="left">2017-10-15 08:58:46</td>
+<td align="left">2017-11-10 20:00:54</td>
+<td align="left">2017-11-10 22:53:34</td>
 </tr>
 <tr class="even">
-<td align="left">292</td>
+<td align="left">316</td>
 <td align="left">Discuss Results</td>
-<td align="left">2017-10-12 08:22:58</td>
-<td align="left">2017-10-12 10:40:08</td>
+<td align="left">2017-11-03 08:24:18</td>
+<td align="left">2017-11-03 10:33:38</td>
 </tr>
 <tr class="odd">
-<td align="left">292</td>
+<td align="left">316</td>
 <td align="left">Registration</td>
-<td align="left">2017-10-10 03:04:42</td>
-<td align="left">2017-10-10 07:13:20</td>
+<td align="left">2017-10-28 01:11:54</td>
+<td align="left">2017-10-28 03:37:02</td>
 </tr>
 <tr class="even">
-<td align="left">292</td>
+<td align="left">316</td>
 <td align="left">Triage and Assessment</td>
-<td align="left">2017-10-11 02:45:26</td>
-<td align="left">2017-10-11 11:26:36</td>
+<td align="left">2017-10-28 18:24:52</td>
+<td align="left">2017-10-29 04:06:51</td>
 </tr>
 <tr class="odd">
-<td align="left">292</td>
+<td align="left">316</td>
 <td align="left">X-Ray</td>
-<td align="left">2017-10-11 21:54:39</td>
-<td align="left">2017-10-12 02:57:28</td>
+<td align="left">2017-11-02 20:32:16</td>
+<td align="left">2017-11-03 00:10:34</td>
 </tr>
 </tbody>
 </table>
@@ -1002,7 +1007,7 @@ standard Transactional lifecycle.</li>
 ## 1 case 
 ## 5 instances of 5 activities 
 ## 0 resources 
-## Events occurred from 2017-10-10 03:04:42 until 2017-10-15 08:58:46 
+## Events occurred from 2017-10-28 01:11:54 until 2017-11-10 22:53:34 
 ##  
 ## # Variables were mapped as follows:
 ## Case identifier:     patient 
@@ -1013,11 +1018,11 @@ standard Transactional lifecycle.</li>
 ## # A tibble: 5 × 5
 ##   patient handling              start               complete            .order
 ##   &lt;chr&gt;   &lt;fct&gt;                 &lt;dttm&gt;              &lt;dttm&gt;               &lt;int&gt;
-## 1 292     Check-out             2017-10-15 07:36:24 2017-10-15 08:58:46      1
-## 2 292     Discuss Results       2017-10-12 08:22:58 2017-10-12 10:40:08      2
-## 3 292     Registration          2017-10-10 03:04:42 2017-10-10 07:13:20      3
-## 4 292     Triage and Assessment 2017-10-11 02:45:26 2017-10-11 11:26:36      4
-## 5 292     X-Ray                 2017-10-11 21:54:39 2017-10-12 02:57:28      5</code></pre>
+## 1 316     Check-out             2017-11-10 20:00:54 2017-11-10 22:53:34      1
+## 2 316     Discuss Results       2017-11-03 08:24:18 2017-11-03 10:33:38      2
+## 3 316     Registration          2017-10-28 01:11:54 2017-10-28 03:37:02      3
+## 4 316     Triage and Assessment 2017-10-28 18:24:52 2017-10-29 04:06:51      4
+## 5 316     X-Ray                 2017-11-02 20:32:16 2017-11-03 00:10:34      5</code></pre>
 <p>Note that in case a resource identifier is available, this
 information can be added in the <code>activitylog</code> call.</p>
 </div>
@@ -1048,84 +1053,100 @@ way to go. Consider the data sample below.</p>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">426</td>
+<td align="left">379</td>
 <td align="left">Registration</td>
 <td align="left">r1</td>
-<td align="left">426</td>
+<td align="left">379</td>
 <td align="left">started</td>
-<td align="left">2018-02-15 19:10:29</td>
+<td align="left">2017-12-29 10:00:33</td>
 </tr>
 <tr class="even">
-<td align="left">426</td>
+<td align="left">379</td>
+<td align="left">Triage and Assessment</td>
+<td align="left">r2</td>
+<td align="left">879</td>
+<td align="left">started</td>
+<td align="left">2017-12-29 11:56:17</td>
+</tr>
+<tr class="odd">
+<td align="left">379</td>
 <td align="left">Registration</td>
 <td align="left">r1</td>
-<td align="left">426</td>
+<td align="left">379</td>
 <td align="left">completed</td>
-<td align="left">2018-02-15 23:02:44</td>
+<td align="left">2017-12-29 11:56:17</td>
 </tr>
-<tr class="odd">
-<td align="left">426</td>
+<tr class="even">
+<td align="left">379</td>
 <td align="left">Triage and Assessment</td>
 <td align="left">r2</td>
-<td align="left">926</td>
-<td align="left">started</td>
-<td align="left">2018-02-16 09:29:18</td>
-</tr>
-<tr class="even">
-<td align="left">426</td>
-<td align="left">Triage and Assessment</td>
-<td align="left">r2</td>
-<td align="left">926</td>
+<td align="left">879</td>
 <td align="left">completed</td>
-<td align="left">2018-02-16 22:17:04</td>
+<td align="left">2017-12-30 05:01:01</td>
 </tr>
 <tr class="odd">
-<td align="left">426</td>
-<td align="left">X-Ray</td>
-<td align="left">r5</td>
-<td align="left">1698</td>
+<td align="left">379</td>
+<td align="left">Blood test</td>
+<td align="left">r3</td>
+<td align="left">1180</td>
 <td align="left">started</td>
-<td align="left">2018-02-17 06:27:13</td>
+<td align="left">2017-12-30 16:14:23</td>
 </tr>
 <tr class="even">
-<td align="left">426</td>
-<td align="left">X-Ray</td>
-<td align="left">r5</td>
-<td align="left">1698</td>
+<td align="left">379</td>
+<td align="left">Blood test</td>
+<td align="left">r3</td>
+<td align="left">1180</td>
 <td align="left">completed</td>
-<td align="left">2018-02-17 12:26:25</td>
+<td align="left">2017-12-30 20:24:12</td>
 </tr>
 <tr class="odd">
-<td align="left">426</td>
+<td align="left">379</td>
+<td align="left">MRI SCAN</td>
+<td align="left">r4</td>
+<td align="left">1417</td>
+<td align="left">started</td>
+<td align="left">2017-12-31 01:22:41</td>
+</tr>
+<tr class="even">
+<td align="left">379</td>
+<td align="left">MRI SCAN</td>
+<td align="left">r4</td>
+<td align="left">1417</td>
+<td align="left">completed</td>
+<td align="left">2017-12-31 06:15:34</td>
+</tr>
+<tr class="odd">
+<td align="left">379</td>
 <td align="left">Discuss Results</td>
 <td align="left">r6</td>
-<td align="left">2160</td>
+<td align="left">2113</td>
 <td align="left">started</td>
-<td align="left">2018-02-20 09:49:29</td>
+<td align="left">2017-12-31 11:46:53</td>
 </tr>
 <tr class="even">
-<td align="left">426</td>
+<td align="left">379</td>
 <td align="left">Discuss Results</td>
 <td align="left">r6</td>
-<td align="left">2160</td>
+<td align="left">2113</td>
 <td align="left">completed</td>
-<td align="left">2018-02-20 12:48:44</td>
+<td align="left">2017-12-31 15:25:11</td>
 </tr>
 <tr class="odd">
-<td align="left">426</td>
+<td align="left">379</td>
 <td align="left">Check-out</td>
 <td align="left">r7</td>
-<td align="left">2655</td>
+<td align="left">2608</td>
 <td align="left">started</td>
-<td align="left">2018-02-21 12:53:58</td>
+<td align="left">2018-01-01 01:48:21</td>
 </tr>
 <tr class="even">
-<td align="left">426</td>
+<td align="left">379</td>
 <td align="left">Check-out</td>
 <td align="left">r7</td>
-<td align="left">2655</td>
+<td align="left">2608</td>
 <td align="left">completed</td>
-<td align="left">2018-02-21 14:15:01</td>
+<td align="left">2018-01-01 04:09:11</td>
 </tr>
 </tbody>
 </table>
@@ -1192,84 +1213,100 @@ below.</p>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">249</td>
+<td align="left">468</td>
 <td align="left">Registration</td>
-<td align="left">r1</td>
-<td align="left">249</td>
+<td align="left">r7</td>
+<td align="left">468</td>
 <td align="left">started</td>
-<td align="left">2017-09-05 22:47:50</td>
+<td align="left">2018-03-29 18:17:50</td>
 </tr>
 <tr class="even">
-<td align="left">249</td>
+<td align="left">468</td>
 <td align="left">Triage and Assessment</td>
-<td align="left">r7</td>
-<td align="left">749</td>
+<td align="left">r2</td>
+<td align="left">968</td>
 <td align="left">started</td>
-<td align="left">2017-09-06 01:20:24</td>
+<td align="left">2018-03-29 20:06:54</td>
 </tr>
 <tr class="odd">
-<td align="left">249</td>
+<td align="left">468</td>
 <td align="left">Registration</td>
-<td align="left">r2</td>
-<td align="left">249</td>
+<td align="left">r4</td>
+<td align="left">468</td>
 <td align="left">completed</td>
-<td align="left">2017-09-06 01:20:24</td>
+<td align="left">2018-03-29 20:06:54</td>
 </tr>
 <tr class="even">
-<td align="left">249</td>
+<td align="left">468</td>
 <td align="left">Triage and Assessment</td>
 <td align="left">r6</td>
-<td align="left">749</td>
+<td align="left">968</td>
 <td align="left">completed</td>
-<td align="left">2017-09-06 13:21:57</td>
+<td align="left">2018-03-30 11:20:12</td>
 </tr>
 <tr class="odd">
-<td align="left">249</td>
-<td align="left">X-Ray</td>
-<td align="left">r7</td>
-<td align="left">1606</td>
+<td align="left">468</td>
+<td align="left">Blood test</td>
+<td align="left">r3</td>
+<td align="left">1224</td>
 <td align="left">started</td>
-<td align="left">2017-09-07 23:47:50</td>
+<td align="left">2018-04-07 01:18:17</td>
 </tr>
 <tr class="even">
-<td align="left">249</td>
-<td align="left">X-Ray</td>
-<td align="left">r5</td>
-<td align="left">1606</td>
+<td align="left">468</td>
+<td align="left">Blood test</td>
+<td align="left">r3</td>
+<td align="left">1224</td>
 <td align="left">completed</td>
-<td align="left">2017-09-08 04:16:50</td>
+<td align="left">2018-04-07 06:30:56</td>
 </tr>
 <tr class="odd">
-<td align="left">249</td>
+<td align="left">468</td>
+<td align="left">MRI SCAN</td>
+<td align="left">r4</td>
+<td align="left">1461</td>
+<td align="left">started</td>
+<td align="left">2018-04-07 09:37:26</td>
+</tr>
+<tr class="even">
+<td align="left">468</td>
+<td align="left">MRI SCAN</td>
+<td align="left">r6</td>
+<td align="left">1461</td>
+<td align="left">completed</td>
+<td align="left">2018-04-07 14:51:54</td>
+</tr>
+<tr class="odd">
+<td align="left">468</td>
 <td align="left">Discuss Results</td>
-<td align="left">r5</td>
-<td align="left">1983</td>
+<td align="left">r2</td>
+<td align="left">2202</td>
 <td align="left">started</td>
-<td align="left">2017-09-08 09:21:01</td>
+<td align="left">2018-04-12 13:59:44</td>
 </tr>
 <tr class="even">
-<td align="left">249</td>
+<td align="left">468</td>
 <td align="left">Discuss Results</td>
 <td align="left">r1</td>
-<td align="left">1983</td>
+<td align="left">2202</td>
 <td align="left">completed</td>
-<td align="left">2017-09-08 12:06:19</td>
+<td align="left">2018-04-12 16:29:33</td>
 </tr>
 <tr class="odd">
-<td align="left">249</td>
+<td align="left">468</td>
 <td align="left">Check-out</td>
-<td align="left">r2</td>
-<td align="left">2478</td>
+<td align="left">r7</td>
+<td align="left">2697</td>
 <td align="left">started</td>
-<td align="left">2017-09-13 22:17:12</td>
+<td align="left">2018-04-12 19:02:12</td>
 </tr>
 <tr class="even">
-<td align="left">249</td>
+<td align="left">468</td>
 <td align="left">Check-out</td>
-<td align="left">r6</td>
-<td align="left">2478</td>
+<td align="left">r1</td>
+<td align="left">2697</td>
 <td align="left">completed</td>
-<td align="left">2017-09-14 00:19:17</td>
+<td align="left">2018-04-12 21:42:41</td>
 </tr>
 </tbody>
 </table>
@@ -1297,13 +1334,13 @@ standard Transactional lifecycle.</li>
 <span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>                <span class="at">timestamp =</span> <span class="st">&quot;time&quot;</span>,</span>
 <span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>                <span class="at">resource_id =</span> <span class="st">&quot;employee&quot;</span>) </span></code></pre></div>
 <pre><code>## Warning in validate_eventlog(eventlog): The following activity instances are
-## connected to more than one resource: 1606,1983,2478,249,749</code></pre>
-<pre><code>## # Log of 10 events consisting of:
+## connected to more than one resource: 1461,2202,2697,468,968</code></pre>
+<pre><code>## # Log of 12 events consisting of:
 ## 1 trace 
 ## 1 case 
-## 5 instances of 5 activities 
-## 5 resources 
-## Events occurred from 2017-09-05 22:47:50 until 2017-09-14 00:19:17 
+## 6 instances of 6 activities 
+## 6 resources 
+## Events occurred from 2018-03-29 18:17:50 until 2018-04-12 21:42:41 
 ##  
 ## # Variables were mapped as follows:
 ## Case identifier:     patient 
@@ -1313,19 +1350,21 @@ standard Transactional lifecycle.</li>
 ## Timestamp:           time 
 ## Lifecycle transition:        registration_type 
 ## 
-## # A tibble: 10 × 7
+## # A tibble: 12 × 7
 ##    patient handling           emplo…¹ handl…² regis…³ time                .order
 ##    &lt;chr&gt;   &lt;fct&gt;              &lt;fct&gt;   &lt;chr&gt;   &lt;fct&gt;   &lt;dttm&gt;               &lt;int&gt;
-##  1 249     Registration       r1      249     start   2017-09-05 22:47:50      1
-##  2 249     Triage and Assess… r7      749     start   2017-09-06 01:20:24      2
-##  3 249     Registration       r2      249     comple… 2017-09-06 01:20:24      3
-##  4 249     Triage and Assess… r6      749     comple… 2017-09-06 13:21:57      4
-##  5 249     X-Ray              r7      1606    start   2017-09-07 23:47:50      5
-##  6 249     X-Ray              r5      1606    comple… 2017-09-08 04:16:50      6
-##  7 249     Discuss Results    r5      1983    start   2017-09-08 09:21:01      7
-##  8 249     Discuss Results    r1      1983    comple… 2017-09-08 12:06:19      8
-##  9 249     Check-out          r2      2478    start   2017-09-13 22:17:12      9
-## 10 249     Check-out          r6      2478    comple… 2017-09-14 00:19:17     10
+##  1 468     Registration       r7      468     start   2018-03-29 18:17:50      1
+##  2 468     Triage and Assess… r2      968     start   2018-03-29 20:06:54      2
+##  3 468     Registration       r4      468     comple… 2018-03-29 20:06:54      3
+##  4 468     Triage and Assess… r6      968     comple… 2018-03-30 11:20:12      4
+##  5 468     Blood test         r3      1224    start   2018-04-07 01:18:17      5
+##  6 468     Blood test         r3      1224    comple… 2018-04-07 06:30:56      6
+##  7 468     MRI SCAN           r4      1461    start   2018-04-07 09:37:26      7
+##  8 468     MRI SCAN           r6      1461    comple… 2018-04-07 14:51:54      8
+##  9 468     Discuss Results    r2      2202    start   2018-04-12 13:59:44      9
+## 10 468     Discuss Results    r1      2202    comple… 2018-04-12 16:29:33     10
+## 11 468     Check-out          r7      2697    start   2018-04-12 19:02:12     11
+## 12 468     Check-out          r1      2697    comple… 2018-04-12 21:42:41     12
 ## # … with abbreviated variable names ¹​employee, ²​handling_id, ³​registration_type</code></pre>
 <p>Note that we need an <code>eventlog</code> irrespective of which
 attribute values are differing, i.e. it can be resources, but also any
@@ -1472,111 +1511,111 @@ different resources, as in the <code>eventlog</code> below.</p>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">187</td>
+<td align="left">113</td>
 <td align="left">Registration</td>
-<td align="left">r7</td>
-<td align="left">187</td>
+<td align="left">r3</td>
+<td align="left">113</td>
 <td align="left">start</td>
-<td align="left">2017-07-03 05:21:36</td>
+<td align="left">2017-04-27 05:07:31</td>
 <td align="right">1</td>
 </tr>
 <tr class="even">
-<td align="left">187</td>
-<td align="left">Triage and Assessment</td>
-<td align="left">r4</td>
-<td align="left">687</td>
-<td align="left">start</td>
-<td align="left">2017-07-03 08:57:23</td>
+<td align="left">113</td>
+<td align="left">Registration</td>
+<td align="left">r6</td>
+<td align="left">113</td>
+<td align="left">complete</td>
+<td align="left">2017-04-27 09:09:00</td>
 <td align="right">2</td>
 </tr>
 <tr class="odd">
-<td align="left">187</td>
-<td align="left">Registration</td>
-<td align="left">r1</td>
-<td align="left">187</td>
-<td align="left">complete</td>
-<td align="left">2017-07-03 08:57:23</td>
+<td align="left">113</td>
+<td align="left">Triage and Assessment</td>
+<td align="left">r4</td>
+<td align="left">613</td>
+<td align="left">start</td>
+<td align="left">2017-04-28 06:44:12</td>
 <td align="right">3</td>
 </tr>
 <tr class="even">
-<td align="left">187</td>
+<td align="left">113</td>
 <td align="left">Triage and Assessment</td>
-<td align="left">r3</td>
-<td align="left">687</td>
+<td align="left">r7</td>
+<td align="left">613</td>
 <td align="left">complete</td>
-<td align="left">2017-07-03 16:49:13</td>
+<td align="left">2017-04-28 20:47:34</td>
 <td align="right">4</td>
 </tr>
 <tr class="odd">
-<td align="left">187</td>
+<td align="left">113</td>
 <td align="left">Blood test</td>
-<td align="left">r7</td>
-<td align="left">1091</td>
+<td align="left">r3</td>
+<td align="left">1052</td>
 <td align="left">start</td>
-<td align="left">2017-07-08 13:30:11</td>
+<td align="left">2017-04-30 09:43:59</td>
 <td align="right">5</td>
 </tr>
 <tr class="even">
-<td align="left">187</td>
+<td align="left">113</td>
 <td align="left">Blood test</td>
 <td align="left">r2</td>
-<td align="left">1091</td>
+<td align="left">1052</td>
 <td align="left">complete</td>
-<td align="left">2017-07-08 19:25:15</td>
+<td align="left">2017-04-30 15:13:28</td>
 <td align="right">6</td>
 </tr>
 <tr class="odd">
-<td align="left">187</td>
+<td align="left">113</td>
 <td align="left">MRI SCAN</td>
 <td align="left">r1</td>
-<td align="left">1328</td>
+<td align="left">1289</td>
 <td align="left">start</td>
-<td align="left">2017-07-09 00:55:50</td>
+<td align="left">2017-04-30 21:24:18</td>
 <td align="right">7</td>
 </tr>
 <tr class="even">
-<td align="left">187</td>
+<td align="left">113</td>
 <td align="left">MRI SCAN</td>
-<td align="left">r2</td>
-<td align="left">1328</td>
+<td align="left">r7</td>
+<td align="left">1289</td>
 <td align="left">complete</td>
-<td align="left">2017-07-09 04:54:05</td>
+<td align="left">2017-05-01 01:12:51</td>
 <td align="right">8</td>
 </tr>
 <tr class="odd">
-<td align="left">187</td>
+<td align="left">113</td>
 <td align="left">Discuss Results</td>
-<td align="left">r6</td>
-<td align="left">1921</td>
+<td align="left">r2</td>
+<td align="left">1847</td>
 <td align="left">start</td>
-<td align="left">2017-07-09 09:57:59</td>
+<td align="left">2017-05-01 07:20:45</td>
 <td align="right">9</td>
 </tr>
 <tr class="even">
-<td align="left">187</td>
+<td align="left">113</td>
 <td align="left">Discuss Results</td>
 <td align="left">r6</td>
-<td align="left">1921</td>
+<td align="left">1847</td>
 <td align="left">complete</td>
-<td align="left">2017-07-09 12:17:58</td>
+<td align="left">2017-05-01 09:44:20</td>
 <td align="right">10</td>
 </tr>
 <tr class="odd">
-<td align="left">187</td>
+<td align="left">113</td>
 <td align="left">Check-out</td>
-<td align="left">r3</td>
-<td align="left">2416</td>
+<td align="left">r1</td>
+<td align="left">2342</td>
 <td align="left">start</td>
-<td align="left">2017-07-09 16:27:02</td>
+<td align="left">2017-05-03 04:02:35</td>
 <td align="right">11</td>
 </tr>
 <tr class="even">
-<td align="left">187</td>
+<td align="left">113</td>
 <td align="left">Check-out</td>
 <td align="left">r4</td>
-<td align="left">2416</td>
+<td align="left">2342</td>
 <td align="left">complete</td>
-<td align="left">2017-07-09 19:29:29</td>
+<td align="left">2017-05-03 06:59:33</td>
 <td align="right">12</td>
 </tr>
 </tbody>
@@ -1587,14 +1626,15 @@ you can use the <code>detect_resource_inconsistences()</code>
 function.</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>log <span class="sc">%&gt;%</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">detect_resource_inconsistencies</span>()</span></code></pre></div>
-<pre><code>## # A tibble: 5 × 5
+<pre><code>## # A tibble: 6 × 5
 ##   patient handling              handling_id complete start
 ##   &lt;chr&gt;   &lt;fct&gt;                 &lt;chr&gt;       &lt;chr&gt;    &lt;chr&gt;
-## 1 187     Blood test            1091        r2       r7   
-## 2 187     Check-out             2416        r4       r3   
-## 3 187     MRI SCAN              1328        r2       r1   
-## 4 187     Registration          187         r1       r7   
-## 5 187     Triage and Assessment 687         r3       r4</code></pre>
+## 1 113     Blood test            1052        r2       r3   
+## 2 113     Check-out             2342        r4       r1   
+## 3 113     Discuss Results       1847        r6       r2   
+## 4 113     MRI SCAN              1289        r7       r1   
+## 5 113     Registration          113         r6       r3   
+## 6 113     Triage and Assessment 613         r7       r4</code></pre>
 <p>If you want to remove these inconsistencies, a quick fix is to merge
 the resource labels together with
 <code>fix_resource_inconsistencies()</code>. Note that this is not
@@ -1607,23 +1647,24 @@ inconsistencies might lead to odd results.</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>log <span class="sc">%&gt;%</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">fix_resource_inconsistencies</span>()</span></code></pre></div>
 <pre><code>## *** OUTPUT ***</code></pre>
-<pre><code>## A total of 5 activity executions in the event log are classified as inconsistencies.</code></pre>
+<pre><code>## A total of 6 activity executions in the event log are classified as inconsistencies.</code></pre>
 <pre><code>## They are spread over the following cases and activities:</code></pre>
-<pre><code>## # A tibble: 5 × 5
+<pre><code>## # A tibble: 6 × 5
 ##   patient handling              handling_id complete start
 ##   &lt;chr&gt;   &lt;fct&gt;                 &lt;chr&gt;       &lt;chr&gt;    &lt;chr&gt;
-## 1 187     Blood test            1091        r2       r7   
-## 2 187     Check-out             2416        r4       r3   
-## 3 187     MRI SCAN              1328        r2       r1   
-## 4 187     Registration          187         r1       r7   
-## 5 187     Triage and Assessment 687         r3       r4</code></pre>
+## 1 113     Blood test            1052        r2       r3   
+## 2 113     Check-out             2342        r4       r1   
+## 3 113     Discuss Results       1847        r6       r2   
+## 4 113     MRI SCAN              1289        r7       r1   
+## 5 113     Registration          113         r6       r3   
+## 6 113     Triage and Assessment 613         r7       r4</code></pre>
 <pre><code>## Inconsistencies solved succesfully.</code></pre>
 <pre><code>## # Log of 12 events consisting of:
 ## 1 trace 
 ## 1 case 
 ## 6 instances of 6 activities 
 ## 6 resources 
-## Events occurred from 2017-07-03 05:21:36 until 2017-07-09 19:29:29 
+## Events occurred from 2017-04-27 05:07:31 until 2017-05-03 06:59:33 
 ##  
 ## # Variables were mapped as follows:
 ## Case identifier:     patient 
@@ -1636,18 +1677,18 @@ inconsistencies might lead to odd results.</p>
 ## # A tibble: 12 × 7
 ##    patient handling           emplo…¹ handl…² regis…³ time                .order
 ##    &lt;chr&gt;   &lt;fct&gt;              &lt;chr&gt;   &lt;chr&gt;   &lt;fct&gt;   &lt;dttm&gt;               &lt;int&gt;
-##  1 187     Registration       r1 - r7 187     start   2017-07-03 05:21:36      1
-##  2 187     Triage and Assess… r3 - r4 687     start   2017-07-03 08:57:23      2
-##  3 187     Registration       r1 - r7 187     comple… 2017-07-03 08:57:23      3
-##  4 187     Triage and Assess… r3 - r4 687     comple… 2017-07-03 16:49:13      4
-##  5 187     Blood test         r2 - r7 1091    start   2017-07-08 13:30:11      5
-##  6 187     Blood test         r2 - r7 1091    comple… 2017-07-08 19:25:15      6
-##  7 187     MRI SCAN           r2 - r1 1328    start   2017-07-09 00:55:50      7
-##  8 187     MRI SCAN           r2 - r1 1328    comple… 2017-07-09 04:54:05      8
-##  9 187     Discuss Results    r6      1921    start   2017-07-09 09:57:59      9
-## 10 187     Discuss Results    r6      1921    comple… 2017-07-09 12:17:58     10
-## 11 187     Check-out          r4 - r3 2416    start   2017-07-09 16:27:02     11
-## 12 187     Check-out          r4 - r3 2416    comple… 2017-07-09 19:29:29     12
+##  1 113     Registration       r6 - r3 113     start   2017-04-27 05:07:31      1
+##  2 113     Registration       r6 - r3 113     comple… 2017-04-27 09:09:00      2
+##  3 113     Triage and Assess… r7 - r4 613     start   2017-04-28 06:44:12      3
+##  4 113     Triage and Assess… r7 - r4 613     comple… 2017-04-28 20:47:34      4
+##  5 113     Blood test         r2 - r3 1052    start   2017-04-30 09:43:59      5
+##  6 113     Blood test         r2 - r3 1052    comple… 2017-04-30 15:13:28      6
+##  7 113     MRI SCAN           r7 - r1 1289    start   2017-04-30 21:24:18      7
+##  8 113     MRI SCAN           r7 - r1 1289    comple… 2017-05-01 01:12:51      8
+##  9 113     Discuss Results    r6 - r2 1847    start   2017-05-01 07:20:45      9
+## 10 113     Discuss Results    r6 - r2 1847    comple… 2017-05-01 09:44:20     10
+## 11 113     Check-out          r4 - r1 2342    start   2017-05-03 04:02:35     11
+## 12 113     Check-out          r4 - r1 2342    comple… 2017-05-03 06:59:33     12
 ## # … with abbreviated variable names ¹​employee, ²​handling_id, ³​registration_type</code></pre>
 <hr />
 <p>Read more:</p>

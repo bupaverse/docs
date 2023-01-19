@@ -35,6 +35,7 @@ ga('create', 'UA-92605173-2', 'auto');
 ga('send', 'pageview');
 
 </script>
+<!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="pkgdown.js"></script>
 <link rel="shortcut icon" href="images/logo/favicon.PNG" />
 <style>
   .title{
@@ -468,6 +469,10 @@ div.tocify {
       <a href="manipulate.html">Overview</a>
     </li>
     <li class="divider"></li>
+    <li>
+      <a href="wrangling.html">Wrangling</a>
+    </li>
+    <li class="divider"></li>
     <li class="dropdown-header">Filter</li>
     <li>
       <a href="case_filters.html">by case</a>
@@ -653,13 +658,20 @@ using <code>augment()</code>. For example, consider <a
 href="control_flow_analysis.html"><code>trace_length()</code></a>.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>traffic_fines <span class="sc">%&gt;%</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">trace_length</span>(<span class="at">level =</span> <span class="st">&quot;case&quot;</span>) </span></code></pre></div>
-<pre><code>## # A tibble: 4 × 2
-##   vehicleclass absolute
-##   &lt;chr&gt;           &lt;int&gt;
-## 1 &lt;NA&gt;            24724
-## 2 A                9973
-## 3 C                  21
-## 4 M                   6</code></pre>
+<pre><code>## # A tibble: 10,000 × 2
+##    case_id absolute
+##    &lt;chr&gt;      &lt;int&gt;
+##  1 A10249         9
+##  2 A10338         9
+##  3 A10619         9
+##  4 A10858         9
+##  5 A12027         9
+##  6 A12414         9
+##  7 A13217         9
+##  8 A1327          9
+##  9 A13617         9
+## 10 A13984         9
+## # … with 9,990 more rows</code></pre>
 <p>Feeding the resulting table back to <code>traffic_fines</code> with
 <code>augment()</code> makes the trace length metric available as a case
 attribute for further analysis.</p>
@@ -687,7 +699,7 @@ attribute for further analysis.</p>
 ## $ vehicleclass         &lt;chr&gt; &quot;A&quot;, NA, &quot;A&quot;, NA, NA, NA, NA, &quot;A&quot;, NA, NA, NA, NA…
 ## $ activity_instance_id &lt;chr&gt; &quot;1&quot;, &quot;2&quot;, &quot;3&quot;, &quot;4&quot;, &quot;5&quot;, &quot;6&quot;, &quot;7&quot;, &quot;8&quot;, &quot;9&quot;, &quot;10&quot;…
 ## $ .order               &lt;int&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15…
-## $ absolute             &lt;int&gt; 9973, 24724, 9973, 24724, 24724, 24724, 24724, 99…</code></pre>
+## $ absolute             &lt;int&gt; 2, 2, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 6, 6, 6, 6, 6…</code></pre>
 <div id="adjust-names" class="section level2">
 <h2>Adjust names</h2>
 <p>Using the <code>prefix</code> argument, you can add a descriptive
@@ -718,7 +730,7 @@ prefix <em>trace_length</em>.</p>
 ## $ vehicleclass          &lt;chr&gt; &quot;A&quot;, NA, &quot;A&quot;, NA, NA, NA, NA, &quot;A&quot;, NA, NA, NA, N…
 ## $ activity_instance_id  &lt;chr&gt; &quot;1&quot;, &quot;2&quot;, &quot;3&quot;, &quot;4&quot;, &quot;5&quot;, &quot;6&quot;, &quot;7&quot;, &quot;8&quot;, &quot;9&quot;, &quot;10…
 ## $ .order                &lt;int&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 1…
-## $ trace_length_absolute &lt;int&gt; 9973, 24724, 9973, 24724, 24724, 24724, 24724, 9…</code></pre>
+## $ trace_length_absolute &lt;int&gt; 2, 2, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 6, 6, 6, 6, …</code></pre>
 </div>
 <div id="select-variables" class="section level2">
 <h2>Select variables</h2>
@@ -812,14 +824,14 @@ This is because the patients dataset did not get updated after the first
 <code>augment()</code> call. The proper way would be as follows.</p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">trace_length</span>(<span class="at">level =</span> <span class="st">&quot;case&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">augment</span>(patients, <span class="at">prefix =</span> <span class="st">&quot;trace_length&quot;</span>) <span class="ot">-&gt;</span> patient</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">augment</span>(patients, <span class="at">prefix =</span> <span class="st">&quot;trace_length&quot;</span>) <span class="ot">-&gt;</span> patients</span>
 <span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>patient <span class="sc">%&gt;%</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span></span>
 <span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">trace_coverage</span>(<span class="at">level =</span> <span class="st">&quot;case&quot;</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">augment</span>(patients, <span class="at">prefix =</span> <span class="st">&quot;trace_frequency&quot;</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">glimpse</span>()</span></code></pre></div>
 <pre><code>## Rows: 5,442
-## Columns: 10
+## Columns: 11
 ## $ handling                 &lt;fct&gt; Registration, Registration, Registration, Reg…
 ## $ patient                  &lt;chr&gt; &quot;1&quot;, &quot;2&quot;, &quot;3&quot;, &quot;4&quot;, &quot;5&quot;, &quot;6&quot;, &quot;7&quot;, &quot;8&quot;, &quot;9&quot;, …
 ## $ employee                 &lt;fct&gt; r1, r1, r1, r1, r1, r1, r1, r1, r1, r1, r1, r…
@@ -827,13 +839,15 @@ This is because the patients dataset did not get updated after the first
 ## $ registration_type        &lt;fct&gt; start, start, start, start, start, start, sta…
 ## $ time                     &lt;dttm&gt; 2017-01-02 11:41:53, 2017-01-02 11:41:53, 20…
 ## $ .order                   &lt;int&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14…
+## $ trace_length_absolute    &lt;int&gt; 6, 5, 6, 6, 5, 6, 6, 5, 5, 5, 5, 6, 6, 5, 6, …
 ## $ trace_frequency_trace    &lt;chr&gt; &quot;Registration,Triage and Assessment,Blood tes…
 ## $ trace_frequency_absolute &lt;int&gt; 234, 258, 234, 234, 258, 234, 234, 258, 258, …
 ## $ trace_frequency_relative &lt;dbl&gt; 0.468, 0.516, 0.468, 0.468, 0.516, 0.468, 0.4…</code></pre>
 <hr />
 <p>Read more:</p>
 <div class="btn-toolbar" role="group">
-<p><a href = "case_filters.html" class="btn btn-info" type="button">Case
+<p><a href = "wrangling.html" class="btn btn-info" type="button">Wrangling</a>
+<a href = "case_filters.html" class="btn btn-info" type="button">Case
 Filters</a>
 <a href = "event_filters.html" class="btn btn-info" type="button">Event
 Filters</a>

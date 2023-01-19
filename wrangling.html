@@ -11,7 +11,7 @@
 
 
 
-<title>bupaR Docs | Inspect log</title>
+<title>Wrangling event data</title>
 
 <script src="site_libs/header-attrs-2.19/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -642,168 +642,285 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">bupaR Docs | Inspect log</h1>
+<h1 class="title toc-ignore">Wrangling event data</h1>
 
 </div>
 
 
-<p><img src="images/icons/create.PNG" width="25%" style="display: block; margin: auto 0 auto auto;" /></p>
+<p><img src="images/icons/manipulate.PNG" width="25%" style="display: block; margin: auto 0 auto auto;" /></p>
 <hr />
-<div id="inspect-logs" class="section level1">
-<h1>Inspect logs</h1>
-<div id="getting-metadata" class="section level2">
-<h2>Getting metadata</h2>
-<p>The mapping function can be used to retrieve all the meta data from a
-<code>log</code> object, i.e. the relation between log identifiers and
-the corresponding data fields.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span> mapping</span></code></pre></div>
-<pre><code>## Case identifier:     patient 
+<div id="wrangling" class="section level1">
+<h1>Wrangling</h1>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(bupaverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code></pre></div>
+<p>In order to easily manipulate logs, well-known <a
+href="https://dplyr.tidyverse.org/">dplyr</a>-verbs have been adapted.
+This page serves as a general introduction of the wrangling verbs. Their
+usages is illustrated through the documentation for
+<em>Manipulation</em>, <em>Analysis</em> and <em>Visualization</em>.</p>
+<div id="group_by" class="section level2">
+<h2>group_by</h2>
+<p>Using the <code>group_by</code> function, event logs can be grouped
+according to a (set of) variables, such that all further computations
+happen for each of these different groups.</p>
+<p>In the next example, the number of cases are computed for each value
+of “vehicleclass”.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>traffic_fines <span class="sc">%&gt;%</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(vehicleclass) <span class="sc">%&gt;%</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">n_cases</span>()</span></code></pre></div>
+<pre><code>## # A tibble: 4 × 2
+##   vehicleclass n_cases
+##   &lt;chr&gt;          &lt;int&gt;
+## 1 A               8569
+## 2 C                 17
+## 3 M                  5
+## 4 &lt;NA&gt;            8591</code></pre>
+<div id="predefined-grouping-functions" class="section level3">
+<h3>Predefined grouping functions</h3>
+<p>For specific groupings, some auxiliary functions are available.</p>
+<ul>
+<li><code>group_by_case</code> - group by cases</li>
+<li><code>group_by_activity</code> - group by activity types</li>
+<li><code>group_by_resource</code> - group by resources</li>
+<li><code>group_by_activity_resource</code> - group by activity resource
+pair</li>
+<li><code>group_by_activity_instance</code> - group by activity
+instances.</li>
+</ul>
+<p>For example, the number of cases in which a specific resource occurs,
+can be computed as follows.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>sepsis <span class="sc">%&gt;%</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    group_by_resource <span class="sc">%&gt;%</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    n_cases</span></code></pre></div>
+<pre><code>## # A tibble: 26 × 2
+##    resource n_cases
+##    &lt;fct&gt;      &lt;int&gt;
+##  1 ?            294
+##  2 A            985
+##  3 B           1013
+##  4 C           1050
+##  5 D             46
+##  6 E            782
+##  7 F            200
+##  8 G            147
+##  9 H             50
+## 10 I            118
+## # … with 16 more rows</code></pre>
+<p>Note that each of the descriptive metrics discussed <a
+href="http://www.bupar.net/exploring.html">here</a> can be rewritten
+using these lower-level functions. The example above is equal to the
+<code>resource_involvement</code> metric at case level.</p>
+</div>
+<div id="remove-grouping" class="section level3">
+<h3>Remove grouping</h3>
+<p>When a grouping is no longer needed, it can be removed using the
+<code>ungroup_eventlog</code> function.</p>
+</div>
+</div>
+<div id="mutate" class="section level2">
+<h2>mutate</h2>
+<p>You can use <code>mutate</code> to add new variable to an event log,
+possibly by using existing variables. In the next example, the total
+amount of lacticacid is computed for each case.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>sepsis <span class="sc">%&gt;%</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by_case</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">total_lacticacid =</span> <span class="fu">sum</span>(lacticacid, <span class="at">na.rm =</span> T))</span></code></pre></div>
+<pre><code>## # Groups: [case_id]
+## Grouped # Log of 15214 events consisting of:
+## 846 traces 
+## 1050 cases 
+## 15214 instances of 16 activities 
+## 26 resources 
+## Events occurred from 2013-11-07 08:18:29 until 2015-06-05 12:25:11 
+##  
+## # Variables were mapped as follows:
+## Case identifier:     case_id 
+## Activity identifier:     activity 
+## Resource identifier:     resource 
+## Activity instance identifier:    activity_instance_id 
+## Timestamp:           timestamp 
+## Lifecycle transition:        lifecycle 
+## 
+## # A tibble: 15,214 × 35
+##    case_id activity      lifec…¹ resou…² timestamp             age   crp diagn…³
+##    &lt;chr&gt;   &lt;fct&gt;         &lt;fct&gt;   &lt;fct&gt;   &lt;dttm&gt;              &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;  
+##  1 A       ER Registrat… comple… A       2014-10-22 11:15:41    85    NA A      
+##  2 A       Leucocytes    comple… B       2014-10-22 11:27:00    NA    NA &lt;NA&gt;   
+##  3 A       CRP           comple… B       2014-10-22 11:27:00    NA   210 &lt;NA&gt;   
+##  4 A       LacticAcid    comple… B       2014-10-22 11:27:00    NA    NA &lt;NA&gt;   
+##  5 A       ER Triage     comple… C       2014-10-22 11:33:37    NA    NA &lt;NA&gt;   
+##  6 A       ER Sepsis Tr… comple… A       2014-10-22 11:34:00    NA    NA &lt;NA&gt;   
+##  7 A       IV Liquid     comple… A       2014-10-22 14:03:47    NA    NA &lt;NA&gt;   
+##  8 A       IV Antibioti… comple… A       2014-10-22 14:03:47    NA    NA &lt;NA&gt;   
+##  9 A       Admission NC  comple… D       2014-10-22 14:13:19    NA    NA &lt;NA&gt;   
+## 10 A       CRP           comple… B       2014-10-24 09:00:00    NA  1090 &lt;NA&gt;   
+## # … with 15,204 more rows, 27 more variables: diagnosticartastrup &lt;lgl&gt;,
+## #   diagnosticblood &lt;lgl&gt;, diagnosticecg &lt;lgl&gt;, diagnosticic &lt;lgl&gt;,
+## #   diagnosticlacticacid &lt;lgl&gt;, diagnosticliquor &lt;lgl&gt;, diagnosticother &lt;lgl&gt;,
+## #   diagnosticsputum &lt;lgl&gt;, diagnosticurinaryculture &lt;lgl&gt;,
+## #   diagnosticurinarysediment &lt;lgl&gt;, diagnosticxthorax &lt;lgl&gt;, disfuncorg &lt;lgl&gt;,
+## #   hypotensie &lt;lgl&gt;, hypoxie &lt;lgl&gt;, infectionsuspected &lt;lgl&gt;, infusion &lt;lgl&gt;,
+## #   lacticacid &lt;dbl&gt;, leucocytes &lt;chr&gt;, oligurie &lt;lgl&gt;, …</code></pre>
+</div>
+<div id="filter" class="section level2">
+<h2>filter</h2>
+<p>Generic filtering of events can be done using the <code>filter</code>
+function, which takes an event log and any number of logical conditions.
+The example below filters events which have vehicleclas “C” and amount
+greater than 300. More process-specific filtering methods can be found
+<a href="http://www.bupar.net/subsetting.html">here</a>.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>traffic_fines <span class="sc">%&gt;%</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(vehicleclass <span class="sc">==</span> <span class="st">&quot;C&quot;</span>, amount <span class="sc">&gt;</span> <span class="dv">300</span>)</span></code></pre></div>
+<pre><code>## # Log of 17 events consisting of:
+## 1 trace 
+## 17 cases 
+## 17 instances of 1 activity 
+## 9 resources 
+## Events occurred from 2006-08-10 until 2008-02-09 
+##  
+## # Variables were mapped as follows:
+## Case identifier:     case_id 
+## Activity identifier:     activity 
+## Resource identifier:     resource 
+## Activity instance identifier:    activity_instance_id 
+## Timestamp:           timestamp 
+## Lifecycle transition:        lifecycle 
+## 
+## # A tibble: 17 × 18
+##    case_id activity   lifec…¹ resou…² timestamp           amount article dismi…³
+##    &lt;chr&gt;   &lt;fct&gt;      &lt;fct&gt;   &lt;fct&gt;   &lt;dttm&gt;              &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;  
+##  1 A10060  Create Fi… comple… 541     2007-03-08 00:00:00 36.0       157 NIL    
+##  2 A10497  Create Fi… comple… 558     2007-03-30 00:00:00 36.0       157 NIL    
+##  3 A10818  Create Fi… comple… 561     2007-04-08 00:00:00 36.0       157 NIL    
+##  4 A11707  Create Fi… comple… 550     2007-04-24 00:00:00 36.0       157 NIL    
+##  5 A1408   Create Fi… comple… 559     2006-08-20 00:00:00 35.0       157 NIL    
+##  6 A14883  Create Fi… comple… 561     2007-06-29 00:00:00 36.0       157 NIL    
+##  7 A17130  Create Fi… comple… 541     2007-07-15 00:00:00 36.0       157 NIL    
+##  8 A1815   Create Fi… comple… 563     2006-08-10 00:00:00 35.0       157 NIL    
+##  9 A19109  Create Fi… comple… 556     2007-07-17 00:00:00 36.0       157 NIL    
+## 10 A23000  Create Fi… comple… 550     2007-12-29 00:00:00 36.0       157 NIL    
+## 11 A24247  Create Fi… comple… 561     2007-12-03 00:00:00 36.0       157 NIL    
+## 12 A24366  Create Fi… comple… 541     2008-02-09 00:00:00 36.0       157 NIL    
+## 13 A24634  Create Fi… comple… 537     2007-11-21 00:00:00 36.0       157 NIL    
+## 14 A24942  Create Fi… comple… 561     2007-12-30 00:00:00 36.0       157 NIL    
+## 15 A25581  Create Fi… comple… 559     2007-11-23 00:00:00 36.0       157 NIL    
+## 16 A26099  Create Fi… comple… 559     2007-12-09 00:00:00 36.0       157 NIL    
+## 17 A26277  Create Fi… comple… 538     2008-01-07 00:00:00 36.0       157 NIL    
+## # … with 10 more variables: expense &lt;chr&gt;, lastsent &lt;chr&gt;, matricola &lt;dbl&gt;,
+## #   notificationtype &lt;chr&gt;, paymentamount &lt;dbl&gt;, points &lt;dbl&gt;,
+## #   totalpaymentamount &lt;chr&gt;, vehicleclass &lt;chr&gt;, activity_instance_id &lt;chr&gt;,
+## #   .order &lt;int&gt;, and abbreviated variable names ¹​lifecycle, ²​resource,
+## #   ³​dismissal</code></pre>
+</div>
+<div id="select" class="section level2">
+<h2>select</h2>
+<p>Variables on a event log can be <em>selected</em> using
+<code>select</code>. By default, <code>select</code> will always make
+sure that the mapping-variables are retained. Otherwise, it would no
+longer function as an eventlog.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>traffic_fines <span class="sc">%&gt;%</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(vehicleclass)</span></code></pre></div>
+<pre><code>## # Log of 27001 events consisting of:
+## 3 traces 
+## 8591 cases 
+## 27001 instances of 6 activities 
+## 15 resources 
+## Events occurred from 2006-06-17 until 2012-03-26 
+##  
+## # Variables were mapped as follows:
+## Case identifier:     case_id 
+## Activity identifier:     activity 
+## Resource identifier:     resource 
+## Activity instance identifier:    activity_instance_id 
+## Timestamp:           timestamp 
+## Lifecycle transition:        lifecycle 
+## 
+## # A tibble: 27,001 × 8
+##    vehiclec…¹ case_id activ…² activ…³ timestamp           resou…⁴ lifec…⁵ .order
+##    &lt;chr&gt;      &lt;chr&gt;   &lt;fct&gt;   &lt;chr&gt;   &lt;dttm&gt;              &lt;fct&gt;   &lt;fct&gt;    &lt;int&gt;
+##  1 A          A1      Create… 1       2006-07-24 00:00:00 561     comple…      1
+##  2 &lt;NA&gt;       A1      Send F… 2       2006-12-05 00:00:00 &lt;NA&gt;    comple…      2
+##  3 A          A100    Create… 3       2006-08-02 00:00:00 561     comple…      3
+##  4 &lt;NA&gt;       A100    Send F… 4       2006-12-12 00:00:00 &lt;NA&gt;    comple…      4
+##  5 &lt;NA&gt;       A100    Insert… 5       2007-01-15 00:00:00 &lt;NA&gt;    comple…      5
+##  6 &lt;NA&gt;       A100    Add pe… 6       2007-03-16 00:00:00 &lt;NA&gt;    comple…      6
+##  7 &lt;NA&gt;       A100    Send f… 7       2009-03-30 00:00:00 &lt;NA&gt;    comple…      7
+##  8 A          A10004  Create… 19      2007-03-20 00:00:00 537     comple…      8
+##  9 &lt;NA&gt;       A10004  Send F… 20      2007-07-17 00:00:00 &lt;NA&gt;    comple…      9
+## 10 &lt;NA&gt;       A10004  Insert… 21      2007-07-24 00:00:00 &lt;NA&gt;    comple…     10
+## # … with 26,991 more rows, and abbreviated variable names ¹​vehicleclass,
+## #   ²​activity, ³​activity_instance_id, ⁴​resource, ⁵​lifecycle</code></pre>
+<p>By setting the argument <code>force_df = TRUE</code>, the
+mapping-variables will not be retained, and the output will be a
+data.frame, and not an event log.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>traffic_fines <span class="sc">%&gt;%</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(case_id, vehicleclass, amount, <span class="at">force_df =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 27,001 × 3
+##    case_id vehicleclass amount
+##    &lt;chr&gt;   &lt;chr&gt;        &lt;chr&gt; 
+##  1 A1      A            35.0  
+##  2 A1      &lt;NA&gt;         35.0  
+##  3 A100    A            35.0  
+##  4 A100    &lt;NA&gt;         35.0  
+##  5 A100    &lt;NA&gt;         35.0  
+##  6 A100    &lt;NA&gt;         71.5  
+##  7 A100    &lt;NA&gt;         71.5  
+##  8 A10004  A            36.0  
+##  9 A10004  &lt;NA&gt;         36.0  
+## 10 A10004  &lt;NA&gt;         36.0  
+## # … with 26,991 more rows</code></pre>
+</div>
+<div id="arrange" class="section level2">
+<h2>arrange</h2>
+<p>Event data can be sorted using the <code>arrange</code> function.
+<code>desc</code> can be used to sort descendingly on an attribute.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">#sort descending on time</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">arrange</span>(<span class="fu">desc</span>(time))</span></code></pre></div>
+<pre><code>## # Log of 5442 events consisting of:
+## 7 traces 
+## 500 cases 
+## 2721 instances of 7 activities 
+## 7 resources 
+## Events occurred from 2017-01-02 11:41:53 until 2018-05-05 07:16:02 
+##  
+## # Variables were mapped as follows:
+## Case identifier:     patient 
 ## Activity identifier:     handling 
 ## Resource identifier:     employee 
 ## Activity instance identifier:    handling_id 
 ## Timestamp:           time 
-## Lifecycle transition:        registration_type</code></pre>
-<p>In this case, we see that the handling field is the activity
-identifier in the event log, while the patient field is used as case
-identifier. We can also obtain each of these identifiers
-individually.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span> activity_id</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span> case_id</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span> resource_id</span></code></pre></div>
-<pre><code>## [1] &quot;handling&quot;
-## [1] &quot;patient&quot;
-## [1] &quot;employee&quot;</code></pre>
-</div>
-<div id="getting-basic-information"
-class="section level2 tabset tabset-fade tabset-pills">
-<h2 class="tabset tabset-fade tabset-pills">Getting basic
-information</h2>
-<p>We can look at a general summary of the event log with
-<code>summary()</code>.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span> summary</span></code></pre></div>
-<pre><code>## Number of events:  5442
-## Number of cases:  500
-## Number of traces:  7
-## Number of distinct activities:  7
-## Average trace length:  10.884
+## Lifecycle transition:        registration_type 
 ## 
-## Start eventlog:  2017-01-02 11:41:53
-## End eventlog:  2018-05-05 07:16:02</code></pre>
-<pre><code>##                   handling      patient          employee  handling_id       
-##  Blood test           : 474   Length:5442        r1:1000   Length:5442       
-##  Check-out            : 984   Class :character   r2:1000   Class :character  
-##  Discuss Results      : 990   Mode  :character   r3: 474   Mode  :character  
-##  MRI SCAN             : 472                      r4: 472                     
-##  Registration         :1000                      r5: 522                     
-##  Triage and Assessment:1000                      r6: 990                     
-##  X-Ray                : 522                      r7: 984                     
-##  registration_type      time                            .order    
-##  complete:2721     Min.   :2017-01-02 11:41:53.00   Min.   :   1  
-##  start   :2721     1st Qu.:2017-05-06 17:15:18.00   1st Qu.:1361  
-##                    Median :2017-09-08 04:16:50.00   Median :2722  
-##                    Mean   :2017-09-02 20:52:34.40   Mean   :2722  
-##                    3rd Qu.:2017-12-22 15:44:11.25   3rd Qu.:4082  
-##                    Max.   :2018-05-05 07:16:02.00   Max.   :5442  
-## </code></pre>
-<p>The basic counts which show up in the summary can also be retrieved
-individual as a numeric vector of length one.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span> n_activities</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span> n_activity_instances</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span> n_cases</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span> n_events</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span> n_traces</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span> n_resources</span></code></pre></div>
-<pre><code>## [1] 7
-## [1] 2721
-## [1] 500
-## [1] 5442
-## [1] 7
-## [1] 7</code></pre>
-<p>More detailed information about <code>activities</code> ,
-<code>cases</code>, <code>resources</code> and <code>traces</code> can
-be obtained using the functions named accordingly, as in the examples
-below for the <code>patients</code> event log.</p>
-<div id="activities" class="section level3">
-<h3>Activities</h3>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span> <span class="fu">activities</span>()</span></code></pre></div>
-<pre><code>## # A tibble: 7 × 3
-##   handling              absolute_frequency relative_frequency
-##   &lt;fct&gt;                              &lt;int&gt;              &lt;dbl&gt;
-## 1 Registration                         500             0.184 
-## 2 Triage and Assessment                500             0.184 
-## 3 Discuss Results                      495             0.182 
-## 4 Check-out                            492             0.181 
-## 5 X-Ray                                261             0.0959
-## 6 Blood test                           237             0.0871
-## 7 MRI SCAN                             236             0.0867</code></pre>
-</div>
-<div id="cases" class="section level3">
-<h3>Cases</h3>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span> <span class="fu">cases</span>()</span></code></pre></div>
-<pre><code>## # A tibble: 500 × 10
-##    patient trace…¹ numbe…² start_timestamp     complete_timestamp  trace trace…³
-##    &lt;chr&gt;     &lt;int&gt;   &lt;int&gt; &lt;dttm&gt;              &lt;dttm&gt;              &lt;chr&gt;   &lt;dbl&gt;
-##  1 1             6       6 2017-01-02 11:41:53 2017-01-09 19:45:45 Regi…       4
-##  2 10            5       5 2017-01-06 05:58:54 2017-01-10 15:41:59 Regi…       7
-##  3 100           5       5 2017-04-11 16:34:31 2017-04-22 09:58:07 Regi…       7
-##  4 101           5       5 2017-04-16 06:38:58 2017-04-23 02:55:23 Regi…       7
-##  5 102           5       5 2017-04-16 06:38:58 2017-04-22 10:50:04 Regi…       7
-##  6 103           6       6 2017-04-19 20:22:01 2017-04-23 02:36:55 Regi…       4
-##  7 104           6       6 2017-04-19 20:22:01 2017-04-23 02:07:20 Regi…       4
-##  8 105           6       6 2017-04-21 02:19:09 2017-04-27 01:09:05 Regi…       4
-##  9 106           6       6 2017-04-21 02:19:09 2017-05-01 09:54:39 Regi…       4
-## 10 107           5       5 2017-04-22 18:32:16 2017-04-27 02:45:57 Regi…       7
-## # … with 490 more rows, 3 more variables: duration &lt;drtn&gt;,
-## #   first_activity &lt;fct&gt;, last_activity &lt;fct&gt;, and abbreviated variable names
-## #   ¹​trace_length, ²​number_of_activities, ³​trace_id</code></pre>
-</div>
-<div id="resources" class="section level3">
-<h3>Resources</h3>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span> <span class="fu">resources</span>()</span></code></pre></div>
-<pre><code>## # A tibble: 7 × 3
-##   employee absolute_frequency relative_frequency
-##   &lt;fct&gt;                 &lt;int&gt;              &lt;dbl&gt;
-## 1 r1                      500             0.184 
-## 2 r2                      500             0.184 
-## 3 r6                      495             0.182 
-## 4 r7                      492             0.181 
-## 5 r5                      261             0.0959
-## 6 r3                      237             0.0871
-## 7 r4                      236             0.0867</code></pre>
-</div>
-<div id="traces" class="section level3">
-<h3>Traces</h3>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span> <span class="fu">traces</span>()</span></code></pre></div>
-<pre><code>## # A tibble: 7 × 3
-##   trace                                                          absol…¹ relat…²
-##   &lt;chr&gt;                                                            &lt;int&gt;   &lt;dbl&gt;
-## 1 Registration,Triage and Assessment,X-Ray,Discuss Results,Chec…     258   0.516
-## 2 Registration,Triage and Assessment,Blood test,MRI SCAN,Discus…     234   0.468
-## 3 Registration,Triage and Assessment,Blood test,MRI SCAN,Discus…       2   0.004
-## 4 Registration,Triage and Assessment,X-Ray                             2   0.004
-## 5 Registration,Triage and Assessment                                   2   0.004
-## 6 Registration,Triage and Assessment,X-Ray,Discuss Results             1   0.002
-## 7 Registration,Triage and Assessment,Blood test                        1   0.002
-## # … with abbreviated variable names ¹​absolute_frequency, ²​relative_frequency</code></pre>
-</div>
-</div>
-<div id="section" class="section level2 unnumbered">
-<h2 class="unnumbered"></h2>
+## # A tibble: 5,442 × 7
+##    handling           patient emplo…¹ handl…² regis…³ time                .order
+##    &lt;fct&gt;              &lt;chr&gt;   &lt;fct&gt;   &lt;chr&gt;   &lt;fct&gt;   &lt;dttm&gt;               &lt;int&gt;
+##  1 Triage and Assess… 500     r2      1000    comple… 2018-05-05 07:16:02   3721
+##  2 Discuss Results    495     r6      2229    comple… 2018-05-05 02:49:57   4950
+##  3 X-Ray              498     r5      1734    comple… 2018-05-05 01:34:30   4455
+##  4 Triage and Assess… 500     r2      1000    start   2018-05-04 23:53:27   1000
+##  5 Triage and Assess… 499     r2      999     comple… 2018-05-04 23:53:27   3720
+##  6 Discuss Results    495     r6      2229    start   2018-05-04 23:50:05   2229
+##  7 Discuss Results    489     r6      2223    comple… 2018-05-04 23:50:05   4944
+##  8 X-Ray              498     r5      1734    start   2018-05-04 21:50:07   1734
+##  9 X-Ray              497     r5      1733    comple… 2018-05-04 21:50:07   4454
+## 10 Discuss Results    489     r6      2223    start   2018-05-04 20:24:44   2223
+## # … with 5,432 more rows, and abbreviated variable names ¹​employee,
+## #   ²​handling_id, ³​registration_type</code></pre>
 <hr />
 <p>Read more:</p>
 <div class="btn-toolbar" role="group">
-<p><a href = "create_logs.html" class="btn btn-secondary" type="button">Create
-Logs</a>
-<a href = "adjust_logs.html" class="btn btn-secondary" type="button">Adjust
-Logs</a>
-<a href = "public_logs.html" class="btn btn-secondary" type="button">Public
-Logs</a>
-<a href = "xes_files.html" class="btn btn-secondary" type="button">Xes
-Files</a>
-<a href = "inspect_logs.html" class="btn btn-secondary disabled" type="button">Inspect
-Logs</a>
-<a href = "data_quality.html" class="btn btn-secondary" type="button">Data
-Quality</a></p>
+<p><a href = "wrangling.html" class="btn btn-info disabled" type="button">Wrangling</a>
+<a href = "case_filters.html" class="btn btn-info" type="button">Case
+Filters</a>
+<a href = "event_filters.html" class="btn btn-info" type="button">Event
+Filters</a>
+<a href = "generic_filtering.html" class="btn btn-info" type="button">Generic
+Filtering</a>
+<a href = "augment.html" class="btn btn-info" type="button">Augment</a>
+<a href = "mutate.html" class="btn btn-info" type="button">Mutate</a>
+<a href = "collapse.html" class="btn btn-info" type="button">Collapse</a>
+<a href = "unite.html" class="btn btn-info" type="button">Unite</a></p>
 </div>
 </div>
 </div>

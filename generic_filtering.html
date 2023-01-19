@@ -35,6 +35,7 @@ ga('create', 'UA-92605173-2', 'auto');
 ga('send', 'pageview');
 
 </script>
+<!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="pkgdown.js"></script>
 <link rel="shortcut icon" href="images/logo/favicon.PNG" />
 <style>
   .title{
@@ -466,6 +467,10 @@ div.tocify {
   <ul class="dropdown-menu" role="menu">
     <li>
       <a href="manipulate.html">Overview</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="wrangling.html">Wrangling</a>
     </li>
     <li class="divider"></li>
     <li class="dropdown-header">Filter</li>
@@ -912,12 +917,12 @@ event log containing n cases. The code below returns a sample of 10
 patients.</p>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sample_n</span>(<span class="at">size =</span> <span class="dv">10</span>)</span></code></pre></div>
-<pre><code>## # Log of 114 events consisting of:
-## 2 traces 
+<pre><code>## # Log of 112 events consisting of:
+## 3 traces 
 ## 10 cases 
-## 57 instances of 7 activities 
+## 56 instances of 7 activities 
 ## 7 resources 
-## Events occurred from 2017-01-05 04:56:11 until 2018-04-26 01:01:25 
+## Events occurred from 2017-01-13 12:09:49 until 2018-05-04 23:50:05 
 ##  
 ## # Variables were mapped as follows:
 ## Case identifier:     patient 
@@ -927,20 +932,20 @@ patients.</p>
 ## Timestamp:           time 
 ## Lifecycle transition:        registration_type 
 ## 
-## # A tibble: 114 × 7
+## # A tibble: 112 × 7
 ##    handling     patient employee handling_id regist…¹ time                .order
 ##    &lt;fct&gt;        &lt;chr&gt;   &lt;fct&gt;    &lt;chr&gt;       &lt;fct&gt;    &lt;dttm&gt;               &lt;int&gt;
-##  1 Registration 8       r1       8           start    2017-01-05 04:56:11      1
-##  2 Registration 34      r1       34          start    2017-02-05 23:01:36      2
-##  3 Registration 105     r1       105         start    2017-04-21 02:19:09      3
-##  4 Registration 149     r1       149         start    2017-05-26 15:01:49      4
-##  5 Registration 175     r1       175         start    2017-06-19 17:40:31      5
-##  6 Registration 275     r1       275         start    2017-09-24 22:29:19      6
-##  7 Registration 307     r1       307         start    2017-10-22 10:11:54      7
-##  8 Registration 380     r1       380         start    2017-12-29 10:00:33      8
-##  9 Registration 384     r1       384         start    2017-12-30 19:02:53      9
-## 10 Registration 484     r1       484         start    2018-04-22 13:40:27     10
-## # … with 104 more rows, and abbreviated variable name ¹​registration_type</code></pre>
+##  1 Registration 16      r1       16          start    2017-01-13 12:09:49      1
+##  2 Registration 62      r1       62          start    2017-03-08 20:55:09      2
+##  3 Registration 80      r1       80          start    2017-03-29 22:12:55      3
+##  4 Registration 116     r1       116         start    2017-04-29 03:24:59      4
+##  5 Registration 119     r1       119         start    2017-05-01 16:37:29      5
+##  6 Registration 212     r1       212         start    2017-07-26 04:56:00      6
+##  7 Registration 315     r1       315         start    2017-10-28 01:11:54      7
+##  8 Registration 350     r1       350         start    2017-11-24 12:22:18      8
+##  9 Registration 467     r1       467         start    2018-03-29 18:17:50      9
+## 10 Registration 489     r1       489         start    2018-04-27 20:50:45     10
+## # … with 102 more rows, and abbreviated variable name ¹​registration_type</code></pre>
 <p>Note that this function can also be used with a sample size bigger
 than the number of cases in the event log, if you allow for the
 replacements of drawn cases.</p>
@@ -950,7 +955,8 @@ information.</p>
 <hr />
 <p>Read more:</p>
 <div class="btn-toolbar" role="group">
-<p><a href = "case_filters.html" class="btn btn-info" type="button">Case
+<p><a href = "wrangling.html" class="btn btn-info" type="button">Wrangling</a>
+<a href = "case_filters.html" class="btn btn-info" type="button">Case
 Filters</a>
 <a href = "event_filters.html" class="btn btn-info" type="button">Event
 Filters</a>

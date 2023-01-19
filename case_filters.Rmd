@@ -1,5 +1,5 @@
 ---
-title: bupaR Docs | Filter case
+title: "bupaR Docs | Filter case"
 ---
 
 
@@ -21,7 +21,7 @@ library(bupaverse)
 
 ## Activity presence {.tabset .tabset-pills}
 
-Using `filter_activity_presence` can be used to select cases that contain a specific activity, for instance a X-Ray scan.
+Use`filter_activity_presence()` to select cases that contain a specific activity, for instance an X-Ray scan. The function returns a `log` object. For the illustration purposes [`traces()`](inspect_logs.html) is also used.
 
 ```{r}
 patients %>%
@@ -37,6 +37,8 @@ patients %>%
 	traces()
 ```
 
+
+
 We can also specify more than one activity. In this case, the `method` argument can be configured as follows: 
 
 * "all" means that all the specified activity labels must be present for a case to be selected.
@@ -45,7 +47,7 @@ We can also specify more than one activity. In this case, the `method` argument 
 * "exact" means that all of these activities have to be present (although multiple times and in random orderings), while no others are  allowed. 
 * "only" means that only (a set of) these activities are allowed to be present, and no others. 
 
-Below illustrates these different options for the activities _Create Fine_ and _Payment_ in the `traffic_fines` dataset. Note that the unfiltered dataset has 44 distinct traces. 
+Below an illustration of these different options for the activities _Create Fine_ and _Payment_ from `traffic_fines`. Note that the unfiltered dataset has 44 distinct traces. 
 <style>
 div.blue { background-color:#E6F4F1; border-radius: 5px; padding: 20px;}
 </style>
@@ -88,7 +90,7 @@ traffic_fines %>%
 ### Exact
 <div class = "blue">
 
-Only 2 have exactly these activities. 
+Only 2 traces consist of exactly these activities. 
 
 ```{r}
 traffic_fines %>%
@@ -100,7 +102,7 @@ traffic_fines %>%
 ### Only
 <div class = "blue">
 
-And the same two have only these activities. 
+And the same 2 traces have only these activities. 
 
 ```{r}
 traffic_fines %>%
@@ -111,7 +113,7 @@ traffic_fines %>%
 
 ## {.unlisted .unnumbered}
 
-Note that when one of the specified activities cannot be found in the log, you will get a warning about this. However, the filter will proceed with the specified list in any case. The result below shows that no trace has the activity "Create Fines". 
+Note that when one of the specified activities cannot be found in the log, you will get a warning about this. However, `filter_activity_presence()` will proceed with the specified list in any case. The result below shows that no trace has the activity "Create Fines". 
 
 ```{r}
 traffic_fines %>%
@@ -120,7 +122,7 @@ traffic_fines %>%
 ```
 ## Case
 
-`filter_case` can be used to filter cases based on their identifier. 
+`filter_case()` can be used to filter cases based on their identifier. It returns the same `log` object containing events with the specified cases.
 
 ```{r}
 traffic_fines %>%
@@ -134,7 +136,7 @@ traffic_fines %>%
 ```
 ## Case Condition
 
-`filter_case_condition` can be used to select cases for which a condition hold. This condition can related to any of the variables in the log. 
+`filter_case_condition()` can be used to select cases for which a condition holds. This condition can be related to any of the variables in the log. 
 
 For example, select all cases where _resource_ 561 is involved. 
 
@@ -142,7 +144,7 @@ For example, select all cases where _resource_ 561 is involved.
 traffic_fines %>%
 	filter_case_condition(resource == 561)
 ```
-Note that multiple conditions can be combined using the symbols `|` (or) and `&` (and). For example, let's select all cases where _resource_ 557 is involved, and the _points_ are more than zero. 
+Note that multiple conditions can be combined using the symbols `|` (or) and `&` (and). For example, let's select all cases where _resource_ 557 is involved, and the _points_ are more than 0. 
 
 ```{r}
 traffic_fines %>%
@@ -159,14 +161,14 @@ traffic_fines %>%
 
 ## Endpoints
 
-`filter_endpoints` allows to select cases with a specific start and/or end activity. In case of the patients data set, all cases start with "Registration". Filtering cases that __don't__ start with Registration (`reverse = TRUE`)  gives an empty log.
+`filter_endpoints()` allows to select cases with a specific start and/or end activity. In case of the `patients` data set, all cases start with "Registration". Filtering cases that __don't__ start with Registration (`reverse = TRUE`)  gives an empty log.
 
 ```{r}
 patients %>%
 	filter_endpoints(start_activities = "Registration", reverse = TRUE)
 ```
 
-If we are interested to see the "completed" cases, those that start with Registration and end we "Check-out", we can apply the following filter.
+If we are interested to see the "completed" cases, those that start with Registration and end we "Check-out", we can apply the following filter. Here [`process_map()`](frequency_maps.html) is used for the illustration purposes.
 
 ```{r fig.width = 9}
 patients %>%
@@ -176,14 +178,14 @@ patients %>%
 
 ## Endpoints Condition
 
-`filter_endpoints_condition` allows to select cases by applying conditions to the start and/or end activity instance. For example. We can use it to replace the `filter_endpoints` command from above, using conditions on the _handling_ variable.
+`filter_endpoints_condition()` allows to select cases by applying conditions to the start and/or end activity instance. For example. We can use it to replace the `filter_endpoints()` from above, using conditions on the _handling_ variable.
 
 ```{r}
 patients %>%
 	filter_endpoints_condition(start_condition = handling  == "Registration", end_condition = handling  == "Check-out")
 ```
 
-Naturally, both conditions can use any of the available variables. The following selects all cases that started between midnight and 6am. Note that no condition is applied on the end activity instance using the `end_condition = TRUE` specification.  
+Naturally, both conditions can use any of the available variables. The following selects all cases that started between midnight and 6am. Note that no condition is applied on the end activity instance using the `end_condition = TRUE` specification. We use [`dotted_chart("relative_day")`](https://bupaverse.github.io/docs/dotted_chart.html) to plot a graph where, each activity instance is displayed with a dot. The x-axis refers to the time aspect (here a __relative__ time difference since the first case on x-axis), while the y-axis refers to cases. 
 
 ```{r}
 patients %>%
@@ -194,9 +196,9 @@ patients %>%
 
 ## Flow Time
 
-`filter_flow_time` can be used to select cases in which a specific directly-follows flow (from > to) happens within a specific time duration interval. 
+`filter_flow_time()` can be used to select cases in which a specific directly-follows flow (from > to) happens within a specific time duration interval. 
 
-For example, we can select the fines in `traffic_fines` in which the creation is followed by the payment within 4 weeks. 
+For example, we can select the fines from `traffic_fines` in which the creation is followed by the payment within 4 weeks. 
 
 ```{r}
 traffic_fines %>%
@@ -219,12 +221,12 @@ traffic_fines %>%
 ## Idle Time {.tabset .tabset-pills}
 
 The idle time is the total time period during the execution of a case where no activity instances are _active_. An activity instance is considered _active_ between the registration of the first related event and the last related event. See more on performance metrics [here](performance_analysis.html).
-`filter_idle_time` can be used to select cases based on the amount of idle time. There are two approaches: using an interval, or using a percentage. 
+`filter_idle_time()` can be used to select cases based on the amount of idle time. There are two approaches: using an interval, or using a percentage. 
 
 ### Interval-based
 <div class = "blue">
 
-Using `filter_idle_time` with argument `interval`, you can select cases of which the idle time falls within a certain duration of time. For example, all the cases of patients with an idle time from 10 to 20 hours. Note that it is mandatory to set the appropriate time unit using `units` for the interval to be as you intend it. The default time unit is seconds. 
+Using `filter_idle_time()` with argument `interval`, you can select cases of which the idle time falls within a certain duration of time. For example, all the cases of patients with an idle time from 10 to 20 hours. Note that it is mandatory to set the appropriate time unit using `units` for the interval to be as you intend it. The default time unit is seconds. 
 
 ```{r}
 patients %>%
@@ -240,7 +242,7 @@ patients %>%
 	filter_idle_time(interval = c(10,NA), units = "hours") %>%
 	idle_time(unit = "hours")
 ```
-And use `reverse`.
+And use `reverse = TRUE`.
 
 ```{r}
 patients %>%
@@ -252,7 +254,7 @@ patients %>%
 ### Percentage-based
 <div class = "blue">
 
-Using `filter_idle_time` with argument `percentage`, you can give priority to cases with the lowest idle time. For example, setting `percentage = 0.5` will select 50% of the cases, starting with those that have the lowest idle time. 
+Using `filter_idle_time()` with argument `percentage`, you can give priority to cases with the lowest idle time. For example, setting `percentage = 0.5` will select 50% of the cases, starting with those that have the lowest idle time. 
 
 ```{r}
 patients %>%
@@ -279,13 +281,13 @@ Note that for both approaches, calculations using idle time assume non-atomic ac
 
 ## Infrequent Flows
 
-`filter_infrequent_flows` allows us to select a set of cases in which every directly-follows flow has a minimum frequency. For example, consider the `traffic_fines` process matrix below. 
+`filter_infrequent_flows()` allows us to select a set of cases in which every directly-follows flow has a minimum frequency. For example, consider the `traffic_fines` [process map](https://bupaverse.github.io/docs/frequency_maps.html) below. 
 
 ```{r}
 traffic_fines %>% process_map()
 ```
 
-In this map, we can observe several unique directly follows relations, as well as flows occuring only 2 or 3 times. Using the filter, we can remove the cases that lead to these flows as follows. 
+In this map, we can observe several unique directly follows relations, as well as flows occurring only 2 or 3 times. Using the filter, we can remove the cases that lead to these flows as follows:
 
 ```{r eval = F}
 traffic_fines %>%
@@ -294,23 +296,23 @@ traffic_fines %>%
 ```
 We can immediately observe less very infrequent flows in the process map. 
 
-It is important to note that `filter_infrequent_flows` does __not__ remove edges from the process map, but entire cases underlying infrequent behaviour. We strongly adhere to the principal that the process map should be a based on a clearly defined set of events, which are either the result of case filters, or specific event filters (see [Event Filters](event_filters.html)). Removing specific edges from a process map requires removing specific activity instances from the log, which not necessarily removing other activity instances of the same activity type. This would result in an ambiguous map which could give a misleading view on your process. 
+It is important to note that `filter_infrequent_flows()` does __not__ remove edges from the process map, but entire cases underlying infrequent behavior. We strongly adhere to the principal that the process map should be a based on a clearly defined set of events, which are either the result of case filters, or specific event filters (see [Event Filters](event_filters.html)). Removing specific edges from a process map requires removing specific activity instances from the log, which not necessarily removing other activity instances of the same activity type. This would result in an ambiguous map which could give a misleading view on your process. 
 
 ## Precedence
 
-The `filter_precedence` allows us to filter cases based on flows between activities, using 5 different inputs:
+The `filter_precedence()` allows us to filter cases based on flows between activities, using 5 different inputs:
 
 *	A list of (one or more) possible `antecedent` activities ("source"-activities)
 *	A list of (one or more) possible `consequent` activities ("target"-activities)
 *	A `precedence_type`
-	*	directly_follows
-	*	eventually_follows
-*	A `filter_method`: all, one_of or none of the precedence rules should hold.
+	*	"directly_follows"
+	*	"eventually_follows"
+*	A `filter_method`: "all", "one_of" or "none" of the precedence rules should hold.
 *	A `reverse` argument
 
 If there is more than one `antecedent` or `consequent` activity, the filter will test __all__ possible pairs. The `filter_method` will tell the filter whether all of the rules should hold, at least one, or none are allowed.
 
-For example, take the patients data. The following filter takes only cases where _Triage and Assessment_ is directly followed by _Blood test_.
+For example, take the `patients` data. The following filter takes only cases where _Triage and Assessment_ is directly followed by _Blood test_.
 
 ```{r}
 patients %>%
@@ -357,9 +359,9 @@ As always, the filter can be negated with `reverse = TRUE`.
 
 ## Precedence Condition
 
-`filter_precedence_condition` is a generic version of `filter_precendence`, where the antecedent and consequents are conditions instead of activity label. This filter can only test for one pair at a time, thus not having a `filter_method`. The `precedence_type` can again be configured. 
+`filter_precedence_condition()` is a generic version of `filter_precendence()`, where the antecedent(s) and consequent(s) are conditions instead of activity labels. This filter can only test for one pair at a time, thus not having a `filter_method`. The `precedence_type` can again be configured. 
 
-The following examples takes all cases in `traffic_fines` where an activity instance with _dismissal_ equal to _NIL_ is eventually followed by an activity instance with _notificationtype_ equal to _P_. 
+The following examples takes all cases from `traffic_fines` where an activity instance with _dismissal_ equal to _NIL_ is eventually followed by an activity instance with _notificationtype_ equal to _P_. 
 
 ```{r}
 traffic_fines %>%
@@ -370,7 +372,7 @@ traffic_fines %>%
 
 ## Precedence Resource
 
-`filter_precedence_resource` is similar to `filter_precedence` but additionally requires that the resources of both executions are equal. While there are three traces that adhere to the following antecedence-consequent directly-follows pair (see earlier), there is not a single case where the two activities are executed by the same resource, returning an empty log. (In fact, all activity types in patients are linked to a distinct resource in a one-to-one relationship.)
+`filter_precedence_resource()` is similar to `filter_precedence()`, but additionally requires that the resources of both executions are equal. While there are three traces that adhere to the following antecedence-consequent directly-follows pair (see earlier), there is not a single case where the two activities are executed by the same resource, returning an empty log. (In fact, all activity types in patients are linked to a distinct resource in a one-to-one relationship.)
 
 
 ```{r}
@@ -386,12 +388,12 @@ patients %>%
 
 The processing time is the total time period during the execution of a case where an activity instance is _active_. An activity instance is considered _active_ between the registration of the first related event and the last related event. See more on performance metrics [here](performance_analysis.html).
 
-`filter_processing_time` can be used to select cases based on the amount of processing time. There are two approaches: using an interval, or using a percentage. 
+`filter_processing_time()` can be used to select cases based on the amount of processing time. There are two approaches: using an interval, or using a percentage. 
 
 ### Interval-based
 <div class = "blue">
 
-Using `filter_processing_time` with argument `interval`, you can select cases of which the processing time falls within a certain duration of time. For example, all the cases of patients with an processing time from 10 to 20 hours. Note that it is mandatory to set the appropriate time unit using `units` for the interval to be as you intend it. The default time unit is seconds. 
+Using `filter_processing_time()` with argument `interval`, you can select cases of which the processing time falls within a certain duration of time. For example, all the cases of patients with an processing time from 10 to 20 hours. Note that it is mandatory to set the appropriate time unit using `units` for the interval to be as you intend it. The default time unit is seconds. 
 
 ```{r}
 patients %>%
@@ -407,7 +409,7 @@ patients %>%
 	filter_processing_time(interval = c(10,NA), units = "hours") %>%
 	processing_time(unit = "hours")
 ```
-And use `reverse`.
+And use `reverse = TRUE`.
 
 ```{r}
 patients %>%
@@ -419,7 +421,7 @@ patients %>%
 ### Percentage-based
 <div class = "blue">
 
-Using `filter_processing_time` with argument `percentage`, you can give priority to cases with the lowest processing time. For example, setting `percentage = 0.5` will select 50% of the cases, starting with those that have the lowest processing time. 
+Using `filter_processing_time()` with argument `percentage`, you can give priority to cases with the lowest processing time. For example, setting `percentage = 0.5` will select 50% of the cases, starting with those that have the lowest processing time. 
 
 ```{r}
 patients %>%
@@ -449,12 +451,12 @@ Note that for both approaches, calculations using processing time assume non-ato
 
 The throughput time is the total time period from the first event to the last event belonging to a case. See more on performance metrics [here](performance_analysis.html).
 
-`filter_throughput_time` can be used to select cases based on the amount of throughput time. There are two approaches: using an interval, or using a percentage. 
+`filter_throughput_time()` can be used to select cases based on the amount of throughput time. There are two approaches: using an interval, or using a percentage. 
 
 ### Interval-based
 <div class = "blue">
 
-Using `filter_throughput_time` with argument `interval`, you can select cases of which the throughput time falls within a certain duration of time. For example, all the cases of patients with an throughput time from 1 to 5 days. Note that it is mandatory to set the appropriate time unit using `units` for the interval to be as you intend it. The default time unit is seconds. 
+Using `filter_throughput_time()` with argument `interval`, you can select cases of which the throughput time falls within a certain duration of time. For example, all the cases of patients with an throughput time from 1 to 5 days. Note that it is mandatory to set the appropriate time unit using `units` for the interval to be as you intend it. The default time unit is seconds. 
 
 ```{r}
 patients %>%
@@ -470,7 +472,7 @@ patients %>%
 	filter_throughput_time(interval = c(10,NA), units = "days") %>%
 	throughput_time(unit = "days")
 ```
-And use `reverse`.
+And use `reverse = TRUE`.
 
 ```{r}
 patients %>%
@@ -482,7 +484,7 @@ patients %>%
 ### Percentage-based
 <div class = "blue">
 
-Using `filter_throughput_time` with argument `percentage`, you can give priority to cases with the lowest throughput time. For example, setting `percentage = 0.5` will select 50% of the cases, starting with those that have the lowest throughput time. 
+Using `filter_throughput_time()` with argument `percentage`, you can give priority to cases with the lowest throughput time. For example, setting `percentage = 0.5` will select 50% of the cases, starting with those that have the lowest throughput time. 
 
 ```{r}
 patients %>%
@@ -507,12 +509,12 @@ Note that it is not necessary to specify the time units when using the percentag
 
 ## Time Period {.tabset .tabset-pills}
 	
-Filtering cases by time period can be done using the `filter_time_period` introduced above. There are four different `filter_method`s that act as case filters:
+Filtering cases by time period can be done using the `filter_time_period()` introduced above. There are four different `filter_method`'s that act as case filters:
 
-*	`start`: all cases started in an interval.
-*	`complete`: all cases completed in an interval.
-*	`contained`: all cases contained in an interval.
-*	`intersecting`: all cases with some activity in an interval.
+*	"start": all cases started in an interval.
+*	"complete": all cases completed in an interval.
+*	"contained": all cases contained in an interval.
+*	"intersecting": all cases with some activity in an interval.
 	
 Using the same interval (the month of January 2015), you can compare the results of different filtering methods below using [dotted charts](dotted_chart.html). 
 
@@ -557,13 +559,13 @@ sepsis %>%
 	
 ## Trace Frequency {.tabset .tabset-pills}
 
-The frequency of a trace, i.e. distinct activity sequence, is the number of cases, i.e. process instances, that follow this trace. 
-`filter_trace_frequency` can be used to select cases based on the amount of throughput time. There are two approaches: using an interval, or using a percentage. 
+The frequency of a trace, i.e. distinct activity sequence, is the number of cases, i.e. process instances that follow this trace. 
+`filter_trace_frequency()` can be used to select cases based on the amount of throughput time. There are two approaches: using an interval, or using a percentage. 
 
 ### Interval-based
 <div class = "blue">
 
-Using `filter_trace_frequency` with argument `interval`, you can select cases of which the trace frequency falls within a certain frequency interval. For example, all the cases of sepsis with a trace frequency between 10 and 50. 
+Using `filter_trace_frequency()` with argument `interval`, you can select cases of which the trace frequency falls within a certain frequency interval. For example, all the cases from `sepsis` with a trace frequency between 10 and 50. [`traces()`](inspect_logs.html) is used to show the changes to the log data after applying the filter.
 
 ```{r}
 sepsis %>%
@@ -574,12 +576,11 @@ sepsis %>%
 Also here you can use half-open intervals. 
 
 ```{r}
-
 sepsis %>%
 	filter_trace_frequency(interval = c(5,NA)) %>%
 	traces()
 ```
-And use `reverse`.
+And use `reverse = TRUE`.
 
 ```{r}
 sepsis %>%
@@ -592,7 +593,7 @@ sepsis %>%
 ### Percentage-based
 <div class = "blue">
 
-Using `filter_trace_frequency` with argument `percentage`, you can give priority to cases with a frequent trace. For example, setting `percentage = 0.2` will select at least 20% of the cases, starting with those that have the highest frequency. 
+Using `filter_trace_frequency()` with argument `percentage`, you can give priority to cases with a frequent trace. For example, setting `percentage = 0.2` will select at least 20% of the cases, starting with those that have the highest frequency. 
 
 ```{r}
 sepsis %>%
@@ -608,7 +609,7 @@ sepsis %>%
 	traces()
 ```
 
-Note that the obtained percentage of cases will not always be exactly the specified percentage, as there can be ties. For example, in the sepsis dataset, 784 of the 1050 cases follow a distinct activity sequence. As bupaR will not break ties randomnly, it will select _all_ cases once the percentage set is higher then ca. 24%, as it will include all unique cases then still remaining in the log to get to this coverage.
+Note that the obtained percentage of cases will not always be exactly the specified percentage, as there can be ties. For example, in the `sepsis` data set, 784 of the 1050 cases (75%) follow a distinct activity sequence. As `bupaR` will not break ties randomly, it will select _all_ cases once the percentage set is higher then ca. 24%, as it will include all unique cases then still remaining in the log to get to this coverage.
 
 </div>
 
@@ -619,12 +620,12 @@ Note that the obtained percentage of cases will not always be exactly the specif
 
 The length of a trace, i.e. distinct activity sequence, is the number of activity instances it contains. Note that this is not necessarily equal to the number of events. 
 
-`filter_trace_length` can be used to select cases based on the amount of throughput time. There are two approaches: using an interval, or using a percentage. 
+`filter_trace_length()` can be used to select cases based on the amount of throughput time. There are two approaches: using an `interval`, or using a `percentage`.
 
 ### Interval-based
 <div class = "blue">
 
-Using `filter_trace_length` with argument `interval`, you can select cases of which the trace length falls within a certain  interval. For example, all the cases of sepsis with a trace length between 10 and 50. 
+Using `filter_trace_length()` with argument `interval`, you can select cases of which the trace length falls within a certain  interval. For example, all the cases of sepsis with a trace length between 10 and 50. Changes are illustrated with [`traces()`](inspect_logs.html).
 
 ```{r}
 sepsis %>%
@@ -640,7 +641,7 @@ sepsis %>%
 	filter_trace_length(interval = c(10,NA)) %>%
 	traces()
 ```
-And use `reverse`.
+And use `reverse = TRUE`.
 
 ```{r}
 sepsis %>%
@@ -653,7 +654,7 @@ sepsis %>%
 ### Percentage-based
 <div class = "blue">
 
-Using `filter_trace_length` with argument `percentage`, you can give priority to cases with the longest length. For example, setting `percentage = 0.5` will select 50% of the cases, starting with those that have the highest length. 
+Using `filter_trace_length()` with argument `percentage`, you can give priority to cases with the longest length. For example, setting `percentage = 0.5` will select 50% of the cases, starting with those that have the highest length. Again, changes are illustrated with [`traces()`](inspect_logs.html).
 
 ```{r}
 sepsis %>%

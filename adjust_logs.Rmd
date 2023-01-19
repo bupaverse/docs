@@ -28,7 +28,7 @@ For an `activitylog`:
 * 	timestamps (`timestamps`)
 *	resource (`resource`)
 
-More information on these characteristics can be found [here](http://bupar.net/creating_eventlogs.html). Each of these can be modified to approach event logs from a different angle. This can be done using the `eventlog()` or `activitylog()`-function, auxiliary  `set_`-functions, or by using an existing mapping.
+More information on these characteristics can be found [here](http://bupar.net/creating_eventlogs.html). Each of these can be modified to approach event logs from a different angle. This can be done using the `eventlog()` or `activitylog()`, auxiliary  `set_`-functions, or by using an existing mapping.
 
 ```{r message = F, warning = F}
 library(bupaR)
@@ -46,9 +46,9 @@ traffic_fines %>%
 	eventlog(case_id = "vehicleclass")
 ```
 
-## Using `set_` functions
+## Using `set_`-functions
 
-If we only want to change one of the elements, as in the example above, the `set()` function provide a very convenient way to do so. The same change as before can be done as follows:
+If we only want to change one of the elements, as in the example above, `set()` provides a very convenient way to do so. The same change as before can be done as follows:
 
 ```{r}
 traffic_fines %>%
@@ -57,7 +57,7 @@ traffic_fines %>%
 
 ## Using existing mapping
 
-It is also possible to extract the `log` mapping at a certain point of time using the `mapping()` function.
+It is also possible to extract the `log` mapping at a certain point of time using `mapping()`.
 
 ```{r}
 mapping_fines <- mapping(traffic_fines)
@@ -72,7 +72,7 @@ traffic_fines %>%
 	set_activity_id("notificationtype") -> traffic_fines
 ```
 
-Later, we can always undo these changes and "reset" the original mapping using the `re_map` function. 
+Later, we can always undo these changes and "reset" the original mapping using `re_map()`. 
 
 ```{r}
 traffic_fines %>%

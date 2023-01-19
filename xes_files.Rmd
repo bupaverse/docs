@@ -13,7 +13,7 @@ knitr::include_graphics("images/icons/create.PNG")
 
 ## Read XES
 
-The function  `read_xes()` can be used to read XES files and turn the data into an `eventlog` object in R. The function needs only one `xesfile` argument. This can be a local path to a file with a .xes extension or an URL. An example XES file can be found at the following link: [https://bupar.net/eventdata/exercise1.xes](https://bupar.net/eventdata/exercise1.xes). When opening this file in a browser, you will see that it is an XML file. More information on the notation can be found [here](http://www.xes-standard.org/).
+`read_xes()` can be used to read XES files and turn the data into an `eventlog` object in R. The function needs only one `xesfile` argument. This can be a local path to a file with a .xes extension or an URL. An example XES file can be found at the following link: [https://bupar.net/eventdata/exercise1.xes](https://bupar.net/eventdata/exercise1.xes). When opening this file in a browser, you will see that it is an XML file. More information on the notation can be found [here](http://www.xes-standard.org/).
 
 Importing a XES file is easily done as follows:
 
@@ -32,7 +32,7 @@ data <- read_xes("https://bupar.net/eventdata/exercise1.xes")
 data
 ```
 
-Note that in the example above, the `read_xes()` function emits a warnings that no activity instance identifier was found. Recall that an `eventlog` object in R needs certain [data fields](create_logs.html) to be present. However, it might be so that not all of these field are available, in which case `read_xes()` will throw a warning or an error. Ideally, the XES file should contain at least the following elements:
+Note that in the example above, `read_xes()` emits a warnings that no activity instance identifier was found. Recall that an `eventlog` object in R needs certain [data fields](create_logs.html) to be present. However, it might be so that not all of these field are available, in which case `read_xes()` will throw a warning or an error. Ideally, the XES file should contain at least the following elements:
 
 
 ```xml
@@ -91,7 +91,7 @@ Note that both traces and events can have additional elements in the XES files. 
 
 ## Create list of cases
 
-In certain circumstances, it might be useful to have a separate list of cases with case attributes. This can be obtained using function `read_xes_cases()`. The argument for this function remains the same `xesfile.` The result is a `data.frame` with one row for each case and one column for each attribute. Non-existing attributes for a specific case are filled in with NA`s. Below, this function is illustrated using the _repairExample_ event log, which has one case attribute called _description_. For the sake of illustration the entire event log is also imported.
+In certain circumstances, it might be useful to have a separate list of cases with case attributes. This can be obtained using `read_xes_cases()`. The argument for this function remains the same `xesfile.` The result is a `data.frame` with one row for each case and one column for each attribute. Non-existing attributes for a specific case are filled in with NA`s. Below, this function is illustrated using the _repairExample_ event log, which has one case attribute called _description_. For the sake of illustration the entire event log is also imported.
 
 ```{r}
 read_xes_cases("https://bupar.net/eventdata/repairExample.xes")
@@ -103,7 +103,7 @@ read_xes("https://bupar.net/eventdata/repairExample.xes")
 
 ## Write XES
 
-Writing a XES file can be done using the function `write_xes()`. 
+Use `write_xes()` to write a XES file.
 
 ```{r}
 args(write_xes)

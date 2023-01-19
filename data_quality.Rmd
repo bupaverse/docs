@@ -68,7 +68,7 @@ hospital_actlog <- activitylog(hospital_actlog)
 
 Detect violations of dependencies between attributes (i.e. condition(s) that should hold when (an)other condition(s) hold(s)).
 
-Example: when the activity is "Registration", the orginator should start with "Clerk". 
+Example: when the activity is "Registration", the originator should start with "Clerk". 
 
 ```{r}
 hospital_actlog %>% 
@@ -87,9 +87,9 @@ hospital_actlog %>%
 
 ## Conditional Activity Presence
 
-Check whether certain activity/ies are present in case a specific condition is satisfied. 
+Check whether certain activities are present when a specific condition is satisfied. 
 
-For example, if specialization is "TRAU", there should be a "Clinical exam". 
+For example, if specialization is "TRAU", then the activity "Clinical exam" must take place. 
 
 ```{r}
 hospital_actlog %>%
@@ -102,14 +102,14 @@ hospital_actlog %>%
 
 Detect duration outliers for particular activities. 
 
-For example, the duration of Treatment should be within 1 standard deviation of its mean duration. 
+For example, the duration of "Treatment" should be within 1 standard deviation of its mean duration. 
 
 ```{r}
 hospital_actlog %>%
   detect_duration_outliers(Treatment = duration_within(bound_sd = 1))
 ```
 
-Or, the duration of Treatement should be within 0 and 15 minutes. 
+Or, the duration of "Treatment" should be within 0 to 15 minutes. 
 
 ```{r}
 hospital_actlog %>%
@@ -188,7 +188,7 @@ hospital_actlog %>%
 
 ## Related Activities
 
-Check responded existence between two activities. If the antecedent activity is executed for a case, the consequent activity should be executed as well. Look at [Rule-Based Conformance Checking](https://bupaverse.github.io/docs/control_flow_analysis.html) for more control-flow rules that you can check.
+Check responded existence between two activities. If the antecedent activity is executed for a case, the consequent activity should be executed as well. Take a look at [Rule-Based Conformance Checking](https://bupaverse.github.io/docs/control_flow_analysis.html) for more control-flow rules that you can check.
 
 ```{r}
 hospital_actlog %>%
@@ -198,7 +198,7 @@ hospital_actlog %>%
 
 ## Similar Labels
 
-Check for similary labels in a specific column. Both the column and the maximum allowed edit distance for two labels to consider similar can be configured.
+Check for similar labels in a specific column. Both the column and the maximum allowed edit distance for two labels to consider similar can be configured.
 
 ```{r}
 hospital_actlog %>%
@@ -229,7 +229,7 @@ hospital_actlog %>%
 
 ## Value Range Violations
 
-Detect 
+Detect value range violation.
 
 ```{r}
 hospital_actlog %>%

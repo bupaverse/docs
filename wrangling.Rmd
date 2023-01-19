@@ -4,7 +4,7 @@ title: bupaR Docs | Mutate logs
 
 
 ```{r echo = F, out.width="25%", fig.align = "right"}
-knitr::include_graphics("images/icons/manipulate.png")
+knitr::include_graphics("images/icons/manipulate.PNG")
 ```
 
 

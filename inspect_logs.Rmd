@@ -16,7 +16,7 @@ knitr::include_graphics("images/icons/create.PNG")
 
 ## Getting metadata
 
-The mapping function can be used to retrieve all the meta data from an event log object, i.e. the relation between event log identifiers and data fields.
+The mapping function can be used to retrieve all the meta data from a `log` object, i.e. the relation between log identifiers and the corresponding data fields.
 
 ```{r}
 patients %>% mapping
@@ -32,13 +32,13 @@ patients %>% resource_id
 
 ## Getting basic information {.tabset .tabset-fade .tabset-pills}
 
-We can look at a general summary of the event log by calling the `summary` function.
+We can look at a general summary of the event log with `summary()`.
 
 ```{r}
 patients %>% summary
 ```
 
-The basic counts which show up in the summary can also be retrieved indivdual as a numeric vector of length one.
+The basic counts which show up in the summary can also be retrieved individual as a numeric vector of length one.
 
 ```{r results='hold'}
 patients %>% n_activities
@@ -49,7 +49,7 @@ patients %>% n_traces
 patients %>% n_resources
 ```
 
-More detailed information about `activities` , `cases`, `resources` and `traces` can be obtained using the functions named accordingly, as in the examples below for the patients event log.
+More detailed information about `activities` , `cases`, `resources` and `traces` can be obtained using the functions named accordingly, as in the examples below for the `patients` event log.
 
 ### Activities 
 

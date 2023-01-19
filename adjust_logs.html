@@ -667,9 +667,9 @@ which are mapped onto the specific characteristics.</p>
 <p>More information on these characteristics can be found <a
 href="http://bupar.net/creating_eventlogs.html">here</a>. Each of these
 can be modified to approach event logs from a different angle. This can
-be done using the <code>eventlog()</code> or
-<code>activitylog()</code>-function, auxiliary
-<code>set_</code>-functions, or by using an existing mapping.</p>
+be done using the <code>eventlog()</code> or <code>activitylog()</code>,
+auxiliary <code>set_</code>-functions, or by using an existing
+mapping.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(bupaR)</span></code></pre></div>
 <div id="using-eventlogactivitylog" class="section level2">
 <h2>Using <code>eventlog()</code>/<code>activitylog()</code></h2>
@@ -718,10 +718,10 @@ number of cases has changed after this modification.</p>
 ## #   ³​dismissal</code></pre>
 </div>
 <div id="using-set_-functions" class="section level2">
-<h2>Using <code>set_</code> functions</h2>
+<h2>Using <code>set_</code>-functions</h2>
 <p>If we only want to change one of the elements, as in the example
-above, the <code>set()</code> function provide a very convenient way to
-do so. The same change as before can be done as follows:</p>
+above, <code>set()</code> provides a very convenient way to do so. The
+same change as before can be done as follows:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>traffic_fines <span class="sc">%&gt;%</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">set_case_id</span>(<span class="st">&quot;vehicleclass&quot;</span>)</span></code></pre></div>
 <pre><code>## # Log of 34724 events consisting of:
@@ -761,7 +761,7 @@ do so. The same change as before can be done as follows:</p>
 <div id="using-existing-mapping" class="section level2">
 <h2>Using existing mapping</h2>
 <p>It is also possible to extract the <code>log</code> mapping at a
-certain point of time using the <code>mapping()</code> function.</p>
+certain point of time using <code>mapping()</code>.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>mapping_fines <span class="ot">&lt;-</span> <span class="fu">mapping</span>(traffic_fines)</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>mapping_fines</span></code></pre></div>
 <pre><code>## Case identifier:     case_id 
@@ -776,7 +776,7 @@ approaches above.</p>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">set_case_id</span>(<span class="st">&quot;vehicleclass&quot;</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">set_activity_id</span>(<span class="st">&quot;notificationtype&quot;</span>) <span class="ot">-&gt;</span> traffic_fines</span></code></pre></div>
 <p>Later, we can always undo these changes and “reset” the original
-mapping using the <code>re_map</code> function.</p>
+mapping using <code>re_map()</code>.</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>traffic_fines <span class="sc">%&gt;%</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">re_map</span>(mapping_fines)</span></code></pre></div>
 <pre><code>## # Log of 34724 events consisting of:

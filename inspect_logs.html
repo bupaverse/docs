@@ -648,9 +648,9 @@ div.tocify {
 <h1>Inspect logs</h1>
 <div id="getting-metadata" class="section level2">
 <h2>Getting metadata</h2>
-<p>The mapping function can be used to retrieve all the meta data from
-an event log object, i.e. the relation between event log identifiers and
-data fields.</p>
+<p>The mapping function can be used to retrieve all the meta data from a
+<code>log</code> object, i.e. the relation between log identifiers and
+the corresponding data fields.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span> mapping</span></code></pre></div>
 <pre><code>## Case identifier:     patient 
 ## Activity identifier:     handling 
@@ -673,8 +673,8 @@ individually.</p>
 class="section level2 tabset tabset-fade tabset-pills">
 <h2 class="tabset tabset-fade tabset-pills">Getting basic
 information</h2>
-<p>We can look at a general summary of the event log by calling the
-<code>summary</code> function.</p>
+<p>We can look at a general summary of the event log with
+<code>summary()</code>.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span> summary</span></code></pre></div>
 <pre><code>## Number of events:  5442
 ## Number of cases:  500
@@ -701,7 +701,7 @@ information</h2>
 ##                    Max.   :2018-05-05 07:16:02.00   Max.   :5442  
 ## </code></pre>
 <p>The basic counts which show up in the summary can also be retrieved
-indivdual as a numeric vector of length one.</p>
+individual as a numeric vector of length one.</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span> n_activities</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span> n_activity_instances</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span> n_cases</span>
@@ -717,7 +717,7 @@ indivdual as a numeric vector of length one.</p>
 <p>More detailed information about <code>activities</code> ,
 <code>cases</code>, <code>resources</code> and <code>traces</code> can
 be obtained using the functions named accordingly, as in the examples
-below for the patients event log.</p>
+below for the <code>patients</code> event log.</p>
 <div id="activities" class="section level3">
 <h3>Activities</h3>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span> <span class="fu">activities</span>()</span></code></pre></div>

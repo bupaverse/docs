@@ -668,7 +668,7 @@ quality issues provided by <code>daqapo</code>.</p>
 <p>Detect violations of dependencies between attributes
 (i.e. condition(s) that should hold when (an)other condition(s)
 hold(s)).</p>
-<p>Example: when the activity is “Registration”, the orginator should
+<p>Example: when the activity is “Registration”, the originator should
 start with “Clerk”.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>hospital_actlog <span class="sc">%&gt;%</span> </span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">detect_attribute_dependencies</span>(<span class="at">antecedent =</span> activity <span class="sc">==</span> <span class="st">&quot;Registration&quot;</span>,</span>
@@ -718,10 +718,10 @@ start with “Clerk”.</p>
 </div>
 <div id="conditional-activity-presence" class="section level2">
 <h2>Conditional Activity Presence</h2>
-<p>Check whether certain activity/ies are present in case a specific
+<p>Check whether certain activities are present when a specific
 condition is satisfied.</p>
-<p>For example, if specialization is “TRAU”, there should be a “Clinical
-exam”.</p>
+<p>For example, if specialization is “TRAU”, then the activity “Clinical
+exam” must take place.</p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>hospital_actlog <span class="sc">%&gt;%</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">detect_conditional_activity_presence</span>(<span class="at">condition =</span> specialization <span class="sc">==</span> <span class="st">&quot;TRAU&quot;</span>,</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>                                       <span class="at">activities =</span> <span class="st">&quot;Clinical exam&quot;</span>)</span></code></pre></div>
@@ -734,7 +734,7 @@ exam”.</p>
 <div id="duration-outliers" class="section level2">
 <h2>Duration Outliers</h2>
 <p>Detect duration outliers for particular activities.</p>
-<p>For example, the duration of Treatment should be within 1 standard
+<p>For example, the duration of “Treatment” should be within 1 standard
 deviation of its mean duration.</p>
 <div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>hospital_actlog <span class="sc">%&gt;%</span></span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">detect_duration_outliers</span>(<span class="at">Treatment =</span> <span class="fu">duration_within</span>(<span class="at">bound_sd =</span> <span class="dv">1</span>))</span></code></pre></div>
@@ -764,7 +764,7 @@ deviation of its mean duration.</p>
 ## #   mean &lt;dbl&gt;, sd &lt;dbl&gt;, bound_sd &lt;dbl&gt;, lower_bound &lt;dbl&gt;, upper_bound &lt;dbl&gt;,
 ## #   and abbreviated variable names ¹​patient_visit_nr, ²​activity, ³​originator,
 ## #   ⁴​triagecode</code></pre>
-<p>Or, the duration of Treatement should be within 0 and 15 minutes.</p>
+<p>Or, the duration of “Treatment” should be within 0 to 15 minutes.</p>
 <div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>hospital_actlog <span class="sc">%&gt;%</span></span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">detect_duration_outliers</span>(<span class="at">Treatment =</span> <span class="fu">duration_within</span>(<span class="at">lower_bound =</span> <span class="dv">0</span>, <span class="at">upper_bound =</span> <span class="dv">15</span>))</span></code></pre></div>
 <pre><code>## *** OUTPUT ***</code></pre>
@@ -1076,7 +1076,7 @@ parallel.</p>
 <h2>Related Activities</h2>
 <p>Check responded existence between two activities. If the antecedent
 activity is executed for a case, the consequent activity should be
-executed as well. Look at <a
+executed as well. Take a look at <a
 href="https://bupaverse.github.io/docs/control_flow_analysis.html">Rule-Based
 Conformance Checking</a> for more control-flow rules that you can
 check.</p>
@@ -1091,7 +1091,7 @@ check.</p>
 </div>
 <div id="similar-labels" class="section level2">
 <h2>Similar Labels</h2>
-<p>Check for similary labels in a specific column. Both the column and
+<p>Check for similar labels in a specific column. Both the column and
 the maximum allowed edit distance for two labels to consider similar can
 be configured.</p>
 <div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a>hospital_actlog <span class="sc">%&gt;%</span></span>
@@ -1234,7 +1234,7 @@ class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="#cb1
 </div>
 <div id="value-range-violations" class="section level2">
 <h2>Value Range Violations</h2>
-<p>Detect</p>
+<p>Detect value range violation.</p>
 <div class="sourceCode" id="cb115"><pre
 class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="#cb115-1" aria-hidden="true" tabindex="-1"></a>hospital_actlog <span class="sc">%&gt;%</span></span>
 <span id="cb115-2"><a href="#cb115-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">detect_value_range_violations</span>(<span class="at">triagecode =</span> <span class="fu">domain_numeric</span>(<span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> <span class="dv">5</span>))</span></code></pre></div>

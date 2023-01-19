@@ -653,8 +653,10 @@ div.tocify {
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(bupaverse)</span></code></pre></div>
 <div id="activity-presence" class="section level2 tabset tabset-pills">
 <h2 class="tabset tabset-pills">Activity presence</h2>
-<p>Using <code>filter_activity_presence</code> can be used to select
-cases that contain a specific activity, for instance a X-Ray scan.</p>
+<p>Use<code>filter_activity_presence()</code> to select cases that
+contain a specific activity, for instance an X-Ray scan. The function
+returns a <code>log</code> object. For the illustration purposes <a
+href="inspect_logs.html"><code>traces()</code></a> is also used.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter_activity_presence</span>(<span class="st">&quot;X-Ray&quot;</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">traces</span>()</span></code></pre></div>
@@ -691,9 +693,10 @@ allowed.</li>
 <li>“only” means that only (a set of) these activities are allowed to be
 present, and no others.</li>
 </ul>
-Below illustrates these different options for the activities <em>Create
-Fine</em> and <em>Payment</em> in the <code>traffic_fines</code>
-dataset. Note that the unfiltered dataset has 44 distinct traces.
+Below an illustration of these different options for the activities
+<em>Create Fine</em> and <em>Payment</em> from
+<code>traffic_fines</code>. Note that the unfiltered dataset has 44
+distinct traces.
 <style>
 div.blue { background-color:#E6F4F1; border-radius: 5px; padding: 20px;}
 </style>
@@ -739,7 +742,7 @@ div.blue { background-color:#E6F4F1; border-radius: 5px; padding: 20px;}
 <div id="exact" class="section level3">
 <h3>Exact</h3>
 <div class="blue">
-<p>Only 2 have exactly these activities.</p>
+<p>Only 2 traces consist of exactly these activities.</p>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>traffic_fines <span class="sc">%&gt;%</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter_activity_presence</span>(<span class="fu">c</span>(<span class="st">&quot;Create Fine&quot;</span>, <span class="st">&quot;Payment&quot;</span>), <span class="at">method =</span> <span class="st">&quot;exact&quot;</span>)  <span class="sc">%&gt;%</span></span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">traces</span>()</span></code></pre></div>
@@ -752,7 +755,7 @@ div.blue { background-color:#E6F4F1; border-radius: 5px; padding: 20px;}
 <div id="only" class="section level3">
 <h3>Only</h3>
 <div class="blue">
-<p>And the same two have only these activities.</p>
+<p>And the same 2 traces have only these activities.</p>
 <div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>traffic_fines <span class="sc">%&gt;%</span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter_activity_presence</span>(<span class="fu">c</span>(<span class="st">&quot;Create Fine&quot;</span>, <span class="st">&quot;Payment&quot;</span>), <span class="at">method =</span> <span class="st">&quot;only&quot;</span>)  <span class="sc">%&gt;%</span></span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">traces</span>()</span></code></pre></div>
@@ -766,9 +769,10 @@ div.blue { background-color:#E6F4F1; border-radius: 5px; padding: 20px;}
 <div id="section" class="section level2 unlisted unnumbered">
 <h2 class="unlisted unnumbered"></h2>
 <p>Note that when one of the specified activities cannot be found in the
-log, you will get a warning about this. However, the filter will proceed
-with the specified list in any case. The result below shows that no
-trace has the activity “Create Fines”.</p>
+log, you will get a warning about this. However,
+<code>filter_activity_presence()</code> will proceed with the specified
+list in any case. The result below shows that no trace has the activity
+“Create Fines”.</p>
 <div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>traffic_fines <span class="sc">%&gt;%</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter_activity_presence</span>(<span class="fu">c</span>(<span class="st">&quot;Create Fines&quot;</span>), <span class="at">method =</span> <span class="st">&quot;none&quot;</span>)  <span class="sc">%&gt;%</span></span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">traces</span>()</span></code></pre></div>
@@ -779,8 +783,9 @@ trace has the activity “Create Fines”.</p>
 </div>
 <div id="case" class="section level2">
 <h2>Case</h2>
-<p><code>filter_case</code> can be used to filter cases based on their
-identifier.</p>
+<p><code>filter_case()</code> can be used to filter cases based on their
+identifier. It returns the same <code>log</code> object containing
+events with the specified cases.</p>
 <div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>traffic_fines <span class="sc">%&gt;%</span></span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter_case</span>(<span class="at">cases =</span> <span class="fu">c</span>(<span class="st">&quot;A1&quot;</span>,<span class="st">&quot;A2&quot;</span>))</span></code></pre></div>
 <pre><code>## EMPTY EVENT LOG
@@ -830,8 +835,8 @@ identifier.</p>
 </div>
 <div id="case-condition" class="section level2">
 <h2>Case Condition</h2>
-<p><code>filter_case_condition</code> can be used to select cases for
-which a condition hold. This condition can related to any of the
+<p><code>filter_case_condition()</code> can be used to select cases for
+which a condition holds. This condition can be related to any of the
 variables in the log.</p>
 <p>For example, select all cases where <em>resource</em> 561 is
 involved.</p>
@@ -873,7 +878,7 @@ involved.</p>
 <p>Note that multiple conditions can be combined using the symbols
 <code>|</code> (or) and <code>&amp;</code> (and). For example, let’s
 select all cases where <em>resource</em> 557 is involved, and the
-<em>points</em> are more than zero.</p>
+<em>points</em> are more than 0.</p>
 <div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>traffic_fines <span class="sc">%&gt;%</span></span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter_case_condition</span>(resource <span class="sc">==</span> <span class="dv">557</span> <span class="sc">&amp;</span> points <span class="sc">&gt;</span> <span class="dv">0</span>)</span></code></pre></div>
 <pre><code>## # Log of 9973 events consisting of:
@@ -985,11 +990,11 @@ equivalent.</p>
 </div>
 <div id="endpoints" class="section level2">
 <h2>Endpoints</h2>
-<p><code>filter_endpoints</code> allows to select cases with a specific
-start and/or end activity. In case of the patients data set, all cases
-start with “Registration”. Filtering cases that <strong>don’t</strong>
-start with Registration (<code>reverse = TRUE</code>) gives an empty
-log.</p>
+<p><code>filter_endpoints()</code> allows to select cases with a
+specific start and/or end activity. In case of the <code>patients</code>
+data set, all cases start with “Registration”. Filtering cases that
+<strong>don’t</strong> start with Registration
+(<code>reverse = TRUE</code>) gives an empty log.</p>
 <div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span></span>
 <span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter_endpoints</span>(<span class="at">start_activities =</span> <span class="st">&quot;Registration&quot;</span>, <span class="at">reverse =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>## EMPTY EVENT LOG
@@ -998,20 +1003,21 @@ log.</p>
 ## #   handling_id &lt;chr&gt;, registration_type &lt;fct&gt;, time &lt;dttm&gt;, .order &lt;int&gt;</code></pre>
 <p>If we are interested to see the “completed” cases, those that start
 with Registration and end we “Check-out”, we can apply the following
-filter.</p>
+filter. Here <a
+href="frequency_maps.html"><code>process_map()</code></a> is used for
+the illustration purposes.</p>
 <div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span></span>
 <span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter_endpoints</span>(<span class="at">start_activities =</span> <span class="st">&quot;Registration&quot;</span>, <span class="at">end_activities =</span> <span class="st">&quot;Check-out&quot;</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">process_map</span>()</span></code></pre></div>
-<div class="grViz html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-0f23a53e14f01fe1d2a3" style="width:864px;height:480px;"></div>
-<script type="application/json" data-for="htmlwidget-0f23a53e14f01fe1d2a3">{"x":{"diagram":"digraph {\n\ngraph [layout = \"dot\",\n       outputorder = \"edgesfirst\",\n       bgcolor = \"white\",\n       rankdir = \"LR\"]\n\nnode [fontname = \"Helvetica\",\n      fontsize = \"10\",\n      shape = \"circle\",\n      fixedsize = \"true\",\n      width = \"0.5\",\n      style = \"filled\",\n      fillcolor = \"aliceblue\",\n      color = \"gray70\",\n      fontcolor = \"gray50\"]\n\nedge [fontname = \"Helvetica\",\n     fontsize = \"8\",\n     weight = \"1.5\",\n     color = \"gray80\",\n     arrowsize = \"0.5\"]\n\n  \"1\" [label = \"End\", shape = \"circle\", style = \"rounded,filled\", fontcolor = \"brown4\", color = \"brown4\", tooltip = \"ARTIFICIAL_END\n492\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#FFFFFF\"] \n  \"2\" [label = \"Start\", shape = \"circle\", style = \"rounded,filled\", fontcolor = \"chartreuse4\", color = \"chartreuse4\", tooltip = \"ARTIFICIAL_START\n492\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#FFFFFF\"] \n  \"3\" [label = \"Blood test\n234\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"black\", color = \"grey\", tooltip = \"Blood test\n234\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#ECE7F2\"] \n  \"4\" [label = \"Check-out\n492\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"white\", color = \"grey\", tooltip = \"Check-out\n492\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#0570B0\"] \n  \"5\" [label = \"Discuss Results\n492\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"white\", color = \"grey\", tooltip = \"Discuss Results\n492\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#0570B0\"] \n  \"6\" [label = \"MRI SCAN\n234\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"black\", color = \"grey\", tooltip = \"MRI SCAN\n234\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#ECE7F2\"] \n  \"7\" [label = \"Registration\n492\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"white\", color = \"grey\", tooltip = \"Registration\n492\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#0570B0\"] \n  \"8\" [label = \"Triage and Assessment\n492\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"white\", color = \"grey\", tooltip = \"Triage and Assessment\n492\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#0570B0\"] \n  \"9\" [label = \"X-Ray\n258\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"black\", color = \"grey\", tooltip = \"X-Ray\n258\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#ECE7F2\"] \n\"2\"->\"7\" [label = \"492\", penwidth = \"5\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"3\"->\"6\" [label = \"234\", penwidth = \"2.90243902439024\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"4\"->\"1\" [label = \"492\", penwidth = \"5\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"5\"->\"4\" [label = \"492\", penwidth = \"5\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"6\"->\"5\" [label = \"234\", penwidth = \"2.90243902439024\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"7\"->\"8\" [label = \"492\", penwidth = \"5\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"8\"->\"3\" [label = \"234\", penwidth = \"2.90243902439024\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"8\"->\"9\" [label = \"258\", penwidth = \"3.09756097560976\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"9\"->\"5\" [label = \"258\", penwidth = \"3.09756097560976\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div class="grViz html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-5957527b5a29e4724922" style="width:864px;height:480px;"></div>
+<script type="application/json" data-for="htmlwidget-5957527b5a29e4724922">{"x":{"diagram":"digraph {\n\ngraph [layout = \"dot\",\n       outputorder = \"edgesfirst\",\n       bgcolor = \"white\",\n       rankdir = \"LR\"]\n\nnode [fontname = \"Helvetica\",\n      fontsize = \"10\",\n      shape = \"circle\",\n      fixedsize = \"true\",\n      width = \"0.5\",\n      style = \"filled\",\n      fillcolor = \"aliceblue\",\n      color = \"gray70\",\n      fontcolor = \"gray50\"]\n\nedge [fontname = \"Helvetica\",\n     fontsize = \"8\",\n     weight = \"1.5\",\n     color = \"gray80\",\n     arrowsize = \"0.5\"]\n\n  \"1\" [label = \"End\", shape = \"circle\", style = \"rounded,filled\", fontcolor = \"brown4\", color = \"brown4\", tooltip = \"ARTIFICIAL_END\n492\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#FFFFFF\"] \n  \"2\" [label = \"Start\", shape = \"circle\", style = \"rounded,filled\", fontcolor = \"chartreuse4\", color = \"chartreuse4\", tooltip = \"ARTIFICIAL_START\n492\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#FFFFFF\"] \n  \"3\" [label = \"Blood test\n234\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"black\", color = \"grey\", tooltip = \"Blood test\n234\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#ECE7F2\"] \n  \"4\" [label = \"Check-out\n492\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"white\", color = \"grey\", tooltip = \"Check-out\n492\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#0570B0\"] \n  \"5\" [label = \"Discuss Results\n492\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"white\", color = \"grey\", tooltip = \"Discuss Results\n492\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#0570B0\"] \n  \"6\" [label = \"MRI SCAN\n234\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"black\", color = \"grey\", tooltip = \"MRI SCAN\n234\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#ECE7F2\"] \n  \"7\" [label = \"Registration\n492\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"white\", color = \"grey\", tooltip = \"Registration\n492\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#0570B0\"] \n  \"8\" [label = \"Triage and Assessment\n492\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"white\", color = \"grey\", tooltip = \"Triage and Assessment\n492\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#0570B0\"] \n  \"9\" [label = \"X-Ray\n258\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"black\", color = \"grey\", tooltip = \"X-Ray\n258\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#ECE7F2\"] \n\"2\"->\"7\" [label = \"492\", penwidth = \"5\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"3\"->\"6\" [label = \"234\", penwidth = \"2.90243902439024\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"4\"->\"1\" [label = \"492\", penwidth = \"5\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"5\"->\"4\" [label = \"492\", penwidth = \"5\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"6\"->\"5\" [label = \"234\", penwidth = \"2.90243902439024\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"7\"->\"8\" [label = \"492\", penwidth = \"5\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"8\"->\"3\" [label = \"234\", penwidth = \"2.90243902439024\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"8\"->\"9\" [label = \"258\", penwidth = \"3.09756097560976\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"9\"->\"5\" [label = \"258\", penwidth = \"3.09756097560976\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div id="endpoints-condition" class="section level2">
 <h2>Endpoints Condition</h2>
-<p><code>filter_endpoints_condition</code> allows to select cases by
+<p><code>filter_endpoints_condition()</code> allows to select cases by
 applying conditions to the start and/or end activity instance. For
-example. We can use it to replace the <code>filter_endpoints</code>
-command from above, using conditions on the <em>handling</em>
-variable.</p>
+example. We can use it to replace the <code>filter_endpoints()</code>
+from above, using conditions on the <em>handling</em> variable.</p>
 <div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span></span>
 <span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter_endpoints_condition</span>(<span class="at">start_condition =</span> handling  <span class="sc">==</span> <span class="st">&quot;Registration&quot;</span>, <span class="at">end_condition =</span> handling  <span class="sc">==</span> <span class="st">&quot;Check-out&quot;</span>)</span></code></pre></div>
 <pre><code>## # Log of 5388 events consisting of:
@@ -1046,7 +1052,12 @@ variable.</p>
 <p>Naturally, both conditions can use any of the available variables.
 The following selects all cases that started between midnight and 6am.
 Note that no condition is applied on the end activity instance using the
-<code>end_condition = TRUE</code> specification.</p>
+<code>end_condition = TRUE</code> specification. We use <a
+href="https://bupaverse.github.io/docs/dotted_chart.html"><code>dotted_chart("relative_day")</code></a>
+to plot a graph where, each activity instance is displayed with a dot.
+The x-axis refers to the time aspect (here a <strong>relative</strong>
+time difference since the first case on x-axis), while the y-axis refers
+to cases.</p>
 <div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span></span>
 <span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter_endpoints_condition</span>(<span class="at">start_condition =</span> lubridate<span class="sc">::</span><span class="fu">hour</span>(time) <span class="sc">&lt;</span> <span class="dv">6</span>, <span class="at">end_condition =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">dotted_chart</span>(<span class="st">&quot;relative_day&quot;</span>)</span></code></pre></div>
@@ -1054,11 +1065,11 @@ Note that no condition is applied on the end activity instance using the
 </div>
 <div id="flow-time" class="section level2">
 <h2>Flow Time</h2>
-<p><code>filter_flow_time</code> can be used to select cases in which a
-specific directly-follows flow (from &gt; to) happens within a specific
-time duration interval.</p>
-<p>For example, we can select the fines in <code>traffic_fines</code> in
-which the creation is followed by the payment within 4 weeks.</p>
+<p><code>filter_flow_time()</code> can be used to select cases in which
+a specific directly-follows flow (from &gt; to) happens within a
+specific time duration interval.</p>
+<p>For example, we can select the fines from <code>traffic_fines</code>
+in which the creation is followed by the payment within 4 weeks.</p>
 <div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>traffic_fines <span class="sc">%&gt;%</span></span>
 <span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter_flow_time</span>(<span class="at">from =</span> <span class="st">&quot;Create Fine&quot;</span>, <span class="at">to =</span> <span class="st">&quot;Payment&quot;</span>, <span class="at">interval =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">4</span>), <span class="at">units =</span> <span class="st">&quot;weeks&quot;</span>)</span></code></pre></div>
 <pre><code>## EMPTY EVENT LOG
@@ -1103,13 +1114,14 @@ following filter is not equivalent to the previous one.</p>
 where no activity instances are <em>active</em>. An activity instance is
 considered <em>active</em> between the registration of the first related
 event and the last related event. See more on performance metrics <a
-href="performance_analysis.html">here</a>. <code>filter_idle_time</code>
-can be used to select cases based on the amount of idle time. There are
-two approaches: using an interval, or using a percentage.</p>
+href="performance_analysis.html">here</a>.
+<code>filter_idle_time()</code> can be used to select cases based on the
+amount of idle time. There are two approaches: using an interval, or
+using a percentage.</p>
 <div id="interval-based" class="section level3">
 <h3>Interval-based</h3>
 <div class="blue">
-<p>Using <code>filter_idle_time</code> with argument
+<p>Using <code>filter_idle_time()</code> with argument
 <code>interval</code>, you can select cases of which the idle time falls
 within a certain duration of time. For example, all the cases of
 patients with an idle time from 10 to 20 hours. Note that it is
@@ -1131,7 +1143,7 @@ seconds.</p>
 ##   min          q1             median         mean       q3    max   st_dev iqr  
 ##   &lt;drtn&gt;       &lt;drtn&gt;         &lt;drtn&gt;         &lt;drtn&gt;     &lt;drt&gt; &lt;drt&gt;  &lt;dbl&gt; &lt;drt&gt;
 ## 1 14.985 hours 76.89194 hours 119.4028 hours 132.4819 … 178.… 525.…   76.9 101.…</code></pre>
-<p>And use <code>reverse</code>.</p>
+<p>And use <code>reverse = TRUE</code>.</p>
 <div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span></span>
 <span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter_idle_time</span>(<span class="at">interval =</span> <span class="fu">c</span>(<span class="cn">NA</span>,<span class="dv">40</span>), <span class="at">units =</span> <span class="st">&quot;hours&quot;</span>, <span class="at">reverse =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">idle_time</span>(<span class="at">unit =</span> <span class="st">&quot;hours&quot;</span>)</span></code></pre></div>
@@ -1144,7 +1156,7 @@ seconds.</p>
 <div id="percentage-based" class="section level3">
 <h3>Percentage-based</h3>
 <div class="blue">
-<p>Using <code>filter_idle_time</code> with argument
+<p>Using <code>filter_idle_time()</code> with argument
 <code>percentage</code>, you can give priority to cases with the lowest
 idle time. For example, setting <code>percentage = 0.5</code> will
 select 50% of the cases, starting with those that have the lowest idle
@@ -1184,24 +1196,25 @@ than the throughput time.</p>
 </div>
 <div id="infrequent-flows" class="section level2">
 <h2>Infrequent Flows</h2>
-<p><code>filter_infrequent_flows</code> allows us to select a set of
+<p><code>filter_infrequent_flows()</code> allows us to select a set of
 cases in which every directly-follows flow has a minimum frequency. For
-example, consider the <code>traffic_fines</code> process matrix
-below.</p>
+example, consider the <code>traffic_fines</code> <a
+href="https://bupaverse.github.io/docs/frequency_maps.html">process
+map</a> below.</p>
 <div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>traffic_fines <span class="sc">%&gt;%</span> <span class="fu">process_map</span>()</span></code></pre></div>
-<div class="grViz html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-bc0b669e2f7a63e19aae" style="width:672px;height:480px;"></div>
-<script type="application/json" data-for="htmlwidget-bc0b669e2f7a63e19aae">{"x":{"diagram":"digraph {\n\ngraph [layout = \"dot\",\n       outputorder = \"edgesfirst\",\n       bgcolor = \"white\",\n       rankdir = \"LR\"]\n\nnode [fontname = \"Helvetica\",\n      fontsize = \"10\",\n      shape = \"circle\",\n      fixedsize = \"true\",\n      width = \"0.5\",\n      style = \"filled\",\n      fillcolor = \"aliceblue\",\n      color = \"gray70\",\n      fontcolor = \"gray50\"]\n\nedge [fontname = \"Helvetica\",\n     fontsize = \"8\",\n     weight = \"1.5\",\n     color = \"gray80\",\n     arrowsize = \"0.5\"]\n\n  \"1\" [label = \"End\", shape = \"circle\", style = \"rounded,filled\", fontcolor = \"brown4\", color = \"brown4\", tooltip = \"ARTIFICIAL_END\n4\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#FFFFFF\"] \n  \"2\" [label = \"Start\", shape = \"circle\", style = \"rounded,filled\", fontcolor = \"chartreuse4\", color = \"chartreuse4\", tooltip = \"ARTIFICIAL_START\n4\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#FFFFFF\"] \n  \"3\" [label = \"P\n4635\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"white\", color = \"grey\", tooltip = \"P\n4635\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#74A9CF\"] \n\"3\"->\"3\" [label = \"3874\", penwidth = \"5\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div class="grViz html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-5cf610024f8489b15e85" style="width:672px;height:480px;"></div>
+<script type="application/json" data-for="htmlwidget-5cf610024f8489b15e85">{"x":{"diagram":"digraph {\n\ngraph [layout = \"dot\",\n       outputorder = \"edgesfirst\",\n       bgcolor = \"white\",\n       rankdir = \"LR\"]\n\nnode [fontname = \"Helvetica\",\n      fontsize = \"10\",\n      shape = \"circle\",\n      fixedsize = \"true\",\n      width = \"0.5\",\n      style = \"filled\",\n      fillcolor = \"aliceblue\",\n      color = \"gray70\",\n      fontcolor = \"gray50\"]\n\nedge [fontname = \"Helvetica\",\n     fontsize = \"8\",\n     weight = \"1.5\",\n     color = \"gray80\",\n     arrowsize = \"0.5\"]\n\n  \"1\" [label = \"End\", shape = \"circle\", style = \"rounded,filled\", fontcolor = \"brown4\", color = \"brown4\", tooltip = \"ARTIFICIAL_END\n4\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#FFFFFF\"] \n  \"2\" [label = \"Start\", shape = \"circle\", style = \"rounded,filled\", fontcolor = \"chartreuse4\", color = \"chartreuse4\", tooltip = \"ARTIFICIAL_START\n4\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#FFFFFF\"] \n  \"3\" [label = \"P\n4635\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"white\", color = \"grey\", tooltip = \"P\n4635\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#74A9CF\"] \n\"3\"->\"3\" [label = \"3874\", penwidth = \"5\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 <p>In this map, we can observe several unique directly follows
-relations, as well as flows occuring only 2 or 3 times. Using the
-filter, we can remove the cases that lead to these flows as follows.</p>
+relations, as well as flows occurring only 2 or 3 times. Using the
+filter, we can remove the cases that lead to these flows as follows:</p>
 <div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>traffic_fines <span class="sc">%&gt;%</span></span>
 <span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter_infrequent_flows</span>(<span class="at">min_n =</span> <span class="dv">5</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">process_map</span>()</span></code></pre></div>
 <p>We can immediately observe less very infrequent flows in the process
 map.</p>
-<p>It is important to note that <code>filter_infrequent_flows</code>
+<p>It is important to note that <code>filter_infrequent_flows()</code>
 does <strong>not</strong> remove edges from the process map, but entire
-cases underlying infrequent behaviour. We strongly adhere to the
+cases underlying infrequent behavior. We strongly adhere to the
 principal that the process map should be a based on a clearly defined
 set of events, which are either the result of case filters, or specific
 event filters (see <a href="event_filters.html">Event Filters</a>).
@@ -1212,8 +1225,8 @@ ambiguous map which could give a misleading view on your process.</p>
 </div>
 <div id="precedence" class="section level2">
 <h2>Precedence</h2>
-<p>The <code>filter_precedence</code> allows us to filter cases based on
-flows between activities, using 5 different inputs:</p>
+<p>The <code>filter_precedence()</code> allows us to filter cases based
+on flows between activities, using 5 different inputs:</p>
 <ul>
 <li>A list of (one or more) possible <code>antecedent</code> activities
 (“source”-activities)</li>
@@ -1221,11 +1234,11 @@ flows between activities, using 5 different inputs:</p>
 (“target”-activities)</li>
 <li>A <code>precedence_type</code>
 <ul>
-<li>directly_follows</li>
-<li>eventually_follows</li>
+<li>“directly_follows”</li>
+<li>“eventually_follows”</li>
 </ul></li>
-<li>A <code>filter_method</code>: all, one_of or none of the precedence
-rules should hold.</li>
+<li>A <code>filter_method</code>: “all”, “one_of” or “none” of the
+precedence rules should hold.</li>
 <li>A <code>reverse</code> argument</li>
 </ul>
 <p>If there is more than one <code>antecedent</code> or
@@ -1233,9 +1246,9 @@ rules should hold.</li>
 <strong>all</strong> possible pairs. The <code>filter_method</code> will
 tell the filter whether all of the rules should hold, at least one, or
 none are allowed.</p>
-<p>For example, take the patients data. The following filter takes only
-cases where <em>Triage and Assessment</em> is directly followed by
-<em>Blood test</em>.</p>
+<p>For example, take the <code>patients</code> data. The following
+filter takes only cases where <em>Triage and Assessment</em> is directly
+followed by <em>Blood test</em>.</p>
 <div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span></span>
 <span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter_precedence</span>(<span class="at">antecedents =</span> <span class="st">&quot;Triage and Assessment&quot;</span>,</span>
 <span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">consequents =</span> <span class="st">&quot;Blood test&quot;</span>,</span>
@@ -1297,15 +1310,17 @@ activities. The result is 2 incomplete cases where the last activity was
 </div>
 <div id="precedence-condition" class="section level2">
 <h2>Precedence Condition</h2>
-<p><code>filter_precedence_condition</code> is a generic version of
-<code>filter_precendence</code>, where the antecedent and consequents
-are conditions instead of activity label. This filter can only test for
-one pair at a time, thus not having a <code>filter_method</code>. The
-<code>precedence_type</code> can again be configured.</p>
-<p>The following examples takes all cases in <code>traffic_fines</code>
-where an activity instance with <em>dismissal</em> equal to <em>NIL</em>
-is eventually followed by an activity instance with
-<em>notificationtype</em> equal to <em>P</em>.</p>
+<p><code>filter_precedence_condition()</code> is a generic version of
+<code>filter_precendence()</code>, where the antecedent(s) and
+consequent(s) are conditions instead of activity labels. This filter can
+only test for one pair at a time, thus not having a
+<code>filter_method</code>. The <code>precedence_type</code> can again
+be configured.</p>
+<p>The following examples takes all cases from
+<code>traffic_fines</code> where an activity instance with
+<em>dismissal</em> equal to <em>NIL</em> is eventually followed by an
+activity instance with <em>notificationtype</em> equal to
+<em>P</em>.</p>
 <div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>traffic_fines <span class="sc">%&gt;%</span></span>
 <span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter_precedence_condition</span>(<span class="at">antecedent_condition =</span> dismissal <span class="sc">==</span> <span class="st">&quot;NIL&quot;</span>,</span>
 <span id="cb68-3"><a href="#cb68-3" aria-hidden="true" tabindex="-1"></a>                                <span class="at">consequent_condition =</span> notificationtype <span class="sc">==</span> <span class="st">&quot;P&quot;</span>,</span>
@@ -1321,8 +1336,8 @@ is eventually followed by an activity instance with
 </div>
 <div id="precedence-resource" class="section level2">
 <h2>Precedence Resource</h2>
-<p><code>filter_precedence_resource</code> is similar to
-<code>filter_precedence</code> but additionally requires that the
+<p><code>filter_precedence_resource()</code> is similar to
+<code>filter_precedence()</code>, but additionally requires that the
 resources of both executions are equal. While there are three traces
 that adhere to the following antecedence-consequent directly-follows
 pair (see earlier), there is not a single case where the two activities
@@ -1344,13 +1359,13 @@ a case where an activity instance is <em>active</em>. An activity
 instance is considered <em>active</em> between the registration of the
 first related event and the last related event. See more on performance
 metrics <a href="performance_analysis.html">here</a>.</p>
-<p><code>filter_processing_time</code> can be used to select cases based
-on the amount of processing time. There are two approaches: using an
-interval, or using a percentage.</p>
+<p><code>filter_processing_time()</code> can be used to select cases
+based on the amount of processing time. There are two approaches: using
+an interval, or using a percentage.</p>
 <div id="interval-based-1" class="section level3">
 <h3>Interval-based</h3>
 <div class="blue">
-<p>Using <code>filter_processing_time</code> with argument
+<p>Using <code>filter_processing_time()</code> with argument
 <code>interval</code>, you can select cases of which the processing time
 falls within a certain duration of time. For example, all the cases of
 patients with an processing time from 10 to 20 hours. Note that it is
@@ -1372,7 +1387,7 @@ seconds.</p>
 ##   min            q1          median         mean        q3    max   st_dev iqr  
 ##   &lt;drtn&gt;         &lt;drtn&gt;      &lt;drtn&gt;         &lt;drtn&gt;      &lt;drt&gt; &lt;drt&gt;  &lt;dbl&gt; &lt;drt&gt;
 ## 1 10.71778 hours 24.95 hours 27.72708 hours 27.74947 h… 30.7… 38.2…   4.17 5.78…</code></pre>
-<p>And use <code>reverse</code>.</p>
+<p>And use <code>reverse = TRUE</code>.</p>
 <div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span></span>
 <span id="cb76-2"><a href="#cb76-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter_processing_time</span>(<span class="at">interval =</span> <span class="fu">c</span>(<span class="cn">NA</span>,<span class="dv">20</span>), <span class="at">units =</span> <span class="st">&quot;hours&quot;</span>, <span class="at">reverse =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb76-3"><a href="#cb76-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">processing_time</span>(<span class="at">unit =</span> <span class="st">&quot;hours&quot;</span>)</span></code></pre></div>
@@ -1385,7 +1400,7 @@ seconds.</p>
 <div id="percentage-based-1" class="section level3">
 <h3>Percentage-based</h3>
 <div class="blue">
-<p>Using <code>filter_processing_time</code> with argument
+<p>Using <code>filter_processing_time()</code> with argument
 <code>percentage</code>, you can give priority to cases with the lowest
 processing time. For example, setting <code>percentage = 0.5</code> will
 select 50% of the cases, starting with those that have the lowest
@@ -1428,13 +1443,13 @@ than zero.</p>
 <p>The throughput time is the total time period from the first event to
 the last event belonging to a case. See more on performance metrics <a
 href="performance_analysis.html">here</a>.</p>
-<p><code>filter_throughput_time</code> can be used to select cases based
-on the amount of throughput time. There are two approaches: using an
-interval, or using a percentage.</p>
+<p><code>filter_throughput_time()</code> can be used to select cases
+based on the amount of throughput time. There are two approaches: using
+an interval, or using a percentage.</p>
 <div id="interval-based-2" class="section level3">
 <h3>Interval-based</h3>
 <div class="blue">
-<p>Using <code>filter_throughput_time</code> with argument
+<p>Using <code>filter_throughput_time()</code> with argument
 <code>interval</code>, you can select cases of which the throughput time
 falls within a certain duration of time. For example, all the cases of
 patients with an throughput time from 1 to 5 days. Note that it is
@@ -1458,7 +1473,7 @@ seconds.</p>
 ##   min           q1            median        mean        q3    max   st_dev iqr  
 ##   &lt;drtn&gt;        &lt;drtn&gt;        &lt;drtn&gt;        &lt;drtn&gt;      &lt;drt&gt; &lt;drt&gt;  &lt;dbl&gt; &lt;drt&gt;
 ## 1 10.00119 days 10.61541 days 11.51726 days 12.38279 d… 13.2… 23.1…   2.59 2.60…</code></pre>
-<p>And use <code>reverse</code>.</p>
+<p>And use <code>reverse = TRUE</code>.</p>
 <div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span></span>
 <span id="cb88-2"><a href="#cb88-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter_throughput_time</span>(<span class="at">interval =</span> <span class="fu">c</span>(<span class="dv">10</span>,<span class="cn">NA</span>), <span class="at">units =</span> <span class="st">&quot;days&quot;</span>, <span class="at">reverse =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb88-3"><a href="#cb88-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">throughput_time</span>(<span class="at">unit =</span> <span class="st">&quot;days&quot;</span>)</span></code></pre></div>
@@ -1472,7 +1487,7 @@ seconds.</p>
 <div id="percentage-based-2" class="section level3">
 <h3>Percentage-based</h3>
 <div class="blue">
-<p>Using <code>filter_throughput_time</code> with argument
+<p>Using <code>filter_throughput_time()</code> with argument
 <code>percentage</code>, you can give priority to cases with the lowest
 throughput time. For example, setting <code>percentage = 0.5</code> will
 select 50% of the cases, starting with those that have the lowest
@@ -1504,14 +1519,13 @@ the percentage approach.</p>
 <div id="time-period" class="section level2 tabset tabset-pills">
 <h2 class="tabset tabset-pills">Time Period</h2>
 <p>Filtering cases by time period can be done using the
-<code>filter_time_period</code> introduced above. There are four
-different <code>filter_method</code>s that act as case filters:</p>
+<code>filter_time_period()</code> introduced above. There are four
+different <code>filter_method</code>’s that act as case filters:</p>
 <ul>
-<li><code>start</code>: all cases started in an interval.</li>
-<li><code>complete</code>: all cases completed in an interval.</li>
-<li><code>contained</code>: all cases contained in an interval.</li>
-<li><code>intersecting</code>: all cases with some activity in an
-interval.</li>
+<li>“start”: all cases started in an interval.</li>
+<li>“complete”: all cases completed in an interval.</li>
+<li>“contained”: all cases contained in an interval.</li>
+<li>“intersecting”: all cases with some activity in an interval.</li>
 </ul>
 <p>Using the same interval (the month of January 2015), you can compare
 the results of different filtering methods below using <a
@@ -1559,17 +1573,19 @@ href="dotted_chart.html">dotted charts</a>.</p>
 <div id="trace-frequency" class="section level2 tabset tabset-pills">
 <h2 class="tabset tabset-pills">Trace Frequency</h2>
 <p>The frequency of a trace, i.e. distinct activity sequence, is the
-number of cases, i.e. process instances, that follow this trace.
-<code>filter_trace_frequency</code> can be used to select cases based on
-the amount of throughput time. There are two approaches: using an
+number of cases, i.e. process instances that follow this trace.
+<code>filter_trace_frequency()</code> can be used to select cases based
+on the amount of throughput time. There are two approaches: using an
 interval, or using a percentage.</p>
 <div id="interval-based-3" class="section level3">
 <h3>Interval-based</h3>
 <div class="blue">
-<p>Using <code>filter_trace_frequency</code> with argument
+<p>Using <code>filter_trace_frequency()</code> with argument
 <code>interval</code>, you can select cases of which the trace frequency
-falls within a certain frequency interval. For example, all the cases of
-sepsis with a trace frequency between 10 and 50.</p>
+falls within a certain frequency interval. For example, all the cases
+from <code>sepsis</code> with a trace frequency between 10 and 50. <a
+href="inspect_logs.html"><code>traces()</code></a> is used to show the
+changes to the log data after applying the filter.</p>
 <div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="#cb99-1" aria-hidden="true" tabindex="-1"></a>sepsis <span class="sc">%&gt;%</span></span>
 <span id="cb99-2"><a href="#cb99-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter_trace_frequency</span>(<span class="at">interval =</span> <span class="fu">c</span>(<span class="dv">10</span>,<span class="dv">50</span>)) <span class="sc">%&gt;%</span></span>
 <span id="cb99-3"><a href="#cb99-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">traces</span>()</span></code></pre></div>
@@ -1602,7 +1618,7 @@ class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="#cb1
 ## 10 ER Registration,ER Triage,ER Sepsis Triage,CRP,Leucocytes,La…       5  0.0355
 ## 11 ER Registration,ER Triage,CRP,Leucocytes,ER Sepsis Triage           5  0.0355
 ## # … with abbreviated variable names ¹​absolute_frequency, ²​relative_frequency</code></pre>
-<p>And use <code>reverse</code>.</p>
+<p>And use <code>reverse = TRUE</code>.</p>
 <div class="sourceCode" id="cb103"><pre
 class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="#cb103-1" aria-hidden="true" tabindex="-1"></a>sepsis <span class="sc">%&gt;%</span></span>
 <span id="cb103-2"><a href="#cb103-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter_trace_frequency</span>(<span class="at">interval =</span> <span class="fu">c</span>(<span class="dv">5</span>,<span class="cn">NA</span>), <span class="at">reverse =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
@@ -1627,7 +1643,7 @@ class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="#cb1
 <div id="percentage-based-3" class="section level3">
 <h3>Percentage-based</h3>
 <div class="blue">
-<p>Using <code>filter_trace_frequency</code> with argument
+<p>Using <code>filter_trace_frequency()</code> with argument
 <code>percentage</code>, you can give priority to cases with a frequent
 trace. For example, setting <code>percentage = 0.2</code> will select at
 least 20% of the cases, starting with those that have the highest
@@ -1674,11 +1690,11 @@ class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="#cb1
 ## #   ²​relative_frequency</code></pre>
 <p>Note that the obtained percentage of cases will not always be exactly
 the specified percentage, as there can be ties. For example, in the
-sepsis dataset, 784 of the 1050 cases follow a distinct activity
-sequence. As bupaR will not break ties randomnly, it will select
-<em>all</em> cases once the percentage set is higher then ca. 24%, as it
-will include all unique cases then still remaining in the log to get to
-this coverage.</p>
+<code>sepsis</code> data set, 784 of the 1050 cases (75%) follow a
+distinct activity sequence. As <code>bupaR</code> will not break ties
+randomly, it will select <em>all</em> cases once the percentage set is
+higher then ca. 24%, as it will include all unique cases then still
+remaining in the log to get to this coverage.</p>
 </div>
 </div>
 </div>
@@ -1690,16 +1706,17 @@ this coverage.</p>
 <p>The length of a trace, i.e. distinct activity sequence, is the number
 of activity instances it contains. Note that this is not necessarily
 equal to the number of events.</p>
-<p><code>filter_trace_length</code> can be used to select cases based on
-the amount of throughput time. There are two approaches: using an
-interval, or using a percentage.</p>
+<p><code>filter_trace_length()</code> can be used to select cases based
+on the amount of throughput time. There are two approaches: using an
+<code>interval</code>, or using a <code>percentage</code>.</p>
 <div id="interval-based-4" class="section level3">
 <h3>Interval-based</h3>
 <div class="blue">
-<p>Using <code>filter_trace_length</code> with argument
+<p>Using <code>filter_trace_length()</code> with argument
 <code>interval</code>, you can select cases of which the trace length
 falls within a certain interval. For example, all the cases of sepsis
-with a trace length between 10 and 50.</p>
+with a trace length between 10 and 50. Changes are illustrated with <a
+href="inspect_logs.html"><code>traces()</code></a>.</p>
 <div class="sourceCode" id="cb109"><pre
 class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="#cb109-1" aria-hidden="true" tabindex="-1"></a>sepsis <span class="sc">%&gt;%</span></span>
 <span id="cb109-2"><a href="#cb109-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter_trace_length</span>(<span class="at">interval =</span> <span class="fu">c</span>(<span class="dv">10</span>,<span class="dv">50</span>)) <span class="sc">%&gt;%</span></span>
@@ -1739,7 +1756,7 @@ class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="#cb1
 ## 10 ER Registration,ER Triage,ER Sepsis Triage,Leucocytes,CRP,La…       2 0.00266
 ## # … with 705 more rows, and abbreviated variable names ¹​absolute_frequency,
 ## #   ²​relative_frequency</code></pre>
-<p>And use <code>reverse</code>.</p>
+<p>And use <code>reverse = TRUE</code>.</p>
 <div class="sourceCode" id="cb113"><pre
 class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="#cb113-1" aria-hidden="true" tabindex="-1"></a>sepsis <span class="sc">%&gt;%</span></span>
 <span id="cb113-2"><a href="#cb113-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter_trace_length</span>(<span class="at">interval =</span> <span class="fu">c</span>(<span class="dv">10</span>,<span class="cn">NA</span>), <span class="at">reverse =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
@@ -1764,10 +1781,12 @@ class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="#cb1
 <div id="percentage-based-4" class="section level3">
 <h3>Percentage-based</h3>
 <div class="blue">
-<p>Using <code>filter_trace_length</code> with argument
+<p>Using <code>filter_trace_length()</code> with argument
 <code>percentage</code>, you can give priority to cases with the longest
 length. For example, setting <code>percentage = 0.5</code> will select
-50% of the cases, starting with those that have the highest length.</p>
+50% of the cases, starting with those that have the highest length.
+Again, changes are illustrated with <a
+href="inspect_logs.html"><code>traces()</code></a>.</p>
 <div class="sourceCode" id="cb115"><pre
 class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="#cb115-1" aria-hidden="true" tabindex="-1"></a>sepsis <span class="sc">%&gt;%</span></span>
 <span id="cb115-2"><a href="#cb115-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter_trace_length</span>(<span class="at">percentage =</span> <span class="fl">0.5</span>) <span class="sc">%&gt;%</span></span>

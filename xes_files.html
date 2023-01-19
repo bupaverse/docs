@@ -648,11 +648,11 @@ div.tocify {
 <h1>XES Files</h1>
 <div id="read-xes" class="section level2">
 <h2>Read XES</h2>
-<p>The function <code>read_xes()</code> can be used to read XES files
-and turn the data into an <code>eventlog</code> object in R. The
-function needs only one <code>xesfile</code> argument. This can be a
-local path to a file with a .xes extension or an URL. An example XES
-file can be found at the following link: <a
+<p><code>read_xes()</code> can be used to read XES files and turn the
+data into an <code>eventlog</code> object in R. The function needs only
+one <code>xesfile</code> argument. This can be a local path to a file
+with a .xes extension or an URL. An example XES file can be found at the
+following link: <a
 href="https://bupar.net/eventdata/exercise1.xes">https://bupar.net/eventdata/exercise1.xes</a>.
 When opening this file in a browser, you will see that it is an XML
 file. More information on the notation can be found <a
@@ -704,9 +704,9 @@ href="http://www.xes-standard.org/">here</a>.</p>
 ## 11 Case1.0           D        comple… UNDEFI… 2008-12-09 07:23:01      11     11
 ## # … with abbreviated variable names ¹​activity_id, ²​lifecycle_id, ³​resource_id,
 ## #   ⁴​activity_instance_id</code></pre>
-<p>Note that in the example above, the <code>read_xes()</code> function
-emits a warnings that no activity instance identifier was found. Recall
-that an <code>eventlog</code> object in R needs certain <a
+<p>Note that in the example above, <code>read_xes()</code> emits a
+warnings that no activity instance identifier was found. Recall that an
+<code>eventlog</code> object in R needs certain <a
 href="create_logs.html">data fields</a> to be present. However, it might
 be so that not all of these field are available, in which case
 <code>read_xes()</code> will throw a warning or an error. Ideally, the
@@ -807,7 +807,7 @@ id="fnref1"><sup>1</sup></a></p>
 <div id="create-list-of-cases" class="section level2">
 <h2>Create list of cases</h2>
 <p>In certain circumstances, it might be useful to have a separate list
-of cases with case attributes. This can be obtained using function
+of cases with case attributes. This can be obtained using
 <code>read_xes_cases()</code>. The argument for this function remains
 the same <code>xesfile.</code> The result is a <code>data.frame</code>
 with one row for each case and one column for each attribute.
@@ -869,8 +869,7 @@ the sake of illustration the entire event log is also imported.</p>
 </div>
 <div id="write-xes" class="section level2">
 <h2>Write XES</h2>
-<p>Writing a XES file can be done using the function
-<code>write_xes()</code>.</p>
+<p>Use <code>write_xes()</code> to write a XES file.</p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">args</span>(write_xes)</span></code></pre></div>
 <pre><code>## function (eventlog, xesfile = file.choose(), case_attributes = NULL) 
 ## NULL</code></pre>

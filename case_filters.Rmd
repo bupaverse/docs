@@ -616,7 +616,7 @@ Note that the obtained percentage of cases will not always be exactly the specif
 
 ## {.unlisted .unnumbered}
 
-## Trace length {.tabset .tabset-pills}
+## Trace Length {.tabset .tabset-pills}
 
 The length of a trace, i.e. distinct activity sequence, is the number of activity instances it contains. Note that this is not necessarily equal to the number of events. 
 

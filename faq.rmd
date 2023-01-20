@@ -1,5 +1,8 @@
 ---
 title: "Frequently Asked Questions"
+output: 
+  html_document: 
+    toc: false
 ---
 
 
@@ -7,23 +10,49 @@ title: "Frequently Asked Questions"
 library(bslib)
 ```
 
+```{r echo = F, out.width="25%", fig.align = "right"}
+knitr::include_graphics("images/icons/faq.png")
+```
 
+<style> 
+div.card-header {
+    text-align: left
+}
+</style>
 # Frequently Asked Questions
 
-## Install
-
-```{r echo = F, message = F, warning = F}
-card(card_header("Question"),
-	 card_body("Answer"))
-```
+This FAQ is a living document. If you haven't found the answer to your question here or anywhere else on our website, write to use as [support@bupar.net](mailto:support@bupar.net), and we will get back to you as soon as we can. If you want to notify us of a bug in one of the `bupaR`-packages, please submit an issue on the respective [GitHub-repository](https://github.com/bupaverse).
 
 ## Create
 
-## Manipulate
+```{r echo = F, message = F, warning = F}
+card(card_header(class = "card text-white bg-secondary mb-3", "What is an activity instance identifier, and when do I need one?"),
+	 card_body(htmltools::HTML("The activity instance identifier is a unique identifier for each activity instance, i.e. one specific execution of an activity for a specific case. If an activity exist of more than a single event, for example a <i>start</i> and a <i>complete</i> event, the activity instance identifier is needed to make sure these events are connected to each other.")),
+	 card_body(htmltools::HTML("When you don't have multiple events per activity instance, i.e. each activity only has one registrered timestamp, the activity instance identifier is redundant. In that case, you can use the <code>activitylog</code> object class, as specified in <a href = 'create_logs.html#Scenario_1'>Scenario 1</a>.")),
+	 card_body(htmltools::HTML("If you log has multiple events for the same activity instance, but there is not variable that can act as activity instance identifier to connect them, you can try <a href = 'create_logs.html#Missing_activity_instance_id'> <code>assign_instance_id()</code></a>")))
+```
 
-## Analyse
+```{r echo = F, message = F, warning = F}
+card(card_header(class = "card text-white bg-secondary mb-3", "Creating the event log takes a lot of time. What can I do?"),
+	 card_body(htmltools::HTML("By default, <code>eventlog()</code> will perform some checks to make sure the provided mapping corresponds to the data model. This means that each value of the <code>activity_instance_id</code> should be connected to a single <code>case_id</code> and a single <code>activity_id</code>. For large event logs, this does take some time. You can circumvent these by setting the argument <code>validate = FALSE</code>.")),
+	 card_body(htmltools::HTML("Alternatively, you might want to have a look at the different <a href = 'create_logs.html#The_right_log_for_the_job'>scenarios<a> to decide whether you need an <code>eventlog</code> or <code>activitylog</code> object. The <code>activitylog</code> is a simplified object class that does not require special validation. ")))
+```
 
 ## Visualize
 
-## Predict
+```{r echo = F, message = F, warning = F}
+card(card_header(class = "card text-white bg-success mb-3", "How can I remove infrequent edges in a process map?"),
+	 card_body(htmltools::HTML("<code>bupaR</code> does not contain a magic slider that can simplify a <code>process_map</code>. We believe that process maps should always be a transparent visualization of the log, and simplifying should be done by the conscious use of filters. You might consider <a href= 'case_filters.html#Infrequent_Flows'><code>filter_infrequent_flows()</code></a>, <a href = 'case_filters.html#Trace_Frequency'><code>filter_trace_frequency()</code></a> or <a href = 'case_filters.html#Activity_Frequency'><code>filter_activity_frequency()</code></a> for this job.")))
+```
+
+```{r echo = F, message = F, warning = F}
+card(card_header(class = "card text-white bg-success mb-3", "Can I use process maps in a Shiny app?"),
+	 card_body(htmltools::HTML("Yes, you can! Use the functions <code>renderProcessMap()</code> in the Server, and <code>processMapOutput</code> in the UI of your app. Make sure to use the <code>width</code> and <code>height</code> arguments to set proper dimensions for the map.")))
+```
+
+```{r echo = F, message = F, warning = F}
+card(card_header(class = "card text-white bg-success mb-3", "Can I save the process map to a file?"),
+	 card_body(htmltools::HTML("You can save a process map to a PDF, PNG, PS or EPS using <code>export_map()</code>. To do this, note that you should use the argument <code>render = FALSE</code> in the call to <code>process_map()</code>. Use the argument <code>title</code> to add a caption to the image, and <code>width</code> and <code>height</code> to adjust the file dimensions.")))
+```
+
 

@@ -1,5 +1,8 @@
 ---
 title: bupaR Docs | Unite activities
+output: 
+  html_document: 
+    toc: false
 ---
 
 
@@ -10,6 +13,24 @@ knitr::include_graphics("images/icons/aggregate.png")
 
 ***
 
+# Unite activities
+
+You can use `act_unite()` to remove unwanted differences between activities. For example, consider the `sepsis` activities. 
+
+```{r}
+sepsis %>%
+	activities()
+```
+
+We can replace all `Release X` activities with a single unique `Release` activity. 
+
+```{r}
+sepsis %>%
+	act_unite(Release = c("Release A","Release B","Release C","Release D","Release E")) %>%
+	activities()
+```
+
+Note that, in contrast with `act_collapse()`, the number of activity instances will never be changed by `act_unite()`. Only the labels of existing activity instances will be changed. On the other hand `act_collapse()` merges multiple activity instances into a new instance.
 
 
 

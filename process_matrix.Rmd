@@ -8,7 +8,7 @@ output:
 
 ```{r echo = F, out.width="25%", fig.align = "right"}
 knitr::include_graphics("images/icons/matrix.PNG")
-knitr::opts_chunk$set(fig.asp = 1)
+knitr::opts_chunk$set(fig.asp = 0.6,out.width = "80%")
 ```
 
 ***
@@ -16,7 +16,6 @@ knitr::opts_chunk$set(fig.asp = 1)
 
 ```{r include = F}
 library(bupaverse)
-knitr::opts_chunk$set(fig.height=3)
 ```
 
 ```{r eval = F}
@@ -49,7 +48,7 @@ div.blue { background-color:#E6F4F1; border-radius: 5px; padding: 20px;}
 
 ### Absolute
 
-```{r out.width = "100%", fig.asp = 0.9}
+```{r out.width = "100%"}
 traffic_fines %>%
 	process_matrix(frequency("absolute")) 
 traffic_fines %>%
@@ -110,6 +109,10 @@ traffic_fines %>%
 
 	
 # {.unnumbered .unlisted}
+
+
+
+
 
 ```{r footer, results = "asis", echo = F}
 CURRENT_PAGE <-  stringr::str_replace(knitr::current_input(), ".Rmd",".html")

@@ -1,5 +1,8 @@
 ---
 title: bupaR Docs | Dotted Charts
+output: 
+  html_document: 
+    toc: false
 ---
 
 ```{r echo = F, out.width="25%", fig.align = "right"}
@@ -8,29 +11,72 @@ knitr::include_graphics("images/icons/dotted.PNG")
 
 ***
 
+# Dotted chart {.tabset .tabset-pills}
+
 ```{r include = F}
-library(tidyverse)
-library(bupaR)
-library(pander)
-library(lubridate)
+library(bupaverse)
+knitr::opts_chunk$set(out.width = "80%", fig.asp = 0.6)
 ```
 
-Dotted charts can be made with the `dotted_chart` function. A dotted chart is a graph in which each activity instance is displayed with a point. The x-axis referce to the time aspect, while the y-axis refers to cases. The dotted chart function has 3 arguments
+```{r eval = F}
+library(bupaverse)
+```
 
-* x: Either absolute (absolute time on x-axis) or relative (time difference since start case on x-axis)
-* y: The ordering of the cases along the y-axis: by start, end, or duration.
-* color: The attribute used to color the activity instances. Default to the activity type.
+Dotted charts can be made with `dotted_chart()`. A dotted chart is a graph in which each activity instance is displayed with by a dot. The x-axis refers to the time aspect, while the y-axis refers to cases. The dotted chart function has 3 arguments.
+
+* __x__: 
+	* absolute: absolute time on x-axis
+	* relative: time difference since start case on x-axis
+	* relative_day: time difference since start of day on x-axis (00:00)
+	* relative_week: time difference since start of week on x-axis (Mondag 00:00)
+* __sort__: The ordering of the cases along the y-axis: _start_, _end_, _duration_, _start_day_, or _start_week._ Value _auto_ (default) will set sort appropriately given the argument for `x`
+* __color__: The attribute used to color the activity instances. Defaults to the activity type.
 
 Below, you can see some examples for dotted charts with various configurations
 
+## Absolute
+
 ```{r}
-patients %>%
-	dotted_chart(x = "absolute", sort = "start")
-patients %>%
-	dotted_chart(x = "absolute", sort = "start", color = "employee")
-patients %>%
-	dotted_chart(x = "relative", sort = "duration", color = "employee")
+sepsis %>%
+	dotted_chart(x = "absolute")
+sepsis %>%
+	dotted_chart(x = "absolute", sort = "end")
 ```
+
+## Relative
+
+```{r}
+sepsis %>%
+	dotted_chart(x = "relative")
+```
+
+
+## Relative day
+
+```{r}
+sepsis %>%
+	dotted_chart(x = "relative_day")
+```
+
+## Relative week 
+
+```{r}
+sepsis %>%
+	dotted_chart(x = "relative_week")
+```
+
+# {.unlisted .unnumbered}
+
+Other configurations: 
+
+* change the used color scale by configuring the `scale_color` argument
+
+```{r}
+sepsis %>%
+	dotted_chart(x = "relative_week",
+				 scale_color = ggplot2::scale_color_discrete)
+```
+
 
 
 ```{r footer, results = "asis", echo = F}

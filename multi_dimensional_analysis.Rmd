@@ -1,5 +1,8 @@
 ---
 title: bupaR Docs | Multi-dimensional analysis
+output: 
+  html_document: 
+    toc: false
 ---
 
 ```{r echo = F, out.width="25%", fig.align = "right"}
@@ -8,7 +11,7 @@ knitr::include_graphics("images/icons/multi.PNG")
 
 ***
 
-# Advanced maps
+# Multi-dimensional analysis
 
 ```{r include = F}
 library(bupaverse)
@@ -25,7 +28,8 @@ For example, let's say we want to compare throughput time (performance) with tra
 
 ```{r}
 traffic_fines %>%
-	throughput_time(level = "case", units = "weeks")
+	throughput_time(level = "case", units = "weeks") %>%
+	head()
 ```
 Subsequently, we add this information to the log using `augment()`, and store the result as `tmp`. 
 

@@ -189,7 +189,7 @@ Returns: cases where `activity` occurs `n` times or more.
 
 ```{r}
 sepsis %>% 
-	check_rule(contains("Leucocytes", n = 3)) %>%
+	check_rule(processcheckR::contains("Leucocytes", n = 3)) %>%
 	group_by(contains_Leucocytes_3) %>%
 	n_cases()
 ```

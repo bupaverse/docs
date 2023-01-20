@@ -659,11 +659,11 @@ greater than 300. More process-specific filtering methods can be found
 <a href="http://www.bupar.net/subsetting.html">here</a>.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>traffic_fines <span class="sc">%&gt;%</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(vehicleclass <span class="sc">==</span> <span class="st">&quot;C&quot;</span>, amount <span class="sc">&gt;</span> <span class="dv">300</span>)</span></code></pre></div>
-<pre><code>## # Log of 17 events consisting of:
+<pre><code>## # Log of 20 events consisting of:
 ## 1 trace 
-## 17 cases 
-## 17 instances of 1 activity 
-## 9 resources 
+## 20 cases 
+## 20 instances of 1 activity 
+## 10 resources 
 ## Events occurred from 2006-08-10 until 2008-02-09 
 ##  
 ## # Variables were mapped as follows:
@@ -674,26 +674,29 @@ greater than 300. More process-specific filtering methods can be found
 ## Timestamp:           timestamp 
 ## Lifecycle transition:        lifecycle 
 ## 
-## # A tibble: 17 × 18
+## # A tibble: 20 × 18
 ##    case_id activity   lifec…¹ resou…² timestamp           amount article dismi…³
 ##    &lt;chr&gt;   &lt;fct&gt;      &lt;fct&gt;   &lt;fct&gt;   &lt;dttm&gt;              &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;  
 ##  1 A10060  Create Fi… comple… 541     2007-03-08 00:00:00 36.0       157 NIL    
 ##  2 A10497  Create Fi… comple… 558     2007-03-30 00:00:00 36.0       157 NIL    
 ##  3 A10818  Create Fi… comple… 561     2007-04-08 00:00:00 36.0       157 NIL    
 ##  4 A11707  Create Fi… comple… 550     2007-04-24 00:00:00 36.0       157 NIL    
-##  5 A1408   Create Fi… comple… 559     2006-08-20 00:00:00 35.0       157 NIL    
-##  6 A14883  Create Fi… comple… 561     2007-06-29 00:00:00 36.0       157 NIL    
-##  7 A17130  Create Fi… comple… 541     2007-07-15 00:00:00 36.0       157 NIL    
-##  8 A1815   Create Fi… comple… 563     2006-08-10 00:00:00 35.0       157 NIL    
-##  9 A19109  Create Fi… comple… 556     2007-07-17 00:00:00 36.0       157 NIL    
-## 10 A23000  Create Fi… comple… 550     2007-12-29 00:00:00 36.0       157 NIL    
-## 11 A24247  Create Fi… comple… 561     2007-12-03 00:00:00 36.0       157 NIL    
-## 12 A24366  Create Fi… comple… 541     2008-02-09 00:00:00 36.0       157 NIL    
-## 13 A24634  Create Fi… comple… 537     2007-11-21 00:00:00 36.0       157 NIL    
-## 14 A24942  Create Fi… comple… 561     2007-12-30 00:00:00 36.0       157 NIL    
-## 15 A25581  Create Fi… comple… 559     2007-11-23 00:00:00 36.0       157 NIL    
-## 16 A26099  Create Fi… comple… 559     2007-12-09 00:00:00 36.0       157 NIL    
-## 17 A26277  Create Fi… comple… 538     2008-01-07 00:00:00 36.0       157 NIL    
+##  5 A11936  Create Fi… comple… 557     2007-04-29 00:00:00 36.0       157 NIL    
+##  6 A12073  Create Fi… comple… 557     2007-05-03 00:00:00 36.0       157 NIL    
+##  7 A1408   Create Fi… comple… 559     2006-08-20 00:00:00 35.0       157 NIL    
+##  8 A14883  Create Fi… comple… 561     2007-06-29 00:00:00 36.0       157 NIL    
+##  9 A17130  Create Fi… comple… 541     2007-07-15 00:00:00 36.0       157 NIL    
+## 10 A1815   Create Fi… comple… 563     2006-08-10 00:00:00 35.0       157 NIL    
+## 11 A19109  Create Fi… comple… 556     2007-07-17 00:00:00 36.0       157 NIL    
+## 12 A23000  Create Fi… comple… 550     2007-12-29 00:00:00 36.0       157 NIL    
+## 13 A24247  Create Fi… comple… 561     2007-12-03 00:00:00 36.0       157 NIL    
+## 14 A24366  Create Fi… comple… 541     2008-02-09 00:00:00 36.0       157 NIL    
+## 15 A24634  Create Fi… comple… 537     2007-11-21 00:00:00 36.0       157 NIL    
+## 16 A24942  Create Fi… comple… 561     2007-12-30 00:00:00 36.0       157 NIL    
+## 17 A25581  Create Fi… comple… 559     2007-11-23 00:00:00 36.0       157 NIL    
+## 18 A25599  Create Fi… comple… 559     2007-11-24 00:00:00 36.0       157 NIL    
+## 19 A26099  Create Fi… comple… 559     2007-12-09 00:00:00 36.0       157 NIL    
+## 20 A26277  Create Fi… comple… 538     2008-01-07 00:00:00 36.0       157 NIL    
 ## # … with 10 more variables: expense &lt;chr&gt;, lastsent &lt;chr&gt;, matricola &lt;dbl&gt;,
 ## #   notificationtype &lt;chr&gt;, paymentamount &lt;dbl&gt;, points &lt;dbl&gt;,
 ## #   totalpaymentamount &lt;chr&gt;, vehicleclass &lt;chr&gt;, activity_instance_id &lt;chr&gt;,
@@ -917,12 +920,12 @@ event log containing n cases. The code below returns a sample of 10
 patients.</p>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sample_n</span>(<span class="at">size =</span> <span class="dv">10</span>)</span></code></pre></div>
-<pre><code>## # Log of 104 events consisting of:
+<pre><code>## # Log of 112 events consisting of:
 ## 2 traces 
 ## 10 cases 
-## 52 instances of 7 activities 
+## 56 instances of 7 activities 
 ## 7 resources 
-## Events occurred from 2017-01-02 11:41:53 until 2018-04-12 20:20:46 
+## Events occurred from 2017-03-25 18:07:51 until 2018-05-03 02:05:09 
 ##  
 ## # Variables were mapped as follows:
 ## Case identifier:     patient 
@@ -932,20 +935,20 @@ patients.</p>
 ## Timestamp:           time 
 ## Lifecycle transition:        registration_type 
 ## 
-## # A tibble: 104 × 7
+## # A tibble: 112 × 7
 ##    handling     patient employee handling_id regist…¹ time                .order
 ##    &lt;fct&gt;        &lt;chr&gt;   &lt;fct&gt;    &lt;chr&gt;       &lt;fct&gt;    &lt;dttm&gt;               &lt;int&gt;
-##  1 Registration 1       r1       1           start    2017-01-02 11:41:53      1
-##  2 Registration 29      r1       29          start    2017-02-01 06:16:20      2
-##  3 Registration 90      r1       90          start    2017-04-04 06:54:12      3
-##  4 Registration 99      r1       99          start    2017-04-11 16:34:31      4
-##  5 Registration 136     r1       136         start    2017-05-14 03:26:23      5
-##  6 Registration 144     r1       144         start    2017-05-19 03:19:05      6
-##  7 Registration 182     r1       182         start    2017-06-25 11:18:08      7
-##  8 Registration 205     r1       205         start    2017-07-19 15:48:14      8
-##  9 Registration 245     r1       245         start    2017-08-27 17:24:15      9
-## 10 Registration 469     r1       469         start    2018-04-06 01:29:41     10
-## # … with 94 more rows, and abbreviated variable name ¹​registration_type</code></pre>
+##  1 Registration 77      r1       77          start    2017-03-25 18:07:51      1
+##  2 Registration 158     r1       158         start    2017-06-05 03:01:58      2
+##  3 Registration 173     r1       173         start    2017-06-18 20:54:33      3
+##  4 Registration 205     r1       205         start    2017-07-19 15:48:14      4
+##  5 Registration 305     r1       305         start    2017-10-21 11:34:56      5
+##  6 Registration 315     r1       315         start    2017-10-28 01:11:54      6
+##  7 Registration 349     r1       349         start    2017-11-24 12:22:18      7
+##  8 Registration 355     r1       355         start    2017-11-30 09:26:01      8
+##  9 Registration 412     r1       412         start    2018-01-30 08:04:41      9
+## 10 Registration 494     r1       494         start    2018-04-29 04:55:10     10
+## # … with 102 more rows, and abbreviated variable name ¹​registration_type</code></pre>
 <p>Note that this function can also be used with a sample size bigger
 than the number of cases in the event log, if you allow for the
 replacements of drawn cases.</p>
@@ -955,17 +958,17 @@ information.</p>
 <hr />
 <p>Read more:</p>
 <div class="btn-toolbar" role="group">
-<p><a href = "wrangling.html" class="btn btn-info" type="button">Wrangling</a>
-<a href = "case_filters.html" class="btn btn-info" type="button">Case
+<p><a style = 'margin: 5px' href = "wrangling.html" class="btn btn-info" type="button">Wrangling</a>
+<a style = 'margin: 5px' href = "case_filters.html" class="btn btn-info" type="button">Case
 Filters</a>
-<a href = "event_filters.html" class="btn btn-info" type="button">Event
+<a style = 'margin: 5px' href = "event_filters.html" class="btn btn-info" type="button">Event
 Filters</a>
-<a href = "generic_filtering.html" class="btn btn-info disabled" type="button">Generic
+<a style = 'margin: 5px' href = "generic_filtering.html" class="btn btn-info disabled" type="button">Generic
 Filtering</a>
-<a href = "augment.html" class="btn btn-info" type="button">Augment</a>
-<a href = "mutate.html" class="btn btn-info" type="button">Mutate</a>
-<a href = "collapse.html" class="btn btn-info" type="button">Collapse</a>
-<a href = "unite.html" class="btn btn-info" type="button">Unite</a></p>
+<a style = 'margin: 5px' href = "augment.html" class="btn btn-info" type="button">Augment</a>
+<a style = 'margin: 5px' href = "mutate.html" class="btn btn-info" type="button">Mutate</a>
+<a style = 'margin: 5px' href = "collapse.html" class="btn btn-info" type="button">Collapse</a>
+<a style = 'margin: 5px' href = "unite.html" class="btn btn-info" type="button">Unite</a></p>
 </div>
 </div>
 

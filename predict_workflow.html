@@ -727,7 +727,7 @@ from <code>eventdataR</code>. Note that both <code>eventlog</code> and
 supported.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">prepare_examples</span>(traffic_fines, <span class="at">task =</span> <span class="st">&quot;outcome&quot;</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>df</span></code></pre></div>
-<pre><code>## # A tibble: 27,001 × 11
+<pre><code>## # A tibble: 34,724 × 11
 ##    ith_case case_id prefix                 prefi…¹ outcome     k activ…² resou…³
 ##       &lt;int&gt; &lt;chr&gt;   &lt;chr&gt;                  &lt;list&gt;  &lt;fct&gt;   &lt;dbl&gt; &lt;chr&gt;   &lt;fct&gt;  
 ##  1        1 A2127   Create Fine            &lt;chr&gt;   Payment     0 Create… 537    
@@ -739,8 +739,8 @@ supported.</p>
 ##  7        2 A15     Create Fine - Send Fi… &lt;chr&gt;   Send f…     4 Send f… &lt;NA&gt;   
 ##  8        3 A1820   Create Fine            &lt;chr&gt;   Payment     0 Create… 563    
 ##  9        3 A1820   Create Fine - Payment  &lt;chr&gt;   Payment     1 Payment &lt;NA&gt;   
-## 10        4 A1451   Create Fine            &lt;chr&gt;   Send f…     0 Create… 560    
-## # … with 26,991 more rows, 3 more variables: start_time &lt;dttm&gt;,
+## 10        4 A22     Create Fine            &lt;chr&gt;   Payment     0 Create… 561    
+## # … with 34,714 more rows, 3 more variables: start_time &lt;dttm&gt;,
 ## #   end_time &lt;dttm&gt;, remaining_trace_list &lt;list&gt;, and abbreviated variable
 ## #   names ¹​prefix_list, ²​activity, ³​resource</code></pre>
 <p>We split the transformed dataset <code>df</code> into train- and test
@@ -762,13 +762,13 @@ respectively. The proportion of the train set is configured with the
 ## #   ²​activity, ³​resource</code></pre>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>split<span class="sc">$</span>test_df <span class="sc">%&gt;%</span> <span class="fu">head</span>(<span class="dv">5</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 5 × 11
-##   ith_case case_id prefix                  prefi…¹ outcome     k activ…² resou…³
-##      &lt;int&gt; &lt;chr&gt;   &lt;chr&gt;                   &lt;list&gt;  &lt;fct&gt;   &lt;dbl&gt; &lt;chr&gt;   &lt;fct&gt;  
-## 1     6873 A23409  Create Fine             &lt;chr&gt;   Payment     0 Create… 557    
-## 2     6873 A23409  Create Fine - Payment   &lt;chr&gt;   Payment     1 Payment &lt;NA&gt;   
-## 3     6874 A23410  Create Fine             &lt;chr&gt;   Send f…     0 Create… 557    
-## 4     6874 A23410  Create Fine - Send Fine &lt;chr&gt;   Send f…     1 Send F… &lt;NA&gt;   
-## 5     6874 A23410  Create Fine - Send Fin… &lt;chr&gt;   Send f…     2 Insert… &lt;NA&gt;   
+##   ith_case case_id prefix                prefix_…¹ outcome     k activ…² resou…³
+##      &lt;int&gt; &lt;chr&gt;   &lt;chr&gt;                 &lt;list&gt;    &lt;fct&gt;   &lt;dbl&gt; &lt;chr&gt;   &lt;fct&gt;  
+## 1     8001 A24869  Create Fine           &lt;chr [1]&gt; Payment     0 Create… 559    
+## 2     8001 A24869  Create Fine - Payment &lt;chr [2]&gt; Payment     1 Payment &lt;NA&gt;   
+## 3     8002 A24871  Create Fine           &lt;chr [1]&gt; Payment     0 Create… 559    
+## 4     8002 A24871  Create Fine - Payment &lt;chr [2]&gt; Payment     1 Payment &lt;NA&gt;   
+## 5     8003 A24872  Create Fine           &lt;chr [1]&gt; Send f…     0 Create… 559    
 ## # … with 3 more variables: start_time &lt;dttm&gt;, end_time &lt;dttm&gt;,
 ## #   remaining_trace_list &lt;list&gt;, and abbreviated variable names ¹​prefix_list,
 ## #   ²​activity, ³​resource</code></pre>
@@ -781,9 +781,9 @@ set contains the split% first cases, and the test set contains the
 all examples in the train set can be slightly different, as cases differ
 with respect their length.</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(split<span class="sc">$</span>train_df) <span class="sc">/</span> <span class="fu">nrow</span>(df)</span></code></pre></div>
-<pre><code>## [1] 0.8032295</code></pre>
+<pre><code>## [1] 0.8016934</code></pre>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">n_distinct</span>(split<span class="sc">$</span>train_df<span class="sc">$</span>case_id) <span class="sc">/</span> <span class="fu">n_distinct</span>(df<span class="sc">$</span>case_id)</span></code></pre></div>
-<pre><code>## [1] 0.7999069</code></pre>
+<pre><code>## [1] 0.8</code></pre>
 </div>
 <div id="define-model" class="section level2">
 <h2>Define model</h2>
@@ -980,11 +980,11 @@ plot (regression).</p>
 <hr />
 <p>Read more:</p>
 <div class="btn-toolbar" role="group">
-<p><a href = "predict_workflow.html" class="btn btn-warning disabled" type="button">Predict
+<p><a style = 'margin: 5px' href = "predict_workflow.html" class="btn btn-warning disabled" type="button">Predict
 Workflow</a>
-<a href = "predict_adapt.html" class="btn btn-warning" type="button">Predict
+<a style = 'margin: 5px' href = "predict_adapt.html" class="btn btn-warning" type="button">Predict
 Adapt</a>
-<a href = "predict_keras.html" class="btn btn-warning" type="button">Predict
+<a style = 'margin: 5px' href = "predict_keras.html" class="btn btn-warning" type="button">Predict
 Keras</a></p>
 </div>
 </div>

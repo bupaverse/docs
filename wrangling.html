@@ -671,10 +671,10 @@ of “vehicleclass”.</p>
 <pre><code>## # A tibble: 4 × 2
 ##   vehicleclass n_cases
 ##   &lt;chr&gt;          &lt;int&gt;
-## 1 A               8569
-## 2 C                 17
-## 3 M                  5
-## 4 &lt;NA&gt;            8591</code></pre>
+## 1 A               9973
+## 2 C                 21
+## 3 M                  6
+## 4 &lt;NA&gt;           10000</code></pre>
 <div id="predefined-groupings" class="section level3">
 <h3>Predefined groupings</h3>
 <p>For specific groupings, some auxiliary functions are available.</p>
@@ -800,11 +800,11 @@ example below filters events which have vehicleclas “C” and amount
 greater than 300. <a href="generic_filtering.html">Read more.</a>.</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>traffic_fines <span class="sc">%&gt;%</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(vehicleclass <span class="sc">==</span> <span class="st">&quot;C&quot;</span>, amount <span class="sc">&gt;</span> <span class="dv">300</span>)</span></code></pre></div>
-<pre><code>## # Log of 17 events consisting of:
+<pre><code>## # Log of 20 events consisting of:
 ## 1 trace 
-## 17 cases 
-## 17 instances of 1 activity 
-## 9 resources 
+## 20 cases 
+## 20 instances of 1 activity 
+## 10 resources 
 ## Events occurred from 2006-08-10 until 2008-02-09 
 ##  
 ## # Variables were mapped as follows:
@@ -815,26 +815,29 @@ greater than 300. <a href="generic_filtering.html">Read more.</a>.</p>
 ## Timestamp:           timestamp 
 ## Lifecycle transition:        lifecycle 
 ## 
-## # A tibble: 17 × 18
+## # A tibble: 20 × 18
 ##    case_id activity   lifec…¹ resou…² timestamp           amount article dismi…³
 ##    &lt;chr&gt;   &lt;fct&gt;      &lt;fct&gt;   &lt;fct&gt;   &lt;dttm&gt;              &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;  
 ##  1 A10060  Create Fi… comple… 541     2007-03-08 00:00:00 36.0       157 NIL    
 ##  2 A10497  Create Fi… comple… 558     2007-03-30 00:00:00 36.0       157 NIL    
 ##  3 A10818  Create Fi… comple… 561     2007-04-08 00:00:00 36.0       157 NIL    
 ##  4 A11707  Create Fi… comple… 550     2007-04-24 00:00:00 36.0       157 NIL    
-##  5 A1408   Create Fi… comple… 559     2006-08-20 00:00:00 35.0       157 NIL    
-##  6 A14883  Create Fi… comple… 561     2007-06-29 00:00:00 36.0       157 NIL    
-##  7 A17130  Create Fi… comple… 541     2007-07-15 00:00:00 36.0       157 NIL    
-##  8 A1815   Create Fi… comple… 563     2006-08-10 00:00:00 35.0       157 NIL    
-##  9 A19109  Create Fi… comple… 556     2007-07-17 00:00:00 36.0       157 NIL    
-## 10 A23000  Create Fi… comple… 550     2007-12-29 00:00:00 36.0       157 NIL    
-## 11 A24247  Create Fi… comple… 561     2007-12-03 00:00:00 36.0       157 NIL    
-## 12 A24366  Create Fi… comple… 541     2008-02-09 00:00:00 36.0       157 NIL    
-## 13 A24634  Create Fi… comple… 537     2007-11-21 00:00:00 36.0       157 NIL    
-## 14 A24942  Create Fi… comple… 561     2007-12-30 00:00:00 36.0       157 NIL    
-## 15 A25581  Create Fi… comple… 559     2007-11-23 00:00:00 36.0       157 NIL    
-## 16 A26099  Create Fi… comple… 559     2007-12-09 00:00:00 36.0       157 NIL    
-## 17 A26277  Create Fi… comple… 538     2008-01-07 00:00:00 36.0       157 NIL    
+##  5 A11936  Create Fi… comple… 557     2007-04-29 00:00:00 36.0       157 NIL    
+##  6 A12073  Create Fi… comple… 557     2007-05-03 00:00:00 36.0       157 NIL    
+##  7 A1408   Create Fi… comple… 559     2006-08-20 00:00:00 35.0       157 NIL    
+##  8 A14883  Create Fi… comple… 561     2007-06-29 00:00:00 36.0       157 NIL    
+##  9 A17130  Create Fi… comple… 541     2007-07-15 00:00:00 36.0       157 NIL    
+## 10 A1815   Create Fi… comple… 563     2006-08-10 00:00:00 35.0       157 NIL    
+## 11 A19109  Create Fi… comple… 556     2007-07-17 00:00:00 36.0       157 NIL    
+## 12 A23000  Create Fi… comple… 550     2007-12-29 00:00:00 36.0       157 NIL    
+## 13 A24247  Create Fi… comple… 561     2007-12-03 00:00:00 36.0       157 NIL    
+## 14 A24366  Create Fi… comple… 541     2008-02-09 00:00:00 36.0       157 NIL    
+## 15 A24634  Create Fi… comple… 537     2007-11-21 00:00:00 36.0       157 NIL    
+## 16 A24942  Create Fi… comple… 561     2007-12-30 00:00:00 36.0       157 NIL    
+## 17 A25581  Create Fi… comple… 559     2007-11-23 00:00:00 36.0       157 NIL    
+## 18 A25599  Create Fi… comple… 559     2007-11-24 00:00:00 36.0       157 NIL    
+## 19 A26099  Create Fi… comple… 559     2007-12-09 00:00:00 36.0       157 NIL    
+## 20 A26277  Create Fi… comple… 538     2008-01-07 00:00:00 36.0       157 NIL    
 ## # … with 10 more variables: expense &lt;chr&gt;, lastsent &lt;chr&gt;, matricola &lt;dbl&gt;,
 ## #   notificationtype &lt;chr&gt;, paymentamount &lt;dbl&gt;, points &lt;dbl&gt;,
 ## #   totalpaymentamount &lt;chr&gt;, vehicleclass &lt;chr&gt;, activity_instance_id &lt;chr&gt;,
@@ -849,11 +852,11 @@ make sure that the mapping-variables are retained. Otherwise, it would
 no longer function as an eventlog.</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>traffic_fines <span class="sc">%&gt;%</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(vehicleclass)</span></code></pre></div>
-<pre><code>## # Log of 27001 events consisting of:
-## 3 traces 
-## 8591 cases 
-## 27001 instances of 6 activities 
-## 15 resources 
+<pre><code>## # Log of 34724 events consisting of:
+## 44 traces 
+## 10000 cases 
+## 34724 instances of 11 activities 
+## 16 resources 
 ## Events occurred from 2006-06-17 until 2012-03-26 
 ##  
 ## # Variables were mapped as follows:
@@ -864,7 +867,7 @@ no longer function as an eventlog.</p>
 ## Timestamp:           timestamp 
 ## Lifecycle transition:        lifecycle 
 ## 
-## # A tibble: 27,001 × 8
+## # A tibble: 34,724 × 8
 ##    vehiclec…¹ case_id activ…² activ…³ timestamp           resou…⁴ lifec…⁵ .order
 ##    &lt;chr&gt;      &lt;chr&gt;   &lt;fct&gt;   &lt;chr&gt;   &lt;dttm&gt;              &lt;fct&gt;   &lt;fct&gt;    &lt;int&gt;
 ##  1 A          A1      Create… 1       2006-07-24 00:00:00 561     comple…      1
@@ -874,10 +877,10 @@ no longer function as an eventlog.</p>
 ##  5 &lt;NA&gt;       A100    Insert… 5       2007-01-15 00:00:00 &lt;NA&gt;    comple…      5
 ##  6 &lt;NA&gt;       A100    Add pe… 6       2007-03-16 00:00:00 &lt;NA&gt;    comple…      6
 ##  7 &lt;NA&gt;       A100    Send f… 7       2009-03-30 00:00:00 &lt;NA&gt;    comple…      7
-##  8 A          A10004  Create… 19      2007-03-20 00:00:00 537     comple…      8
-##  9 &lt;NA&gt;       A10004  Send F… 20      2007-07-17 00:00:00 &lt;NA&gt;    comple…      9
-## 10 &lt;NA&gt;       A10004  Insert… 21      2007-07-24 00:00:00 &lt;NA&gt;    comple…     10
-## # … with 26,991 more rows, and abbreviated variable names ¹​vehicleclass,
+##  8 A          A10000  Create… 8       2007-03-09 00:00:00 561     comple…      8
+##  9 &lt;NA&gt;       A10000  Send F… 9       2007-07-17 00:00:00 &lt;NA&gt;    comple…      9
+## 10 &lt;NA&gt;       A10000  Insert… 10      2007-08-02 00:00:00 &lt;NA&gt;    comple…     10
+## # … with 34,714 more rows, and abbreviated variable names ¹​vehicleclass,
 ## #   ²​activity, ³​activity_instance_id, ⁴​resource, ⁵​lifecycle</code></pre>
 <p>By setting the argument <code>force_df = TRUE</code>, the
 mapping-variables will not be retained, and the output will be a
@@ -885,20 +888,20 @@ data.frame, and not an event log. Not that this is true even in the case
 that all mapping variables are selected.</p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>traffic_fines <span class="sc">%&gt;%</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(case_id, vehicleclass, amount, <span class="at">force_df =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
-<pre><code>## # A tibble: 27,001 × 3
+<pre><code>## # A tibble: 34,724 × 3
 ##    case_id vehicleclass amount
 ##    &lt;chr&gt;   &lt;chr&gt;        &lt;chr&gt; 
 ##  1 A1      A            35.0  
-##  2 A1      &lt;NA&gt;         35.0  
+##  2 A1      &lt;NA&gt;         &lt;NA&gt;  
 ##  3 A100    A            35.0  
-##  4 A100    &lt;NA&gt;         35.0  
-##  5 A100    &lt;NA&gt;         35.0  
+##  4 A100    &lt;NA&gt;         &lt;NA&gt;  
+##  5 A100    &lt;NA&gt;         &lt;NA&gt;  
 ##  6 A100    &lt;NA&gt;         71.5  
-##  7 A100    &lt;NA&gt;         71.5  
-##  8 A10004  A            36.0  
-##  9 A10004  &lt;NA&gt;         36.0  
-## 10 A10004  &lt;NA&gt;         36.0  
-## # … with 26,991 more rows</code></pre>
+##  7 A100    &lt;NA&gt;         &lt;NA&gt;  
+##  8 A10000  A            36.0  
+##  9 A10000  &lt;NA&gt;         &lt;NA&gt;  
+## 10 A10000  &lt;NA&gt;         &lt;NA&gt;  
+## # … with 34,714 more rows</code></pre>
 <div id="selecting-a-set-of-ids" class="section level3">
 <h3>Selecting (a set of) ids</h3>
 <p>Similar to <code>group_by_ids()</code>, <code>select_ids()</code> can
@@ -965,17 +968,17 @@ ids in the mapping will be selected.</p>
 <hr />
 <p>Read more:</p>
 <div class="btn-toolbar" role="group">
-<p><a href = "wrangling.html" class="btn btn-info disabled" type="button">Wrangling</a>
-<a href = "case_filters.html" class="btn btn-info" type="button">Case
+<p><a style = 'margin: 5px' href = "wrangling.html" class="btn btn-info disabled" type="button">Wrangling</a>
+<a style = 'margin: 5px' href = "case_filters.html" class="btn btn-info" type="button">Case
 Filters</a>
-<a href = "event_filters.html" class="btn btn-info" type="button">Event
+<a style = 'margin: 5px' href = "event_filters.html" class="btn btn-info" type="button">Event
 Filters</a>
-<a href = "generic_filtering.html" class="btn btn-info" type="button">Generic
+<a style = 'margin: 5px' href = "generic_filtering.html" class="btn btn-info" type="button">Generic
 Filtering</a>
-<a href = "augment.html" class="btn btn-info" type="button">Augment</a>
-<a href = "mutate.html" class="btn btn-info" type="button">Mutate</a>
-<a href = "collapse.html" class="btn btn-info" type="button">Collapse</a>
-<a href = "unite.html" class="btn btn-info" type="button">Unite</a></p>
+<a style = 'margin: 5px' href = "augment.html" class="btn btn-info" type="button">Augment</a>
+<a style = 'margin: 5px' href = "mutate.html" class="btn btn-info" type="button">Mutate</a>
+<a style = 'margin: 5px' href = "collapse.html" class="btn btn-info" type="button">Collapse</a>
+<a style = 'margin: 5px' href = "unite.html" class="btn btn-info" type="button">Unite</a></p>
 </div>
 </div>
 </div>

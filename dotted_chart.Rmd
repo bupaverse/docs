@@ -35,36 +35,40 @@ Dotted charts can be made with `dotted_chart()`. A dotted chart is a graph in wh
 Below, you can see some examples for dotted charts with various configurations
 
 ## Absolute
-
+<div class = "blue">
 ```{r}
 sepsis %>%
 	dotted_chart(x = "absolute")
 sepsis %>%
 	dotted_chart(x = "absolute", sort = "end")
 ```
+</div>
 
 ## Relative
-
+<div class = "blue">
 ```{r}
 sepsis %>%
 	dotted_chart(x = "relative")
 ```
-
+</div>
 
 ## Relative day
-
+<div class = "blue">
 ```{r}
 sepsis %>%
 	dotted_chart(x = "relative_day")
 ```
 
+</div>
 ## Relative week 
+
+<div class = "blue">
 
 ```{r}
 sepsis %>%
 	dotted_chart(x = "relative_week")
 ```
-
+</div>
 # {.unlisted .unnumbered}
 
 Other configurations: 

@@ -9,23 +9,71 @@ knitr::include_graphics("images/icons/pm.PNG")
 ***
 
 
-### Performance profile
+# Performance profile
 
-Instead of a frequency profile, one can also use a performance profile, focussing on processing time of activities. The performance profile has two arguments: the FUN argument to specify the function to apply on the processing time (e.g. min, max, mean, median, etc.), and the units argument to specificy the time unit to be used.
+```{r include = F}
+library(bupaverse)
+knitr::opts_chunk$set(fig.height=3)
+knitr::opts_chunk$set(warning = F)
+knitr::opts_chunk$set(out.width = "100%")
+```
+
+```{r eval = F}
+library(bupaverse)
+```
+
+
+Instead of a frequencies, process maps can also be used to visualize performance of the process, by using `performance()` to configure the map, instead of `frequency()`. 
+
+```{r}
+patients %>%
+	process_map(performance())
+```
+
+There are three different parameters specific to the `performance()` configuration: the aggregation function, the time units, and the flow time type. 
+
+## Aggregation function
+
+The `FUN` argument specifies the aggregation function to apply on the processing time (e.g. min, max, mean, median, etc.). By default, the _mean_ durations are shown. We can adjust this to the maximum, for example. 
+
+```{r}
+patients %>%
+	process_map(performance(FUN = max))
+```
+
+Any function that takes a numerical vector and returns a single value can be used. For example, let's say we want to show the 0.90 percentile. 
+
+```{r}
+p90 <- function(x, ...) {
+	quantile(x, probs = 0.9, ...)
+}
+
+patients %>%
+	process_map(performance(FUN = p90))
+```
+
+Note that the `...` is mandatory as `process_map` will automatically add `na.rm = T` to the aggregation function call. 
+
+## Time units
+
+
+The `units` argument allows to specificy the time unit to be used.
 
 ```{r fig.height=2}
 patients %>%
-	process_map(performance(median, "days"))
+	process_map(performance(mean, "days"))
 patients %>%
 	process_map(performance(mean, "hours"))
 ```
 
+## Flow time type
+
+Finally, you can set the `flowt_time` argument. 
+
 There are two different duration types that can be displayed on the edges.
 
-*	`idle_time`: the time between the end of the from-activity, and the start of the to-activity. Can be negative if the from-activity overleaps with the consecutive activity.
-*	`inter_start_time`: the time between the start of the consecutive activity, including the duration of the from-activity. 
-
-The colors can be modified through the `color_scale` argument. See `RColorBrewer::brewer.pal.info` for all options. 
+*	`idle_time`: the time between the end of the source-activity, and the start of the target-activity. Can be negative if the source-activity overlaps with the target-activity.
+*	`inter_start_time`: the time between the __start__ of the source and target activities, __including__ the duration of the from-activity. 
 
 ```{r footer, results = "asis", echo = F}
 CURRENT_PAGE <-  stringr::str_replace(knitr::current_input(), ".Rmd",".html")

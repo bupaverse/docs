@@ -13,7 +13,7 @@
 
 <title>Frequently Asked Questions</title>
 
-<script src="site_libs/header-attrs-2.19/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.20/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <link href="site_libs/bootstrap-5.2.2/bootstrap.min.css" rel="stylesheet" />
@@ -21,9 +21,6 @@
 <script src="site_libs/bs3compat-0.4.2/transition.js"></script>
 <script src="site_libs/bs3compat-0.4.2/tabs.js"></script>
 <script src="site_libs/bs3compat-0.4.2/bs3compat.js"></script>
-<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
-<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
-<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <script src="site_libs/bslib-tag-require-0.4.2/tag-require.js"></script>
 <link href="site_libs/htmltools-fill-0.5.4/fill.css" rel="stylesheet" />
@@ -221,78 +218,6 @@ $(document).ready(function () {
 
 
 
-<style type="text/css">
-
-#TOC {
-  margin: 25px 0px 20px 0px;
-}
-@media (max-width: 768px) {
-#TOC {
-  position: relative;
-  width: 100%;
-}
-}
-
-@media print {
-#TOC {
-  display: none !important;
-}
-.toc-content {
-  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
-  float: right;
-}
-}
-
-.toc-content {
-  padding-left: 30px;
-  padding-right: 40px;
-}
-
-div.main-container {
-  max-width: 1200px;
-}
-
-div.tocify {
-  width: 20%;
-  max-width: 260px;
-  max-height: 85%;
-}
-
-@media (min-width: 768px) and (max-width: 991px) {
-  div.tocify {
-    width: 25%;
-  }
-}
-
-@media (max-width: 767px) {
-  div.tocify {
-    width: 100%;
-    max-width: none;
-  }
-}
-
-.tocify ul, .tocify li {
-  line-height: 20px;
-}
-
-.tocify-subheader .tocify-item {
-  font-size: 0.90em;
-}
-
-.tocify .list-group-item {
-  border-radius: 0px;
-}
-
-.tocify-subheader {
-  display: inline;
-}
-.tocify-subheader .tocify-item {
-  font-size: 0.95em;
-}
-
-</style>
-
-
 
 </head>
 
@@ -300,16 +225,6 @@ div.tocify {
 
 
 <div class="container-fluid main-container">
-
-
-<!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row">
-<div class="col-xs-12 col-sm-4 col-md-3">
-<div id="TOC" class="tocify">
-</div>
-</div>
-
-<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -548,29 +463,49 @@ div.tocify {
 </div>
 
 
+<p><img src="images/icons/faq.png" width="25%" style="display: block; margin: auto 0 auto auto;" /></p>
+<style> 
+div.card-header {
+    text-align: left
+}
+</style>
 <div id="frequently-asked-questions" class="section level1">
 <h1>Frequently Asked Questions</h1>
-<div id="install" class="section level2">
-<h2>Install</h2>
-<div class="card bslib-card html-fill-item html-fill-container" data-require-bs-caller="card()" data-require-bs-version="5">
-<div class="card-header">Question</div>
-<div class="card-body" style="flex:0 0 auto;">Answer</div>
-</div>
-</div>
+<p>This FAQ is a living document. If you haven’t found the answer to
+your question here or anywhere else on our website, write to use as <a
+href="mailto:support@bupar.net">support@bupar.net</a>, and we will get
+back to you as soon as we can. If you want to notify us of a bug in one
+of the <code>bupaR</code>-packages, please submit an issue on the
+respective <a
+href="https://github.com/bupaverse">GitHub-repository</a>.</p>
 <div id="create" class="section level2">
 <h2>Create</h2>
+<div class="card bslib-card html-fill-item html-fill-container" data-require-bs-caller="card()" data-require-bs-version="5">
+<div class="card-header card text-white bg-secondary mb-3">What is an activity instance identifier, and when do I need one?</div>
+<div class="card-body" style="flex:0 0 auto;">The activity instance identifier is a unique identifier for each activity instance, i.e. one specific execution of an activity for a specific case. If an activity exist of more than a single event, for example a <i>start</i> and a <i>complete</i> event, the activity instance identifier is needed to make sure these events are connected to each other.</div>
+<div class="card-body" style="flex:0 0 auto;">When you don't have multiple events per activity instance, i.e. each activity only has one registrered timestamp, the activity instance identifier is redundant. In that case, you can use the <code>activitylog</code> object class, as specified in <a href = 'create_logs.html#Scenario_1'>Scenario 1</a>.</div>
+<div class="card-body" style="flex:0 0 auto;">If you log has multiple events for the same activity instance, but there is not variable that can act as activity instance identifier to connect them, you can try <a href = 'create_logs.html#Missing_activity_instance_id'> <code>assign_instance_id()</code></a></div>
 </div>
-<div id="manipulate" class="section level2">
-<h2>Manipulate</h2>
+<div class="card bslib-card html-fill-item html-fill-container" data-require-bs-caller="card()" data-require-bs-version="5">
+<div class="card-header card text-white bg-secondary mb-3">Creating the event log takes a lot of time. What can I do?</div>
+<div class="card-body" style="flex:0 0 auto;">By default, <code>eventlog()</code> will perform some checks to make sure the provided mapping corresponds to the data model. This means that each value of the <code>activity_instance_id</code> should be connected to a single <code>case_id</code> and a single <code>activity_id</code>. For large event logs, this does take some time. You can circumvent these by setting the argument <code>validate = FALSE</code>.</div>
+<div class="card-body" style="flex:0 0 auto;">Alternatively, you might want to have a look at the different <a href = 'create_logs.html#The_right_log_for_the_job'>scenarios<a> to decide whether you need an <code>eventlog</code> or <code>activitylog</code> object. The <code>activitylog</code> is a simplified object class that does not require special validation. </div>
 </div>
-<div id="analyse" class="section level2">
-<h2>Analyse</h2>
 </div>
 <div id="visualize" class="section level2">
 <h2>Visualize</h2>
+<div class="card bslib-card html-fill-item html-fill-container" data-require-bs-caller="card()" data-require-bs-version="5">
+<div class="card-header card text-white bg-success mb-3">How can I remove infrequent edges in a process map?</div>
+<div class="card-body" style="flex:0 0 auto;"><code>bupaR</code> does not contain a magic slider that can simplify a <code>process_map</code>. We believe that process maps should always be a transparent visualization of the log, and simplifying should be done by the conscious use of filters. You might consider <a href= 'case_filters.html#Infrequent_Flows'><code>filter_infrequent_flows()</code></a>, <a href = 'case_filters.html#Trace_Frequency'><code>filter_trace_frequency()</code></a> or <a href = 'case_filters.html#Activity_Frequency'><code>filter_activity_frequency()</code></a> for this job.</div>
 </div>
-<div id="predict" class="section level2">
-<h2>Predict</h2>
+<div class="card bslib-card html-fill-item html-fill-container" data-require-bs-caller="card()" data-require-bs-version="5">
+<div class="card-header card text-white bg-success mb-3">Can I use process maps in a Shiny app?</div>
+<div class="card-body" style="flex:0 0 auto;">Yes, you can! Use the functions <code>renderProcessMap()</code> in the Server, and <code>processMapOutput</code> in the UI of your app. Make sure to use the <code>width</code> and <code>height</code> arguments to set proper dimensions for the map.</div>
+</div>
+<div class="card bslib-card html-fill-item html-fill-container" data-require-bs-caller="card()" data-require-bs-version="5">
+<div class="card-header card text-white bg-success mb-3">Can I save the process map to a file?</div>
+<div class="card-body" style="flex:0 0 auto;">You can save a process map to a PDF, PNG, PS or EPS using <code>export_map()</code>. To do this, note that you should use the argument <code>render = FALSE</code> in the call to <code>process_map()</code>. Use the argument <code>title</code> to add a caption to the image, and <code>width</code> and <code>height</code> to adjust the file dimensions.</div>
+</div>
 </div>
 </div>
 
@@ -578,8 +513,6 @@ div.tocify {
 <center><p style = "font-size: 12px">Copyright &copy; 2023 <a href = "https://bupar.net/about/" >bupaR - Hasselt University</a></p></center>
 
 
-</div>
-</div>
 
 </div>
 
@@ -612,35 +545,6 @@ $(document).ready(function () {
 
 <!-- code folding -->
 
-<script>
-$(document).ready(function ()  {
-
-    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
-    $('.unlisted.unnumbered').addClass('toc-ignore')
-
-    // move toc-ignore selectors from section div to header
-    $('div.section.toc-ignore')
-        .removeClass('toc-ignore')
-        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
-
-    // establish options
-    var options = {
-      selectors: "h1,h2,h3,h4",
-      theme: "bootstrap3",
-      context: '.toc-content',
-      hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
-      },
-      ignoreSelector: ".toc-ignore",
-      scrollTo: 0
-    };
-    options.showAndHide = false;
-    options.smoothScroll = true;
-
-    // tocify
-    var toc = $("#TOC").tocify(options).data("toc-tocify");
-});
-</script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>

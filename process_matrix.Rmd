@@ -84,25 +84,25 @@ traffic_fines %>%
 
 ```{r}
 traffic_fines %>%
+	process_matrix(frequency("relative-consequent")) 
+traffic_fines %>%
+	process_matrix(frequency("relative-consequent")) %>%
+	plot()
+```
+
+
+</div>
+## Performance 
+<div class = "blue">
+
+```{r}
+traffic_fines %>%
 	process_matrix(performance(FUN = mean, units = "weeks")) 
 traffic_fines %>%
 	process_matrix(performance(FUN = mean, units = "weeks"))  %>%
 	plot()
 ```
 
-</div>
-## Performance 
-<div class = "blue">
-
-
-
-```{r}
-traffic_fines %>%
-	process_matrix(frequency("relative-consequent")) 
-traffic_fines %>%
-	process_matrix(frequency("relative-consequent")) %>%
-	plot()
-```
 
 
 </div>

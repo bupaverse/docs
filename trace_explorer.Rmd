@@ -9,7 +9,7 @@ knitr::include_graphics("images/icons/traces.PNG")
 ***
 
 
-# Trace exlorer {.tabset .tabset-pills}
+# Trace exlorer 
 
 ```{r include = F}
 library(bupaverse)

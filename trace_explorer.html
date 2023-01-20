@@ -649,22 +649,79 @@ div.tocify {
 
 <p><img src="images/icons/traces.PNG" width="25%" style="display: block; margin: auto 0 auto auto;" /></p>
 <hr />
-<p>Different activity sequences in the event log can be visualized with
-the <code>trace_explorer</code>. It can be used to explore frequent as
-well as infrequent traces. The coverage argument specificies how much of
-the log you want to explore. By default it is set at 0.2, meaning that
-it will show the most (in)frequency traces covering 20% of the event
-log.</p>
-<div id="frequent-traces" class="section level2">
-<h2>Frequent traces</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>sepsis <span class="sc">%&gt;%</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">trace_explorer</span>()</span></code></pre></div>
+<div id="trace-exlorer" class="section level1 tabset tabset-pills">
+<h1 class="tabset tabset-pills">Trace exlorer</h1>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(bupaverse)</span></code></pre></div>
+<p>Different activity sequences in the log can be visualized with
+<code>trace_explorer()</code>. It can be used to explore frequent as
+well as infrequent traces.</p>
+<div id="set-coverage" class="section level2">
+<h2>Set coverage</h2>
+<p>The coverage argument specificies how much of the log you want to
+explore. By default it is set at 0.2, meaning that it will show the most
+frequent traces covering 20% of the event log.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>sepsis <span class="sc">%&gt;%</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">trace_explorer</span>()</span></code></pre></div>
 <pre><code>## Warning: No `coverage` or `n_traces` set.
 ## ! Defaulting to `coverage` = 0.2 for `type` = &quot;frequent&quot; traces.</code></pre>
-<p><img src="trace_explorer_files/figure-html/unnamed-chunk-4-1.png" width="864" /></p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>sepsis <span class="sc">%&gt;%</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">trace_explorer</span>(<span class="at">coverage =</span> <span class="fl">0.15</span>)</span></code></pre></div>
-<p><img src="trace_explorer_files/figure-html/unnamed-chunk-4-2.png" width="864" /></p>
+<p><img src="trace_explorer_files/figure-html/unnamed-chunk-5-1.png" width="80%" /></p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>sepsis <span class="sc">%&gt;%</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">trace_explorer</span>(<span class="at">coverage =</span> <span class="fl">0.15</span>)</span></code></pre></div>
+<p><img src="trace_explorer_files/figure-html/unnamed-chunk-5-2.png" width="80%" /></p>
+<p>You can also set the coverage by directly specifying the number of
+traces to show.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>sepsis <span class="sc">%&gt;%</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">trace_explorer</span>(<span class="at">n_traces =</span> <span class="dv">10</span>)</span></code></pre></div>
+<p><img src="trace_explorer_files/figure-html/unnamed-chunk-6-1.png" width="80%" /></p>
+<p>Instead of giving priority to frequent traces, you can show
+infrequent traces.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>sepsis <span class="sc">%&gt;%</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">trace_explorer</span>(<span class="at">n_traces =</span> <span class="dv">10</span>, <span class="at">type =</span> <span class="st">&quot;infrequent&quot;</span>)</span></code></pre></div>
+<p><img src="trace_explorer_files/figure-html/unnamed-chunk-7-1.png" width="80%" /></p>
+</div>
+<div id="set-metrics" class="section level2">
+<h2>Set metrics</h2>
+<p>The <code>trace_explorer()</code> shows three metrics by default:</p>
+<ul>
+<li>relative coverage of the trace</li>
+<li>absolute coverage of the trace</li>
+<li>cumulative coverage of this and previous traces</li>
+</ul>
+<p>You can set which metric to include using
+<code>coverage_labels</code>, as well as change the order.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>sepsis <span class="sc">%&gt;%</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">trace_explorer</span>(<span class="at">n_traces =</span> <span class="dv">10</span>,</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">coverage_labels =</span> <span class="fu">c</span>(<span class="st">&quot;cumulative&quot;</span>, <span class="st">&quot;relative&quot;</span>))</span></code></pre></div>
+<p><img src="trace_explorer_files/figure-html/unnamed-chunk-8-1.png" width="80%" /></p>
+</div>
+<div id="set-labels" class="section level2">
+<h2>Set labels</h2>
+<p>The labels show on the traces can be configured with the arguments
+<code>label_size</code>, <code>show_labels</code> and
+<code>abbreviate</code>.</p>
+<p>Increasing the label size.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>sepsis <span class="sc">%&gt;%</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">trace_explorer</span>(<span class="at">n_traces =</span> <span class="dv">10</span>, <span class="at">label_size =</span> <span class="dv">4</span>)</span></code></pre></div>
+<p><img src="trace_explorer_files/figure-html/unnamed-chunk-9-1.png" width="80%" /></p>
+<p>Removing the labels.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>sepsis <span class="sc">%&gt;%</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">trace_explorer</span>(<span class="at">n_traces =</span> <span class="dv">10</span>, </span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">show_labels =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<p><img src="trace_explorer_files/figure-html/unnamed-chunk-10-1.png" width="80%" /></p>
+<p>Disabling the abbreviation of labels.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>sepsis <span class="sc">%&gt;%</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">trace_explorer</span>(<span class="at">n_traces =</span> <span class="dv">10</span>, <span class="at">abbreviate =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<p><img src="trace_explorer_files/figure-html/unnamed-chunk-11-1.png" width="80%" /></p>
+</div>
+<div id="set-the-colors" class="section level2">
+<h2>Set the colors</h2>
+<p>The colors used can be change by providing a discrete fill scale to
+<code>scale_fill</code>. The example below uses the default
+<code>ggplot2</code> scale.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>sepsis <span class="sc">%&gt;%</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">trace_explorer</span>(<span class="at">n_traces =</span> <span class="dv">10</span>,</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">scale_fill =</span> ggplot2<span class="sc">::</span>scale_fill_discrete)</span></code></pre></div>
+<p><img src="trace_explorer_files/figure-html/unnamed-chunk-12-1.png" width="80%" /></p>
 <hr />
 <p>Read more:</p>
 <div class="btn-toolbar" role="group">
@@ -684,6 +741,7 @@ Chart</a>
 Explorer</a>
 <a style = 'margin: 5px' href = "performance_spectrum.html" class="btn btn-success" type="button">Performance
 Spectrum</a></p>
+</div>
 </div>
 </div>
 

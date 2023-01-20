@@ -843,7 +843,7 @@ times or more.</p>
 <p><strong>[Example]</strong> How many cases have three or more
 occurences of Leucocytes?</p>
 <div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>sepsis <span class="sc">%&gt;%</span> </span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">check_rule</span>(<span class="fu">contains</span>(<span class="st">&quot;Leucocytes&quot;</span>, <span class="at">n =</span> <span class="dv">3</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">check_rule</span>(processcheckR<span class="sc">::</span><span class="fu">contains</span>(<span class="st">&quot;Leucocytes&quot;</span>, <span class="at">n =</span> <span class="dv">3</span>)) <span class="sc">%&gt;%</span></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(contains_Leucocytes_3) <span class="sc">%&gt;%</span></span>
 <span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">n_cases</span>()</span></code></pre></div>
 <pre><code>## # A tibble: 2 × 2

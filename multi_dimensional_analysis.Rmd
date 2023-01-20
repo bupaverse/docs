@@ -110,7 +110,7 @@ traffic_fines %>%
 Finally, not that you are not limited to combining calculated metrics. You can also combine metrics with data attributes. 
 
 ```{r}
-hospital %>%
+eventdataR::hospital %>%
 	group_by(group) %>%
 	trace_length()
 ```

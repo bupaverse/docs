@@ -7,6 +7,54 @@ knitr::include_graphics("images/icons/pm.PNG")
 ```
 
 ***
+### Custom profile
+
+Next to the specific profiles above, also custom numeric attributes can be projected. This can be achieved with the `custom` profile. It requires an aggregation function (mean, median, sum, min, etc.) and a numerical attribute. The units argument can be used to indicate how the values should be interpreted (e.g. "USD" for monetary values.) For edges, it will show the values related to the out-going activity. 
+
+```{r echo = F}
+library(eventdataR)
+data(traffic_fines)
+# make sure the amount attribute is propagated forward in each trace
+# using zoo::na.locf instead of tidyr::fill since it is much faster
+# still the whole pre-processing is still very slow
+
+traffic_fines <- traffic_fines %>%
+	filter_trace_frequency(percentage = 0.8) %>%
+	group_by_case() %>%
+	mutate(amount = zoo::na.locf(amount, na.rm = F)) %>%
+	ungroup_eventlog()
+```
+
+```{r fig.height=2, eval = F}
+traffic_fines %>% 
+	process_map(type = custom(attribute = "amount", units = "EUR"))
+
+```
+
+
+### Combining different profiles
+
+The profile used for edges and nodes can be differentiated using the `type_edges` and `type_nodes` attributes instead of the `type` argument. In this way, information about frequencies and performance, or any other value, can be combined in the same graph.
+
+```{r fig.height=2}
+patients %>%
+	process_map(type_nodes = frequency("relative_case"),
+				type_edges = performance(mean))
+```
+
+### Customizing the layout
+
+The layout of the process map can be further customized.
+
+*	Instead of a left-right (LR) layout, the `rankdir` can be set to TB (top-bottom), BT (bottom-top) or RL (right-left).
+*	The varying edge width can be disabled.
+*	If `render` is set to `FALSE`, the function will return a unrendered graph, which can be further modified. See [here](http://rich-iannone.github.io/DiagrammeR/) for more information.
+
+
+
+## Simplifying process maps
+
+When event logs get larger, they will also become more unstructured, making the process maps illegible and expensive to computate. In such cases, it is useful to apply them on a simplified version of the event log, using one or more of the [subsetting methods](http://www.bupar.net/subsetting.html) provided by edeaR. 
 
 
 

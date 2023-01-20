@@ -81,7 +81,7 @@ create_buttons <- function(df, input_page_html = "create_logs.html") {
 
 		for (i in 1:nrow(groups)) {
 			cat(
-				paste0("<a href = \"", groups$page_html[i], "\" class=\"btn btn-", unique(groups$class), is_disabled(not_disabled, groups$page_html[i]), "\" type=\"button\">", groups$page[[i]], "</a>", "\n")
+				paste0("<a style = 'margin: 5px' href = \"", groups$page_html[i], "\" class=\"btn btn-", unique(groups$class), is_disabled(not_disabled, groups$page_html[i]), "\" type=\"button\">", groups$page[[i]], "</a>", "\n")
 			)
 		},
 		cat("</div>")

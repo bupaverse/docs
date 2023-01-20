@@ -11,126 +11,114 @@ knitr::include_graphics("images/icons/pm.PNG")
 
 
 
-## Introduction
+# Frequency maps
+
+```{r include = F}
+library(bupaverse)
+knitr::opts_chunk$set(fig.height=3)
+```
+
+```{r eval = F}
+library(bupaverse)
+```
+
+A process map of a log can be created using `process_map()`. A process map is a directly-follows graph, in which activity type is represented by a node, and each directly follows relation between activities is shown by the arrows between nodes. 
+
+Below we explain how process maps can be used to show frequent (and infrequent) flows in the process. You can also use them to visualize [performance](performance_maps.html) or more [advanced analyses](advanced analysis). 
 
 
-The function `process_map` can be used very easily to create a process map of an event log. Below, an example of a process map for the patients event log can be found.
+Six different flavors of frequency process map can be considered: 
+
+*	__absolute__ frequency
+	*	__Nodes__: The absolute number of activity instance executions
+	*	__Flows__: The absolute number of times source and target activity type where executed directly following each other. 
+*	__absolute-case__ frequency
+	*	__Nodes__: The absolute number of cases in which the activity was executed
+	*	__Flows__: The absolute number of cases in which source and target activity type where executed directly following each other. 
+*	__relative__ frequency
+	* 	__Nodes__: The proportion of all activity instances that had this type
+	*	__Flows__: The proportion of source executions that was followed by an execution of target. 
+*	__relative-case__ frequency
+	*	__Nodes__: The proportion of cases in which the activity was executed
+	*	__Flows__: The proportion of cases in which source and target activity type where executed directly following each other.
+*   __relative-antecedent__ frequency (= _relative_)
+	*   __Nodes__: The proportion of all activity instances that had this type
+	*   __Flows__: The proportion of source executions that was followed by an execution of target. 
+*	__relative-consequent__ frequency
+	*	__Nodes__: The proportion of all activity instances that had this type
+	*   __Flows__: The proportion of target executions that was predeceded by an execution of source. 
+
+Each of these flavors can be configured using `frequency()`, which can be feeded into `process_map()`.
+
+In the examples below, we will use a slightly filtered versions of the `traffic_fines` log, which contains 95% of the cases that have [the most frequent traces.](case_filters.html#Trace_Frequency) 
+
+```{r}
+tmp <- traffic_fines %>%
+	filter_trace_frequency(percentage = 0.95)
+```
 
 
-```{r message = F, warning = F, fig.height=2}
-library(bupaR)
-patients %>%
+## Absolute 
+
+Below you can see the __absolute__ frequency map. Let's focus on the _Payment_ activity. We see it was exectued 4686 times. It was followed by another payment 250 times, while it was the end of the case in 4436 times. 
+
+```{r}
+tmp %>%
+	process_map(frequency("absolute"))
+```
+
+Note that this is the default process map configuration, and is thus equivalent to the following. 
+
+```{r}
+tmp %>%
 	process_map()
 ```
 
-## Map profiles
+## Absolute case
 
-### Frequency profile
+Looking at the __absolute-case__ process map below, we see that the _Payment_ activity is only executed in 4436 cases. This number is lower than the total number of executions seen above because of the self-loop on the activity. 
 
-By default, the process map is annotated with frequencies of activities and flows. The is what is called the frequency _profile_, and can be created explicitly using the  `frequency` function. This function has a `value` argument, which can be used to adjust the frequencies shown, for instance using relative frequencies instead of the default absolute ones.
-
-
-```{r fig.height=2}
-patients %>%
-	process_map(type = frequency("relative"))
+```{r}
+tmp %>%
+	process_map(frequency("absolute-case"))
 ```
 
-The frequency value displayed can be one of the following
+## Relative 
 
-*	`absolute` frequency
-	*	The absolute number of activity instances and flows
-*	`absolute_case` frequency
-	*	The absolute number of cases behind each activity and flow
-*	`relative` frequency
-	* 	The relative number of instances per activity
-	*	The relative outgoing flows for each activity
-*	`relative_case` frequency
-	*	The relative number of cases per activity and flow
-	
-Examples are included below.
+In relative terms, _Payment_ represents 14.51% of the total activity instances. We can furthermore see that it in 94.66% of the times it occurs, it was the end of the case. In the other 5.34% of circumstances, it was followed by another Payment. 
 
-```{r fig.height=2}
-patients %>%
-	process_map(type = frequency("absolute"))
-patients %>%
-	process_map(type = frequency("relative_case"))
+```{r}
+tmp %>%
+	process_map(frequency("relative"))
 ```
 
-The colors can be modified through the `color_scale` argument. See `RColorBrewer::brewer.pal.info` for all options. 
+## Relative case
 
-```{r fig.height=2}
-patients %>%
-	process_map(type = frequency("relative_case", color_scale = "Purples"))
+
+Below, we see that _Payment_ occured in 46.24% of cases. In 2.5% of cases, a _Payment_ activity was followed by another _Payment._ 
+
+```{r}
+tmp %>%
+	process_map(frequency("relative-case"))
 ```
 
 
+## Relative antecedence
 
-### Performance profile
+See [relative.](frequency_maps.html#Relative). Relative-antecedence is included as an option in symmetry with relative-consequent.
 
-Instead of a frequency profile, one can also use a performance profile, focussing on processing time of activities. The performance profile has two arguments: the FUN argument to specify the function to apply on the processing time (e.g. min, max, mean, median, etc.), and the units argument to specificy the time unit to be used.
+## Relative consequent
 
-```{r fig.height=2}
-patients %>%
-	process_map(performance(median, "days"))
-patients %>%
-	process_map(performance(mean, "hours"))
-```
+Finally, the __relative-consequent__ map shows us what happens _before_ activities. With respect to _Payment_, we can see that in 73.15% of times, it was following _Create Fine_, in 21.51% of times it was following _Add Penalty_, while in the remanning 5.34% of circumstances it was following another _Payment_. Note that the values on the nodes are equal to the __relative__ process map, and show that _Payment_ represents 14.51% of all activity exuctions. 
 
-There are two different duration types that can be displayed on the edges.
-
-*	`idle_time`: the time between the end of the from-activity, and the start of the to-activity. Can be negative if the from-activity overleaps with the consecutive activity.
-*	`inter_start_time`: the time between the start of the consecutive activity, including the duration of the from-activity. 
-
-The colors can be modified through the `color_scale` argument. See `RColorBrewer::brewer.pal.info` for all options. 
-
-### Custom profile
-
-Next to the specific profiles above, also custom numeric attributes can be projected. This can be achieved with the `custom` profile. It requires an aggregation function (mean, median, sum, min, etc.) and a numerical attribute. The units argument can be used to indicate how the values should be interpreted (e.g. "USD" for monetary values.) For edges, it will show the values related to the out-going activity. 
-
-```{r echo = F}
-library(eventdataR)
-data(traffic_fines)
-# make sure the amount attribute is propagated forward in each trace
-# using zoo::na.locf instead of tidyr::fill since it is much faster
-# still the whole pre-processing is still very slow
-
-traffic_fines <- traffic_fines %>%
-	filter_trace_frequency(percentage = 0.8) %>%
-	group_by_case() %>%
-	mutate(amount = zoo::na.locf(amount, na.rm = F)) %>%
-	ungroup_eventlog()
-```
-
-```{r fig.height=2, eval = F}
-traffic_fines %>% 
-	process_map(type = custom(attribute = "amount", units = "EUR"))
-
+```{r}
+tmp %>%
+	process_map(frequency("relative-consequent"))
 ```
 
 
-### Combining different profiles
-
-The profile used for edges and nodes can be differentiated using the `type_edges` and `type_nodes` attributes instead of the `type` argument. In this way, information about frequencies and performance, or any other value, can be combined in the same graph.
-
-```{r fig.height=2}
-patients %>%
-	process_map(type_nodes = frequency("relative_case"),
-				type_edges = performance(mean))
-```
-
-### Customizing the layout
-
-The layout of the process map can be further customized.
-
-*	Instead of a left-right (LR) layout, the `rankdir` can be set to TB (top-bottom), BT (bottom-top) or RL (right-left).
-*	The varying edge width can be disabled.
-*	If `render` is set to `FALSE`, the function will return a unrendered graph, which can be further modified. See [here](http://rich-iannone.github.io/DiagrammeR/) for more information.
 
 
-
-## Simplifying process maps
-
-When event logs get larger, they will also become more unstructured, making the process maps illegible and expensive to computate. In such cases, it is useful to apply them on a simplified version of the event log, using one or more of the [subsetting methods](http://www.bupar.net/subsetting.html) provided by edeaR. 
 
 
 ```{r footer, results = "asis", echo = F}

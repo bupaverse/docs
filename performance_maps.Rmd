@@ -9,6 +9,23 @@ knitr::include_graphics("images/icons/pm.PNG")
 ***
 
 
+### Performance profile
+
+Instead of a frequency profile, one can also use a performance profile, focussing on processing time of activities. The performance profile has two arguments: the FUN argument to specify the function to apply on the processing time (e.g. min, max, mean, median, etc.), and the units argument to specificy the time unit to be used.
+
+```{r fig.height=2}
+patients %>%
+	process_map(performance(median, "days"))
+patients %>%
+	process_map(performance(mean, "hours"))
+```
+
+There are two different duration types that can be displayed on the edges.
+
+*	`idle_time`: the time between the end of the from-activity, and the start of the to-activity. Can be negative if the from-activity overleaps with the consecutive activity.
+*	`inter_start_time`: the time between the start of the consecutive activity, including the duration of the from-activity. 
+
+The colors can be modified through the `color_scale` argument. See `RColorBrewer::brewer.pal.info` for all options. 
 
 ```{r footer, results = "asis", echo = F}
 CURRENT_PAGE <-  stringr::str_replace(knitr::current_input(), ".Rmd",".html")

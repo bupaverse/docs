@@ -8,22 +8,28 @@ knitr::include_graphics("images/icons/pm.PNG")
 
 ***
 
+# Animate Process Maps
 
-
-```{r}
+```{r echo = F}
 knitr::opts_chunk$set(eval = T)
 ```
 
+```{r include = F}
+library(bupaverse)
+library(processanimateR)
+```
 
-## Introduction
+
+```{r eval = F}
+library(bupaverse)
+library(processanimateR)
+```
+
 
 We use the patients event log provided by the eventdataR package.
 
 
-```{r warning = F}
-library(processanimateR)
-library(eventdataR)
-```
+
 
 
 A basic animation with static color and token size:
@@ -225,9 +231,6 @@ ianimate_process(sepsis %>%
   mutate_at(c("disfuncorg", "sirscriteria2ormore", "infectionsuspected"), as.logical))
 ```
 
-
-
-### Introduction
 
 ProcessanimateR animation can be also used interactively as part of a (Shiny) web-application. Here, an example application that expects attributes are of an appropriate data type and automatically chooses appropriate color scales is given. We first define a function ianimate_process that defines our Shiny application as follows:
 

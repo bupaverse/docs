@@ -8,25 +8,100 @@ knitr::include_graphics("images/icons/traces.PNG")
 
 ***
 
+
+# Trace exlorer {.tabset .tabset-pills}
+
 ```{r include = F}
-library(tidyverse)
-library(bupaR)
-library(pander)
-library(lubridate)
+library(bupaverse)
+knitr::opts_chunk$set(out.width = "80%", fig.asp = 0.6)
 ```
+
+```{r eval = F}
+library(bupaverse)
+```
+
 ```{r echo = F}
 knitr::opts_chunk$set(fig.width = 9)
 ```
 
-Different activity sequences in the event log can be visualized with the `trace_explorer`. It can be used to explore frequent as well as infrequent traces. The coverage argument specificies how much of the log you want to explore. By default it is set at 0.2, meaning that it will show the most (in)frequency traces covering 20% of the event log.
+Different activity sequences in the log can be visualized with `trace_explorer()`. It can be used to explore frequent as well as infrequent traces. 
 
-## Frequent traces
+## Set coverage 
+
+The coverage argument specificies how much of the log you want to explore. By default it is set at 0.2, meaning that it will show the most frequent traces covering 20% of the event log.
 
 ```{r fig.heigth = 6}
 sepsis %>%
 	trace_explorer()
 sepsis %>%
 	trace_explorer(coverage = 0.15)
+```
+
+You can also set the coverage by directly specifying the number of traces to show. 
+
+```{r}
+sepsis %>%
+	trace_explorer(n_traces = 10)
+```
+
+Instead of giving priority to frequent traces, you can show infrequent traces. 
+
+```{r}
+sepsis %>%
+	trace_explorer(n_traces = 10, type = "infrequent")
+```
+
+
+## Set metrics
+
+The `trace_explorer()` shows three metrics by default:
+
+* 	relative coverage of the trace
+*	absolute coverage of the trace
+*	cumulative coverage of this and previous traces
+
+You can set which metric to include using `coverage_labels`, as well as change the order. 
+
+```{r}
+sepsis %>%
+	trace_explorer(n_traces = 10,
+				   coverage_labels = c("cumulative", "relative"))
+```
+
+## Set labels
+
+The labels show on the traces can be configured with the arguments `label_size`, `show_labels` and `abbreviate`. 
+
+Increasing the label size.
+
+```{r}
+sepsis %>%
+	trace_explorer(n_traces = 10, label_size = 4)
+```
+
+Removing the labels. 
+
+```{r}
+sepsis %>%
+	trace_explorer(n_traces = 10, 
+				   show_labels = FALSE)
+```
+
+Disabling the abbreviation of labels. 
+
+```{r}
+sepsis %>%
+	trace_explorer(n_traces = 10, abbreviate = FALSE)
+```
+
+## Set the colors
+
+The colors used can be change by providing a discrete fill scale to `scale_fill`. The example below uses the default `ggplot2` scale.
+
+```{r}
+sepsis %>%
+	trace_explorer(n_traces = 10,
+				   scale_fill = ggplot2::scale_fill_discrete)
 ```
 
 

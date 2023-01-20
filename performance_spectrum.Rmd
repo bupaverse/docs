@@ -7,20 +7,26 @@ knitr::include_graphics("images/icons/psminer.PNG")
 ```
 
 ***
-```{r creating_eventlogs, include = F}
-library(tidyverse)
-library(pander)
-library(lubridate)
-library(bupaR)
+
+# Performance Spectrum
+```{r include = F}
+library(bupaverse)
 library(psmineR)
+
+knitr::opts_chunk$set(out.width = "80%", fig.asp = 0.6)
 ```
 
+```{r eval = F}
+library(bupaverse)
+library(psmineR)
+
+```
 
 
 The `psmineR` packages supports both detailed and aggregated performance spectra, as described in Denisov, V., Fahland, D., & van der Aalst, W. M. P. (2018) doi:10.1007/978-3-319-98648-7_9. The can be created using `ps_detailed` and `ps_aggregated`, respectively.
 
 
-## Detailed performance spectrum
+## Detailed 
 
 ```{r}
 traffic_fines %>%
@@ -62,7 +68,7 @@ traffic_fines %>%
 	ps_detailed()
 ```
 
-## Aggregated performance spectrum
+## Aggregated 
 
 The aggregated performance spectrum works in completely the same way. 
 

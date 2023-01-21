@@ -472,7 +472,7 @@ div.card-header {
 <div id="frequently-asked-questions" class="section level1">
 <h1>Frequently Asked Questions</h1>
 <p>This FAQ is a living document. If you haven’t found the answer to
-your question here or anywhere else on our website, write to use as <a
+your question here or anywhere else on our website, contact us via <a
 href="mailto:support@bupar.net">support@bupar.net</a>, and we will get
 back to you as soon as we can. If you want to notify us of a bug in one
 of the <code>bupaR</code>-packages, please submit an issue on the
@@ -484,11 +484,11 @@ href="https://github.com/bupaverse">GitHub-repository</a>.</p>
 <div class="card-header card text-white bg-secondary mb-3">What is an activity instance identifier, and when do I need one?</div>
 <div class="card-body" style="flex:0 0 auto;">The activity instance identifier is a unique identifier for each activity instance, i.e. one specific execution of an activity for a specific case. If an activity exist of more than a single event, for example a <i>start</i> and a <i>complete</i> event, the activity instance identifier is needed to make sure these events are connected to each other.</div>
 <div class="card-body" style="flex:0 0 auto;">When you don't have multiple events per activity instance, i.e. each activity only has one registrered timestamp, the activity instance identifier is redundant. In that case, you can use the <code>activitylog</code> object class, as specified in <a href = 'create_logs.html#Scenario_1'>Scenario 1</a>.</div>
-<div class="card-body" style="flex:0 0 auto;">If you log has multiple events for the same activity instance, but there is not variable that can act as activity instance identifier to connect them, you can try <a href = 'create_logs.html#Missing_activity_instance_id'> <code>assign_instance_id()</code></a></div>
+<div class="card-body" style="flex:0 0 auto;">If your log has multiple events for the same activity instance, but there is no variable that can serve as an activity instance identifier to connect them, you can try <a href = 'create_logs.html#Missing_activity_instance_id'> <code>assign_instance_id()</code></a>.</div>
 </div>
 <div class="card bslib-card html-fill-item html-fill-container" data-require-bs-caller="card()" data-require-bs-version="5">
 <div class="card-header card text-white bg-secondary mb-3">Creating the event log takes a lot of time. What can I do?</div>
-<div class="card-body" style="flex:0 0 auto;">By default, <code>eventlog()</code> will perform some checks to make sure the provided mapping corresponds to the data model. This means that each value of the <code>activity_instance_id</code> should be connected to a single <code>case_id</code> and a single <code>activity_id</code>. For large event logs, this does take some time. You can circumvent these by setting the argument <code>validate = FALSE</code>.</div>
+<div class="card-body" style="flex:0 0 auto;">By default, <code>eventlog()</code> will perform some checks to make sure the provided mapping corresponds to the data model. This means that each value of the <code>activity_instance_id</code> should be connected to a single <code>case_id</code> and a single <code>activity_id</code>. For larger event logs, this does take some time. You can circumvent these by setting the argument <code>validate = FALSE</code>.</div>
 <div class="card-body" style="flex:0 0 auto;">Alternatively, you might want to have a look at the different <a href = 'create_logs.html#The_right_log_for_the_job'>scenarios<a> to decide whether you need an <code>eventlog</code> or <code>activitylog</code> object. The <code>activitylog</code> is a simplified object class that does not require special validation. </div>
 </div>
 </div>

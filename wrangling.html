@@ -656,15 +656,15 @@ div.tocify {
 <p>In order to easily manipulate logs, well-known <a
 href="https://dplyr.tidyverse.org/">dplyr</a>-verbs have been adapted.
 This page serves as a general introduction of the wrangling verbs. Their
-usage is illustrated through the documentation for
+usage is illustrated throughout the documentation in
 <em>Manipulation</em>, <em>Analysis</em> and <em>Visualization</em>.</p>
 <div id="group_by" class="section level2">
 <h2>group_by</h2>
-<p>Using the <code>group_by</code> function, event logs can be grouped
-according to a (set of) variables, such that all further computations
+<p>Using the <code>group_by()</code> function, event logs can be grouped
+according to (a set of) variables, such that all further computations
 happen for each of these different groups.</p>
 <p>In the next example, the number of cases are computed for each value
-of “vehicleclass”.</p>
+of <em>vehicleclass</em>.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>traffic_fines <span class="sc">%&gt;%</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(vehicleclass) <span class="sc">%&gt;%</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">n_cases</span>()</span></code></pre></div>
@@ -688,7 +688,7 @@ pair</li>
 instances.</li>
 </ul>
 <p>For example, the number of cases in which a specific resource occurs,
-can be computed as follows.</p>
+can be computed as follows:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>sepsis <span class="sc">%&gt;%</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    group_by_resource <span class="sc">%&gt;%</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">n_cases</span>()</span></code></pre></div>
@@ -709,14 +709,14 @@ can be computed as follows.</p>
 <p>Note that each of the descriptive metrics discussed <a
 href="http://www.bupar.net/exploring.html">here</a> can be rewritten
 using these lower-level functions. The example above is equal to the
-<code>resource_involvement</code> metric at case level.</p>
+<code>resource_involvement</code> metric at case-level.</p>
 </div>
-<div id="grouping-on-a-set-of-ids" class="section level3">
-<h3>Grouping on (a set of) ids</h3>
+<div id="grouping-on-id" class="section level3">
+<h3>Grouping on id</h3>
 <p>When you want to group on a combination of mapping variables, for
 example, for each combination of <em>case</em> and <em>activity</em>,
 you can use <code>group_by_ids()</code>. The following examples counts
-the number of events per case and per activity.</p>
+the number of events per case and per activity:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by_ids</span>(case_id, activity_id) <span class="sc">%&gt;%</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">n_events</span>()  </span></code></pre></div>
@@ -736,21 +736,21 @@ the number of events per case and per activity.</p>
 ## # … with 2,711 more rows</code></pre>
 <p>Note that the arguments of <code>group_by_ids()</code> are not the
 variable names of case (<em>patient</em>) and activity
-(<em>handling</em>) columns, but unqouted mapping id-functions. You can
+(<em>handling</em>) columns, but unquoted mapping id-functions. You can
 thus use this function while being agnostic of the precise variable
 names.</p>
 </div>
 <div id="remove-grouping" class="section level3">
 <h3>Remove grouping</h3>
-<p>When a grouping is no longer needed, it can be removed using the
-<code>ungroup_eventlog</code> function.</p>
+<p>When a grouping is no longer needed, it can be removed using
+<code>ungroup_eventlog()</code>.</p>
 </div>
 </div>
 <div id="mutate" class="section level2">
 <h2>mutate</h2>
-<p>You can use <code>mutate</code> to add new variables to an event log,
-possibly by using existing variables. In the next example, the total
-amount of lacticacid is computed for each case. <a
+<p>You can use <code>mutate()</code> to add new variables to an event
+log, possibly by using existing variables. In the next example, the
+total amount of <em>lacticacid</em> is computed for each case. <a
 href="mutate.html">Read more.</a></p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>sepsis <span class="sc">%&gt;%</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by_case</span>() <span class="sc">%&gt;%</span></span>
@@ -796,8 +796,9 @@ href="mutate.html">Read more.</a></p>
 <h2>filter</h2>
 <p>Generic filtering of events can be done using <code>filter()</code>,
 which takes an event log and any number of logical conditions. The
-example below filters events which have vehicleclas “C” and amount
-greater than 300. <a href="generic_filtering.html">Read more.</a>.</p>
+example below filters events where “C” is the vehicle class and an
+amount greater than 300. <a href="generic_filtering.html">Read
+more.</a>.</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>traffic_fines <span class="sc">%&gt;%</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(vehicleclass <span class="sc">==</span> <span class="st">&quot;C&quot;</span>, amount <span class="sc">&gt;</span> <span class="dv">300</span>)</span></code></pre></div>
 <pre><code>## # Log of 20 events consisting of:
@@ -849,7 +850,7 @@ greater than 300. <a href="generic_filtering.html">Read more.</a>.</p>
 <p>Variables on a event log can be <em>selected</em> using
 <code>select()</code>. By default, <code>select()</code> will always
 make sure that the mapping-variables are retained. Otherwise, it would
-no longer function as an eventlog.</p>
+no longer function as an <code>eventlog</code> object.</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>traffic_fines <span class="sc">%&gt;%</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(vehicleclass)</span></code></pre></div>
 <pre><code>## # Log of 34724 events consisting of:
@@ -884,8 +885,8 @@ no longer function as an eventlog.</p>
 ## #   ²​activity, ³​activity_instance_id, ⁴​resource, ⁵​lifecycle</code></pre>
 <p>By setting the argument <code>force_df = TRUE</code>, the
 mapping-variables will not be retained, and the output will be a
-data.frame, and not an event log. Not that this is true even in the case
-that all mapping variables are selected.</p>
+data.frame, and not an <code>eventlog</code> object. Note that doing so
+will hold even in the case that all mapping variables are selected.</p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>traffic_fines <span class="sc">%&gt;%</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(case_id, vehicleclass, amount, <span class="at">force_df =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 34,724 × 3
@@ -902,10 +903,10 @@ that all mapping variables are selected.</p>
 ##  9 A10000  &lt;NA&gt;         &lt;NA&gt;  
 ## 10 A10000  &lt;NA&gt;         &lt;NA&gt;  
 ## # … with 34,714 more rows</code></pre>
-<div id="selecting-a-set-of-ids" class="section level3">
-<h3>Selecting (a set of) ids</h3>
+<div id="selecting-id" class="section level3">
+<h3>Selecting id</h3>
 <p>Similar to <code>group_by_ids()</code>, <code>select_ids()</code> can
-be used to select a (set of) mapping variables.</p>
+be used to select the mapping variables.</p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select_ids</span>(case_id, activity_id)</span></code></pre></div>
 <pre><code>## # A tibble: 5,442 × 2
@@ -924,14 +925,15 @@ be used to select a (set of) mapping variables.</p>
 ## # … with 5,432 more rows</code></pre>
 <p>Note again how the arguments are unquoted id-functions instead of raw
 variable names. The result of <code>select_ids()</code> will
-<strong>always</strong> be <code>data.frame</code>, as typically not all
-ids in the mapping will be selected.</p>
+<strong>always</strong> result in a <code>data.frame</code> object, as
+typically not all id’s in the mapping will be selected.</p>
 </div>
 </div>
 <div id="arrange" class="section level2">
 <h2>arrange</h2>
-<p>Event data can be sorted using the <code>arrange</code> function.
-<code>desc</code> can be used to sort descending on an attribute.</p>
+<p>Event data can be sorted using the <code>arrange()</code>.
+<code>desc()</code> argument can be used to sort descending on an
+attribute.</p>
 <div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">#sort descending on time</span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span></span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">arrange</span>(<span class="fu">desc</span>(time))</span></code></pre></div>

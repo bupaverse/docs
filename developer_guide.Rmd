@@ -1,5 +1,5 @@
 ---
-title: Developer Guide
+title: "Developer Guide"
 ---
 
 <br/>
@@ -8,7 +8,7 @@ title: Developer Guide
 
 ### Object classes
 
-bupaR knows 2 main object classes: `eventlog` and `activitylog.` Both are special types of `data.frames`. Furthermore there is the overarching object class `log`. The object class log is used by functions were a distinction between the two classes is not relevant. It is only used as a higher-level classification of the `eventlog` and `activitylog` objects - it cannot stand on its own. That is, objects which have just the class "log" cannot exist, they must have one of the subclasses as well. 
+`bupaR` knows 2 main object classes: `eventlog` and `activitylog.` Both are special types of a `data.frame` object. Furthermore, there is the overarching object class `log`. The object class `log` is used by functions where a distinction between the two classes is not relevant. It is only used as a higher-level classification of the `eventlog` and `activitylog` objects - it cannot stand on its own. That is, objects which have just the class `log` cannot exist, they must have one of the subclasses as well. 
 
 The defining characteristics of a `log` are stored in regular variables, of which the names can be obtained with the `mapping()` function.  
 ```{r}
@@ -16,18 +16,18 @@ mapping(patients)
 mapping(patients_act)
 ```
 
-Note that `eventlog`s and `activitylog`s have some mapping-elements in common: 
+Note that both `eventlog` and `activitylog` have some mapping-elements in common: 
 
 - case identifier
 - activity identifier
 - resource identifier
 
-While others are slightly difference
+While other mapping-elements are slightly different:
 
-- the activity instance identifier only exist for `eventlog`s. For `activitylog`, each row is an activity instance by definition
-- the lifecycle identifier for `eventlog`s consist of a single column. For activity log, it consist of multiple columns. (At least start and complete are required, although they can contain NAs). These are stored under the `timestamps` mapping elemnt
+- the activity instance identifier only exist for `eventlog`. For `activitylog`, each row is an activity instance by definition
+- the lifecycle identifier for `eventlog` consist of a single column. For `activitylog`, it consist of multiple columns. (At least start- and complete status are required, although they can contain NA's). These are stored under the `timestamps` mapping element.
 
-Note that there are 2 classes for the mapping, one for `eventlog` and one for `activitylog.` (Note also that the `eventlog_mapping` has a dedicated print function, while the activitylog has not (yet), and prints just a regular list.)
+Note that there are 2 classes for the mapping, one for `eventlog` and one for `activitylog`. (Note also that the `eventlog_mapping()` has a dedicated `print()`, while `activitylog` has not (yet), and prints just a regular list.)
 
 Individual mapping-variables can be obtained with the dedicated id functions. They work on both the logs itself, and on the mappings. 
 
@@ -40,7 +40,7 @@ activity_id(mapping_event)
 activity_id(mapping_act)
 ```
 
-During data manipulation, it can sometimes happen (or sometimes is necessary) that the log is at somepoint transferred to a regular `data.frame` for some operations. If the ultimate output of the function should be once again a log object (and not a visual or summary table), the mapping can be used to recuperate the original mapping. This happens with the `re_map()` function. 
+During data manipulation, it can sometimes happen (or sometimes is necessary) that the log is at some point transferred to a regular `data.frame` for some operations. If the ultimate output of the function should be once again a `log` object (and not a visual or summary table), the mapping can be used to recuperate the original mapping. This can  be done using `re_map()`. 
 
 ```{r}
 patients_df <- as.data.frame(patients)
@@ -49,21 +49,21 @@ patients_log <- re_map(patients_df, mapping_event)
 class(patients_log)
 ```
 
-The `re_map()` function, recognizes the class of the mapping, and thus works for both `activitylog` and `eventlog` mappings. It will always return to the original type. (I.e. if the mapping originates from an `activitylog` object, it will result once again in an `activitylog` object.) It can never be used to convert `activitylog` to `eventlog`, or vice versa. 
+`re_map()` recognizes the class of the mapping, and thus works for both `activitylog` and `eventlog` mappings. It will always return to the original type. (I.e. if the mapping originates from an `activitylog` object, it will result once again in an `activitylog` object.) It can never be used to convert `activitylog` to `eventlog`, or vice versa. 
 
-While the `re_map()` function is exported by bupaR, it is primarly for internal use. Only for more advanced use of bupaR, it can be useful for the end-user. 
+While `re_map()` is exported by `bupaR`, it is primarily for internal use. Only for more advanced use of `bupaR`, it can be useful for the end-user. 
 
-Note that functions that are not exported can always be used using the ::: instead of the :: operator. For instance, we can use the not-exported `activity_id_()` function outside of bupaR as follows. 
+Note that functions that are not exported can always be used using the `:::` instead of the `::` operator. For instance, we can use the non-exported `activity_id_()` function outside of `bupaR` as follows:
 
 ```{r}
 bupaR:::activity_id_(patients)
 ```
 
-While you should typically not need these function outside of `bupaR`, except for perhaps developing or testing some code interactively, we will use the ::: notation in this manual whenever we refer to internal functions. 
+While you should typically not need these function outside of `bupaR`, except for perhaps developing or testing some code interactively, we will use the `:::` notation in this manual whenever we refer to internal functions. 
 
-The `activity_id_()` function is a variant on the `activity_id()` function. Only instead of returning a character object, it returns a symbol. This symbol is useful when you want to use the mapping variable while programming. 
+`activity_id_()` is a variant of `activity_id()`. Only instead of returning a `chr` object, it returns a symbol. This symbol is useful when you want to use the mapping variable while programming. 
 
-For example, suppose you want to filter the patients log, only for patient == 1. But you don't know that the `case_id` is patient, so you use the function to get the case_id. 
+For example, suppose you want to filter the `patients` log, only for patient == 1. But you don't know that the `case_id` is "patient", so you use the function to get the case_id. 
 
 The following will not work.
 
@@ -97,9 +97,9 @@ patients %>%
 
 The .data here is a special command, _a pronoun_, that can be used in `dplyr` functions. More information here: https://adv-r.hadley.nz/quasiquotation.html
 
-In `bupaR`, the preference goes to the latter notation. It has the advantage to be used in scripts both inside bupaR as well as outside (whereas the !! notation only works with the bupaR::: prefix). It is also slightly easier to understand than the workings of !!. 
+In `bupaR`, the preference goes to the latter notation. It has the advantage to be used in scripts both inside `bupaR` as well as outside (whereas the !! notation only works with the `bupaR:::` prefix). It is also slightly easier to understand than the workings of !!. 
 
-That said, the use of `case_id_()` and `symbol(case_id())` is still widespread in bupaR, but the goal is to phase out this usage. 
+That said, the use of `case_id_()` and `symbol(case_id())` is still widespread in `bupaR`, but the goal is to phase out this usage. 
 
 ### dplyr verbs
 
@@ -111,22 +111,22 @@ The following dplyr verbs have received methods for activity logs and event logs
 - `mutate()`
 - `select()`
 
-They will all return a proper log - i.e. there is no risk the mapping is lost. 
+They will all return a proper log, i.e. there is no risk of losing the defined mapping. 
 
 Special attention has to be given to the following: 
 
 #### Select
 
-Conventionally, `select()` will not ensure that the log maintains the variables it needs to be considered a log. The select methods for logs therefore will keep the listed variables __and__ the variables that define the eventlog. 
+Conventionally, `select()` will not ensure that the log maintains the variables it needs to be considered a log. The select methods for logs therefore will keep the listed variables __and__ the variables that define the event log. 
 
-The following code returns an `eventlog` with the attribute _oligurie_, as well as the 6 variables needed to define the `eventlog` (plus the .order variable, see further). 
+The following code returns an `eventlog` object with the attribute _oligurie_, as well as the 6 variables needed to define the event log (plus the .order variable, see further). 
 
 ```{r}
 sepsis %>%
 	select(oligurie)
 ```
 
-This behavior can be turned of using the `force_df = TRUE` argument. In that case, the select will work just like a traditional `select`, and the result will be a normal `data.frame`, no longer an `eventlog`. 
+This behavior can be turned by setting `force_df = TRUE`. In that case, the select will work just like a traditional `select()`, and the result will be a `data.frame`, no longer `eventlog`. 
 
 ```{r}
 sepsis %>%
@@ -140,20 +140,20 @@ sepsis %>%
 	select()
 ```
 
-If you want to select only specific eventlog-classifiers, you can use the function `selects_ids()`. Because you will typically not select all ids (otherwise you can use select()), this will by default turn your object to a data.frame. 
+If you want to select only specific `eventlog` classifiers, you can use `selects_ids()`. Because you would typically not select all id's (otherwise you can use `select()`), this will by default turn your object to a `data.frame` object. 
 
 ```{r}
 sepsis %>%
 	bupaR::select_ids(activity_id, case_id)
 ```
 
-Note how the different classifiers are defined: using the `id()` functions, but without the brackets. And not using characters. 
+Note how the different classifiers are defined: using the `_id()` functions, but without the brackets. And not using characters. 
 
 #### Group by
 
-While the `group_by()` function is defined for logs, it should be noted that it requires special methods for each function before that function is "compatible" with grouped logs. Some utility functions for this do however exist (see further). 
+While `group_by()` is defined for logs, it should be noted that it requires special methods for each function before that function is "compatible" with grouped logs. Some utility functions for this do however exist (see further). 
 
-There are some short cuts for typical groupings when programming in bupaR. 
+There are some short cuts for typical groupings when programming in `bupaR`:
 
 - `group_by_case()`
 - `group_by_activity()`
@@ -173,7 +173,7 @@ patients %>%
 	group_by(.data[[case_id(patients)]])
 ```
 
-While, except for the more common resource-activity, not all relevant combinations of groupings are provided as a shortcut, the internal group_by_ids function allows the use of any combination of _id functions. For example: 
+While, except for the more common resource-activity, not all relevant combinations of groupings are provided as a shortcut, the internal `group_by_ids()`  allows the use of any combination of `_id()` functions. For example: 
 
 ```{r}
 patients %>%

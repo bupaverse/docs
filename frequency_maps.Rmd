@@ -1,5 +1,5 @@
 ---
-title: bupaR Docs | Frequency Maps
+title: "bupaR Docs | Frequency Maps"
 ---
 
 
@@ -22,7 +22,7 @@ knitr::opts_chunk$set(fig.height=3)
 library(bupaverse)
 ```
 
-A process map of a log can be created using `process_map()`. A process map is a directly-follows graph, in which activity type is represented by a node, and each directly follows relation between activities is shown by the arrows between nodes. 
+A process map of a log can be created using `process_map()`. A process map is a directly-follows graph, where each distinct activity is represented by a node, and each directly-follows relationship between activities is shown by directed edges, i.e. arrows between the nodes.
 
 Below we explain how process maps can be used to show frequent (and infrequent) flows in the process. You can also use them to visualize [performance](performance_maps.html) or more [advanced analyses](advanced analysis). 
 
@@ -31,26 +31,26 @@ Six different flavors of frequency process map can be considered:
 
 *	__absolute__ frequency
 	*	__Nodes__: The absolute number of activity instance executions
-	*	__Flows__: The absolute number of times source and target activity type where executed directly following each other. 
+	*	__Flows__: The absolute number of times source and target activities were executed directly following each other. 
 *	__absolute-case__ frequency
 	*	__Nodes__: The absolute number of cases in which the activity was executed
-	*	__Flows__: The absolute number of cases in which source and target activity type where executed directly following each other. 
+	*	__Flows__: The absolute number of cases in which source and target activity were executed directly following each other. 
 *	__relative__ frequency
 	* 	__Nodes__: The proportion of all activity instances that had this type
-	*	__Flows__: The proportion of source executions that was followed by an execution of target. 
+	*	__Flows__: The proportion of source executions directly followed by target executions. 
 *	__relative-case__ frequency
-	*	__Nodes__: The proportion of cases in which the activity was executed
-	*	__Flows__: The proportion of cases in which source and target activity type where executed directly following each other.
+	*	__Nodes__: The proportion of cases in which an activity was executed
+	*	__Flows__: The proportion of cases in which source and target activities were executed directly following each other.
 *   __relative-antecedent__ frequency (= _relative_)
 	*   __Nodes__: The proportion of all activity instances that had this type
-	*   __Flows__: The proportion of source executions that was followed by an execution of target. 
+	*   __Flows__: The proportion of source executions directly followed by target executions. 
 *	__relative-consequent__ frequency
 	*	__Nodes__: The proportion of all activity instances that had this type
-	*   __Flows__: The proportion of target executions that was predeceded by an execution of source. 
+	*   __Flows__: The proportion of target executions that was preceded by an execution of source. 
 
-Each of these flavors can be configured using `frequency()`, which can be feeded into `process_map()`.
+Each of these flavors can be configured by passing `type = frequency()` to `process_map()`, additionally specifying the type of `frequency()` (ex. "absolute", "absolute-case", etc.)
 
-In the examples below, we will use a slightly filtered versions of the `traffic_fines` log, which contains 95% of the cases that have [the most frequent traces.](case_filters.html#Trace_Frequency) 
+In the examples below, we will use a slightly filtered versions of the `traffic_fines` data set, which contains 95% of the cases that have [the most frequent traces.](case_filters.html#Trace_Frequency) 
 
 ```{r}
 tmp <- traffic_fines %>%
@@ -60,7 +60,7 @@ tmp <- traffic_fines %>%
 
 ## Absolute 
 
-Below you can see the __absolute__ frequency map. Let's focus on the _Payment_ activity. We see it was exectued 4686 times. It was followed by another payment 250 times, while it was the end of the case in 4436 times. 
+Below you can see the __absolute__ frequency map. Let's focus on the _Payment_ activity. We see it was executed 4686 times. It was followed by another payment 250 times, while it was also the end of the case in 4436 times. 
 
 ```{r}
 tmp %>%
@@ -85,7 +85,7 @@ tmp %>%
 
 ## Relative 
 
-In relative terms, _Payment_ represents 14.51% of the total activity instances. We can furthermore see that it in 94.66% of the times it occurs, it was the end of the case. In the other 5.34% of circumstances, it was followed by another Payment. 
+In relative terms, _Payment_ represents 14.51% of the total activity instances. We can furthermore see that in 94.66% of cases it occurred, it was the end of the case. In the other 5.34% of cases, it was followed by another Payment. 
 
 ```{r}
 tmp %>%
@@ -95,7 +95,7 @@ tmp %>%
 ## Relative case
 
 
-Below, we see that _Payment_ occured in 46.24% of cases. In 2.5% of cases, a _Payment_ activity was followed by another _Payment._ 
+Below, we see that _Payment_ occurred in 46.24% of cases. In 2.5% of cases, a _Payment_ activity was followed by another _Payment._ 
 
 ```{r}
 tmp %>%
@@ -105,11 +105,17 @@ tmp %>%
 
 ## Relative antecedence
 
-See [relative.](frequency_maps.html#Relative). Relative-antecedence is included as an option in symmetry with relative-consequent.
+See [relative.](frequency_maps.html#Relative) Relative-antecedence is included as an option in symmetry with relative-consequent.
 
 ## Relative consequent
 
-Finally, the __relative-consequent__ map shows us what happens _before_ activities. With respect to _Payment_, we can see that in 73.15% of times, it was following _Create Fine_, in 21.51% of times it was following _Add Penalty_, while in the remanning 5.34% of circumstances it was following another _Payment_. Note that the values on the nodes are equal to the __relative__ process map, and show that _Payment_ represents 14.51% of all activity exuctions. 
+Finally, the __relative-consequent__ map shows us what happens _before_ activities. With respect to _Payment_, we can see that it was preceded by:
+
+* _Create Fine_ (73.15%)
+* _Add Penalty_ (21.51%)
+* _Payment_ (5.34%)
+
+_Payment_ itself represents 14.51% of all activity executions.
 
 ```{r}
 tmp %>%

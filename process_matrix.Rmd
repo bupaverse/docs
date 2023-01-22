@@ -1,5 +1,5 @@
 ---
-title: bupaR Docs | Process Matrix
+title: "bupaR Docs | Process Matrix"
 output: 
   html_document: 
     toc: false
@@ -24,13 +24,13 @@ library(bupaverse)
 
 
 
-A process matrix is a two-dimensional matrix showing the flows between activities. Its configuration is exactly the same as those used by `process_map`, and can thus be the following. 
+A process matrix is a two-dimensional matrix showing the flows between activities. Its configuration is exactly the same as that used by `process_map()`, and can thus be the following:
 
 *	[`frequency()`](frequency_maps.html)
 	*	Absolute frequency of flows
 	*	Relative case frequency of flows
-	*	Relative frequency of flows, for each antecendent
-		*	I.e. given antecendent A, it is followed x% of the time by Consequent B
+	*	Relative frequency of flows, for each antecedent
+		*	I.e. given antecedent A, it is followed x% of the time by Consequent B
 	*	Relative frequency of flows, for each consequent
 		*	I.e. given consequent B, it is preceded x% of the time by Antecedent A
 * 	[`performance()`](performance_maps.html)

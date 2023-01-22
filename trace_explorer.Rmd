@@ -1,5 +1,5 @@
 ---
-title: bupaR Docs | Trace Explorer
+title: "bupaR Docs | Trace Explorer"
 ---
 
 ```{r echo = F, out.width="25%", fig.align = "right"}
@@ -28,7 +28,7 @@ Different activity sequences in the log can be visualized with `trace_explorer()
 
 ## Set coverage 
 
-The coverage argument specificies how much of the log you want to explore. By default it is set at 0.2, meaning that it will show the most frequent traces covering 20% of the event log.
+The `coverage` argument specifies how much of the log you want to explore. By default it is set at 0.2, meaning that it will show the most frequent traces covering 20% of the event log.
 
 ```{r fig.heigth = 6}
 sepsis %>%
@@ -70,7 +70,7 @@ sepsis %>%
 
 ## Set labels
 
-The labels show on the traces can be configured with the arguments `label_size`, `show_labels` and `abbreviate`. 
+The labels shown on the traces can be configured with the arguments `label_size`, `show_labels` and `abbreviate`. 
 
 Increasing the label size.
 

@@ -23,7 +23,7 @@ library(psmineR)
 ```
 
 
-The `psmineR` packages supports both detailed and aggregated performance spectra, as described in Denisov, V., Fahland, D., & van der Aalst, W. M. P. (2018) doi:10.1007/978-3-319-98648-7_9. The can be created using `ps_detailed` and `ps_aggregated`, respectively.
+The `psmineR` packages supports both detailed and aggregated performance spectra, as described in Denisov, V., Fahland, D., & van der Aalst, W. M. P. (2018) doi:10.1007/978-3-319-98648-7_9. Both can be created using `ps_detailed()` and `ps_aggregated()`, respectively.
 
 
 ## Detailed 
@@ -49,7 +49,7 @@ traffic_fines %>%
 	ps_detailed(classification = "resource")
 ```
 
-Note that when another color classification is used, the built-in bupaR color scale will be used. As the resource in the case of traffic_fines is not very insightful, below we show a slightly more advanced version, where we use log augmentation incorporate the end activity of the case.
+Note that when another color classification is used, the built-in `bupaR` color scale will be used. As the resource variable from `traffic_fines` is not very insightful, below we show a slightly more advanced version, where we use log augmentation, while incorporating the end activity of the case.
 
 ```{r}
 traffic_fines %>%
@@ -80,7 +80,7 @@ traffic_fines %>%
 	ps_aggregated()
 ```
 
-It does have 2 more configuration options: the number of bins to be used (default 30), and the grouping to be used (which can be based on "start" or "complete"). Details on the latter can be found in the original paper describing the performance spectrum. 
+Though, it does have 2 more configuration options: the number of bins to be used (default 30), and the grouping to be used (which can be based on "start" or "complete"). Details on the latter can be found in the original paper describing the performance spectrum. 
 
 
 ```{r footer, results = "asis", echo = F}

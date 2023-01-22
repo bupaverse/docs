@@ -1,5 +1,5 @@
 ---
-title: bupaR Docs | Dotted Charts
+title: "bupaR Docs | Dotted Charts"
 output: 
   html_document: 
     toc: false
@@ -22,7 +22,7 @@ knitr::opts_chunk$set(out.width = "80%", fig.asp = 0.6)
 library(bupaverse)
 ```
 
-Dotted charts can be made with `dotted_chart()`. A dotted chart is a graph in which each activity instance is displayed with by a dot. The x-axis refers to the time aspect, while the y-axis refers to cases. The dotted chart function has 3 arguments.
+Dotted charts can be made with `dotted_chart()`. A dotted chart is a graph in which each activity instance is displayed by a dot. The x-axis refers to the time aspect, while the y-axis refers to cases. The dotted chart function has 3 arguments:
 
 * __x__: 
 	* absolute: absolute time on x-axis
@@ -32,7 +32,7 @@ Dotted charts can be made with `dotted_chart()`. A dotted chart is a graph in wh
 * __sort__: The ordering of the cases along the y-axis: _start_, _end_, _duration_, _start_day_, or _start_week._ Value _auto_ (default) will set sort appropriately given the argument for `x`
 * __color__: The attribute used to color the activity instances. Defaults to the activity type.
 
-Below, you can see some examples for dotted charts with various configurations
+Below, you can see some examples for dotted charts with various configurations.
 
 ## Absolute
 <div class = "blue">
@@ -73,7 +73,7 @@ sepsis %>%
 
 Other configurations: 
 
-* change the used color scale by configuring the `scale_color` argument
+* change the used color scale by configuring the `scale_color` argument.
 
 ```{r}
 sepsis %>%

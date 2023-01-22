@@ -1,5 +1,5 @@
 ---
-title: bupaR Docs | Unite activities
+title: "bupaR Docs | Unite activities"
 output: 
   html_document: 
     toc: false
@@ -15,14 +15,14 @@ knitr::include_graphics("images/icons/aggregate.png")
 
 # Unite activities
 
-You can use `act_unite()` to remove unwanted differences between activities. For example, consider the `sepsis` activities. 
+You can use `act_unite()` to remove unwanted differences between activities. For example, consider activities from the `sepsis` data set. 
 
 ```{r}
 sepsis %>%
 	activities()
 ```
 
-We can replace all `Release X` activities with a single unique `Release` activity. 
+We can replace all _Release X_ activities with a single unique _Release_ activity. 
 
 ```{r}
 sepsis %>%

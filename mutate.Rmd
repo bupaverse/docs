@@ -1,5 +1,5 @@
 ---
-title: bupaR Docs | Mutate logs
+title: "bupaR Docs | Mutate logs"
 ---
 
 
@@ -25,7 +25,7 @@ library(dplyr)
 
 
 
-Next to [`augment()`](augment.html) for enriching log with calculated merics, you can use `mutate()` to add more custom new variables to a log, or change existing ones. The use of `mutate()` is especially conventient in combination with `group_by()`.
+Next to [`augment()`](augment.html) for enriching an event log with calculated metrics, you can use `mutate()` to add more custom new variables to a log, or change the existing ones. The use of `mutate()` is especially convenient in combination with `group_by()`.
 
 
 ## Transforming variables
@@ -39,7 +39,7 @@ sepsis %>%
 
 ## Calculating variables
 
-Below, we group the data by case using `group_by_case()`, and subsequently calculate the total lacticacid value. Note that `na.rm = TRUE` is required as there are missing values for this variable. 
+Below, we group the data by case using `group_by_case()`, and subsequently calculate the total _lacticacid_ value. Note that setting `na.rm = TRUE` is required as there are missing values present for this variable. 
 
 ```{r}
 sepsis %>%

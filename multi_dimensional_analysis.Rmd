@@ -1,5 +1,5 @@
 ---
-title: bupaR Docs | Multi-dimensional analysis
+title: "bupaR Docs | Multi-dimensional analysis"
 output: 
   html_document: 
     toc: false
@@ -22,7 +22,7 @@ knitr::opts_chunk$set(fig.height=3)
 library(bupaverse)
 ```
 
-By combining metrics with [`group_by()`](wrangling.html#group_by) and [`augment`](augment.html), you can perform analysis that combine multiple perspectives. 
+By combining metrics with [`group_by()`](wrangling.html#group_by) and [`augment()`](augment.html), you can perform analysis that combine multiple perspectives. 
 
 For example, let's say we want to compare throughput time (performance) with trace length (control-flow). We start by computing the throughput time per case. 
 
@@ -80,7 +80,7 @@ tmp %>%
 	n_cases()
 ```
 
-Now, instead of using `group_by` and `n_cases`, we can use `group_by` followed by `trace_length`. This gives us the distribution of the trace length, for each of the groups. 
+Now, instead of using `group_by()` and `n_cases()`, we can use `group_by()` followed by `trace_length()`. This gives us the distribution of the trace length, for each of the groups. 
 
 ```{r}
 tmp %>%
@@ -89,7 +89,7 @@ tmp %>%
 	trace_length()
 ```
 
-This information, we can `plot()` as well. 
+We plot this new information:
 
 ```{r}
 tmp %>%
@@ -98,9 +98,9 @@ tmp %>%
 	trace_length() %>%
 	plot()
 ```
-While the resulting default plot might not be ideal for your situation (as here, it doesn't work well with trace lengths discreet characteristic), you can get a first insight without needing any additional visualization expertise. 
+While the resulting default plot might not be ideal for your situation (as here, it doesn't work well with trace lengths discrete characteristic), you can get a first insight without needing any additional visualization expertise. 
 
-Note that, if we turn the analysis the other way around, e.g. what is the impact of trace length on throughput time, things get even easier, as the discreet trace length variable can be directly feeded to `group_by`. 
+Note that, if we turn the analysis the other way around (e.g. what is the impact of trace length on throughput time?), things get even easier as the discrete trace length variable can be directly fed to `group_by()`. 
 
 ```{r}
 traffic_fines %>%
@@ -111,7 +111,7 @@ traffic_fines %>%
 	plot()
 ```
 
-Finally, not that you are not limited to combining calculated metrics. You can also combine metrics with data attributes. 
+Finally, note that you are not restricted to combining calculated metrics. You can also combine metrics with data attributes. 
 
 ```{r}
 eventdataR::hospital %>%

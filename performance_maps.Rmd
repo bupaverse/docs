@@ -1,5 +1,5 @@
 ---
-title: bupaR Docs | Performance Maps
+title: "bupaR Docs | Performance Maps"
 ---
 
 ```{r echo = F, out.width="25%", fig.align = "right"}
@@ -23,7 +23,7 @@ library(bupaverse)
 ```
 
 
-Instead of a frequencies, process maps can also be used to visualize performance of the process, by using `performance()` to configure the map, instead of `frequency()`. 
+Instead of a frequencies, __process maps__ can also be used to visualize performance of the process, by using `performance()` to configure the map, instead of `frequency()`. 
 
 ```{r}
 patients %>%
@@ -52,12 +52,12 @@ patients %>%
 	process_map(performance(FUN = p90))
 ```
 
-Note that the `...` is mandatory as `process_map` will automatically add `na.rm = T` to the aggregation function call. 
+Note that the `...` is mandatory as `process_map()` will automatically add `na.rm = T` to the aggregation function call. 
 
 ## Time units
 
 
-The `units` argument allows to specificy the time unit to be used.
+The `units` argument allows to specify the time units to be used.
 
 ```{r fig.height=2}
 patients %>%
@@ -70,10 +70,10 @@ patients %>%
 
 Finally, you can set the `flowt_time` argument. 
 
-There are two different duration types that can be displayed on the edges.
+There are two different duration types that can be displayed on the edges:
 
-*	`idle_time`: the time between the end of the source-activity, and the start of the target-activity. Can be negative if the source-activity overlaps with the target-activity.
-*	`inter_start_time`: the time between the __start__ of the source and target activities, __including__ the duration of the from-activity. 
+*	`idle_time`: the time between the end of the source activity, and the start of the target activity. Can be negative if the source activity overlaps with the target activity.
+*	`inter_start_time`: the time between the __start__ of the source- and target activities, __including__ the duration of the from-activity. 
 
 ```{r footer, results = "asis", echo = F}
 CURRENT_PAGE <-  stringr::str_replace(knitr::current_input(), ".Rmd",".html")

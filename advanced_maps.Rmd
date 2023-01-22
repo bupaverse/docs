@@ -1,5 +1,5 @@
 ---
-title: bupaR Docs | Advanced Maps
+title: "bupaR Docs | Advanced Maps"
 ---
 
 ```{r echo = F, out.width="25%", fig.align = "right"}
@@ -22,7 +22,7 @@ library(bupaverse)
 
 ## Combining different profiles
 
-The profile used for edges and nodes can be differentiated using the `type_edges` and `type_nodes` attributes instead of the `type` argument. In this way, information about frequencies and performance, or any other value, can be combined in the same graph.
+The profile used for nodes and edges can be differentiated using the `type_nodes` and `type_edges` attributes instead of the `type` argument. In this way, information about frequencies and performance, or any other value, can be combined in the same graph.
 
 ```{r fig.height=2}
 patients %>%
@@ -41,7 +41,7 @@ patients %>%
 				sec = frequency("absolute"))
 ```
 
-Both primary and secondary layers can be differentiated between edges and nodes. 
+Both primary and secondary layers can be differentiated between nodes and edges. 
 
 ```{r warning = F}
 patients %>%
@@ -53,7 +53,7 @@ patients %>%
 
 ## Customizing colors
 
-Both `frequency()` and `performance()` have the argument `color_scale` and `color_edges` to customize the colors in the process map. 
+Both `frequency()` and `performance()` have the argument `color_scale` and `color_edges` to customize the colors in the process map: 
 
 * `color_scale`: set the color scale to fill the nodes. Can be any of the scales in `RColorBrewer::brewer.pal.info`. Defaults to _PuBu_ (frequency) or _Reds_ (performance)
 * `color_edges`: any single color to apply to the arrows. Can be a named color, hex-code, or a result of `rgb`. Defaults to _dodgerblue4_ (frequency) or _red4_ (performance)
@@ -68,11 +68,11 @@ patients %>%
 
 ## Customizing the layout
 
-The layout of the process map can be further customized.
+The layout of the process map can be further customized: 
 
 *	Instead of a left-right (LR) layout, the `rankdir` can be set to TB (top-bottom), BT (bottom-top) or RL (right-left).
 *	The varying edge width can be disabled.
-*	If `render` is set to `FALSE`, the function will return a unrendered graph, which can be further modified. See [here](http://rich-iannone.github.io/DiagrammeR/) for more information.
+*	If `render` is set to `FALSE`, the function will return an unrendered graph, which can be further modified. See [here](http://rich-iannone.github.io/DiagrammeR/) for more information.
 
 
 ```{r include = F}

@@ -1,5 +1,5 @@
 ---
-title: bupaR Docs | Collapse Activities
+title: "bupaR Docs | Collapse Activities"
 output: 
   html_document: 
     toc: false
@@ -23,14 +23,14 @@ knitr::opts_chunk$set(fig.height = 3)
 library(bupaverse)
 ```
 
-Using `act_collapse()` you can replace a set of closely related activities by one higher level activity. For example, consider the patients process map. 
+Using `act_collapse()` you can replace a set of closely related activities by one higher-level activity. For example, consider the process map of `patients` data set. 
 
 ```{r}
 patients %>%
 	process_map()
 ```
 
-Let's say we want to combine the activities "Blood test", "MRI SCAN" and "X-Ray" scan into a single "Examination" activity. This can be done as follows. 
+Let's say we want to combine the activities _Blood test_, _MRI SCAN_ and _X-Ray_ scan into a single _Examination_ activity. This can be done as follows: 
 
 ```{r}
 patients %>%

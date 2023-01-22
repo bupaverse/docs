@@ -1,5 +1,5 @@
 ---
-title: bupaR Docs | Augment logs
+title: "bupaR Docs | Augment logs"
 ---
 
 
@@ -22,7 +22,7 @@ library(dplyr)
 ```
 
 
-Enriching your `log` with calculated metrics can be done using `augment()`. For example, consider [`trace_length()`](control_flow_analysis.html).
+Enriching an event log with calculated metrics can be done using `augment()`. For example, consider [`trace_length()`](control_flow_analysis.html).
 
 ```{r}
 traffic_fines %>%
@@ -57,7 +57,7 @@ patients %>%
 	processing_time(level = "activity", units = "hours")
 ```
 
-Calling augment without any further arguments will add all columns, from _min_ until _relative_frequency_ to the data. 
+Calling `augment` without any further arguments will add all columns, from _min_ until _relative_frequency_ to the data. 
 
 ```{r}
 patients %>% 
@@ -87,7 +87,7 @@ patients %>%
 	glimpse()
 ```
 
-As you can see only the [`trace_coverage()`](control_flow_analysis.html) values of the second augment are added, while the first augment is lost. This is because the patients dataset did not get updated after the first `augment()` call. The proper way would be as follows. 
+As you can see only the [`trace_coverage()`](control_flow_analysis.html) values of the second augment are added, while the first augment is lost. This is because the `patients` data set did not get updated after the first `augment()` call. The proper way would be as follows. 
 
 ```{r}
 patients %>%

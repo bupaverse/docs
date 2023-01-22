@@ -653,8 +653,8 @@ div.tocify {
 <h1>Augment logs</h1>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(bupaverse)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code></pre></div>
-<p>Enriching your <code>log</code> with calculated metrics can be done
-using <code>augment()</code>. For example, consider <a
+<p>Enriching an event log with calculated metrics can be done using
+<code>augment()</code>. For example, consider <a
 href="control_flow_analysis.html"><code>trace_length()</code></a>.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>traffic_fines <span class="sc">%&gt;%</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">trace_length</span>(<span class="at">level =</span> <span class="st">&quot;case&quot;</span>) </span></code></pre></div>
@@ -750,8 +750,9 @@ to add information on the <em>processing time</em> of each
 ## 6 Blood test     3.08…  4.7…  5.5…  5.46…  6.2…  8.1…  1.06  1.51  1311…  0.0871
 ## 7 MRI SCAN       2.48…  3.6…  4.1…  4.09…  4.6…  5.9…  0.735 1.09   979…  0.0867
 ## # … with abbreviated variable name ¹​relative_frequency</code></pre>
-<p>Calling augment without any further arguments will add all columns,
-from <em>min</em> until <em>relative_frequency</em> to the data.</p>
+<p>Calling <code>augment</code> without any further arguments will add
+all columns, from <em>min</em> until <em>relative_frequency</em> to the
+data.</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span> </span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">processing_time</span>(<span class="at">level =</span> <span class="st">&quot;activity&quot;</span>, <span class="at">units =</span> <span class="st">&quot;hours&quot;</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">augment</span>(patients) <span class="sc">%&gt;%</span></span>
@@ -820,8 +821,9 @@ intermediate updates of the data. Consider the example below.</p>
 <p>As you can see only the <a
 href="control_flow_analysis.html"><code>trace_coverage()</code></a>
 values of the second augment are added, while the first augment is lost.
-This is because the patients dataset did not get updated after the first
-<code>augment()</code> call. The proper way would be as follows.</p>
+This is because the <code>patients</code> data set did not get updated
+after the first <code>augment()</code> call. The proper way would be as
+follows.</p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">trace_length</span>(<span class="at">level =</span> <span class="st">&quot;case&quot;</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">augment</span>(patients, <span class="at">prefix =</span> <span class="st">&quot;trace_length&quot;</span>) <span class="ot">-&gt;</span> patients</span>

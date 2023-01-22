@@ -567,8 +567,8 @@ $(document).ready(function () {
 <div id="unite-activities" class="section level1">
 <h1>Unite activities</h1>
 <p>You can use <code>act_unite()</code> to remove unwanted differences
-between activities. For example, consider the <code>sepsis</code>
-activities.</p>
+between activities. For example, consider activities from the
+<code>sepsis</code> data set.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>sepsis <span class="sc">%&gt;%</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">activities</span>()</span></code></pre></div>
 <pre><code>## # A tibble: 16 × 3
@@ -590,8 +590,8 @@ activities.</p>
 ## 14 Release C                        25           0.00164 
 ## 15 Release D                        24           0.00158 
 ## 16 Release E                         6           0.000394</code></pre>
-<p>We can replace all <code>Release X</code> activities with a single
-unique <code>Release</code> activity.</p>
+<p>We can replace all <em>Release X</em> activities with a single unique
+<em>Release</em> activity.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>sepsis <span class="sc">%&gt;%</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">act_unite</span>(<span class="at">Release =</span> <span class="fu">c</span>(<span class="st">&quot;Release A&quot;</span>,<span class="st">&quot;Release B&quot;</span>,<span class="st">&quot;Release C&quot;</span>,<span class="st">&quot;Release D&quot;</span>,<span class="st">&quot;Release E&quot;</span>)) <span class="sc">%&gt;%</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">activities</span>()</span></code></pre></div>

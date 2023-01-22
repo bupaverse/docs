@@ -570,7 +570,7 @@ analysis</h1>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(bupaverse)</span></code></pre></div>
 <p>By combining metrics with <a
 href="wrangling.html#group_by"><code>group_by()</code></a> and <a
-href="augment.html"><code>augment</code></a>, you can perform analysis
+href="augment.html"><code>augment()</code></a>, you can perform analysis
 that combine multiple perspectives.</p>
 <p>For example, let’s say we want to compare throughput time
 (performance) with trace length (control-flow). We start by computing
@@ -667,10 +667,10 @@ with the roughly same number of cases.</p>
 ## 2 (1,17.9]               2428
 ## 3 (17.9,85.1]            2484
 ## 4 (85.1, Inf]            2521</code></pre>
-<p>Now, instead of using <code>group_by</code> and <code>n_cases</code>,
-we can use <code>group_by</code> followed by <code>trace_length</code>.
-This gives us the distribution of the trace length, for each of the
-groups.</p>
+<p>Now, instead of using <code>group_by()</code> and
+<code>n_cases()</code>, we can use <code>group_by()</code> followed by
+<code>trace_length()</code>. This gives us the distribution of the trace
+length, for each of the groups.</p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="sc">%&gt;%</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">throughput_time_bin =</span> <span class="fu">cut</span>(<span class="fu">as.numeric</span>(throughput_time), <span class="at">breaks =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="cn">Inf</span>, <span class="dv">1</span>, <span class="fl">17.85</span>, <span class="fl">85.14</span>, <span class="cn">Inf</span>))) <span class="sc">%&gt;%</span></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(throughput_time_bin) <span class="sc">%&gt;%</span></span>
@@ -682,7 +682,7 @@ groups.</p>
 ## 2 (1,17.9]                2     2      2  2.02     2     6  0.237     0
 ## 3 (17.9,85.1]             2     5      5  4.78     5     9  1.28      0
 ## 4 (85.1, Inf]             5     5      5  5.08     5     9  0.417     0</code></pre>
-<p>This information, we can <code>plot()</code> as well.</p>
+<p>We plot this new information:</p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="sc">%&gt;%</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">throughput_time_bin =</span> <span class="fu">cut</span>(<span class="fu">as.numeric</span>(throughput_time), <span class="at">breaks =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="cn">Inf</span>, <span class="dv">1</span>, <span class="fl">17.85</span>, <span class="fl">85.14</span>, <span class="cn">Inf</span>))) <span class="sc">%&gt;%</span></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(throughput_time_bin) <span class="sc">%&gt;%</span></span>
@@ -690,13 +690,13 @@ groups.</p>
 <span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">plot</span>()</span></code></pre></div>
 <p><img src="multi_dimensional_analysis_files/figure-html/unnamed-chunk-12-1.png" width="672" />
 While the resulting default plot might not be ideal for your situation
-(as here, it doesn’t work well with trace lengths discreet
+(as here, it doesn’t work well with trace lengths discrete
 characteristic), you can get a first insight without needing any
 additional visualization expertise.</p>
-<p>Note that, if we turn the analysis the other way around, e.g. what is
-the impact of trace length on throughput time, things get even easier,
-as the discreet trace length variable can be directly feeded to
-<code>group_by</code>.</p>
+<p>Note that, if we turn the analysis the other way around (e.g. what is
+the impact of trace length on throughput time?), things get even easier
+as the discrete trace length variable can be directly fed to
+<code>group_by()</code>.</p>
 <div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>traffic_fines <span class="sc">%&gt;%</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">trace_length</span>(<span class="at">level =</span> <span class="st">&quot;case&quot;</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">augment</span>(traffic_fines, <span class="at">prefix =</span> <span class="st">&quot;length&quot;</span>) <span class="sc">%&gt;%</span></span>
@@ -704,7 +704,7 @@ as the discreet trace length variable can be directly feeded to
 <span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">throughput_time</span>() <span class="sc">%&gt;%</span></span>
 <span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">plot</span>()</span></code></pre></div>
 <p><img src="multi_dimensional_analysis_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
-<p>Finally, not that you are not limited to combining calculated
+<p>Finally, note that you are not restricted to combining calculated
 metrics. You can also combine metrics with data attributes.</p>
 <div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>eventdataR<span class="sc">::</span>hospital <span class="sc">%&gt;%</span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(group) <span class="sc">%&gt;%</span></span>

@@ -654,10 +654,10 @@ div.tocify {
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(bupaverse)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code></pre></div>
 <p>Next to <a href="augment.html"><code>augment()</code></a> for
-enriching log with calculated merics, you can use <code>mutate()</code>
-to add more custom new variables to a log, or change existing ones. The
-use of <code>mutate()</code> is especially conventient in combination
-with <code>group_by()</code>.</p>
+enriching an event log with calculated metrics, you can use
+<code>mutate()</code> to add more custom new variables to a log, or
+change the existing ones. The use of <code>mutate()</code> is especially
+convenient in combination with <code>group_by()</code>.</p>
 <div id="transforming-variables" class="section level2">
 <h2>Transforming variables</h2>
 <p>The code below transforms the <em>lacticacid</em> variable, stored as
@@ -668,9 +668,9 @@ a <code>character</code>, to a <code>numeric</code> variable.</p>
 <div id="calculating-variables" class="section level2">
 <h2>Calculating variables</h2>
 <p>Below, we group the data by case using <code>group_by_case()</code>,
-and subsequently calculate the total lacticacid value. Note that
-<code>na.rm = TRUE</code> is required as there are missing values for
-this variable.</p>
+and subsequently calculate the total <em>lacticacid</em> value. Note
+that setting <code>na.rm = TRUE</code> is required as there are missing
+values present for this variable.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>sepsis <span class="sc">%&gt;%</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by_case</span>() <span class="sc">%&gt;%</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">total_lacticacid =</span> <span class="fu">sum</span>(lacticacid, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>

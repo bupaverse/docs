@@ -657,8 +657,8 @@ div.tocify {
 aggregated performance spectra, as described in Denisov, V., Fahland,
 D., &amp; van der Aalst, W. M. P. (2018) <a
 href="doi:10.1007/978-3-319-98648-7_9"
-class="uri">doi:10.1007/978-3-319-98648-7_9</a>. The can be created
-using <code>ps_detailed</code> and <code>ps_aggregated</code>,
+class="uri">doi:10.1007/978-3-319-98648-7_9</a>. Both can be created
+using <code>ps_detailed()</code> and <code>ps_aggregated()</code>,
 respectively.</p>
 <div id="detailed" class="section level2">
 <h2>Detailed</h2>
@@ -685,10 +685,10 @@ the resource, as shown below.</p>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ps_detailed</span>(<span class="at">classification =</span> <span class="st">&quot;resource&quot;</span>)</span></code></pre></div>
 <p><img src="performance_spectrum_files/figure-html/unnamed-chunk-6-1.png" width="80%" /></p>
 <p>Note that when another color classification is used, the built-in
-bupaR color scale will be used. As the resource in the case of
-traffic_fines is not very insightful, below we show a slightly more
-advanced version, where we use log augmentation incorporate the end
-activity of the case.</p>
+<code>bupaR</code> color scale will be used. As the resource variable
+from <code>traffic_fines</code> is not very insightful, below we show a
+slightly more advanced version, where we use log augmentation, while
+incorporating the end activity of the case.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>traffic_fines <span class="sc">%&gt;%</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">end_activities</span>(<span class="st">&quot;case&quot;</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">augment</span>(traffic_fines, <span class="at">prefix =</span> <span class="st">&quot;end&quot;</span>) <span class="sc">%&gt;%</span></span>
@@ -713,9 +713,9 @@ way.</p>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(end_activity) <span class="sc">%&gt;%</span></span>
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ps_aggregated</span>()</span></code></pre></div>
 <p><img src="performance_spectrum_files/figure-html/unnamed-chunk-9-1.png" width="80%" /></p>
-<p>It does have 2 more configuration options: the number of bins to be
-used (default 30), and the grouping to be used (which can be based on
-“start” or “complete”). Details on the latter can be found in the
+<p>Though, it does have 2 more configuration options: the number of bins
+to be used (default 30), and the grouping to be used (which can be based
+on “start” or “complete”). Details on the latter can be found in the
 original paper describing the performance spectrum.</p>
 <hr />
 <p>Read more:</p>

@@ -568,9 +568,9 @@ $(document).ready(function () {
 <h1 class="tabset tabset-pills">Dotted chart</h1>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(bupaverse)</span></code></pre></div>
 <p>Dotted charts can be made with <code>dotted_chart()</code>. A dotted
-chart is a graph in which each activity instance is displayed with by a
-dot. The x-axis refers to the time aspect, while the y-axis refers to
-cases. The dotted chart function has 3 arguments.</p>
+chart is a graph in which each activity instance is displayed by a dot.
+The x-axis refers to the time aspect, while the y-axis refers to cases.
+The dotted chart function has 3 arguments:</p>
 <ul>
 <li><strong>x</strong>:
 <ul>
@@ -589,7 +589,7 @@ appropriately given the argument for <code>x</code></li>
 instances. Defaults to the activity type.</li>
 </ul>
 <p>Below, you can see some examples for dotted charts with various
-configurations</p>
+configurations.</p>
 <div id="absolute" class="section level2">
 <h2>Absolute</h2>
 <div class="blue">
@@ -631,7 +631,7 @@ configurations</p>
 <p>Other configurations:</p>
 <ul>
 <li>change the used color scale by configuring the
-<code>scale_color</code> argument</li>
+<code>scale_color</code> argument.</li>
 </ul>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>sepsis <span class="sc">%&gt;%</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">dotted_chart</span>(<span class="at">x =</span> <span class="st">&quot;relative_week&quot;</span>,</span>

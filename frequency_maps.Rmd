@@ -39,7 +39,7 @@ Six different flavors of frequency process map can be considered:
 	* 	__Nodes__: The proportion of all activity instances that had this type
 	*	__Flows__: The proportion of source executions directly followed by target executions. 
 *	__relative-case__ frequency
-	*	__Nodes__: The proportion of cases in which an activity was executed
+	*	__Nodes__: The proportion of cases in which the activity was executed
 	*	__Flows__: The proportion of cases in which source and target activities were executed directly following each other.
 *   __relative-antecedent__ frequency (= _relative_)
 	*   __Nodes__: The proportion of all activity instances that had this type
@@ -48,7 +48,7 @@ Six different flavors of frequency process map can be considered:
 	*	__Nodes__: The proportion of all activity instances that had this type
 	*   __Flows__: The proportion of target executions that was preceded by an execution of source. 
 
-Each of these flavors can be configured by passing `type = frequency()` to `process_map()`, additionally specifying the type of `frequency()` (ex. "absolute", "absolute-case", etc.)
+Each of these flavors can be configured by passing `type = frequency()` to `process_map()`, and additionally specifying the type of `frequency()` (ex. "absolute", "absolute-case", etc.)
 
 In the examples below, we will use a slightly filtered versions of the `traffic_fines` data set, which contains 95% of the cases that have [the most frequent traces.](case_filters.html#Trace_Frequency) 
 

@@ -27,8 +27,8 @@ jobs:
 
       - name: Install packages
         run: |
-          remotes::install_github("bupaverse/edeaR")
           install.packages("remotes")
+          remotes::install_github("bupaverse/edeaR")
           install.packages("rmarkdown")
           install.packages("bslib")
           install.packages("htmltools")

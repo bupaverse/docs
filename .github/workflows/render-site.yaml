@@ -27,6 +27,8 @@ jobs:
 
       - name: Install packages
         run: |
+          remotes::install_github("bupaverse/edeaR")
+          install.packages("remotes")
           install.packages("rmarkdown")
           install.packages("bslib")
           install.packages("htmltools")
@@ -38,7 +40,6 @@ jobs:
           install.packages("purrr")
           install.packages("xaringanExtra")
           install.packages("pander")
-          install.packages("remotes")
           install.packages("xesreadR")
           install.packages("processanimateR")
           install.packages("daqapo")
@@ -46,7 +47,7 @@ jobs:
           install.packages("processcheckR")
           install.packages("distill")
           remotes::install_github("bupaverse/processpredictR")
-          remotes::install_github("bupaverse/edeaR")
+          
         shell: Rscript {0}
 
       - name: Build site

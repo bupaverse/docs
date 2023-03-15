@@ -920,12 +920,12 @@ event log containing n cases. The code below returns a sample of 10
 patients.</p>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sample_n</span>(<span class="at">size =</span> <span class="dv">10</span>)</span></code></pre></div>
-<pre><code>## # Log of 112 events consisting of:
-## 2 traces 
+<pre><code>## # Log of 108 events consisting of:
+## 3 traces 
 ## 10 cases 
-## 56 instances of 7 activities 
+## 54 instances of 7 activities 
 ## 7 resources 
-## Events occurred from 2017-04-25 03:08:21 until 2018-03-05 07:59:10 
+## Events occurred from 2017-03-29 22:12:55 until 2018-05-04 21:50:07 
 ##  
 ## # Variables were mapped as follows:
 ## Case identifier:     patient 
@@ -935,20 +935,20 @@ patients.</p>
 ## Timestamp:           time 
 ## Lifecycle transition:        registration_type 
 ## 
-## # A tibble: 112 × 7
+## # A tibble: 108 × 7
 ##    handling     patient employee handling_id regist…¹ time                .order
 ##    &lt;fct&gt;        &lt;chr&gt;   &lt;fct&gt;    &lt;chr&gt;       &lt;fct&gt;    &lt;dttm&gt;               &lt;int&gt;
-##  1 Registration 110     r1       110         start    2017-04-25 03:08:21      1
-##  2 Registration 204     r1       204         start    2017-07-18 11:22:29      2
-##  3 Registration 216     r1       216         start    2017-07-28 08:15:21      3
-##  4 Registration 262     r1       262         start    2017-09-16 15:08:03      4
-##  5 Registration 282     r1       282         start    2017-09-30 15:32:00      5
-##  6 Registration 347     r1       347         start    2017-11-24 08:28:44      6
-##  7 Registration 384     r1       384         start    2017-12-30 19:02:53      7
-##  8 Registration 397     r1       397         start    2018-01-21 04:23:48      8
-##  9 Registration 437     r1       437         start    2018-02-20 17:36:35      9
-## 10 Registration 442     r1       442         start    2018-02-27 16:18:24     10
-## # … with 102 more rows, and abbreviated variable name ¹​registration_type</code></pre>
+##  1 Registration 80      r1       80          start    2017-03-29 22:12:55      1
+##  2 Registration 92      r1       92          start    2017-04-04 17:42:26      2
+##  3 Registration 156     r1       156         start    2017-06-03 10:05:28      3
+##  4 Registration 170     r1       170         start    2017-06-17 15:10:30      4
+##  5 Registration 202     r1       202         start    2017-07-17 03:11:39      5
+##  6 Registration 231     r1       231         start    2017-08-13 19:50:42      6
+##  7 Registration 328     r1       328         start    2017-11-12 04:23:27      7
+##  8 Registration 434     r1       434         start    2018-02-19 02:53:00      8
+##  9 Registration 462     r1       462         start    2018-03-20 07:37:11      9
+## 10 Registration 497     r1       497         start    2018-04-30 09:42:11     10
+## # … with 98 more rows, and abbreviated variable name ¹​registration_type</code></pre>
 <p>Note that this function can also be used with a sample size bigger
 than the number of cases in the event log, if you allow for the
 replacements of drawn cases.</p>
@@ -974,6 +974,24 @@ Filtering</a>
 
 <hr>
 <center><p style = "font-size: 12px">Copyright &copy; 2023 <a href = "https://bupar.net/about/" >bupaR - Hasselt University</a></p></center>
+
+<script type="text/javascript">
+_linkedin_partner_id = "4726898";
+window._linkedin_data_partner_ids = window._linkedin_data_partner_ids || [];
+window._linkedin_data_partner_ids.push(_linkedin_partner_id);
+</script><script type="text/javascript">
+(function(l) {
+if (!l){window.lintrk = function(a,b){window.lintrk.q.push([a,b])};
+window.lintrk.q=[]}
+var s = document.getElementsByTagName("script")[0];
+var b = document.createElement("script");
+b.type = "text/javascript";b.async = true;
+b.src = "https://snap.licdn.com/li.lms-analytics/insight.min.js";
+s.parentNode.insertBefore(b, s);})(window.lintrk);
+</script>
+<noscript>
+<img height="1" width="1" style="display:none;" alt="" src="https://px.ads.linkedin.com/collect/?pid=4726898&fmt=gif" />
+</noscript>
 
 
 </div>

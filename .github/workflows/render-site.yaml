@@ -46,6 +46,7 @@ jobs:
           install.packages("processcheckR")
           install.packages("distill")
           remotes::install_github("bupaverse/processpredictR")
+          remotes::install_github("bupaverse/edeaR")
         shell: Rscript {0}
 
       - name: Build site

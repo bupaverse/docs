@@ -13,15 +13,15 @@
 
 <title>bupaR Docs | processpredictR workflow</title>
 
-<script src="site_libs/header-attrs-2.20/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.23/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <link href="site_libs/bootstrap-5.2.2/bootstrap.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-5.2.2/bootstrap.bundle.min.js"></script>
-<script src="site_libs/bs3compat-0.4.2/transition.js"></script>
-<script src="site_libs/bs3compat-0.4.2/tabs.js"></script>
-<script src="site_libs/bs3compat-0.4.2/bs3compat.js"></script>
-<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<script src="site_libs/bs3compat-0.5.0/transition.js"></script>
+<script src="site_libs/bs3compat-0.5.0/tabs.js"></script>
+<script src="site_libs/bs3compat-0.5.0/bs3compat.js"></script>
+<script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
@@ -728,21 +728,21 @@ supported.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">prepare_examples</span>(traffic_fines, <span class="at">task =</span> <span class="st">&quot;outcome&quot;</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>df</span></code></pre></div>
 <pre><code>## # A tibble: 34,724 × 11
-##    ith_case case_id prefix                 prefi…¹ outcome     k activ…² resou…³
-##       &lt;int&gt; &lt;chr&gt;   &lt;chr&gt;                  &lt;list&gt;  &lt;fct&gt;   &lt;dbl&gt; &lt;chr&gt;   &lt;fct&gt;  
-##  1        1 A2127   Create Fine            &lt;chr&gt;   Payment     0 Create… 537    
-##  2        1 A2127   Create Fine - Payment  &lt;chr&gt;   Payment     1 Payment &lt;NA&gt;   
-##  3        2 A15     Create Fine            &lt;chr&gt;   Send f…     0 Create… 561    
-##  4        2 A15     Create Fine - Send Fi… &lt;chr&gt;   Send f…     1 Send F… &lt;NA&gt;   
-##  5        2 A15     Create Fine - Send Fi… &lt;chr&gt;   Send f…     2 Insert… &lt;NA&gt;   
-##  6        2 A15     Create Fine - Send Fi… &lt;chr&gt;   Send f…     3 Add pe… &lt;NA&gt;   
-##  7        2 A15     Create Fine - Send Fi… &lt;chr&gt;   Send f…     4 Send f… &lt;NA&gt;   
-##  8        3 A1820   Create Fine            &lt;chr&gt;   Payment     0 Create… 563    
-##  9        3 A1820   Create Fine - Payment  &lt;chr&gt;   Payment     1 Payment &lt;NA&gt;   
-## 10        4 A22     Create Fine            &lt;chr&gt;   Payment     0 Create… 561    
-## # … with 34,714 more rows, 3 more variables: start_time &lt;dttm&gt;,
-## #   end_time &lt;dttm&gt;, remaining_trace_list &lt;list&gt;, and abbreviated variable
-## #   names ¹​prefix_list, ²​activity, ³​resource</code></pre>
+##    ith_case case_id prefix           prefix_list outcome     k activity resource
+##       &lt;int&gt; &lt;chr&gt;   &lt;chr&gt;            &lt;list&gt;      &lt;fct&gt;   &lt;dbl&gt; &lt;chr&gt;    &lt;fct&gt;   
+##  1        1 A2127   Create Fine      &lt;chr [1]&gt;   Payment     0 Create … 537     
+##  2        1 A2127   Create Fine - P… &lt;chr [2]&gt;   Payment     1 Payment  &lt;NA&gt;    
+##  3        2 A15     Create Fine      &lt;chr [1]&gt;   Send f…     0 Create … 561     
+##  4        2 A15     Create Fine - S… &lt;chr [2]&gt;   Send f…     1 Send Fi… &lt;NA&gt;    
+##  5        2 A15     Create Fine - S… &lt;chr [3]&gt;   Send f…     2 Insert … &lt;NA&gt;    
+##  6        2 A15     Create Fine - S… &lt;chr [4]&gt;   Send f…     3 Add pen… &lt;NA&gt;    
+##  7        2 A15     Create Fine - S… &lt;chr [5]&gt;   Send f…     4 Send fo… &lt;NA&gt;    
+##  8        3 A1820   Create Fine      &lt;chr [1]&gt;   Payment     0 Create … 563     
+##  9        3 A1820   Create Fine - P… &lt;chr [2]&gt;   Payment     1 Payment  &lt;NA&gt;    
+## 10        4 A22     Create Fine      &lt;chr [1]&gt;   Payment     0 Create … 561     
+## # ℹ 34,714 more rows
+## # ℹ 3 more variables: start_time &lt;dttm&gt;, end_time &lt;dttm&gt;,
+## #   remaining_trace_list &lt;list&gt;</code></pre>
 <p>We split the transformed dataset <code>df</code> into train- and test
 sets for later use in <code>fit()</code> and <code>predict()</code>,
 respectively. The proportion of the train set is configured with the
@@ -750,28 +750,26 @@ respectively. The proportion of the train set is configured with the
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>split <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> <span class="fu">split_train_test</span>(<span class="at">split =</span> <span class="fl">0.8</span>)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>split<span class="sc">$</span>train_df <span class="sc">%&gt;%</span> <span class="fu">head</span>(<span class="dv">5</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 5 × 11
-##   ith_case case_id prefix                  prefi…¹ outcome     k activ…² resou…³
-##      &lt;int&gt; &lt;chr&gt;   &lt;chr&gt;                   &lt;list&gt;  &lt;fct&gt;   &lt;dbl&gt; &lt;chr&gt;   &lt;fct&gt;  
-## 1        1 A2127   Create Fine             &lt;chr&gt;   Payment     0 Create… 537    
-## 2        1 A2127   Create Fine - Payment   &lt;chr&gt;   Payment     1 Payment &lt;NA&gt;   
-## 3        2 A15     Create Fine             &lt;chr&gt;   Send f…     0 Create… 561    
-## 4        2 A15     Create Fine - Send Fine &lt;chr&gt;   Send f…     1 Send F… &lt;NA&gt;   
-## 5        2 A15     Create Fine - Send Fin… &lt;chr&gt;   Send f…     2 Insert… &lt;NA&gt;   
-## # … with 3 more variables: start_time &lt;dttm&gt;, end_time &lt;dttm&gt;,
-## #   remaining_trace_list &lt;list&gt;, and abbreviated variable names ¹​prefix_list,
-## #   ²​activity, ³​resource</code></pre>
+##   ith_case case_id prefix            prefix_list outcome     k activity resource
+##      &lt;int&gt; &lt;chr&gt;   &lt;chr&gt;             &lt;list&gt;      &lt;fct&gt;   &lt;dbl&gt; &lt;chr&gt;    &lt;fct&gt;   
+## 1        1 A2127   Create Fine       &lt;chr [1]&gt;   Payment     0 Create … 537     
+## 2        1 A2127   Create Fine - Pa… &lt;chr [2]&gt;   Payment     1 Payment  &lt;NA&gt;    
+## 3        2 A15     Create Fine       &lt;chr [1]&gt;   Send f…     0 Create … 561     
+## 4        2 A15     Create Fine - Se… &lt;chr [2]&gt;   Send f…     1 Send Fi… &lt;NA&gt;    
+## 5        2 A15     Create Fine - Se… &lt;chr [3]&gt;   Send f…     2 Insert … &lt;NA&gt;    
+## # ℹ 3 more variables: start_time &lt;dttm&gt;, end_time &lt;dttm&gt;,
+## #   remaining_trace_list &lt;list&gt;</code></pre>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>split<span class="sc">$</span>test_df <span class="sc">%&gt;%</span> <span class="fu">head</span>(<span class="dv">5</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 5 × 11
-##   ith_case case_id prefix                prefix_…¹ outcome     k activ…² resou…³
-##      &lt;int&gt; &lt;chr&gt;   &lt;chr&gt;                 &lt;list&gt;    &lt;fct&gt;   &lt;dbl&gt; &lt;chr&gt;   &lt;fct&gt;  
-## 1     8001 A24869  Create Fine           &lt;chr [1]&gt; Payment     0 Create… 559    
-## 2     8001 A24869  Create Fine - Payment &lt;chr [2]&gt; Payment     1 Payment &lt;NA&gt;   
-## 3     8002 A24871  Create Fine           &lt;chr [1]&gt; Payment     0 Create… 559    
-## 4     8002 A24871  Create Fine - Payment &lt;chr [2]&gt; Payment     1 Payment &lt;NA&gt;   
-## 5     8003 A24872  Create Fine           &lt;chr [1]&gt; Send f…     0 Create… 559    
-## # … with 3 more variables: start_time &lt;dttm&gt;, end_time &lt;dttm&gt;,
-## #   remaining_trace_list &lt;list&gt;, and abbreviated variable names ¹​prefix_list,
-## #   ²​activity, ³​resource</code></pre>
+##   ith_case case_id prefix            prefix_list outcome     k activity resource
+##      &lt;int&gt; &lt;chr&gt;   &lt;chr&gt;             &lt;list&gt;      &lt;fct&gt;   &lt;dbl&gt; &lt;chr&gt;    &lt;fct&gt;   
+## 1     8001 A24869  Create Fine       &lt;chr [1]&gt;   Payment     0 Create … 559     
+## 2     8001 A24869  Create Fine - Pa… &lt;chr [2]&gt;   Payment     1 Payment  &lt;NA&gt;    
+## 3     8002 A24871  Create Fine       &lt;chr [1]&gt;   Payment     0 Create … 559     
+## 4     8002 A24871  Create Fine - Pa… &lt;chr [2]&gt;   Payment     1 Payment  &lt;NA&gt;    
+## 5     8003 A24872  Create Fine       &lt;chr [1]&gt;   Send f…     0 Create … 559     
+## # ℹ 3 more variables: start_time &lt;dttm&gt;, end_time &lt;dttm&gt;,
+## #   remaining_trace_list &lt;list&gt;</code></pre>
 <p>It’s important to note that the split is done at case level (a case
 is fully part of either the train data or either the test data).
 Furthermore, the split is done chronologically, meaning that the train

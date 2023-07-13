@@ -13,15 +13,15 @@
 
 <title>bupaR Docs | Mutate logs</title>
 
-<script src="site_libs/header-attrs-2.20/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.23/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <link href="site_libs/bootstrap-5.2.2/bootstrap.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-5.2.2/bootstrap.bundle.min.js"></script>
-<script src="site_libs/bs3compat-0.4.2/transition.js"></script>
-<script src="site_libs/bs3compat-0.4.2/tabs.js"></script>
-<script src="site_libs/bs3compat-0.4.2/bs3compat.js"></script>
-<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<script src="site_libs/bs3compat-0.5.0/transition.js"></script>
+<script src="site_libs/bs3compat-0.5.0/tabs.js"></script>
+<script src="site_libs/bs3compat-0.5.0/bs3compat.js"></script>
+<script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
@@ -705,7 +705,7 @@ can be computed as follows:</p>
 ##  8 G            147
 ##  9 H             50
 ## 10 I            118
-## # … with 16 more rows</code></pre>
+## # ℹ 16 more rows</code></pre>
 <p>Note that each of the descriptive metrics discussed <a
 href="http://www.bupar.net/exploring.html">here</a> can be rewritten
 using these lower-level functions. The example above is equal to the
@@ -733,7 +733,7 @@ the number of events per case and per activity:</p>
 ##  8 10      Discuss Results              2
 ##  9 10      Registration                 2
 ## 10 10      Triage and Assessment        2
-## # … with 2,711 more rows</code></pre>
+## # ℹ 2,711 more rows</code></pre>
 <p>Note that the arguments of <code>group_by_ids()</code> are not the
 variable names of case (<em>patient</em>) and activity
 (<em>handling</em>) columns, but unquoted mapping id-functions. You can
@@ -772,25 +772,25 @@ href="mutate.html">Read more.</a></p>
 ## Lifecycle transition:        lifecycle 
 ## 
 ## # A tibble: 15,214 × 35
-##    case_id activity      lifec…¹ resou…² timestamp             age   crp diagn…³
-##    &lt;chr&gt;   &lt;fct&gt;         &lt;fct&gt;   &lt;fct&gt;   &lt;dttm&gt;              &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;  
-##  1 A       ER Registrat… comple… A       2014-10-22 11:15:41    85    NA A      
-##  2 A       Leucocytes    comple… B       2014-10-22 11:27:00    NA    NA &lt;NA&gt;   
-##  3 A       CRP           comple… B       2014-10-22 11:27:00    NA   210 &lt;NA&gt;   
-##  4 A       LacticAcid    comple… B       2014-10-22 11:27:00    NA    NA &lt;NA&gt;   
-##  5 A       ER Triage     comple… C       2014-10-22 11:33:37    NA    NA &lt;NA&gt;   
-##  6 A       ER Sepsis Tr… comple… A       2014-10-22 11:34:00    NA    NA &lt;NA&gt;   
-##  7 A       IV Liquid     comple… A       2014-10-22 14:03:47    NA    NA &lt;NA&gt;   
-##  8 A       IV Antibioti… comple… A       2014-10-22 14:03:47    NA    NA &lt;NA&gt;   
-##  9 A       Admission NC  comple… D       2014-10-22 14:13:19    NA    NA &lt;NA&gt;   
-## 10 A       CRP           comple… B       2014-10-24 09:00:00    NA  1090 &lt;NA&gt;   
-## # … with 15,204 more rows, 27 more variables: diagnosticartastrup &lt;lgl&gt;,
-## #   diagnosticblood &lt;lgl&gt;, diagnosticecg &lt;lgl&gt;, diagnosticic &lt;lgl&gt;,
-## #   diagnosticlacticacid &lt;lgl&gt;, diagnosticliquor &lt;lgl&gt;, diagnosticother &lt;lgl&gt;,
-## #   diagnosticsputum &lt;lgl&gt;, diagnosticurinaryculture &lt;lgl&gt;,
-## #   diagnosticurinarysediment &lt;lgl&gt;, diagnosticxthorax &lt;lgl&gt;, disfuncorg &lt;lgl&gt;,
-## #   hypotensie &lt;lgl&gt;, hypoxie &lt;lgl&gt;, infectionsuspected &lt;lgl&gt;, infusion &lt;lgl&gt;,
-## #   lacticacid &lt;dbl&gt;, leucocytes &lt;chr&gt;, oligurie &lt;lgl&gt;, …</code></pre>
+##    case_id activity  lifecycle resource timestamp             age   crp diagnose
+##    &lt;chr&gt;   &lt;fct&gt;     &lt;fct&gt;     &lt;fct&gt;    &lt;dttm&gt;              &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;   
+##  1 A       ER Regis… complete  A        2014-10-22 11:15:41    85    NA A       
+##  2 A       Leucocyt… complete  B        2014-10-22 11:27:00    NA    NA &lt;NA&gt;    
+##  3 A       CRP       complete  B        2014-10-22 11:27:00    NA   210 &lt;NA&gt;    
+##  4 A       LacticAc… complete  B        2014-10-22 11:27:00    NA    NA &lt;NA&gt;    
+##  5 A       ER Triage complete  C        2014-10-22 11:33:37    NA    NA &lt;NA&gt;    
+##  6 A       ER Sepsi… complete  A        2014-10-22 11:34:00    NA    NA &lt;NA&gt;    
+##  7 A       IV Liquid complete  A        2014-10-22 14:03:47    NA    NA &lt;NA&gt;    
+##  8 A       IV Antib… complete  A        2014-10-22 14:03:47    NA    NA &lt;NA&gt;    
+##  9 A       Admissio… complete  D        2014-10-22 14:13:19    NA    NA &lt;NA&gt;    
+## 10 A       CRP       complete  B        2014-10-24 09:00:00    NA  1090 &lt;NA&gt;    
+## # ℹ 15,204 more rows
+## # ℹ 27 more variables: diagnosticartastrup &lt;lgl&gt;, diagnosticblood &lt;lgl&gt;,
+## #   diagnosticecg &lt;lgl&gt;, diagnosticic &lt;lgl&gt;, diagnosticlacticacid &lt;lgl&gt;,
+## #   diagnosticliquor &lt;lgl&gt;, diagnosticother &lt;lgl&gt;, diagnosticsputum &lt;lgl&gt;,
+## #   diagnosticurinaryculture &lt;lgl&gt;, diagnosticurinarysediment &lt;lgl&gt;,
+## #   diagnosticxthorax &lt;lgl&gt;, disfuncorg &lt;lgl&gt;, hypotensie &lt;lgl&gt;, hypoxie &lt;lgl&gt;,
+## #   infectionsuspected &lt;lgl&gt;, infusion &lt;lgl&gt;, lacticacid &lt;dbl&gt;, …</code></pre>
 </div>
 <div id="filter" class="section level2">
 <h2>filter</h2>
@@ -817,33 +817,32 @@ more.</a>.</p>
 ## Lifecycle transition:        lifecycle 
 ## 
 ## # A tibble: 20 × 18
-##    case_id activity   lifec…¹ resou…² timestamp           amount article dismi…³
-##    &lt;chr&gt;   &lt;fct&gt;      &lt;fct&gt;   &lt;fct&gt;   &lt;dttm&gt;              &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;  
-##  1 A10060  Create Fi… comple… 541     2007-03-08 00:00:00 36.0       157 NIL    
-##  2 A10497  Create Fi… comple… 558     2007-03-30 00:00:00 36.0       157 NIL    
-##  3 A10818  Create Fi… comple… 561     2007-04-08 00:00:00 36.0       157 NIL    
-##  4 A11707  Create Fi… comple… 550     2007-04-24 00:00:00 36.0       157 NIL    
-##  5 A11936  Create Fi… comple… 557     2007-04-29 00:00:00 36.0       157 NIL    
-##  6 A12073  Create Fi… comple… 557     2007-05-03 00:00:00 36.0       157 NIL    
-##  7 A1408   Create Fi… comple… 559     2006-08-20 00:00:00 35.0       157 NIL    
-##  8 A14883  Create Fi… comple… 561     2007-06-29 00:00:00 36.0       157 NIL    
-##  9 A17130  Create Fi… comple… 541     2007-07-15 00:00:00 36.0       157 NIL    
-## 10 A1815   Create Fi… comple… 563     2006-08-10 00:00:00 35.0       157 NIL    
-## 11 A19109  Create Fi… comple… 556     2007-07-17 00:00:00 36.0       157 NIL    
-## 12 A23000  Create Fi… comple… 550     2007-12-29 00:00:00 36.0       157 NIL    
-## 13 A24247  Create Fi… comple… 561     2007-12-03 00:00:00 36.0       157 NIL    
-## 14 A24366  Create Fi… comple… 541     2008-02-09 00:00:00 36.0       157 NIL    
-## 15 A24634  Create Fi… comple… 537     2007-11-21 00:00:00 36.0       157 NIL    
-## 16 A24942  Create Fi… comple… 561     2007-12-30 00:00:00 36.0       157 NIL    
-## 17 A25581  Create Fi… comple… 559     2007-11-23 00:00:00 36.0       157 NIL    
-## 18 A25599  Create Fi… comple… 559     2007-11-24 00:00:00 36.0       157 NIL    
-## 19 A26099  Create Fi… comple… 559     2007-12-09 00:00:00 36.0       157 NIL    
-## 20 A26277  Create Fi… comple… 538     2008-01-07 00:00:00 36.0       157 NIL    
-## # … with 10 more variables: expense &lt;chr&gt;, lastsent &lt;chr&gt;, matricola &lt;dbl&gt;,
-## #   notificationtype &lt;chr&gt;, paymentamount &lt;dbl&gt;, points &lt;dbl&gt;,
+##    case_id activity    lifecycle resource timestamp           amount article
+##    &lt;chr&gt;   &lt;fct&gt;       &lt;fct&gt;     &lt;fct&gt;    &lt;dttm&gt;              &lt;chr&gt;    &lt;dbl&gt;
+##  1 A10060  Create Fine complete  541      2007-03-08 00:00:00 36.0       157
+##  2 A10497  Create Fine complete  558      2007-03-30 00:00:00 36.0       157
+##  3 A10818  Create Fine complete  561      2007-04-08 00:00:00 36.0       157
+##  4 A11707  Create Fine complete  550      2007-04-24 00:00:00 36.0       157
+##  5 A11936  Create Fine complete  557      2007-04-29 00:00:00 36.0       157
+##  6 A12073  Create Fine complete  557      2007-05-03 00:00:00 36.0       157
+##  7 A1408   Create Fine complete  559      2006-08-20 00:00:00 35.0       157
+##  8 A14883  Create Fine complete  561      2007-06-29 00:00:00 36.0       157
+##  9 A17130  Create Fine complete  541      2007-07-15 00:00:00 36.0       157
+## 10 A1815   Create Fine complete  563      2006-08-10 00:00:00 35.0       157
+## 11 A19109  Create Fine complete  556      2007-07-17 00:00:00 36.0       157
+## 12 A23000  Create Fine complete  550      2007-12-29 00:00:00 36.0       157
+## 13 A24247  Create Fine complete  561      2007-12-03 00:00:00 36.0       157
+## 14 A24366  Create Fine complete  541      2008-02-09 00:00:00 36.0       157
+## 15 A24634  Create Fine complete  537      2007-11-21 00:00:00 36.0       157
+## 16 A24942  Create Fine complete  561      2007-12-30 00:00:00 36.0       157
+## 17 A25581  Create Fine complete  559      2007-11-23 00:00:00 36.0       157
+## 18 A25599  Create Fine complete  559      2007-11-24 00:00:00 36.0       157
+## 19 A26099  Create Fine complete  559      2007-12-09 00:00:00 36.0       157
+## 20 A26277  Create Fine complete  538      2008-01-07 00:00:00 36.0       157
+## # ℹ 11 more variables: dismissal &lt;chr&gt;, expense &lt;chr&gt;, lastsent &lt;chr&gt;,
+## #   matricola &lt;dbl&gt;, notificationtype &lt;chr&gt;, paymentamount &lt;dbl&gt;, points &lt;dbl&gt;,
 ## #   totalpaymentamount &lt;chr&gt;, vehicleclass &lt;chr&gt;, activity_instance_id &lt;chr&gt;,
-## #   .order &lt;int&gt;, and abbreviated variable names ¹​lifecycle, ²​resource,
-## #   ³​dismissal</code></pre>
+## #   .order &lt;int&gt;</code></pre>
 </div>
 <div id="select" class="section level2">
 <h2>select</h2>
@@ -869,20 +868,20 @@ no longer function as an <code>eventlog</code> object.</p>
 ## Lifecycle transition:        lifecycle 
 ## 
 ## # A tibble: 34,724 × 8
-##    vehiclec…¹ case_id activ…² activ…³ timestamp           resou…⁴ lifec…⁵ .order
-##    &lt;chr&gt;      &lt;chr&gt;   &lt;fct&gt;   &lt;chr&gt;   &lt;dttm&gt;              &lt;fct&gt;   &lt;fct&gt;    &lt;int&gt;
-##  1 A          A1      Create… 1       2006-07-24 00:00:00 561     comple…      1
-##  2 &lt;NA&gt;       A1      Send F… 2       2006-12-05 00:00:00 &lt;NA&gt;    comple…      2
-##  3 A          A100    Create… 3       2006-08-02 00:00:00 561     comple…      3
-##  4 &lt;NA&gt;       A100    Send F… 4       2006-12-12 00:00:00 &lt;NA&gt;    comple…      4
-##  5 &lt;NA&gt;       A100    Insert… 5       2007-01-15 00:00:00 &lt;NA&gt;    comple…      5
-##  6 &lt;NA&gt;       A100    Add pe… 6       2007-03-16 00:00:00 &lt;NA&gt;    comple…      6
-##  7 &lt;NA&gt;       A100    Send f… 7       2009-03-30 00:00:00 &lt;NA&gt;    comple…      7
-##  8 A          A10000  Create… 8       2007-03-09 00:00:00 561     comple…      8
-##  9 &lt;NA&gt;       A10000  Send F… 9       2007-07-17 00:00:00 &lt;NA&gt;    comple…      9
-## 10 &lt;NA&gt;       A10000  Insert… 10      2007-08-02 00:00:00 &lt;NA&gt;    comple…     10
-## # … with 34,714 more rows, and abbreviated variable names ¹​vehicleclass,
-## #   ²​activity, ³​activity_instance_id, ⁴​resource, ⁵​lifecycle</code></pre>
+##    vehicleclass case_id activity        activity_instance_id timestamp          
+##    &lt;chr&gt;        &lt;chr&gt;   &lt;fct&gt;           &lt;chr&gt;                &lt;dttm&gt;             
+##  1 A            A1      Create Fine     1                    2006-07-24 00:00:00
+##  2 &lt;NA&gt;         A1      Send Fine       2                    2006-12-05 00:00:00
+##  3 A            A100    Create Fine     3                    2006-08-02 00:00:00
+##  4 &lt;NA&gt;         A100    Send Fine       4                    2006-12-12 00:00:00
+##  5 &lt;NA&gt;         A100    Insert Fine No… 5                    2007-01-15 00:00:00
+##  6 &lt;NA&gt;         A100    Add penalty     6                    2007-03-16 00:00:00
+##  7 &lt;NA&gt;         A100    Send for Credi… 7                    2009-03-30 00:00:00
+##  8 A            A10000  Create Fine     8                    2007-03-09 00:00:00
+##  9 &lt;NA&gt;         A10000  Send Fine       9                    2007-07-17 00:00:00
+## 10 &lt;NA&gt;         A10000  Insert Fine No… 10                   2007-08-02 00:00:00
+## # ℹ 34,714 more rows
+## # ℹ 3 more variables: resource &lt;fct&gt;, lifecycle &lt;fct&gt;, .order &lt;int&gt;</code></pre>
 <p>By setting the argument <code>force_df = TRUE</code>, the
 mapping-variables will not be retained, and the output will be a
 data.frame, and not an <code>eventlog</code> object. Note that doing so
@@ -902,7 +901,7 @@ will hold even in the case that all mapping variables are selected.</p>
 ##  8 A10000  A            36.0  
 ##  9 A10000  &lt;NA&gt;         &lt;NA&gt;  
 ## 10 A10000  &lt;NA&gt;         &lt;NA&gt;  
-## # … with 34,714 more rows</code></pre>
+## # ℹ 34,714 more rows</code></pre>
 <div id="selecting-id" class="section level3">
 <h3>Selecting id</h3>
 <p>Similar to <code>group_by_ids()</code>, <code>select_ids()</code> can
@@ -922,7 +921,7 @@ be used to select the mapping variables.</p>
 ##  8 8       Registration
 ##  9 9       Registration
 ## 10 10      Registration
-## # … with 5,432 more rows</code></pre>
+## # ℹ 5,432 more rows</code></pre>
 <p>Note again how the arguments are unquoted id-functions instead of raw
 variable names. The result of <code>select_ids()</code> will
 <strong>always</strong> result in a <code>data.frame</code> object, as
@@ -953,20 +952,20 @@ attribute.</p>
 ## Lifecycle transition:        registration_type 
 ## 
 ## # A tibble: 5,442 × 7
-##    handling           patient emplo…¹ handl…² regis…³ time                .order
-##    &lt;fct&gt;              &lt;chr&gt;   &lt;fct&gt;   &lt;chr&gt;   &lt;fct&gt;   &lt;dttm&gt;               &lt;int&gt;
-##  1 Triage and Assess… 500     r2      1000    comple… 2018-05-05 07:16:02   3721
-##  2 Discuss Results    495     r6      2229    comple… 2018-05-05 02:49:57   4950
-##  3 X-Ray              498     r5      1734    comple… 2018-05-05 01:34:30   4455
-##  4 Triage and Assess… 500     r2      1000    start   2018-05-04 23:53:27   1000
-##  5 Triage and Assess… 499     r2      999     comple… 2018-05-04 23:53:27   3720
-##  6 Discuss Results    495     r6      2229    start   2018-05-04 23:50:05   2229
-##  7 Discuss Results    489     r6      2223    comple… 2018-05-04 23:50:05   4944
-##  8 X-Ray              498     r5      1734    start   2018-05-04 21:50:07   1734
-##  9 X-Ray              497     r5      1733    comple… 2018-05-04 21:50:07   4454
-## 10 Discuss Results    489     r6      2223    start   2018-05-04 20:24:44   2223
-## # … with 5,432 more rows, and abbreviated variable names ¹​employee,
-## #   ²​handling_id, ³​registration_type</code></pre>
+##    handling   patient employee handling_id registration_type time               
+##    &lt;fct&gt;      &lt;chr&gt;   &lt;fct&gt;    &lt;chr&gt;       &lt;fct&gt;             &lt;dttm&gt;             
+##  1 Triage an… 500     r2       1000        complete          2018-05-05 07:16:02
+##  2 Discuss R… 495     r6       2229        complete          2018-05-05 02:49:57
+##  3 X-Ray      498     r5       1734        complete          2018-05-05 01:34:30
+##  4 Triage an… 500     r2       1000        start             2018-05-04 23:53:27
+##  5 Triage an… 499     r2       999         complete          2018-05-04 23:53:27
+##  6 Discuss R… 495     r6       2229        start             2018-05-04 23:50:05
+##  7 Discuss R… 489     r6       2223        complete          2018-05-04 23:50:05
+##  8 X-Ray      498     r5       1734        start             2018-05-04 21:50:07
+##  9 X-Ray      497     r5       1733        complete          2018-05-04 21:50:07
+## 10 Discuss R… 489     r6       2223        start             2018-05-04 20:24:44
+## # ℹ 5,432 more rows
+## # ℹ 1 more variable: .order &lt;int&gt;</code></pre>
 <hr />
 <p>Read more:</p>
 <div class="btn-toolbar" role="group">

@@ -13,15 +13,15 @@
 
 <title>bupaR Docs | Data Quality</title>
 
-<script src="site_libs/header-attrs-2.20/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.23/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <link href="site_libs/bootstrap-5.2.2/bootstrap.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-5.2.2/bootstrap.bundle.min.js"></script>
-<script src="site_libs/bs3compat-0.4.2/transition.js"></script>
-<script src="site_libs/bs3compat-0.4.2/tabs.js"></script>
-<script src="site_libs/bs3compat-0.4.2/bs3compat.js"></script>
-<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<script src="site_libs/bs3compat-0.5.0/transition.js"></script>
+<script src="site_libs/bs3compat-0.5.0/tabs.js"></script>
+<script src="site_libs/bs3compat-0.5.0/bs3compat.js"></script>
+<script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
@@ -696,15 +696,14 @@ start with “Clerk”.</p>
 ## Timestamps:      start, complete 
 ## 
 ## # A tibble: 5 × 8
-##   patient_visi…¹ activ…² origi…³ start               complete            triag…⁴
-##            &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;dttm&gt;              &lt;dttm&gt;                &lt;dbl&gt;
-## 1            528 Regist… Nurse 6 2017-11-21 18:10:17 2017-11-21 18:15:04       3
-## 2            535 Regist… Clerk 3 2017-11-22 10:04:57 2017-11-22 10:06:46       2
-## 3            536 Regist… Clerk 9 2017-11-22 10:26:41 2017-11-22 10:32:56       5
-## 4            535 Regist… Clerk 6 2017-11-22 11:05:42 2017-11-22 11:11:11       2
-## 5            534 Regist… &lt;NA&gt;    2017-11-22 18:35:00 2017-11-22 18:37:00       0
-## # … with 2 more variables: specialization &lt;chr&gt;, .order &lt;int&gt;, and abbreviated
-## #   variable names ¹​patient_visit_nr, ²​activity, ³​originator, ⁴​triagecode</code></pre>
+##   patient_visit_nr activity   originator start               complete           
+##              &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;dttm&gt;              &lt;dttm&gt;             
+## 1              528 Registrat… Nurse 6    2017-11-21 18:10:17 2017-11-21 18:15:04
+## 2              535 Registrat… Clerk 3    2017-11-22 10:04:57 2017-11-22 10:06:46
+## 3              536 Registrat… Clerk 9    2017-11-22 10:26:41 2017-11-22 10:32:56
+## 4              535 Registrat… Clerk 6    2017-11-22 11:05:42 2017-11-22 11:11:11
+## 5              534 Registrat… &lt;NA&gt;       2017-11-22 18:35:00 2017-11-22 18:37:00
+## # ℹ 3 more variables: triagecode &lt;dbl&gt;, specialization &lt;chr&gt;, .order &lt;int&gt;</code></pre>
 </div>
 <div id="case-id-sequence-gaps" class="section level2">
 <h2>Case ID Sequence Gaps</h2>
@@ -762,13 +761,12 @@ deviation of its mean duration.</p>
 ## Timestamps:      start, complete 
 ## 
 ## # A tibble: 1 × 14
-##   patient_visi…¹ activ…² origi…³ start               complete            triag…⁴
-##            &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;dttm&gt;              &lt;dttm&gt;                &lt;dbl&gt;
-## 1            523 Treatm… Nurse … 2017-11-21 18:26:04 2017-11-21 18:55:00       3
-## # … with 8 more variables: specialization &lt;chr&gt;, .order &lt;int&gt;, duration &lt;dbl&gt;,
-## #   mean &lt;dbl&gt;, sd &lt;dbl&gt;, bound_sd &lt;dbl&gt;, lower_bound &lt;dbl&gt;, upper_bound &lt;dbl&gt;,
-## #   and abbreviated variable names ¹​patient_visit_nr, ²​activity, ³​originator,
-## #   ⁴​triagecode</code></pre>
+##   patient_visit_nr activity  originator start               complete           
+##              &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;      &lt;dttm&gt;              &lt;dttm&gt;             
+## 1              523 Treatment Nurse 17   2017-11-21 18:26:04 2017-11-21 18:55:00
+## # ℹ 9 more variables: triagecode &lt;dbl&gt;, specialization &lt;chr&gt;, .order &lt;int&gt;,
+## #   duration &lt;dbl&gt;, mean &lt;dbl&gt;, sd &lt;dbl&gt;, bound_sd &lt;dbl&gt;, lower_bound &lt;dbl&gt;,
+## #   upper_bound &lt;dbl&gt;</code></pre>
 <p>Or, the duration of “Treatment” should be within 0 to 15 minutes.</p>
 <div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>hospital_actlog <span class="sc">%&gt;%</span></span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">detect_duration_outliers</span>(<span class="at">Treatment =</span> <span class="fu">duration_within</span>(<span class="at">lower_bound =</span> <span class="dv">0</span>, <span class="at">upper_bound =</span> <span class="dv">15</span>))</span></code></pre></div>
@@ -791,13 +789,12 @@ deviation of its mean duration.</p>
 ## Timestamps:      start, complete 
 ## 
 ## # A tibble: 1 × 14
-##   patient_visi…¹ activ…² origi…³ start               complete            triag…⁴
-##            &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;dttm&gt;              &lt;dttm&gt;                &lt;dbl&gt;
-## 1            523 Treatm… Nurse … 2017-11-21 18:26:04 2017-11-21 18:55:00       3
-## # … with 8 more variables: specialization &lt;chr&gt;, .order &lt;int&gt;, duration &lt;dbl&gt;,
-## #   mean &lt;dbl&gt;, sd &lt;dbl&gt;, bound_sd &lt;dbl&gt;, lower_bound &lt;dbl&gt;, upper_bound &lt;dbl&gt;,
-## #   and abbreviated variable names ¹​patient_visit_nr, ²​activity, ³​originator,
-## #   ⁴​triagecode</code></pre>
+##   patient_visit_nr activity  originator start               complete           
+##              &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;      &lt;dttm&gt;              &lt;dttm&gt;             
+## 1              523 Treatment Nurse 17   2017-11-21 18:26:04 2017-11-21 18:55:00
+## # ℹ 9 more variables: triagecode &lt;dbl&gt;, specialization &lt;chr&gt;, .order &lt;int&gt;,
+## #   duration &lt;dbl&gt;, mean &lt;dbl&gt;, sd &lt;dbl&gt;, bound_sd &lt;dbl&gt;, lower_bound &lt;dbl&gt;,
+## #   upper_bound &lt;dbl&gt;</code></pre>
 </div>
 <div id="inactive-periods" class="section level2">
 <h2>Inactive Periods</h2>
@@ -872,14 +869,13 @@ incorrect?</p>
 ## Timestamps:      start, complete 
 ## 
 ## # A tibble: 4 × 8
-##   patient_visi…¹ activ…² origi…³ start               complete            triag…⁴
-##            &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;dttm&gt;              &lt;dttm&gt;                &lt;dbl&gt;
-## 1            510 regist… Clerk 9 2017-11-20 10:18:17 2017-11-20 10:20:06       3
-## 2            520 Trage   Nurse … 2017-11-21 13:43:16 2017-11-21 13:39:00       5
-## 3            522 Triaga  Nurse 5 2017-11-21 15:15:25 2017-11-21 15:18:04       2
-## 4            533 0       &lt;NA&gt;    2017-11-22 18:35:00 2017-11-22 18:37:00       7
-## # … with 2 more variables: specialization &lt;chr&gt;, .order &lt;int&gt;, and abbreviated
-## #   variable names ¹​patient_visit_nr, ²​activity, ³​originator, ⁴​triagecode</code></pre>
+##   patient_visit_nr activity   originator start               complete           
+##              &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;dttm&gt;              &lt;dttm&gt;             
+## 1              510 registrat… Clerk 9    2017-11-20 10:18:17 2017-11-20 10:20:06
+## 2              520 Trage      Nurse 17   2017-11-21 13:43:16 2017-11-21 13:39:00
+## 3              522 Triaga     Nurse 5    2017-11-21 15:15:25 2017-11-21 15:18:04
+## 4              533 0          &lt;NA&gt;       2017-11-22 18:35:00 2017-11-22 18:37:00
+## # ℹ 3 more variables: triagecode &lt;dbl&gt;, specialization &lt;chr&gt;, .order &lt;int&gt;</code></pre>
 </div>
 <div id="missing-values" class="section level2">
 <h2>Missing Values</h2>
@@ -924,48 +920,45 @@ or at the level of activities or specific columns.</p>
 ## Timestamps:      start, complete 
 ## 
 ## # A tibble: 4 × 8
-##   patient_visi…¹ activ…² origi…³ start               complete            triag…⁴
-##            &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;dttm&gt;              &lt;dttm&gt;                &lt;dbl&gt;
-## 1            510 Clinic… Doctor… 2017-11-20 11:35:01 2017-11-20 11:36:09      NA
-## 2            533 0       &lt;NA&gt;    2017-11-22 18:35:00 2017-11-22 18:37:00       7
-## 3            534 Regist… &lt;NA&gt;    2017-11-22 18:35:00 2017-11-22 18:37:00       0
-## 4            512 Clinic… Doctor… NA                  2017-11-20 11:33:57       3
-## # … with 2 more variables: specialization &lt;chr&gt;, .order &lt;int&gt;, and abbreviated
-## #   variable names ¹​patient_visit_nr, ²​activity, ³​originator, ⁴​triagecode</code></pre>
+##   patient_visit_nr activity   originator start               complete           
+##              &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;dttm&gt;              &lt;dttm&gt;             
+## 1              510 Clinical … Doctor 7   2017-11-20 11:35:01 2017-11-20 11:36:09
+## 2              533 0          &lt;NA&gt;       2017-11-22 18:35:00 2017-11-22 18:37:00
+## 3              534 Registrat… &lt;NA&gt;       2017-11-22 18:35:00 2017-11-22 18:37:00
+## 4              512 Clinical … Doctor 7   NA                  2017-11-20 11:33:57
+## # ℹ 3 more variables: triagecode &lt;dbl&gt;, specialization &lt;chr&gt;, .order &lt;int&gt;</code></pre>
 <div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a>hospital_actlog <span class="sc">%&gt;%</span> </span>
 <span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">detect_missing_values</span>(<span class="at">level_of_aggregation =</span> <span class="st">&quot;activity&quot;</span>)</span></code></pre></div>
 <pre><code>## Selected level of aggregation:activity</code></pre>
 <pre><code>## *** OUTPUT ***</code></pre>
 <pre><code>## Absolute number of missing values per column (per activity):</code></pre>
 <pre><code>## # A tibble: 9 × 8
-##   activity             patient_vi…¹ origi…² start compl…³ triag…⁴ speci…⁵ .order
-##   &lt;chr&gt;                       &lt;int&gt;   &lt;int&gt; &lt;int&gt;   &lt;int&gt;   &lt;int&gt;   &lt;int&gt;  &lt;int&gt;
-## 1 0                               0       1     0       0       0       0      0
-## 2 Clinical exam                   0       0     1       0       1       0      0
-## 3 Registration                    0       1     0       0       0       0      0
-## 4 Trage                           0       0     0       0       0       0      0
-## 5 Treatment                       0       0     0       0       0       0      0
-## 6 Treatment evaluation            0       0     0       0       0       0      0
-## 7 Triaga                          0       0     0       0       0       0      0
-## 8 Triage                          0       0     0       0       0       0      0
-## 9 registration                    0       0     0       0       0       0      0
-## # … with abbreviated variable names ¹​patient_visit_nr, ²​originator, ³​complete,
-## #   ⁴​triagecode, ⁵​specialization</code></pre>
+##   activity  patient_visit_nr originator start complete triagecode specialization
+##   &lt;chr&gt;                &lt;int&gt;      &lt;int&gt; &lt;int&gt;    &lt;int&gt;      &lt;int&gt;          &lt;int&gt;
+## 1 0                        0          1     0        0          0              0
+## 2 Clinical…                0          0     1        0          1              0
+## 3 Registra…                0          1     0        0          0              0
+## 4 Trage                    0          0     0        0          0              0
+## 5 Treatment                0          0     0        0          0              0
+## 6 Treatmen…                0          0     0        0          0              0
+## 7 Triaga                   0          0     0        0          0              0
+## 8 Triage                   0          0     0        0          0              0
+## 9 registra…                0          0     0        0          0              0
+## # ℹ 1 more variable: .order &lt;int&gt;</code></pre>
 <pre><code>## Relative number of missing values per column (per activity, expressed as percentage):</code></pre>
 <pre><code>## # A tibble: 9 × 8
-##   activity             patient_vi…¹ origi…² start compl…³ triag…⁴ speci…⁵ .order
-##   &lt;chr&gt;                       &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;
-## 1 0                               0  1      0           0   0           0      0
-## 2 Clinical exam                   0  0      0.111       0   0.111       0      0
-## 3 Registration                    0  0.0714 0           0   0           0      0
-## 4 Trage                           0  0      0           0   0           0      0
-## 5 Treatment                       0  0      0           0   0           0      0
-## 6 Treatment evaluation            0  0      0           0   0           0      0
-## 7 Triaga                          0  0      0           0   0           0      0
-## 8 Triage                          0  0      0           0   0           0      0
-## 9 registration                    0  0      0           0   0           0      0
-## # … with abbreviated variable names ¹​patient_visit_nr, ²​originator, ³​complete,
-## #   ⁴​triagecode, ⁵​specialization</code></pre>
+##   activity  patient_visit_nr originator start complete triagecode specialization
+##   &lt;chr&gt;                &lt;dbl&gt;      &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;      &lt;dbl&gt;          &lt;dbl&gt;
+## 1 0                        0     1      0            0      0                  0
+## 2 Clinical…                0     0      0.111        0      0.111              0
+## 3 Registra…                0     0.0714 0            0      0                  0
+## 4 Trage                    0     0      0            0      0                  0
+## 5 Treatment                0     0      0            0      0                  0
+## 6 Treatmen…                0     0      0            0      0                  0
+## 7 Triaga                   0     0      0            0      0                  0
+## 8 Triage                   0     0      0            0      0                  0
+## 9 registra…                0     0      0            0      0                  0
+## # ℹ 1 more variable: .order &lt;dbl&gt;</code></pre>
 <pre><code>## Overview of activity log rows which are incomplete:</code></pre>
 <pre><code>## # Log of 7 events consisting of:
 ## 3 traces 
@@ -981,14 +974,13 @@ or at the level of activities or specific columns.</p>
 ## Timestamps:      start, complete 
 ## 
 ## # A tibble: 4 × 8
-##   patient_visi…¹ activ…² origi…³ start               complete            triag…⁴
-##            &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;dttm&gt;              &lt;dttm&gt;                &lt;dbl&gt;
-## 1            510 Clinic… Doctor… 2017-11-20 11:35:01 2017-11-20 11:36:09      NA
-## 2            533 0       &lt;NA&gt;    2017-11-22 18:35:00 2017-11-22 18:37:00       7
-## 3            534 Regist… &lt;NA&gt;    2017-11-22 18:35:00 2017-11-22 18:37:00       0
-## 4            512 Clinic… Doctor… NA                  2017-11-20 11:33:57       3
-## # … with 2 more variables: specialization &lt;chr&gt;, .order &lt;int&gt;, and abbreviated
-## #   variable names ¹​patient_visit_nr, ²​activity, ³​originator, ⁴​triagecode</code></pre>
+##   patient_visit_nr activity   originator start               complete           
+##              &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;dttm&gt;              &lt;dttm&gt;             
+## 1              510 Clinical … Doctor 7   2017-11-20 11:35:01 2017-11-20 11:36:09
+## 2              533 0          &lt;NA&gt;       2017-11-22 18:35:00 2017-11-22 18:37:00
+## 3              534 Registrat… &lt;NA&gt;       2017-11-22 18:35:00 2017-11-22 18:37:00
+## 4              512 Clinical … Doctor 7   NA                  2017-11-20 11:33:57
+## # ℹ 3 more variables: triagecode &lt;dbl&gt;, specialization &lt;chr&gt;, .order &lt;int&gt;</code></pre>
 <div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a>hospital_actlog <span class="sc">%&gt;%</span> </span>
 <span id="cb72-2"><a href="#cb72-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">detect_missing_values</span>(</span>
 <span id="cb72-3"><a href="#cb72-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">level_of_aggregation =</span> <span class="st">&quot;column&quot;</span>,</span>
@@ -1013,11 +1005,10 @@ or at the level of activities or specific columns.</p>
 ## Timestamps:      start, complete 
 ## 
 ## # A tibble: 1 × 8
-##   patient_visi…¹ activ…² origi…³ start               complete            triag…⁴
-##            &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;dttm&gt;              &lt;dttm&gt;                &lt;dbl&gt;
-## 1            510 Clinic… Doctor… 2017-11-20 11:35:01 2017-11-20 11:36:09      NA
-## # … with 2 more variables: specialization &lt;chr&gt;, .order &lt;int&gt;, and abbreviated
-## #   variable names ¹​patient_visit_nr, ²​activity, ³​originator, ⁴​triagecode</code></pre>
+##   patient_visit_nr activity   originator start               complete           
+##              &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;dttm&gt;              &lt;dttm&gt;             
+## 1              510 Clinical … Doctor 7   2017-11-20 11:35:01 2017-11-20 11:36:09
+## # ℹ 3 more variables: triagecode &lt;dbl&gt;, specialization &lt;chr&gt;, .order &lt;int&gt;</code></pre>
 </div>
 <div id="multiregistration" class="section level2">
 <h2>Multiregistration</h2>
@@ -1046,19 +1037,18 @@ This period of time can be specified with a threshold in seconds.</p>
 ## Timestamps:      start, complete 
 ## 
 ## # A tibble: 9 × 8
-##   originator patient_v…¹ activ…² start               complete            triag…³
-##   &lt;chr&gt;            &lt;dbl&gt; &lt;chr&gt;   &lt;dttm&gt;              &lt;dttm&gt;                &lt;dbl&gt;
-## 1 Doctor 7           512 Clinic… 2017-11-20 11:27:12 2017-11-20 11:33:57       3
-## 2 Doctor 7           512 Clinic… NA                  2017-11-20 11:33:57       3
-## 3 Nurse 27           536 Triage  2017-11-22 15:15:39 2017-11-22 15:25:01       5
-## 4 Nurse 27           536 Treatm… 2017-11-22 15:15:41 2017-11-22 15:25:03       5
-## 5 Nurse 5            524 Triage  2017-11-21 17:04:03 2017-11-21 17:06:05       3
-## 6 Nurse 5            525 Triage  2017-11-21 17:04:13 2017-11-21 17:06:08       3
-## 7 Nurse 5            526 Triage  2017-11-21 17:04:15 2017-11-21 17:06:10       4
-## 8 &lt;NA&gt;               533 0       2017-11-22 18:35:00 2017-11-22 18:37:00       7
-## 9 &lt;NA&gt;               534 Regist… 2017-11-22 18:35:00 2017-11-22 18:37:00       0
-## # … with 2 more variables: specialization &lt;chr&gt;, .order &lt;int&gt;, and abbreviated
-## #   variable names ¹​patient_visit_nr, ²​activity, ³​triagecode</code></pre>
+##   originator patient_visit_nr activity   start               complete           
+##   &lt;chr&gt;                 &lt;dbl&gt; &lt;chr&gt;      &lt;dttm&gt;              &lt;dttm&gt;             
+## 1 Doctor 7                512 Clinical … 2017-11-20 11:27:12 2017-11-20 11:33:57
+## 2 Doctor 7                512 Clinical … NA                  2017-11-20 11:33:57
+## 3 Nurse 27                536 Triage     2017-11-22 15:15:39 2017-11-22 15:25:01
+## 4 Nurse 27                536 Treatment  2017-11-22 15:15:41 2017-11-22 15:25:03
+## 5 Nurse 5                 524 Triage     2017-11-21 17:04:03 2017-11-21 17:06:05
+## 6 Nurse 5                 525 Triage     2017-11-21 17:04:13 2017-11-21 17:06:08
+## 7 Nurse 5                 526 Triage     2017-11-21 17:04:15 2017-11-21 17:06:10
+## 8 &lt;NA&gt;                    533 0          2017-11-22 18:35:00 2017-11-22 18:37:00
+## 9 &lt;NA&gt;                    534 Registrat… 2017-11-22 18:35:00 2017-11-22 18:37:00
+## # ℹ 3 more variables: triagecode &lt;dbl&gt;, specialization &lt;chr&gt;, .order &lt;int&gt;</code></pre>
 </div>
 <div id="overlaps" class="section level2">
 <h2>Overlaps</h2>
@@ -1154,16 +1144,15 @@ be configured.</p>
 ## Timestamps:      start, complete 
 ## 
 ## # A tibble: 5 × 10
-##   patient_visi…¹ activ…² origi…³ start               complete            triag…⁴
-##            &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;dttm&gt;              &lt;dttm&gt;                &lt;dbl&gt;
-## 1            518 Regist… Clerk … 2017-11-21 11:45:16 2017-11-21 11:22:16       4
-## 2            518 Regist… Clerk 6 2017-11-21 11:45:16 2017-11-21 11:22:16       4
-## 3            518 Regist… Clerk 9 2017-11-21 11:45:16 2017-11-21 11:22:16       4
-## 4            520 Trage   Nurse … 2017-11-21 13:43:16 2017-11-21 13:39:00       5
-## 5            528 Clinic… Doctor… 2017-11-21 19:00:00 2017-11-21 19:00:00       3
-## # … with 4 more variables: specialization &lt;chr&gt;, .order &lt;int&gt;, duration &lt;dbl&gt;,
-## #   type &lt;chr&gt;, and abbreviated variable names ¹​patient_visit_nr, ²​activity,
-## #   ³​originator, ⁴​triagecode</code></pre>
+##   patient_visit_nr activity   originator start               complete           
+##              &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;dttm&gt;              &lt;dttm&gt;             
+## 1              518 Registrat… Clerk 12   2017-11-21 11:45:16 2017-11-21 11:22:16
+## 2              518 Registrat… Clerk 6    2017-11-21 11:45:16 2017-11-21 11:22:16
+## 3              518 Registrat… Clerk 9    2017-11-21 11:45:16 2017-11-21 11:22:16
+## 4              520 Trage      Nurse 17   2017-11-21 13:43:16 2017-11-21 13:39:00
+## 5              528 Clinical … Doctor 1   2017-11-21 19:00:00 2017-11-21 19:00:00
+## # ℹ 5 more variables: triagecode &lt;dbl&gt;, specialization &lt;chr&gt;, .order &lt;int&gt;,
+## #   duration &lt;dbl&gt;, type &lt;chr&gt;</code></pre>
 </div>
 <div id="unique-values" class="section level2">
 <h2>Unique Values</h2>
@@ -1188,20 +1177,20 @@ class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="#cb1
 ## Timestamps:      start, complete 
 ## 
 ## # A tibble: 53 × 6
-##    activity      patien…¹ origi…² start               complete            .order
-##    &lt;chr&gt;            &lt;dbl&gt; &lt;chr&gt;   &lt;dttm&gt;              &lt;dttm&gt;               &lt;int&gt;
-##  1 registration       510 Clerk 9 2017-11-20 10:18:17 2017-11-20 10:20:06      1
-##  2 Registration       512 Clerk … 2017-11-20 10:33:14 2017-11-20 10:37:00      2
-##  3 Triage             510 Nurse … 2017-11-20 10:34:08 2017-11-20 10:41:48      3
-##  4 Triage             512 Nurse … 2017-11-20 10:44:12 2017-11-20 10:50:17      4
-##  5 Clinical exam      512 Doctor… 2017-11-20 11:27:12 2017-11-20 11:33:57      5
-##  6 Clinical exam      510 Doctor… 2017-11-20 11:35:01 2017-11-20 11:36:09      6
-##  7 Triage             517 Nurse … 2017-11-21 11:35:16 2017-11-21 11:39:00      7
-##  8 Registration       518 Clerk … 2017-11-21 11:45:16 2017-11-21 11:22:16      8
-##  9 Registration       518 Clerk 6 2017-11-21 11:45:16 2017-11-21 11:22:16      9
-## 10 Registration       518 Clerk 9 2017-11-21 11:45:16 2017-11-21 11:22:16     10
-## # … with 43 more rows, and abbreviated variable names ¹​patient_visit_nr,
-## #   ²​originator</code></pre>
+##    activity  patient_visit_nr originator start               complete           
+##    &lt;chr&gt;                &lt;dbl&gt; &lt;chr&gt;      &lt;dttm&gt;              &lt;dttm&gt;             
+##  1 registra…              510 Clerk 9    2017-11-20 10:18:17 2017-11-20 10:20:06
+##  2 Registra…              512 Clerk 12   2017-11-20 10:33:14 2017-11-20 10:37:00
+##  3 Triage                 510 Nurse 27   2017-11-20 10:34:08 2017-11-20 10:41:48
+##  4 Triage                 512 Nurse 27   2017-11-20 10:44:12 2017-11-20 10:50:17
+##  5 Clinical…              512 Doctor 7   2017-11-20 11:27:12 2017-11-20 11:33:57
+##  6 Clinical…              510 Doctor 7   2017-11-20 11:35:01 2017-11-20 11:36:09
+##  7 Triage                 517 Nurse 17   2017-11-21 11:35:16 2017-11-21 11:39:00
+##  8 Registra…              518 Clerk 12   2017-11-21 11:45:16 2017-11-21 11:22:16
+##  9 Registra…              518 Clerk 6    2017-11-21 11:45:16 2017-11-21 11:22:16
+## 10 Registra…              518 Clerk 9    2017-11-21 11:45:16 2017-11-21 11:22:16
+## # ℹ 43 more rows
+## # ℹ 1 more variable: .order &lt;int&gt;</code></pre>
 <div class="sourceCode" id="cb111"><pre
 class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="#cb111-1" aria-hidden="true" tabindex="-1"></a>hospital_actlog <span class="sc">%&gt;%</span></span>
 <span id="cb111-2"><a href="#cb111-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">detect_unique_values</span>(<span class="at">column_labels =</span> <span class="fu">c</span>(<span class="st">&quot;activity&quot;</span>, <span class="st">&quot;originator&quot;</span>))</span></code></pre></div>
@@ -1222,20 +1211,20 @@ class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="#cb1
 ## Timestamps:      start, complete 
 ## 
 ## # A tibble: 53 × 6
-##    activity      origin…¹ patie…² start               complete            .order
-##    &lt;chr&gt;         &lt;chr&gt;      &lt;dbl&gt; &lt;dttm&gt;              &lt;dttm&gt;               &lt;int&gt;
-##  1 registration  Clerk 9      510 2017-11-20 10:18:17 2017-11-20 10:20:06      1
-##  2 Registration  Clerk 12     512 2017-11-20 10:33:14 2017-11-20 10:37:00      2
-##  3 Triage        Nurse 27     510 2017-11-20 10:34:08 2017-11-20 10:41:48      3
-##  4 Triage        Nurse 27     512 2017-11-20 10:44:12 2017-11-20 10:50:17      4
-##  5 Clinical exam Doctor 7     512 2017-11-20 11:27:12 2017-11-20 11:33:57      5
-##  6 Clinical exam Doctor 7     510 2017-11-20 11:35:01 2017-11-20 11:36:09      6
-##  7 Triage        Nurse 17     517 2017-11-21 11:35:16 2017-11-21 11:39:00      7
-##  8 Registration  Clerk 12     518 2017-11-21 11:45:16 2017-11-21 11:22:16      8
-##  9 Registration  Clerk 6      518 2017-11-21 11:45:16 2017-11-21 11:22:16      9
-## 10 Registration  Clerk 9      518 2017-11-21 11:45:16 2017-11-21 11:22:16     10
-## # … with 43 more rows, and abbreviated variable names ¹​originator,
-## #   ²​patient_visit_nr</code></pre>
+##    activity  originator patient_visit_nr start               complete           
+##    &lt;chr&gt;     &lt;chr&gt;                 &lt;dbl&gt; &lt;dttm&gt;              &lt;dttm&gt;             
+##  1 registra… Clerk 9                 510 2017-11-20 10:18:17 2017-11-20 10:20:06
+##  2 Registra… Clerk 12                512 2017-11-20 10:33:14 2017-11-20 10:37:00
+##  3 Triage    Nurse 27                510 2017-11-20 10:34:08 2017-11-20 10:41:48
+##  4 Triage    Nurse 27                512 2017-11-20 10:44:12 2017-11-20 10:50:17
+##  5 Clinical… Doctor 7                512 2017-11-20 11:27:12 2017-11-20 11:33:57
+##  6 Clinical… Doctor 7                510 2017-11-20 11:35:01 2017-11-20 11:36:09
+##  7 Triage    Nurse 17                517 2017-11-21 11:35:16 2017-11-21 11:39:00
+##  8 Registra… Clerk 12                518 2017-11-21 11:45:16 2017-11-21 11:22:16
+##  9 Registra… Clerk 6                 518 2017-11-21 11:45:16 2017-11-21 11:22:16
+## 10 Registra… Clerk 9                 518 2017-11-21 11:45:16 2017-11-21 11:22:16
+## # ℹ 43 more rows
+## # ℹ 1 more variable: .order &lt;int&gt;</code></pre>
 </div>
 <div id="value-range-violations" class="section level2">
 <h2>Value Range Violations</h2>
@@ -1275,18 +1264,17 @@ class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="#cb1
 ## Timestamps:      start, complete 
 ## 
 ## # A tibble: 7 × 9
-##   column_checked patie…¹ activ…² origi…³ start               complete           
-##   &lt;chr&gt;            &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;dttm&gt;              &lt;dttm&gt;             
-## 1 triagecode         510 Clinic… Doctor… 2017-11-20 11:35:01 2017-11-20 11:36:09
-## 2 triagecode         529 Treatm… Doctor… 2017-11-22 16:30:00 2017-11-22 17:00:00
-## 3 triagecode         530 Triage  Nurse … 2017-11-22 18:00:00 2017-11-22 18:05:00
-## 4 triagecode         531 Triage  Nurse … 2017-11-22 18:05:00 2017-11-22 18:10:00
-## 5 triagecode         532 Treatm… Nurse … 2017-11-22 18:15:00 2017-11-22 18:25:00
-## 6 triagecode         532 Treatm… Doctor… 2017-11-22 18:27:00 2017-11-23 18:33:00
-## 7 triagecode         533 0       &lt;NA&gt;    2017-11-22 18:35:00 2017-11-22 18:37:00
-## # … with 3 more variables: triagecode &lt;dbl&gt;, specialization &lt;chr&gt;,
-## #   .order &lt;int&gt;, and abbreviated variable names ¹​patient_visit_nr, ²​activity,
-## #   ³​originator</code></pre>
+##   column_checked patient_visit_nr activity        originator start              
+##   &lt;chr&gt;                     &lt;dbl&gt; &lt;chr&gt;           &lt;chr&gt;      &lt;dttm&gt;             
+## 1 triagecode                  510 Clinical exam   Doctor 7   2017-11-20 11:35:01
+## 2 triagecode                  529 Treatment eval… Doctor 1   2017-11-22 16:30:00
+## 3 triagecode                  530 Triage          Nurse 17   2017-11-22 18:00:00
+## 4 triagecode                  531 Triage          Nurse 17   2017-11-22 18:05:00
+## 5 triagecode                  532 Treatment       Nurse 17   2017-11-22 18:15:00
+## 6 triagecode                  532 Treatment eval… Doctor 7   2017-11-22 18:27:00
+## 7 triagecode                  533 0               &lt;NA&gt;       2017-11-22 18:35:00
+## # ℹ 4 more variables: complete &lt;dttm&gt;, triagecode &lt;dbl&gt;, specialization &lt;chr&gt;,
+## #   .order &lt;int&gt;</code></pre>
 <hr />
 <p>Read more:</p>
 <div class="btn-toolbar" role="group">

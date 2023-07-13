@@ -13,15 +13,15 @@
 
 <title>bupaR Docs | Mutate logs</title>
 
-<script src="site_libs/header-attrs-2.20/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.23/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <link href="site_libs/bootstrap-5.2.2/bootstrap.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-5.2.2/bootstrap.bundle.min.js"></script>
-<script src="site_libs/bs3compat-0.4.2/transition.js"></script>
-<script src="site_libs/bs3compat-0.4.2/tabs.js"></script>
-<script src="site_libs/bs3compat-0.4.2/bs3compat.js"></script>
-<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<script src="site_libs/bs3compat-0.5.0/transition.js"></script>
+<script src="site_libs/bs3compat-0.5.0/tabs.js"></script>
+<script src="site_libs/bs3compat-0.5.0/bs3compat.js"></script>
+<script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
@@ -691,25 +691,25 @@ values present for this variable.</p>
 ## Lifecycle transition:        lifecycle 
 ## 
 ## # A tibble: 15,214 × 35
-##    case_id activity      lifec…¹ resou…² timestamp             age   crp diagn…³
-##    &lt;chr&gt;   &lt;fct&gt;         &lt;fct&gt;   &lt;fct&gt;   &lt;dttm&gt;              &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;  
-##  1 A       ER Registrat… comple… A       2014-10-22 11:15:41    85    NA A      
-##  2 A       Leucocytes    comple… B       2014-10-22 11:27:00    NA    NA &lt;NA&gt;   
-##  3 A       CRP           comple… B       2014-10-22 11:27:00    NA   210 &lt;NA&gt;   
-##  4 A       LacticAcid    comple… B       2014-10-22 11:27:00    NA    NA &lt;NA&gt;   
-##  5 A       ER Triage     comple… C       2014-10-22 11:33:37    NA    NA &lt;NA&gt;   
-##  6 A       ER Sepsis Tr… comple… A       2014-10-22 11:34:00    NA    NA &lt;NA&gt;   
-##  7 A       IV Liquid     comple… A       2014-10-22 14:03:47    NA    NA &lt;NA&gt;   
-##  8 A       IV Antibioti… comple… A       2014-10-22 14:03:47    NA    NA &lt;NA&gt;   
-##  9 A       Admission NC  comple… D       2014-10-22 14:13:19    NA    NA &lt;NA&gt;   
-## 10 A       CRP           comple… B       2014-10-24 09:00:00    NA  1090 &lt;NA&gt;   
-## # … with 15,204 more rows, 27 more variables: diagnosticartastrup &lt;lgl&gt;,
-## #   diagnosticblood &lt;lgl&gt;, diagnosticecg &lt;lgl&gt;, diagnosticic &lt;lgl&gt;,
-## #   diagnosticlacticacid &lt;lgl&gt;, diagnosticliquor &lt;lgl&gt;, diagnosticother &lt;lgl&gt;,
-## #   diagnosticsputum &lt;lgl&gt;, diagnosticurinaryculture &lt;lgl&gt;,
-## #   diagnosticurinarysediment &lt;lgl&gt;, diagnosticxthorax &lt;lgl&gt;, disfuncorg &lt;lgl&gt;,
-## #   hypotensie &lt;lgl&gt;, hypoxie &lt;lgl&gt;, infectionsuspected &lt;lgl&gt;, infusion &lt;lgl&gt;,
-## #   lacticacid &lt;dbl&gt;, leucocytes &lt;chr&gt;, oligurie &lt;lgl&gt;, …</code></pre>
+##    case_id activity  lifecycle resource timestamp             age   crp diagnose
+##    &lt;chr&gt;   &lt;fct&gt;     &lt;fct&gt;     &lt;fct&gt;    &lt;dttm&gt;              &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;   
+##  1 A       ER Regis… complete  A        2014-10-22 11:15:41    85    NA A       
+##  2 A       Leucocyt… complete  B        2014-10-22 11:27:00    NA    NA &lt;NA&gt;    
+##  3 A       CRP       complete  B        2014-10-22 11:27:00    NA   210 &lt;NA&gt;    
+##  4 A       LacticAc… complete  B        2014-10-22 11:27:00    NA    NA &lt;NA&gt;    
+##  5 A       ER Triage complete  C        2014-10-22 11:33:37    NA    NA &lt;NA&gt;    
+##  6 A       ER Sepsi… complete  A        2014-10-22 11:34:00    NA    NA &lt;NA&gt;    
+##  7 A       IV Liquid complete  A        2014-10-22 14:03:47    NA    NA &lt;NA&gt;    
+##  8 A       IV Antib… complete  A        2014-10-22 14:03:47    NA    NA &lt;NA&gt;    
+##  9 A       Admissio… complete  D        2014-10-22 14:13:19    NA    NA &lt;NA&gt;    
+## 10 A       CRP       complete  B        2014-10-24 09:00:00    NA  1090 &lt;NA&gt;    
+## # ℹ 15,204 more rows
+## # ℹ 27 more variables: diagnosticartastrup &lt;lgl&gt;, diagnosticblood &lt;lgl&gt;,
+## #   diagnosticecg &lt;lgl&gt;, diagnosticic &lt;lgl&gt;, diagnosticlacticacid &lt;lgl&gt;,
+## #   diagnosticliquor &lt;lgl&gt;, diagnosticother &lt;lgl&gt;, diagnosticsputum &lt;lgl&gt;,
+## #   diagnosticurinaryculture &lt;lgl&gt;, diagnosticurinarysediment &lt;lgl&gt;,
+## #   diagnosticxthorax &lt;lgl&gt;, disfuncorg &lt;lgl&gt;, hypotensie &lt;lgl&gt;, hypoxie &lt;lgl&gt;,
+## #   infectionsuspected &lt;lgl&gt;, infusion &lt;lgl&gt;, lacticacid &lt;dbl&gt;, …</code></pre>
 <p>Before continuing to further analyses, not that you might want to
 ungroup the log using <code>ungroup_eventlog()</code>. More on <a
 href="wrangling.html">grouping</a>.</p>

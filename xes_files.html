@@ -13,15 +13,15 @@
 
 <title>bupaR Docs | Xes Files</title>
 
-<script src="site_libs/header-attrs-2.20/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.23/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <link href="site_libs/bootstrap-5.2.2/bootstrap.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-5.2.2/bootstrap.bundle.min.js"></script>
-<script src="site_libs/bs3compat-0.4.2/transition.js"></script>
-<script src="site_libs/bs3compat-0.4.2/tabs.js"></script>
-<script src="site_libs/bs3compat-0.4.2/bs3compat.js"></script>
-<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<script src="site_libs/bs3compat-0.5.0/transition.js"></script>
+<script src="site_libs/bs3compat-0.5.0/tabs.js"></script>
+<script src="site_libs/bs3compat-0.5.0/bs3compat.js"></script>
+<script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
@@ -700,21 +700,20 @@ href="http://www.xes-standard.org/">here</a>.</p>
 ## Lifecycle transition:        lifecycle_id 
 ## 
 ## # A tibble: 11 × 7
-##    CASE_concept_name activi…¹ lifec…² resou…³ timestamp           activ…⁴ .order
-##    &lt;chr&gt;             &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;   &lt;dttm&gt;                &lt;int&gt;  &lt;int&gt;
-##  1 Case3.0           A        comple… UNDEFI… 2008-12-09 07:20:01       1      1
-##  2 Case3.0           E        comple… UNDEFI… 2008-12-09 07:21:01       2      2
-##  3 Case3.0           D        comple… UNDEFI… 2008-12-09 07:22:01       3      3
-##  4 Case2.0           A        comple… UNDEFI… 2008-12-09 07:20:01       4      4
-##  5 Case2.0           C        comple… UNDEFI… 2008-12-09 07:21:01       5      5
-##  6 Case2.0           B        comple… UNDEFI… 2008-12-09 07:22:01       6      6
-##  7 Case2.0           D        comple… UNDEFI… 2008-12-09 07:23:01       7      7
-##  8 Case1.0           A        comple… UNDEFI… 2008-12-09 07:20:01       8      8
-##  9 Case1.0           B        comple… UNDEFI… 2008-12-09 07:21:01       9      9
-## 10 Case1.0           C        comple… UNDEFI… 2008-12-09 07:22:01      10     10
-## 11 Case1.0           D        comple… UNDEFI… 2008-12-09 07:23:01      11     11
-## # … with abbreviated variable names ¹​activity_id, ²​lifecycle_id, ³​resource_id,
-## #   ⁴​activity_instance_id</code></pre>
+##    CASE_concept_name activity_id lifecycle_id resource_id timestamp          
+##    &lt;chr&gt;             &lt;chr&gt;       &lt;chr&gt;        &lt;chr&gt;       &lt;dttm&gt;             
+##  1 Case3.0           A           complete     UNDEFINED   2008-12-09 07:20:01
+##  2 Case3.0           E           complete     UNDEFINED   2008-12-09 07:21:01
+##  3 Case3.0           D           complete     UNDEFINED   2008-12-09 07:22:01
+##  4 Case2.0           A           complete     UNDEFINED   2008-12-09 07:20:01
+##  5 Case2.0           C           complete     UNDEFINED   2008-12-09 07:21:01
+##  6 Case2.0           B           complete     UNDEFINED   2008-12-09 07:22:01
+##  7 Case2.0           D           complete     UNDEFINED   2008-12-09 07:23:01
+##  8 Case1.0           A           complete     UNDEFINED   2008-12-09 07:20:01
+##  9 Case1.0           B           complete     UNDEFINED   2008-12-09 07:21:01
+## 10 Case1.0           C           complete     UNDEFINED   2008-12-09 07:22:01
+## 11 Case1.0           D           complete     UNDEFINED   2008-12-09 07:23:01
+## # ℹ 2 more variables: activity_instance_id &lt;int&gt;, .order &lt;int&gt;</code></pre>
 <p>Note that in the example above, <code>read_xes()</code> emits a
 warnings that no activity instance identifier was found. Recall that an
 <code>eventlog</code> object in R needs certain <a
@@ -840,7 +839,7 @@ the sake of illustration the entire event log is also imported.</p>
 ##  8 1004              Simulated process instance
 ##  9 1005              Simulated process instance
 ## 10 1006              Simulated process instance
-## # … with 1,094 more rows</code></pre>
+## # ℹ 1,094 more rows</code></pre>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read_xes</span>(<span class="st">&quot;https://bupar.net/eventdata/repairExample.xes&quot;</span>)</span></code></pre></div>
 <pre><code>## Warning in read_xes(&quot;https://bupar.net/eventdata/repairExample.xes&quot;): No
 ## activity instance identifier specified in xes-file. By default considered each
@@ -861,22 +860,22 @@ the sake of illustration the entire event log is also imported.</p>
 ## Lifecycle transition:        lifecycle_id 
 ## 
 ## # A tibble: 11,855 × 12
-##    CASE_concep…¹ CASE_…² activ…³ defec…⁴ defec…⁵ lifec…⁶ numbe…⁷ resou…⁸ phone…⁹
-##    &lt;chr&gt;         &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;  
-##  1 1             Simula… Regist… &lt;NA&gt;    &lt;NA&gt;    comple… &lt;NA&gt;    System  &lt;NA&gt;   
-##  2 1             Simula… Analyz… &lt;NA&gt;    &lt;NA&gt;    start   &lt;NA&gt;    Tester3 &lt;NA&gt;   
-##  3 1             Simula… Analyz… &lt;NA&gt;    6       comple… &lt;NA&gt;    Tester3 T2     
-##  4 1             Simula… Repair… &lt;NA&gt;    &lt;NA&gt;    start   &lt;NA&gt;    Solver… &lt;NA&gt;   
-##  5 1             Simula… Repair… &lt;NA&gt;    &lt;NA&gt;    comple… &lt;NA&gt;    Solver… &lt;NA&gt;   
-##  6 1             Simula… Test R… &lt;NA&gt;    &lt;NA&gt;    start   &lt;NA&gt;    Tester3 &lt;NA&gt;   
-##  7 1             Simula… Test R… true    &lt;NA&gt;    comple… 0       Tester3 &lt;NA&gt;   
-##  8 1             Simula… Inform… &lt;NA&gt;    &lt;NA&gt;    comple… &lt;NA&gt;    System  &lt;NA&gt;   
-##  9 1             Simula… Archiv… true    &lt;NA&gt;    comple… 0       System  &lt;NA&gt;   
-## 10 10            Simula… Regist… &lt;NA&gt;    &lt;NA&gt;    comple… &lt;NA&gt;    System  &lt;NA&gt;   
-## # … with 11,845 more rows, 3 more variables: timestamp &lt;dttm&gt;,
-## #   activity_instance_id &lt;int&gt;, .order &lt;int&gt;, and abbreviated variable names
-## #   ¹​CASE_concept_name, ²​CASE_description, ³​activity_id, ⁴​defectFixed,
-## #   ⁵​defectType, ⁶​lifecycle_id, ⁷​numberRepairs, ⁸​resource_id, ⁹​phoneType</code></pre>
+##    CASE_concept_name CASE_description         activity_id defectFixed defectType
+##    &lt;chr&gt;             &lt;chr&gt;                    &lt;chr&gt;       &lt;chr&gt;       &lt;chr&gt;     
+##  1 1                 Simulated process insta… Register    &lt;NA&gt;        &lt;NA&gt;      
+##  2 1                 Simulated process insta… Analyze De… &lt;NA&gt;        &lt;NA&gt;      
+##  3 1                 Simulated process insta… Analyze De… &lt;NA&gt;        6         
+##  4 1                 Simulated process insta… Repair (Co… &lt;NA&gt;        &lt;NA&gt;      
+##  5 1                 Simulated process insta… Repair (Co… &lt;NA&gt;        &lt;NA&gt;      
+##  6 1                 Simulated process insta… Test Repair &lt;NA&gt;        &lt;NA&gt;      
+##  7 1                 Simulated process insta… Test Repair true        &lt;NA&gt;      
+##  8 1                 Simulated process insta… Inform User &lt;NA&gt;        &lt;NA&gt;      
+##  9 1                 Simulated process insta… Archive Re… true        &lt;NA&gt;      
+## 10 10                Simulated process insta… Register    &lt;NA&gt;        &lt;NA&gt;      
+## # ℹ 11,845 more rows
+## # ℹ 7 more variables: lifecycle_id &lt;chr&gt;, numberRepairs &lt;chr&gt;,
+## #   resource_id &lt;chr&gt;, phoneType &lt;chr&gt;, timestamp &lt;dttm&gt;,
+## #   activity_instance_id &lt;int&gt;, .order &lt;int&gt;</code></pre>
 </div>
 <div id="write-xes" class="section level2">
 <h2>Write XES</h2>

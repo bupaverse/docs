@@ -13,22 +13,22 @@
 
 <title>bupaR Docs | Filter case</title>
 
-<script src="site_libs/header-attrs-2.20/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.23/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <link href="site_libs/bootstrap-5.2.2/bootstrap.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-5.2.2/bootstrap.bundle.min.js"></script>
-<script src="site_libs/bs3compat-0.4.2/transition.js"></script>
-<script src="site_libs/bs3compat-0.4.2/tabs.js"></script>
-<script src="site_libs/bs3compat-0.4.2/bs3compat.js"></script>
-<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<script src="site_libs/bs3compat-0.5.0/transition.js"></script>
+<script src="site_libs/bs3compat-0.5.0/tabs.js"></script>
+<script src="site_libs/bs3compat-0.5.0/bs3compat.js"></script>
+<script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
-<script src="site_libs/htmlwidgets-1.6.1/htmlwidgets.js"></script>
+<script src="site_libs/htmlwidgets-1.6.2/htmlwidgets.js"></script>
 <script src="site_libs/viz-1.8.2/viz.js"></script>
 <link href="site_libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
-<script src="site_libs/grViz-binding-1.0.9/grViz.js"></script>
+<script src="site_libs/grViz-binding-1.0.10/grViz.js"></script>
 <script>
 	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -666,25 +666,23 @@ href="inspect_logs.html"><code>traces()</code></a> is also used.</p>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter_activity_presence</span>(<span class="st">&quot;X-Ray&quot;</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">traces</span>()</span></code></pre></div>
 <pre><code>## # A tibble: 3 × 3
-##   trace                                                          absol…¹ relat…²
-##   &lt;chr&gt;                                                            &lt;int&gt;   &lt;dbl&gt;
-## 1 Registration,Triage and Assessment,X-Ray,Discuss Results,Chec…     258 0.989  
-## 2 Registration,Triage and Assessment,X-Ray                             2 0.00766
-## 3 Registration,Triage and Assessment,X-Ray,Discuss Results             1 0.00383
-## # … with abbreviated variable names ¹​absolute_frequency, ²​relative_frequency</code></pre>
+##   trace                                    absolute_frequency relative_frequency
+##   &lt;chr&gt;                                                 &lt;int&gt;              &lt;dbl&gt;
+## 1 Registration,Triage and Assessment,X-Ra…                258            0.989  
+## 2 Registration,Triage and Assessment,X-Ray                  2            0.00766
+## 3 Registration,Triage and Assessment,X-Ra…                  1            0.00383</code></pre>
 <p>Or that don’t have a specific activity, using
 <code>reserve = TRUE</code>.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter_activity_presence</span>(<span class="st">&quot;X-Ray&quot;</span>, <span class="at">reverse =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">traces</span>()</span></code></pre></div>
 <pre><code>## # A tibble: 4 × 3
-##   trace                                                          absol…¹ relat…²
-##   &lt;chr&gt;                                                            &lt;int&gt;   &lt;dbl&gt;
-## 1 Registration,Triage and Assessment,Blood test,MRI SCAN,Discus…     234 0.979  
-## 2 Registration,Triage and Assessment,Blood test,MRI SCAN,Discus…       2 0.00837
-## 3 Registration,Triage and Assessment                                   2 0.00837
-## 4 Registration,Triage and Assessment,Blood test                        1 0.00418
-## # … with abbreviated variable names ¹​absolute_frequency, ²​relative_frequency</code></pre>
+##   trace                                    absolute_frequency relative_frequency
+##   &lt;chr&gt;                                                 &lt;int&gt;              &lt;dbl&gt;
+## 1 Registration,Triage and Assessment,Bloo…                234            0.979  
+## 2 Registration,Triage and Assessment,Bloo…                  2            0.00837
+## 3 Registration,Triage and Assessment                        2            0.00837
+## 4 Registration,Triage and Assessment,Bloo…                  1            0.00418</code></pre>
 <p>We can also specify more than one activity. In this case, the
 <code>method</code> argument can be configured as follows:</p>
 <ul>
@@ -713,20 +711,19 @@ div.blue { background-color:#E6F4F1; border-radius: 5px; padding: 20px;}
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter_activity_presence</span>(<span class="fu">c</span>(<span class="st">&quot;Create Fine&quot;</span>, <span class="st">&quot;Payment&quot;</span>), <span class="at">method =</span> <span class="st">&quot;all&quot;</span>)  <span class="sc">%&gt;%</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">traces</span>()</span></code></pre></div>
 <pre><code>## # A tibble: 27 × 3
-##    trace                                                         absol…¹ relat…²
-##    &lt;chr&gt;                                                           &lt;int&gt;   &lt;dbl&gt;
-##  1 Create Fine,Payment                                              3428 0.741  
-##  2 Create Fine,Send Fine,Insert Fine Notification,Add penalty,P…     758 0.164  
-##  3 Create Fine,Send Fine,Insert Fine Notification,Add penalty,P…     250 0.0540 
-##  4 Create Fine,Send Fine,Insert Fine Notification,Add penalty,P…      78 0.0169 
-##  5 Create Fine,Send Fine,Payment                                      37 0.00800
-##  6 Create Fine,Send Fine,Insert Fine Notification,Payment,Add p…      13 0.00281
-##  7 Create Fine,Send Fine,Insert Fine Notification,Insert Date A…       9 0.00195
-##  8 Create Fine,Send Fine,Insert Fine Notification,Add penalty,I…       8 0.00173
-##  9 Create Fine,Send Fine,Insert Fine Notification,Appeal to Jud…       7 0.00151
-## 10 Create Fine,Send Fine,Insert Fine Notification,Add penalty,P…       5 0.00108
-## # … with 17 more rows, and abbreviated variable names ¹​absolute_frequency,
-## #   ²​relative_frequency</code></pre>
+##    trace                                   absolute_frequency relative_frequency
+##    &lt;chr&gt;                                                &lt;int&gt;              &lt;dbl&gt;
+##  1 Create Fine,Payment                                   3428            0.741  
+##  2 Create Fine,Send Fine,Insert Fine Noti…                758            0.164  
+##  3 Create Fine,Send Fine,Insert Fine Noti…                250            0.0540 
+##  4 Create Fine,Send Fine,Insert Fine Noti…                 78            0.0169 
+##  5 Create Fine,Send Fine,Payment                           37            0.00800
+##  6 Create Fine,Send Fine,Insert Fine Noti…                 13            0.00281
+##  7 Create Fine,Send Fine,Insert Fine Noti…                  9            0.00195
+##  8 Create Fine,Send Fine,Insert Fine Noti…                  8            0.00173
+##  9 Create Fine,Send Fine,Insert Fine Noti…                  7            0.00151
+## 10 Create Fine,Send Fine,Insert Fine Noti…                  5            0.00108
+## # ℹ 17 more rows</code></pre>
 </div>
 </div>
 <div id="none" class="section level3">
@@ -748,20 +745,19 @@ div.blue { background-color:#E6F4F1; border-radius: 5px; padding: 20px;}
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter_activity_presence</span>(<span class="fu">c</span>(<span class="st">&quot;Create Fine&quot;</span>, <span class="st">&quot;Payment&quot;</span>), <span class="at">method =</span> <span class="st">&quot;one_of&quot;</span>)  <span class="sc">%&gt;%</span></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">traces</span>()</span></code></pre></div>
 <pre><code>## # A tibble: 44 × 3
-##    trace                                                         absol…¹ relat…²
-##    &lt;chr&gt;                                                           &lt;int&gt;   &lt;dbl&gt;
-##  1 Create Fine,Payment                                              3428  0.343 
-##  2 Create Fine,Send Fine,Insert Fine Notification,Add penalty,S…    3273  0.327 
-##  3 Create Fine,Send Fine                                            1890  0.189 
-##  4 Create Fine,Send Fine,Insert Fine Notification,Add penalty,P…     758  0.0758
-##  5 Create Fine,Send Fine,Insert Fine Notification,Add penalty,P…     250  0.025 
-##  6 Create Fine,Send Fine,Insert Fine Notification,Insert Date A…     151  0.0151
-##  7 Create Fine,Send Fine,Insert Fine Notification,Add penalty,P…      78  0.0078
-##  8 Create Fine,Send Fine,Payment                                      37  0.0037
-##  9 Create Fine,Send Fine,Insert Fine Notification,Add penalty,I…      24  0.0024
-## 10 Create Fine,Send Fine,Insert Fine Notification,Payment,Add p…      13  0.0013
-## # … with 34 more rows, and abbreviated variable names ¹​absolute_frequency,
-## #   ²​relative_frequency</code></pre>
+##    trace                                   absolute_frequency relative_frequency
+##    &lt;chr&gt;                                                &lt;int&gt;              &lt;dbl&gt;
+##  1 Create Fine,Payment                                   3428             0.343 
+##  2 Create Fine,Send Fine,Insert Fine Noti…               3273             0.327 
+##  3 Create Fine,Send Fine                                 1890             0.189 
+##  4 Create Fine,Send Fine,Insert Fine Noti…                758             0.0758
+##  5 Create Fine,Send Fine,Insert Fine Noti…                250             0.025 
+##  6 Create Fine,Send Fine,Insert Fine Noti…                151             0.0151
+##  7 Create Fine,Send Fine,Insert Fine Noti…                 78             0.0078
+##  8 Create Fine,Send Fine,Payment                           37             0.0037
+##  9 Create Fine,Send Fine,Insert Fine Noti…                 24             0.0024
+## 10 Create Fine,Send Fine,Insert Fine Noti…                 13             0.0013
+## # ℹ 34 more rows</code></pre>
 </div>
 </div>
 <div id="exact" class="section level3">
@@ -831,17 +827,16 @@ events with the specified cases.</p>
 ## Lifecycle transition:        lifecycle 
 ## 
 ## # A tibble: 4 × 18
-##   case_id activity    lifec…¹ resou…² timestamp           amount article dismi…³
-##   &lt;chr&gt;   &lt;fct&gt;       &lt;fct&gt;   &lt;fct&gt;   &lt;dttm&gt;              &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;  
-## 1 A1      Create Fine comple… 561     2006-07-24 00:00:00 35.0       157 NIL    
-## 2 A1      Send Fine   comple… &lt;NA&gt;    2006-12-05 00:00:00 &lt;NA&gt;        NA &lt;NA&gt;   
-## 3 A2      Create Fine comple… 561     2006-07-24 00:00:00 35.0       157 NIL    
-## 4 A2      Send Fine   comple… &lt;NA&gt;    2006-12-05 00:00:00 &lt;NA&gt;        NA &lt;NA&gt;   
-## # … with 10 more variables: expense &lt;chr&gt;, lastsent &lt;chr&gt;, matricola &lt;dbl&gt;,
-## #   notificationtype &lt;chr&gt;, paymentamount &lt;dbl&gt;, points &lt;dbl&gt;,
+##   case_id activity    lifecycle resource timestamp           amount article
+##   &lt;chr&gt;   &lt;fct&gt;       &lt;fct&gt;     &lt;fct&gt;    &lt;dttm&gt;              &lt;chr&gt;    &lt;dbl&gt;
+## 1 A1      Create Fine complete  561      2006-07-24 00:00:00 35.0       157
+## 2 A1      Send Fine   complete  &lt;NA&gt;     2006-12-05 00:00:00 &lt;NA&gt;        NA
+## 3 A2      Create Fine complete  561      2006-07-24 00:00:00 35.0       157
+## 4 A2      Send Fine   complete  &lt;NA&gt;     2006-12-05 00:00:00 &lt;NA&gt;        NA
+## # ℹ 11 more variables: dismissal &lt;chr&gt;, expense &lt;chr&gt;, lastsent &lt;chr&gt;,
+## #   matricola &lt;dbl&gt;, notificationtype &lt;chr&gt;, paymentamount &lt;dbl&gt;, points &lt;dbl&gt;,
 ## #   totalpaymentamount &lt;chr&gt;, vehicleclass &lt;chr&gt;, activity_instance_id &lt;chr&gt;,
-## #   .order &lt;int&gt;, and abbreviated variable names ¹​lifecycle, ²​resource,
-## #   ³​dismissal</code></pre>
+## #   .order &lt;int&gt;</code></pre>
 <p>The selection can be reversed with <code>reverse = TRUE</code>.</p>
 <div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>traffic_fines <span class="sc">%&gt;%</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter_case</span>(<span class="at">cases =</span> <span class="fu">c</span>(<span class="st">&quot;A1&quot;</span>,<span class="st">&quot;A2&quot;</span>), <span class="at">reverse =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
@@ -861,23 +856,23 @@ events with the specified cases.</p>
 ## Lifecycle transition:        lifecycle 
 ## 
 ## # A tibble: 34,720 × 18
-##    case_id activity   lifec…¹ resou…² timestamp           amount article dismi…³
-##    &lt;chr&gt;   &lt;fct&gt;      &lt;fct&gt;   &lt;fct&gt;   &lt;dttm&gt;              &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;  
-##  1 A100    Create Fi… comple… 561     2006-08-02 00:00:00 35.0       157 NIL    
-##  2 A100    Send Fine  comple… &lt;NA&gt;    2006-12-12 00:00:00 &lt;NA&gt;        NA &lt;NA&gt;   
-##  3 A100    Insert Fi… comple… &lt;NA&gt;    2007-01-15 00:00:00 &lt;NA&gt;        NA &lt;NA&gt;   
-##  4 A100    Add penal… comple… &lt;NA&gt;    2007-03-16 00:00:00 71.5        NA &lt;NA&gt;   
-##  5 A100    Send for … comple… &lt;NA&gt;    2009-03-30 00:00:00 &lt;NA&gt;        NA &lt;NA&gt;   
-##  6 A10000  Create Fi… comple… 561     2007-03-09 00:00:00 36.0       157 NIL    
-##  7 A10000  Send Fine  comple… &lt;NA&gt;    2007-07-17 00:00:00 &lt;NA&gt;        NA &lt;NA&gt;   
-##  8 A10000  Insert Fi… comple… &lt;NA&gt;    2007-08-02 00:00:00 &lt;NA&gt;        NA &lt;NA&gt;   
-##  9 A10000  Add penal… comple… &lt;NA&gt;    2007-10-01 00:00:00 74.0        NA &lt;NA&gt;   
-## 10 A10000  Payment    comple… &lt;NA&gt;    2008-09-09 00:00:00 &lt;NA&gt;        NA &lt;NA&gt;   
-## # … with 34,710 more rows, 10 more variables: expense &lt;chr&gt;, lastsent &lt;chr&gt;,
+##    case_id activity        lifecycle resource timestamp           amount article
+##    &lt;chr&gt;   &lt;fct&gt;           &lt;fct&gt;     &lt;fct&gt;    &lt;dttm&gt;              &lt;chr&gt;    &lt;dbl&gt;
+##  1 A100    Create Fine     complete  561      2006-08-02 00:00:00 35.0       157
+##  2 A100    Send Fine       complete  &lt;NA&gt;     2006-12-12 00:00:00 &lt;NA&gt;        NA
+##  3 A100    Insert Fine No… complete  &lt;NA&gt;     2007-01-15 00:00:00 &lt;NA&gt;        NA
+##  4 A100    Add penalty     complete  &lt;NA&gt;     2007-03-16 00:00:00 71.5        NA
+##  5 A100    Send for Credi… complete  &lt;NA&gt;     2009-03-30 00:00:00 &lt;NA&gt;        NA
+##  6 A10000  Create Fine     complete  561      2007-03-09 00:00:00 36.0       157
+##  7 A10000  Send Fine       complete  &lt;NA&gt;     2007-07-17 00:00:00 &lt;NA&gt;        NA
+##  8 A10000  Insert Fine No… complete  &lt;NA&gt;     2007-08-02 00:00:00 &lt;NA&gt;        NA
+##  9 A10000  Add penalty     complete  &lt;NA&gt;     2007-10-01 00:00:00 74.0        NA
+## 10 A10000  Payment         complete  &lt;NA&gt;     2008-09-09 00:00:00 &lt;NA&gt;        NA
+## # ℹ 34,710 more rows
+## # ℹ 11 more variables: dismissal &lt;chr&gt;, expense &lt;chr&gt;, lastsent &lt;chr&gt;,
 ## #   matricola &lt;dbl&gt;, notificationtype &lt;chr&gt;, paymentamount &lt;dbl&gt;, points &lt;dbl&gt;,
 ## #   totalpaymentamount &lt;chr&gt;, vehicleclass &lt;chr&gt;, activity_instance_id &lt;chr&gt;,
-## #   .order &lt;int&gt;, and abbreviated variable names ¹​lifecycle, ²​resource,
-## #   ³​dismissal</code></pre>
+## #   .order &lt;int&gt;</code></pre>
 </div>
 <div id="case-condition" class="section level2">
 <h2>Case Condition</h2>
@@ -904,23 +899,23 @@ involved.</p>
 ## Lifecycle transition:        lifecycle 
 ## 
 ## # A tibble: 3,333 × 18
-##    case_id activity   lifec…¹ resou…² timestamp           amount article dismi…³
-##    &lt;chr&gt;   &lt;fct&gt;      &lt;fct&gt;   &lt;fct&gt;   &lt;dttm&gt;              &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;  
-##  1 A1      Create Fi… comple… 561     2006-07-24 00:00:00 35.0       157 NIL    
-##  2 A1      Send Fine  comple… &lt;NA&gt;    2006-12-05 00:00:00 &lt;NA&gt;        NA &lt;NA&gt;   
-##  3 A100    Create Fi… comple… 561     2006-08-02 00:00:00 35.0       157 NIL    
-##  4 A100    Send Fine  comple… &lt;NA&gt;    2006-12-12 00:00:00 &lt;NA&gt;        NA &lt;NA&gt;   
-##  5 A100    Insert Fi… comple… &lt;NA&gt;    2007-01-15 00:00:00 &lt;NA&gt;        NA &lt;NA&gt;   
-##  6 A100    Add penal… comple… &lt;NA&gt;    2007-03-16 00:00:00 71.5        NA &lt;NA&gt;   
-##  7 A100    Send for … comple… &lt;NA&gt;    2009-03-30 00:00:00 &lt;NA&gt;        NA &lt;NA&gt;   
-##  8 A10000  Create Fi… comple… 561     2007-03-09 00:00:00 36.0       157 NIL    
-##  9 A10000  Send Fine  comple… &lt;NA&gt;    2007-07-17 00:00:00 &lt;NA&gt;        NA &lt;NA&gt;   
-## 10 A10000  Insert Fi… comple… &lt;NA&gt;    2007-08-02 00:00:00 &lt;NA&gt;        NA &lt;NA&gt;   
-## # … with 3,323 more rows, 10 more variables: expense &lt;chr&gt;, lastsent &lt;chr&gt;,
+##    case_id activity        lifecycle resource timestamp           amount article
+##    &lt;chr&gt;   &lt;fct&gt;           &lt;fct&gt;     &lt;fct&gt;    &lt;dttm&gt;              &lt;chr&gt;    &lt;dbl&gt;
+##  1 A1      Create Fine     complete  561      2006-07-24 00:00:00 35.0       157
+##  2 A1      Send Fine       complete  &lt;NA&gt;     2006-12-05 00:00:00 &lt;NA&gt;        NA
+##  3 A100    Create Fine     complete  561      2006-08-02 00:00:00 35.0       157
+##  4 A100    Send Fine       complete  &lt;NA&gt;     2006-12-12 00:00:00 &lt;NA&gt;        NA
+##  5 A100    Insert Fine No… complete  &lt;NA&gt;     2007-01-15 00:00:00 &lt;NA&gt;        NA
+##  6 A100    Add penalty     complete  &lt;NA&gt;     2007-03-16 00:00:00 71.5        NA
+##  7 A100    Send for Credi… complete  &lt;NA&gt;     2009-03-30 00:00:00 &lt;NA&gt;        NA
+##  8 A10000  Create Fine     complete  561      2007-03-09 00:00:00 36.0       157
+##  9 A10000  Send Fine       complete  &lt;NA&gt;     2007-07-17 00:00:00 &lt;NA&gt;        NA
+## 10 A10000  Insert Fine No… complete  &lt;NA&gt;     2007-08-02 00:00:00 &lt;NA&gt;        NA
+## # ℹ 3,323 more rows
+## # ℹ 11 more variables: dismissal &lt;chr&gt;, expense &lt;chr&gt;, lastsent &lt;chr&gt;,
 ## #   matricola &lt;dbl&gt;, notificationtype &lt;chr&gt;, paymentamount &lt;dbl&gt;, points &lt;dbl&gt;,
 ## #   totalpaymentamount &lt;chr&gt;, vehicleclass &lt;chr&gt;, activity_instance_id &lt;chr&gt;,
-## #   .order &lt;int&gt;, and abbreviated variable names ¹​lifecycle, ²​resource,
-## #   ³​dismissal</code></pre>
+## #   .order &lt;int&gt;</code></pre>
 <p>Note that multiple conditions can be combined using the symbols
 <code>|</code> (or) and <code>&amp;</code> (and). For example, let’s
 select all cases where <em>resource</em> 557 is involved, and the
@@ -943,23 +938,22 @@ select all cases where <em>resource</em> 557 is involved, and the
 ## Lifecycle transition:        lifecycle 
 ## 
 ## # A tibble: 10 × 18
-##    case_id activity   lifec…¹ resou…² timestamp           amount article dismi…³
-##    &lt;chr&gt;   &lt;fct&gt;      &lt;fct&gt;   &lt;fct&gt;   &lt;dttm&gt;              &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;  
-##  1 A10141  Create Fi… comple… 557     2007-03-12 00:00:00 74.0       158 NIL    
-##  2 A10141  Send Fine  comple… &lt;NA&gt;    2007-07-17 00:00:00 &lt;NA&gt;        NA &lt;NA&gt;   
-##  3 A10141  Insert Fi… comple… &lt;NA&gt;    2007-07-26 00:00:00 &lt;NA&gt;        NA &lt;NA&gt;   
-##  4 A10141  Add penal… comple… &lt;NA&gt;    2007-09-24 00:00:00 148.0       NA &lt;NA&gt;   
-##  5 A10141  Send for … comple… &lt;NA&gt;    2009-03-30 00:00:00 &lt;NA&gt;        NA &lt;NA&gt;   
-##  6 A25817  Create Fi… comple… 557     2008-03-01 00:00:00 74.0       158 NIL    
-##  7 A25817  Send Fine  comple… &lt;NA&gt;    2008-06-04 00:00:00 &lt;NA&gt;        NA &lt;NA&gt;   
-##  8 A25817  Insert Fi… comple… &lt;NA&gt;    2008-06-09 00:00:00 &lt;NA&gt;        NA &lt;NA&gt;   
-##  9 A25817  Add penal… comple… &lt;NA&gt;    2008-08-08 00:00:00 148.0       NA &lt;NA&gt;   
-## 10 A25817  Send for … comple… &lt;NA&gt;    2010-10-15 00:00:00 &lt;NA&gt;        NA &lt;NA&gt;   
-## # … with 10 more variables: expense &lt;chr&gt;, lastsent &lt;chr&gt;, matricola &lt;dbl&gt;,
-## #   notificationtype &lt;chr&gt;, paymentamount &lt;dbl&gt;, points &lt;dbl&gt;,
+##    case_id activity        lifecycle resource timestamp           amount article
+##    &lt;chr&gt;   &lt;fct&gt;           &lt;fct&gt;     &lt;fct&gt;    &lt;dttm&gt;              &lt;chr&gt;    &lt;dbl&gt;
+##  1 A10141  Create Fine     complete  557      2007-03-12 00:00:00 74.0       158
+##  2 A10141  Send Fine       complete  &lt;NA&gt;     2007-07-17 00:00:00 &lt;NA&gt;        NA
+##  3 A10141  Insert Fine No… complete  &lt;NA&gt;     2007-07-26 00:00:00 &lt;NA&gt;        NA
+##  4 A10141  Add penalty     complete  &lt;NA&gt;     2007-09-24 00:00:00 148.0       NA
+##  5 A10141  Send for Credi… complete  &lt;NA&gt;     2009-03-30 00:00:00 &lt;NA&gt;        NA
+##  6 A25817  Create Fine     complete  557      2008-03-01 00:00:00 74.0       158
+##  7 A25817  Send Fine       complete  &lt;NA&gt;     2008-06-04 00:00:00 &lt;NA&gt;        NA
+##  8 A25817  Insert Fine No… complete  &lt;NA&gt;     2008-06-09 00:00:00 &lt;NA&gt;        NA
+##  9 A25817  Add penalty     complete  &lt;NA&gt;     2008-08-08 00:00:00 148.0       NA
+## 10 A25817  Send for Credi… complete  &lt;NA&gt;     2010-10-15 00:00:00 &lt;NA&gt;        NA
+## # ℹ 11 more variables: dismissal &lt;chr&gt;, expense &lt;chr&gt;, lastsent &lt;chr&gt;,
+## #   matricola &lt;dbl&gt;, notificationtype &lt;chr&gt;, paymentamount &lt;dbl&gt;, points &lt;dbl&gt;,
 ## #   totalpaymentamount &lt;chr&gt;, vehicleclass &lt;chr&gt;, activity_instance_id &lt;chr&gt;,
-## #   .order &lt;int&gt;, and abbreviated variable names ¹​lifecycle, ²​resource,
-## #   ³​dismissal</code></pre>
+## #   .order &lt;int&gt;</code></pre>
 <p>Conditions can be reversed using <code>!</code> or the
 <code>reverse = TRUE</code> argument. The following to commands are
 equivalent.</p>
@@ -981,23 +975,23 @@ equivalent.</p>
 ## Lifecycle transition:        lifecycle 
 ## 
 ## # A tibble: 34,714 × 18
-##    case_id activity   lifec…¹ resou…² timestamp           amount article dismi…³
-##    &lt;chr&gt;   &lt;fct&gt;      &lt;fct&gt;   &lt;fct&gt;   &lt;dttm&gt;              &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;  
-##  1 A1      Create Fi… comple… 561     2006-07-24 00:00:00 35.0       157 NIL    
-##  2 A1      Send Fine  comple… &lt;NA&gt;    2006-12-05 00:00:00 &lt;NA&gt;        NA &lt;NA&gt;   
-##  3 A100    Create Fi… comple… 561     2006-08-02 00:00:00 35.0       157 NIL    
-##  4 A100    Send Fine  comple… &lt;NA&gt;    2006-12-12 00:00:00 &lt;NA&gt;        NA &lt;NA&gt;   
-##  5 A100    Insert Fi… comple… &lt;NA&gt;    2007-01-15 00:00:00 &lt;NA&gt;        NA &lt;NA&gt;   
-##  6 A100    Add penal… comple… &lt;NA&gt;    2007-03-16 00:00:00 71.5        NA &lt;NA&gt;   
-##  7 A100    Send for … comple… &lt;NA&gt;    2009-03-30 00:00:00 &lt;NA&gt;        NA &lt;NA&gt;   
-##  8 A10000  Create Fi… comple… 561     2007-03-09 00:00:00 36.0       157 NIL    
-##  9 A10000  Send Fine  comple… &lt;NA&gt;    2007-07-17 00:00:00 &lt;NA&gt;        NA &lt;NA&gt;   
-## 10 A10000  Insert Fi… comple… &lt;NA&gt;    2007-08-02 00:00:00 &lt;NA&gt;        NA &lt;NA&gt;   
-## # … with 34,704 more rows, 10 more variables: expense &lt;chr&gt;, lastsent &lt;chr&gt;,
+##    case_id activity        lifecycle resource timestamp           amount article
+##    &lt;chr&gt;   &lt;fct&gt;           &lt;fct&gt;     &lt;fct&gt;    &lt;dttm&gt;              &lt;chr&gt;    &lt;dbl&gt;
+##  1 A1      Create Fine     complete  561      2006-07-24 00:00:00 35.0       157
+##  2 A1      Send Fine       complete  &lt;NA&gt;     2006-12-05 00:00:00 &lt;NA&gt;        NA
+##  3 A100    Create Fine     complete  561      2006-08-02 00:00:00 35.0       157
+##  4 A100    Send Fine       complete  &lt;NA&gt;     2006-12-12 00:00:00 &lt;NA&gt;        NA
+##  5 A100    Insert Fine No… complete  &lt;NA&gt;     2007-01-15 00:00:00 &lt;NA&gt;        NA
+##  6 A100    Add penalty     complete  &lt;NA&gt;     2007-03-16 00:00:00 71.5        NA
+##  7 A100    Send for Credi… complete  &lt;NA&gt;     2009-03-30 00:00:00 &lt;NA&gt;        NA
+##  8 A10000  Create Fine     complete  561      2007-03-09 00:00:00 36.0       157
+##  9 A10000  Send Fine       complete  &lt;NA&gt;     2007-07-17 00:00:00 &lt;NA&gt;        NA
+## 10 A10000  Insert Fine No… complete  &lt;NA&gt;     2007-08-02 00:00:00 &lt;NA&gt;        NA
+## # ℹ 34,704 more rows
+## # ℹ 11 more variables: dismissal &lt;chr&gt;, expense &lt;chr&gt;, lastsent &lt;chr&gt;,
 ## #   matricola &lt;dbl&gt;, notificationtype &lt;chr&gt;, paymentamount &lt;dbl&gt;, points &lt;dbl&gt;,
 ## #   totalpaymentamount &lt;chr&gt;, vehicleclass &lt;chr&gt;, activity_instance_id &lt;chr&gt;,
-## #   .order &lt;int&gt;, and abbreviated variable names ¹​lifecycle, ²​resource,
-## #   ³​dismissal</code></pre>
+## #   .order &lt;int&gt;</code></pre>
 <div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>traffic_fines <span class="sc">%&gt;%</span></span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter_case_condition</span>(resource <span class="sc">==</span> <span class="dv">557</span> <span class="sc">&amp;</span> points <span class="sc">&gt;</span> <span class="dv">0</span>, <span class="at">reverse =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>## # Log of 34714 events consisting of:
@@ -1016,23 +1010,23 @@ equivalent.</p>
 ## Lifecycle transition:        lifecycle 
 ## 
 ## # A tibble: 34,714 × 18
-##    case_id activity   lifec…¹ resou…² timestamp           amount article dismi…³
-##    &lt;chr&gt;   &lt;fct&gt;      &lt;fct&gt;   &lt;fct&gt;   &lt;dttm&gt;              &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;  
-##  1 A1      Create Fi… comple… 561     2006-07-24 00:00:00 35.0       157 NIL    
-##  2 A1      Send Fine  comple… &lt;NA&gt;    2006-12-05 00:00:00 &lt;NA&gt;        NA &lt;NA&gt;   
-##  3 A100    Create Fi… comple… 561     2006-08-02 00:00:00 35.0       157 NIL    
-##  4 A100    Send Fine  comple… &lt;NA&gt;    2006-12-12 00:00:00 &lt;NA&gt;        NA &lt;NA&gt;   
-##  5 A100    Insert Fi… comple… &lt;NA&gt;    2007-01-15 00:00:00 &lt;NA&gt;        NA &lt;NA&gt;   
-##  6 A100    Add penal… comple… &lt;NA&gt;    2007-03-16 00:00:00 71.5        NA &lt;NA&gt;   
-##  7 A100    Send for … comple… &lt;NA&gt;    2009-03-30 00:00:00 &lt;NA&gt;        NA &lt;NA&gt;   
-##  8 A10000  Create Fi… comple… 561     2007-03-09 00:00:00 36.0       157 NIL    
-##  9 A10000  Send Fine  comple… &lt;NA&gt;    2007-07-17 00:00:00 &lt;NA&gt;        NA &lt;NA&gt;   
-## 10 A10000  Insert Fi… comple… &lt;NA&gt;    2007-08-02 00:00:00 &lt;NA&gt;        NA &lt;NA&gt;   
-## # … with 34,704 more rows, 10 more variables: expense &lt;chr&gt;, lastsent &lt;chr&gt;,
+##    case_id activity        lifecycle resource timestamp           amount article
+##    &lt;chr&gt;   &lt;fct&gt;           &lt;fct&gt;     &lt;fct&gt;    &lt;dttm&gt;              &lt;chr&gt;    &lt;dbl&gt;
+##  1 A1      Create Fine     complete  561      2006-07-24 00:00:00 35.0       157
+##  2 A1      Send Fine       complete  &lt;NA&gt;     2006-12-05 00:00:00 &lt;NA&gt;        NA
+##  3 A100    Create Fine     complete  561      2006-08-02 00:00:00 35.0       157
+##  4 A100    Send Fine       complete  &lt;NA&gt;     2006-12-12 00:00:00 &lt;NA&gt;        NA
+##  5 A100    Insert Fine No… complete  &lt;NA&gt;     2007-01-15 00:00:00 &lt;NA&gt;        NA
+##  6 A100    Add penalty     complete  &lt;NA&gt;     2007-03-16 00:00:00 71.5        NA
+##  7 A100    Send for Credi… complete  &lt;NA&gt;     2009-03-30 00:00:00 &lt;NA&gt;        NA
+##  8 A10000  Create Fine     complete  561      2007-03-09 00:00:00 36.0       157
+##  9 A10000  Send Fine       complete  &lt;NA&gt;     2007-07-17 00:00:00 &lt;NA&gt;        NA
+## 10 A10000  Insert Fine No… complete  &lt;NA&gt;     2007-08-02 00:00:00 &lt;NA&gt;        NA
+## # ℹ 34,704 more rows
+## # ℹ 11 more variables: dismissal &lt;chr&gt;, expense &lt;chr&gt;, lastsent &lt;chr&gt;,
 ## #   matricola &lt;dbl&gt;, notificationtype &lt;chr&gt;, paymentamount &lt;dbl&gt;, points &lt;dbl&gt;,
 ## #   totalpaymentamount &lt;chr&gt;, vehicleclass &lt;chr&gt;, activity_instance_id &lt;chr&gt;,
-## #   .order &lt;int&gt;, and abbreviated variable names ¹​lifecycle, ²​resource,
-## #   ³​dismissal</code></pre>
+## #   .order &lt;int&gt;</code></pre>
 </div>
 <div id="endpoints" class="section level2">
 <h2>Endpoints</h2>
@@ -1045,7 +1039,7 @@ data set, all cases start with “Registration”. Filtering cases that
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter_endpoints</span>(<span class="at">start_activities =</span> <span class="st">&quot;Registration&quot;</span>, <span class="at">reverse =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>## EMPTY EVENT LOG
 ## # A tibble: 0 × 7
-## # … with 7 variables: handling &lt;fct&gt;, patient &lt;chr&gt;, employee &lt;fct&gt;,
+## # ℹ 7 variables: handling &lt;fct&gt;, patient &lt;chr&gt;, employee &lt;fct&gt;,
 ## #   handling_id &lt;chr&gt;, registration_type &lt;fct&gt;, time &lt;dttm&gt;, .order &lt;int&gt;</code></pre>
 <p>If we are interested to see the “completed” cases, those that start
 with Registration and end we “Check-out”, we can apply the following
@@ -1055,8 +1049,8 @@ the illustration purposes.</p>
 <div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span></span>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter_endpoints</span>(<span class="at">start_activities =</span> <span class="st">&quot;Registration&quot;</span>, <span class="at">end_activities =</span> <span class="st">&quot;Check-out&quot;</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">process_map</span>()</span></code></pre></div>
-<div class="grViz html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-554b122f39100475299e" style="width:864px;height:480px;"></div>
-<script type="application/json" data-for="htmlwidget-554b122f39100475299e">{"x":{"diagram":"digraph {\n\ngraph [layout = \"dot\",\n       outputorder = \"edgesfirst\",\n       bgcolor = \"white\",\n       rankdir = \"LR\"]\n\nnode [fontname = \"Helvetica\",\n      fontsize = \"10\",\n      shape = \"circle\",\n      fixedsize = \"true\",\n      width = \"0.5\",\n      style = \"filled\",\n      fillcolor = \"aliceblue\",\n      color = \"gray70\",\n      fontcolor = \"gray50\"]\n\nedge [fontname = \"Helvetica\",\n     fontsize = \"8\",\n     weight = \"1.5\",\n     color = \"gray80\",\n     arrowsize = \"0.5\"]\n\n  \"1\" [label = \"End\", shape = \"circle\", style = \"rounded,filled\", fontcolor = \"brown4\", color = \"brown4\", tooltip = \"ARTIFICIAL_END\n492\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#FFFFFF\"] \n  \"2\" [label = \"Start\", shape = \"circle\", style = \"rounded,filled\", fontcolor = \"chartreuse4\", color = \"chartreuse4\", tooltip = \"ARTIFICIAL_START\n492\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#FFFFFF\"] \n  \"3\" [label = \"Blood test\n234\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"black\", color = \"grey\", tooltip = \"Blood test\n234\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#ECE7F2\"] \n  \"4\" [label = \"Check-out\n492\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"white\", color = \"grey\", tooltip = \"Check-out\n492\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#0570B0\"] \n  \"5\" [label = \"Discuss Results\n492\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"white\", color = \"grey\", tooltip = \"Discuss Results\n492\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#0570B0\"] \n  \"6\" [label = \"MRI SCAN\n234\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"black\", color = \"grey\", tooltip = \"MRI SCAN\n234\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#ECE7F2\"] \n  \"7\" [label = \"Registration\n492\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"white\", color = \"grey\", tooltip = \"Registration\n492\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#0570B0\"] \n  \"8\" [label = \"Triage and Assessment\n492\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"white\", color = \"grey\", tooltip = \"Triage and Assessment\n492\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#0570B0\"] \n  \"9\" [label = \"X-Ray\n258\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"black\", color = \"grey\", tooltip = \"X-Ray\n258\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#ECE7F2\"] \n\"2\"->\"7\" [label = \"492\", penwidth = \"5\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"3\"->\"6\" [label = \"234\", penwidth = \"2.90243902439024\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"4\"->\"1\" [label = \"492\", penwidth = \"5\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"5\"->\"4\" [label = \"492\", penwidth = \"5\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"6\"->\"5\" [label = \"234\", penwidth = \"2.90243902439024\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"7\"->\"8\" [label = \"492\", penwidth = \"5\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"8\"->\"3\" [label = \"234\", penwidth = \"2.90243902439024\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"8\"->\"9\" [label = \"258\", penwidth = \"3.09756097560976\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"9\"->\"5\" [label = \"258\", penwidth = \"3.09756097560976\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div class="grViz html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-9c4f97b9da3b05bfc24c" style="width:864px;height:480px;"></div>
+<script type="application/json" data-for="htmlwidget-9c4f97b9da3b05bfc24c">{"x":{"diagram":"digraph {\n\ngraph [layout = \"dot\",\n       outputorder = \"edgesfirst\",\n       bgcolor = \"white\",\n       rankdir = \"LR\"]\n\nnode [fontname = \"Helvetica\",\n      fontsize = \"10\",\n      shape = \"circle\",\n      fixedsize = \"true\",\n      width = \"0.5\",\n      style = \"filled\",\n      fillcolor = \"aliceblue\",\n      color = \"gray70\",\n      fontcolor = \"gray50\"]\n\nedge [fontname = \"Helvetica\",\n     fontsize = \"8\",\n     weight = \"1.5\",\n     color = \"gray80\",\n     arrowsize = \"0.5\"]\n\n  \"1\" [label = \"End\", shape = \"circle\", style = \"rounded,filled\", fontcolor = \"brown4\", color = \"brown4\", tooltip = \"ARTIFICIAL_END\n492\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#FFFFFF\"] \n  \"2\" [label = \"Start\", shape = \"circle\", style = \"rounded,filled\", fontcolor = \"chartreuse4\", color = \"chartreuse4\", tooltip = \"ARTIFICIAL_START\n492\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#FFFFFF\"] \n  \"3\" [label = \"Blood test\n234\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"black\", color = \"grey\", tooltip = \"Blood test\n234\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#ECE7F2\"] \n  \"4\" [label = \"Check-out\n492\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"white\", color = \"grey\", tooltip = \"Check-out\n492\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#0570B0\"] \n  \"5\" [label = \"Discuss Results\n492\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"white\", color = \"grey\", tooltip = \"Discuss Results\n492\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#0570B0\"] \n  \"6\" [label = \"MRI SCAN\n234\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"black\", color = \"grey\", tooltip = \"MRI SCAN\n234\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#ECE7F2\"] \n  \"7\" [label = \"Registration\n492\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"white\", color = \"grey\", tooltip = \"Registration\n492\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#0570B0\"] \n  \"8\" [label = \"Triage and Assessment\n492\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"white\", color = \"grey\", tooltip = \"Triage and Assessment\n492\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#0570B0\"] \n  \"9\" [label = \"X-Ray\n258\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"black\", color = \"grey\", tooltip = \"X-Ray\n258\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#ECE7F2\"] \n\"2\"->\"7\" [label = \"492\", penwidth = \"5\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"3\"->\"6\" [label = \"234\", penwidth = \"2.90243902439024\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"4\"->\"1\" [label = \"492\", penwidth = \"5\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"5\"->\"4\" [label = \"492\", penwidth = \"5\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"6\"->\"5\" [label = \"234\", penwidth = \"2.90243902439024\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"7\"->\"8\" [label = \"492\", penwidth = \"5\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"8\"->\"3\" [label = \"234\", penwidth = \"2.90243902439024\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"8\"->\"9\" [label = \"258\", penwidth = \"3.09756097560976\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"9\"->\"5\" [label = \"258\", penwidth = \"3.09756097560976\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div id="endpoints-condition" class="section level2">
 <h2>Endpoints Condition</h2>
@@ -1082,19 +1076,20 @@ from above, using conditions on the <em>handling</em> variable.</p>
 ## Lifecycle transition:        registration_type 
 ## 
 ## # A tibble: 5,388 × 7
-##    handling     patient employee handling_id regist…¹ time                .order
-##    &lt;fct&gt;        &lt;chr&gt;   &lt;fct&gt;    &lt;chr&gt;       &lt;fct&gt;    &lt;dttm&gt;               &lt;int&gt;
-##  1 Registration 1       r1       1           start    2017-01-02 11:41:53      1
-##  2 Registration 2       r1       2           start    2017-01-02 11:41:53      2
-##  3 Registration 3       r1       3           start    2017-01-04 01:34:05      3
-##  4 Registration 4       r1       4           start    2017-01-04 01:34:04      4
-##  5 Registration 5       r1       5           start    2017-01-04 16:07:47      5
-##  6 Registration 6       r1       6           start    2017-01-04 16:07:47      6
-##  7 Registration 7       r1       7           start    2017-01-05 04:56:11      7
-##  8 Registration 8       r1       8           start    2017-01-05 04:56:11      8
-##  9 Registration 9       r1       9           start    2017-01-06 05:58:54      9
-## 10 Registration 10      r1       10          start    2017-01-06 05:58:54     10
-## # … with 5,378 more rows, and abbreviated variable name ¹​registration_type</code></pre>
+##    handling   patient employee handling_id registration_type time               
+##    &lt;fct&gt;      &lt;chr&gt;   &lt;fct&gt;    &lt;chr&gt;       &lt;fct&gt;             &lt;dttm&gt;             
+##  1 Registrat… 1       r1       1           start             2017-01-02 11:41:53
+##  2 Registrat… 2       r1       2           start             2017-01-02 11:41:53
+##  3 Registrat… 3       r1       3           start             2017-01-04 01:34:05
+##  4 Registrat… 4       r1       4           start             2017-01-04 01:34:04
+##  5 Registrat… 5       r1       5           start             2017-01-04 16:07:47
+##  6 Registrat… 6       r1       6           start             2017-01-04 16:07:47
+##  7 Registrat… 7       r1       7           start             2017-01-05 04:56:11
+##  8 Registrat… 8       r1       8           start             2017-01-05 04:56:11
+##  9 Registrat… 9       r1       9           start             2017-01-06 05:58:54
+## 10 Registrat… 10      r1       10          start             2017-01-06 05:58:54
+## # ℹ 5,378 more rows
+## # ℹ 1 more variable: .order &lt;int&gt;</code></pre>
 <p>Naturally, both conditions can use any of the available variables.
 The following selects all cases that started between midnight and 6am.
 Note that no condition is applied on the end activity instance using the
@@ -1134,23 +1129,23 @@ in which the creation is followed by the payment within 4 weeks.</p>
 ## Lifecycle transition:        lifecycle 
 ## 
 ## # A tibble: 6,303 × 18
-##    case_id activity   lifec…¹ resou…² timestamp           amount article dismi…³
-##    &lt;chr&gt;   &lt;fct&gt;      &lt;fct&gt;   &lt;fct&gt;   &lt;dttm&gt;              &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;  
-##  1 A10005  Create Fi… comple… 537     2007-03-20 00:00:00 36.0       157 NIL    
-##  2 A10005  Payment    comple… &lt;NA&gt;    2007-03-21 00:00:00 &lt;NA&gt;        NA &lt;NA&gt;   
-##  3 A10007  Create Fi… comple… 537     2007-03-20 00:00:00 36.0       157 NIL    
-##  4 A10007  Payment    comple… &lt;NA&gt;    2007-03-23 00:00:00 &lt;NA&gt;        NA &lt;NA&gt;   
-##  5 A10022  Create Fi… comple… 537     2007-03-22 00:00:00 22.0         7 NIL    
-##  6 A10022  Payment    comple… &lt;NA&gt;    2007-03-28 00:00:00 &lt;NA&gt;        NA &lt;NA&gt;   
-##  7 A10024  Create Fi… comple… 537     2007-03-22 00:00:00 36.0       157 NIL    
-##  8 A10024  Payment    comple… &lt;NA&gt;    2007-03-26 00:00:00 &lt;NA&gt;        NA &lt;NA&gt;   
-##  9 A10029  Create Fi… comple… 537     2007-03-22 00:00:00 36.0       157 NIL    
-## 10 A10029  Payment    comple… &lt;NA&gt;    2007-04-10 00:00:00 &lt;NA&gt;        NA &lt;NA&gt;   
-## # … with 6,293 more rows, 10 more variables: expense &lt;chr&gt;, lastsent &lt;chr&gt;,
+##    case_id activity    lifecycle resource timestamp           amount article
+##    &lt;chr&gt;   &lt;fct&gt;       &lt;fct&gt;     &lt;fct&gt;    &lt;dttm&gt;              &lt;chr&gt;    &lt;dbl&gt;
+##  1 A10005  Create Fine complete  537      2007-03-20 00:00:00 36.0       157
+##  2 A10005  Payment     complete  &lt;NA&gt;     2007-03-21 00:00:00 &lt;NA&gt;        NA
+##  3 A10007  Create Fine complete  537      2007-03-20 00:00:00 36.0       157
+##  4 A10007  Payment     complete  &lt;NA&gt;     2007-03-23 00:00:00 &lt;NA&gt;        NA
+##  5 A10022  Create Fine complete  537      2007-03-22 00:00:00 22.0         7
+##  6 A10022  Payment     complete  &lt;NA&gt;     2007-03-28 00:00:00 &lt;NA&gt;        NA
+##  7 A10024  Create Fine complete  537      2007-03-22 00:00:00 36.0       157
+##  8 A10024  Payment     complete  &lt;NA&gt;     2007-03-26 00:00:00 &lt;NA&gt;        NA
+##  9 A10029  Create Fine complete  537      2007-03-22 00:00:00 36.0       157
+## 10 A10029  Payment     complete  &lt;NA&gt;     2007-04-10 00:00:00 &lt;NA&gt;        NA
+## # ℹ 6,293 more rows
+## # ℹ 11 more variables: dismissal &lt;chr&gt;, expense &lt;chr&gt;, lastsent &lt;chr&gt;,
 ## #   matricola &lt;dbl&gt;, notificationtype &lt;chr&gt;, paymentamount &lt;dbl&gt;, points &lt;dbl&gt;,
 ## #   totalpaymentamount &lt;chr&gt;, vehicleclass &lt;chr&gt;, activity_instance_id &lt;chr&gt;,
-## #   .order &lt;int&gt;, and abbreviated variable names ¹​lifecycle, ²​resource,
-## #   ³​dismissal</code></pre>
+## #   .order &lt;int&gt;</code></pre>
 <p>The <code>interval</code> can be defined as half-open using
 <code>NA</code> for the first or second element. Below select cases
 where payment is followed after 4 weeks.</p>
@@ -1172,23 +1167,23 @@ where payment is followed after 4 weeks.</p>
 ## Lifecycle transition:        lifecycle 
 ## 
 ## # A tibble: 646 × 18
-##    case_id activity   lifec…¹ resou…² timestamp           amount article dismi…³
-##    &lt;chr&gt;   &lt;fct&gt;      &lt;fct&gt;   &lt;fct&gt;   &lt;dttm&gt;              &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;  
-##  1 A10059  Create Fi… comple… 541     2007-03-08 00:00:00 36.0       157 NIL    
-##  2 A10059  Payment    comple… &lt;NA&gt;    2007-04-18 00:00:00 &lt;NA&gt;        NA &lt;NA&gt;   
-##  3 A1006   Create Fi… comple… 550     2006-08-08 00:00:00 21.0         7 NIL    
-##  4 A1006   Payment    comple… &lt;NA&gt;    2006-09-12 00:00:00 &lt;NA&gt;        NA &lt;NA&gt;   
-##  5 A10157  Create Fi… comple… 558     2007-03-06 00:00:00 36.0       157 NIL    
-##  6 A10157  Payment    comple… &lt;NA&gt;    2007-04-13 00:00:00 &lt;NA&gt;        NA &lt;NA&gt;   
-##  7 A10221  Create Fi… comple… 559     2007-03-09 00:00:00 36.0       157 NIL    
-##  8 A10221  Payment    comple… &lt;NA&gt;    2007-04-19 00:00:00 &lt;NA&gt;        NA &lt;NA&gt;   
-##  9 A10283  Create Fi… comple… 559     2007-03-18 00:00:00 36.0       157 NIL    
-## 10 A10283  Payment    comple… &lt;NA&gt;    2007-05-17 00:00:00 &lt;NA&gt;        NA &lt;NA&gt;   
-## # … with 636 more rows, 10 more variables: expense &lt;chr&gt;, lastsent &lt;chr&gt;,
+##    case_id activity    lifecycle resource timestamp           amount article
+##    &lt;chr&gt;   &lt;fct&gt;       &lt;fct&gt;     &lt;fct&gt;    &lt;dttm&gt;              &lt;chr&gt;    &lt;dbl&gt;
+##  1 A10059  Create Fine complete  541      2007-03-08 00:00:00 36.0       157
+##  2 A10059  Payment     complete  &lt;NA&gt;     2007-04-18 00:00:00 &lt;NA&gt;        NA
+##  3 A1006   Create Fine complete  550      2006-08-08 00:00:00 21.0         7
+##  4 A1006   Payment     complete  &lt;NA&gt;     2006-09-12 00:00:00 &lt;NA&gt;        NA
+##  5 A10157  Create Fine complete  558      2007-03-06 00:00:00 36.0       157
+##  6 A10157  Payment     complete  &lt;NA&gt;     2007-04-13 00:00:00 &lt;NA&gt;        NA
+##  7 A10221  Create Fine complete  559      2007-03-09 00:00:00 36.0       157
+##  8 A10221  Payment     complete  &lt;NA&gt;     2007-04-19 00:00:00 &lt;NA&gt;        NA
+##  9 A10283  Create Fine complete  559      2007-03-18 00:00:00 36.0       157
+## 10 A10283  Payment     complete  &lt;NA&gt;     2007-05-17 00:00:00 &lt;NA&gt;        NA
+## # ℹ 636 more rows
+## # ℹ 11 more variables: dismissal &lt;chr&gt;, expense &lt;chr&gt;, lastsent &lt;chr&gt;,
 ## #   matricola &lt;dbl&gt;, notificationtype &lt;chr&gt;, paymentamount &lt;dbl&gt;, points &lt;dbl&gt;,
 ## #   totalpaymentamount &lt;chr&gt;, vehicleclass &lt;chr&gt;, activity_instance_id &lt;chr&gt;,
-## #   .order &lt;int&gt;, and abbreviated variable names ¹​lifecycle, ²​resource,
-## #   ³​dismissal</code></pre>
+## #   .order &lt;int&gt;</code></pre>
 <p>Note that we can also use <code>reverse = TRUE</code>. However, this
 will also include cases where <em>Create Fine</em> is
 <strong>not</strong> followed by <em>Payment</em> at all. Therefore, the
@@ -1211,23 +1206,23 @@ following filter is not equivalent to the previous one.</p>
 ## Lifecycle transition:        lifecycle 
 ## 
 ## # A tibble: 28,421 × 18
-##    case_id activity   lifec…¹ resou…² timestamp           amount article dismi…³
-##    &lt;chr&gt;   &lt;fct&gt;      &lt;fct&gt;   &lt;fct&gt;   &lt;dttm&gt;              &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;  
-##  1 A1      Create Fi… comple… 561     2006-07-24 00:00:00 35.0       157 NIL    
-##  2 A1      Send Fine  comple… &lt;NA&gt;    2006-12-05 00:00:00 &lt;NA&gt;        NA &lt;NA&gt;   
-##  3 A100    Create Fi… comple… 561     2006-08-02 00:00:00 35.0       157 NIL    
-##  4 A100    Send Fine  comple… &lt;NA&gt;    2006-12-12 00:00:00 &lt;NA&gt;        NA &lt;NA&gt;   
-##  5 A100    Insert Fi… comple… &lt;NA&gt;    2007-01-15 00:00:00 &lt;NA&gt;        NA &lt;NA&gt;   
-##  6 A100    Add penal… comple… &lt;NA&gt;    2007-03-16 00:00:00 71.5        NA &lt;NA&gt;   
-##  7 A100    Send for … comple… &lt;NA&gt;    2009-03-30 00:00:00 &lt;NA&gt;        NA &lt;NA&gt;   
-##  8 A10000  Create Fi… comple… 561     2007-03-09 00:00:00 36.0       157 NIL    
-##  9 A10000  Send Fine  comple… &lt;NA&gt;    2007-07-17 00:00:00 &lt;NA&gt;        NA &lt;NA&gt;   
-## 10 A10000  Insert Fi… comple… &lt;NA&gt;    2007-08-02 00:00:00 &lt;NA&gt;        NA &lt;NA&gt;   
-## # … with 28,411 more rows, 10 more variables: expense &lt;chr&gt;, lastsent &lt;chr&gt;,
+##    case_id activity        lifecycle resource timestamp           amount article
+##    &lt;chr&gt;   &lt;fct&gt;           &lt;fct&gt;     &lt;fct&gt;    &lt;dttm&gt;              &lt;chr&gt;    &lt;dbl&gt;
+##  1 A1      Create Fine     complete  561      2006-07-24 00:00:00 35.0       157
+##  2 A1      Send Fine       complete  &lt;NA&gt;     2006-12-05 00:00:00 &lt;NA&gt;        NA
+##  3 A100    Create Fine     complete  561      2006-08-02 00:00:00 35.0       157
+##  4 A100    Send Fine       complete  &lt;NA&gt;     2006-12-12 00:00:00 &lt;NA&gt;        NA
+##  5 A100    Insert Fine No… complete  &lt;NA&gt;     2007-01-15 00:00:00 &lt;NA&gt;        NA
+##  6 A100    Add penalty     complete  &lt;NA&gt;     2007-03-16 00:00:00 71.5        NA
+##  7 A100    Send for Credi… complete  &lt;NA&gt;     2009-03-30 00:00:00 &lt;NA&gt;        NA
+##  8 A10000  Create Fine     complete  561      2007-03-09 00:00:00 36.0       157
+##  9 A10000  Send Fine       complete  &lt;NA&gt;     2007-07-17 00:00:00 &lt;NA&gt;        NA
+## 10 A10000  Insert Fine No… complete  &lt;NA&gt;     2007-08-02 00:00:00 &lt;NA&gt;        NA
+## # ℹ 28,411 more rows
+## # ℹ 11 more variables: dismissal &lt;chr&gt;, expense &lt;chr&gt;, lastsent &lt;chr&gt;,
 ## #   matricola &lt;dbl&gt;, notificationtype &lt;chr&gt;, paymentamount &lt;dbl&gt;, points &lt;dbl&gt;,
 ## #   totalpaymentamount &lt;chr&gt;, vehicleclass &lt;chr&gt;, activity_instance_id &lt;chr&gt;,
-## #   .order &lt;int&gt;, and abbreviated variable names ¹​lifecycle, ²​resource,
-## #   ³​dismissal</code></pre>
+## #   .order &lt;int&gt;</code></pre>
 </div>
 <div id="idle-time" class="section level2 tabset tabset-pills">
 <h2 class="tabset tabset-pills">Idle Time</h2>
@@ -1323,16 +1318,16 @@ example, consider the <code>traffic_fines</code> <a
 href="https://bupaverse.github.io/docs/frequency_maps.html">process
 map</a> below.</p>
 <div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>traffic_fines <span class="sc">%&gt;%</span> <span class="fu">process_map</span>()</span></code></pre></div>
-<div class="grViz html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-d5bbfbd5c577e61fb7bc" style="width:672px;height:480px;"></div>
-<script type="application/json" data-for="htmlwidget-d5bbfbd5c577e61fb7bc">{"x":{"diagram":"digraph {\n\ngraph [layout = \"dot\",\n       outputorder = \"edgesfirst\",\n       bgcolor = \"white\",\n       rankdir = \"LR\"]\n\nnode [fontname = \"Helvetica\",\n      fontsize = \"10\",\n      shape = \"circle\",\n      fixedsize = \"true\",\n      width = \"0.5\",\n      style = \"filled\",\n      fillcolor = \"aliceblue\",\n      color = \"gray70\",\n      fontcolor = \"gray50\"]\n\nedge [fontname = \"Helvetica\",\n     fontsize = \"8\",\n     weight = \"1.5\",\n     color = \"gray80\",\n     arrowsize = \"0.5\"]\n\n  \"1\" [label = \"End\", shape = \"circle\", style = \"rounded,filled\", fontcolor = \"brown4\", color = \"brown4\", tooltip = \"ARTIFICIAL_END\n10000\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#FFFFFF\"] \n  \"2\" [label = \"Start\", shape = \"circle\", style = \"rounded,filled\", fontcolor = \"chartreuse4\", color = \"chartreuse4\", tooltip = \"ARTIFICIAL_START\n10000\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#FFFFFF\"] \n  \"3\" [label = \"Add penalty\n4635\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"black\", color = \"grey\", tooltip = \"Add penalty\n4635\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#A6BDDB\"] \n  \"4\" [label = \"Appeal to Judge\n19\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"black\", color = \"grey\", tooltip = \"Appeal to Judge\n19\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#FFF7FB\"] \n  \"5\" [label = \"Create Fine\n10000\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"white\", color = \"grey\", tooltip = \"Create Fine\n10000\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#034E7B\"] \n  \"6\" [label = \"Insert Date Appeal to Prefecture\n232\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"black\", color = \"grey\", tooltip = \"Insert Date Appeal to Prefecture\n232\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#FFF7FB\"] \n  \"7\" [label = \"Insert Fine Notification\n4635\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"black\", color = \"grey\", tooltip = \"Insert Fine Notification\n4635\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#A6BDDB\"] \n  \"8\" [label = \"Notify Result Appeal to Offender\n54\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"black\", color = \"grey\", tooltip = \"Notify Result Appeal to Offender\n54\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#FFF7FB\"] \n  \"9\" [label = \"Payment\n4910\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"black\", color = \"grey\", tooltip = \"Payment\n4910\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#A6BDDB\"] \n  \"10\" [label = \"Receive Result Appeal from Prefecture\n55\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"black\", color = \"grey\", tooltip = \"Receive Result Appeal from Prefecture\n55\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#FFF7FB\"] \n  \"11\" [label = \"Send Appeal to Prefecture\n227\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"black\", color = \"grey\", tooltip = \"Send Appeal to Prefecture\n227\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#FFF7FB\"] \n  \"12\" [label = \"Send Fine\n6570\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"white\", color = \"grey\", tooltip = \"Send Fine\n6570\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#3690C0\"] \n  \"13\" [label = \"Send for Credit Collection\n3387\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"black\", color = \"grey\", tooltip = \"Send for Credit Collection\n3387\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#D0D1E6\"] \n\"2\"->\"5\" [label = \"10000\", penwidth = \"5\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"3\"->\"6\" [label = \"41\", penwidth = \"1.0164\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"3\"->\"8\" [label = \"3\", penwidth = \"1.0012\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"3\"->\"9\" [label = \"1117\", penwidth = \"1.4468\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"3\"->\"10\" [label = \"15\", penwidth = \"1.006\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"3\"->\"11\" [label = \"171\", penwidth = \"1.0684\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"3\"->\"13\" [label = \"3288\", penwidth = \"2.3152\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"4\"->\"1\" [label = \"5\", penwidth = \"1.002\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"4\"->\"3\" [label = \"13\", penwidth = \"1.0052\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"4\"->\"6\" [label = \"1\", penwidth = \"1.0004\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"5\"->\"9\" [label = \"3443\", penwidth = \"2.3772\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"5\"->\"12\" [label = \"6557\", penwidth = \"3.6228\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"6\"->\"3\" [label = \"170\", penwidth = \"1.068\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"6\"->\"7\" [label = \"1\", penwidth = \"1.0004\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"6\"->\"9\" [label = \"3\", penwidth = \"1.0012\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"6\"->\"10\" [label = \"5\", penwidth = \"1.002\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"6\"->\"11\" [label = \"53\", penwidth = \"1.0212\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"7\"->\"3\" [label = \"4417\", penwidth = \"2.7668\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"7\"->\"4\" [label = \"14\", penwidth = \"1.0056\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"7\"->\"6\" [label = \"188\", penwidth = \"1.0752\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"7\"->\"9\" [label = \"16\", penwidth = \"1.0064\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"8\"->\"1\" [label = \"1\", penwidth = \"1.0004\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"8\"->\"3\" [label = \"3\", penwidth = \"1.0012\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"8\"->\"4\" [label = \"5\", penwidth = \"1.002\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"8\"->\"9\" [label = \"24\", penwidth = \"1.0096\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"8\"->\"10\" [label = \"1\", penwidth = \"1.0004\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"8\"->\"13\" [label = \"20\", penwidth = \"1.008\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"9\"->\"1\" [label = \"4535\", penwidth = \"2.814\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"9\"->\"3\" [label = \"18\", penwidth = \"1.0072\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"9\"->\"7\" [label = \"1\", penwidth = \"1.0004\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"9\"->\"9\" [label = \"264\", penwidth = \"1.1056\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"9\"->\"10\" [label = \"1\", penwidth = \"1.0004\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"9\"->\"12\" [label = \"13\", penwidth = \"1.0052\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"9\"->\"13\" [label = \"78\", penwidth = \"1.0312\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"10\"->\"3\" [label = \"2\", penwidth = \"1.0008\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"10\"->\"8\" [label = \"51\", penwidth = \"1.0204\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"10\"->\"9\" [label = \"1\", penwidth = \"1.0004\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"10\"->\"13\" [label = \"1\", penwidth = \"1.0004\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"11\"->\"1\" [label = \"182\", penwidth = \"1.0728\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"11\"->\"3\" [label = \"12\", penwidth = \"1.0048\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"11\"->\"10\" [label = \"33\", penwidth = \"1.0132\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"12\"->\"1\" [label = \"1893\", penwidth = \"1.7572\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"12\"->\"6\" [label = \"2\", penwidth = \"1.0008\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"12\"->\"7\" [label = \"4633\", penwidth = \"2.8532\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"12\"->\"9\" [label = \"42\", penwidth = \"1.0168\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"13\"->\"1\" [label = \"3384\", penwidth = \"2.3536\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"13\"->\"11\" [label = \"3\", penwidth = \"1.0012\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div class="grViz html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-cff9e273333d18c0d896" style="width:672px;height:480px;"></div>
+<script type="application/json" data-for="htmlwidget-cff9e273333d18c0d896">{"x":{"diagram":"digraph {\n\ngraph [layout = \"dot\",\n       outputorder = \"edgesfirst\",\n       bgcolor = \"white\",\n       rankdir = \"LR\"]\n\nnode [fontname = \"Helvetica\",\n      fontsize = \"10\",\n      shape = \"circle\",\n      fixedsize = \"true\",\n      width = \"0.5\",\n      style = \"filled\",\n      fillcolor = \"aliceblue\",\n      color = \"gray70\",\n      fontcolor = \"gray50\"]\n\nedge [fontname = \"Helvetica\",\n     fontsize = \"8\",\n     weight = \"1.5\",\n     color = \"gray80\",\n     arrowsize = \"0.5\"]\n\n  \"1\" [label = \"End\", shape = \"circle\", style = \"rounded,filled\", fontcolor = \"brown4\", color = \"brown4\", tooltip = \"ARTIFICIAL_END\n10000\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#FFFFFF\"] \n  \"2\" [label = \"Start\", shape = \"circle\", style = \"rounded,filled\", fontcolor = \"chartreuse4\", color = \"chartreuse4\", tooltip = \"ARTIFICIAL_START\n10000\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#FFFFFF\"] \n  \"3\" [label = \"Add penalty\n4635\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"black\", color = \"grey\", tooltip = \"Add penalty\n4635\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#A6BDDB\"] \n  \"4\" [label = \"Appeal to Judge\n19\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"black\", color = \"grey\", tooltip = \"Appeal to Judge\n19\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#FFF7FB\"] \n  \"5\" [label = \"Create Fine\n10000\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"white\", color = \"grey\", tooltip = \"Create Fine\n10000\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#034E7B\"] \n  \"6\" [label = \"Insert Date Appeal to Prefecture\n232\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"black\", color = \"grey\", tooltip = \"Insert Date Appeal to Prefecture\n232\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#FFF7FB\"] \n  \"7\" [label = \"Insert Fine Notification\n4635\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"black\", color = \"grey\", tooltip = \"Insert Fine Notification\n4635\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#A6BDDB\"] \n  \"8\" [label = \"Notify Result Appeal to Offender\n54\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"black\", color = \"grey\", tooltip = \"Notify Result Appeal to Offender\n54\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#FFF7FB\"] \n  \"9\" [label = \"Payment\n4910\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"black\", color = \"grey\", tooltip = \"Payment\n4910\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#A6BDDB\"] \n  \"10\" [label = \"Receive Result Appeal from Prefecture\n55\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"black\", color = \"grey\", tooltip = \"Receive Result Appeal from Prefecture\n55\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#FFF7FB\"] \n  \"11\" [label = \"Send Appeal to Prefecture\n227\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"black\", color = \"grey\", tooltip = \"Send Appeal to Prefecture\n227\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#FFF7FB\"] \n  \"12\" [label = \"Send Fine\n6570\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"white\", color = \"grey\", tooltip = \"Send Fine\n6570\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#3690C0\"] \n  \"13\" [label = \"Send for Credit Collection\n3387\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"black\", color = \"grey\", tooltip = \"Send for Credit Collection\n3387\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#D0D1E6\"] \n\"2\"->\"5\" [label = \"10000\", penwidth = \"5\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"3\"->\"6\" [label = \"41\", penwidth = \"1.0164\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"3\"->\"8\" [label = \"3\", penwidth = \"1.0012\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"3\"->\"9\" [label = \"1117\", penwidth = \"1.4468\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"3\"->\"10\" [label = \"15\", penwidth = \"1.006\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"3\"->\"11\" [label = \"171\", penwidth = \"1.0684\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"3\"->\"13\" [label = \"3288\", penwidth = \"2.3152\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"4\"->\"1\" [label = \"5\", penwidth = \"1.002\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"4\"->\"3\" [label = \"13\", penwidth = \"1.0052\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"4\"->\"6\" [label = \"1\", penwidth = \"1.0004\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"5\"->\"9\" [label = \"3443\", penwidth = \"2.3772\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"5\"->\"12\" [label = \"6557\", penwidth = \"3.6228\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"6\"->\"3\" [label = \"170\", penwidth = \"1.068\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"6\"->\"7\" [label = \"1\", penwidth = \"1.0004\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"6\"->\"9\" [label = \"3\", penwidth = \"1.0012\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"6\"->\"10\" [label = \"5\", penwidth = \"1.002\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"6\"->\"11\" [label = \"53\", penwidth = \"1.0212\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"7\"->\"3\" [label = \"4417\", penwidth = \"2.7668\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"7\"->\"4\" [label = \"14\", penwidth = \"1.0056\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"7\"->\"6\" [label = \"188\", penwidth = \"1.0752\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"7\"->\"9\" [label = \"16\", penwidth = \"1.0064\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"8\"->\"1\" [label = \"1\", penwidth = \"1.0004\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"8\"->\"3\" [label = \"3\", penwidth = \"1.0012\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"8\"->\"4\" [label = \"5\", penwidth = \"1.002\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"8\"->\"9\" [label = \"24\", penwidth = \"1.0096\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"8\"->\"10\" [label = \"1\", penwidth = \"1.0004\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"8\"->\"13\" [label = \"20\", penwidth = \"1.008\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"9\"->\"1\" [label = \"4535\", penwidth = \"2.814\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"9\"->\"3\" [label = \"18\", penwidth = \"1.0072\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"9\"->\"7\" [label = \"1\", penwidth = \"1.0004\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"9\"->\"9\" [label = \"264\", penwidth = \"1.1056\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"9\"->\"10\" [label = \"1\", penwidth = \"1.0004\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"9\"->\"12\" [label = \"13\", penwidth = \"1.0052\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"9\"->\"13\" [label = \"78\", penwidth = \"1.0312\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"10\"->\"3\" [label = \"2\", penwidth = \"1.0008\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"10\"->\"8\" [label = \"51\", penwidth = \"1.0204\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"10\"->\"9\" [label = \"1\", penwidth = \"1.0004\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"10\"->\"13\" [label = \"1\", penwidth = \"1.0004\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"11\"->\"1\" [label = \"182\", penwidth = \"1.0728\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"11\"->\"3\" [label = \"12\", penwidth = \"1.0048\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"11\"->\"10\" [label = \"33\", penwidth = \"1.0132\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"12\"->\"1\" [label = \"1893\", penwidth = \"1.7572\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"12\"->\"6\" [label = \"2\", penwidth = \"1.0008\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"12\"->\"7\" [label = \"4633\", penwidth = \"2.8532\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"12\"->\"9\" [label = \"42\", penwidth = \"1.0168\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"13\"->\"1\" [label = \"3384\", penwidth = \"2.3536\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"13\"->\"11\" [label = \"3\", penwidth = \"1.0012\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 <p>In this map, we can observe several unique directly follows
 relations, as well as flows occurring only 2 or 3 times. Using the
 filter, we can remove the cases that lead to these flows as follows:</p>
 <div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>traffic_fines <span class="sc">%&gt;%</span></span>
 <span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter_infrequent_flows</span>(<span class="at">min_n =</span> <span class="dv">5</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">process_map</span>()</span></code></pre></div>
-<div class="grViz html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-271baa13210c68e775df" style="width:672px;height:480px;"></div>
-<script type="application/json" data-for="htmlwidget-271baa13210c68e775df">{"x":{"diagram":"digraph {\n\ngraph [layout = \"dot\",\n       outputorder = \"edgesfirst\",\n       bgcolor = \"white\",\n       rankdir = \"LR\"]\n\nnode [fontname = \"Helvetica\",\n      fontsize = \"10\",\n      shape = \"circle\",\n      fixedsize = \"true\",\n      width = \"0.5\",\n      style = \"filled\",\n      fillcolor = \"aliceblue\",\n      color = \"gray70\",\n      fontcolor = \"gray50\"]\n\nedge [fontname = \"Helvetica\",\n     fontsize = \"8\",\n     weight = \"1.5\",\n     color = \"gray80\",\n     arrowsize = \"0.5\"]\n\n  \"1\" [label = \"End\", shape = \"circle\", style = \"rounded,filled\", fontcolor = \"brown4\", color = \"brown4\", tooltip = \"ARTIFICIAL_END\n9983\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#FFFFFF\"] \n  \"2\" [label = \"Start\", shape = \"circle\", style = \"rounded,filled\", fontcolor = \"chartreuse4\", color = \"chartreuse4\", tooltip = \"ARTIFICIAL_START\n9983\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#FFFFFF\"] \n  \"3\" [label = \"Add penalty\n4619\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"black\", color = \"grey\", tooltip = \"Add penalty\n4619\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#A6BDDB\"] \n  \"4\" [label = \"Appeal to Judge\n18\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"black\", color = \"grey\", tooltip = \"Appeal to Judge\n18\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#FFF7FB\"] \n  \"5\" [label = \"Create Fine\n9983\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"white\", color = \"grey\", tooltip = \"Create Fine\n9983\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#034E7B\"] \n  \"6\" [label = \"Insert Date Appeal to Prefecture\n218\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"black\", color = \"grey\", tooltip = \"Insert Date Appeal to Prefecture\n218\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#FFF7FB\"] \n  \"7\" [label = \"Insert Fine Notification\n4619\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"black\", color = \"grey\", tooltip = \"Insert Fine Notification\n4619\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#A6BDDB\"] \n  \"8\" [label = \"Notify Result Appeal to Offender\n44\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"black\", color = \"grey\", tooltip = \"Notify Result Appeal to Offender\n44\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#FFF7FB\"] \n  \"9\" [label = \"Payment\n4900\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"black\", color = \"grey\", tooltip = \"Payment\n4900\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#A6BDDB\"] \n  \"10\" [label = \"Receive Result Appeal from Prefecture\n44\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"black\", color = \"grey\", tooltip = \"Receive Result Appeal from Prefecture\n44\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#FFF7FB\"] \n  \"11\" [label = \"Send Appeal to Prefecture\n215\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"black\", color = \"grey\", tooltip = \"Send Appeal to Prefecture\n215\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#FFF7FB\"] \n  \"12\" [label = \"Send Fine\n6553\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"white\", color = \"grey\", tooltip = \"Send Fine\n6553\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#3690C0\"] \n  \"13\" [label = \"Send for Credit Collection\n3381\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"black\", color = \"grey\", tooltip = \"Send for Credit Collection\n3381\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#D0D1E6\"] \n\"2\"->\"5\" [label = \"9983\", penwidth = \"5\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"3\"->\"6\" [label = \"37\", penwidth = \"1.01482520284484\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"3\"->\"9\" [label = \"1114\", penwidth = \"1.44635880997696\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"3\"->\"10\" [label = \"14\", penwidth = \"1.00560953621156\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"3\"->\"11\" [label = \"168\", penwidth = \"1.06731443453872\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"3\"->\"13\" [label = \"3286\", penwidth = \"2.31663828508464\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"4\"->\"1\" [label = \"5\", penwidth = \"1.00200340578984\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"4\"->\"3\" [label = \"13\", penwidth = \"1.00520885505359\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"5\"->\"9\" [label = \"3443\", penwidth = \"2.37954522688571\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"5\"->\"12\" [label = \"6540\", penwidth = \"3.62045477311429\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"6\"->\"3\" [label = \"169\", penwidth = \"1.06771511569668\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"6\"->\"10\" [label = \"2\", penwidth = \"1.00080136231594\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"6\"->\"11\" [label = \"47\", penwidth = \"1.01883201442452\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"7\"->\"3\" [label = \"4409\", penwidth = \"2.76660322548332\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"7\"->\"4\" [label = \"13\", penwidth = \"1.00520885505359\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"7\"->\"6\" [label = \"181\", penwidth = \"1.07252328959231\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"7\"->\"9\" [label = \"16\", penwidth = \"1.0064108985275\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"8\"->\"4\" [label = \"5\", penwidth = \"1.00200340578984\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"8\"->\"9\" [label = \"22\", penwidth = \"1.00881498547531\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"8\"->\"13\" [label = \"17\", penwidth = \"1.00681157968547\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"9\"->\"1\" [label = \"4529\", penwidth = \"2.81468496443955\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"9\"->\"3\" [label = \"16\", penwidth = \"1.0064108985275\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"9\"->\"9\" [label = \"264\", penwidth = \"1.1057798257037\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"9\"->\"12\" [label = \"13\", penwidth = \"1.00520885505359\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"9\"->\"13\" [label = \"78\", penwidth = \"1.03125313032155\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"10\"->\"8\" [label = \"44\", penwidth = \"1.01762997095062\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"11\"->\"1\" [label = \"175\", penwidth = \"1.0701192026445\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"11\"->\"3\" [label = \"12\", penwidth = \"1.00480817389562\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"11\"->\"10\" [label = \"28\", penwidth = \"1.01121907242312\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"12\"->\"1\" [label = \"1893\", penwidth = \"1.75848943203446\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"12\"->\"7\" [label = \"4619\", penwidth = \"2.85074626865672\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"12\"->\"9\" [label = \"41\", penwidth = \"1.01642792747671\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"13\"->\"1\" [label = \"3381\", penwidth = \"2.35470299509166\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div class="grViz html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-5899a8a4989ff3f5cdf6" style="width:672px;height:480px;"></div>
+<script type="application/json" data-for="htmlwidget-5899a8a4989ff3f5cdf6">{"x":{"diagram":"digraph {\n\ngraph [layout = \"dot\",\n       outputorder = \"edgesfirst\",\n       bgcolor = \"white\",\n       rankdir = \"LR\"]\n\nnode [fontname = \"Helvetica\",\n      fontsize = \"10\",\n      shape = \"circle\",\n      fixedsize = \"true\",\n      width = \"0.5\",\n      style = \"filled\",\n      fillcolor = \"aliceblue\",\n      color = \"gray70\",\n      fontcolor = \"gray50\"]\n\nedge [fontname = \"Helvetica\",\n     fontsize = \"8\",\n     weight = \"1.5\",\n     color = \"gray80\",\n     arrowsize = \"0.5\"]\n\n  \"1\" [label = \"End\", shape = \"circle\", style = \"rounded,filled\", fontcolor = \"brown4\", color = \"brown4\", tooltip = \"ARTIFICIAL_END\n9983\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#FFFFFF\"] \n  \"2\" [label = \"Start\", shape = \"circle\", style = \"rounded,filled\", fontcolor = \"chartreuse4\", color = \"chartreuse4\", tooltip = \"ARTIFICIAL_START\n9983\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#FFFFFF\"] \n  \"3\" [label = \"Add penalty\n4619\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"black\", color = \"grey\", tooltip = \"Add penalty\n4619\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#A6BDDB\"] \n  \"4\" [label = \"Appeal to Judge\n18\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"black\", color = \"grey\", tooltip = \"Appeal to Judge\n18\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#FFF7FB\"] \n  \"5\" [label = \"Create Fine\n9983\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"white\", color = \"grey\", tooltip = \"Create Fine\n9983\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#034E7B\"] \n  \"6\" [label = \"Insert Date Appeal to Prefecture\n218\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"black\", color = \"grey\", tooltip = \"Insert Date Appeal to Prefecture\n218\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#FFF7FB\"] \n  \"7\" [label = \"Insert Fine Notification\n4619\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"black\", color = \"grey\", tooltip = \"Insert Fine Notification\n4619\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#A6BDDB\"] \n  \"8\" [label = \"Notify Result Appeal to Offender\n44\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"black\", color = \"grey\", tooltip = \"Notify Result Appeal to Offender\n44\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#FFF7FB\"] \n  \"9\" [label = \"Payment\n4900\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"black\", color = \"grey\", tooltip = \"Payment\n4900\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#A6BDDB\"] \n  \"10\" [label = \"Receive Result Appeal from Prefecture\n44\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"black\", color = \"grey\", tooltip = \"Receive Result Appeal from Prefecture\n44\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#FFF7FB\"] \n  \"11\" [label = \"Send Appeal to Prefecture\n215\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"black\", color = \"grey\", tooltip = \"Send Appeal to Prefecture\n215\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#FFF7FB\"] \n  \"12\" [label = \"Send Fine\n6553\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"white\", color = \"grey\", tooltip = \"Send Fine\n6553\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#3690C0\"] \n  \"13\" [label = \"Send for Credit Collection\n3381\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"black\", color = \"grey\", tooltip = \"Send for Credit Collection\n3381\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#D0D1E6\"] \n\"2\"->\"5\" [label = \"9983\", penwidth = \"5\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"3\"->\"6\" [label = \"37\", penwidth = \"1.01482520284484\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"3\"->\"9\" [label = \"1114\", penwidth = \"1.44635880997696\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"3\"->\"10\" [label = \"14\", penwidth = \"1.00560953621156\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"3\"->\"11\" [label = \"168\", penwidth = \"1.06731443453872\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"3\"->\"13\" [label = \"3286\", penwidth = \"2.31663828508464\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"4\"->\"1\" [label = \"5\", penwidth = \"1.00200340578984\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"4\"->\"3\" [label = \"13\", penwidth = \"1.00520885505359\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"5\"->\"9\" [label = \"3443\", penwidth = \"2.37954522688571\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"5\"->\"12\" [label = \"6540\", penwidth = \"3.62045477311429\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"6\"->\"3\" [label = \"169\", penwidth = \"1.06771511569668\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"6\"->\"10\" [label = \"2\", penwidth = \"1.00080136231594\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"6\"->\"11\" [label = \"47\", penwidth = \"1.01883201442452\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"7\"->\"3\" [label = \"4409\", penwidth = \"2.76660322548332\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"7\"->\"4\" [label = \"13\", penwidth = \"1.00520885505359\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"7\"->\"6\" [label = \"181\", penwidth = \"1.07252328959231\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"7\"->\"9\" [label = \"16\", penwidth = \"1.0064108985275\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"8\"->\"4\" [label = \"5\", penwidth = \"1.00200340578984\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"8\"->\"9\" [label = \"22\", penwidth = \"1.00881498547531\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"8\"->\"13\" [label = \"17\", penwidth = \"1.00681157968547\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"9\"->\"1\" [label = \"4529\", penwidth = \"2.81468496443955\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"9\"->\"3\" [label = \"16\", penwidth = \"1.0064108985275\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"9\"->\"9\" [label = \"264\", penwidth = \"1.1057798257037\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"9\"->\"12\" [label = \"13\", penwidth = \"1.00520885505359\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"9\"->\"13\" [label = \"78\", penwidth = \"1.03125313032155\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"10\"->\"8\" [label = \"44\", penwidth = \"1.01762997095062\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"11\"->\"1\" [label = \"175\", penwidth = \"1.0701192026445\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"11\"->\"3\" [label = \"12\", penwidth = \"1.00480817389562\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"11\"->\"10\" [label = \"28\", penwidth = \"1.01121907242312\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"12\"->\"1\" [label = \"1893\", penwidth = \"1.75848943203446\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"12\"->\"7\" [label = \"4619\", penwidth = \"2.85074626865672\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"12\"->\"9\" [label = \"41\", penwidth = \"1.01642792747671\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"13\"->\"1\" [label = \"3381\", penwidth = \"2.35470299509166\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 <p>We can immediately observe less very infrequent flows in the process
 map.</p>
 <p>It is important to note that <code>filter_infrequent_flows()</code>
@@ -1378,12 +1373,11 @@ followed by <em>Blood test</em>.</p>
 <span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a>                      <span class="at">precedence_type =</span> <span class="st">&quot;directly_follows&quot;</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">traces</span>()</span></code></pre></div>
 <pre><code>## # A tibble: 3 × 3
-##   trace                                                          absol…¹ relat…²
-##   &lt;chr&gt;                                                            &lt;int&gt;   &lt;dbl&gt;
-## 1 Registration,Triage and Assessment,Blood test,MRI SCAN,Discus…     234 0.987  
-## 2 Registration,Triage and Assessment,Blood test,MRI SCAN,Discus…       2 0.00844
-## 3 Registration,Triage and Assessment,Blood test                        1 0.00422
-## # … with abbreviated variable names ¹​absolute_frequency, ²​relative_frequency</code></pre>
+##   trace                                    absolute_frequency relative_frequency
+##   &lt;chr&gt;                                                 &lt;int&gt;              &lt;dbl&gt;
+## 1 Registration,Triage and Assessment,Bloo…                234            0.987  
+## 2 Registration,Triage and Assessment,Bloo…                  2            0.00844
+## 3 Registration,Triage and Assessment,Bloo…                  1            0.00422</code></pre>
 <p>The following selects cases where <em>Triage and Assessment</em> is
 eventually followed by <strong>both</strong> <em>Blood test</em> and
 <em>X-Ray</em>, which never happens.</p>
@@ -1405,15 +1399,14 @@ antecedents, by changing the filter method to <em>one_of</em>.</p>
 <span id="cb59-5"><a href="#cb59-5" aria-hidden="true" tabindex="-1"></a>                      <span class="at">filter_method =</span> <span class="st">&quot;one_of&quot;</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb59-6"><a href="#cb59-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">traces</span>()</span></code></pre></div>
 <pre><code>## # A tibble: 6 × 3
-##   trace                                                          absol…¹ relat…²
-##   &lt;chr&gt;                                                            &lt;int&gt;   &lt;dbl&gt;
-## 1 Registration,Triage and Assessment,X-Ray,Discuss Results,Chec…     258 0.518  
-## 2 Registration,Triage and Assessment,Blood test,MRI SCAN,Discus…     234 0.470  
-## 3 Registration,Triage and Assessment,Blood test,MRI SCAN,Discus…       2 0.00402
-## 4 Registration,Triage and Assessment,X-Ray                             2 0.00402
-## 5 Registration,Triage and Assessment,X-Ray,Discuss Results             1 0.00201
-## 6 Registration,Triage and Assessment,Blood test                        1 0.00201
-## # … with abbreviated variable names ¹​absolute_frequency, ²​relative_frequency</code></pre>
+##   trace                                    absolute_frequency relative_frequency
+##   &lt;chr&gt;                                                 &lt;int&gt;              &lt;dbl&gt;
+## 1 Registration,Triage and Assessment,X-Ra…                258            0.518  
+## 2 Registration,Triage and Assessment,Bloo…                234            0.470  
+## 3 Registration,Triage and Assessment,Bloo…                  2            0.00402
+## 4 Registration,Triage and Assessment,X-Ray                  2            0.00402
+## 5 Registration,Triage and Assessment,X-Ra…                  1            0.00201
+## 6 Registration,Triage and Assessment,Bloo…                  1            0.00201</code></pre>
 <p>This final example only retains cases where <em>Triage and
 Assessment</em> is <em>not</em> followed by any of the three consequent
 activities. The result is 2 incomplete cases where the last activity was
@@ -1450,7 +1443,7 @@ activity instance with <em>notificationtype</em> equal to
 <span id="cb63-4"><a href="#cb63-4" aria-hidden="true" tabindex="-1"></a>                                <span class="at">precedence_type =</span> <span class="st">&quot;eventually_follows&quot;</span>)</span></code></pre></div>
 <pre><code>## EMPTY EVENT LOG
 ## # A tibble: 0 × 20
-## # … with 20 variables: case_id &lt;chr&gt;, activity &lt;fct&gt;, lifecycle &lt;fct&gt;,
+## # ℹ 20 variables: case_id &lt;chr&gt;, activity &lt;fct&gt;, lifecycle &lt;fct&gt;,
 ## #   resource &lt;fct&gt;, timestamp &lt;dttm&gt;, amount &lt;chr&gt;, article &lt;dbl&gt;,
 ## #   dismissal &lt;chr&gt;, expense &lt;chr&gt;, lastsent &lt;chr&gt;, matricola &lt;dbl&gt;,
 ## #   notificationtype &lt;chr&gt;, paymentamount &lt;dbl&gt;, points &lt;dbl&gt;,
@@ -1710,52 +1703,49 @@ changes to the log data after applying the filter.</p>
 <span id="cb91-2"><a href="#cb91-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter_trace_frequency</span>(<span class="at">interval =</span> <span class="fu">c</span>(<span class="dv">10</span>,<span class="dv">50</span>)) <span class="sc">%&gt;%</span></span>
 <span id="cb91-3"><a href="#cb91-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">traces</span>()</span></code></pre></div>
 <pre><code>## # A tibble: 5 × 3
-##   trace                                                          absol…¹ relat…²
-##   &lt;chr&gt;                                                            &lt;int&gt;   &lt;dbl&gt;
-## 1 ER Registration,ER Triage,ER Sepsis Triage                          35   0.333
-## 2 ER Registration,ER Triage,ER Sepsis Triage,Leucocytes,CRP           24   0.229
-## 3 ER Registration,ER Triage,ER Sepsis Triage,CRP,Leucocytes           22   0.210
-## 4 ER Registration,ER Triage,ER Sepsis Triage,CRP,LacticAcid,Leu…      13   0.124
-## 5 ER Registration,ER Triage,ER Sepsis Triage,Leucocytes,CRP,Lac…      11   0.105
-## # … with abbreviated variable names ¹​absolute_frequency, ²​relative_frequency</code></pre>
+##   trace                                    absolute_frequency relative_frequency
+##   &lt;chr&gt;                                                 &lt;int&gt;              &lt;dbl&gt;
+## 1 ER Registration,ER Triage,ER Sepsis Tri…                 35              0.333
+## 2 ER Registration,ER Triage,ER Sepsis Tri…                 24              0.229
+## 3 ER Registration,ER Triage,ER Sepsis Tri…                 22              0.210
+## 4 ER Registration,ER Triage,ER Sepsis Tri…                 13              0.124
+## 5 ER Registration,ER Triage,ER Sepsis Tri…                 11              0.105</code></pre>
 <p>Also here you can use half-open intervals.</p>
 <div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a>sepsis <span class="sc">%&gt;%</span></span>
 <span id="cb93-2"><a href="#cb93-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter_trace_frequency</span>(<span class="at">interval =</span> <span class="fu">c</span>(<span class="dv">5</span>,<span class="cn">NA</span>)) <span class="sc">%&gt;%</span></span>
 <span id="cb93-3"><a href="#cb93-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">traces</span>()</span></code></pre></div>
 <pre><code>## # A tibble: 11 × 3
-##    trace                                                         absol…¹ relat…²
-##    &lt;chr&gt;                                                           &lt;int&gt;   &lt;dbl&gt;
-##  1 ER Registration,ER Triage,ER Sepsis Triage                         35  0.248 
-##  2 ER Registration,ER Triage,ER Sepsis Triage,Leucocytes,CRP          24  0.170 
-##  3 ER Registration,ER Triage,ER Sepsis Triage,CRP,Leucocytes          22  0.156 
-##  4 ER Registration,ER Triage,ER Sepsis Triage,CRP,LacticAcid,Le…      13  0.0922
-##  5 ER Registration,ER Triage,ER Sepsis Triage,Leucocytes,CRP,La…      11  0.0780
-##  6 ER Registration,ER Triage,ER Sepsis Triage,Leucocytes,CRP,La…       9  0.0638
-##  7 ER Registration,ER Triage,ER Sepsis Triage,Leucocytes,Lactic…       7  0.0496
-##  8 ER Registration,ER Triage,ER Sepsis Triage,Leucocytes,CRP,Ad…       5  0.0355
-##  9 ER Registration,ER Triage,ER Sepsis Triage,LacticAcid,Leucoc…       5  0.0355
-## 10 ER Registration,ER Triage,ER Sepsis Triage,CRP,Leucocytes,La…       5  0.0355
-## 11 ER Registration,ER Triage,CRP,Leucocytes,ER Sepsis Triage           5  0.0355
-## # … with abbreviated variable names ¹​absolute_frequency, ²​relative_frequency</code></pre>
+##    trace                                   absolute_frequency relative_frequency
+##    &lt;chr&gt;                                                &lt;int&gt;              &lt;dbl&gt;
+##  1 ER Registration,ER Triage,ER Sepsis Tr…                 35             0.248 
+##  2 ER Registration,ER Triage,ER Sepsis Tr…                 24             0.170 
+##  3 ER Registration,ER Triage,ER Sepsis Tr…                 22             0.156 
+##  4 ER Registration,ER Triage,ER Sepsis Tr…                 13             0.0922
+##  5 ER Registration,ER Triage,ER Sepsis Tr…                 11             0.0780
+##  6 ER Registration,ER Triage,ER Sepsis Tr…                  9             0.0638
+##  7 ER Registration,ER Triage,ER Sepsis Tr…                  7             0.0496
+##  8 ER Registration,ER Triage,ER Sepsis Tr…                  5             0.0355
+##  9 ER Registration,ER Triage,ER Sepsis Tr…                  5             0.0355
+## 10 ER Registration,ER Triage,ER Sepsis Tr…                  5             0.0355
+## 11 ER Registration,ER Triage,CRP,Leucocyt…                  5             0.0355</code></pre>
 <p>And use <code>reverse = TRUE</code>.</p>
 <div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="#cb95-1" aria-hidden="true" tabindex="-1"></a>sepsis <span class="sc">%&gt;%</span></span>
 <span id="cb95-2"><a href="#cb95-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter_trace_frequency</span>(<span class="at">interval =</span> <span class="fu">c</span>(<span class="dv">5</span>,<span class="cn">NA</span>), <span class="at">reverse =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb95-3"><a href="#cb95-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">traces</span>()</span></code></pre></div>
 <pre><code>## # A tibble: 835 × 3
-##    trace                                                         absol…¹ relat…²
-##    &lt;chr&gt;                                                           &lt;int&gt;   &lt;dbl&gt;
-##  1 ER Registration,ER Triage,ER Sepsis Triage,CRP,LacticAcid,Le…       4 0.00440
-##  2 ER Registration,ER Triage,ER Sepsis Triage,LacticAcid,Leucoc…       4 0.00440
-##  3 ER Registration,ER Triage,ER Sepsis Triage,IV Liquid,CRP,Leu…       4 0.00440
-##  4 ER Registration,ER Triage,ER Sepsis Triage,CRP,Leucocytes,Ad…       4 0.00440
-##  5 ER Registration,ER Triage,Leucocytes,CRP,ER Sepsis Triage           4 0.00440
-##  6 ER Registration,ER Triage,ER Sepsis Triage,Leucocytes,CRP,La…       4 0.00440
-##  7 ER Registration,ER Triage,ER Sepsis Triage,Leucocytes,Lactic…       4 0.00440
-##  8 ER Registration,ER Triage,ER Sepsis Triage,IV Liquid,Leucocy…       3 0.00330
-##  9 ER Registration,ER Triage,LacticAcid,Leucocytes,CRP,ER Sepsi…       3 0.00330
-## 10 ER Registration,ER Triage,CRP,LacticAcid,Leucocytes,ER Sepsi…       3 0.00330
-## # … with 825 more rows, and abbreviated variable names ¹​absolute_frequency,
-## #   ²​relative_frequency</code></pre>
+##    trace                                   absolute_frequency relative_frequency
+##    &lt;chr&gt;                                                &lt;int&gt;              &lt;dbl&gt;
+##  1 ER Registration,ER Triage,ER Sepsis Tr…                  4            0.00440
+##  2 ER Registration,ER Triage,ER Sepsis Tr…                  4            0.00440
+##  3 ER Registration,ER Triage,ER Sepsis Tr…                  4            0.00440
+##  4 ER Registration,ER Triage,ER Sepsis Tr…                  4            0.00440
+##  5 ER Registration,ER Triage,Leucocytes,C…                  4            0.00440
+##  6 ER Registration,ER Triage,ER Sepsis Tr…                  4            0.00440
+##  7 ER Registration,ER Triage,ER Sepsis Tr…                  4            0.00440
+##  8 ER Registration,ER Triage,ER Sepsis Tr…                  3            0.00330
+##  9 ER Registration,ER Triage,LacticAcid,L…                  3            0.00330
+## 10 ER Registration,ER Triage,CRP,LacticAc…                  3            0.00330
+## # ℹ 825 more rows</code></pre>
 </div>
 </div>
 <div id="percentage-based-3" class="section level3">
@@ -1770,40 +1760,38 @@ frequency.</p>
 <span id="cb97-2"><a href="#cb97-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter_trace_frequency</span>(<span class="at">percentage =</span> <span class="fl">0.8</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb97-3"><a href="#cb97-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">traces</span>()</span></code></pre></div>
 <pre><code>## # A tibble: 846 × 3
-##    trace                                                         absol…¹ relat…²
-##    &lt;chr&gt;                                                           &lt;int&gt;   &lt;dbl&gt;
-##  1 ER Registration,ER Triage,ER Sepsis Triage                         35 0.0333 
-##  2 ER Registration,ER Triage,ER Sepsis Triage,Leucocytes,CRP          24 0.0229 
-##  3 ER Registration,ER Triage,ER Sepsis Triage,CRP,Leucocytes          22 0.0210 
-##  4 ER Registration,ER Triage,ER Sepsis Triage,CRP,LacticAcid,Le…      13 0.0124 
-##  5 ER Registration,ER Triage,ER Sepsis Triage,Leucocytes,CRP,La…      11 0.0105 
-##  6 ER Registration,ER Triage,ER Sepsis Triage,Leucocytes,CRP,La…       9 0.00857
-##  7 ER Registration,ER Triage,ER Sepsis Triage,Leucocytes,Lactic…       7 0.00667
-##  8 ER Registration,ER Triage,ER Sepsis Triage,Leucocytes,CRP,Ad…       5 0.00476
-##  9 ER Registration,ER Triage,ER Sepsis Triage,LacticAcid,Leucoc…       5 0.00476
-## 10 ER Registration,ER Triage,ER Sepsis Triage,CRP,Leucocytes,La…       5 0.00476
-## # … with 836 more rows, and abbreviated variable names ¹​absolute_frequency,
-## #   ²​relative_frequency</code></pre>
+##    trace                                   absolute_frequency relative_frequency
+##    &lt;chr&gt;                                                &lt;int&gt;              &lt;dbl&gt;
+##  1 ER Registration,ER Triage,ER Sepsis Tr…                 35            0.0333 
+##  2 ER Registration,ER Triage,ER Sepsis Tr…                 24            0.0229 
+##  3 ER Registration,ER Triage,ER Sepsis Tr…                 22            0.0210 
+##  4 ER Registration,ER Triage,ER Sepsis Tr…                 13            0.0124 
+##  5 ER Registration,ER Triage,ER Sepsis Tr…                 11            0.0105 
+##  6 ER Registration,ER Triage,ER Sepsis Tr…                  9            0.00857
+##  7 ER Registration,ER Triage,ER Sepsis Tr…                  7            0.00667
+##  8 ER Registration,ER Triage,ER Sepsis Tr…                  5            0.00476
+##  9 ER Registration,ER Triage,ER Sepsis Tr…                  5            0.00476
+## 10 ER Registration,ER Triage,ER Sepsis Tr…                  5            0.00476
+## # ℹ 836 more rows</code></pre>
 <p>You can again set <code>reverse = TRUE</code> if you instead want 80%
 of the cases with the lowest frequency.</p>
 <div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="#cb99-1" aria-hidden="true" tabindex="-1"></a>sepsis <span class="sc">%&gt;%</span></span>
 <span id="cb99-2"><a href="#cb99-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter_trace_frequency</span>(<span class="at">percentage =</span> <span class="fl">0.2</span>, <span class="at">reverse =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb99-3"><a href="#cb99-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">traces</span>()</span></code></pre></div>
 <pre><code>## # A tibble: 784 × 3
-##    trace                                                         absol…¹ relat…²
-##    &lt;chr&gt;                                                           &lt;int&gt;   &lt;dbl&gt;
-##  1 ER Registration,ER Triage,ER Sepsis Triage,LacticAcid,Leucoc…       1 0.00128
-##  2 ER Registration,ER Triage,ER Sepsis Triage,IV Antibiotics,Le…       1 0.00128
-##  3 ER Registration,ER Triage,ER Sepsis Triage,CRP,Leucocytes,IV…       1 0.00128
-##  4 ER Registration,ER Triage,ER Sepsis Triage,LacticAcid,Leucoc…       1 0.00128
-##  5 ER Registration,IV Liquid,ER Triage,Leucocytes,CRP,LacticAci…       1 0.00128
-##  6 ER Registration,ER Triage,ER Sepsis Triage,CRP,LacticAcid,Le…       1 0.00128
-##  7 ER Registration,ER Triage,ER Sepsis Triage,Leucocytes,CRP,La…       1 0.00128
-##  8 ER Registration,ER Triage,CRP,LacticAcid,Leucocytes,ER Sepsi…       1 0.00128
-##  9 ER Registration,ER Triage,ER Sepsis Triage,Leucocytes,CRP,La…       1 0.00128
-## 10 ER Registration,ER Triage,Leucocytes,CRP,LacticAcid,ER Sepsi…       1 0.00128
-## # … with 774 more rows, and abbreviated variable names ¹​absolute_frequency,
-## #   ²​relative_frequency</code></pre>
+##    trace                                   absolute_frequency relative_frequency
+##    &lt;chr&gt;                                                &lt;int&gt;              &lt;dbl&gt;
+##  1 ER Registration,ER Triage,ER Sepsis Tr…                  1            0.00128
+##  2 ER Registration,ER Triage,ER Sepsis Tr…                  1            0.00128
+##  3 ER Registration,ER Triage,ER Sepsis Tr…                  1            0.00128
+##  4 ER Registration,ER Triage,ER Sepsis Tr…                  1            0.00128
+##  5 ER Registration,IV Liquid,ER Triage,Le…                  1            0.00128
+##  6 ER Registration,ER Triage,ER Sepsis Tr…                  1            0.00128
+##  7 ER Registration,ER Triage,ER Sepsis Tr…                  1            0.00128
+##  8 ER Registration,ER Triage,CRP,LacticAc…                  1            0.00128
+##  9 ER Registration,ER Triage,ER Sepsis Tr…                  1            0.00128
+## 10 ER Registration,ER Triage,Leucocytes,C…                  1            0.00128
+## # ℹ 774 more rows</code></pre>
 <p>Note that the obtained percentage of cases will not always be exactly
 the specified percentage, as there can be ties. For example, in the
 <code>sepsis</code> data set, 784 of the 1050 cases (75%) follow a
@@ -1838,60 +1826,57 @@ class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="#cb1
 <span id="cb101-2"><a href="#cb101-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter_trace_length</span>(<span class="at">interval =</span> <span class="fu">c</span>(<span class="dv">10</span>,<span class="dv">50</span>)) <span class="sc">%&gt;%</span></span>
 <span id="cb101-3"><a href="#cb101-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">traces</span>()</span></code></pre></div>
 <pre><code>## # A tibble: 703 × 3
-##    trace                                                         absol…¹ relat…²
-##    &lt;chr&gt;                                                           &lt;int&gt;   &lt;dbl&gt;
-##  1 ER Registration,ER Triage,ER Sepsis Triage,LacticAcid,Leucoc…       4 0.00540
-##  2 ER Registration,ER Triage,ER Sepsis Triage,Leucocytes,CRP,La…       4 0.00540
-##  3 ER Registration,ER Triage,ER Sepsis Triage,Leucocytes,Lactic…       4 0.00540
-##  4 ER Registration,ER Triage,ER Sepsis Triage,IV Liquid,IV Anti…       3 0.00405
-##  5 ER Registration,ER Triage,ER Sepsis Triage,Leucocytes,CRP,La…       3 0.00405
-##  6 ER Registration,ER Triage,ER Sepsis Triage,CRP,LacticAcid,Le…       3 0.00405
-##  7 ER Registration,ER Triage,ER Sepsis Triage,IV Liquid,Leucocy…       3 0.00405
-##  8 ER Registration,ER Triage,ER Sepsis Triage,LacticAcid,Leucoc…       2 0.00270
-##  9 ER Registration,ER Triage,ER Sepsis Triage,LacticAcid,CRP,Le…       2 0.00270
-## 10 ER Registration,ER Triage,ER Sepsis Triage,Leucocytes,CRP,La…       2 0.00270
-## # … with 693 more rows, and abbreviated variable names ¹​absolute_frequency,
-## #   ²​relative_frequency</code></pre>
+##    trace                                   absolute_frequency relative_frequency
+##    &lt;chr&gt;                                                &lt;int&gt;              &lt;dbl&gt;
+##  1 ER Registration,ER Triage,ER Sepsis Tr…                  4            0.00540
+##  2 ER Registration,ER Triage,ER Sepsis Tr…                  4            0.00540
+##  3 ER Registration,ER Triage,ER Sepsis Tr…                  4            0.00540
+##  4 ER Registration,ER Triage,ER Sepsis Tr…                  3            0.00405
+##  5 ER Registration,ER Triage,ER Sepsis Tr…                  3            0.00405
+##  6 ER Registration,ER Triage,ER Sepsis Tr…                  3            0.00405
+##  7 ER Registration,ER Triage,ER Sepsis Tr…                  3            0.00405
+##  8 ER Registration,ER Triage,ER Sepsis Tr…                  2            0.00270
+##  9 ER Registration,ER Triage,ER Sepsis Tr…                  2            0.00270
+## 10 ER Registration,ER Triage,ER Sepsis Tr…                  2            0.00270
+## # ℹ 693 more rows</code></pre>
 <p>Also here you can use half-open intervals.</p>
 <div class="sourceCode" id="cb103"><pre
 class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="#cb103-1" aria-hidden="true" tabindex="-1"></a>sepsis <span class="sc">%&gt;%</span></span>
 <span id="cb103-2"><a href="#cb103-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter_trace_length</span>(<span class="at">interval =</span> <span class="fu">c</span>(<span class="dv">10</span>,<span class="cn">NA</span>)) <span class="sc">%&gt;%</span></span>
 <span id="cb103-3"><a href="#cb103-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">traces</span>()</span></code></pre></div>
 <pre><code>## # A tibble: 715 × 3
-##    trace                                                         absol…¹ relat…²
-##    &lt;chr&gt;                                                           &lt;int&gt;   &lt;dbl&gt;
-##  1 ER Registration,ER Triage,ER Sepsis Triage,LacticAcid,Leucoc…       4 0.00531
-##  2 ER Registration,ER Triage,ER Sepsis Triage,Leucocytes,CRP,La…       4 0.00531
-##  3 ER Registration,ER Triage,ER Sepsis Triage,Leucocytes,Lactic…       4 0.00531
-##  4 ER Registration,ER Triage,ER Sepsis Triage,IV Liquid,IV Anti…       3 0.00398
-##  5 ER Registration,ER Triage,ER Sepsis Triage,Leucocytes,CRP,La…       3 0.00398
-##  6 ER Registration,ER Triage,ER Sepsis Triage,CRP,LacticAcid,Le…       3 0.00398
-##  7 ER Registration,ER Triage,ER Sepsis Triage,IV Liquid,Leucocy…       3 0.00398
-##  8 ER Registration,ER Triage,ER Sepsis Triage,LacticAcid,Leucoc…       2 0.00266
-##  9 ER Registration,ER Triage,ER Sepsis Triage,LacticAcid,CRP,Le…       2 0.00266
-## 10 ER Registration,ER Triage,ER Sepsis Triage,Leucocytes,CRP,La…       2 0.00266
-## # … with 705 more rows, and abbreviated variable names ¹​absolute_frequency,
-## #   ²​relative_frequency</code></pre>
+##    trace                                   absolute_frequency relative_frequency
+##    &lt;chr&gt;                                                &lt;int&gt;              &lt;dbl&gt;
+##  1 ER Registration,ER Triage,ER Sepsis Tr…                  4            0.00531
+##  2 ER Registration,ER Triage,ER Sepsis Tr…                  4            0.00531
+##  3 ER Registration,ER Triage,ER Sepsis Tr…                  4            0.00531
+##  4 ER Registration,ER Triage,ER Sepsis Tr…                  3            0.00398
+##  5 ER Registration,ER Triage,ER Sepsis Tr…                  3            0.00398
+##  6 ER Registration,ER Triage,ER Sepsis Tr…                  3            0.00398
+##  7 ER Registration,ER Triage,ER Sepsis Tr…                  3            0.00398
+##  8 ER Registration,ER Triage,ER Sepsis Tr…                  2            0.00266
+##  9 ER Registration,ER Triage,ER Sepsis Tr…                  2            0.00266
+## 10 ER Registration,ER Triage,ER Sepsis Tr…                  2            0.00266
+## # ℹ 705 more rows</code></pre>
 <p>And use <code>reverse = TRUE</code>.</p>
 <div class="sourceCode" id="cb105"><pre
 class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="#cb105-1" aria-hidden="true" tabindex="-1"></a>sepsis <span class="sc">%&gt;%</span></span>
 <span id="cb105-2"><a href="#cb105-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter_trace_length</span>(<span class="at">interval =</span> <span class="fu">c</span>(<span class="dv">10</span>,<span class="cn">NA</span>), <span class="at">reverse =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb105-3"><a href="#cb105-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">traces</span>()</span></code></pre></div>
 <pre><code>## # A tibble: 131 × 3
-##    trace                                                         absol…¹ relat…²
-##    &lt;chr&gt;                                                           &lt;int&gt;   &lt;dbl&gt;
-##  1 ER Registration,ER Triage,ER Sepsis Triage                         35  0.118 
-##  2 ER Registration,ER Triage,ER Sepsis Triage,Leucocytes,CRP          24  0.0808
-##  3 ER Registration,ER Triage,ER Sepsis Triage,CRP,Leucocytes          22  0.0741
-##  4 ER Registration,ER Triage,ER Sepsis Triage,CRP,LacticAcid,Le…      13  0.0438
-##  5 ER Registration,ER Triage,ER Sepsis Triage,Leucocytes,CRP,La…      11  0.0370
-##  6 ER Registration,ER Triage,ER Sepsis Triage,Leucocytes,CRP,La…       9  0.0303
-##  7 ER Registration,ER Triage,ER Sepsis Triage,Leucocytes,Lactic…       7  0.0236
-##  8 ER Registration,ER Triage,ER Sepsis Triage,Leucocytes,CRP,Ad…       5  0.0168
-##  9 ER Registration,ER Triage,ER Sepsis Triage,LacticAcid,Leucoc…       5  0.0168
-## 10 ER Registration,ER Triage,ER Sepsis Triage,CRP,Leucocytes,La…       5  0.0168
-## # … with 121 more rows, and abbreviated variable names ¹​absolute_frequency,
-## #   ²​relative_frequency</code></pre>
+##    trace                                   absolute_frequency relative_frequency
+##    &lt;chr&gt;                                                &lt;int&gt;              &lt;dbl&gt;
+##  1 ER Registration,ER Triage,ER Sepsis Tr…                 35             0.118 
+##  2 ER Registration,ER Triage,ER Sepsis Tr…                 24             0.0808
+##  3 ER Registration,ER Triage,ER Sepsis Tr…                 22             0.0741
+##  4 ER Registration,ER Triage,ER Sepsis Tr…                 13             0.0438
+##  5 ER Registration,ER Triage,ER Sepsis Tr…                 11             0.0370
+##  6 ER Registration,ER Triage,ER Sepsis Tr…                  9             0.0303
+##  7 ER Registration,ER Triage,ER Sepsis Tr…                  7             0.0236
+##  8 ER Registration,ER Triage,ER Sepsis Tr…                  5             0.0168
+##  9 ER Registration,ER Triage,ER Sepsis Tr…                  5             0.0168
+## 10 ER Registration,ER Triage,ER Sepsis Tr…                  5             0.0168
+## # ℹ 121 more rows</code></pre>
 </div>
 </div>
 <div id="percentage-based-4" class="section level3">
@@ -1908,20 +1893,19 @@ class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="#cb1
 <span id="cb107-2"><a href="#cb107-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter_trace_length</span>(<span class="at">percentage =</span> <span class="fl">0.5</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb107-3"><a href="#cb107-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">traces</span>()</span></code></pre></div>
 <pre><code>## # A tibble: 514 × 3
-##    trace                                                         absol…¹ relat…²
-##    &lt;chr&gt;                                                           &lt;int&gt;   &lt;dbl&gt;
-##  1 ER Registration,ER Triage,ER Sepsis Triage,LacticAcid,Leucoc…       2 0.00381
-##  2 ER Registration,ER Triage,ER Sepsis Triage,IV Liquid,IV Anti…       2 0.00381
-##  3 ER Registration,ER Triage,ER Sepsis Triage,Leucocytes,CRP,La…       2 0.00381
-##  4 ER Registration,ER Triage,ER Sepsis Triage,Leucocytes,CRP,La…       2 0.00381
-##  5 ER Registration,ER Triage,ER Sepsis Triage,LacticAcid,Leucoc…       2 0.00381
-##  6 ER Registration,ER Triage,ER Sepsis Triage,CRP,Leucocytes,La…       2 0.00381
-##  7 ER Registration,ER Triage,ER Sepsis Triage,Leucocytes,CRP,La…       2 0.00381
-##  8 ER Registration,ER Triage,ER Sepsis Triage,IV Liquid,Leucocy…       2 0.00381
-##  9 ER Registration,ER Triage,ER Sepsis Triage,CRP,LacticAcid,Le…       2 0.00381
-## 10 ER Registration,ER Triage,ER Sepsis Triage,IV Liquid,CRP,Lac…       2 0.00381
-## # … with 504 more rows, and abbreviated variable names ¹​absolute_frequency,
-## #   ²​relative_frequency</code></pre>
+##    trace                                   absolute_frequency relative_frequency
+##    &lt;chr&gt;                                                &lt;int&gt;              &lt;dbl&gt;
+##  1 ER Registration,ER Triage,ER Sepsis Tr…                  2            0.00381
+##  2 ER Registration,ER Triage,ER Sepsis Tr…                  2            0.00381
+##  3 ER Registration,ER Triage,ER Sepsis Tr…                  2            0.00381
+##  4 ER Registration,ER Triage,ER Sepsis Tr…                  2            0.00381
+##  5 ER Registration,ER Triage,ER Sepsis Tr…                  2            0.00381
+##  6 ER Registration,ER Triage,ER Sepsis Tr…                  2            0.00381
+##  7 ER Registration,ER Triage,ER Sepsis Tr…                  2            0.00381
+##  8 ER Registration,ER Triage,ER Sepsis Tr…                  2            0.00381
+##  9 ER Registration,ER Triage,ER Sepsis Tr…                  2            0.00381
+## 10 ER Registration,ER Triage,ER Sepsis Tr…                  2            0.00381
+## # ℹ 504 more rows</code></pre>
 <p>You can again set <code>reverse = TRUE</code> if you instead want 50%
 of the cases with the lowest frequency.</p>
 <div class="sourceCode" id="cb109"><pre
@@ -1929,20 +1913,19 @@ class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="#cb1
 <span id="cb109-2"><a href="#cb109-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter_trace_length</span>(<span class="at">percentage =</span> <span class="fl">0.5</span>, <span class="at">reverse =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb109-3"><a href="#cb109-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">traces</span>()</span></code></pre></div>
 <pre><code>## # A tibble: 337 × 3
-##    trace                                                         absol…¹ relat…²
-##    &lt;chr&gt;                                                           &lt;int&gt;   &lt;dbl&gt;
-##  1 ER Registration,ER Triage,ER Sepsis Triage                         35 0.0667 
-##  2 ER Registration,ER Triage,ER Sepsis Triage,Leucocytes,CRP          24 0.0457 
-##  3 ER Registration,ER Triage,ER Sepsis Triage,CRP,Leucocytes          22 0.0419 
-##  4 ER Registration,ER Triage,ER Sepsis Triage,CRP,LacticAcid,Le…      13 0.0248 
-##  5 ER Registration,ER Triage,ER Sepsis Triage,Leucocytes,CRP,La…      11 0.0210 
-##  6 ER Registration,ER Triage,ER Sepsis Triage,Leucocytes,CRP,La…       9 0.0171 
-##  7 ER Registration,ER Triage,ER Sepsis Triage,Leucocytes,Lactic…       7 0.0133 
-##  8 ER Registration,ER Triage,ER Sepsis Triage,Leucocytes,CRP,Ad…       5 0.00952
-##  9 ER Registration,ER Triage,ER Sepsis Triage,LacticAcid,Leucoc…       5 0.00952
-## 10 ER Registration,ER Triage,ER Sepsis Triage,CRP,Leucocytes,La…       5 0.00952
-## # … with 327 more rows, and abbreviated variable names ¹​absolute_frequency,
-## #   ²​relative_frequency</code></pre>
+##    trace                                   absolute_frequency relative_frequency
+##    &lt;chr&gt;                                                &lt;int&gt;              &lt;dbl&gt;
+##  1 ER Registration,ER Triage,ER Sepsis Tr…                 35            0.0667 
+##  2 ER Registration,ER Triage,ER Sepsis Tr…                 24            0.0457 
+##  3 ER Registration,ER Triage,ER Sepsis Tr…                 22            0.0419 
+##  4 ER Registration,ER Triage,ER Sepsis Tr…                 13            0.0248 
+##  5 ER Registration,ER Triage,ER Sepsis Tr…                 11            0.0210 
+##  6 ER Registration,ER Triage,ER Sepsis Tr…                  9            0.0171 
+##  7 ER Registration,ER Triage,ER Sepsis Tr…                  7            0.0133 
+##  8 ER Registration,ER Triage,ER Sepsis Tr…                  5            0.00952
+##  9 ER Registration,ER Triage,ER Sepsis Tr…                  5            0.00952
+## 10 ER Registration,ER Triage,ER Sepsis Tr…                  5            0.00952
+## # ℹ 327 more rows</code></pre>
 <p>Note that the obtained percentage of cases will not always be exactly
 the specified percentage, as there can be ties.</p>
 </div>

@@ -13,15 +13,15 @@
 
 <title>Performance Analysis</title>
 
-<script src="site_libs/header-attrs-2.20/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.23/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <link href="site_libs/bootstrap-5.2.2/bootstrap.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-5.2.2/bootstrap.bundle.min.js"></script>
-<script src="site_libs/bs3compat-0.4.2/transition.js"></script>
-<script src="site_libs/bs3compat-0.4.2/tabs.js"></script>
-<script src="site_libs/bs3compat-0.4.2/bs3compat.js"></script>
-<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<script src="site_libs/bs3compat-0.5.0/transition.js"></script>
+<script src="site_libs/bs3compat-0.5.0/tabs.js"></script>
+<script src="site_libs/bs3compat-0.5.0/bs3compat.js"></script>
+<script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
@@ -647,20 +647,10 @@ div.tocify {
 </div>
 
 
-<p>The metrics for exploring and describing event data which are
-available are based on literature in the field of operational excellence
-and are organized in the following (sub)categories</p>
-<ul>
-<li>Time perspective</li>
-<li>Organizational perspective</li>
-<li>Structuredness perspective
-<ul>
-<li>Variance</li>
-<li>Rework</li>
-</ul></li>
-</ul>
-<div id="time-perspective" class="section level2">
-<h2>Time perspective</h2>
+<p><img src="images/icons/perf.PNG" width="25%" style="display: block; margin: auto 0 auto auto;" /></p>
+<hr />
+<div id="performance-analysis" class="section level1">
+<h1>Performance analysis</h1>
 <p>Three different time metrics can be computed:</p>
 <ul>
 <li>throughput time: the time between the very first event of the case
@@ -675,8 +665,8 @@ activity instances within a case overlap, processing time for that
 overlap will be counted twice. The figure below shows a schematic
 overview of different time metrics.</p>
 <p><img src="images/processingtime.PNG" width="732" /></p>
-<div id="idle-time" class="section level4">
-<h4>Idle Time</h4>
+<div id="idle-time" class="section level2">
+<h2>Idle Time</h2>
 <p>The idle time is the time that there is no activity in a case or for
 a resource. It can only be calculated when there are both start and end
 timestamps available for activity instances. It can be computed at the
@@ -699,27 +689,27 @@ by supplying it to the plot function.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">idle_time</span>(<span class="st">&quot;resource&quot;</span>, <span class="at">units =</span> <span class="st">&quot;days&quot;</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">plot</span>()</span></code></pre></div>
-<p><img src="performance_analysis_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p><img src="performance_analysis_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 </div>
-<div id="processing-time" class="section level4">
-<h4>Processing Time</h4>
+<div id="processing-time" class="section level2">
+<h2>Processing Time</h2>
 <p>The processing time can be computed at the levels log, trace, case,
 activity and resource-activity. It can only be calculated when there are
 both start and end timestamps available for activity instances.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span> </span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">processing_time</span>(<span class="st">&quot;activity&quot;</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    plot</span></code></pre></div>
-<p><img src="performance_analysis_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p><img src="performance_analysis_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 </div>
-<div id="throughput-time" class="section level4">
-<h4>Throughput Time</h4>
+<div id="throughput-time" class="section level2">
+<h2>Throughput Time</h2>
 <p>The throughput time is the time form the very first event to the last
 event of a case. The levels at which it can be computed are log, trace,
 or case.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">throughput_time</span>(<span class="st">&quot;log&quot;</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">plot</span>()</span></code></pre></div>
-<p><img src="performance_analysis_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p><img src="performance_analysis_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 </div>
 </div>
 

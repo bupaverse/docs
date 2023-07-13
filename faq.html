@@ -13,17 +13,18 @@
 
 <title>Frequently Asked Questions</title>
 
-<script src="site_libs/header-attrs-2.20/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.23/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <link href="site_libs/bootstrap-5.2.2/bootstrap.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-5.2.2/bootstrap.bundle.min.js"></script>
-<script src="site_libs/bs3compat-0.4.2/transition.js"></script>
-<script src="site_libs/bs3compat-0.4.2/tabs.js"></script>
-<script src="site_libs/bs3compat-0.4.2/bs3compat.js"></script>
+<script src="site_libs/bs3compat-0.5.0/transition.js"></script>
+<script src="site_libs/bs3compat-0.5.0/tabs.js"></script>
+<script src="site_libs/bs3compat-0.5.0/bs3compat.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
-<script src="site_libs/bslib-tag-require-0.4.2/tag-require.js"></script>
-<link href="site_libs/htmltools-fill-0.5.4/fill.css" rel="stylesheet" />
+<link href="site_libs/htmltools-fill-0.5.5/fill.css" rel="stylesheet" />
+<script src="site_libs/bslib-card-0.5.0/card.min.js"></script>
+<script src="site_libs/bslib-tag-require-0.5.0/tag-require.js"></script>
 <script>
 	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -480,31 +481,36 @@ respective <a
 href="https://github.com/bupaverse">GitHub-repository</a>.</p>
 <div id="create" class="section level2">
 <h2>Create</h2>
-<div class="card bslib-card html-fill-item html-fill-container" data-require-bs-caller="card()" data-require-bs-version="5">
+<div class="card bslib-card bslib-mb-spacer html-fill-item html-fill-container" data-bslib-card-init data-require-bs-caller="card()" data-require-bs-version="5">
 <div class="card-header card text-white bg-secondary mb-3">What is an activity instance identifier, and when do I need one?</div>
-<div class="card-body" style="flex:0 0 auto;">The activity instance identifier is a unique identifier for each activity instance, i.e. one specific execution of an activity for a specific case. If an activity exist of more than a single event, for example a <i>start</i> and a <i>complete</i> event, the activity instance identifier is needed to make sure these events are connected to each other.</div>
-<div class="card-body" style="flex:0 0 auto;">When you don't have multiple events per activity instance, i.e. each activity only has one registrered timestamp, the activity instance identifier is redundant. In that case, you can use the <code>activitylog</code> object class, as specified in <a href = 'create_logs.html#Scenario_1'>Scenario 1</a>.</div>
-<div class="card-body" style="flex:0 0 auto;">If your log has multiple events for the same activity instance, but there is no variable that can serve as an activity instance identifier to connect them, you can try <a href = 'create_logs.html#Missing_activity_instance_id'> <code>assign_instance_id()</code></a>.</div>
+<div class="card-body bslib-gap-spacing html-fill-item html-fill-container" style="margin-top:auto;margin-bottom:auto;flex:1 1 auto;">The activity instance identifier is a unique identifier for each activity instance, i.e. one specific execution of an activity for a specific case. If an activity exist of more than a single event, for example a <i>start</i> and a <i>complete</i> event, the activity instance identifier is needed to make sure these events are connected to each other.</div>
+<div class="card-body bslib-gap-spacing html-fill-item html-fill-container" style="margin-top:auto;margin-bottom:auto;flex:1 1 auto;">When you don't have multiple events per activity instance, i.e. each activity only has one registrered timestamp, the activity instance identifier is redundant. In that case, you can use the <code>activitylog</code> object class, as specified in <a href = 'create_logs.html#Scenario_1'>Scenario 1</a>.</div>
+<div class="card-body bslib-gap-spacing html-fill-item html-fill-container" style="margin-top:auto;margin-bottom:auto;flex:1 1 auto;">If your log has multiple events for the same activity instance, but there is no variable that can serve as an activity instance identifier to connect them, you can try <a href = 'create_logs.html#Missing_activity_instance_id'> <code>assign_instance_id()</code></a>.</div>
+<script data-bslib-card-init>bslib.Card.initializeAllCards();</script>
 </div>
-<div class="card bslib-card html-fill-item html-fill-container" data-require-bs-caller="card()" data-require-bs-version="5">
+<div class="card bslib-card bslib-mb-spacer html-fill-item html-fill-container" data-bslib-card-init data-require-bs-caller="card()" data-require-bs-version="5">
 <div class="card-header card text-white bg-secondary mb-3">Creating the event log takes a lot of time. What can I do?</div>
-<div class="card-body" style="flex:0 0 auto;">By default, <code>eventlog()</code> will perform some checks to make sure the provided mapping corresponds to the data model. This means that each value of the <code>activity_instance_id</code> should be connected to a single <code>case_id</code> and a single <code>activity_id</code>. For larger event logs, this does take some time. You can circumvent these by setting the argument <code>validate = FALSE</code>.</div>
-<div class="card-body" style="flex:0 0 auto;">Alternatively, you might want to have a look at the different <a href = 'create_logs.html#The_right_log_for_the_job'>scenarios<a> to decide whether you need an <code>eventlog</code> or <code>activitylog</code> object. The <code>activitylog</code> is a simplified object class that does not require special validation. </div>
+<div class="card-body bslib-gap-spacing html-fill-item html-fill-container" style="margin-top:auto;margin-bottom:auto;flex:1 1 auto;">By default, <code>eventlog()</code> will perform some checks to make sure the provided mapping corresponds to the data model. This means that each value of the <code>activity_instance_id</code> should be connected to a single <code>case_id</code> and a single <code>activity_id</code>. For larger event logs, this does take some time. You can circumvent these by setting the argument <code>validate = FALSE</code>.</div>
+<div class="card-body bslib-gap-spacing html-fill-item html-fill-container" style="margin-top:auto;margin-bottom:auto;flex:1 1 auto;">Alternatively, you might want to have a look at the different <a href = 'create_logs.html#The_right_log_for_the_job'>scenarios<a> to decide whether you need an <code>eventlog</code> or <code>activitylog</code> object. The <code>activitylog</code> is a simplified object class that does not require special validation. </div>
+<script data-bslib-card-init>bslib.Card.initializeAllCards();</script>
 </div>
 </div>
 <div id="visualize" class="section level2">
 <h2>Visualize</h2>
-<div class="card bslib-card html-fill-item html-fill-container" data-require-bs-caller="card()" data-require-bs-version="5">
+<div class="card bslib-card bslib-mb-spacer html-fill-item html-fill-container" data-bslib-card-init data-require-bs-caller="card()" data-require-bs-version="5">
 <div class="card-header card text-white bg-success mb-3">How can I remove infrequent edges in a process map?</div>
-<div class="card-body" style="flex:0 0 auto;"><code>bupaR</code> does not contain a magic slider that can simplify a <code>process_map</code>. We believe that process maps should always be a transparent visualization of the log, and simplifying should be done by the conscious use of filters. You might consider <a href= 'case_filters.html#Infrequent_Flows'><code>filter_infrequent_flows()</code></a>, <a href = 'case_filters.html#Trace_Frequency'><code>filter_trace_frequency()</code></a> or <a href = 'case_filters.html#Activity_Frequency'><code>filter_activity_frequency()</code></a> for this job.</div>
+<div class="card-body bslib-gap-spacing html-fill-item html-fill-container" style="margin-top:auto;margin-bottom:auto;flex:1 1 auto;"><code>bupaR</code> does not contain a magic slider that can simplify a <code>process_map</code>. We believe that process maps should always be a transparent visualization of the log, and simplifying should be done by the conscious use of filters. You might consider <a href= 'case_filters.html#Infrequent_Flows'><code>filter_infrequent_flows()</code></a>, <a href = 'case_filters.html#Trace_Frequency'><code>filter_trace_frequency()</code></a> or <a href = 'case_filters.html#Activity_Frequency'><code>filter_activity_frequency()</code></a> for this job.</div>
+<script data-bslib-card-init>bslib.Card.initializeAllCards();</script>
 </div>
-<div class="card bslib-card html-fill-item html-fill-container" data-require-bs-caller="card()" data-require-bs-version="5">
+<div class="card bslib-card bslib-mb-spacer html-fill-item html-fill-container" data-bslib-card-init data-require-bs-caller="card()" data-require-bs-version="5">
 <div class="card-header card text-white bg-success mb-3">Can I use process maps in a Shiny app?</div>
-<div class="card-body" style="flex:0 0 auto;">Yes, you can! Use the functions <code>renderProcessMap()</code> in the Server, and <code>processMapOutput</code> in the UI of your app. Make sure to use the <code>width</code> and <code>height</code> arguments to set proper dimensions for the map.</div>
+<div class="card-body bslib-gap-spacing html-fill-item html-fill-container" style="margin-top:auto;margin-bottom:auto;flex:1 1 auto;">Yes, you can! Use the functions <code>renderProcessMap()</code> in the Server, and <code>processMapOutput</code> in the UI of your app. Make sure to use the <code>width</code> and <code>height</code> arguments to set proper dimensions for the map.</div>
+<script data-bslib-card-init>bslib.Card.initializeAllCards();</script>
 </div>
-<div class="card bslib-card html-fill-item html-fill-container" data-require-bs-caller="card()" data-require-bs-version="5">
+<div class="card bslib-card bslib-mb-spacer html-fill-item html-fill-container" data-bslib-card-init data-require-bs-caller="card()" data-require-bs-version="5">
 <div class="card-header card text-white bg-success mb-3">Can I save the process map to a file?</div>
-<div class="card-body" style="flex:0 0 auto;">You can save a process map to a PDF, PNG, PS or EPS using <code>export_map()</code>. To do this, note that you should use the argument <code>render = FALSE</code> in the call to <code>process_map()</code>. Use the argument <code>title</code> to add a caption to the image, and <code>width</code> and <code>height</code> to adjust the file dimensions.</div>
+<div class="card-body bslib-gap-spacing html-fill-item html-fill-container" style="margin-top:auto;margin-bottom:auto;flex:1 1 auto;">You can save a process map to a PDF, PNG, PS or EPS using <code>export_map()</code>. To do this, note that you should use the argument <code>render = FALSE</code> in the call to <code>process_map()</code>. Use the argument <code>title</code> to add a caption to the image, and <code>width</code> and <code>height</code> to adjust the file dimensions.</div>
+<script data-bslib-card-init>bslib.Card.initializeAllCards();</script>
 </div>
 </div>
 </div>

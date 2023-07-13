@@ -13,15 +13,15 @@
 
 <title>bupaR Docs | Adjust Logs</title>
 
-<script src="site_libs/header-attrs-2.20/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.23/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <link href="site_libs/bootstrap-5.2.2/bootstrap.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-5.2.2/bootstrap.bundle.min.js"></script>
-<script src="site_libs/bs3compat-0.4.2/transition.js"></script>
-<script src="site_libs/bs3compat-0.4.2/tabs.js"></script>
-<script src="site_libs/bs3compat-0.4.2/bs3compat.js"></script>
-<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<script src="site_libs/bs3compat-0.5.0/transition.js"></script>
+<script src="site_libs/bs3compat-0.5.0/tabs.js"></script>
+<script src="site_libs/bs3compat-0.5.0/bs3compat.js"></script>
+<script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
@@ -704,23 +704,23 @@ number of cases has changed after this modification.</p>
 ## Lifecycle transition:        lifecycle 
 ## 
 ## # A tibble: 34,724 × 18
-##    case_id activity   lifec…¹ resou…² timestamp           amount article dismi…³
-##    &lt;chr&gt;   &lt;fct&gt;      &lt;fct&gt;   &lt;fct&gt;   &lt;dttm&gt;              &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;  
-##  1 A1      Create Fi… comple… 561     2006-07-24 00:00:00 35.0       157 NIL    
-##  2 A1      Send Fine  comple… &lt;NA&gt;    2006-12-05 00:00:00 &lt;NA&gt;        NA &lt;NA&gt;   
-##  3 A100    Create Fi… comple… 561     2006-08-02 00:00:00 35.0       157 NIL    
-##  4 A100    Send Fine  comple… &lt;NA&gt;    2006-12-12 00:00:00 &lt;NA&gt;        NA &lt;NA&gt;   
-##  5 A100    Insert Fi… comple… &lt;NA&gt;    2007-01-15 00:00:00 &lt;NA&gt;        NA &lt;NA&gt;   
-##  6 A100    Add penal… comple… &lt;NA&gt;    2007-03-16 00:00:00 71.5        NA &lt;NA&gt;   
-##  7 A100    Send for … comple… &lt;NA&gt;    2009-03-30 00:00:00 &lt;NA&gt;        NA &lt;NA&gt;   
-##  8 A10000  Create Fi… comple… 561     2007-03-09 00:00:00 36.0       157 NIL    
-##  9 A10000  Send Fine  comple… &lt;NA&gt;    2007-07-17 00:00:00 &lt;NA&gt;        NA &lt;NA&gt;   
-## 10 A10000  Insert Fi… comple… &lt;NA&gt;    2007-08-02 00:00:00 &lt;NA&gt;        NA &lt;NA&gt;   
-## # … with 34,714 more rows, 10 more variables: expense &lt;chr&gt;, lastsent &lt;chr&gt;,
+##    case_id activity        lifecycle resource timestamp           amount article
+##    &lt;chr&gt;   &lt;fct&gt;           &lt;fct&gt;     &lt;fct&gt;    &lt;dttm&gt;              &lt;chr&gt;    &lt;dbl&gt;
+##  1 A1      Create Fine     complete  561      2006-07-24 00:00:00 35.0       157
+##  2 A1      Send Fine       complete  &lt;NA&gt;     2006-12-05 00:00:00 &lt;NA&gt;        NA
+##  3 A100    Create Fine     complete  561      2006-08-02 00:00:00 35.0       157
+##  4 A100    Send Fine       complete  &lt;NA&gt;     2006-12-12 00:00:00 &lt;NA&gt;        NA
+##  5 A100    Insert Fine No… complete  &lt;NA&gt;     2007-01-15 00:00:00 &lt;NA&gt;        NA
+##  6 A100    Add penalty     complete  &lt;NA&gt;     2007-03-16 00:00:00 71.5        NA
+##  7 A100    Send for Credi… complete  &lt;NA&gt;     2009-03-30 00:00:00 &lt;NA&gt;        NA
+##  8 A10000  Create Fine     complete  561      2007-03-09 00:00:00 36.0       157
+##  9 A10000  Send Fine       complete  &lt;NA&gt;     2007-07-17 00:00:00 &lt;NA&gt;        NA
+## 10 A10000  Insert Fine No… complete  &lt;NA&gt;     2007-08-02 00:00:00 &lt;NA&gt;        NA
+## # ℹ 34,714 more rows
+## # ℹ 11 more variables: dismissal &lt;chr&gt;, expense &lt;chr&gt;, lastsent &lt;chr&gt;,
 ## #   matricola &lt;dbl&gt;, notificationtype &lt;chr&gt;, paymentamount &lt;dbl&gt;, points &lt;dbl&gt;,
 ## #   totalpaymentamount &lt;chr&gt;, vehicleclass &lt;chr&gt;, activity_instance_id &lt;chr&gt;,
-## #   .order &lt;int&gt;, and abbreviated variable names ¹​lifecycle, ²​resource,
-## #   ³​dismissal</code></pre>
+## #   .order &lt;int&gt;</code></pre>
 </div>
 <div id="using-set_-functions" class="section level2">
 <h2>Using <code>set_</code>-functions</h2>
@@ -745,23 +745,23 @@ same change as before can be done as follows:</p>
 ## Lifecycle transition:        lifecycle 
 ## 
 ## # A tibble: 34,724 × 18
-##    case_id activity   lifec…¹ resou…² timestamp           amount article dismi…³
-##    &lt;chr&gt;   &lt;fct&gt;      &lt;fct&gt;   &lt;fct&gt;   &lt;dttm&gt;              &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;  
-##  1 A1      Create Fi… comple… 561     2006-07-24 00:00:00 35.0       157 NIL    
-##  2 A1      Send Fine  comple… &lt;NA&gt;    2006-12-05 00:00:00 &lt;NA&gt;        NA &lt;NA&gt;   
-##  3 A100    Create Fi… comple… 561     2006-08-02 00:00:00 35.0       157 NIL    
-##  4 A100    Send Fine  comple… &lt;NA&gt;    2006-12-12 00:00:00 &lt;NA&gt;        NA &lt;NA&gt;   
-##  5 A100    Insert Fi… comple… &lt;NA&gt;    2007-01-15 00:00:00 &lt;NA&gt;        NA &lt;NA&gt;   
-##  6 A100    Add penal… comple… &lt;NA&gt;    2007-03-16 00:00:00 71.5        NA &lt;NA&gt;   
-##  7 A100    Send for … comple… &lt;NA&gt;    2009-03-30 00:00:00 &lt;NA&gt;        NA &lt;NA&gt;   
-##  8 A10000  Create Fi… comple… 561     2007-03-09 00:00:00 36.0       157 NIL    
-##  9 A10000  Send Fine  comple… &lt;NA&gt;    2007-07-17 00:00:00 &lt;NA&gt;        NA &lt;NA&gt;   
-## 10 A10000  Insert Fi… comple… &lt;NA&gt;    2007-08-02 00:00:00 &lt;NA&gt;        NA &lt;NA&gt;   
-## # … with 34,714 more rows, 10 more variables: expense &lt;chr&gt;, lastsent &lt;chr&gt;,
+##    case_id activity        lifecycle resource timestamp           amount article
+##    &lt;chr&gt;   &lt;fct&gt;           &lt;fct&gt;     &lt;fct&gt;    &lt;dttm&gt;              &lt;chr&gt;    &lt;dbl&gt;
+##  1 A1      Create Fine     complete  561      2006-07-24 00:00:00 35.0       157
+##  2 A1      Send Fine       complete  &lt;NA&gt;     2006-12-05 00:00:00 &lt;NA&gt;        NA
+##  3 A100    Create Fine     complete  561      2006-08-02 00:00:00 35.0       157
+##  4 A100    Send Fine       complete  &lt;NA&gt;     2006-12-12 00:00:00 &lt;NA&gt;        NA
+##  5 A100    Insert Fine No… complete  &lt;NA&gt;     2007-01-15 00:00:00 &lt;NA&gt;        NA
+##  6 A100    Add penalty     complete  &lt;NA&gt;     2007-03-16 00:00:00 71.5        NA
+##  7 A100    Send for Credi… complete  &lt;NA&gt;     2009-03-30 00:00:00 &lt;NA&gt;        NA
+##  8 A10000  Create Fine     complete  561      2007-03-09 00:00:00 36.0       157
+##  9 A10000  Send Fine       complete  &lt;NA&gt;     2007-07-17 00:00:00 &lt;NA&gt;        NA
+## 10 A10000  Insert Fine No… complete  &lt;NA&gt;     2007-08-02 00:00:00 &lt;NA&gt;        NA
+## # ℹ 34,714 more rows
+## # ℹ 11 more variables: dismissal &lt;chr&gt;, expense &lt;chr&gt;, lastsent &lt;chr&gt;,
 ## #   matricola &lt;dbl&gt;, notificationtype &lt;chr&gt;, paymentamount &lt;dbl&gt;, points &lt;dbl&gt;,
 ## #   totalpaymentamount &lt;chr&gt;, vehicleclass &lt;chr&gt;, activity_instance_id &lt;chr&gt;,
-## #   .order &lt;int&gt;, and abbreviated variable names ¹​lifecycle, ²​resource,
-## #   ³​dismissal</code></pre>
+## #   .order &lt;int&gt;</code></pre>
 </div>
 <div id="using-existing-mapping" class="section level2">
 <h2>Using existing mapping</h2>
@@ -800,23 +800,23 @@ mapping using <code>re_map()</code>.</p>
 ## Lifecycle transition:        lifecycle 
 ## 
 ## # A tibble: 34,724 × 18
-##    case_id activity   lifec…¹ resou…² timestamp           amount article dismi…³
-##    &lt;chr&gt;   &lt;fct&gt;      &lt;fct&gt;   &lt;fct&gt;   &lt;dttm&gt;              &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;  
-##  1 A1      Create Fi… comple… 561     2006-07-24 00:00:00 35.0       157 NIL    
-##  2 A1      Send Fine  comple… &lt;NA&gt;    2006-12-05 00:00:00 &lt;NA&gt;        NA &lt;NA&gt;   
-##  3 A100    Create Fi… comple… 561     2006-08-02 00:00:00 35.0       157 NIL    
-##  4 A100    Send Fine  comple… &lt;NA&gt;    2006-12-12 00:00:00 &lt;NA&gt;        NA &lt;NA&gt;   
-##  5 A100    Insert Fi… comple… &lt;NA&gt;    2007-01-15 00:00:00 &lt;NA&gt;        NA &lt;NA&gt;   
-##  6 A100    Add penal… comple… &lt;NA&gt;    2007-03-16 00:00:00 71.5        NA &lt;NA&gt;   
-##  7 A100    Send for … comple… &lt;NA&gt;    2009-03-30 00:00:00 &lt;NA&gt;        NA &lt;NA&gt;   
-##  8 A10000  Create Fi… comple… 561     2007-03-09 00:00:00 36.0       157 NIL    
-##  9 A10000  Send Fine  comple… &lt;NA&gt;    2007-07-17 00:00:00 &lt;NA&gt;        NA &lt;NA&gt;   
-## 10 A10000  Insert Fi… comple… &lt;NA&gt;    2007-08-02 00:00:00 &lt;NA&gt;        NA &lt;NA&gt;   
-## # … with 34,714 more rows, 10 more variables: expense &lt;chr&gt;, lastsent &lt;chr&gt;,
+##    case_id activity        lifecycle resource timestamp           amount article
+##    &lt;chr&gt;   &lt;fct&gt;           &lt;fct&gt;     &lt;fct&gt;    &lt;dttm&gt;              &lt;chr&gt;    &lt;dbl&gt;
+##  1 A1      Create Fine     complete  561      2006-07-24 00:00:00 35.0       157
+##  2 A1      Send Fine       complete  &lt;NA&gt;     2006-12-05 00:00:00 &lt;NA&gt;        NA
+##  3 A100    Create Fine     complete  561      2006-08-02 00:00:00 35.0       157
+##  4 A100    Send Fine       complete  &lt;NA&gt;     2006-12-12 00:00:00 &lt;NA&gt;        NA
+##  5 A100    Insert Fine No… complete  &lt;NA&gt;     2007-01-15 00:00:00 &lt;NA&gt;        NA
+##  6 A100    Add penalty     complete  &lt;NA&gt;     2007-03-16 00:00:00 71.5        NA
+##  7 A100    Send for Credi… complete  &lt;NA&gt;     2009-03-30 00:00:00 &lt;NA&gt;        NA
+##  8 A10000  Create Fine     complete  561      2007-03-09 00:00:00 36.0       157
+##  9 A10000  Send Fine       complete  &lt;NA&gt;     2007-07-17 00:00:00 &lt;NA&gt;        NA
+## 10 A10000  Insert Fine No… complete  &lt;NA&gt;     2007-08-02 00:00:00 &lt;NA&gt;        NA
+## # ℹ 34,714 more rows
+## # ℹ 11 more variables: dismissal &lt;chr&gt;, expense &lt;chr&gt;, lastsent &lt;chr&gt;,
 ## #   matricola &lt;dbl&gt;, notificationtype &lt;chr&gt;, paymentamount &lt;dbl&gt;, points &lt;dbl&gt;,
 ## #   totalpaymentamount &lt;chr&gt;, vehicleclass &lt;chr&gt;, activity_instance_id &lt;chr&gt;,
-## #   .order &lt;int&gt;, and abbreviated variable names ¹​lifecycle, ²​resource,
-## #   ³​dismissal</code></pre>
+## #   .order &lt;int&gt;</code></pre>
 <hr />
 <p>Read more:</p>
 <div class="btn-toolbar" role="group">

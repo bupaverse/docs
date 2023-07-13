@@ -13,14 +13,14 @@
 
 <title>bupaR Docs | Multi-dimensional analysis</title>
 
-<script src="site_libs/header-attrs-2.20/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.23/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <link href="site_libs/bootstrap-5.2.2/bootstrap.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-5.2.2/bootstrap.bundle.min.js"></script>
-<script src="site_libs/bs3compat-0.4.2/transition.js"></script>
-<script src="site_libs/bs3compat-0.4.2/tabs.js"></script>
-<script src="site_libs/bs3compat-0.4.2/bs3compat.js"></script>
+<script src="site_libs/bs3compat-0.5.0/transition.js"></script>
+<script src="site_libs/bs3compat-0.5.0/tabs.js"></script>
+<script src="site_libs/bs3compat-0.5.0/bs3compat.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <script>
 	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -637,23 +637,23 @@ the throughput time distribution.</p>
 ## Lifecycle transition:        lifecycle 
 ## 
 ## # A tibble: 34,724 × 20
-##    case_id activity   lifec…¹ resou…² timestamp           amount article dismi…³
-##    &lt;chr&gt;   &lt;fct&gt;      &lt;fct&gt;   &lt;fct&gt;   &lt;dttm&gt;              &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;  
-##  1 A1      Create Fi… comple… 561     2006-07-24 00:00:00 35.0       157 NIL    
-##  2 A1      Send Fine  comple… &lt;NA&gt;    2006-12-05 00:00:00 &lt;NA&gt;        NA &lt;NA&gt;   
-##  3 A100    Create Fi… comple… 561     2006-08-02 00:00:00 35.0       157 NIL    
-##  4 A100    Send Fine  comple… &lt;NA&gt;    2006-12-12 00:00:00 &lt;NA&gt;        NA &lt;NA&gt;   
-##  5 A100    Insert Fi… comple… &lt;NA&gt;    2007-01-15 00:00:00 &lt;NA&gt;        NA &lt;NA&gt;   
-##  6 A100    Add penal… comple… &lt;NA&gt;    2007-03-16 00:00:00 71.5        NA &lt;NA&gt;   
-##  7 A100    Send for … comple… &lt;NA&gt;    2009-03-30 00:00:00 &lt;NA&gt;        NA &lt;NA&gt;   
-##  8 A10000  Create Fi… comple… 561     2007-03-09 00:00:00 36.0       157 NIL    
-##  9 A10000  Send Fine  comple… &lt;NA&gt;    2007-07-17 00:00:00 &lt;NA&gt;        NA &lt;NA&gt;   
-## 10 A10000  Insert Fi… comple… &lt;NA&gt;    2007-08-02 00:00:00 &lt;NA&gt;        NA &lt;NA&gt;   
-## # … with 34,714 more rows, 12 more variables: expense &lt;chr&gt;, lastsent &lt;chr&gt;,
+##    case_id activity        lifecycle resource timestamp           amount article
+##    &lt;chr&gt;   &lt;fct&gt;           &lt;fct&gt;     &lt;fct&gt;    &lt;dttm&gt;              &lt;chr&gt;    &lt;dbl&gt;
+##  1 A1      Create Fine     complete  561      2006-07-24 00:00:00 35.0       157
+##  2 A1      Send Fine       complete  &lt;NA&gt;     2006-12-05 00:00:00 &lt;NA&gt;        NA
+##  3 A100    Create Fine     complete  561      2006-08-02 00:00:00 35.0       157
+##  4 A100    Send Fine       complete  &lt;NA&gt;     2006-12-12 00:00:00 &lt;NA&gt;        NA
+##  5 A100    Insert Fine No… complete  &lt;NA&gt;     2007-01-15 00:00:00 &lt;NA&gt;        NA
+##  6 A100    Add penalty     complete  &lt;NA&gt;     2007-03-16 00:00:00 71.5        NA
+##  7 A100    Send for Credi… complete  &lt;NA&gt;     2009-03-30 00:00:00 &lt;NA&gt;        NA
+##  8 A10000  Create Fine     complete  561      2007-03-09 00:00:00 36.0       157
+##  9 A10000  Send Fine       complete  &lt;NA&gt;     2007-07-17 00:00:00 &lt;NA&gt;        NA
+## 10 A10000  Insert Fine No… complete  &lt;NA&gt;     2007-08-02 00:00:00 &lt;NA&gt;        NA
+## # ℹ 34,714 more rows
+## # ℹ 13 more variables: dismissal &lt;chr&gt;, expense &lt;chr&gt;, lastsent &lt;chr&gt;,
 ## #   matricola &lt;dbl&gt;, notificationtype &lt;chr&gt;, paymentamount &lt;dbl&gt;, points &lt;dbl&gt;,
 ## #   totalpaymentamount &lt;chr&gt;, vehicleclass &lt;chr&gt;, activity_instance_id &lt;chr&gt;,
-## #   .order &lt;int&gt;, throughput_time &lt;drtn&gt;, throughput_time_bin &lt;fct&gt;, and
-## #   abbreviated variable names ¹​lifecycle, ²​resource, ³​dismissal</code></pre>
+## #   .order &lt;int&gt;, throughput_time &lt;drtn&gt;, throughput_time_bin &lt;fct&gt;</code></pre>
 <p>Observe that we have now 4 groups under <em>throughput_time_bin</em>
 with the roughly same number of cases.</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="sc">%&gt;%</span></span>
@@ -722,7 +722,7 @@ metrics. You can also combine metrics with data attributes.</p>
 ##  8 Diet Studies                 1     1      1  2.12  2       18  2.25   1   
 ##  9 Emergency room               1     1      1  1.5   1.75     3  0.837  0.75
 ## 10 Endoscopy                    1     1      2  2.27  3        5  1.42   2   
-## # … with 33 more rows</code></pre>
+## # ℹ 33 more rows</code></pre>
 </div>
 
 <hr>

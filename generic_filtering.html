@@ -13,15 +13,15 @@
 
 <title>Generic filtering</title>
 
-<script src="site_libs/header-attrs-2.20/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.23/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <link href="site_libs/bootstrap-5.2.2/bootstrap.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-5.2.2/bootstrap.bundle.min.js"></script>
-<script src="site_libs/bs3compat-0.4.2/transition.js"></script>
-<script src="site_libs/bs3compat-0.4.2/tabs.js"></script>
-<script src="site_libs/bs3compat-0.4.2/bs3compat.js"></script>
-<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<script src="site_libs/bs3compat-0.5.0/transition.js"></script>
+<script src="site_libs/bs3compat-0.5.0/tabs.js"></script>
+<script src="site_libs/bs3compat-0.5.0/bs3compat.js"></script>
+<script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
@@ -675,33 +675,32 @@ greater than 300. More process-specific filtering methods can be found
 ## Lifecycle transition:        lifecycle 
 ## 
 ## # A tibble: 20 × 18
-##    case_id activity   lifec…¹ resou…² timestamp           amount article dismi…³
-##    &lt;chr&gt;   &lt;fct&gt;      &lt;fct&gt;   &lt;fct&gt;   &lt;dttm&gt;              &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;  
-##  1 A10060  Create Fi… comple… 541     2007-03-08 00:00:00 36.0       157 NIL    
-##  2 A10497  Create Fi… comple… 558     2007-03-30 00:00:00 36.0       157 NIL    
-##  3 A10818  Create Fi… comple… 561     2007-04-08 00:00:00 36.0       157 NIL    
-##  4 A11707  Create Fi… comple… 550     2007-04-24 00:00:00 36.0       157 NIL    
-##  5 A11936  Create Fi… comple… 557     2007-04-29 00:00:00 36.0       157 NIL    
-##  6 A12073  Create Fi… comple… 557     2007-05-03 00:00:00 36.0       157 NIL    
-##  7 A1408   Create Fi… comple… 559     2006-08-20 00:00:00 35.0       157 NIL    
-##  8 A14883  Create Fi… comple… 561     2007-06-29 00:00:00 36.0       157 NIL    
-##  9 A17130  Create Fi… comple… 541     2007-07-15 00:00:00 36.0       157 NIL    
-## 10 A1815   Create Fi… comple… 563     2006-08-10 00:00:00 35.0       157 NIL    
-## 11 A19109  Create Fi… comple… 556     2007-07-17 00:00:00 36.0       157 NIL    
-## 12 A23000  Create Fi… comple… 550     2007-12-29 00:00:00 36.0       157 NIL    
-## 13 A24247  Create Fi… comple… 561     2007-12-03 00:00:00 36.0       157 NIL    
-## 14 A24366  Create Fi… comple… 541     2008-02-09 00:00:00 36.0       157 NIL    
-## 15 A24634  Create Fi… comple… 537     2007-11-21 00:00:00 36.0       157 NIL    
-## 16 A24942  Create Fi… comple… 561     2007-12-30 00:00:00 36.0       157 NIL    
-## 17 A25581  Create Fi… comple… 559     2007-11-23 00:00:00 36.0       157 NIL    
-## 18 A25599  Create Fi… comple… 559     2007-11-24 00:00:00 36.0       157 NIL    
-## 19 A26099  Create Fi… comple… 559     2007-12-09 00:00:00 36.0       157 NIL    
-## 20 A26277  Create Fi… comple… 538     2008-01-07 00:00:00 36.0       157 NIL    
-## # … with 10 more variables: expense &lt;chr&gt;, lastsent &lt;chr&gt;, matricola &lt;dbl&gt;,
-## #   notificationtype &lt;chr&gt;, paymentamount &lt;dbl&gt;, points &lt;dbl&gt;,
+##    case_id activity    lifecycle resource timestamp           amount article
+##    &lt;chr&gt;   &lt;fct&gt;       &lt;fct&gt;     &lt;fct&gt;    &lt;dttm&gt;              &lt;chr&gt;    &lt;dbl&gt;
+##  1 A10060  Create Fine complete  541      2007-03-08 00:00:00 36.0       157
+##  2 A10497  Create Fine complete  558      2007-03-30 00:00:00 36.0       157
+##  3 A10818  Create Fine complete  561      2007-04-08 00:00:00 36.0       157
+##  4 A11707  Create Fine complete  550      2007-04-24 00:00:00 36.0       157
+##  5 A11936  Create Fine complete  557      2007-04-29 00:00:00 36.0       157
+##  6 A12073  Create Fine complete  557      2007-05-03 00:00:00 36.0       157
+##  7 A1408   Create Fine complete  559      2006-08-20 00:00:00 35.0       157
+##  8 A14883  Create Fine complete  561      2007-06-29 00:00:00 36.0       157
+##  9 A17130  Create Fine complete  541      2007-07-15 00:00:00 36.0       157
+## 10 A1815   Create Fine complete  563      2006-08-10 00:00:00 35.0       157
+## 11 A19109  Create Fine complete  556      2007-07-17 00:00:00 36.0       157
+## 12 A23000  Create Fine complete  550      2007-12-29 00:00:00 36.0       157
+## 13 A24247  Create Fine complete  561      2007-12-03 00:00:00 36.0       157
+## 14 A24366  Create Fine complete  541      2008-02-09 00:00:00 36.0       157
+## 15 A24634  Create Fine complete  537      2007-11-21 00:00:00 36.0       157
+## 16 A24942  Create Fine complete  561      2007-12-30 00:00:00 36.0       157
+## 17 A25581  Create Fine complete  559      2007-11-23 00:00:00 36.0       157
+## 18 A25599  Create Fine complete  559      2007-11-24 00:00:00 36.0       157
+## 19 A26099  Create Fine complete  559      2007-12-09 00:00:00 36.0       157
+## 20 A26277  Create Fine complete  538      2008-01-07 00:00:00 36.0       157
+## # ℹ 11 more variables: dismissal &lt;chr&gt;, expense &lt;chr&gt;, lastsent &lt;chr&gt;,
+## #   matricola &lt;dbl&gt;, notificationtype &lt;chr&gt;, paymentamount &lt;dbl&gt;, points &lt;dbl&gt;,
 ## #   totalpaymentamount &lt;chr&gt;, vehicleclass &lt;chr&gt;, activity_instance_id &lt;chr&gt;,
-## #   .order &lt;int&gt;, and abbreviated variable names ¹​lifecycle, ²​resource,
-## #   ³​dismissal</code></pre>
+## #   .order &lt;int&gt;</code></pre>
 </div>
 <div id="slice" class="section level2">
 <h2>slice</h2>
@@ -735,19 +734,20 @@ time.</p>
 ## Lifecycle transition:        registration_type 
 ## 
 ## # A tibble: 110 × 7
-##    handling     patient employee handling_id regist…¹ time                .order
-##    &lt;fct&gt;        &lt;chr&gt;   &lt;fct&gt;    &lt;chr&gt;       &lt;fct&gt;    &lt;dttm&gt;               &lt;int&gt;
-##  1 Registration 1       r1       1           start    2017-01-02 11:41:53      1
-##  2 Registration 2       r1       2           start    2017-01-02 11:41:53      2
-##  3 Registration 3       r1       3           start    2017-01-04 01:34:05      3
-##  4 Registration 4       r1       4           start    2017-01-04 01:34:04      4
-##  5 Registration 5       r1       5           start    2017-01-04 16:07:47      5
-##  6 Registration 6       r1       6           start    2017-01-04 16:07:47      6
-##  7 Registration 7       r1       7           start    2017-01-05 04:56:11      7
-##  8 Registration 8       r1       8           start    2017-01-05 04:56:11      8
-##  9 Registration 9       r1       9           start    2017-01-06 05:58:54      9
-## 10 Registration 10      r1       10          start    2017-01-06 05:58:54     10
-## # … with 100 more rows, and abbreviated variable name ¹​registration_type</code></pre>
+##    handling   patient employee handling_id registration_type time               
+##    &lt;fct&gt;      &lt;chr&gt;   &lt;fct&gt;    &lt;chr&gt;       &lt;fct&gt;             &lt;dttm&gt;             
+##  1 Registrat… 1       r1       1           start             2017-01-02 11:41:53
+##  2 Registrat… 2       r1       2           start             2017-01-02 11:41:53
+##  3 Registrat… 3       r1       3           start             2017-01-04 01:34:05
+##  4 Registrat… 4       r1       4           start             2017-01-04 01:34:04
+##  5 Registrat… 5       r1       5           start             2017-01-04 16:07:47
+##  6 Registrat… 6       r1       6           start             2017-01-04 16:07:47
+##  7 Registrat… 7       r1       7           start             2017-01-05 04:56:11
+##  8 Registrat… 8       r1       8           start             2017-01-05 04:56:11
+##  9 Registrat… 9       r1       9           start             2017-01-06 05:58:54
+## 10 Registrat… 10      r1       10          start             2017-01-06 05:58:54
+## # ℹ 100 more rows
+## # ℹ 1 more variable: .order &lt;int&gt;</code></pre>
 <div id="slice_activities" class="section level3">
 <h3>slice_activities</h3>
 <p>The next piece of code returns the <em>first</em> 10 activity
@@ -770,29 +770,29 @@ instances.</p>
 ## Lifecycle transition:        registration_type 
 ## 
 ## # A tibble: 20 × 7
-##    handling     patient employee handling_id regist…¹ time                .order
-##    &lt;fct&gt;        &lt;chr&gt;   &lt;fct&gt;    &lt;chr&gt;       &lt;fct&gt;    &lt;dttm&gt;               &lt;int&gt;
-##  1 Registration 1       r1       1           start    2017-01-02 11:41:53      1
-##  2 Registration 2       r1       2           start    2017-01-02 11:41:53      2
-##  3 Registration 3       r1       3           start    2017-01-04 01:34:05      3
-##  4 Registration 4       r1       4           start    2017-01-04 01:34:04      4
-##  5 Registration 5       r1       5           start    2017-01-04 16:07:47      5
-##  6 Registration 6       r1       6           start    2017-01-04 16:07:47      6
-##  7 Registration 7       r1       7           start    2017-01-05 04:56:11      7
-##  8 Registration 8       r1       8           start    2017-01-05 04:56:11      8
-##  9 Registration 9       r1       9           start    2017-01-06 05:58:54      9
-## 10 Registration 10      r1       10          start    2017-01-06 05:58:54     10
-## 11 Registration 1       r1       1           complete 2017-01-02 12:40:20     11
-## 12 Registration 2       r1       2           complete 2017-01-02 15:16:38     12
-## 13 Registration 3       r1       3           complete 2017-01-04 06:36:54     13
-## 14 Registration 4       r1       4           complete 2017-01-04 04:25:06     14
-## 15 Registration 5       r1       5           complete 2017-01-04 20:07:50     15
-## 16 Registration 6       r1       6           complete 2017-01-04 18:12:46     16
-## 17 Registration 7       r1       7           complete 2017-01-05 06:27:49     17
-## 18 Registration 8       r1       8           complete 2017-01-05 07:58:17     18
-## 19 Registration 9       r1       9           complete 2017-01-06 07:18:32     19
-## 20 Registration 10      r1       10          complete 2017-01-06 09:13:28     20
-## # … with abbreviated variable name ¹​registration_type</code></pre>
+##    handling   patient employee handling_id registration_type time               
+##    &lt;fct&gt;      &lt;chr&gt;   &lt;fct&gt;    &lt;chr&gt;       &lt;fct&gt;             &lt;dttm&gt;             
+##  1 Registrat… 1       r1       1           start             2017-01-02 11:41:53
+##  2 Registrat… 2       r1       2           start             2017-01-02 11:41:53
+##  3 Registrat… 3       r1       3           start             2017-01-04 01:34:05
+##  4 Registrat… 4       r1       4           start             2017-01-04 01:34:04
+##  5 Registrat… 5       r1       5           start             2017-01-04 16:07:47
+##  6 Registrat… 6       r1       6           start             2017-01-04 16:07:47
+##  7 Registrat… 7       r1       7           start             2017-01-05 04:56:11
+##  8 Registrat… 8       r1       8           start             2017-01-05 04:56:11
+##  9 Registrat… 9       r1       9           start             2017-01-06 05:58:54
+## 10 Registrat… 10      r1       10          start             2017-01-06 05:58:54
+## 11 Registrat… 1       r1       1           complete          2017-01-02 12:40:20
+## 12 Registrat… 2       r1       2           complete          2017-01-02 15:16:38
+## 13 Registrat… 3       r1       3           complete          2017-01-04 06:36:54
+## 14 Registrat… 4       r1       4           complete          2017-01-04 04:25:06
+## 15 Registrat… 5       r1       5           complete          2017-01-04 20:07:50
+## 16 Registrat… 6       r1       6           complete          2017-01-04 18:12:46
+## 17 Registrat… 7       r1       7           complete          2017-01-05 06:27:49
+## 18 Registrat… 8       r1       8           complete          2017-01-05 07:58:17
+## 19 Registrat… 9       r1       9           complete          2017-01-06 07:18:32
+## 20 Registrat… 10      r1       10          complete          2017-01-06 09:13:28
+## # ℹ 1 more variable: .order &lt;int&gt;</code></pre>
 </div>
 <div id="slice_events" class="section level3">
 <h3>slice_events</h3>
@@ -815,19 +815,19 @@ instances.</p>
 ## Lifecycle transition:        registration_type 
 ## 
 ## # A tibble: 10 × 7
-##    handling     patient employee handling_id regist…¹ time                .order
-##    &lt;fct&gt;        &lt;chr&gt;   &lt;fct&gt;    &lt;chr&gt;       &lt;fct&gt;    &lt;dttm&gt;               &lt;int&gt;
-##  1 Registration 1       r1       1           start    2017-01-02 11:41:53      1
-##  2 Registration 2       r1       2           start    2017-01-02 11:41:53      2
-##  3 Registration 3       r1       3           start    2017-01-04 01:34:05      3
-##  4 Registration 4       r1       4           start    2017-01-04 01:34:04      4
-##  5 Registration 5       r1       5           start    2017-01-04 16:07:47      5
-##  6 Registration 6       r1       6           start    2017-01-04 16:07:47      6
-##  7 Registration 7       r1       7           start    2017-01-05 04:56:11      7
-##  8 Registration 8       r1       8           start    2017-01-05 04:56:11      8
-##  9 Registration 9       r1       9           start    2017-01-06 05:58:54      9
-## 10 Registration 10      r1       10          start    2017-01-06 05:58:54     10
-## # … with abbreviated variable name ¹​registration_type</code></pre>
+##    handling   patient employee handling_id registration_type time               
+##    &lt;fct&gt;      &lt;chr&gt;   &lt;fct&gt;    &lt;chr&gt;       &lt;fct&gt;             &lt;dttm&gt;             
+##  1 Registrat… 1       r1       1           start             2017-01-02 11:41:53
+##  2 Registrat… 2       r1       2           start             2017-01-02 11:41:53
+##  3 Registrat… 3       r1       3           start             2017-01-04 01:34:05
+##  4 Registrat… 4       r1       4           start             2017-01-04 01:34:04
+##  5 Registrat… 5       r1       5           start             2017-01-04 16:07:47
+##  6 Registrat… 6       r1       6           start             2017-01-04 16:07:47
+##  7 Registrat… 7       r1       7           start             2017-01-05 04:56:11
+##  8 Registrat… 8       r1       8           start             2017-01-05 04:56:11
+##  9 Registrat… 9       r1       9           start             2017-01-06 05:58:54
+## 10 Registrat… 10      r1       10          start             2017-01-06 05:58:54
+## # ℹ 1 more variable: .order &lt;int&gt;</code></pre>
 </div>
 </div>
 <div id="first_n-last_n" class="section level2">
@@ -857,19 +857,19 @@ log based on time, not on position.</p>
 ## Lifecycle transition:        registration_type 
 ## 
 ## # A tibble: 10 × 7
-##    handling           patient emplo…¹ handl…² regis…³ time                .order
-##    &lt;fct&gt;              &lt;chr&gt;   &lt;fct&gt;   &lt;chr&gt;   &lt;fct&gt;   &lt;dttm&gt;               &lt;int&gt;
-##  1 Registration       1       r1      1       start   2017-01-02 11:41:53      1
-##  2 Registration       2       r1      2       start   2017-01-02 11:41:53      2
-##  3 Triage and Assess… 1       r2      501     start   2017-01-02 12:40:20      4
-##  4 Registration       1       r1      1       comple… 2017-01-02 12:40:20      6
-##  5 Registration       2       r1      2       comple… 2017-01-02 15:16:38      7
-##  6 Triage and Assess… 2       r2      502     start   2017-01-02 22:32:25      5
-##  7 Triage and Assess… 1       r2      501     comple… 2017-01-02 22:32:25      9
-##  8 Triage and Assess… 2       r2      502     comple… 2017-01-03 12:34:01     10
-##  9 Registration       4       r1      4       start   2017-01-04 01:34:04      3
-## 10 Registration       4       r1      4       comple… 2017-01-04 04:25:06      8
-## # … with abbreviated variable names ¹​employee, ²​handling_id, ³​registration_type</code></pre>
+##    handling   patient employee handling_id registration_type time               
+##    &lt;fct&gt;      &lt;chr&gt;   &lt;fct&gt;    &lt;chr&gt;       &lt;fct&gt;             &lt;dttm&gt;             
+##  1 Registrat… 1       r1       1           start             2017-01-02 11:41:53
+##  2 Registrat… 2       r1       2           start             2017-01-02 11:41:53
+##  3 Triage an… 1       r2       501         start             2017-01-02 12:40:20
+##  4 Registrat… 1       r1       1           complete          2017-01-02 12:40:20
+##  5 Registrat… 2       r1       2           complete          2017-01-02 15:16:38
+##  6 Triage an… 2       r2       502         start             2017-01-02 22:32:25
+##  7 Triage an… 1       r2       501         complete          2017-01-02 22:32:25
+##  8 Triage an… 2       r2       502         complete          2017-01-03 12:34:01
+##  9 Registrat… 4       r1       4           start             2017-01-04 01:34:04
+## 10 Registrat… 4       r1       4           complete          2017-01-04 04:25:06
+## # ℹ 1 more variable: .order &lt;int&gt;</code></pre>
 <p>This is not impacted by a different ordering of the data since it
 will take the time aspect into account.</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span></span>
@@ -891,19 +891,19 @@ will take the time aspect into account.</p>
 ## Lifecycle transition:        registration_type 
 ## 
 ## # A tibble: 10 × 7
-##    handling           patient emplo…¹ handl…² regis…³ time                .order
-##    &lt;fct&gt;              &lt;chr&gt;   &lt;fct&gt;   &lt;chr&gt;   &lt;fct&gt;   &lt;dttm&gt;               &lt;int&gt;
-##  1 Registration       1       r1      1       start   2017-01-02 11:41:53      1
-##  2 Registration       2       r1      2       start   2017-01-02 11:41:53      2
-##  3 Triage and Assess… 1       r2      501     start   2017-01-02 12:40:20      4
-##  4 Registration       1       r1      1       comple… 2017-01-02 12:40:20      6
-##  5 Registration       2       r1      2       comple… 2017-01-02 15:16:38      7
-##  6 Triage and Assess… 2       r2      502     start   2017-01-02 22:32:25      5
-##  7 Triage and Assess… 1       r2      501     comple… 2017-01-02 22:32:25      9
-##  8 Triage and Assess… 2       r2      502     comple… 2017-01-03 12:34:01     10
-##  9 Registration       4       r1      4       start   2017-01-04 01:34:04      3
-## 10 Registration       4       r1      4       comple… 2017-01-04 04:25:06      8
-## # … with abbreviated variable names ¹​employee, ²​handling_id, ³​registration_type</code></pre>
+##    handling   patient employee handling_id registration_type time               
+##    &lt;fct&gt;      &lt;chr&gt;   &lt;fct&gt;    &lt;chr&gt;       &lt;fct&gt;             &lt;dttm&gt;             
+##  1 Registrat… 1       r1       1           start             2017-01-02 11:41:53
+##  2 Registrat… 2       r1       2           start             2017-01-02 11:41:53
+##  3 Triage an… 1       r2       501         start             2017-01-02 12:40:20
+##  4 Registrat… 1       r1       1           complete          2017-01-02 12:40:20
+##  5 Registrat… 2       r1       2           complete          2017-01-02 15:16:38
+##  6 Triage an… 2       r2       502         start             2017-01-02 22:32:25
+##  7 Triage an… 1       r2       501         complete          2017-01-02 22:32:25
+##  8 Triage an… 2       r2       502         complete          2017-01-03 12:34:01
+##  9 Registrat… 4       r1       4           start             2017-01-04 01:34:04
+## 10 Registrat… 4       r1       4           complete          2017-01-04 04:25:06
+## # ℹ 1 more variable: .order &lt;int&gt;</code></pre>
 <p>Incombination with <code>group_by_case</code>, it is very easy to
 select the heads or tails of each case. Below, we explore the 95% most
 common first 3 activities in the <code>sepsis</code> log.</p>
@@ -920,12 +920,12 @@ event log containing n cases. The code below returns a sample of 10
 patients.</p>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sample_n</span>(<span class="at">size =</span> <span class="dv">10</span>)</span></code></pre></div>
-<pre><code>## # Log of 108 events consisting of:
-## 3 traces 
+<pre><code>## # Log of 110 events consisting of:
+## 2 traces 
 ## 10 cases 
-## 54 instances of 7 activities 
+## 55 instances of 7 activities 
 ## 7 resources 
-## Events occurred from 2017-03-29 22:12:55 until 2018-05-04 21:50:07 
+## Events occurred from 2017-04-01 22:15:15 until 2018-02-25 14:21:06 
 ##  
 ## # Variables were mapped as follows:
 ## Case identifier:     patient 
@@ -935,20 +935,21 @@ patients.</p>
 ## Timestamp:           time 
 ## Lifecycle transition:        registration_type 
 ## 
-## # A tibble: 108 × 7
-##    handling     patient employee handling_id regist…¹ time                .order
-##    &lt;fct&gt;        &lt;chr&gt;   &lt;fct&gt;    &lt;chr&gt;       &lt;fct&gt;    &lt;dttm&gt;               &lt;int&gt;
-##  1 Registration 80      r1       80          start    2017-03-29 22:12:55      1
-##  2 Registration 92      r1       92          start    2017-04-04 17:42:26      2
-##  3 Registration 156     r1       156         start    2017-06-03 10:05:28      3
-##  4 Registration 170     r1       170         start    2017-06-17 15:10:30      4
-##  5 Registration 202     r1       202         start    2017-07-17 03:11:39      5
-##  6 Registration 231     r1       231         start    2017-08-13 19:50:42      6
-##  7 Registration 328     r1       328         start    2017-11-12 04:23:27      7
-##  8 Registration 434     r1       434         start    2018-02-19 02:53:00      8
-##  9 Registration 462     r1       462         start    2018-03-20 07:37:11      9
-## 10 Registration 497     r1       497         start    2018-04-30 09:42:11     10
-## # … with 98 more rows, and abbreviated variable name ¹​registration_type</code></pre>
+## # A tibble: 110 × 7
+##    handling   patient employee handling_id registration_type time               
+##    &lt;fct&gt;      &lt;chr&gt;   &lt;fct&gt;    &lt;chr&gt;       &lt;fct&gt;             &lt;dttm&gt;             
+##  1 Registrat… 83      r1       83          start             2017-04-01 22:15:15
+##  2 Registrat… 124     r1       124         start             2017-05-03 12:50:34
+##  3 Registrat… 149     r1       149         start             2017-05-26 15:01:49
+##  4 Registrat… 206     r1       206         start             2017-07-19 15:48:14
+##  5 Registrat… 239     r1       239         start             2017-08-20 03:17:18
+##  6 Registrat… 257     r1       257         start             2017-09-12 23:14:23
+##  7 Registrat… 295     r1       295         start             2017-10-14 00:21:58
+##  8 Registrat… 298     r1       298         start             2017-10-15 18:31:02
+##  9 Registrat… 430     r1       430         start             2018-02-17 15:44:17
+## 10 Registrat… 434     r1       434         start             2018-02-19 02:53:00
+## # ℹ 100 more rows
+## # ℹ 1 more variable: .order &lt;int&gt;</code></pre>
 <p>Note that this function can also be used with a sample size bigger
 than the number of cases in the event log, if you allow for the
 replacements of drawn cases.</p>

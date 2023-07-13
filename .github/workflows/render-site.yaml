@@ -24,6 +24,8 @@ jobs:
           use-public-rspm: true
 
       - uses: r-lib/actions/setup-renv@v2
+        with: 
+          cache-version: 0
 
       - name: Install packages
         run: |

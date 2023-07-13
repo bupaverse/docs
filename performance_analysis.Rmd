@@ -2,20 +2,19 @@
 title: "Performance Analysis"
 ---
 
+
+
+```{r echo = F, out.width="25%", fig.align = "right"}
+knitr::include_graphics("images/icons/perf.PNG")
+```
+
 ```{r include = F}
 library(bupaR)
 ```
 
+***
 
-The metrics for exploring and describing event data which are available are based on literature in the field of operational excellence and are organized in the following (sub)categories
-
-*	Time perspective
-*	Organizational perspective
-*	Structuredness perspective
-	*	Variance
-	*	Rework
-	
-## Time perspective
+# Performance analysis
 
 Three different time metrics can be computed:
 
@@ -33,7 +32,7 @@ knitr::include_graphics("images/processingtime.PNG")
 
 
 
-#### Idle Time
+## Idle Time
 
 The idle time is the time that there is no activity in a case or for a resource. It can only be calculated when there are both start and end timestamps available for activity instances. It can be computed at the levels trace, resource, case and log, and using different time units.
 
@@ -50,7 +49,7 @@ patients %>%
 	plot()
 ```
 
-#### Processing Time
+## Processing Time
 
 The processing time can be computed at the levels log, trace, case, activity and resource-activity. It can only be calculated when there are both start and end timestamps available for activity instances.
 
@@ -60,7 +59,7 @@ patients %>%
 	plot
 ```
 
-#### Throughput Time
+## Throughput Time
 
 The throughput time is the time form the very first event to the last event of a case. The levels at which it can be computed are log, trace, or case.
 

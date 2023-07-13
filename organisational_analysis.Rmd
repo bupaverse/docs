@@ -2,13 +2,20 @@
 title: "Organisational Analysis"
 ---
 
-```{r}
-library(bupaR)
+```{r echo = F, out.width="25%", fig.align = "right"}
+knitr::include_graphics("images/icons/org.PNG")
 ```
 
 
+```{r include = F}
+library(bupaR)
+```
 
-#### Resource Frequency
+***
+
+# Organisational analysis
+
+## Resource Frequency
 
 The resource frequency metric allows the computation of the number/frequency of resources at the levels of log, case, activity, resource, and resource-activity.
 
@@ -17,7 +24,7 @@ patients %>%
 	resource_frequency("resource")
 ```
 
-#### Resource Involvement
+## Resource Involvement
 
 Resource involvement refers to the notion of the number of cases in which a resource is involved. It can be computed at levels case, resource, and resource-activity. 
 
@@ -28,7 +35,7 @@ patients %>%
 It this example it shows that only r1 and r2 are involved in all cases, r6 and r7 are involved in most of the cases, while the others are only involved in half of the cases, more or less.
 
 
-#### Resource Specialization
+## Resource Specialization
 
 The resource specalization metric shows whether resources are specialized in certain activities or not. It can be calculated at the levels log, case, resource and activity.
 
@@ -58,7 +65,7 @@ patients %>%
 
 ## Resource precedence matrix
 
-A more compact representation of hand-over-of-work is given by the `resource_matrix` function, which works the same as the `precedence matrix` functions.
+A more compact representation of hand-over-of-work is given by the `resource_matrix` function, which works the same as the `process matrix` functions.
 
 ```{r}
 patients %>%

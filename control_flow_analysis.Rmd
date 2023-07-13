@@ -3,14 +3,21 @@ title: Control-Flow Analysis
 ---
 
 
-```{r}
+```{r echo = F, out.width="25%", fig.align = "right"}
+knitr::include_graphics("images/icons/cf.PNG")
+```
+
+```{r include = F}
 library(bupaR)
 ```
 
+***
 
-### Variance
+# Control-flow analysis
 
-#### Activity Presence
+## Metrics
+
+### Activity Presence
 
 Activity presence shows in what percentage of cases an activity is present. It has no level-argument.
 
@@ -20,7 +27,7 @@ patients %>% activity_presence() %>%
 ```
 
 
-#### Activity Frequency
+### Activity Frequency
 
 The frequency of activities can be calculated using the activity_frequency function, at the levels log, trace and activity.
 
@@ -29,7 +36,7 @@ patients %>%
 	activity_frequency("activity")
 ```
 
-#### Start Activities
+### Start Activities
 
 The start of cases can be described using the start_activities function. Available levels are activity, case, log, resource and resource activity.
 
@@ -40,7 +47,7 @@ patients %>%
 
 This shows that in this event log, all cases are started with the Registration by resource r1.
 
-#### End Activities
+### End Activities
 
 Conversely, the end_activities functions describes the end of cases, using the same levels: log, case, activity, resource and resource-activity.
 
@@ -50,7 +57,7 @@ patients %>%
 ```
 In contract to the start of cases, the end of cases seems to differ more frequently, although it is mostly the Check-Out activity.
 
-#### Trace Coverage
+### Trace Coverage
 
 The trace coverage metric shows the relationship between the number of different activity sequences (i.e. traces) and the number of cases they cover.
 
@@ -62,7 +69,7 @@ patients %>%
 
 In the patients log, there are only 7 different traces, and 2 of them cover nearly 100% of the event log.
 
-#### Trace Length
+### Trace Length
 
 The trace length metric describes the length of traces, i.e. the number of activity instances for each case. It can be computed at the levels case, trace and log.
 
@@ -76,28 +83,25 @@ It can be seen that in this simple event log, most cases have a trace length of 
 
 ### Rework
 
-Documentation coming soon
+Several metrics to measure rework (repeated work) are provided by bupaR. A distinction is made between self-loops and repetitions. A self-loop is an immediate recurrence of the same activity (i.e. no other activity in between), while a repetition is a recurrence after some other activities. 
 
+The metrics `number_of_repetitions` and `number_of_selfloops` can be used to analyse these occurrences at the levels of log, case, activity, resource and resource-activity. The metrics `size_of_repetitions` and `size_of_selfloops` (available at the same levels) provide further insight into the extent of the repeats within a single case (e.g. is it repeated only once, or multiple times?). Finally, all these metrics are able to distinguish between two types of rework: _repeat_ rework, where the same resource does the rework, and _redo_ rework, where the rework is done by another research. This can be specified with the `type` argument. Specifying `type = all` makes no distinction based on resources. 
 
-```{r echo = F, eval = F}
-
-### Rework
-
-#### Number of selfloops
-
-A selfloop occurs when an activity is immediatey
-
-#### Size of selfloops
-#### Referral matrix selfloops
-#### Number of repetitions
-#### Size of repetitions
-#### Referral matrix repetitions
+```{r}
+sepsis %>%
+	number_of_repetitions()	
+sepsis %>%
+	number_of_selfloops()	
+sepsis %>%
+	size_of_repetitions()	
+sepsis %>%
+	size_of_selfloops()	
 ```
 
 
 
-## Introduction
 
+## Rule-based conformance 
 
 Using the packages `processcheckr` prodecural rules can be checked in an event log. Checking rules will add a boolean case attribute, which can be used for filtering or in analysis. 
 
@@ -144,7 +148,7 @@ sepsis %>%
 ```
 
 
-## Rules
+### Rules
 
 Currently the following declarative rules can be checked:
 
@@ -174,9 +178,9 @@ Exclusiveness:
 
 The available rules are explained in more detail below.
 
-### Cardinality rules
+#### Cardinality rules
 
-#### contains
+##### contains
 
 Arguments:  
 
@@ -197,7 +201,7 @@ sepsis %>%
 
 
 
-#### contains_exactly
+##### contains_exactly
 
 Arguments:  
 
@@ -215,7 +219,7 @@ sepsis %>%
 
 Returns: cases where `activity` occurs `n`. 
 
-#### contains_between
+##### contains_between
 
 Arguments:  
 
@@ -235,7 +239,7 @@ sepsis %>%
 	n_cases()
 ```
 
-#### absent
+##### absent
 
 Arguments:  
 
@@ -255,9 +259,9 @@ sepsis %>%
 	n_cases()
 ```
 
-### Ordering rules
+#### Ordering rules
 
-#### starts
+##### starts
 
 Arguments:
 
@@ -276,7 +280,7 @@ sepsis %>%
 
 
 
-#### ends
+##### ends
 
 Arguments:
 
@@ -293,7 +297,7 @@ sepsis %>%
 	n_cases()
 ```
 
-#### succession
+##### succession
 
 Arguments:
 
@@ -312,7 +316,7 @@ sepsis %>%
 ```
 
 
-#### response
+##### response
 
 
 Arguments:
@@ -330,7 +334,7 @@ sepsis %>%
 	n_cases()
 ```
 
-#### precedence
+##### precedence
 
 Arguments:
 
@@ -350,7 +354,7 @@ sepsis %>%
 
 
 
-#### responded_existence
+##### responded_existence
 
 Arguments:
 
@@ -369,9 +373,9 @@ sepsis %>%
 ```
 
 
-### Exclusiveness rules
+#### Exclusiveness rules
 
-#### and 
+##### and 
 
 Arguments:
 
@@ -389,7 +393,7 @@ sepsis %>%
 	n_cases()
 ```
 
-#### xor
+##### xor
 
 Arguments:
 

@@ -66,8 +66,28 @@ patients %>%
 
 
 ## Activity Instance
+
+Specific activity instances can be selected using the `filter_activity_instance`. 
+
+```{r}
+patients %>%
+	filter_activity_instance(activity_instances = 10)
+```
+
 ## Lifecycle
+
+`filter_lifecycle` can be used to select events with a specific lifecycle
+
+```{r}
+patients %>%
+	filter_lifecycle("complete")
+```
+
 ## Lifecycle Presence
+
+We can select activity instances that contain a specific status with `filter_lifecycle_presence`. Its workings are comparable to `filter_activity_presence`.
+
+
 ## Resource Labels
 
 Similar to the activity filter, the resource filter can be used to filter events by listing on or more resources. 

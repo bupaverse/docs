@@ -177,7 +177,7 @@ data %>%
 	to_activitylog() -> tmp_act
 ```
 
-Note that the resource identifier is optional, and can be left out of the `eventlog` call if such an attribute does not exist in your data. If the activity instance id does not exist, some heuristics are available to generate it: [Missing activity instance identifier].
+Note that the resource identifier is optional, and can be left out of the `eventlog` call if such an attribute does not exist in your data. If the activity instance id does not exist, some heuristics are available to generate it: [Missing activity instance id].
 
 ### Scenario 3
 

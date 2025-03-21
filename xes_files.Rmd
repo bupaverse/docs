@@ -13,7 +13,7 @@ knitr::include_graphics("images/icons/create.PNG")
 
 ## Read XES
 
-`read_xes()` can be used to read XES files and turn the data into an `eventlog` object in R. The function needs only one `xesfile` argument. This can be a local path to a file with a .xes extension or an URL. An example XES file can be found at the following link: [https://bupar.net/eventdata/exercise1.xes](https://bupar.net/eventdata/exercise1.xes). When opening this file in a browser, you will see that it is an XML file. More information on the notation can be found [here](http://www.xes-standard.org/).
+`read_xes()` can be used to read XES files and turn the data into an `eventlog` object in R. The function needs only one `xesfile` argument. This can be a local path to a file with a .xes extension or an URL. An example XES file can be found [here](https://github.com/bupaverse/docs/tree/master/eventdata). When opening an xes file, you will see that it is an XML file. More information on the notation can be found [here](http://www.xes-standard.org/).
 
 Importing a XES file is easily done as follows:
 
@@ -28,7 +28,7 @@ library(xesreadR)
 
 
 ```{r}
-data <- read_xes("https://bupar.net/eventdata/exercise1.xes")
+data <- read_xes("https://github.com/bupaverse/docs/raw/refs/heads/master/eventdata/example_log_1.xes")
 data
 ```
 
@@ -94,11 +94,11 @@ Note that both traces and events can have additional elements in the XES files. 
 In certain circumstances, it might be useful to have a separate list of cases with case attributes. This can be obtained using `read_xes_cases()`. The argument for this function remains the same `xesfile.` The result is a `data.frame` with one row for each case and one column for each attribute. Non-existing attributes for a specific case are filled in with NA`s. Below, this function is illustrated using the _repairExample_ event log, which has one case attribute called _description_. For the sake of illustration the entire event log is also imported.
 
 ```{r}
-read_xes_cases("https://bupar.net/eventdata/repairExample.xes")
+read_xes_cases("https://github.com/bupaverse/docs/raw/refs/heads/master/eventdata/repairExample.xes")
 ```
 
 ```{r}
-read_xes("https://bupar.net/eventdata/repairExample.xes")
+read_xes("https://github.com/bupaverse/docs/raw/refs/heads/master/eventdata/repairExample.xes")
 ```
 
 ## Write XES

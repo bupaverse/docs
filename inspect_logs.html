@@ -13,14 +13,14 @@
 
 <title>bupaR Docs | Inspect log</title>
 
-<script src="site_libs/header-attrs-2.23/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.29/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-<link href="site_libs/bootstrap-5.2.2/bootstrap.min.css" rel="stylesheet" />
-<script src="site_libs/bootstrap-5.2.2/bootstrap.bundle.min.js"></script>
-<script src="site_libs/bs3compat-0.5.0/transition.js"></script>
-<script src="site_libs/bs3compat-0.5.0/tabs.js"></script>
-<script src="site_libs/bs3compat-0.5.0/bs3compat.js"></script>
+<link href="site_libs/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-5.3.1/bootstrap.bundle.min.js"></script>
+<script src="site_libs/bs3compat-0.9.0/transition.js"></script>
+<script src="site_libs/bs3compat-0.9.0/tabs.js"></script>
+<script src="site_libs/bs3compat-0.9.0/bs3compat.js"></script>
 <script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
@@ -64,7 +64,7 @@ ga('send', 'pageview');
 </style>
 <style type="text/css" data-origin="pandoc">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -99,11 +99,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }
 code span.al { color: #ef2929; } /* Alert */
 code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #c4a000; } /* Attribute */
+code span.at { color: #204a87; } /* Attribute */
 code span.bn { color: #0000cf; } /* BaseN */
 code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4e9a06; } /* Char */
-code span.cn { color: #000000; } /* Constant */
+code span.cn { color: #8f5902; } /* Constant */
 code span.co { color: #8f5902; font-style: italic; } /* Comment */
 code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
 code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
@@ -112,14 +112,14 @@ code span.dv { color: #0000cf; } /* DecVal */
 code span.er { color: #a40000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #0000cf; } /* Float */
-code span.fu { color: #000000; } /* Function */
+code span.fu { color: #204a87; font-weight: bold; } /* Function */
 code span.im { } /* Import */
 code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
 code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
 code span.ot { color: #8f5902; } /* Other */
 code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
-code span.sc { color: #000000; } /* SpecialChar */
+code span.sc { color: #ce5c00; font-weight: bold; } /* SpecialChar */
 code span.ss { color: #4e9a06; } /* SpecialString */
 code span.st { color: #4e9a06; } /* String */
 code span.va { color: #000000; } /* Variable */
@@ -656,7 +656,7 @@ div.tocify {
 <p>The mapping function can be used to retrieve all the meta data from a
 <code>log</code> object, i.e. the relation between log identifiers and
 the corresponding data fields.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span> mapping</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>patients <span class="sc">%&gt;%</span> mapping</span></code></pre></div>
 <pre><code>## Case identifier:     patient 
 ## Activity identifier:     handling 
 ## Resource identifier:     employee 
@@ -667,9 +667,9 @@ the corresponding data fields.</p>
 identifier in the event log, while the patient field is used as case
 identifier. We can also obtain each of these identifiers
 individually.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span> activity_id</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span> case_id</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span> resource_id</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>patients <span class="sc">%&gt;%</span> activity_id</span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>patients <span class="sc">%&gt;%</span> case_id</span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a>patients <span class="sc">%&gt;%</span> resource_id</span></code></pre></div>
 <pre><code>## [1] &quot;handling&quot;
 ## [1] &quot;patient&quot;
 ## [1] &quot;employee&quot;</code></pre>
@@ -680,7 +680,7 @@ class="section level2 tabset tabset-fade tabset-pills">
 information</h2>
 <p>We can look at a general summary of the event log with
 <code>summary()</code>.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span> summary</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>patients <span class="sc">%&gt;%</span> summary</span></code></pre></div>
 <pre><code>## Number of events:  5442
 ## Number of cases:  500
 ## Number of traces:  7
@@ -707,12 +707,12 @@ information</h2>
 ## </code></pre>
 <p>The basic counts which show up in the summary can also be retrieved
 individual as a numeric vector of length one.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span> n_activities</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span> n_activity_instances</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span> n_cases</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span> n_events</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span> n_traces</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span> n_resources</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a>patients <span class="sc">%&gt;%</span> n_activities</span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a>patients <span class="sc">%&gt;%</span> n_activity_instances</span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a>patients <span class="sc">%&gt;%</span> n_cases</span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a>patients <span class="sc">%&gt;%</span> n_events</span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a>patients <span class="sc">%&gt;%</span> n_traces</span>
+<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a>patients <span class="sc">%&gt;%</span> n_resources</span></code></pre></div>
 <pre><code>## [1] 7
 ## [1] 2721
 ## [1] 500
@@ -725,7 +725,7 @@ be obtained using the functions named accordingly, as in the examples
 below for the <code>patients</code> event log.</p>
 <div id="activities" class="section level3">
 <h3>Activities</h3>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span> <span class="fu">activities</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a>patients <span class="sc">%&gt;%</span> <span class="fu">activities</span>()</span></code></pre></div>
 <pre><code>## # A tibble: 7 × 3
 ##   handling              absolute_frequency relative_frequency
 ##   &lt;fct&gt;                              &lt;int&gt;              &lt;dbl&gt;
@@ -739,7 +739,7 @@ below for the <code>patients</code> event log.</p>
 </div>
 <div id="cases" class="section level3">
 <h3>Cases</h3>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span> <span class="fu">cases</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a>patients <span class="sc">%&gt;%</span> <span class="fu">cases</span>()</span></code></pre></div>
 <pre><code>## # A tibble: 500 × 10
 ##    patient trace_length number_of_activities start_timestamp    
 ##    &lt;chr&gt;          &lt;int&gt;                &lt;int&gt; &lt;dttm&gt;             
@@ -759,7 +759,7 @@ below for the <code>patients</code> event log.</p>
 </div>
 <div id="resources" class="section level3">
 <h3>Resources</h3>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span> <span class="fu">resources</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a>patients <span class="sc">%&gt;%</span> <span class="fu">resources</span>()</span></code></pre></div>
 <pre><code>## # A tibble: 7 × 3
 ##   employee absolute_frequency relative_frequency
 ##   &lt;fct&gt;                 &lt;int&gt;              &lt;dbl&gt;
@@ -773,7 +773,7 @@ below for the <code>patients</code> event log.</p>
 </div>
 <div id="traces" class="section level3">
 <h3>Traces</h3>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span> <span class="fu">traces</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a>patients <span class="sc">%&gt;%</span> <span class="fu">traces</span>()</span></code></pre></div>
 <pre><code>## # A tibble: 7 × 3
 ##   trace                                    absolute_frequency relative_frequency
 ##   &lt;chr&gt;                                                 &lt;int&gt;              &lt;dbl&gt;

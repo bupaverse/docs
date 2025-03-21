@@ -13,14 +13,14 @@
 
 <title>bupaR Docs | Adjust Logs</title>
 
-<script src="site_libs/header-attrs-2.23/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.29/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-<link href="site_libs/bootstrap-5.2.2/bootstrap.min.css" rel="stylesheet" />
-<script src="site_libs/bootstrap-5.2.2/bootstrap.bundle.min.js"></script>
-<script src="site_libs/bs3compat-0.5.0/transition.js"></script>
-<script src="site_libs/bs3compat-0.5.0/tabs.js"></script>
-<script src="site_libs/bs3compat-0.5.0/bs3compat.js"></script>
+<link href="site_libs/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-5.3.1/bootstrap.bundle.min.js"></script>
+<script src="site_libs/bs3compat-0.9.0/transition.js"></script>
+<script src="site_libs/bs3compat-0.9.0/tabs.js"></script>
+<script src="site_libs/bs3compat-0.9.0/bs3compat.js"></script>
 <script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
@@ -64,7 +64,7 @@ ga('send', 'pageview');
 </style>
 <style type="text/css" data-origin="pandoc">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -99,11 +99,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }
 code span.al { color: #ef2929; } /* Alert */
 code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #c4a000; } /* Attribute */
+code span.at { color: #204a87; } /* Attribute */
 code span.bn { color: #0000cf; } /* BaseN */
 code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4e9a06; } /* Char */
-code span.cn { color: #000000; } /* Constant */
+code span.cn { color: #8f5902; } /* Constant */
 code span.co { color: #8f5902; font-style: italic; } /* Comment */
 code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
 code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
@@ -112,14 +112,14 @@ code span.dv { color: #0000cf; } /* DecVal */
 code span.er { color: #a40000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #0000cf; } /* Float */
-code span.fu { color: #000000; } /* Function */
+code span.fu { color: #204a87; font-weight: bold; } /* Function */
 code span.im { } /* Import */
 code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
 code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
 code span.ot { color: #8f5902; } /* Other */
 code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
-code span.sc { color: #000000; } /* SpecialChar */
+code span.sc { color: #ce5c00; font-weight: bold; } /* SpecialChar */
 code span.ss { color: #4e9a06; } /* SpecialString */
 code span.st { color: #4e9a06; } /* String */
 code span.va { color: #000000; } /* Variable */
@@ -675,7 +675,7 @@ can be modified to approach event logs from a different angle. This can
 be done using the <code>eventlog()</code> or <code>activitylog()</code>,
 auxiliary <code>set_</code>-functions, or by using an existing
 mapping.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(bupaR)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">library</span>(bupaR)</span></code></pre></div>
 <div id="using-eventlogactivitylog" class="section level2">
 <h2>Using <code>eventlog()</code>/<code>activitylog()</code></h2>
 <p>The <code>eventlog()</code> and <code>activitylog()</code> functions
@@ -686,8 +686,8 @@ setting only the identifiers one wants to change.</p>
 change <code>case_id</code> argument to the vehicleclass column as
 follows (This is a purely hypothetical example). You will see that the
 number of cases has changed after this modification.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>traffic_fines <span class="sc">%&gt;%</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">eventlog</span>(<span class="at">case_id =</span> <span class="st">&quot;vehicleclass&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>traffic_fines <span class="sc">%&gt;%</span></span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>    <span class="fu">eventlog</span>(<span class="at">case_id =</span> <span class="st">&quot;vehicleclass&quot;</span>)</span></code></pre></div>
 <pre><code>## # Log of 34724 events consisting of:
 ## 4 traces 
 ## 4 cases 
@@ -727,8 +727,8 @@ number of cases has changed after this modification.</p>
 <p>If we only want to change one of the elements, as in the example
 above, <code>set()</code> provides a very convenient way to do so. The
 same change as before can be done as follows:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>traffic_fines <span class="sc">%&gt;%</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">set_case_id</span>(<span class="st">&quot;vehicleclass&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>traffic_fines <span class="sc">%&gt;%</span></span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>    <span class="fu">set_case_id</span>(<span class="st">&quot;vehicleclass&quot;</span>)</span></code></pre></div>
 <pre><code>## # Log of 34724 events consisting of:
 ## 4 traces 
 ## 4 cases 
@@ -767,8 +767,8 @@ same change as before can be done as follows:</p>
 <h2>Using existing mapping</h2>
 <p>It is also possible to extract the <code>log</code> mapping at a
 certain point of time using <code>mapping()</code>.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>mapping_fines <span class="ot">&lt;-</span> <span class="fu">mapping</span>(traffic_fines)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>mapping_fines</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a>mapping_fines <span class="ot">&lt;-</span> <span class="fu">mapping</span>(traffic_fines)</span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>mapping_fines</span></code></pre></div>
 <pre><code>## Case identifier:     case_id 
 ## Activity identifier:     activity 
 ## Resource identifier:     resource 
@@ -777,13 +777,13 @@ certain point of time using <code>mapping()</code>.</p>
 ## Lifecycle transition:        lifecycle</code></pre>
 <p>We can adjust the mapping incrementally by using the described
 approaches above.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>traffic_fines <span class="sc">%&gt;%</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">set_case_id</span>(<span class="st">&quot;vehicleclass&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">set_activity_id</span>(<span class="st">&quot;notificationtype&quot;</span>) <span class="ot">-&gt;</span> traffic_fines</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a>traffic_fines <span class="sc">%&gt;%</span></span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a>    <span class="fu">set_case_id</span>(<span class="st">&quot;vehicleclass&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a>    <span class="fu">set_activity_id</span>(<span class="st">&quot;notificationtype&quot;</span>) <span class="ot">-&gt;</span> traffic_fines</span></code></pre></div>
 <p>Later, we can always undo these changes and “reset” the original
 mapping using <code>re_map()</code>.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>traffic_fines <span class="sc">%&gt;%</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">re_map</span>(mapping_fines)</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a>traffic_fines <span class="sc">%&gt;%</span></span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a>    <span class="fu">re_map</span>(mapping_fines)</span></code></pre></div>
 <pre><code>## # Log of 34724 events consisting of:
 ## 44 traces 
 ## 10000 cases 

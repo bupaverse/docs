@@ -13,14 +13,14 @@
 
 <title>Developer Guide</title>
 
-<script src="site_libs/header-attrs-2.23/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.29/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-<link href="site_libs/bootstrap-5.2.2/bootstrap.min.css" rel="stylesheet" />
-<script src="site_libs/bootstrap-5.2.2/bootstrap.bundle.min.js"></script>
-<script src="site_libs/bs3compat-0.5.0/transition.js"></script>
-<script src="site_libs/bs3compat-0.5.0/tabs.js"></script>
-<script src="site_libs/bs3compat-0.5.0/bs3compat.js"></script>
+<link href="site_libs/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-5.3.1/bootstrap.bundle.min.js"></script>
+<script src="site_libs/bs3compat-0.9.0/transition.js"></script>
+<script src="site_libs/bs3compat-0.9.0/tabs.js"></script>
+<script src="site_libs/bs3compat-0.9.0/bs3compat.js"></script>
 <script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
@@ -64,7 +64,7 @@ ga('send', 'pageview');
 </style>
 <style type="text/css" data-origin="pandoc">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -99,11 +99,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }
 code span.al { color: #ef2929; } /* Alert */
 code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #c4a000; } /* Attribute */
+code span.at { color: #204a87; } /* Attribute */
 code span.bn { color: #0000cf; } /* BaseN */
 code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4e9a06; } /* Char */
-code span.cn { color: #000000; } /* Constant */
+code span.cn { color: #8f5902; } /* Constant */
 code span.co { color: #8f5902; font-style: italic; } /* Comment */
 code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
 code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
@@ -112,14 +112,14 @@ code span.dv { color: #0000cf; } /* DecVal */
 code span.er { color: #a40000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #0000cf; } /* Float */
-code span.fu { color: #000000; } /* Function */
+code span.fu { color: #204a87; font-weight: bold; } /* Function */
 code span.im { } /* Import */
 code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
 code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
 code span.ot { color: #8f5902; } /* Other */
 code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
-code span.sc { color: #000000; } /* SpecialChar */
+code span.sc { color: #ce5c00; font-weight: bold; } /* SpecialChar */
 code span.ss { color: #4e9a06; } /* SpecialString */
 code span.st { color: #4e9a06; } /* String */
 code span.va { color: #000000; } /* Variable */
@@ -665,14 +665,14 @@ well.</p>
 <p>The defining characteristics of a <code>log</code> are stored in
 regular variables, of which the names can be obtained with the
 <code>mapping()</code> function.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mapping</span>(patients)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">mapping</span>(patients)</span></code></pre></div>
 <pre><code>## Case identifier:     patient 
 ## Activity identifier:     handling 
 ## Resource identifier:     employee 
 ## Activity instance identifier:    handling_id 
 ## Timestamp:           time 
 ## Lifecycle transition:        registration_type</code></pre>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mapping</span>(patients_act)</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="fu">mapping</span>(patients_act)</span></code></pre></div>
 <pre><code>## Case identifier:     patient 
 ## Activity identifier:     handling 
 ## Resource identifier:     employee 
@@ -702,15 +702,15 @@ that the <code>eventlog_mapping()</code> has a dedicated
 prints just a regular list.)</p>
 <p>Individual mapping-variables can be obtained with the dedicated id
 functions. They work on both the logs itself, and on the mappings.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">activity_id</span>(patients)</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="fu">activity_id</span>(patients)</span></code></pre></div>
 <pre><code>## [1] &quot;handling&quot;</code></pre>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">activity_id</span>(patients_act)</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="fu">activity_id</span>(patients_act)</span></code></pre></div>
 <pre><code>## [1] &quot;handling&quot;</code></pre>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>mapping_event <span class="ot">&lt;-</span> <span class="fu">mapping</span>(patients)</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>mapping_act <span class="ot">&lt;-</span> <span class="fu">mapping</span>(patients_act)</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">activity_id</span>(mapping_event)</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a>mapping_event <span class="ot">&lt;-</span> <span class="fu">mapping</span>(patients)</span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a>mapping_act <span class="ot">&lt;-</span> <span class="fu">mapping</span>(patients_act)</span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a><span class="fu">activity_id</span>(mapping_event)</span></code></pre></div>
 <pre><code>## [1] &quot;handling&quot;</code></pre>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">activity_id</span>(mapping_act)</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="fu">activity_id</span>(mapping_act)</span></code></pre></div>
 <pre><code>## [1] &quot;handling&quot;</code></pre>
 <p>During data manipulation, it can sometimes happen (or sometimes is
 necessary) that the log is at some point transferred to a regular
@@ -718,11 +718,11 @@ necessary) that the log is at some point transferred to a regular
 the function should be once again a <code>log</code> object (and not a
 visual or summary table), the mapping can be used to recuperate the
 original mapping. This can be done using <code>re_map()</code>.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>patients_df <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(patients)</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(patients_df)</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a>patients_df <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(patients)</span>
+<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a><span class="fu">class</span>(patients_df)</span></code></pre></div>
 <pre><code>## [1] &quot;data.frame&quot;</code></pre>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>patients_log <span class="ot">&lt;-</span> <span class="fu">re_map</span>(patients_df, mapping_event)</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(patients_log)</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a>patients_log <span class="ot">&lt;-</span> <span class="fu">re_map</span>(patients_df, mapping_event)</span>
+<span id="cb15-2"><a href="#cb15-2" tabindex="-1"></a><span class="fu">class</span>(patients_log)</span></code></pre></div>
 <pre><code>## [1] &quot;eventlog&quot;   &quot;log&quot;        &quot;tbl_df&quot;     &quot;tbl&quot;        &quot;data.frame&quot;</code></pre>
 <p><code>re_map()</code> recognizes the class of the mapping, and thus
 works for both <code>activitylog</code> and <code>eventlog</code>
@@ -738,7 +738,7 @@ primarily for internal use. Only for more advanced use of
 the <code>:::</code> instead of the <code>::</code> operator. For
 instance, we can use the non-exported <code>activity_id_()</code>
 function outside of <code>bupaR</code> as follows:</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>bupaR<span class="sc">:::</span><span class="fu">activity_id_</span>(patients)</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a>bupaR<span class="sc">:::</span><span class="fu">activity_id_</span>(patients)</span></code></pre></div>
 <pre><code>## handling</code></pre>
 <p>While you should typically not need these function outside of
 <code>bupaR</code>, except for perhaps developing or testing some code
@@ -753,22 +753,22 @@ log, only for patient == 1. But you don’t know that the
 <code>case_id</code> is “patient”, so you use the function to get the
 case_id.</p>
 <p>The following will not work.</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="fu">case_id</span>(patients) <span class="sc">==</span> <span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a>patients <span class="sc">%&gt;%</span></span>
+<span id="cb19-2"><a href="#cb19-2" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="fu">case_id</span>(patients) <span class="sc">==</span> <span class="dv">1</span>)</span></code></pre></div>
 <pre><code>## EMPTY EVENT LOG
 ## # A tibble: 0 × 7
 ## # ℹ 7 variables: handling &lt;fct&gt;, patient &lt;chr&gt;, employee &lt;fct&gt;,
 ## #   handling_id &lt;chr&gt;, registration_type &lt;fct&gt;, time &lt;dttm&gt;, .order &lt;int&gt;</code></pre>
 <p>just as the following will not work.</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="st">&quot;patient&quot;</span> <span class="sc">==</span> <span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a>patients <span class="sc">%&gt;%</span></span>
+<span id="cb21-2"><a href="#cb21-2" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="st">&quot;patient&quot;</span> <span class="sc">==</span> <span class="dv">1</span>)</span></code></pre></div>
 <pre><code>## EMPTY EVENT LOG
 ## # A tibble: 0 × 7
 ## # ℹ 7 variables: handling &lt;fct&gt;, patient &lt;chr&gt;, employee &lt;fct&gt;,
 ## #   handling_id &lt;chr&gt;, registration_type &lt;fct&gt;, time &lt;dttm&gt;, .order &lt;int&gt;</code></pre>
 <p>In order to successfully do this, we could use the symbol:</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="sc">!!</span>bupaR<span class="sc">:::</span><span class="fu">case_id_</span>(patients) <span class="sc">==</span> <span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" tabindex="-1"></a>patients <span class="sc">%&gt;%</span></span>
+<span id="cb23-2"><a href="#cb23-2" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="sc">!!</span>bupaR<span class="sc">:::</span><span class="fu">case_id_</span>(patients) <span class="sc">==</span> <span class="dv">1</span>)</span></code></pre></div>
 <pre><code>## # Log of 12 events consisting of:
 ## 1 trace 
 ## 1 case 
@@ -804,8 +804,8 @@ case_id.</p>
 href="https://adv-r.hadley.nz/quasiquotation.html"
 class="uri">https://adv-r.hadley.nz/quasiquotation.html</a></p>
 <p>Alternatively, the following notation works as well.</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(.data[[<span class="fu">case_id</span>(patients)]] <span class="sc">==</span> <span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" tabindex="-1"></a>patients <span class="sc">%&gt;%</span></span>
+<span id="cb25-2"><a href="#cb25-2" tabindex="-1"></a>    <span class="fu">filter</span>(.data[[<span class="fu">case_id</span>(patients)]] <span class="sc">==</span> <span class="dv">1</span>)</span></code></pre></div>
 <pre><code>## # Log of 12 events consisting of:
 ## 1 trace 
 ## 1 case 
@@ -873,8 +873,8 @@ methods for logs therefore will keep the listed variables
 <p>The following code returns an <code>eventlog</code> object with the
 attribute <em>oligurie</em>, as well as the 6 variables needed to define
 the event log (plus the .order variable, see further).</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>sepsis <span class="sc">%&gt;%</span></span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(oligurie)</span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" tabindex="-1"></a>sepsis <span class="sc">%&gt;%</span></span>
+<span id="cb27-2"><a href="#cb27-2" tabindex="-1"></a>    <span class="fu">select</span>(oligurie)</span></code></pre></div>
 <pre><code>## # Log of 15214 events consisting of:
 ## 846 traces 
 ## 1050 cases 
@@ -909,8 +909,8 @@ the event log (plus the .order variable, see further).</p>
 In that case, the select will work just like a traditional
 <code>select()</code>, and the result will be a <code>data.frame</code>,
 no longer <code>eventlog</code>.</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>sepsis <span class="sc">%&gt;%</span></span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(oligurie, <span class="at">force_df =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" tabindex="-1"></a>sepsis <span class="sc">%&gt;%</span></span>
+<span id="cb29-2"><a href="#cb29-2" tabindex="-1"></a>    <span class="fu">select</span>(oligurie, <span class="at">force_df =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 15,214 × 1
 ##    oligurie
 ##    &lt;lgl&gt;   
@@ -927,8 +927,8 @@ no longer <code>eventlog</code>.</p>
 ## # ℹ 15,204 more rows</code></pre>
 <p>Because of this, you can select just the <em>event log mapping</em>
 using <code>select()</code>.</p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>sepsis <span class="sc">%&gt;%</span></span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" tabindex="-1"></a>sepsis <span class="sc">%&gt;%</span></span>
+<span id="cb31-2"><a href="#cb31-2" tabindex="-1"></a>    <span class="fu">select</span>()</span></code></pre></div>
 <pre><code>## # Log of 15214 events consisting of:
 ## 846 traces 
 ## 1050 cases 
@@ -964,8 +964,8 @@ classifiers, you can use <code>selects_ids()</code>. Because you would
 typically not select all id’s (otherwise you can use
 <code>select()</code>), this will by default turn your object to a
 <code>data.frame</code> object.</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>sepsis <span class="sc">%&gt;%</span></span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>    bupaR<span class="sc">::</span><span class="fu">select_ids</span>(activity_id, case_id)</span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" tabindex="-1"></a>sepsis <span class="sc">%&gt;%</span></span>
+<span id="cb33-2"><a href="#cb33-2" tabindex="-1"></a>    bupaR<span class="sc">::</span><span class="fu">select_ids</span>(activity_id, case_id)</span></code></pre></div>
 <pre><code>## # A tibble: 15,214 × 2
 ##    activity         case_id
 ##    &lt;fct&gt;            &lt;chr&gt;  
@@ -999,8 +999,8 @@ however exist (see further).</p>
 <li><code>group_by_resource()</code></li>
 <li><code>group_by_resource_activity()</code></li>
 </ul>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span></span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by_case</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" tabindex="-1"></a>patients <span class="sc">%&gt;%</span></span>
+<span id="cb35-2"><a href="#cb35-2" tabindex="-1"></a>    <span class="fu">group_by_case</span>()</span></code></pre></div>
 <pre><code>## # Groups: [patient]
 ## Grouped # Log of 5442 events consisting of:
 ## 7 traces 
@@ -1033,8 +1033,8 @@ however exist (see further).</p>
 ## # ℹ 5,432 more rows
 ## # ℹ 1 more variable: .order &lt;int&gt;</code></pre>
 <p>is equivalent to</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span></span>
-<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(.data[[<span class="fu">case_id</span>(patients)]])</span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" tabindex="-1"></a>patients <span class="sc">%&gt;%</span></span>
+<span id="cb37-2"><a href="#cb37-2" tabindex="-1"></a>    <span class="fu">group_by</span>(.data[[<span class="fu">case_id</span>(patients)]])</span></code></pre></div>
 <pre><code>## # Groups: [patient]
 ## Grouped # Log of 5442 events consisting of:
 ## 7 traces 
@@ -1070,8 +1070,8 @@ however exist (see further).</p>
 combinations of groupings are provided as a shortcut, the internal
 <code>group_by_ids()</code> allows the use of any combination of
 <code>_id()</code> functions. For example:</p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span></span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>    bupaR<span class="sc">:::</span><span class="fu">group_by_ids</span>(activity_id, case_id)</span></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" tabindex="-1"></a>patients <span class="sc">%&gt;%</span></span>
+<span id="cb39-2"><a href="#cb39-2" tabindex="-1"></a>    bupaR<span class="sc">:::</span><span class="fu">group_by_ids</span>(activity_id, case_id)</span></code></pre></div>
 <pre><code>## # Groups: [handling, patient]
 ## Grouped # Log of 5442 events consisting of:
 ## 7 traces 

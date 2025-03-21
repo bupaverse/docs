@@ -13,14 +13,14 @@
 
 <title>bupaR Docs | Data Quality</title>
 
-<script src="site_libs/header-attrs-2.23/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.29/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-<link href="site_libs/bootstrap-5.2.2/bootstrap.min.css" rel="stylesheet" />
-<script src="site_libs/bootstrap-5.2.2/bootstrap.bundle.min.js"></script>
-<script src="site_libs/bs3compat-0.5.0/transition.js"></script>
-<script src="site_libs/bs3compat-0.5.0/tabs.js"></script>
-<script src="site_libs/bs3compat-0.5.0/bs3compat.js"></script>
+<link href="site_libs/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-5.3.1/bootstrap.bundle.min.js"></script>
+<script src="site_libs/bs3compat-0.9.0/transition.js"></script>
+<script src="site_libs/bs3compat-0.9.0/tabs.js"></script>
+<script src="site_libs/bs3compat-0.9.0/bs3compat.js"></script>
 <script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
@@ -64,7 +64,7 @@ ga('send', 'pageview');
 </style>
 <style type="text/css" data-origin="pandoc">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -99,11 +99,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }
 code span.al { color: #ef2929; } /* Alert */
 code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #c4a000; } /* Attribute */
+code span.at { color: #204a87; } /* Attribute */
 code span.bn { color: #0000cf; } /* BaseN */
 code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4e9a06; } /* Char */
-code span.cn { color: #000000; } /* Constant */
+code span.cn { color: #8f5902; } /* Constant */
 code span.co { color: #8f5902; font-style: italic; } /* Comment */
 code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
 code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
@@ -112,14 +112,14 @@ code span.dv { color: #0000cf; } /* DecVal */
 code span.er { color: #a40000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #0000cf; } /* Float */
-code span.fu { color: #000000; } /* Function */
+code span.fu { color: #204a87; font-weight: bold; } /* Function */
 code span.im { } /* Import */
 code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
 code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
 code span.ot { color: #8f5902; } /* Other */
 code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
-code span.sc { color: #000000; } /* SpecialChar */
+code span.sc { color: #ce5c00; font-weight: bold; } /* SpecialChar */
 code span.ss { color: #4e9a06; } /* SpecialString */
 code span.st { color: #4e9a06; } /* String */
 code span.va { color: #000000; } /* Variable */
@@ -662,11 +662,11 @@ assessment functions to identify a wide array of quality issues.</p>
 <p>In the examples below, we use the dataset
 <code>hospital_actlog</code>, which is an artificial event log with data
 quality issues provided by <code>daqapo</code>.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(daqapo)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;hospital_actlog&quot;</span>)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;hospital_events&quot;</span>)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>hospital_actlog <span class="ot">&lt;-</span> <span class="fu">activitylog</span>(hospital_actlog)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">library</span>(daqapo)</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;hospital_actlog&quot;</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;hospital_events&quot;</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>hospital_actlog <span class="ot">&lt;-</span> <span class="fu">activitylog</span>(hospital_actlog)</span></code></pre></div>
 </div>
 <div id="attribute-dependencies" class="section level2">
 <h2>Attribute Dependencies</h2>
@@ -675,9 +675,9 @@ quality issues provided by <code>daqapo</code>.</p>
 hold(s)).</p>
 <p>Example: when the activity is “Registration”, the originator should
 start with “Clerk”.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>hospital_actlog <span class="sc">%&gt;%</span> </span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">detect_attribute_dependencies</span>(<span class="at">antecedent =</span> activity <span class="sc">==</span> <span class="st">&quot;Registration&quot;</span>,</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>                                <span class="at">consequent =</span> <span class="fu">startsWith</span>(originator,<span class="st">&quot;Clerk&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>hospital_actlog <span class="sc">%&gt;%</span> </span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>  <span class="fu">detect_attribute_dependencies</span>(<span class="at">antecedent =</span> activity <span class="sc">==</span> <span class="st">&quot;Registration&quot;</span>,</span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a>                                <span class="at">consequent =</span> <span class="fu">startsWith</span>(originator,<span class="st">&quot;Clerk&quot;</span>))</span></code></pre></div>
 <pre><code>## *** OUTPUT ***</code></pre>
 <pre><code>## The following statement was checked: if condition(s) ~activity == &quot;Registration&quot; hold(s), then ~startsWith(originator, &quot;Clerk&quot;) should also hold.</code></pre>
 <pre><code>## This statement holds for 12 (85.71%) of the rows in the activity log for which the first condition(s) hold and does not hold for 2 (14.29%) of these rows.</code></pre>
@@ -708,8 +708,8 @@ start with “Clerk”.</p>
 <div id="case-id-sequence-gaps" class="section level2">
 <h2>Case ID Sequence Gaps</h2>
 <p>Detect gaps in the sequence of case identifiers.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>hospital_actlog <span class="sc">%&gt;%</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">detect_case_id_sequence_gaps</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a>hospital_actlog <span class="sc">%&gt;%</span></span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a>  <span class="fu">detect_case_id_sequence_gaps</span>()</span></code></pre></div>
 <pre><code>## *** OUTPUT ***</code></pre>
 <pre><code>## It was checked whether there are gaps in the sequence of case IDs</code></pre>
 <pre><code>## From the 27 expected cases in the activity log, ranging from 510 to 536, 5 (18.52%) are missing.</code></pre>
@@ -726,9 +726,9 @@ start with “Clerk”.</p>
 condition is satisfied.</p>
 <p>For example, if specialization is “TRAU”, then the activity “Clinical
 exam” must take place.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>hospital_actlog <span class="sc">%&gt;%</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">detect_conditional_activity_presence</span>(<span class="at">condition =</span> specialization <span class="sc">==</span> <span class="st">&quot;TRAU&quot;</span>,</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>                                       <span class="at">activities =</span> <span class="st">&quot;Clinical exam&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a>hospital_actlog <span class="sc">%&gt;%</span></span>
+<span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a>  <span class="fu">detect_conditional_activity_presence</span>(<span class="at">condition =</span> specialization <span class="sc">==</span> <span class="st">&quot;TRAU&quot;</span>,</span>
+<span id="cb14-3"><a href="#cb14-3" tabindex="-1"></a>                                       <span class="at">activities =</span> <span class="st">&quot;Clinical exam&quot;</span>)</span></code></pre></div>
 <pre><code>## *** OUTPUT ***</code></pre>
 <pre><code>## The following statement was checked: if condition(s) ~specialization == &quot;TRAU&quot; hold(s), then activity/activities Clinical exam should be recorded</code></pre>
 <pre><code>## The condition(s) hold(s) for 2 cases. From these cases:</code></pre>
@@ -740,8 +740,8 @@ exam” must take place.</p>
 <p>Detect duration outliers for particular activities.</p>
 <p>For example, the duration of “Treatment” should be within 1 standard
 deviation of its mean duration.</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>hospital_actlog <span class="sc">%&gt;%</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">detect_duration_outliers</span>(<span class="at">Treatment =</span> <span class="fu">duration_within</span>(<span class="at">bound_sd =</span> <span class="dv">1</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" tabindex="-1"></a>hospital_actlog <span class="sc">%&gt;%</span></span>
+<span id="cb20-2"><a href="#cb20-2" tabindex="-1"></a>  <span class="fu">detect_duration_outliers</span>(<span class="at">Treatment =</span> <span class="fu">duration_within</span>(<span class="at">bound_sd =</span> <span class="dv">1</span>))</span></code></pre></div>
 <pre><code>## *** OUTPUT ***</code></pre>
 <pre><code>## Outliers are detected for following activities</code></pre>
 <pre><code>## Treatment     Lower bound: 5.06   Upper bound: 22.2</code></pre>
@@ -768,8 +768,8 @@ deviation of its mean duration.</p>
 ## #   duration &lt;dbl&gt;, mean &lt;dbl&gt;, sd &lt;dbl&gt;, bound_sd &lt;dbl&gt;, lower_bound &lt;dbl&gt;,
 ## #   upper_bound &lt;dbl&gt;</code></pre>
 <p>Or, the duration of “Treatment” should be within 0 to 15 minutes.</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>hospital_actlog <span class="sc">%&gt;%</span></span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">detect_duration_outliers</span>(<span class="at">Treatment =</span> <span class="fu">duration_within</span>(<span class="at">lower_bound =</span> <span class="dv">0</span>, <span class="at">upper_bound =</span> <span class="dv">15</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" tabindex="-1"></a>hospital_actlog <span class="sc">%&gt;%</span></span>
+<span id="cb27-2"><a href="#cb27-2" tabindex="-1"></a>  <span class="fu">detect_duration_outliers</span>(<span class="at">Treatment =</span> <span class="fu">duration_within</span>(<span class="at">lower_bound =</span> <span class="dv">0</span>, <span class="at">upper_bound =</span> <span class="dv">15</span>))</span></code></pre></div>
 <pre><code>## *** OUTPUT ***</code></pre>
 <pre><code>## Outliers are detected for following activities</code></pre>
 <pre><code>## Treatment     Lower bound: 0      Upper bound: 15</code></pre>
@@ -802,8 +802,8 @@ deviation of its mean duration.</p>
 using a threshold specified in minutes.</p>
 <p>For example, detect whether there are periods of more than 30 minutes
 without any activity executions.</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>hospital_actlog <span class="sc">%&gt;%</span></span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">detect_inactive_periods</span>(<span class="at">threshold =</span> <span class="dv">30</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" tabindex="-1"></a>hospital_actlog <span class="sc">%&gt;%</span></span>
+<span id="cb34-2"><a href="#cb34-2" tabindex="-1"></a>  <span class="fu">detect_inactive_periods</span>(<span class="at">threshold =</span> <span class="dv">30</span>)</span></code></pre></div>
 <pre><code>## Selected timestamp parameter value: both</code></pre>
 <pre><code>## Selected inactivity type:arrivals</code></pre>
 <pre><code>## *** OUTPUT ***</code></pre>
@@ -824,8 +824,8 @@ without any activity executions.</p>
 <h2>Incomplete Cases</h2>
 <p>Check whether there are cases that miss a specific activity.</p>
 <p>For example, does any of the cases miss the 5 listed activities?</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>hospital_actlog <span class="sc">%&gt;%</span></span>
-<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">detect_incomplete_cases</span>(<span class="at">activities =</span> <span class="fu">c</span>(<span class="st">&quot;Registration&quot;</span>,<span class="st">&quot;Triage&quot;</span>,<span class="st">&quot;Clinical exam&quot;</span>,<span class="st">&quot;Treatment&quot;</span>,<span class="st">&quot;Treatment evaluation&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" tabindex="-1"></a>hospital_actlog <span class="sc">%&gt;%</span></span>
+<span id="cb41-2"><a href="#cb41-2" tabindex="-1"></a>  <span class="fu">detect_incomplete_cases</span>(<span class="at">activities =</span> <span class="fu">c</span>(<span class="st">&quot;Registration&quot;</span>,<span class="st">&quot;Triage&quot;</span>,<span class="st">&quot;Clinical exam&quot;</span>,<span class="st">&quot;Treatment&quot;</span>,<span class="st">&quot;Treatment evaluation&quot;</span>))</span></code></pre></div>
 <pre><code>## *** OUTPUT ***</code></pre>
 <pre><code>## It was checked whether the activities Clinical exam, Registration, Treatment, Treatment evaluation, Triage are present for cases.</code></pre>
 <pre><code>## These activities are present for 4 (39.62%) of the cases and are not present for 18 (60.38%) of the cases.</code></pre>
@@ -848,8 +848,8 @@ without any activity executions.</p>
 <h2>Incorrect Activity Names</h2>
 <p>Given a set of allowed activities, are there any activities that are
 incorrect?</p>
-<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>hospital_actlog <span class="sc">%&gt;%</span></span>
-<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">detect_incorrect_activity_names</span>(<span class="at">allowed_activities =</span> <span class="fu">c</span>(<span class="st">&quot;Registration&quot;</span>,<span class="st">&quot;Triage&quot;</span>,<span class="st">&quot;Clinical exam&quot;</span>,<span class="st">&quot;Treatment&quot;</span>,<span class="st">&quot;Treatment evaluation&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" tabindex="-1"></a>hospital_actlog <span class="sc">%&gt;%</span></span>
+<span id="cb48-2"><a href="#cb48-2" tabindex="-1"></a>  <span class="fu">detect_incorrect_activity_names</span>(<span class="at">allowed_activities =</span> <span class="fu">c</span>(<span class="st">&quot;Registration&quot;</span>,<span class="st">&quot;Triage&quot;</span>,<span class="st">&quot;Clinical exam&quot;</span>,<span class="st">&quot;Treatment&quot;</span>,<span class="st">&quot;Treatment evaluation&quot;</span>))</span></code></pre></div>
 <pre><code>## *** OUTPUT ***</code></pre>
 <pre><code>## 4 out of 9 (44.44% ) activity labels are identified to be incorrect.</code></pre>
 <pre><code>## These activity labels are:
@@ -881,8 +881,8 @@ incorrect?</p>
 <h2>Missing Values</h2>
 <p>Analyse the missing values of the log. This can be done in general,
 or at the level of activities or specific columns.</p>
-<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>hospital_actlog <span class="sc">%&gt;%</span></span>
-<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">detect_missing_values</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" tabindex="-1"></a>hospital_actlog <span class="sc">%&gt;%</span></span>
+<span id="cb54-2"><a href="#cb54-2" tabindex="-1"></a>  <span class="fu">detect_missing_values</span>()</span></code></pre></div>
 <pre><code>## Selected level of aggregation:overview</code></pre>
 <pre><code>## *** OUTPUT ***</code></pre>
 <pre><code>## Absolute number of missing values per column:</code></pre>
@@ -927,8 +927,8 @@ or at the level of activities or specific columns.</p>
 ## 3              534 Registrat… &lt;NA&gt;       2017-11-22 18:35:00 2017-11-22 18:37:00
 ## 4              512 Clinical … Doctor 7   NA                  2017-11-20 11:33:57
 ## # ℹ 3 more variables: triagecode &lt;dbl&gt;, specialization &lt;chr&gt;, .order &lt;int&gt;</code></pre>
-<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a>hospital_actlog <span class="sc">%&gt;%</span> </span>
-<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">detect_missing_values</span>(<span class="at">level_of_aggregation =</span> <span class="st">&quot;activity&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" tabindex="-1"></a>hospital_actlog <span class="sc">%&gt;%</span> </span>
+<span id="cb63-2"><a href="#cb63-2" tabindex="-1"></a>  <span class="fu">detect_missing_values</span>(<span class="at">level_of_aggregation =</span> <span class="st">&quot;activity&quot;</span>)</span></code></pre></div>
 <pre><code>## Selected level of aggregation:activity</code></pre>
 <pre><code>## *** OUTPUT ***</code></pre>
 <pre><code>## Absolute number of missing values per column (per activity):</code></pre>
@@ -981,10 +981,10 @@ or at the level of activities or specific columns.</p>
 ## 3              534 Registrat… &lt;NA&gt;       2017-11-22 18:35:00 2017-11-22 18:37:00
 ## 4              512 Clinical … Doctor 7   NA                  2017-11-20 11:33:57
 ## # ℹ 3 more variables: triagecode &lt;dbl&gt;, specialization &lt;chr&gt;, .order &lt;int&gt;</code></pre>
-<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a>hospital_actlog <span class="sc">%&gt;%</span> </span>
-<span id="cb72-2"><a href="#cb72-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">detect_missing_values</span>(</span>
-<span id="cb72-3"><a href="#cb72-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">level_of_aggregation =</span> <span class="st">&quot;column&quot;</span>,</span>
-<span id="cb72-4"><a href="#cb72-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">column =</span> <span class="st">&quot;triagecode&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" tabindex="-1"></a>hospital_actlog <span class="sc">%&gt;%</span> </span>
+<span id="cb72-2"><a href="#cb72-2" tabindex="-1"></a>  <span class="fu">detect_missing_values</span>(</span>
+<span id="cb72-3"><a href="#cb72-3" tabindex="-1"></a>  <span class="at">level_of_aggregation =</span> <span class="st">&quot;column&quot;</span>,</span>
+<span id="cb72-4"><a href="#cb72-4" tabindex="-1"></a>  <span class="at">column =</span> <span class="st">&quot;triagecode&quot;</span>)</span></code></pre></div>
 <pre><code>## Selected level of aggregation:column</code></pre>
 <pre><code>## *** OUTPUT ***</code></pre>
 <pre><code>## Absolute number of missing values in columntriagecode:1</code></pre>
@@ -1015,8 +1015,8 @@ or at the level of activities or specific columns.</p>
 <p>Detect whether there are multiple activity executions registered by
 the same resource (or for the same case), in a short period of time.
 This period of time can be specified with a threshold in seconds.</p>
-<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a>hospital_actlog <span class="sc">%&gt;%</span></span>
-<span id="cb80-2"><a href="#cb80-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">detect_multiregistration</span>(<span class="at">threshold_in_seconds =</span> <span class="dv">10</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" tabindex="-1"></a>hospital_actlog <span class="sc">%&gt;%</span></span>
+<span id="cb80-2"><a href="#cb80-2" tabindex="-1"></a>  <span class="fu">detect_multiregistration</span>(<span class="at">threshold_in_seconds =</span> <span class="dv">10</span>)</span></code></pre></div>
 <pre><code>## Selected level of aggregation: resource</code></pre>
 <pre><code>## Selected timestamp parameter value: complete</code></pre>
 <pre><code>## *** OUTPUT ***</code></pre>
@@ -1054,8 +1054,8 @@ This period of time can be specified with a threshold in seconds.</p>
 <h2>Overlaps</h2>
 <p>Check if a resource has performed two or more activities in
 parallel.</p>
-<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a>hospital_actlog <span class="sc">%&gt;%</span></span>
-<span id="cb88-2"><a href="#cb88-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">detect_overlaps</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1" tabindex="-1"></a>hospital_actlog <span class="sc">%&gt;%</span></span>
+<span id="cb88-2"><a href="#cb88-2" tabindex="-1"></a>  <span class="fu">detect_overlaps</span>()</span></code></pre></div>
 <pre><code>## # A tibble: 7 × 4
 ##   activity_a    activity_b        n avg_overlap_mins
 ##   &lt;chr&gt;         &lt;chr&gt;         &lt;int&gt;            &lt;dbl&gt;
@@ -1075,9 +1075,9 @@ executed as well. Take a look at <a
 href="https://bupaverse.github.io/docs/control_flow_analysis.html">Rule-Based
 Conformance Checking</a> for more control-flow rules that you can
 check.</p>
-<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1" aria-hidden="true" tabindex="-1"></a>hospital_actlog <span class="sc">%&gt;%</span></span>
-<span id="cb90-2"><a href="#cb90-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">detect_related_activities</span>(<span class="at">antecedent =</span> <span class="st">&quot;Treatment evaluation&quot;</span>, </span>
-<span id="cb90-3"><a href="#cb90-3" aria-hidden="true" tabindex="-1"></a>                            <span class="at">consequent =</span> <span class="st">&quot;Treatment&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1" tabindex="-1"></a>hospital_actlog <span class="sc">%&gt;%</span></span>
+<span id="cb90-2"><a href="#cb90-2" tabindex="-1"></a>  <span class="fu">detect_related_activities</span>(<span class="at">antecedent =</span> <span class="st">&quot;Treatment evaluation&quot;</span>, </span>
+<span id="cb90-3"><a href="#cb90-3" tabindex="-1"></a>                            <span class="at">consequent =</span> <span class="st">&quot;Treatment&quot;</span>)</span></code></pre></div>
 <pre><code>## *** OUTPUT ***</code></pre>
 <pre><code>## The following statement was checked: if Treatment evaluation is recorded for a case, then Treatment should also be recorded.</code></pre>
 <pre><code>## This statement holds for 5 (83.33%) of the cases in which Treatment evaluation was recorded and does not hold for 1 (16.67%) of the cases in which Treatment evaluation was recorded.</code></pre>
@@ -1089,8 +1089,8 @@ check.</p>
 <p>Check for similar labels in a specific column. Both the column and
 the maximum allowed edit distance for two labels to consider similar can
 be configured.</p>
-<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a>hospital_actlog <span class="sc">%&gt;%</span></span>
-<span id="cb96-2"><a href="#cb96-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">detect_similar_labels</span>(<span class="at">column_labels =</span> <span class="st">&quot;activity&quot;</span>, <span class="at">max_edit_distance =</span> <span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="#cb96-1" tabindex="-1"></a>hospital_actlog <span class="sc">%&gt;%</span></span>
+<span id="cb96-2"><a href="#cb96-2" tabindex="-1"></a>  <span class="fu">detect_similar_labels</span>(<span class="at">column_labels =</span> <span class="st">&quot;activity&quot;</span>, <span class="at">max_edit_distance =</span> <span class="dv">3</span>)</span></code></pre></div>
 <pre><code>## Warning in detect_similar_labels.activitylog(., column_labels = &quot;activity&quot;, :
 ## Not all provided columns are of type character or factor and will be ignored:
 ## patient_visit_nr,start,complete,.order</code></pre>
@@ -1117,8 +1117,8 @@ be configured.</p>
 <div id="time-anomalies" class="section level2">
 <h2>Time Anomalies</h2>
 <p>Detect activity executions with negative or zero duration.</p>
-<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="#cb99-1" aria-hidden="true" tabindex="-1"></a>hospital_actlog <span class="sc">%&gt;%</span></span>
-<span id="cb99-2"><a href="#cb99-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">detect_time_anomalies</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="#cb99-1" tabindex="-1"></a>hospital_actlog <span class="sc">%&gt;%</span></span>
+<span id="cb99-2"><a href="#cb99-2" tabindex="-1"></a>  <span class="fu">detect_time_anomalies</span>()</span></code></pre></div>
 <pre><code>## Selected anomaly type: both</code></pre>
 <pre><code>## *** OUTPUT ***</code></pre>
 <pre><code>## For 5 rows in the activity log (9.43%), an anomaly is detected.</code></pre>
@@ -1158,8 +1158,8 @@ be configured.</p>
 <h2>Unique Values</h2>
 <p>List all unique combinations of the specified columns.</p>
 <div class="sourceCode" id="cb107"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="#cb107-1" aria-hidden="true" tabindex="-1"></a>hospital_actlog <span class="sc">%&gt;%</span></span>
-<span id="cb107-2"><a href="#cb107-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">detect_unique_values</span>(<span class="at">column_labels =</span> <span class="st">&quot;activity&quot;</span>)</span></code></pre></div>
+class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="#cb107-1" tabindex="-1"></a>hospital_actlog <span class="sc">%&gt;%</span></span>
+<span id="cb107-2"><a href="#cb107-2" tabindex="-1"></a>  <span class="fu">detect_unique_values</span>(<span class="at">column_labels =</span> <span class="st">&quot;activity&quot;</span>)</span></code></pre></div>
 <pre><code>## *** OUTPUT ***</code></pre>
 <pre><code>## Distinct entries are computed for the following columns: 
 ## activity</code></pre>
@@ -1192,8 +1192,8 @@ class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="#cb1
 ## # ℹ 43 more rows
 ## # ℹ 1 more variable: .order &lt;int&gt;</code></pre>
 <div class="sourceCode" id="cb111"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="#cb111-1" aria-hidden="true" tabindex="-1"></a>hospital_actlog <span class="sc">%&gt;%</span></span>
-<span id="cb111-2"><a href="#cb111-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">detect_unique_values</span>(<span class="at">column_labels =</span> <span class="fu">c</span>(<span class="st">&quot;activity&quot;</span>, <span class="st">&quot;originator&quot;</span>))</span></code></pre></div>
+class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="#cb111-1" tabindex="-1"></a>hospital_actlog <span class="sc">%&gt;%</span></span>
+<span id="cb111-2"><a href="#cb111-2" tabindex="-1"></a>  <span class="fu">detect_unique_values</span>(<span class="at">column_labels =</span> <span class="fu">c</span>(<span class="st">&quot;activity&quot;</span>, <span class="st">&quot;originator&quot;</span>))</span></code></pre></div>
 <pre><code>## *** OUTPUT ***</code></pre>
 <pre><code>## Distinct entries are computed for the following columns: 
 ## activity - originator</code></pre>
@@ -1230,8 +1230,8 @@ class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="#cb1
 <h2>Value Range Violations</h2>
 <p>Detect value range violation.</p>
 <div class="sourceCode" id="cb115"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="#cb115-1" aria-hidden="true" tabindex="-1"></a>hospital_actlog <span class="sc">%&gt;%</span></span>
-<span id="cb115-2"><a href="#cb115-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">detect_value_range_violations</span>(<span class="at">triagecode =</span> <span class="fu">domain_numeric</span>(<span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> <span class="dv">5</span>))</span></code></pre></div>
+class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="#cb115-1" tabindex="-1"></a>hospital_actlog <span class="sc">%&gt;%</span></span>
+<span id="cb115-2"><a href="#cb115-2" tabindex="-1"></a>  <span class="fu">detect_value_range_violations</span>(<span class="at">triagecode =</span> <span class="fu">domain_numeric</span>(<span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> <span class="dv">5</span>))</span></code></pre></div>
 <pre><code>## $triagecode
 ## $type
 ## [1] &quot;numeric&quot;

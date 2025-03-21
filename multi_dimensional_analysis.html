@@ -13,14 +13,14 @@
 
 <title>bupaR Docs | Multi-dimensional analysis</title>
 
-<script src="site_libs/header-attrs-2.23/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.29/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-<link href="site_libs/bootstrap-5.2.2/bootstrap.min.css" rel="stylesheet" />
-<script src="site_libs/bootstrap-5.2.2/bootstrap.bundle.min.js"></script>
-<script src="site_libs/bs3compat-0.5.0/transition.js"></script>
-<script src="site_libs/bs3compat-0.5.0/tabs.js"></script>
-<script src="site_libs/bs3compat-0.5.0/bs3compat.js"></script>
+<link href="site_libs/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-5.3.1/bootstrap.bundle.min.js"></script>
+<script src="site_libs/bs3compat-0.9.0/transition.js"></script>
+<script src="site_libs/bs3compat-0.9.0/tabs.js"></script>
+<script src="site_libs/bs3compat-0.9.0/bs3compat.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <script>
 	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -61,7 +61,7 @@ ga('send', 'pageview');
 </style>
 <style type="text/css" data-origin="pandoc">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -96,11 +96,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }
 code span.al { color: #ef2929; } /* Alert */
 code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #c4a000; } /* Attribute */
+code span.at { color: #204a87; } /* Attribute */
 code span.bn { color: #0000cf; } /* BaseN */
 code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4e9a06; } /* Char */
-code span.cn { color: #000000; } /* Constant */
+code span.cn { color: #8f5902; } /* Constant */
 code span.co { color: #8f5902; font-style: italic; } /* Comment */
 code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
 code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
@@ -109,14 +109,14 @@ code span.dv { color: #0000cf; } /* DecVal */
 code span.er { color: #a40000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #0000cf; } /* Float */
-code span.fu { color: #000000; } /* Function */
+code span.fu { color: #204a87; font-weight: bold; } /* Function */
 code span.im { } /* Import */
 code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
 code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
 code span.ot { color: #8f5902; } /* Other */
 code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
-code span.sc { color: #000000; } /* SpecialChar */
+code span.sc { color: #ce5c00; font-weight: bold; } /* SpecialChar */
 code span.ss { color: #4e9a06; } /* SpecialString */
 code span.st { color: #4e9a06; } /* String */
 code span.va { color: #000000; } /* Variable */
@@ -567,7 +567,7 @@ analysis</h1>
 <hr />
 <div id="multi-dimensional-analysis" class="section level1">
 <h1>Multi-dimensional analysis</h1>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(bupaverse)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">library</span>(bupaverse)</span></code></pre></div>
 <p>By combining metrics with <a
 href="wrangling.html#group_by"><code>group_by()</code></a> and <a
 href="augment.html"><code>augment()</code></a>, you can perform analysis
@@ -575,9 +575,9 @@ that combine multiple perspectives.</p>
 <p>For example, let’s say we want to compare throughput time
 (performance) with trace length (control-flow). We start by computing
 the throughput time per case.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>traffic_fines <span class="sc">%&gt;%</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">throughput_time</span>(<span class="at">level =</span> <span class="st">&quot;case&quot;</span>, <span class="at">units =</span> <span class="st">&quot;weeks&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">head</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>traffic_fines <span class="sc">%&gt;%</span></span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>    <span class="fu">throughput_time</span>(<span class="at">level =</span> <span class="st">&quot;case&quot;</span>, <span class="at">units =</span> <span class="st">&quot;weeks&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a>    <span class="fu">head</span>()</span></code></pre></div>
 <pre><code>##   case_id throughput_time
 ## 1   A1280  279.4286 weeks
 ## 2  A10495  247.4286 weeks
@@ -587,20 +587,20 @@ the throughput time per case.</p>
 ## 6  A11475  244.0000 weeks</code></pre>
 <p>Subsequently, we add this information to the log using
 <code>augment()</code>, and store the result as <code>tmp</code>.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>traffic_fines <span class="sc">%&gt;%</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">throughput_time</span>(<span class="at">level =</span> <span class="st">&quot;case&quot;</span>, <span class="at">units =</span> <span class="st">&quot;weeks&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">augment</span>(traffic_fines) <span class="ot">-&gt;</span> tmp</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>traffic_fines <span class="sc">%&gt;%</span></span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>    <span class="fu">throughput_time</span>(<span class="at">level =</span> <span class="st">&quot;case&quot;</span>, <span class="at">units =</span> <span class="st">&quot;weeks&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>    <span class="fu">augment</span>(traffic_fines) <span class="ot">-&gt;</span> tmp</span></code></pre></div>
 <p>Now, we have 2 options. Option 1 is to calculate the
 <code>trace_length()</code> as well, and adding it again to the log.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="sc">%&gt;%</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">trace_length</span>(<span class="at">level =</span> <span class="st">&quot;case&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">augment</span>(tmp, <span class="at">prefix =</span> <span class="st">&quot;length&quot;</span>) <span class="ot">-&gt;</span> tmp2</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>tmp <span class="sc">%&gt;%</span></span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>    <span class="fu">trace_length</span>(<span class="at">level =</span> <span class="st">&quot;case&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>    <span class="fu">augment</span>(tmp, <span class="at">prefix =</span> <span class="st">&quot;length&quot;</span>) <span class="ot">-&gt;</span> tmp2</span></code></pre></div>
 <p>We then have both the performance and coverage information in the
 log, and can visualize their relationship.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>tmp2 <span class="sc">%&gt;%</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(length_absolute, throughput_time)) <span class="sc">+</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">group =</span> length_absolute))</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>tmp2 <span class="sc">%&gt;%</span></span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(length_absolute, throughput_time)) <span class="sc">+</span></span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a>    <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">group =</span> length_absolute))</span></code></pre></div>
 <pre><code>## Don&#39;t know how to automatically pick scale for object of type &lt;difftime&gt;.
 ## Defaulting to continuous.</code></pre>
 <p><img src="multi_dimensional_analysis_files/figure-html/unnamed-chunk-7-1.png" width="672" />
@@ -612,15 +612,15 @@ and the default <code>plot()</code> method provided by
 <em>throughput_time</em> variable. Let’s use <code>cut()</code> to
 create multiple categories of throughput time. We start by looking at
 the throughput time distribution.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="sc">%&gt;%</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">throughput_time</span>(<span class="at">units =</span> <span class="st">&quot;weeks&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a>tmp <span class="sc">%&gt;%</span></span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a>    <span class="fu">throughput_time</span>(<span class="at">units =</span> <span class="st">&quot;weeks&quot;</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 1 × 8
 ##   min     q1      median         mean           q3            max   st_dev iqr  
 ##   &lt;drtn&gt;  &lt;drtn&gt;  &lt;drtn&gt;         &lt;drtn&gt;         &lt;drtn&gt;        &lt;drt&gt;  &lt;dbl&gt; &lt;drt&gt;
 ## 1 0 weeks 1 weeks 17.85714 weeks 42.30501 weeks 85.14286 wee… 279.…   44.8 84.1…</code></pre>
 <p>Let’s say use Q1, Q3 and the median to create 4 groups.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="sc">%&gt;%</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">throughput_time_bin =</span> <span class="fu">cut</span>(<span class="fu">as.numeric</span>(throughput_time), <span class="at">breaks =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="cn">Inf</span>, <span class="dv">1</span>, <span class="fl">17.85</span>, <span class="fl">85.14</span>, <span class="cn">Inf</span>)))</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a>tmp <span class="sc">%&gt;%</span></span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">throughput_time_bin =</span> <span class="fu">cut</span>(<span class="fu">as.numeric</span>(throughput_time), <span class="at">breaks =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="cn">Inf</span>, <span class="dv">1</span>, <span class="fl">17.85</span>, <span class="fl">85.14</span>, <span class="cn">Inf</span>)))</span></code></pre></div>
 <pre><code>## # Log of 34724 events consisting of:
 ## 44 traces 
 ## 10000 cases 
@@ -656,10 +656,10 @@ the throughput time distribution.</p>
 ## #   .order &lt;int&gt;, throughput_time &lt;drtn&gt;, throughput_time_bin &lt;fct&gt;</code></pre>
 <p>Observe that we have now 4 groups under <em>throughput_time_bin</em>
 with the roughly same number of cases.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="sc">%&gt;%</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">throughput_time_bin =</span> <span class="fu">cut</span>(<span class="fu">as.numeric</span>(throughput_time), <span class="at">breaks =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="cn">Inf</span>, <span class="dv">1</span>, <span class="fl">17.85</span>, <span class="fl">85.14</span>, <span class="cn">Inf</span>))) <span class="sc">%&gt;%</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(throughput_time_bin) <span class="sc">%&gt;%</span></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">n_cases</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a>tmp <span class="sc">%&gt;%</span></span>
+<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">throughput_time_bin =</span> <span class="fu">cut</span>(<span class="fu">as.numeric</span>(throughput_time), <span class="at">breaks =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="cn">Inf</span>, <span class="dv">1</span>, <span class="fl">17.85</span>, <span class="fl">85.14</span>, <span class="cn">Inf</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a>    <span class="fu">group_by</span>(throughput_time_bin) <span class="sc">%&gt;%</span></span>
+<span id="cb12-4"><a href="#cb12-4" tabindex="-1"></a>    <span class="fu">n_cases</span>()</span></code></pre></div>
 <pre><code>## # A tibble: 4 × 2
 ##   throughput_time_bin n_cases
 ##   &lt;fct&gt;                 &lt;int&gt;
@@ -671,10 +671,10 @@ with the roughly same number of cases.</p>
 <code>n_cases()</code>, we can use <code>group_by()</code> followed by
 <code>trace_length()</code>. This gives us the distribution of the trace
 length, for each of the groups.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="sc">%&gt;%</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">throughput_time_bin =</span> <span class="fu">cut</span>(<span class="fu">as.numeric</span>(throughput_time), <span class="at">breaks =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="cn">Inf</span>, <span class="dv">1</span>, <span class="fl">17.85</span>, <span class="fl">85.14</span>, <span class="cn">Inf</span>))) <span class="sc">%&gt;%</span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(throughput_time_bin) <span class="sc">%&gt;%</span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">trace_length</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a>tmp <span class="sc">%&gt;%</span></span>
+<span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">throughput_time_bin =</span> <span class="fu">cut</span>(<span class="fu">as.numeric</span>(throughput_time), <span class="at">breaks =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="cn">Inf</span>, <span class="dv">1</span>, <span class="fl">17.85</span>, <span class="fl">85.14</span>, <span class="cn">Inf</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb14-3"><a href="#cb14-3" tabindex="-1"></a>    <span class="fu">group_by</span>(throughput_time_bin) <span class="sc">%&gt;%</span></span>
+<span id="cb14-4"><a href="#cb14-4" tabindex="-1"></a>    <span class="fu">trace_length</span>()</span></code></pre></div>
 <pre><code>## # A tibble: 4 × 9
 ##   throughput_time_bin   min    q1 median  mean    q3   max st_dev   iqr
 ##   &lt;fct&gt;               &lt;int&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt;
@@ -683,11 +683,11 @@ length, for each of the groups.</p>
 ## 3 (17.9,85.1]             2     5      5  4.78     5     9  1.28      0
 ## 4 (85.1, Inf]             5     5      5  5.08     5     9  0.417     0</code></pre>
 <p>We plot this new information:</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="sc">%&gt;%</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">throughput_time_bin =</span> <span class="fu">cut</span>(<span class="fu">as.numeric</span>(throughput_time), <span class="at">breaks =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="cn">Inf</span>, <span class="dv">1</span>, <span class="fl">17.85</span>, <span class="fl">85.14</span>, <span class="cn">Inf</span>))) <span class="sc">%&gt;%</span></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(throughput_time_bin) <span class="sc">%&gt;%</span></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">trace_length</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">plot</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a>tmp <span class="sc">%&gt;%</span></span>
+<span id="cb16-2"><a href="#cb16-2" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">throughput_time_bin =</span> <span class="fu">cut</span>(<span class="fu">as.numeric</span>(throughput_time), <span class="at">breaks =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="cn">Inf</span>, <span class="dv">1</span>, <span class="fl">17.85</span>, <span class="fl">85.14</span>, <span class="cn">Inf</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb16-3"><a href="#cb16-3" tabindex="-1"></a>    <span class="fu">group_by</span>(throughput_time_bin) <span class="sc">%&gt;%</span></span>
+<span id="cb16-4"><a href="#cb16-4" tabindex="-1"></a>    <span class="fu">trace_length</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb16-5"><a href="#cb16-5" tabindex="-1"></a>    <span class="fu">plot</span>()</span></code></pre></div>
 <p><img src="multi_dimensional_analysis_files/figure-html/unnamed-chunk-12-1.png" width="672" />
 While the resulting default plot might not be ideal for your situation
 (as here, it doesn’t work well with trace lengths discrete
@@ -697,18 +697,18 @@ additional visualization expertise.</p>
 the impact of trace length on throughput time?), things get even easier
 as the discrete trace length variable can be directly fed to
 <code>group_by()</code>.</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>traffic_fines <span class="sc">%&gt;%</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">trace_length</span>(<span class="at">level =</span> <span class="st">&quot;case&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">augment</span>(traffic_fines, <span class="at">prefix =</span> <span class="st">&quot;length&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(length_absolute) <span class="sc">%&gt;%</span></span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">throughput_time</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">plot</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a>traffic_fines <span class="sc">%&gt;%</span></span>
+<span id="cb17-2"><a href="#cb17-2" tabindex="-1"></a>    <span class="fu">trace_length</span>(<span class="at">level =</span> <span class="st">&quot;case&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb17-3"><a href="#cb17-3" tabindex="-1"></a>    <span class="fu">augment</span>(traffic_fines, <span class="at">prefix =</span> <span class="st">&quot;length&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb17-4"><a href="#cb17-4" tabindex="-1"></a>    <span class="fu">group_by</span>(length_absolute) <span class="sc">%&gt;%</span></span>
+<span id="cb17-5"><a href="#cb17-5" tabindex="-1"></a>    <span class="fu">throughput_time</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb17-6"><a href="#cb17-6" tabindex="-1"></a>    <span class="fu">plot</span>()</span></code></pre></div>
 <p><img src="multi_dimensional_analysis_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
 <p>Finally, note that you are not restricted to combining calculated
 metrics. You can also combine metrics with data attributes.</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>eventdataR<span class="sc">::</span>hospital <span class="sc">%&gt;%</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(group) <span class="sc">%&gt;%</span></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">trace_length</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" tabindex="-1"></a>eventdataR<span class="sc">::</span>hospital <span class="sc">%&gt;%</span></span>
+<span id="cb18-2"><a href="#cb18-2" tabindex="-1"></a>    <span class="fu">group_by</span>(group) <span class="sc">%&gt;%</span></span>
+<span id="cb18-3"><a href="#cb18-3" tabindex="-1"></a>    <span class="fu">trace_length</span>()</span></code></pre></div>
 <pre><code>## # A tibble: 43 × 9
 ##    group                      min    q1 median  mean    q3   max st_dev   iqr
 ##    &lt;fct&gt;                    &lt;int&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt;

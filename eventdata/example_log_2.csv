@@ -1,0 +1,6 @@
+patient,activity,timestamp,resource
+John Doe,check-in,2017-05-10T08:33:26Z,Samantha
+John Doe,surgery,2017-05-10T09:25:19Z,Richard
+John Doe,treatment,2017-05-10T10:35:18Z,Danny
+John Doe,surgery,2017-05-10T11:05:56Z,William
+John Doe,check-out,2017-05-11T14:52:36Z,Samantha

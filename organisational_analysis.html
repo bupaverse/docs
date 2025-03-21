@@ -13,22 +13,34 @@
 
 <title>Organisational Analysis</title>
 
-<script src="site_libs/header-attrs-2.23/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.29/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-<link href="site_libs/bootstrap-5.2.2/bootstrap.min.css" rel="stylesheet" />
-<script src="site_libs/bootstrap-5.2.2/bootstrap.bundle.min.js"></script>
-<script src="site_libs/bs3compat-0.5.0/transition.js"></script>
-<script src="site_libs/bs3compat-0.5.0/tabs.js"></script>
-<script src="site_libs/bs3compat-0.5.0/bs3compat.js"></script>
+<link href="site_libs/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-5.3.1/bootstrap.bundle.min.js"></script>
+<script src="site_libs/bs3compat-0.9.0/transition.js"></script>
+<script src="site_libs/bs3compat-0.9.0/tabs.js"></script>
+<script src="site_libs/bs3compat-0.9.0/bs3compat.js"></script>
 <script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
-<script src="site_libs/htmlwidgets-1.6.2/htmlwidgets.js"></script>
-<script src="site_libs/viz-1.8.2/viz.js"></script>
-<link href="site_libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
-<script src="site_libs/grViz-binding-1.0.10/grViz.js"></script>
+<link href="site_libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet" />
+<script src="site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<script src="site_libs/processmapR-libs-1.0.3/animation_playback_control.js"></script>
+<script src="site_libs/processmapR-libs-1.0.3/animation_scales.js"></script>
+<script src="site_libs/processmapR-libs-1.0.3/animation_tokens.js"></script>
+<script src="site_libs/processmapR-libs-1.0.3/animation_renderer_graphviz.js"></script>
+<script src="site_libs/processmapR-libs-1.0.3/animation_renderer_leaflet.js"></script>
+<script src="site_libs/d3-5.7.0/d3-custom.min.js"></script>
+<script src="site_libs/fakesmil-0.3.0/smil.user.js"></script>
+<script src="site_libs/svg-pan-zoom-3.6.0/svg-pan-zoom.min.js"></script>
+<script src="site_libs/momentjs-0.2.22.1/moment.min.js"></script>
+<script src="site_libs/es6-promise-4.2.5/es6-promise.auto.min.js"></script>
+<script src="site_libs/hammerjs-2.0.8/hammer.min.js"></script>
+<script src="site_libs/processmapR-binding-0.5.6/processmapR.js"></script>
+<script src="site_libs/viz.js-2.1.2/viz.js"></script>
+<script src="site_libs/viz.js-2.1.2/full.render.js"></script>
 <script>
 	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -68,7 +80,7 @@ ga('send', 'pageview');
 </style>
 <style type="text/css" data-origin="pandoc">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -103,11 +115,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }
 code span.al { color: #ef2929; } /* Alert */
 code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #c4a000; } /* Attribute */
+code span.at { color: #204a87; } /* Attribute */
 code span.bn { color: #0000cf; } /* BaseN */
 code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4e9a06; } /* Char */
-code span.cn { color: #000000; } /* Constant */
+code span.cn { color: #8f5902; } /* Constant */
 code span.co { color: #8f5902; font-style: italic; } /* Comment */
 code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
 code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
@@ -116,14 +128,14 @@ code span.dv { color: #0000cf; } /* DecVal */
 code span.er { color: #a40000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #0000cf; } /* Float */
-code span.fu { color: #000000; } /* Function */
+code span.fu { color: #204a87; font-weight: bold; } /* Function */
 code span.im { } /* Import */
 code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
 code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
 code span.ot { color: #8f5902; } /* Other */
 code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
-code span.sc { color: #000000; } /* SpecialChar */
+code span.sc { color: #ce5c00; font-weight: bold; } /* SpecialChar */
 code span.ss { color: #4e9a06; } /* SpecialString */
 code span.st { color: #4e9a06; } /* String */
 code span.va { color: #000000; } /* Variable */
@@ -660,8 +672,8 @@ div.tocify {
 <p>The resource frequency metric allows the computation of the
 number/frequency of resources at the levels of log, case, activity,
 resource, and resource-activity.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">resource_frequency</span>(<span class="st">&quot;resource&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>patients <span class="sc">%&gt;%</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>    <span class="fu">resource_frequency</span>(<span class="st">&quot;resource&quot;</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 7 × 3
 ##   employee absolute relative
 ##   &lt;fct&gt;       &lt;int&gt;    &lt;dbl&gt;
@@ -678,8 +690,8 @@ resource, and resource-activity.</p>
 <p>Resource involvement refers to the notion of the number of cases in
 which a resource is involved. It can be computed at levels case,
 resource, and resource-activity.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">resource_involvement</span>(<span class="at">level =</span> <span class="st">&quot;resource&quot;</span>) <span class="sc">%&gt;%</span> plot</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>patients <span class="sc">%&gt;%</span></span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>    <span class="fu">resource_involvement</span>(<span class="at">level =</span> <span class="st">&quot;resource&quot;</span>) <span class="sc">%&gt;%</span> plot</span></code></pre></div>
 <p>It this example it shows that only r1 and r2 are involved in all
 cases, r6 and r7 are involved in most of the cases, while the others are
 only involved in half of the cases, more or less.</p>
@@ -689,8 +701,8 @@ only involved in half of the cases, more or less.</p>
 <p>The resource specalization metric shows whether resources are
 specialized in certain activities or not. It can be calculated at the
 levels log, case, resource and activity.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">resource_specialisation</span>(<span class="st">&quot;resource&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>patients <span class="sc">%&gt;%</span></span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>    <span class="fu">resource_specialisation</span>(<span class="st">&quot;resource&quot;</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 7 × 3
 ##   employee absolute relative
 ##   &lt;fct&gt;       &lt;int&gt;    &lt;dbl&gt;
@@ -709,19 +721,19 @@ one activity, and is therefore 100% specialized.</p>
 <p>A handover-of-work network can be created with the
 <code>resource_map</code> function. It has the same arguments as the
 <code>process_map</code> function.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">resource_map</span>()</span></code></pre></div>
-<div class="grViz html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-7b0de9d859176489e756" style="width:672px;height:480px;"></div>
-<script type="application/json" data-for="htmlwidget-7b0de9d859176489e756">{"x":{"diagram":"digraph {\n\ngraph [layout = \"dot\",\n       outputorder = \"edgesfirst\",\n       bgcolor = \"white\",\n       rankdir = \"LR\"]\n\nnode [fontname = \"Helvetica\",\n      fontsize = \"10\",\n      shape = \"circle\",\n      fixedsize = \"true\",\n      width = \"0.5\",\n      style = \"filled\",\n      fillcolor = \"aliceblue\",\n      color = \"gray70\",\n      fontcolor = \"gray50\"]\n\nedge [fontname = \"Helvetica\",\n     fontsize = \"8\",\n     weight = \"1.5\",\n     color = \"gray80\",\n     arrowsize = \"0.5\"]\n\n  \"1\" [label = \"End\", shape = \"circle\", style = \"rounded,filled\", fontcolor = \"brown4\", color = \"brown4\", tooltip = \"ARTIFICIAL_END\n500\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#FFFFFF\"] \n  \"2\" [label = \"Start\", shape = \"circle\", style = \"rounded,filled\", fontcolor = \"chartreuse4\", color = \"chartreuse4\", tooltip = \"ARTIFICIAL_START\n500\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#FFFFFF\"] \n  \"3\" [label = \"r1\n500\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"white\", color = \"grey\", tooltip = \"r1\n500\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#0570B0\"] \n  \"4\" [label = \"r2\n500\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"white\", color = \"grey\", tooltip = \"r2\n500\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#0570B0\"] \n  \"5\" [label = \"r3\n237\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"black\", color = \"grey\", tooltip = \"r3\n237\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#ECE7F2\"] \n  \"6\" [label = \"r4\n236\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"black\", color = \"grey\", tooltip = \"r4\n236\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#ECE7F2\"] \n  \"7\" [label = \"r5\n261\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"black\", color = \"grey\", tooltip = \"r5\n261\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#ECE7F2\"] \n  \"8\" [label = \"r6\n495\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"white\", color = \"grey\", tooltip = \"r6\n495\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#0570B0\"] \n  \"9\" [label = \"r7\n492\", shape = \"rectangle\", style = \"rounded,filled\", fontcolor = \"white\", color = \"grey\", tooltip = \"r7\n492\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#0570B0\"] \n\"2\"->\"3\" [label = \"500\", penwidth = \"5\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"3\"->\"4\" [label = \"500\", penwidth = \"5\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"4\"->\"1\" [label = \"2\", penwidth = \"1.016\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"4\"->\"5\" [label = \"237\", penwidth = \"2.896\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"4\"->\"7\" [label = \"261\", penwidth = \"3.088\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"5\"->\"1\" [label = \"1\", penwidth = \"1.008\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"5\"->\"6\" [label = \"236\", penwidth = \"2.888\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"6\"->\"8\" [label = \"236\", penwidth = \"2.888\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"7\"->\"1\" [label = \"2\", penwidth = \"1.016\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"7\"->\"8\" [label = \"259\", penwidth = \"3.072\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"8\"->\"1\" [label = \"3\", penwidth = \"1.024\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"8\"->\"9\" [label = \"492\", penwidth = \"4.936\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"9\"->\"1\" [label = \"492\", penwidth = \"4.936\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a>patients <span class="sc">%&gt;%</span></span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>    <span class="fu">resource_map</span>()</span></code></pre></div>
+<div class="processmapR html-widget html-fill-item" id="htmlwidget-f32986bf8f7bee347636" style="width:100%;height:300px;"></div>
+<script type="application/json" data-for="htmlwidget-f32986bf8f7bee347636">{"x":{"rendered_process":"digraph {\n\ngraph [layout = \"dot\",\n       outputorder = \"edgesfirst\",\n       bgcolor = \"white\",\n       rankdir = \"LR\"]\n\nnode [fontname = \"Helvetica\",\n      fontsize = \"10\",\n      shape = \"circle\",\n      fixedsize = \"true\",\n      width = \"0.5\",\n      style = \"filled\",\n      fillcolor = \"aliceblue\",\n      color = \"gray70\",\n      fontcolor = \"gray50\"]\n\nedge [fontname = \"Helvetica\",\n     fontsize = \"8\",\n     len = \"1.5\",\n     color = \"gray80\",\n     arrowsize = \"0.5\"]\n\n  \"1\" [label = \"End\", shape = \"circle\", gradientangle = \"0.1\", style = \"rounded,filled\", fontcolor = \"brown4\", color = \"brown4\", tooltip = \"ARTIFICIAL_END\n500\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#FFFFFF\"] \n  \"2\" [label = \"Start\", shape = \"circle\", gradientangle = \"0.1\", style = \"rounded,filled\", fontcolor = \"chartreuse4\", color = \"chartreuse4\", tooltip = \"ARTIFICIAL_START\n500\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#FFFFFF\"] \n  \"3\" [label = \"r1\n500\", shape = \"rectangle\", gradientangle = \"0.1\", style = \"rounded,filled\", fontcolor = \"white\", color = \"grey\", tooltip = \"r1\n500\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#0570B0\"] \n  \"4\" [label = \"r2\n500\", shape = \"rectangle\", gradientangle = \"0.1\", style = \"rounded,filled\", fontcolor = \"white\", color = \"grey\", tooltip = \"r2\n500\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#0570B0\"] \n  \"5\" [label = \"r3\n237\", shape = \"rectangle\", gradientangle = \"0.1\", style = \"rounded,filled\", fontcolor = \"black\", color = \"grey\", tooltip = \"r3\n237\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#ECE7F2\"] \n  \"6\" [label = \"r4\n236\", shape = \"rectangle\", gradientangle = \"0.1\", style = \"rounded,filled\", fontcolor = \"black\", color = \"grey\", tooltip = \"r4\n236\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#ECE7F2\"] \n  \"7\" [label = \"r5\n261\", shape = \"rectangle\", gradientangle = \"0.1\", style = \"rounded,filled\", fontcolor = \"black\", color = \"grey\", tooltip = \"r5\n261\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#ECE7F2\"] \n  \"8\" [label = \"r6\n495\", shape = \"rectangle\", gradientangle = \"0.1\", style = \"rounded,filled\", fontcolor = \"white\", color = \"grey\", tooltip = \"r6\n495\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#0570B0\"] \n  \"9\" [label = \"r7\n492\", shape = \"rectangle\", gradientangle = \"0.1\", style = \"rounded,filled\", fontcolor = \"white\", color = \"grey\", tooltip = \"r7\n492\", penwidth = \"1.5\", fixedsize = \"FALSE\", fontname = \"Arial\", fontsize = \"10\", fillcolor = \"#0570B0\"] \n\"2\"->\"3\" [labeltooltip = \" > r1\", edgetooltip = \" > r1\", label = \"500\", penwidth = \"5\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"3\"->\"4\" [labeltooltip = \"r1 > r2\", edgetooltip = \"r1 > r2\", label = \"500\", penwidth = \"5\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"4\"->\"1\" [labeltooltip = \"r2 > \", edgetooltip = \"r2 > \", label = \"2\", penwidth = \"1.016\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"4\"->\"5\" [labeltooltip = \"r2 > r3\", edgetooltip = \"r2 > r3\", label = \"237\", penwidth = \"2.896\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"4\"->\"7\" [labeltooltip = \"r2 > r5\", edgetooltip = \"r2 > r5\", label = \"261\", penwidth = \"3.088\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"5\"->\"1\" [labeltooltip = \"r3 > \", edgetooltip = \"r3 > \", label = \"1\", penwidth = \"1.008\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"5\"->\"6\" [labeltooltip = \"r3 > r4\", edgetooltip = \"r3 > r4\", label = \"236\", penwidth = \"2.888\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"6\"->\"8\" [labeltooltip = \"r4 > r6\", edgetooltip = \"r4 > r6\", label = \"236\", penwidth = \"2.888\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"7\"->\"1\" [labeltooltip = \"r5 > \", edgetooltip = \"r5 > \", label = \"2\", penwidth = \"1.016\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"7\"->\"8\" [labeltooltip = \"r5 > r6\", edgetooltip = \"r5 > r6\", label = \"259\", penwidth = \"3.072\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"8\"->\"1\" [labeltooltip = \"r6 > \", edgetooltip = \"r6 > \", label = \"3\", penwidth = \"1.024\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"8\"->\"9\" [labeltooltip = \"r6 > r7\", edgetooltip = \"r6 > r7\", label = \"492\", penwidth = \"4.936\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n\"9\"->\"1\" [labeltooltip = \"r7 > \", edgetooltip = \"r7 > \", label = \"492\", penwidth = \"4.936\", color = \"dodgerblue4\", fontname = \"Arial\", fontsize = \"10\", weight = \"1\", constraint = \"TRUE\"] \n}","activities":{"act":["ARTIFICIAL_END","ARTIFICIAL_START","r1","r2","r3","r4","r5","r6","r7"],"id":[1,2,3,4,5,6,7,8,9]},"tokens":{},"sizes":{},"sizes_scale":{"attribute":null,"scale":"identity","domain":null,"range":null},"colors":{},"colors_scale":{"attribute":null,"scale":"identity","domain":null,"range":null},"opacities":{},"opacities_scale":{"attribute":null,"scale":"identity","domain":null,"range":null},"images":{},"images_scale":{"attribute":null,"scale":"identity","domain":null,"range":null},"shape":"circle","attributes":[],"start_activity":2,"end_activity":1,"timeline":false,"mode":"off","processmap_renderer":"graph","svg_fit":true,"svg_contain":false,"svg_resize_fit":true,"zoom_controls":true,"zoom_initial":null},"evals":[],"jsHooks":[]}</script>
 </div>
 <div id="resource-precedence-matrix" class="section level2">
 <h2>Resource precedence matrix</h2>
 <p>A more compact representation of hand-over-of-work is given by the
 <code>resource_matrix</code> function, which works the same as the
 <code>process matrix</code> functions.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>patients <span class="sc">%&gt;%</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">resource_matrix</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">plot</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a>patients <span class="sc">%&gt;%</span></span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a>    <span class="fu">resource_matrix</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a>    <span class="fu">plot</span>()</span></code></pre></div>
 <p><img src="organisational_analysis_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 </div>
 </div>

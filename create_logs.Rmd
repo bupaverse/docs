@@ -220,7 +220,7 @@ data %>%
 
 Note that we need an `eventlog` irrespective of which attribute values are differing, i.e. it can be resources, but also any additional variables you have in your data set. For the special case of resource values, it might be that a different resource executing events in the same activity instance is a data quality issue. If so, some functions can help you to identify this issue: [Inconsistent Resources].
 
-Again, if the activity instance id does not exist, some heuristics are available to generate it: [Missing activity instance identifier].
+Again, if the activity instance id does not exist, some heuristics are available to generate it: [Missing activity instance id].
 
 ## Typical problems
 

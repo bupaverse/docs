@@ -1,0 +1,6 @@
+patient,activity,schedule,start,complete
+John Doe,check-in,NA,NA,2017-05-10T08:33:26Z
+John Doe,check-out,NA,NA,2017-05-11T14:52:36Z
+John Doe,surgery,2017-05-10T08:38:21Z,2017-05-10T08:53:16Z,2017-05-10T09:25:19Z
+John Doe,surgery,NA,2017-05-10T10:41:35Z,2017-05-10T11:05:56Z
+John Doe,treatment,NA,2017-05-10T10:01:25Z,2017-05-10T10:35:18Z

@@ -56,7 +56,7 @@ The processing time can be computed at the levels log, trace, case, activity and
 ```{r}
 patients %>% 
 	processing_time("activity") %>%
-	plot
+	plot()
 ```
 
 ## Throughput Time

@@ -103,7 +103,7 @@ sepsis %>%
 
 ## Rule-based conformance 
 
-Using the packages `processcheckr` prodecural rules can be checked in an event log. Checking rules will add a boolean case attribute, which can be used for filtering or in analysis. 
+Using the package `processcheckr` prodecural rules can be checked in an event log. Checking rules will add a boolean case attribute, which can be used for filtering or in analysis. 
 
 Rules can be checked using the  `check_rule` function (see example below). It will create a new logical variable to indicate for which cases the rule holds. The name of the variable can be configured using the `label` argument in  `check_rule`.
 

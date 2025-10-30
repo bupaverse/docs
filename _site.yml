@@ -24,7 +24,7 @@ output:
 output_dir: "docs"
 navbar:
   search: true
-  title: "<a href = 'https://bupar.net'><img id = \"logo\" style = \"width: 200px; padding: 0px 20px 0px 0px\" src = \"images/logo/bupar_trans_witteR2.png\" /></a>"
+  title: "<a href = 'https://bupar.net'><img id = \"logo\" style = \"width: 200px; padding: 0px 20px 0px 0px\" src = \"images/logo/bupar2.png\" /></a>"
   left:
   - text: "Home"
     href: index.html
@@ -142,5 +142,7 @@ navbar:
         href: https://bupaverse.github.io/processcheckR/
       - text: processmapR
         href: https://bupaverse.github.io/processmapR/
+      - text: psmineR
+        href: https://bupaverse.github.io/psmineR/ 
       - text: xesreadR
         href: https://bupaverse.github.io/xesreadR

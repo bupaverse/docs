@@ -50,7 +50,7 @@ sepsis %>%
 
 Before continuing to further analyses, not that you might want to ungroup the log using `ungroup_eventlog()`. More on [grouping](wrangling.html).
 
-```
+
 
 ```{r footer, results = "asis", echo = F}
 CURRENT_PAGE <-  stringr::str_replace(knitr::current_input(), ".Rmd",".html")

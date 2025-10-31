@@ -13,7 +13,7 @@
 
 <title>bupaR Docs | Performance Spectrum</title>
 
-<script src="site_libs/header-attrs-2.29/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.30/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <link href="site_libs/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet" />
@@ -421,7 +421,7 @@ div.tocify {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.html"><a href = 'https://bupar.net'><img id = "logo" style = "width: 200px; padding: 0px 20px 0px 0px" src = "images/logo/bupar_trans_witteR2.png" /></a></a>
+      <a class="navbar-brand" href="index.html"><a href = 'https://bupar.net'><img id = "logo" style = "width: 200px; padding: 0px 20px 0px 0px" src = "images/logo/bupar2.png" /></a></a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
@@ -629,6 +629,9 @@ div.tocify {
       <a href="https://bupaverse.github.io/processmapR/">processmapR</a>
     </li>
     <li>
+      <a href="https://bupaverse.github.io/psmineR/">psmineR</a>
+    </li>
+    <li>
       <a href="https://bupaverse.github.io/xesreadR">xesreadR</a>
     </li>
   </ul>
@@ -664,12 +667,19 @@ respectively.</p>
 <h2>Detailed</h2>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>traffic_fines <span class="sc">%&gt;%</span></span>
 <span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>    <span class="fu">ps_detailed</span>()</span></code></pre></div>
+<pre><code>## Warning: `aes_()` was deprecated in ggplot2 3.0.0.
+## ℹ Please use tidy evaluation idioms with `aes()`
+## ℹ The deprecated feature was likely used in the psmineR package.
+##   Please report the issue at &lt;https://github.com/bupaverse/psmineR/issues&gt;.
+## This warning is displayed once every 8 hours.
+## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
+## generated.</code></pre>
 <p><img src="performance_spectrum_files/figure-html/unnamed-chunk-4-1.png" width="80%" /></p>
 <p>The number of segments shown in the performance spectrum can be
 configured in two ways. The first is to explicitly state the number of
 segments to show.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>traffic_fines <span class="sc">%&gt;%</span></span>
-<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>    <span class="fu">ps_detailed</span>(<span class="at">n_segments =</span> <span class="dv">10</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>traffic_fines <span class="sc">%&gt;%</span></span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>    <span class="fu">ps_detailed</span>(<span class="at">n_segments =</span> <span class="dv">10</span>)</span></code></pre></div>
 <p><img src="performance_spectrum_files/figure-html/unnamed-chunk-5-1.png" width="80%" /></p>
 <p>Alternatively, one can state a <code>segment_coverage</code>. This is
 a value between 0 and 1 that indicates the percentage of cases in which
@@ -681,37 +691,37 @@ lead time quartiles, the longest instances colored in red, while the
 shortest are colored in blue. Using the <code>classification</code>
 argument, any available attribute can be used for coloring. For example,
 the resource, as shown below.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>traffic_fines <span class="sc">%&gt;%</span></span>
-<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>    <span class="fu">ps_detailed</span>(<span class="at">classification =</span> <span class="st">&quot;resource&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>traffic_fines <span class="sc">%&gt;%</span></span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>    <span class="fu">ps_detailed</span>(<span class="at">classification =</span> <span class="st">&quot;resource&quot;</span>)</span></code></pre></div>
 <p><img src="performance_spectrum_files/figure-html/unnamed-chunk-6-1.png" width="80%" /></p>
 <p>Note that when another color classification is used, the built-in
 <code>bupaR</code> color scale will be used. As the resource variable
 from <code>traffic_fines</code> is not very insightful, below we show a
 slightly more advanced version, where we use log augmentation, while
 incorporating the end activity of the case.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>traffic_fines <span class="sc">%&gt;%</span></span>
-<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>    <span class="fu">end_activities</span>(<span class="st">&quot;case&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>    <span class="fu">augment</span>(traffic_fines, <span class="at">prefix =</span> <span class="st">&quot;end&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>    <span class="fu">ps_detailed</span>(<span class="at">classification =</span> <span class="st">&quot;end_activity&quot;</span>)</span></code></pre></div>
-<p><img src="performance_spectrum_files/figure-html/unnamed-chunk-7-1.png" width="80%" /></p>
-<p>Changing the color classification can also be done implicitly, by
-grouping the log on the classification variable.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a>traffic_fines <span class="sc">%&gt;%</span></span>
 <span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>    <span class="fu">end_activities</span>(<span class="st">&quot;case&quot;</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a>    <span class="fu">augment</span>(traffic_fines, <span class="at">prefix =</span> <span class="st">&quot;end&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a>    <span class="fu">group_by</span>(end_activity) <span class="sc">%&gt;%</span></span>
-<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a>    <span class="fu">ps_detailed</span>()</span></code></pre></div>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a>    <span class="fu">ps_detailed</span>(<span class="at">classification =</span> <span class="st">&quot;end_activity&quot;</span>)</span></code></pre></div>
+<p><img src="performance_spectrum_files/figure-html/unnamed-chunk-7-1.png" width="80%" /></p>
+<p>Changing the color classification can also be done implicitly, by
+grouping the log on the classification variable.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a>traffic_fines <span class="sc">%&gt;%</span></span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a>    <span class="fu">end_activities</span>(<span class="st">&quot;case&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a>    <span class="fu">augment</span>(traffic_fines, <span class="at">prefix =</span> <span class="st">&quot;end&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a>    <span class="fu">group_by</span>(end_activity) <span class="sc">%&gt;%</span></span>
+<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a>    <span class="fu">ps_detailed</span>()</span></code></pre></div>
 <p><img src="performance_spectrum_files/figure-html/unnamed-chunk-8-1.png" width="80%" /></p>
 </div>
 <div id="aggregated" class="section level2">
 <h2>Aggregated</h2>
 <p>The aggregated performance spectrum works in completely the same
 way.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a>traffic_fines <span class="sc">%&gt;%</span></span>
-<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a>    <span class="fu">end_activities</span>(<span class="st">&quot;case&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a>    <span class="fu">augment</span>(traffic_fines, <span class="at">prefix =</span> <span class="st">&quot;end&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a>    <span class="fu">group_by</span>(end_activity) <span class="sc">%&gt;%</span></span>
-<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a>    <span class="fu">ps_aggregated</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a>traffic_fines <span class="sc">%&gt;%</span></span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a>    <span class="fu">end_activities</span>(<span class="st">&quot;case&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a>    <span class="fu">augment</span>(traffic_fines, <span class="at">prefix =</span> <span class="st">&quot;end&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a>    <span class="fu">group_by</span>(end_activity) <span class="sc">%&gt;%</span></span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a>    <span class="fu">ps_aggregated</span>()</span></code></pre></div>
 <p><img src="performance_spectrum_files/figure-html/unnamed-chunk-9-1.png" width="80%" /></p>
 <p>Though, it does have 2 more configuration options: the number of bins
 to be used (default 30), and the grouping to be used (which can be based

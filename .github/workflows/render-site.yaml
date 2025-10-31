@@ -39,12 +39,12 @@ jobs:
           install.packages("xaringanExtra")
           install.packages("pander")
           install.packages("xesreadR")
-          install.packages("processanimateR")
           install.packages("daqapo")
           install.packages("psmineR")
           install.packages("processcheckR")
           install.packages("distill")
           remotes::install_github("bupaverse/processpredictR")
+          remotes::install_github("bupaverse/processanimateR")
           
         shell: Rscript {0}
 

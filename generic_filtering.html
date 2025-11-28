@@ -588,6 +588,21 @@ div.tocify {
         <li>
   <a href="faq.html">FAQ</a>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    KNIME
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="knime_installation.html">Installation</a>
+    </li>
+    <li>
+      <a href="knime_features.html">Features</a>
+    </li>
+  </ul>
+</li>
 <li>
   <a href="developer_guide.html">Developer guide</a>
 </li>
@@ -923,12 +938,12 @@ event log containing n cases. The code below returns a sample of 10
 patients.</p>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a>patients <span class="sc">%&gt;%</span></span>
 <span id="cb15-2"><a href="#cb15-2" tabindex="-1"></a>    <span class="fu">sample_n</span>(<span class="at">size =</span> <span class="dv">10</span>)</span></code></pre></div>
-<pre><code>## # Log of 104 events consisting of:
-## 3 traces 
+<pre><code>## # Log of 114 events consisting of:
+## 2 traces 
 ## 10 cases 
-## 52 instances of 7 activities 
+## 57 instances of 7 activities 
 ## 7 resources 
-## Events occurred from 2017-02-11 18:48:07 until 2018-05-05 01:34:30 
+## Events occurred from 2017-03-30 13:32:50 until 2018-02-21 14:56:59 
 ##  
 ## # Variables were mapped as follows:
 ## Case identifier:     patient 
@@ -938,20 +953,20 @@ patients.</p>
 ## Timestamp:           time 
 ## Lifecycle transition:        registration_type 
 ## 
-## # A tibble: 104 × 7
+## # A tibble: 114 × 7
 ##    handling   patient employee handling_id registration_type time               
 ##    &lt;fct&gt;      &lt;chr&gt;   &lt;fct&gt;    &lt;chr&gt;       &lt;fct&gt;             &lt;dttm&gt;             
-##  1 Registrat… 40      r1       40          start             2017-02-11 18:48:07
-##  2 Registrat… 49      r1       49          start             2017-02-25 16:45:40
-##  3 Registrat… 76      r1       76          start             2017-03-21 03:09:46
-##  4 Registrat… 147     r1       147         start             2017-05-24 09:05:09
-##  5 Registrat… 241     r1       241         start             2017-08-20 14:26:57
-##  6 Registrat… 320     r1       320         start             2017-11-04 06:23:34
-##  7 Registrat… 400     r1       400         start             2018-01-24 06:05:03
-##  8 Registrat… 420     r1       420         start             2018-02-08 03:39:21
-##  9 Registrat… 429     r1       429         start             2018-02-17 15:44:17
-## 10 Registrat… 498     r1       498         start             2018-04-30 09:42:11
-## # ℹ 94 more rows
+##  1 Registrat… 81      r1       81          start             2017-03-30 13:32:50
+##  2 Registrat… 118     r1       118         start             2017-04-30 17:49:37
+##  3 Registrat… 140     r1       140         start             2017-05-17 08:37:35
+##  4 Registrat… 196     r1       196         start             2017-07-11 03:39:26
+##  5 Registrat… 245     r1       245         start             2017-08-27 17:24:15
+##  6 Registrat… 254     r1       254         start             2017-09-08 06:31:49
+##  7 Registrat… 275     r1       275         start             2017-09-24 22:29:19
+##  8 Registrat… 366     r1       366         start             2017-12-09 23:10:13
+##  9 Registrat… 411     r1       411         start             2018-01-30 08:04:41
+## 10 Registrat… 432     r1       432         start             2018-02-18 06:58:33
+## # ℹ 104 more rows
 ## # ℹ 1 more variable: .order &lt;int&gt;</code></pre>
 <p>Note that this function can also be used with a sample size bigger
 than the number of cases in the event log, if you allow for the
@@ -977,7 +992,7 @@ Filtering</a>
 </div>
 
 <hr>
-<center><p style = "font-size: 12px">Copyright &copy; 2023 <a href = "https://bupar.net/about/" >bupaR - Hasselt University</a></p></center>
+<center><p style = "font-size: 12px">Copyright &copy; 2025 <a href = "https://bupar.net/about/" >bupaR - Hasselt University</a></p></center>
 
 <script type="text/javascript">
 _linkedin_partner_id = "4726898";

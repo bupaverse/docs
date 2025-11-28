@@ -118,6 +118,12 @@ navbar:
   right:
   - text: "FAQ"
     href: faq.html
+  - text: "KNIME"
+    menu: 
+      -  text: "Installation"
+         href: knime_installation.html
+      -  text: "Features" 
+         href: knime_features.html
   - text: "Developer guide"
     href: developer_guide.html
   - text: "Package guide"

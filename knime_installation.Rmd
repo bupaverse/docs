@@ -1,0 +1,55 @@
+---
+title: bupaR4KNIME
+output:
+  html_document:
+    toc: false
+---
+	
+<br/> 
+
+```{r echo = F, out.width="25%", fig.align = "right"}
+knitr::include_graphics("images/bupaRknime.PNG")
+
+```
+	
+***	
+	
+### 1. Install R 
+
+... and Posit Rstudio or other IDE. 
+
+*  [R](https://cran.r-project.org/)
+*  [Rstudio](https://posit.co/downloads/)
+
+### 2. Install bupaverse and supporting packages
+
+```{r eval = F}
+install.packages("bupaverse")
+install.packages("Rserve")
+install.packages("Cairo")
+```
+
+`Rserve` and `Cairo` are not `bupaverse` dependencies but are needed to get the KNIME components to work. 
+
+### 3. Install KNIME
+
+Go to [knime.com](https://www.knime.com/get-started-download), download KNIME, and install. 
+
+### 4. Install and configure the KNIME R extension
+
+1. Go to _Menu_ > _Install extensions_
+2. Search KNIME Interactive R Statistics Integration
+3. Install the extension
+4. Go to _Preferences_ > _R_
+5. Correctly configure the path to R on your device
+
+Check the extension [installation guide](https://docs.knime.com/2019-12/r_installation_guide/index.html#_introduction) for more details regarding your specific OS.
+
+### 5. Download the bupaR4KNIME components
+
+1. Go to https://hub.knime.com/biaru%20-%20digital%20future%20lab
+2. Go to the _bupaverse_ space
+3. Download the entire folder as a `.knar` file 
+4. Import the file using the _Immport workflow_ functionality in KNIME
+
+You are now ready to experience the `bupaverse` in KNIME!

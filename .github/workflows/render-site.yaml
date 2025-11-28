@@ -39,7 +39,7 @@ jobs:
           install.packages("xaringanExtra")
           install.packages("pander")
           install.packages("xesreadR")
-          install.packages("processanimateR")
+          remotes::install_github("bupaverse/processanimateR")
           install.packages("daqapo")
           install.packages("psmineR")
           install.packages("processcheckR")
